@@ -16,3 +16,6 @@
 [submodule "External/NVAPI"]
 	path = External/NVAPI
 	url = https://github.com/NVIDIA/nvapi.git
+[submodule "External/RTXPT"]
+	path = External/RTXPT
+	url = https://github.com/NVIDIA-RTX/RTXPT.git
