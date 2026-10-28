@@ -80,6 +80,8 @@ This first comparison covers two original static scenes, one GPU, one isolated r
 
 [Raw timing traces, per-run manifests, quality scores and checksums](https://github.com/BasixMaster/RTXPT_Next/tree/main/Benchmarks/results/2026-10-28-b1) are retained alongside the frozen protocol and portable capture/analysis tools. Images below show repeat1 without selecting for a favorable score. Generated scene captures retain the upstream assets’ applicable terms; see the pinned Assets repository.
 
+Click a capture to open the image preview. Press **Escape** or choose **Close** to return to the report.
+
 ### Convergence captures
 
 | RTXPT1.9 / B0 | B1 | B0 reference4096spp |

@@ -27,3 +27,8 @@ The initial baseline/research stage is retained; the subsequent authorized B1 st
 ## Summary and lessons learned
 
 RTXDI is sampling machinery; RTXPT is a renderer consuming it. RTXPT1.9 uses RTXDI3.0, while the linked SDK3.1 reference implements only part of PT++. B1 aligns the existing DI/GI APIs; it does not activate new PT capabilities. B2 integrates the ReSTIR PT path; B3 exposes and extends PT++ one mechanism at a time. The RTXDI3.1 PT baseline already inherits some PT++ machinery, which is recorded rather than counted as a new B3 gain. Preserve source pins, scene/camera identity and reference settings across every comparison. Report quality, complete-frame time and VRAM together. Reported paper gains are not measurements of this project.
+
+
+## Documentation changes
+
+- 2026-10-28: Shared image preview opens pictures in place, supports keyboard activation, and closes with Escape or Close while restoring focus. The central HTML template and Documenter guidance share the same behavior.
