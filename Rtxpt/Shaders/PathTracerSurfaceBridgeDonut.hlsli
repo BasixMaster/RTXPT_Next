@@ -321,7 +321,7 @@ PathTracer::Surface Bridge::loadSurface( const uint instanceIndex, const uint ge
     else
     #endif
     {
-        SampleGeneratorVertexBase sampleGeneratorVertexBase = SampleGeneratorVertexBase::make(pixelPos, pathVertexIndex, Bridge::getSampleIndex());       
+        SampleGeneratorVertexBase sampleGeneratorVertexBase = SampleGeneratorVertexBase::make(pixelPos, pathVertexIndex, Bridge::getSampleIndex(), g_Const.ptConsts.samplingSeed);
         SampleGenerator sampleGenerator = SampleGenerator::make(sampleGeneratorVertexBase); 
         u = sampleNext4D(sampleGenerator);
     }

@@ -282,13 +282,20 @@ RTXDI_LightBufferParameters PrepareLightsPass::Process(nvrhi::ICommandList* comm
     uint32_t numFinitePrimLights = 0;
     uint32_t numInfinitePrimLights = 0;
 
-    bool enableImportanceSampledEnvironmentLight = m_EnvironmentMap ? true : false;
+    const bool canImportanceSampleEnvironment = bool(m_EnvironmentMap);
+    // An allocated map is not an entry in the scene's light list. Only subtract
+    // an environment record after one was actually converted and appended.
+    bool enableImportanceSampledEnvironmentLight = false;
 
+    std::unordered_map<const Light*, uint32_t> currentPrimitiveOffsets;
     for (const std::shared_ptr<Light>& pLight : sortedLights)
     {
         PolymorphicLightInfoFull polymorphicLight = {};
        
-        if (!ConvertLight(*pLight, polymorphicLight, enableImportanceSampledEnvironmentLight, m_EnvironmentMap.get()))
+        // The renderer binds one global environment map and reserves one slot.
+        if (pLight->GetLightType() == LightType_Environment && enableImportanceSampledEnvironmentLight)
+            continue;
+        if (!ConvertLight(*pLight, polymorphicLight, canImportanceSampleEnvironment, m_EnvironmentMap.get()))
             continue;
 
         // find the previous offset of this instance in the light buffer
@@ -301,12 +308,14 @@ RTXDI_LightBufferParameters PrepareLightsPass::Process(nvrhi::ICommandList* comm
         task.previousLightBufferOffset = (pOffset != m_PrimitiveLightBufferOffsets.end()) ? pOffset->second : -1;
 
         // record the current offset of this instance for use on the next frame
-        m_PrimitiveLightBufferOffsets[pLight.get()] = lightBufferOffset;
+        currentPrimitiveOffsets[pLight.get()] = lightBufferOffset;
 
         lightBufferOffset += task.triangleCount;
 
         tasks.push_back(task);
         primitiveLightInfos.push_back(polymorphicLight);
+        if (pLight->GetLightType() == LightType_Environment)
+            enableImportanceSampledEnvironmentLight = true;
 
         if (isInfiniteLight(*pLight))
             numInfinitePrimLights++;
@@ -314,10 +323,34 @@ RTXDI_LightBufferParameters PrepareLightsPass::Process(nvrhi::ICommandList* comm
             numFinitePrimLights++;
     }
 
+    m_PrimitiveLightBufferOffsets = std::move(currentPrimitiveOffsets);
+
+    // Native distant illumination is evaluated from the baked global map. It
+    // may contain a directional sun or an override without a scene EnvironmentLight.
+    // Give that map a real record rather than borrowing the last local-light ID.
+    if (canImportanceSampleEnvironment && !enableImportanceSampledEnvironmentLight)
+    {
+        PolymorphicLightInfoFull environment = {};
+        environment.Base.ColorTypeAndFlags = uint32_t(PolymorphicLightType::kEnvironment) << kPolymorphicLightTypeShift;
+        PrepareLightsTask task = {};
+        task.instanceAndGeometryIndex = TASK_PRIMITIVE_LIGHT_BIT | uint32_t(primitiveLightInfos.size());
+        task.lightBufferOffset = lightBufferOffset;
+        task.triangleCount = 1;
+        task.previousLightBufferOffset = m_PreviousSyntheticEnvironmentOffset;
+        m_PreviousSyntheticEnvironmentOffset = int32_t(lightBufferOffset);
+        ++lightBufferOffset;
+        ++numInfinitePrimLights;
+        tasks.push_back(task);
+        primitiveLightInfos.push_back(environment);
+        enableImportanceSampledEnvironmentLight = true;
+    }
+    else
+        m_PreviousSyntheticEnvironmentOffset = -1;
+
 	lightBufferParams.localLightBufferRegion.numLights += numFinitePrimLights;
 	lightBufferParams.infiniteLightBufferRegion.firstLightIndex = lightBufferParams.localLightBufferRegion.numLights;
     // Note we do not include the environment map in numInfiniteLights
-	lightBufferParams.infiniteLightBufferRegion.numLights = numInfinitePrimLights - enableImportanceSampledEnvironmentLight;;
+	lightBufferParams.infiniteLightBufferRegion.numLights = numInfinitePrimLights - uint32_t(enableImportanceSampledEnvironmentLight);
 	lightBufferParams.environmentLightParams.lightIndex = lightBufferParams.infiniteLightBufferRegion.firstLightIndex + lightBufferParams.infiniteLightBufferRegion.numLights;
 	lightBufferParams.environmentLightParams.lightPresent = enableImportanceSampledEnvironmentLight ? 1u : 0u;
     

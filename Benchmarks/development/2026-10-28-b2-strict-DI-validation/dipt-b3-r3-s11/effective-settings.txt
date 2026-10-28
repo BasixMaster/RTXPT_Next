@@ -1,0 +1,3 @@
+SAMPLING_CONTRACT seed=11 realtime=1 referencePixelCenter=0 pixelJitterScale=0
+TRANSPORT_CONTRACT di=1 gi=0 pt=1 diMode=3 neeMIS=0 maxBounces=3 maxDiffuseBounces=3
+DI_VALIDATION_CONTRACT strict=1 boiling=0 discountNaive=0

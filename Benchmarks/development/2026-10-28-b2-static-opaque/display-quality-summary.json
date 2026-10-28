@@ -1,0 +1,26 @@
+{
+  "groups": {
+    "B0": {
+      "captures": 3,
+      "unique_image_hashes": 3,
+      "median_mse_srgb": 0.013369665980498952,
+      "median_ldr_flip": 0.11678846925497055,
+      "scope": "Three legacy process captures without explicit independent seeds"
+    },
+    "B1": {
+      "captures": 3,
+      "unique_image_hashes": 3,
+      "median_mse_srgb": 0.013359491875453884,
+      "median_ldr_flip": 0.11674106866121292,
+      "scope": "Three legacy process captures without explicit independent seeds"
+    },
+    "B2": {
+      "captures": 8,
+      "unique_image_hashes": 8,
+      "median_mse_srgb": 0.003170708526012075,
+      "median_ldr_flip": 0.06668264418840408,
+      "scope": "Eight explicitly seeded process captures; histories warmed64frames"
+    }
+  },
+  "scope": "Display-only common comparison. B0/B1 HDR unavailable; B0/B1 native approximate-MIS default retained, B2 DI+PT strict static preset. Not equal-quality performance or convergence proof."
+}

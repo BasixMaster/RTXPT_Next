@@ -21,6 +21,13 @@ class WrapperTransportTests(unittest.TestCase):
     def assert_parity(self,out,launched,expected):
         m=json.loads((out/'manifest.json').read_text());self.assertEqual(transport_settings(launched),expected)
         self.assertEqual({k:m['settings'][k] for k in expected},expected)
+    def test_scene_path_cannot_silently_fall_back(self):
+        scene=self.root/'Assets/static.scene.json'
+        self.assertEqual(run_capture.scene_argument(str(scene)),str(scene.resolve()))
+        self.assertEqual(run_capture.scene_argument('static.scene.json'),'static.scene.json')
+        for missing in [str(self.root/'missing.scene.json'),'missing/path.scene.json']:
+            with self.assertRaises(ValueError):run_capture.scene_argument(missing)
+
     def test_timed_mode_launch_and_metadata_match(self):
         for mode,expected in [('dipt',dict(restir_di=1,restir_gi=0,restir_pt=1)),('digi',dict(restir_di=1,restir_gi=1,restir_pt=0)),('default',dict(restir_di=0,restir_gi=0,restir_pt=0))]:
             out=self.root/('timed-'+mode);launched=[]
@@ -29,7 +36,7 @@ class WrapperTransportTests(unittest.TestCase):
                 with self.assertRaises(StopBeforeLaunch):run_timed.main()
             self.assert_parity(out,launched,expected)
     def test_capture_mode_launch_and_metadata_match(self):
-        for mode,expected in [('dipt',dict(restir_di=1,restir_gi=0,restir_pt=1)),('digi',dict(restir_di=1,restir_gi=1,restir_pt=0)),('default',dict(restir_di=0,restir_gi=0,restir_pt=0))]:
+        for mode,expected in [('dipt',dict(restir_di=1,restir_gi=0,restir_pt=1)),('digi',dict(restir_di=1,restir_gi=1,restir_pt=0)),('default',dict(restir_di=0,restir_gi=0,restir_pt=0)),('di',dict(restir_di=1,restir_gi=0,restir_pt=0)),('pt',dict(restir_di=0,restir_gi=0,restir_pt=1))]:
             out=self.root/('capture-'+mode);launched=[]
             def completed(args,**kwargs):
                 launched.extend(args);Path(args[args.index('--capturePath')+1]).write_bytes(b'synthetic placeholder; not an image-quality sample')

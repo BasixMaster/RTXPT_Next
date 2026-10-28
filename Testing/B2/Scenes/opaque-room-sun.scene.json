@@ -1,0 +1,57 @@
+{
+  "models": [
+    "opaque-room.gltf"
+  ],
+  "graph": [
+    {
+      "name": "OpaqueRoom",
+      "model": 0
+    },
+    {
+      "name": "Lights",
+      "children": [
+        {
+          "name": "ValidationSun",
+          "type": "DirectionalLight",
+          "rotation": [
+            -0.2305389071743629,
+            -0.15879165885860183,
+            -0.6890465942713406,
+            0.6684697541989844
+          ],
+          "angularSize": 2.86478877,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "irradiance": 2.0
+        }
+      ]
+    },
+    {
+      "name": "Cameras",
+      "children": [
+        {
+          "name": "Default",
+          "type": "PerspectiveCameraEx",
+          "translation": [
+            0,
+            1,
+            4
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "verticalFov": 0.62,
+          "zNear": 0.001,
+          "exposureCompensation": 0,
+          "enableAutoExposure": false
+        }
+      ]
+    }
+  ]
+}

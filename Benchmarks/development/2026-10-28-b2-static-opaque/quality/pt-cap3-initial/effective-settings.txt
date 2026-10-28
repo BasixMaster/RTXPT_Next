@@ -1,0 +1,7 @@
+SAMPLING_CONTRACT seed=0 realtime=1 referencePixelCenter=0 pixelJitterScale=0
+TRANSPORT_CONTRACT di=0 gi=0 pt=1 diMode=0 neeMIS=0 maxBounces=3 maxDiffuseBounces=3
+DI_VALIDATION_CONTRACT strict=1 boiling=0 discountNaive=0
+PT_REPLAY_CONTRACT replayOnly=0 roughnessThreshold=0.100000001
+PT_HISTORY_CONTRACT ageRejection=0 maxAge=30 maxHistory=8
+PT_SPATIAL_CONTRACT samples=1 boost=1
+DI_TEMPORAL_CONTRACT permutation=0 maxHistory=20

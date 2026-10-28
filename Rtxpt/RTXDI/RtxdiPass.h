@@ -109,6 +109,7 @@ struct RtxdiBridgeParameters
     // Assert on camera cuts, scene/material changes and history-invalidating mode changes.
     bool resetReSTIRPT = false;
     bool capturePTDiagnostics = false;
+    uint32_t samplingSeed = 0;
 };
 
 class RtxdiPass

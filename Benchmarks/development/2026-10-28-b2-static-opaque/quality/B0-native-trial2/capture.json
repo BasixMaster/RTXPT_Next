@@ -1,0 +1,109 @@
+{
+  "label": "B0-native-trial2",
+  "scene": "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room.scene.json",
+  "mode": "default",
+  "output_track": "unreconstructed tonemapped sRGB PNG; not linear HDR",
+  "exe_sha256": "502682d68e34d66ce43454bf47bd2eb8ee9c9e49455cb5b260c3c9c637fe7dd0",
+  "started_utc": "2026-10-28T21:09:10.414811+00:00",
+  "command": [
+    "[WORKSPACE]\\work\\controls-B0\\bin\\Rtxpt.exe",
+    "--scene",
+    "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room.scene.json",
+    "--width",
+    "640",
+    "--height",
+    "360",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "0",
+    "--useReSTIRGI",
+    "0",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "[WORKSPACE]\\work\\B2-native-comparison-quality-v3\\B0-native-trial2\\frame.png",
+    "--captureSuffix",
+    "B0-native-trial2",
+    "--perfLog",
+    "[WORKSPACE]\\work\\B2-native-comparison-quality-v3\\B0-native-trial2\\partial-perf.csv",
+    "--benchmarkUncapped",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--maxBounces",
+    "3",
+    "--maxDiffuseBounces",
+    "3",
+    "--stopAnimations",
+    "--captureSimple"
+  ],
+  "cwd": "[WORKSPACE]\\work\\controls-B0\\bin",
+  "settings": {
+    "width": 640,
+    "height": 360,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 0,
+    "restir_gi": 0,
+    "simple": true,
+    "record_start": null,
+    "frames": 1,
+    "reference_spp": null,
+    "linear_hdr_requested": false,
+    "sampling_seed_requested": null,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": null,
+    "nee_mis_requested": null,
+    "nee_type": 2,
+    "restir_pt": 0,
+    "max_bounces_override": 3,
+    "max_diffuse_bounces_override": 3,
+    "pt_mode": null
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "process_id": 56300,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 9.906000000002678,
+  "images": [
+    {
+      "name": "frame_B0-native-trial2.png",
+      "sha256": "008a1661981a1169729981f7f851559d051c69a07e3c6e9d6cebf4df1f40f158",
+      "bytes": 477251
+    }
+  ],
+  "linear_hdr_files": [],
+  "effective_sampling": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_di_validation": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_pt_replay": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_pt_history": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_pt_spatial": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  }
+}

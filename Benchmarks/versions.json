@@ -27,7 +27,9 @@
       "status": "in_progress",
       "ref": null,
       "source_sha": null,
-      "scope": "Integrate the RTXDI3.1 ReSTIR PT path into RTXPT with selectable DI/GI modes and explicit non-overlapping contribution ownership; not a pure2022 algorithm replica"
+      "scope": "Integrate the RTXDI3.1 ReSTIR PT path into RTXPT with selectable DI/GI modes and explicit non-overlapping contribution ownership; not a pure2022 algorithm replica",
+      "development_branch": "b2/restir-pt-integration",
+      "measured_checkpoint": "2026-10-28-b2-static-opaque"
     },
     {
       "id": "B3",
@@ -91,6 +93,24 @@
       "conclusion": "Initial migration comparison; no general speedup or equal-quality performance claim.",
       "cap_coverage": "historical_unverified",
       "cap_audit_note": "Later RTSS audit found current232FPS global cap; original run-time RTSS state unrecorded. Historical observations remain exploratory, not verified uncapped throughput."
+    },
+    {
+      "id": "2026-10-28-b2-static-opaque",
+      "status": "measured_development_not_promoted",
+      "report": "Docs/Research/B2_RESULTS.md",
+      "path": "Benchmarks/development/2026-10-28-b2-static-opaque",
+      "scenes": [
+        "owned-opaque-room"
+      ],
+      "hardware": "RTX4090",
+      "resolution": [
+        640,
+        360
+      ],
+      "timing_scope": "Three processes/configuration; PresentMon target-process GPUBusy; native B0/B1 controls versus B2 strict DI+PT",
+      "quality_scope": "Common display LDR-FLIP; B2-only eight-seed raw HDR/HDR-FLIP versus finite8192spp reference",
+      "cap_coverage": "verified_app_NVIDIA_RTSS_boundaries; other external limiters unknown",
+      "conclusion": "Higher observed steady-state quality at higher per-frame GPU-busy cost in one static scene; no equal-quality speedup or promotion."
     }
   ]
 }

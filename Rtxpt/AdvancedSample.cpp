@@ -309,11 +309,22 @@ void AdvancedPathTracer::PathTrace(nvrhi::IFramebuffer* framebuffer, const Sampl
     // B2 raw output: initialize native radiance before DI/PT add their terms.
     // The later AA copy must observe the completed sum, and no later layer
     // merge may overwrite contributions written directly to OutputColor.
-    if (m_ui.ActualUseReSTIRPT() && !m_ui.ActualUseStandaloneDenoiser() && m_ui.RealtimeAA == 0)
+    if (m_ui.RealtimeMode && !m_ui.ActualUseStandaloneDenoiser() && m_ui.RealtimeAA == 0)
     {
         SampleMiniConstants mergeConstants = { uint4(0, 0, 0, 0) };
         m_postProcess->Apply(m_commandList, PostProcess::ComputePassType::NoDenoiserFinalMerge,
             m_constantBuffer, mergeConstants, m_bindingSet, m_bindingLayout, width, height);
+        if (m_ui.CaptureNativeRadiance)
+        {
+            if (!m_renderTargets->NativeRadianceCapture)
+            {
+                auto desc = m_renderTargets->OutputColor->getDesc();
+                desc.debugName = "NativeRadianceBeforeReuse";
+                m_renderTargets->NativeRadianceCapture = GetDevice()->createTexture(desc);
+            }
+            m_commandList->copyTexture(m_renderTargets->NativeRadianceCapture, nvrhi::TextureSlice(),
+                m_renderTargets->OutputColor, nvrhi::TextureSlice());
+        }
     }
 
     // this is a performance optimization where final 2 passes from ReSTIR DI and ReSTIR GI are combined to avoid loading GBuffer twice

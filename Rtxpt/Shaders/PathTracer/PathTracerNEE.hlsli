@@ -234,6 +234,19 @@ namespace PathTracer
             float pathMIS = lightSampler.ComputeLightVsBSDF_MIS_ForLight(shadingData.posW, lightSample, thisPdf, otherPdf, thisCount, otherCount, candidateSampleCount, fullSamples, scatterPdfForDir);
 #endif
 
+#if PATH_TRACER_MODE==PT_DENOISING_LAYERS_FILL && PT_USE_RESTIR_PT
+            // Native continuation is removed for this exact owner. Its primary
+            // BSDF emitter-hit counterpart is absent, so native NEE owns all of
+            // this direct term. Inner light-selection MIS remains unchanged.
+            const uint ownerPlane = (g_Const.ptConsts.frameIndex % 2) == 0;
+            const uint ownerAddress = GenericTSPixelToAddress(preScatterPath.GetPixelPos(), ownerPlane,
+                g_Const.ptConsts.genericTSLineStride, g_Const.ptConsts.genericTSPlaneStride);
+            if (preScatterPath.hasFlag(PathFlags::denoisingLayerOnPlane) &&
+                preScatterPath.hasFlag(PathFlags::denoisingLayerOnDominantBranch) &&
+                RTXPT_PTOwnsPrimary(u_PTPrimaryData[ownerAddress], g_Const.ptConsts.frameIndex))
+                pathMIS = 1.0f;
+#endif
+
             // apply MIS and other multipliers to light here - reduces register pressure and computation later
             lightSample.Li *= fadeOut * wrsMIS * pathMIS / (float)fullSamples;
 

@@ -24,22 +24,24 @@ struct SampleGeneratorVertexBase
     uint    m_vertexIndex;  
 #endif
 
-    static SampleGeneratorVertexBase    make(uint packedPixel, uint vertexIndex, uint sampleIndex)
+    static SampleGeneratorVertexBase    make(uint packedPixel, uint vertexIndex, uint sampleIndex, uint samplingSeed = 0)
     {
         SampleGeneratorVertexBase ret;
         ret.m_sampleIndex   = sampleIndex;
         ret.m_baseHash      = Hash32Combine(Hash32(vertexIndex + 0x035F9F29), packedPixel);
+        if (samplingSeed != 0) ret.m_baseHash = Hash32Combine(ret.m_baseHash, Hash32(samplingSeed));
 #ifdef HQ_UNIFORM_SAMPLE_SEQUENCE_GENERATOR_ENABLED
         ret.m_pixelCoord    = pixelCoord;  
         ret.m_vertexIndex   = vertexIndex;
 #endif
         return ret;
     }
-    static SampleGeneratorVertexBase    make(uint2 pixelCoord, uint vertexIndex, uint sampleIndex)
+    static SampleGeneratorVertexBase    make(uint2 pixelCoord, uint vertexIndex, uint sampleIndex, uint samplingSeed = 0)
     {
         SampleGeneratorVertexBase ret;
         ret.m_sampleIndex   = sampleIndex;
         ret.m_baseHash      = Hash32Combine(Hash32(vertexIndex + 0x035F9F29), (pixelCoord.x << 16) | pixelCoord.y);
+        if (samplingSeed != 0) ret.m_baseHash = Hash32Combine(ret.m_baseHash, Hash32(samplingSeed));
 #ifdef HQ_UNIFORM_SAMPLE_SEQUENCE_GENERATOR_ENABLED
         ret.m_pixelCoord    = pixelCoord;  
         ret.m_vertexIndex   = vertexIndex;

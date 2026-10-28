@@ -2,7 +2,7 @@
 
 
 
-Updated2026-10-28. **B2 is in progress. B3 is planned. Neither has published GPU results or a promoted source tag yet.** The [B1 report](B1_RESULTS.md) remains available locally and on GitHub; its frozen evidence is unchanged.
+Updated2026-10-28. **B2 is in progress with scoped static opaque GPU quality/timing results; B3 is planned. Neither has a promoted B2/B3 source tag.** See the [current B2 report](B2_RESULTS.md); older sections retain superseded diagnostic checkpoints. The [B1 report](B1_RESULTS.md) remains available locally and on GitHub; its frozen evidence is unchanged.
 
 
 
@@ -206,7 +206,7 @@ The updated primary-ownership path and raw merge completed GPU captures in initi
 
 
 
-These are single diagnostic images against a finite-sample reference, not independent-trial improvements or a bias result. Temporal-only being close to initial-only requires history-use investigation; a successful dispatch does not prove useful history. HDR-FLIP and reference uncertainty remain unmeasured. Formula/channel/stabilization definitions are in [quality metrics](QUALITY_METRICS.md). All five HDR captures, source-format metadata, PNG previews, metric JSON and byte hashes are retained under `Benchmarks/development/2026-10-28-b2-hdr-diagnostic`.
+These are single diagnostic images against a finite-sample reference, not independent-trial improvements or a bias result. Temporal-only being close to initial-only requires history-use investigation; a successful dispatch does not prove useful history. HDR-FLIP and reference uncertainty were not measured at that early checkpoint; later matched-reference results supersede it. Formula/channel/stabilization definitions are in [quality metrics](QUALITY_METRICS.md). All five HDR captures, source-format metadata, PNG previews, metric JSON and byte hashes are retained under `Benchmarks/development/2026-10-28-b2-hdr-diagnostic`.
 
 
 
@@ -249,3 +249,85 @@ Use this corrected table for the current screenshot diagnostic. It remains one i
 The timing pilot uses a capture-sequence guard but measures only after 45 seconds wall-clock warm-up, long after its 64-frame reset phase. Its known cap/identity evidence remains intact; it is still an exploratory one-process comparison of the earlier executable. That earlier B2 executable was fingerprinted before/after timing but was not retained before subsequent diagnostic builds; a fully retained repeatable B2 performance checkpoint remains pending. Do not substitute the current diagnostic executable hash for the pilot's recorded hash.
 
 The tool suite passes 68 tests. The reservoir inspector independently checks tiled addressing and the pinned half-precision M/age layout. Raw reservoir capture is diagnostic-only, synchronizes the GPU, and must never be enabled in throughput timing runs.
+
+
+## Matched-reference failure retained for diagnosis
+
+The earlier raw-HDR tables used a reference with default `AccumulationAA=true`, while realtime AA0 used pixel-center camera rays. They remain methodology diagnostics, not matched camera-domain estimator-accuracy evidence. A new explicit `--referencePixelCenter true` switch disables reference subpixel integration. First-frame `SAMPLING_CONTRACT` logs verify actual seed, mode and pixel-jitter scale. General frame/history indices are unchanged by the new scramble seed.
+
+The validation build adds default-zero `--samplingSeed`, scrambling native camera/BSDF/STF/RTXDI sampling and PT runtime RNG inputs. Seed0 retains the source's original stream construction; whole-renderer bit-exact replay is not established: same-seed separate processes differ. The controlled trials therefore record both distinct seeds and repeated-seed process variation. Packed PT reservoir export is now a separate opt-in `--capturePTReservoirs true` diagnostic, rather than a cost hidden in every HDR capture.
+
+Eight seed trials (0,1,2,3,5,11,23,47), each initial-only and combined reuse, completed against a matched pixel-center native reference. The reference uses8192spp/seed101; separate4096spp/seed101 and8192spp/seed103 checks quantify finite-reference discrepancy. All captures use640×360,1spp realtime, total/diffuse caps3/3, AA0, denoiser0, cache0, fixed exposure0 and no firefly/post filters.
+
+| Diagnostic | Initial only | Temporal + spatial |
+|---|---:|---:|
+| Median linear RGB MSE, eight seeds |0.109511|0.024737|
+| Median official HDR-FLIP |0.232799|0.192335|
+| Mean signed whole-frame luminance difference relative to reference |+16.27%|+15.24%|
+
+**This pre-repair checkpoint failed the mean-radiance check.** Lower error after reuse is not sufficient when a persistent brightness discrepancy remains. A direct-only cap1 probe is already bright before PT indirect can contribute; native-vs-DI isolation is in progress. A separate source audit found a light-vertex bounce-budget mismatch that predicts missing, rather than excess, PT suffix light and needs its own correction/test.
+
+Official flip-evaluator1.7 runs locally on stored linear RGB. PPD67 and ACES are explicit project choices, not recovered paper settings. Reference-only calibration selects exposure range[-3.2584834,+4.6571465] and8exposures; the same settings apply to every test. Reference4096 vs8192 RGB MSE is3.69138e-6; the separate8192-seed comparison is7.09672e-6. These finite checks do not prove convergence or unbiasedness.
+
+DI-only raw captures also require the native layer merge before DI additions; the prior late merge overwrote those additions in OutputColor. B2 now uses the explicit raw merge order for realtime AA0 with denoising off, preserving original B0/B1 controls. New `--restirDIMode` and native `--neeMIS` validation overrides isolate initial, temporal and spatial DI against native exact-MIS lighting. PT-only light preparation now includes the configured ReGIR proposal even with primary DI off. These repairs require renewed GPU checks and remain development changes.
+
+
+## Light-list, path-budget and DI reuse corrections
+
+The matched-reference failure led to a local-light isolation experiment. A deterministic 8×8-per-triangle quadrature using the same reconstructed DI surface produced mean RGB [0.302392,0.301655,0.281082], close to native direct-reference [0.303280,0.302282,0.282504]. Thus the large excess was not explained by a different material model or duplicated native direct lighting. Component readback showed only primary emitter radiance before DI.
+
+The concrete cause was in `PrepareLightsPass`: an allocated environment-map resource was treated as a registered scene light. With no scene environment record, subtracting one from zero infinite lights underflowed; the environment index wrapped into the local triangle list. The correction counts actual records and appends a real synthetic global-environment record when a baked map has no corresponding scene light. This preserves native baked sun/override illumination rather than inferring a light solely from resource allocation. Extra capacity and previous-frame mappings are tracked; skipped primitive records are pruned from temporal mapping.
+
+A first registered-record repair reduced direct-only initial DI mean radiance to within approximately0.3–0.4% of the reference across uniform/power/ReGIR proposals, with and without BRDF candidates. These are diagnostic captures, not a convergence claim. The subsequent synthetic-record build and supported-light variants require their own verification.
+
+Two additional contracts were repaired: geometry-hit light indices now include the current light-buffer region offset, while the power-PDF callback subtracts that offset before indexing its local texture and normalizes by actual texture area. Neither light loading nor temporal translation adds another offset. Native bounce limit B permits the terminal emitter after B scattering surfaces, whereas RTXDI PT counts the light vertex in its path length. Initial and replay PT limits therefore use B+1; this correction is measured separately from the light-list repair.
+
+DI reuse has two additional validation controls. The inherited boiling filter intentionally removes high-weight samples. In pinned runtime `f12037f`, raytraced spatial resampling caches a neighbor before the naïve-sample discount rejects its contribution, but the later normalization pass still counts its mass. B2 now defaults the naïve-neighbor discount off to avoid that normalization defect. `--strictDIValidation true` also disables DI boiling and explicitly keeps the discount off while retaining raytraced bias correction; it does not modify the child runtime or promise unbiased GI. The capture wrapper verifies the effective first-frame receipt. Old default-filter captures remain an explicit ablation.
+
+The corrected release checkpoint is retained locally with source patch and604 non-PDB bundle files (executable SHA256 `662d30e9cc7a18456a98fc0f8c109ffebbd36712d8ea8e6dedafcd9381db6f67`). A30-capture bounce/seed sweep is in progress, followed by strict-DI and distant-light checks. No B2 tag or equal-quality performance claim is issued. Seventy-three benchmark-tool tests pass, including rejected missing scene paths and effective seed/camera/DI receipts.
+
+### Summary and lessons learned
+
+Successful pass dispatch and lower per-image error did not establish transport correctness. Matching pixel integration exposed a real mean-lighting error; component captures and deterministic quadrature then isolated its source. Keep environment records, absolute/local light-index domains, light-vertex budgets and deliberate rejection filters explicit in each result identity. Original B0/B1 evidence remains preserved; the corrected B2 renderer needs fresh quality and timing evidence.
+
+
+### Corrected 30-capture sweep and strict-DI ablation
+
+Thirty captures completed on the retained corrected checkpoint. The fixed bounce sweep covers native limits1–4, PT-only and DI+PT, initial-only and combined reuse. At limit1, PT adds no indirect term. At limits2–4, initial PT-only whole-frame luminance differs from its matched native reference by approximately−0.48% to−0.51%; DI+PT initial differences are approximately−0.25% to−0.36%. This removes the earlier large brightness error and aligns the path-length domain; it is not proof of an unbiased estimator.
+
+| Eight-seed cap3 diagnostic | Median linear RGB MSE | Median HDR-FLIP | Mean signed luminance difference |
+|---|---:|---:|---:|
+| Pre-repair initial |0.109511|0.232799|+16.27%|
+| Pre-repair reuse |0.024737|0.192335|+15.24%|
+| Corrected initial, inherited DI rejection settings |0.042697|0.167899|−0.351%|
+| Corrected reuse, inherited DI rejection settings |0.005698|0.132292|−2.939%|
+| Corrected initial, strict DI |0.042721|0.167812|−0.349%|
+| Corrected reuse, strict DI |0.005637|0.125119|−2.126%|
+
+These are development diagnostics with the same8192spp pixel-center reference and fixed HDR-FLIP settings. The intervals across eight seeds are exploratory; they do not include every source of reference/process uncertainty. Reuse still has a measurable negative mean difference, so a lower MSE/FLIP is not an equal-quality performance result or a B2 promotion.
+
+Strict-DI spatial-only direct lighting now closely tracks initial-only output, confirming the skipped-neighbor normalization problem's practical effect. Temporal reuse retains a smaller deficit. PT-only reused output also darkens with longer paths independently of DI. A replay-only diagnostic is being added to isolate cached view-dependent radiance at mid-path reconnection; its result is pending. A separate producer defect was found in miss export: zero was written to the packed validity word even though bit1 must mark an empty surface. The miss-bit repair needs its own post-build regression; PT already has a separate frame/ownership guard.
+
+Owned procedural-sky and directional-only variants were added alongside the original scene. Initial DI direct-light mean differences are approximately−0.25% and−0.23% respectively versus their matched8192spp native references. The directional-only scene exercises synthetic baked-environment registration without a scene EnvironmentLight. These single captures establish scoped lighting smoke checks, not full original-scene/material/motion coverage. PT cap3 sky/sun captures are finite smoke checks and are not compared to cap1 references.
+
+The earlier uncapped timing pilot on the no-environment room predates this light-list repair. Retain its raw timings and cap receipts as historical execution evidence, but do not interpret it as a comparison of corrected lighting or substitute a new executable under those hashes. Fresh accepted B2 timing remains pending transport validation.
+
+
+### Inspectable images and evidence
+
+Fixed exposure0, same camera and640×360 output. The realtime images use1spp; the reference uses8192spp. These PNGs are display previews; the metrics above use stored linear PFM radiance. Click a picture to inspect it and press Escape to close.
+
+| Native reference | Strict DI+PT initial, seed0 | Strict DI+PT reuse, seed0 |
+|---|---|---|
+| [![Native8192spp reference](assets/b2/reference-8192.png)](assets/b2/reference-8192.png) | [![B2 strict initial1spp](assets/b2/strict-initial-seed0.png)](assets/b2/strict-initial-seed0.png) | [![B2 strict reuse1spp](assets/b2/strict-reuse-seed0.png)](assets/b2/strict-reuse-seed0.png) |
+
+Raw PFM/PNG, effective-setting receipts, public-safe capture manifests, metric JSON, source patches and hashes are retained in `Benchmarks/development/2026-10-28-b2-seeded-validation`, `2026-10-28-b2-corrected-budget`, and `2026-10-28-b2-strict-DI-validation`. In capture IDs, bN means bounce cap N, not a promoted B-version. Exact corrected and strict runtime bundles are retained locally. The strict checkpoint's source patch was reconstructed by removing documented subsequent diagnostic edits because a build-time source snapshot was missed; its exact executable/shader bundle is retained, and no bit-exact rebuild claim is made. The subsequent replay checkpoint snapshots source before compilation.
+
+
+## Latest partition and reconnection checkpoint
+
+See [B2 results](B2_RESULTS.md) for the current comparison. Later GPU tests confirmed that generic allowed-lobe masks disabled opaque mid-path reconnection; the guard now tests actual BSDF lobes. Census proves active mid-path connections. The replay-only ablation therefore did not explain the earlier deficit; it exposed missing activation. Native primary direct NEE also needed MIS1 under the same PT owner predicate because native continuation, including the primary BSDF light-hit counterpart, had been removed. Unsupported/native-owned paths retain their original MIS.
+
+The current strict static DI preset additionally disables permutation sampling: under current-TLAS visibility approximation, evaluating a permuted neighbor's normalization from the current receiver produced a measurable static deficit. Fixed PT ordinary/boosted neighbor counts isolate the sample-dependent disocclusion boost. Age rejection remains an explicit independent ablation and had little effect in this seed0/11 test. The inactive raw PT neighbor-selection buffer remains allocated, but classic B2 does not define the macro enabling its loads; it is not an active CGNS prepass.
+
+The packed miss validity repair passed subsequent native/DI/PT captures. Seventy-six benchmark-tool tests pass. B2's current raw quality and matched timing use the settings and hashes in the current report; older intermediate tables are not final B2 claims.

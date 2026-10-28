@@ -17,6 +17,10 @@ class ReservoirTests(unittest.TestCase):
         self.assertEqual(result['valid'], 1)
         self.assertEqual(result['m_greater_than_one'], 1)
         self.assertEqual(result['max_age_valid'], 7)
+        self.assertEqual(result['midpath_reconnection_valid'],1)
+        self.assertEqual(result['terminal_reconnection_valid'],0)
+        self.assertEqual(result['rc_length_histogram_valid'],{'3':1})
+        self.assertEqual(result['path_length_histogram_valid'],{'5':1})
         self.assertEqual(result['mean_m_valid'], 2)
         self.assertEqual(result['valid_with_positive_weight'], 1)
         meta['final_index'] = 1

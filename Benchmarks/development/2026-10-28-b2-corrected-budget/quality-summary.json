@@ -1,0 +1,60 @@
+{
+  "status": "development diagnostic, not B2 promotion",
+  "metric_scope": "Eight explicitly seeded process trials, finite matched reference; same-seed whole-renderer bit-exact replay not established",
+  "groups": {
+    "0": {
+      "trials": 8,
+      "median_mse": 0.04269657834693627,
+      "median_hdr_flip": 0.16789905726909637,
+      "relative_signed_mean_luminance_drift": -0.0035124479634401134,
+      "exploratory_seed_mean_drift_ci95": [
+        -0.004214463350341955,
+        -0.0027518339967804303
+      ],
+      "ensemble_mean_image_error": {
+        "linear_rgb_mse": 0.005376808680444028,
+        "smape_cgns_y100": 6.320407696643388,
+        "full_frame_reference_mean_luminance": 0.34872898087601023,
+        "mape_rgb_ydenom": 0.11342323916779828,
+        "relmse_project": 0.21803806792394054,
+        "relative_metrics_available": true
+      },
+      "ensemble_mean_rgb": [
+        0.3501938833475449,
+        0.3505006536150338,
+        0.3099002965675835
+      ]
+    },
+    "3": {
+      "trials": 8,
+      "median_mse": 0.005698153914411635,
+      "median_hdr_flip": 0.13229232281446457,
+      "relative_signed_mean_luminance_drift": -0.02939193372565088,
+      "exploratory_seed_mean_drift_ci95": [
+        -0.029995051936309206,
+        -0.02877657785883826
+      ],
+      "ensemble_mean_image_error": {
+        "linear_rgb_mse": 0.0012192770408652861,
+        "smape_cgns_y100": 3.7609286742377597,
+        "full_frame_reference_mean_luminance": 0.34872898087601023,
+        "mape_rgb_ydenom": 0.07143335398644415,
+        "relmse_project": 0.025821906131065532,
+        "relative_metrics_available": true
+      },
+      "ensemble_mean_rgb": [
+        0.3407902198575579,
+        0.3413530813894532,
+        0.30320550180657946
+      ]
+    }
+  },
+  "flip_parameters": {
+    "ppd": 67.0,
+    "startExposure": -3.258483409881592,
+    "stopExposure": 4.657146453857422,
+    "numExposures": 8,
+    "tonemapper": "ACES"
+  },
+  "reference_sha256": "67c854dfd988d607caa6d88248e2064f7ee2f36ad504e8b38bbf3b89bee2bda6"
+}

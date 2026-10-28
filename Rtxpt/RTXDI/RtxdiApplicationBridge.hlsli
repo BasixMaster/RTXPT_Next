@@ -262,7 +262,7 @@ RAB_RandomSamplerState RAB_InitRandomSampler(uint2 index, uint pass)
 #if defined(RTXPT_RESTIR_PT_BRIDGE)
     return RTXDI_InitRandomSampler(index, g_RtxdiBridgeConst.runtimeParams.frameIndex, pass);
 #else
-    return SampleGenerator::make(SampleGeneratorVertexBase::make(index, pass, Bridge::getSampleIndex()));
+    return SampleGenerator::make(SampleGeneratorVertexBase::make(index, pass, Bridge::getSampleIndex(), g_Const.ptConsts.samplingSeed));
 #endif
 }
 
@@ -460,18 +460,20 @@ float RAB_EvaluateEnvironmentMapSamplingPdf(float3 L)
 // Evaluates pdf for a particular light
 float RAB_EvaluateLocalLightSourcePdf(uint lightIndex)
 {
-    uint2 pdfTextureSize = g_RtxdiBridgeConst.localLightPdfTextureSize.xy;
-    uint2 texelPosition = RTXDI_LinearIndexToZCurve(lightIndex);
-    float texelValue = t_LocalLightPdfTexture[texelPosition].r;
-
-    int lastMipLevel = g_RtxdiBridgeConst.localLightPdfLastMipLevel;
-    float averageValue = t_LocalLightPdfTexture.mips[lastMipLevel][uint2(0, 0)].x;
-
-    // See the comment at 'sum' in RAB_EvaluateEnvironmentMapSamplingPdf.
-    // The same texture shape considerations apply to local lights.
-    float sum = averageValue * square(1u << lastMipLevel);
-
-    return texelValue / sum;
+    // Reservoir/light callbacks use absolute indices in the two-frame buffer;
+    // the power PDF texture is indexed relative to the current local region.
+    const RTXDI_LightBufferRegion region = g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion;
+    if (lightIndex < region.firstLightIndex || lightIndex - region.firstLightIndex >= region.numLights)
+        return 0.f;
+    const uint localIndex = lightIndex - region.firstLightIndex;
+    const uint2 pdfTextureSize = g_RtxdiBridgeConst.localLightPdfTextureSize.xy;
+    const uint2 texelPosition = RTXDI_LinearIndexToZCurve(localIndex);
+    if (any(texelPosition >= pdfTextureSize)) return 0.f;
+    const float texelValue = t_LocalLightPdfTexture[texelPosition].r;
+    const int lastMipLevel = g_RtxdiBridgeConst.localLightPdfLastMipLevel;
+    const float averageValue = t_LocalLightPdfTexture.mips[lastMipLevel][uint2(0, 0)].x;
+    const float sum = averageValue * float(pdfTextureSize.x) * float(pdfTextureSize.y);
+    return isfinite(sum) && sum > 0.f && isfinite(texelValue) ? texelValue / sum : 0.f;
 }
 
 float3 _Schlick_Fresnel(float3 F0, float VdotH)
@@ -591,8 +593,9 @@ uint getLightIndex(uint firstGeometryInstanceIndex, uint geometryIndex, uint pri
     uint geometryInstanceIndex = firstGeometryInstanceIndex + geometryIndex;
     lightIndex = t_GeometryInstanceToLight[geometryInstanceIndex];
 
-    //return lightIndex + primitiveIndex;
-    return lightIndex == RTXDI_InvalidLightIndex ? lightIndex : lightIndex + primitiveIndex;
+    // Geometry mapping stores a local base; runtime reservoirs store absolute IDs.
+    return lightIndex == RTXDI_InvalidLightIndex ? lightIndex :
+        g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion.firstLightIndex + lightIndex + primitiveIndex;
 }
 
 RayDesc setupVisibilityRay(RAB_Surface surface, RAB_LightSample lightSample, float offset = 0.001)

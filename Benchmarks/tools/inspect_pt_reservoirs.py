@@ -23,12 +23,19 @@ def inspect(words, meta):
         selected = words[address]
         m = (selected[..., 5] >> 16).astype('<u2').view('<f2').astype(np.float64)
         age = selected[..., 11] & 31
+        rc = (selected[..., 11] >> 8) & 255
+        path_length = (selected[..., 11] >> 16) & 255
         weight = selected[..., 3].astype('<u4').view('<f4')
         target = selected[..., 12:15].copy().astype('<u4').view('<f4')
         valid = m > 0
         results[semantic] = dict(slot=int(meta[semantic]), pixels=int(valid.size), valid=int(valid.sum()),
             m_greater_than_one=int((m > 1).sum()),
             positive_age_valid=int(((age > 0) & valid).sum()),
+            midpath_reconnection_valid=int((valid & (rc < path_length)).sum()),
+            terminal_reconnection_valid=int((valid & (rc == path_length)).sum()),
+            age_histogram_valid={str(int(k)):int(v) for k,v in zip(*np.unique(age[valid],return_counts=True))},
+            rc_length_histogram_valid={str(int(k)):int(v) for k,v in zip(*np.unique(rc[valid],return_counts=True))},
+            path_length_histogram_valid={str(int(k)):int(v) for k,v in zip(*np.unique(path_length[valid],return_counts=True))},
             max_age_valid=int(age[valid].max()) if valid.any() else None,
             mean_m_valid=float(m[valid].mean()) if valid.any() else None,
             valid_with_positive_weight=int((valid & (weight > 0)).sum()),

@@ -25,7 +25,7 @@
       "id": "B2-partition",
       "status": "in_progress",
       "acceptance": "Direct/indirect, native/PT, delta/non-delta and fallback contributions counted exactly once",
-      "evidence": "Shared native-export eligibility bit controls both PT receivers/donors and native continuation; raw native radiance merged before DI/PT additions. Opaque four-mode GPU smoke passed; broader path-domain validation pending."
+      "evidence": "Ownership bit and raw merge checks remain; direct-only cap1 probe exposes native-vs-DI brightness discrepancy before PT indirect. Native/PT light-vertex bounce-budget mismatch also identified. Neither is resolved by enabled-pass smoke tests."
     },
     {
       "id": "B2-medium",
@@ -41,9 +41,9 @@
     },
     {
       "id": "B2-quality",
-      "status": "in_progress",
+      "status": "partial",
       "acceptance": "Raw/reference, replay/history, materials and reconstruction checks under matched contracts",
-      "evidence": "Corrected capture warm-up permits PT history; temporal/combined reservoir readback confirms positive ages and accumulated M. Four finite HDR captures and explicit linear metrics recorded; one image per mode, no bias/independent-seed acceptance yet."
+      "evidence": "Matched static opaque checks, active mid-path reconnection census, primary ownership MIS and fixed-neighbor ablations completed. Eight-seed DI+PT initial/reuse mean drift\u22120.356%/\u22120.350%; median HDR-FLIP0.1680/0.1034. Wider materials/motion/reconstruction remain pending."
     },
     {
       "id": "B2-caps",
@@ -55,13 +55,13 @@
       "id": "B2-comparison",
       "status": "partial",
       "acceptance": "B0/B1/B2 matched transport, scene, cap audit and process repetitions with quality and timing evidence",
-      "evidence": "One cap-verified 640x360 opaque-scene process per B0+controls/B1+controls/B2 passed, with frozen artifacts and driver restoration. Exploratory timings recorded; independent repetitions and matched HDR quality comparisons remain pending."
+      "evidence": "Fresh three-process native B0/B1 versus strict B2 DI+PT comparison completed with display quality; B2-only raw HDR. Median GPUBusy0.803/0.806/1.519ms. One scene, different sampling estimators, no equal-quality speedup claim."
     },
     {
       "id": "B2-promotion",
       "status": "pending",
       "acceptance": "Supported scope, checks and immutable source identity complete before assigning release tag",
-      "evidence": "Development branch only; no B2 tag or completed-release claim."
+      "evidence": "Pending: current mean-luminance acceptance fails; no B2 release tag. Seeded GPU diagnostics, raw-merge repair and direct-light isolation are in progress."
     },
     {
       "id": "B3-ptpp",
@@ -77,6 +77,27 @@
       "from": "planned",
       "to": "in_progress",
       "reason": "User resumed integration and explicitly separated B2 ReSTIR PT from B3 PT++. Current release gate remains pending."
+    },
+    {
+      "date": "2026-10-28",
+      "id": "B2-quality-matched-reference",
+      "from": "in_progress",
+      "to": "in_progress",
+      "reason": "Matched pixel-center seeded references expose systematic brightness mismatch; direct-only probe isolates a pre-PT-indirect component. B2 promotion remains pending."
+    },
+    {
+      "date": "2026-10-28",
+      "id": "B2-light-list-and-budget",
+      "from": "in_progress",
+      "to": "in_progress",
+      "reason": "Isolated phantom environment index underflow; registered actual/synthetic environment records and corrected absolute/local light domains and PT light-vertex budget. Validation remains active."
+    },
+    {
+      "date": "2026-10-28",
+      "id": "B2-static-opaque-checkpoint",
+      "from": "in_progress",
+      "to": "partial",
+      "reason": "Corrected ownership, light-list/budget/validity and actual-lobe reconnection contracts; static quality and cap-verified timing now measured. Full B2 promotion gates remain pending."
     }
   ],
   "limits": [

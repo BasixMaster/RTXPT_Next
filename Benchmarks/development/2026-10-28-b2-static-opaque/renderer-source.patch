@@ -1,0 +1,624 @@
+diff --git a/Rtxpt/AdvancedSample.cpp b/Rtxpt/AdvancedSample.cpp
+index 1d863a2..bbf7122 100644
+--- a/Rtxpt/AdvancedSample.cpp
++++ b/Rtxpt/AdvancedSample.cpp
+@@ -309,11 +309,22 @@ void AdvancedPathTracer::PathTrace(nvrhi::IFramebuffer* framebuffer, const Sampl
+     // B2 raw output: initialize native radiance before DI/PT add their terms.
+     // The later AA copy must observe the completed sum, and no later layer
+     // merge may overwrite contributions written directly to OutputColor.
+-    if (m_ui.ActualUseReSTIRPT() && !m_ui.ActualUseStandaloneDenoiser() && m_ui.RealtimeAA == 0)
++    if (m_ui.RealtimeMode && !m_ui.ActualUseStandaloneDenoiser() && m_ui.RealtimeAA == 0)
+     {
+         SampleMiniConstants mergeConstants = { uint4(0, 0, 0, 0) };
+         m_postProcess->Apply(m_commandList, PostProcess::ComputePassType::NoDenoiserFinalMerge,
+             m_constantBuffer, mergeConstants, m_bindingSet, m_bindingLayout, width, height);
++        if (m_ui.CaptureNativeRadiance)
++        {
++            if (!m_renderTargets->NativeRadianceCapture)
++            {
++                auto desc = m_renderTargets->OutputColor->getDesc();
++                desc.debugName = "NativeRadianceBeforeReuse";
++                m_renderTargets->NativeRadianceCapture = GetDevice()->createTexture(desc);
++            }
++            m_commandList->copyTexture(m_renderTargets->NativeRadianceCapture, nvrhi::TextureSlice(),
++                m_renderTargets->OutputColor, nvrhi::TextureSlice());
++        }
+     }
+ 
+     // this is a performance optimization where final 2 passes from ReSTIR DI and ReSTIR GI are combined to avoid loading GBuffer twice
+diff --git a/Rtxpt/RTXDI/PT/Bridge.hlsli b/Rtxpt/RTXDI/PT/Bridge.hlsli
+index 15dfe71..52579b0 100644
+--- a/Rtxpt/RTXDI/PT/Bridge.hlsli
++++ b/Rtxpt/RTXDI/PT/Bridge.hlsli
+@@ -33,7 +33,7 @@ bool RTXPT_PTCanReconnectSurface(RAB_Surface s)
+     // Restrict fixed-threshold mid-path reconnection to non-transmissive,
+     // out-of-medium vertices. Other prefixes use deterministic random replay.
+     return s._ptNativeState.interiorSlots[0] == 0 &&
+-        (s._mtl.getActiveLobes() & (uint)LobeType::Transmission) == 0;
++        (FalcorBSDF::getLobes(s._data) & s._mtl.getActiveLobes() & (uint)LobeType::Transmission) == 0;
+ }
+ float RAB_GetSurfaceRoughness(RAB_Surface s) { return RTXPT_PTCanReconnectSurface(s) ? s.GetRoughness() : 0.0f; }
+ float3 RAB_GetSurfaceViewDir(RAB_Surface s) { return s.GetView(); }
+diff --git a/Rtxpt/RTXDI/PrepareLightsPass.cpp b/Rtxpt/RTXDI/PrepareLightsPass.cpp
+index adbd78c..9bc82a7 100644
+--- a/Rtxpt/RTXDI/PrepareLightsPass.cpp
++++ b/Rtxpt/RTXDI/PrepareLightsPass.cpp
+@@ -282,13 +282,20 @@ RTXDI_LightBufferParameters PrepareLightsPass::Process(nvrhi::ICommandList* comm
+     uint32_t numFinitePrimLights = 0;
+     uint32_t numInfinitePrimLights = 0;
+ 
+-    bool enableImportanceSampledEnvironmentLight = m_EnvironmentMap ? true : false;
++    const bool canImportanceSampleEnvironment = bool(m_EnvironmentMap);
++    // An allocated map is not an entry in the scene's light list. Only subtract
++    // an environment record after one was actually converted and appended.
++    bool enableImportanceSampledEnvironmentLight = false;
+ 
++    std::unordered_map<const Light*, uint32_t> currentPrimitiveOffsets;
+     for (const std::shared_ptr<Light>& pLight : sortedLights)
+     {
+         PolymorphicLightInfoFull polymorphicLight = {};
+        
+-        if (!ConvertLight(*pLight, polymorphicLight, enableImportanceSampledEnvironmentLight, m_EnvironmentMap.get()))
++        // The renderer binds one global environment map and reserves one slot.
++        if (pLight->GetLightType() == LightType_Environment && enableImportanceSampledEnvironmentLight)
++            continue;
++        if (!ConvertLight(*pLight, polymorphicLight, canImportanceSampleEnvironment, m_EnvironmentMap.get()))
+             continue;
+ 
+         // find the previous offset of this instance in the light buffer
+@@ -301,12 +308,14 @@ RTXDI_LightBufferParameters PrepareLightsPass::Process(nvrhi::ICommandList* comm
+         task.previousLightBufferOffset = (pOffset != m_PrimitiveLightBufferOffsets.end()) ? pOffset->second : -1;
+ 
+         // record the current offset of this instance for use on the next frame
+-        m_PrimitiveLightBufferOffsets[pLight.get()] = lightBufferOffset;
++        currentPrimitiveOffsets[pLight.get()] = lightBufferOffset;
+ 
+         lightBufferOffset += task.triangleCount;
+ 
+         tasks.push_back(task);
+         primitiveLightInfos.push_back(polymorphicLight);
++        if (pLight->GetLightType() == LightType_Environment)
++            enableImportanceSampledEnvironmentLight = true;
+ 
+         if (isInfiniteLight(*pLight))
+             numInfinitePrimLights++;
+@@ -314,10 +323,34 @@ RTXDI_LightBufferParameters PrepareLightsPass::Process(nvrhi::ICommandList* comm
+             numFinitePrimLights++;
+     }
+ 
++    m_PrimitiveLightBufferOffsets = std::move(currentPrimitiveOffsets);
++
++    // Native distant illumination is evaluated from the baked global map. It
++    // may contain a directional sun or an override without a scene EnvironmentLight.
++    // Give that map a real record rather than borrowing the last local-light ID.
++    if (canImportanceSampleEnvironment && !enableImportanceSampledEnvironmentLight)
++    {
++        PolymorphicLightInfoFull environment = {};
++        environment.Base.ColorTypeAndFlags = uint32_t(PolymorphicLightType::kEnvironment) << kPolymorphicLightTypeShift;
++        PrepareLightsTask task = {};
++        task.instanceAndGeometryIndex = TASK_PRIMITIVE_LIGHT_BIT | uint32_t(primitiveLightInfos.size());
++        task.lightBufferOffset = lightBufferOffset;
++        task.triangleCount = 1;
++        task.previousLightBufferOffset = m_PreviousSyntheticEnvironmentOffset;
++        m_PreviousSyntheticEnvironmentOffset = int32_t(lightBufferOffset);
++        ++lightBufferOffset;
++        ++numInfinitePrimLights;
++        tasks.push_back(task);
++        primitiveLightInfos.push_back(environment);
++        enableImportanceSampledEnvironmentLight = true;
++    }
++    else
++        m_PreviousSyntheticEnvironmentOffset = -1;
++
+ 	lightBufferParams.localLightBufferRegion.numLights += numFinitePrimLights;
+ 	lightBufferParams.infiniteLightBufferRegion.firstLightIndex = lightBufferParams.localLightBufferRegion.numLights;
+     // Note we do not include the environment map in numInfiniteLights
+-	lightBufferParams.infiniteLightBufferRegion.numLights = numInfinitePrimLights - enableImportanceSampledEnvironmentLight;;
++	lightBufferParams.infiniteLightBufferRegion.numLights = numInfinitePrimLights - uint32_t(enableImportanceSampledEnvironmentLight);
+ 	lightBufferParams.environmentLightParams.lightIndex = lightBufferParams.infiniteLightBufferRegion.firstLightIndex + lightBufferParams.infiniteLightBufferRegion.numLights;
+ 	lightBufferParams.environmentLightParams.lightPresent = enableImportanceSampledEnvironmentLight ? 1u : 0u;
+     
+diff --git a/Rtxpt/RTXDI/PrepareLightsPass.h b/Rtxpt/RTXDI/PrepareLightsPass.h
+index 0cc1b47..62f0f9e 100644
+--- a/Rtxpt/RTXDI/PrepareLightsPass.h
++++ b/Rtxpt/RTXDI/PrepareLightsPass.h
+@@ -58,6 +58,7 @@ private:
+ 
+     uint32_t m_MaxLightsInBuffer;
+     bool m_OddFrame = false;
++    int32_t m_PreviousSyntheticEnvironmentOffset = -1;
+     
+     std::shared_ptr<donut::engine::ShaderFactory> m_shaderFactory;
+     std::shared_ptr<donut::engine::CommonRenderPasses> m_commonPasses;
+diff --git a/Rtxpt/RTXDI/RtxdiApplicationBridge.hlsli b/Rtxpt/RTXDI/RtxdiApplicationBridge.hlsli
+index e567196..9e5453c 100644
+--- a/Rtxpt/RTXDI/RtxdiApplicationBridge.hlsli
++++ b/Rtxpt/RTXDI/RtxdiApplicationBridge.hlsli
+@@ -262,7 +262,7 @@ RAB_RandomSamplerState RAB_InitRandomSampler(uint2 index, uint pass)
+ #if defined(RTXPT_RESTIR_PT_BRIDGE)
+     return RTXDI_InitRandomSampler(index, g_RtxdiBridgeConst.runtimeParams.frameIndex, pass);
+ #else
+-    return SampleGenerator::make(SampleGeneratorVertexBase::make(index, pass, Bridge::getSampleIndex()));
++    return SampleGenerator::make(SampleGeneratorVertexBase::make(index, pass, Bridge::getSampleIndex(), g_Const.ptConsts.samplingSeed));
+ #endif
+ }
+ 
+@@ -460,18 +460,20 @@ float RAB_EvaluateEnvironmentMapSamplingPdf(float3 L)
+ // Evaluates pdf for a particular light
+ float RAB_EvaluateLocalLightSourcePdf(uint lightIndex)
+ {
+-    uint2 pdfTextureSize = g_RtxdiBridgeConst.localLightPdfTextureSize.xy;
+-    uint2 texelPosition = RTXDI_LinearIndexToZCurve(lightIndex);
+-    float texelValue = t_LocalLightPdfTexture[texelPosition].r;
+-
+-    int lastMipLevel = g_RtxdiBridgeConst.localLightPdfLastMipLevel;
+-    float averageValue = t_LocalLightPdfTexture.mips[lastMipLevel][uint2(0, 0)].x;
+-
+-    // See the comment at 'sum' in RAB_EvaluateEnvironmentMapSamplingPdf.
+-    // The same texture shape considerations apply to local lights.
+-    float sum = averageValue * square(1u << lastMipLevel);
+-
+-    return texelValue / sum;
++    // Reservoir/light callbacks use absolute indices in the two-frame buffer;
++    // the power PDF texture is indexed relative to the current local region.
++    const RTXDI_LightBufferRegion region = g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion;
++    if (lightIndex < region.firstLightIndex || lightIndex - region.firstLightIndex >= region.numLights)
++        return 0.f;
++    const uint localIndex = lightIndex - region.firstLightIndex;
++    const uint2 pdfTextureSize = g_RtxdiBridgeConst.localLightPdfTextureSize.xy;
++    const uint2 texelPosition = RTXDI_LinearIndexToZCurve(localIndex);
++    if (any(texelPosition >= pdfTextureSize)) return 0.f;
++    const float texelValue = t_LocalLightPdfTexture[texelPosition].r;
++    const int lastMipLevel = g_RtxdiBridgeConst.localLightPdfLastMipLevel;
++    const float averageValue = t_LocalLightPdfTexture.mips[lastMipLevel][uint2(0, 0)].x;
++    const float sum = averageValue * float(pdfTextureSize.x) * float(pdfTextureSize.y);
++    return isfinite(sum) && sum > 0.f && isfinite(texelValue) ? texelValue / sum : 0.f;
+ }
+ 
+ float3 _Schlick_Fresnel(float3 F0, float VdotH)
+@@ -591,8 +593,9 @@ uint getLightIndex(uint firstGeometryInstanceIndex, uint geometryIndex, uint pri
+     uint geometryInstanceIndex = firstGeometryInstanceIndex + geometryIndex;
+     lightIndex = t_GeometryInstanceToLight[geometryInstanceIndex];
+ 
+-    //return lightIndex + primitiveIndex;
+-    return lightIndex == RTXDI_InvalidLightIndex ? lightIndex : lightIndex + primitiveIndex;
++    // Geometry mapping stores a local base; runtime reservoirs store absolute IDs.
++    return lightIndex == RTXDI_InvalidLightIndex ? lightIndex :
++        g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion.firstLightIndex + lightIndex + primitiveIndex;
+ }
+ 
+ RayDesc setupVisibilityRay(RAB_Surface surface, RAB_LightSample lightSample, float offset = 0.001)
+diff --git a/Rtxpt/RTXDI/RtxdiApplicationSettings.cpp b/Rtxpt/RTXDI/RtxdiApplicationSettings.cpp
+index 5f12006..3329479 100644
+--- a/Rtxpt/RTXDI/RtxdiApplicationSettings.cpp
++++ b/Rtxpt/RTXDI/RtxdiApplicationSettings.cpp
+@@ -58,7 +58,9 @@ const RTXDI_DISpatialResamplingParameters getReSTIRDISpatialResamplingParams()
+ 	params.depthThreshold = 0.1f;
+ 	params.normalThreshold = 0.5f;
+ 	params.samplingRadius = 32.0f;
+-	params.discountNaiveSamples = true;
++	// f12037f raytraced spatial MIS counts discounted neighbors in its
++    // normalization after skipping their RIS contribution. Keep this off.
++    params.discountNaiveSamples = false;
+ 
+ 	return params;
+ }
+diff --git a/Rtxpt/RTXDI/RtxdiPass.cpp b/Rtxpt/RTXDI/RtxdiPass.cpp
+index 0ec28ef..bcd291d 100644
+--- a/Rtxpt/RTXDI/RtxdiPass.cpp
++++ b/Rtxpt/RTXDI/RtxdiPass.cpp
+@@ -14,6 +14,7 @@
+ #include <cstdio>
+ #include <stdexcept>
+ #include <rtxdi/ImportanceSamplingContext.h>
++#include <rtxdi/RtxdiUtils.h>
+ 
+ #include "RtxdiResources.h"
+ #include "PrepareLightsPass.h"
+@@ -275,6 +276,7 @@ void RtxdiPass::PrepareResources(
+     const auto& newPT = bridgeParams.userSettings.restirPT;
+     const bool ptHistoryContractChanged = m_BridgeParameters.usingReSTIRPT && bridgeParams.usingReSTIRPT &&
+         (bridgeParams.frameIndex != m_BridgeParameters.frameIndex + 1u ||
++         bridgeParams.samplingSeed != m_BridgeParameters.samplingSeed ||
+          oldPT.resamplingMode != newPT.resamplingMode ||
+          oldPT.initialSamplingParams.numInitialSamples != newPT.initialSamplingParams.numInitialSamples ||
+          oldPT.initialSamplingParams.maxBounceDepth != newPT.initialSamplingParams.maxBounceDepth ||
+@@ -325,7 +327,8 @@ void RtxdiPass::PrepareResources(
+     bool envMapPresent = envMap != nullptr;
+     uint32_t numEmissiveMeshes, numEmissiveTriangles = 0;
+     m_PrepareLightsPass->CountLightsInScene(numEmissiveMeshes, numEmissiveTriangles);
+-    uint32_t numPrimitiveLights = uint32_t(m_Scene->GetSceneGraph()->GetLights().size());
++    // Reserve a record for the baked global environment even without a scene light.
++    uint32_t numPrimitiveLights = uint32_t(m_Scene->GetSceneGraph()->GetLights().size()) + uint32_t(envMapPresent);
+     uint32_t numGeometryInstances = uint32_t(m_Scene->GetSceneGraph()->GetGeometryInstancesCount());
+ 
+     if (m_rtxdiResources && (
+@@ -530,6 +533,16 @@ void RtxdiPass::FillConstants(nvrhi::CommandListHandle commandList)
+ 	FillReGIRConstant(bridgeConstants.regir);
+ 	FillReGirIndirectConstants(bridgeConstants.regirIndirect);
+ 
++    if (m_BridgeParameters.samplingSeed != 0)
++    {
++        // Only random-stream inputs change. Actual frame, history tags and
++        // reservoir ping-pong indices retain their native chronology.
++        const uint32_t streamFrame = rtxdi::JenkinsHash(m_BridgeParameters.frameIndex ^ rtxdi::JenkinsHash(m_BridgeParameters.samplingSeed));
++        bridgeConstants.runtimeParams.frameIndex = streamFrame;
++        bridgeConstants.restirPT.temporalResampling.uniformRandomNumber = rtxdi::JenkinsHash(streamFrame);
++        bridgeConstants.restirDI.temporalResamplingParams.uniformRandomNumber = rtxdi::JenkinsHash(streamFrame);
++        bridgeConstants.restirGI.temporalResamplingParams.uniformRandomNumber = rtxdi::JenkinsHash(streamFrame);
++    }
+ 	commandList->writeBuffer(m_rtxdiConstantBuffer, &bridgeConstants, sizeof(RtxdiBridgeConstants));
+ }
+ 
+@@ -559,6 +572,8 @@ void RtxdiPass::FillDIConstants(RTXDI_Parameters& diParams)
+ 	diParams.reservoirBufferParams = reSTIRDI.GetReservoirBufferParameters();
+ 	diParams.bufferIndices = reSTIRDI.GetBufferIndices();
+ 	diParams.initialSamplingParams = reSTIRDI.GetInitialSamplingParameters();
++    if (lightBufferParams.infiniteLightBufferRegion.numLights == 0)
++        diParams.initialSamplingParams.numInfiniteLightSamples = 0;
+ 	diParams.initialSamplingParams.environmentMapImportanceSampling = lightBufferParams.environmentLightParams.lightPresent;
+ 	if (!diParams.initialSamplingParams.environmentMapImportanceSampling)
+ 		diParams.initialSamplingParams.numEnvironmentSamples = 0;
+diff --git a/Rtxpt/RTXDI/RtxdiPass.h b/Rtxpt/RTXDI/RtxdiPass.h
+index b703aef..66821ee 100644
+--- a/Rtxpt/RTXDI/RtxdiPass.h
++++ b/Rtxpt/RTXDI/RtxdiPass.h
+@@ -109,6 +109,7 @@ struct RtxdiBridgeParameters
+     // Assert on camera cuts, scene/material changes and history-invalidating mode changes.
+     bool resetReSTIRPT = false;
+     bool capturePTDiagnostics = false;
++    uint32_t samplingSeed = 0;
+ };
+ 
+ class RtxdiPass
+diff --git a/Rtxpt/Sample.cpp b/Rtxpt/Sample.cpp
+index 7118185..c27482f 100644
+--- a/Rtxpt/Sample.cpp
++++ b/Rtxpt/Sample.cpp
+@@ -2276,6 +2276,31 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
+ 
+     constants.texLODBias = m_ui.TexLODBias + dlssBias;
+     constants.sampleBaseIndex = m_sampleIndex * m_ui.ActualSamplesPerPixel();
++    constants.samplingSeed = m_cmdLine.SamplingSeed;
++    if (m_frameIndex == 0)
++    {
++        std::printf("SAMPLING_CONTRACT seed=%u realtime=%d referencePixelCenter=%d pixelJitterScale=%.9g\n",
++            m_cmdLine.SamplingSeed, int(m_ui.RealtimeMode), int(m_cmdLine.ReferencePixelCenter), constants.perPixelJitterAAScale);
++        std::printf("TRANSPORT_CONTRACT di=%d gi=%d pt=%d diMode=%u neeMIS=%d maxBounces=%d maxDiffuseBounces=%d\n",
++            int(m_ui.ActualUseReSTIRDI()), int(m_ui.ActualUseReSTIRGI()), int(m_ui.ActualUseReSTIRPT()),
++            unsigned(m_ui.RTXDI.restirDI.resamplingMode), m_ui.NEEMISType, m_ui.BounceCount, m_ui.DiffuseBounceCount);
++        std::printf("DI_VALIDATION_CONTRACT strict=%d boiling=%u discountNaive=%u\n", int(m_cmdLine.StrictDIValidation),
++            uint32_t(m_ui.RTXDI.restirDI.boilingFilterParams.enableBoilingFilter),
++            uint32_t(m_ui.RTXDI.restirDI.spatialResamplingParams.discountNaiveSamples));
++        std::printf("PT_REPLAY_CONTRACT replayOnly=%d roughnessThreshold=%.9g\n", int(m_cmdLine.PTReplayOnlyValidation),
++            double(m_ui.RTXDI.restirPT.reconnectionParams.roughnessThreshold));
++        std::printf("PT_HISTORY_CONTRACT ageRejection=%u maxAge=%u maxHistory=%u\n",
++            uint32_t(m_ui.RTXDI.restirPT.temporalResamplingParams.enableAgeBasedRejection),
++            uint32_t(m_ui.RTXDI.restirPT.temporalResamplingParams.maxReservoirAge),
++            uint32_t(m_ui.RTXDI.restirPT.temporalResamplingParams.maxHistoryLength));
++        std::printf("PT_SPATIAL_CONTRACT samples=%u boost=%u\n",
++            uint32_t(m_ui.RTXDI.restirPT.spatialResamplingParams.numSpatialSamples),
++            uint32_t(m_ui.RTXDI.restirPT.spatialResamplingParams.numDisocclusionBoostSamples));
++        std::printf("DI_TEMPORAL_CONTRACT permutation=%u maxHistory=%u\n",
++            uint32_t(m_ui.RTXDI.restirDI.temporalResamplingParams.enablePermutationSampling),
++            uint32_t(m_ui.RTXDI.restirDI.temporalResamplingParams.maxHistoryLength));
++        std::fflush(stdout);
++    }
+ 
+     //constants.subSampleCount = m_ui.ActualSamplesPerPixel();
+     constants.invSubSampleCount = 1.0f / (float)m_ui.ActualSamplesPerPixel();
+@@ -2365,15 +2390,25 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
+ 	bridgeParameters.frameDims = renderDims;
+ 	bridgeParameters.cameraPosition = m_camera.GetPosition();
+ 	bridgeParameters.userSettings = m_ui.RTXDI;
+-    bridgeParameters.userSettings.restirPT.initialSamplingParams.maxBounceDepth = uint32_t(m_ui.BounceCount);
++    // Native B limits scattering surfaces, then permits the terminal emitter.
++    // RTXDI PT path length counts that light vertex too (NEE adds one).
++    const uint32_t ptMaxPathLength = uint32_t(m_ui.BounceCount + 1);
++    bridgeParameters.userSettings.restirPT.initialSamplingParams.maxBounceDepth = ptMaxPathLength;
+     bridgeParameters.userSettings.restirPT.initialSamplingParams.maxRcVertexLength = uint32_t(m_ui.BounceCount + 1);
+-    bridgeParameters.userSettings.restirPT.hybridShiftParams.maxBounceDepth = uint32_t(m_ui.BounceCount);
++    bridgeParameters.userSettings.restirPT.hybridShiftParams.maxBounceDepth = ptMaxPathLength;
+     bridgeParameters.userSettings.restirPT.hybridShiftParams.maxRcVertexLength = uint32_t(m_ui.BounceCount + 1);
++    if (m_cmdLine.PTReplayOnlyValidation)
++    {
++        bridgeParameters.userSettings.restirPT.initialSamplingParams.maxRcVertexLength = ptMaxPathLength + 1;
++        bridgeParameters.userSettings.restirPT.hybridShiftParams.maxRcVertexLength = ptMaxPathLength + 1;
++    }
+     bridgeParameters.usingReSTIRPT = m_ui.ActualUseReSTIRPT();
+     bridgeParameters.resetReSTIRPT = m_ui.ResetRealtimeCaches || m_ui.ResetAccumulation;
+-    bridgeParameters.capturePTDiagnostics = m_cmdLine.CaptureLinearHDR;
++    bridgeParameters.capturePTDiagnostics = m_cmdLine.CapturePTReservoirs;
++    bridgeParameters.samplingSeed = m_cmdLine.SamplingSeed;
+     bridgeParameters.usingLightSampling = m_ui.ActualUseReSTIRDI() || m_ui.ActualUseReSTIRPT();
+-    bridgeParameters.usingReGIR = m_ui.ActualUseReSTIRDI();
++    // PT NEE uses the same configured ReGIR proposal even when primary DI is off.
++    bridgeParameters.usingReGIR = m_ui.ActualUseReSTIRDI() || m_ui.ActualUseReSTIRPT();
+ 
+     bridgeParameters.userSettings.restirDI.initialSamplingParams.environmentMapImportanceSampling = envMapPresent;
+ 
+@@ -3337,8 +3372,14 @@ void Sample::Render(nvrhi::IFramebuffer* framebuffer)
+                 ? m_renderTargets->OutputColor.Get() : m_renderTargets->AccumulatedRadiance.Get();
+             if (!rtxpt::SaveLinearHdrPFM(GetDevice(), source, hdrPath, error))
+                 throw std::runtime_error("Linear HDR capture failed: " + error);
+-            if (m_ui.ActualUseReSTIRPT())
++            if (m_ui.ActualUseReSTIRPT() && m_cmdLine.CapturePTReservoirs)
+                 m_rtxdiPass->CapturePTReservoirs(hdrPath.string() + ".pt.bin");
++            if (m_ui.CaptureNativeRadiance && m_ui.RealtimeMode)
++            {
++                if (!m_renderTargets->NativeRadianceCapture || !rtxpt::SaveLinearHdrPFM(GetDevice(),
++                    m_renderTargets->NativeRadianceCapture, hdrPath.string() + ".native.pfm", error))
++                    throw std::runtime_error("Native radiance diagnostic capture failed: " + error);
++            }
+         }
+         // Present, the swapchain's kept state - Common is the same on D3D12 but means UNDEFINED (discard) on Vulkan.
+         return SaveTextureToFile(GetDevice(), m_CommonPasses.get(), framebufferTexture, nvrhi::ResourceStates::Present, fileName);
+@@ -3848,7 +3889,7 @@ void Sample::PostProcessAA(nvrhi::IFramebuffer* framebuffer, bool reset)
+             GetDeviceManager()->GetStreamline().EvaluateDLSSRR(m_commandList);
+             m_commandList->clearState();
+         }
+-        else if ( !m_ui.ActualUseStandaloneDenoiser() && !m_ui.ActualUseReSTIRPT() )
++        else if ( !m_ui.ActualUseStandaloneDenoiser() && m_ui.RealtimeAA != 0 )
+         {
+             // If all denoisers disabled, this is a pass-through that just merges and outputs noisy data
+             SampleMiniConstants miniConstants = { uint4(0, 0, 0, 0) };
+diff --git a/Rtxpt/SampleCommon/CommandLine.cpp b/Rtxpt/SampleCommon/CommandLine.cpp
+index ba3df82..f095f35 100644
+--- a/Rtxpt/SampleCommon/CommandLine.cpp
++++ b/Rtxpt/SampleCommon/CommandLine.cpp
+@@ -57,7 +57,19 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
+             ("useReSTIRPT", "Experimental ReSTIR PT indirect transport; supersedes GI, uses one plane without PSR/cache/subsampling", value(UseReSTIRPT))
+             ("maxBounces", "Override total bounce cap for validation (1..32)", value(OverrideMaxBounces))
+             ("maxDiffuseBounces", "Override diffuse bounce cap for validation (0..32)", value(OverrideMaxDiffuseBounces))
++            ("ptFixedSpatialSamples", "Diagnostic: fixed PT ordinary/boosted neighbor count (1..32)", value(PTFixedSpatialSamples))
++            ("ptDisableAgeRejectionValidation", "Diagnostic: disable PT age-based history rejection, retaining history mass cap", value(PTDisableAgeRejectionValidation))
++            ("ptReplayOnlyValidation", "Diagnostic: suppress mid-path PT reconnection; preserve terminal-light reconnection", value(PTReplayOnlyValidation))
++            ("strictDIValidation", "DI validation: disable boiling rejection and naive-neighbor discount; retain raytraced bias correction", value(StrictDIValidation))
++            ("diLightMode", "DI local light proposals: 0 uniform, 1 power RIS, 2 ReGIR RIS", value(OverrideDILightMode))
++            ("diBrdfSamples", "DI initial BRDF candidate count (0..32)", value(OverrideDIBrdfSamples))
++            ("captureNativeRadiance", "HDR diagnostic: save native radiance before DI/GI/PT additions", value(CaptureNativeRadiance))
++            ("restirDIMode", "DI reuse override: 0 initial only, 1 temporal, 2 spatial, 3 both", value(OverrideReSTIRDIMode))
++            ("neeMIS", "Native NEE MIS: 0 exact, 1 auto, 2 approximate", value(OverrideNEEMIS))
+             ("restirPTMode", "PT resampling: 0 initial only, 1 temporal, 2 spatial, 3 both", value(ReSTIRPTMode))
++            ("samplingSeed", "Validation scramble seed; zero retains the original random streams", value(SamplingSeed))
++            ("referencePixelCenter", "Reference rays use pixel centers, matching raw realtime AA0", value(ReferencePixelCenter))
++            ("capturePTReservoirs", "With HDR capture, export packed PT reservoir diagnostics (large, synchronizes GPU)", value(CapturePTReservoirs))
+             ("captureLinearHDR", "Write stored linear radiance as PFM alongside screenshots (raw AA0 only)", value(CaptureLinearHDR))
+             ("benchmarkUncapped", "Force app VSync/FPS/Reflex caps and frame generation off; render unfocused (external caps require separate audit)", value(BenchmarkUncapped))
+             ("realtimeSamplesPerPixel", "Number of spp in realtime mode",     value(RealtimeSamplesPerPixel))
+diff --git a/Rtxpt/SampleCommon/CommandLine.h b/Rtxpt/SampleCommon/CommandLine.h
+index 29537cb..98eb245 100644
+--- a/Rtxpt/SampleCommon/CommandLine.h
++++ b/Rtxpt/SampleCommon/CommandLine.h
+@@ -34,6 +34,9 @@ struct CommandLineOptions
+     std::string captureSuffix = "";
+     bool captureSimple = false;
+     bool CaptureLinearHDR = false;
++    bool CapturePTReservoirs = false;
++    bool ReferencePixelCenter = false;
++    uint32_t SamplingSeed = 0;
+     bool captureSequence = false;
+     float sequenceWarmupStart = 0;
+     float sequenceRecordStart = 0;
+@@ -51,6 +54,11 @@ struct CommandLineOptions
+     int OverrideMaxBounces         = -1;
+     int OverrideMaxDiffuseBounces  = -1;
+     int ReSTIRPTMode               = 3;
++    int OverrideReSTIRDIMode       = -1;
++    int OverrideNEEMIS            = -1;
++    int OverrideDILightMode       = -1;
++    int OverrideDIBrdfSamples     = -1;
++    bool CaptureNativeRadiance    = false;
+     int  RealtimeSamplesPerPixel    = 1;
+     int  ReferenceSamplesPerPixel   = 4096;
+     int  StandaloneDenoiser         = true;
+@@ -62,6 +70,10 @@ struct CommandLineOptions
+     bool OverrideAutoexposureOff    = false;
+     float OverrideExposureOffset    = FLT_MAX;
+     
++    int PTFixedSpatialSamples      = -1;
++    bool PTDisableAgeRejectionValidation = false;
++    bool PTReplayOnlyValidation    = false;
++    bool StrictDIValidation        = false;
+     bool DisableFireflyFilters      = false;
+     bool DisablePostProcessFilters  = false;
+     bool AsyncPrefix                = true;
+diff --git a/Rtxpt/SampleCommon/RenderTargets.h b/Rtxpt/SampleCommon/RenderTargets.h
+index 1ae695d..5bbe93e 100644
+--- a/Rtxpt/SampleCommon/RenderTargets.h
++++ b/Rtxpt/SampleCommon/RenderTargets.h
+@@ -40,6 +40,7 @@ public:
+         bool UseReverseProjection      = true;  // selects Depth clear value (0 for reversed, 1 otherwise)
+     };
+ 
++    nvrhi::TextureHandle NativeRadianceCapture; // Optional diagnostic snapshot; never used by estimator.
+     nvrhi::TextureHandle AccumulatedRadiance;   // used only in non-realtime mode
+     nvrhi::TextureHandle LdrColor;              // final, post-tonemapped color
+     nvrhi::TextureHandle LdrColorScratch;       // used for ping-ponging post-process stuff vs LdrColor
+diff --git a/Rtxpt/SampleUI.cpp b/Rtxpt/SampleUI.cpp
+index 7082c6f..793c6fe 100644
+--- a/Rtxpt/SampleUI.cpp
++++ b/Rtxpt/SampleUI.cpp
+@@ -1,3 +1,4 @@
++#include <stdexcept>
+ /*
+ * Copyright (c) 2025, NVIDIA CORPORATION.  All rights reserved.
+ *
+@@ -183,6 +184,37 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
+     m_ui.UseReSTIRDI                = cmdLine.UseReSTIRDI != 0;
+     m_ui.UseReSTIRGI                = cmdLine.UseReSTIRGI != 0;
+     m_ui.UseReSTIRPT                = cmdLine.UseReSTIRPT != 0;
++    if (cmdLine.OverrideReSTIRDIMode < -1 || cmdLine.OverrideReSTIRDIMode > 3 || cmdLine.OverrideNEEMIS < -1 || cmdLine.OverrideNEEMIS > 2)
++        throw std::runtime_error("DI reuse override must be 0..3 and native NEE MIS override 0..2");
++    if (cmdLine.OverrideReSTIRDIMode >= 0)
++        m_ui.RTXDI.restirDI.resamplingMode = static_cast<rtxdi::ReSTIRDI_ResamplingMode>(cmdLine.OverrideReSTIRDIMode);
++    if (cmdLine.OverrideNEEMIS >= 0) m_ui.NEEMISType = cmdLine.OverrideNEEMIS;
++    if (cmdLine.OverrideDILightMode < -1 || cmdLine.OverrideDILightMode > 2 || cmdLine.OverrideDIBrdfSamples < -1 || cmdLine.OverrideDIBrdfSamples > 32)
++        throw std::runtime_error("DI light mode must be 0..2 and BRDF candidate count 0..32");
++    if (cmdLine.OverrideDILightMode >= 0)
++        m_ui.RTXDI.restirDI.initialSamplingParams.localLightSamplingMode = static_cast<ReSTIRDI_LocalLightSamplingMode>(cmdLine.OverrideDILightMode);
++    if (cmdLine.OverrideDIBrdfSamples >= 0)
++        m_ui.RTXDI.restirDI.initialSamplingParams.numBrdfSamples = cmdLine.OverrideDIBrdfSamples;
++    if (cmdLine.PTFixedSpatialSamples < -1 || cmdLine.PTFixedSpatialSamples == 0 || cmdLine.PTFixedSpatialSamples > 32)
++        throw std::runtime_error("Fixed PT neighbor count must be 1..32");
++    if (cmdLine.PTFixedSpatialSamples > 0)
++    {
++        m_ui.RTXDI.restirPT.spatialResamplingParams.numSpatialSamples = cmdLine.PTFixedSpatialSamples;
++        m_ui.RTXDI.restirPT.spatialResamplingParams.numDisocclusionBoostSamples = cmdLine.PTFixedSpatialSamples;
++    }
++    if (cmdLine.PTDisableAgeRejectionValidation)
++        m_ui.RTXDI.restirPT.temporalResamplingParams.enableAgeBasedRejection = 0;
++    if (cmdLine.PTReplayOnlyValidation)
++        m_ui.RTXDI.restirPT.reconnectionParams.roughnessThreshold = 1.0f;
++    if (cmdLine.StrictDIValidation)
++    {
++        // The static validation track avoids evaluating a permuted neighbor's
++        // normalization visibility from the current pixel under current-TLAS approximation.
++        m_ui.RTXDI.restirDI.temporalResamplingParams.enablePermutationSampling = false;
++        m_ui.RTXDI.restirDI.boilingFilterParams.enableBoilingFilter = false;
++        m_ui.RTXDI.restirDI.spatialResamplingParams.discountNaiveSamples = false;
++    }
++    m_ui.CaptureNativeRadiance = cmdLine.CaptureNativeRadiance && cmdLine.CaptureLinearHDR;
+     m_ui.BenchmarkUncapped          = cmdLine.BenchmarkUncapped;
+     if (m_ui.UseReSTIRPT)
+     {
+@@ -197,6 +229,7 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
+     }
+     m_ui.RealtimeSamplesPerPixel    = cmdLine.RealtimeSamplesPerPixel;
+     m_ui.AccumulationTarget         = cmdLine.ReferenceSamplesPerPixel;
++    if (cmdLine.ReferencePixelCenter) m_ui.AccumulationAA = false;
+     m_ui.StandaloneDenoiser         = cmdLine.StandaloneDenoiser != 0;
+     m_ui.RealtimeAA                 = cmdLine.RealtimeAA;
+     m_ui.RealtimeSubSamplingPattern = dm::clamp(cmdLine.SubSamplingPattern, 0, (int)SubSamplingPattern::Count - 1);
+diff --git a/Rtxpt/SampleUI.h b/Rtxpt/SampleUI.h
+index 52ff7cf..fa61cc9 100644
+--- a/Rtxpt/SampleUI.h
++++ b/Rtxpt/SampleUI.h
+@@ -220,6 +220,7 @@ struct SampleUIData
+     bool                                UseReSTIRDI /*Defaults in CommandLine >*/;
+     bool                                UseReSTIRGI /*Defaults in CommandLine >*/;
+     bool                                UseReSTIRPT = false;
++    bool                                CaptureNativeRadiance = false;
+     bool                                RealtimeMode = true;
+     int                                 RealtimeSamplesPerPixel /*Defaults in CommandLine >*/;        // equivalent to m_ui.AccumulationTarget in reference mode (except looping x times within frame)
+     bool                                StandaloneDenoiser /*Defaults in CommandLine >*/;
+diff --git a/Rtxpt/Shaders/DonutBridgeCommon.hlsli b/Rtxpt/Shaders/DonutBridgeCommon.hlsli
+index a3b9ddf..a1f8757 100644
+--- a/Rtxpt/Shaders/DonutBridgeCommon.hlsli
++++ b/Rtxpt/Shaders/DonutBridgeCommon.hlsli
+@@ -27,7 +27,7 @@ namespace Bridge
+ static Ray computeCameraRay(const uint2 pixelPos)
+ {
+     uint sampleIndex = g_Const.ptConsts.sampleBaseIndex + g_MiniConst.params.x;
+-    SampleGenerator sampleGenerator = SampleGenerator::make(SampleGeneratorVertexBase::make(pixelPos, 0, sampleIndex));
++    SampleGenerator sampleGenerator = SampleGenerator::make(SampleGeneratorVertexBase::make(pixelPos, 0, sampleIndex, g_Const.ptConsts.samplingSeed));
+ 
+     // compute camera ray! would make sense to compile out if unused
+     float2 subPixelOffset = g_Const.ptConsts.camera.Jitter + (sampleNext2D(sampleGenerator) - 0.5.xx) * g_Const.ptConsts.perPixelJitterAAScale;
+diff --git a/Rtxpt/Shaders/PathTracer/PathTracerHandleHit.hlsli b/Rtxpt/Shaders/PathTracer/PathTracerHandleHit.hlsli
+index d5c4e60..2872022 100644
+--- a/Rtxpt/Shaders/PathTracer/PathTracerHandleHit.hlsli
++++ b/Rtxpt/Shaders/PathTracer/PathTracerHandleHit.hlsli
+@@ -432,7 +432,7 @@ namespace PathTracer
+         return;
+ #endif
+         
+-        const SampleGeneratorVertexBase sampleGeneratorVertexBase = SampleGeneratorVertexBase::make(path.GetId(), path.getVertexIndex(), Bridge::getSampleIndex() );
++        const SampleGeneratorVertexBase sampleGeneratorVertexBase = SampleGeneratorVertexBase::make(path.GetId(), path.getVertexIndex(), Bridge::getSampleIndex(), workingContext.PtConsts.samplingSeed);
+ 
+         UniformSampleSequenceGenerator uniformSG = UniformSampleSequenceGenerator::make( sampleGeneratorVertexBase, SampleGeneratorEffectSeed::Base );
+ 
+diff --git a/Rtxpt/Shaders/PathTracer/PathTracerNEE.hlsli b/Rtxpt/Shaders/PathTracer/PathTracerNEE.hlsli
+index 820eddc..6b42d2c 100644
+--- a/Rtxpt/Shaders/PathTracer/PathTracerNEE.hlsli
++++ b/Rtxpt/Shaders/PathTracer/PathTracerNEE.hlsli
+@@ -234,6 +234,19 @@ namespace PathTracer
+             float pathMIS = lightSampler.ComputeLightVsBSDF_MIS_ForLight(shadingData.posW, lightSample, thisPdf, otherPdf, thisCount, otherCount, candidateSampleCount, fullSamples, scatterPdfForDir);
+ #endif
+ 
++#if PATH_TRACER_MODE==PT_DENOISING_LAYERS_FILL && PT_USE_RESTIR_PT
++            // Native continuation is removed for this exact owner. Its primary
++            // BSDF emitter-hit counterpart is absent, so native NEE owns all of
++            // this direct term. Inner light-selection MIS remains unchanged.
++            const uint ownerPlane = (g_Const.ptConsts.frameIndex % 2) == 0;
++            const uint ownerAddress = GenericTSPixelToAddress(preScatterPath.GetPixelPos(), ownerPlane,
++                g_Const.ptConsts.genericTSLineStride, g_Const.ptConsts.genericTSPlaneStride);
++            if (preScatterPath.hasFlag(PathFlags::denoisingLayerOnPlane) &&
++                preScatterPath.hasFlag(PathFlags::denoisingLayerOnDominantBranch) &&
++                RTXPT_PTOwnsPrimary(u_PTPrimaryData[ownerAddress], g_Const.ptConsts.frameIndex))
++                pathMIS = 1.0f;
++#endif
++
+             // apply MIS and other multipliers to light here - reduces register pressure and computation later
+             lightSample.Li *= fadeOut * wrsMIS * pathMIS / (float)fullSamples;
+ 
+diff --git a/Rtxpt/Shaders/PathTracer/PathTracerShared.h b/Rtxpt/Shaders/PathTracer/PathTracerShared.h
+index d05680e..3976d28 100644
+--- a/Rtxpt/Shaders/PathTracer/PathTracerShared.h
++++ b/Rtxpt/Shaders/PathTracer/PathTracerShared.h
+@@ -70,7 +70,7 @@ struct PathTracerConstants
+ 
+     float   denoisingLayersSplitStopThreshold;
+     float   _padding3;
+-    uint    _padding4;
++    uint    samplingSeed;                  // Validation scramble; zero preserves legacy streams.
+     float   denoisingLayersSuppressPrimaryIndirectSpecularK;
+ 
+     float   denoiserRadianceClampK;
+diff --git a/Rtxpt/Shaders/PathTracer/Utils/StatelessSampleGenerators.hlsli b/Rtxpt/Shaders/PathTracer/Utils/StatelessSampleGenerators.hlsli
+index 679937c..028f510 100644
+--- a/Rtxpt/Shaders/PathTracer/Utils/StatelessSampleGenerators.hlsli
++++ b/Rtxpt/Shaders/PathTracer/Utils/StatelessSampleGenerators.hlsli
+@@ -24,22 +24,24 @@ struct SampleGeneratorVertexBase
+     uint    m_vertexIndex;  
+ #endif
+ 
+-    static SampleGeneratorVertexBase    make(uint packedPixel, uint vertexIndex, uint sampleIndex)
++    static SampleGeneratorVertexBase    make(uint packedPixel, uint vertexIndex, uint sampleIndex, uint samplingSeed = 0)
+     {
+         SampleGeneratorVertexBase ret;
+         ret.m_sampleIndex   = sampleIndex;
+         ret.m_baseHash      = Hash32Combine(Hash32(vertexIndex + 0x035F9F29), packedPixel);
++        if (samplingSeed != 0) ret.m_baseHash = Hash32Combine(ret.m_baseHash, Hash32(samplingSeed));
+ #ifdef HQ_UNIFORM_SAMPLE_SEQUENCE_GENERATOR_ENABLED
+         ret.m_pixelCoord    = pixelCoord;  
+         ret.m_vertexIndex   = vertexIndex;
+ #endif
+         return ret;
+     }
+-    static SampleGeneratorVertexBase    make(uint2 pixelCoord, uint vertexIndex, uint sampleIndex)
++    static SampleGeneratorVertexBase    make(uint2 pixelCoord, uint vertexIndex, uint sampleIndex, uint samplingSeed = 0)
+     {
+         SampleGeneratorVertexBase ret;
+         ret.m_sampleIndex   = sampleIndex;
+         ret.m_baseHash      = Hash32Combine(Hash32(vertexIndex + 0x035F9F29), (pixelCoord.x << 16) | pixelCoord.y);
++        if (samplingSeed != 0) ret.m_baseHash = Hash32Combine(ret.m_baseHash, Hash32(samplingSeed));
+ #ifdef HQ_UNIFORM_SAMPLE_SEQUENCE_GENERATOR_ENABLED
+         ret.m_pixelCoord    = pixelCoord;  
+         ret.m_vertexIndex   = vertexIndex;
+diff --git a/Rtxpt/Shaders/PathTracerBridgeDonut.hlsli b/Rtxpt/Shaders/PathTracerBridgeDonut.hlsli
+index c16ff31..c3cc4f5 100644
+--- a/Rtxpt/Shaders/PathTracerBridgeDonut.hlsli
++++ b/Rtxpt/Shaders/PathTracerBridgeDonut.hlsli
+@@ -305,7 +305,7 @@ void Bridge::ExportNonSurface(const PathState path, float3 virtualWorldPos, floa
+         const uint idx = GenericTSPixelToAddress(pixelPos, idxPingPong, g_Const.ptConsts.genericTSLineStride, g_Const.ptConsts.genericTSPlaneStride);
+ 
+         PackedPathTracerSurfaceData emptyData = (PackedPathTracerSurfaceData)0;
+-        emptyData._viewDepth_planeHash_isEmpty_frontFacing = 0; // <- we actually only need to initialize this (because of isEmpty) but let's write everything to 0 for consistency
++        emptyData._viewDepth_planeHash_isEmpty_frontFacing = 1u << 1; // Packed isEmpty bit; zero denotes a valid surface.
+ #if !RTXPT_SKIP_STANDARD_OUTPUTS
+         u_SurfaceData[idx] = emptyData;
+         if (g_Const.ptConsts.useReSTIRPT)
+diff --git a/Rtxpt/Shaders/PathTracerSurfaceBridgeDonut.hlsli b/Rtxpt/Shaders/PathTracerSurfaceBridgeDonut.hlsli
+index 70c7b24..e4e1daf 100644
+--- a/Rtxpt/Shaders/PathTracerSurfaceBridgeDonut.hlsli
++++ b/Rtxpt/Shaders/PathTracerSurfaceBridgeDonut.hlsli
+@@ -321,7 +321,7 @@ PathTracer::Surface Bridge::loadSurface( const uint instanceIndex, const uint ge
+     else
+     #endif
+     {
+-        SampleGeneratorVertexBase sampleGeneratorVertexBase = SampleGeneratorVertexBase::make(pixelPos, pathVertexIndex, Bridge::getSampleIndex());       
++        SampleGeneratorVertexBase sampleGeneratorVertexBase = SampleGeneratorVertexBase::make(pixelPos, pathVertexIndex, Bridge::getSampleIndex(), g_Const.ptConsts.samplingSeed);
+         SampleGenerator sampleGenerator = SampleGenerator::make(sampleGeneratorVertexBase); 
+         u = sampleNext4D(sampleGenerator);
+     }

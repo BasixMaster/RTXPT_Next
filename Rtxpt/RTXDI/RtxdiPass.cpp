@@ -14,6 +14,7 @@
 #include <cstdio>
 #include <stdexcept>
 #include <rtxdi/ImportanceSamplingContext.h>
+#include <rtxdi/RtxdiUtils.h>
 
 #include "RtxdiResources.h"
 #include "PrepareLightsPass.h"
@@ -275,6 +276,7 @@ void RtxdiPass::PrepareResources(
     const auto& newPT = bridgeParams.userSettings.restirPT;
     const bool ptHistoryContractChanged = m_BridgeParameters.usingReSTIRPT && bridgeParams.usingReSTIRPT &&
         (bridgeParams.frameIndex != m_BridgeParameters.frameIndex + 1u ||
+         bridgeParams.samplingSeed != m_BridgeParameters.samplingSeed ||
          oldPT.resamplingMode != newPT.resamplingMode ||
          oldPT.initialSamplingParams.numInitialSamples != newPT.initialSamplingParams.numInitialSamples ||
          oldPT.initialSamplingParams.maxBounceDepth != newPT.initialSamplingParams.maxBounceDepth ||
@@ -325,7 +327,8 @@ void RtxdiPass::PrepareResources(
     bool envMapPresent = envMap != nullptr;
     uint32_t numEmissiveMeshes, numEmissiveTriangles = 0;
     m_PrepareLightsPass->CountLightsInScene(numEmissiveMeshes, numEmissiveTriangles);
-    uint32_t numPrimitiveLights = uint32_t(m_Scene->GetSceneGraph()->GetLights().size());
+    // Reserve a record for the baked global environment even without a scene light.
+    uint32_t numPrimitiveLights = uint32_t(m_Scene->GetSceneGraph()->GetLights().size()) + uint32_t(envMapPresent);
     uint32_t numGeometryInstances = uint32_t(m_Scene->GetSceneGraph()->GetGeometryInstancesCount());
 
     if (m_rtxdiResources && (
@@ -530,6 +533,16 @@ void RtxdiPass::FillConstants(nvrhi::CommandListHandle commandList)
 	FillReGIRConstant(bridgeConstants.regir);
 	FillReGirIndirectConstants(bridgeConstants.regirIndirect);
 
+    if (m_BridgeParameters.samplingSeed != 0)
+    {
+        // Only random-stream inputs change. Actual frame, history tags and
+        // reservoir ping-pong indices retain their native chronology.
+        const uint32_t streamFrame = rtxdi::JenkinsHash(m_BridgeParameters.frameIndex ^ rtxdi::JenkinsHash(m_BridgeParameters.samplingSeed));
+        bridgeConstants.runtimeParams.frameIndex = streamFrame;
+        bridgeConstants.restirPT.temporalResampling.uniformRandomNumber = rtxdi::JenkinsHash(streamFrame);
+        bridgeConstants.restirDI.temporalResamplingParams.uniformRandomNumber = rtxdi::JenkinsHash(streamFrame);
+        bridgeConstants.restirGI.temporalResamplingParams.uniformRandomNumber = rtxdi::JenkinsHash(streamFrame);
+    }
 	commandList->writeBuffer(m_rtxdiConstantBuffer, &bridgeConstants, sizeof(RtxdiBridgeConstants));
 }
 
@@ -559,6 +572,8 @@ void RtxdiPass::FillDIConstants(RTXDI_Parameters& diParams)
 	diParams.reservoirBufferParams = reSTIRDI.GetReservoirBufferParameters();
 	diParams.bufferIndices = reSTIRDI.GetBufferIndices();
 	diParams.initialSamplingParams = reSTIRDI.GetInitialSamplingParameters();
+    if (lightBufferParams.infiniteLightBufferRegion.numLights == 0)
+        diParams.initialSamplingParams.numInfiniteLightSamples = 0;
 	diParams.initialSamplingParams.environmentMapImportanceSampling = lightBufferParams.environmentLightParams.lightPresent;
 	if (!diParams.initialSamplingParams.environmentMapImportanceSampling)
 		diParams.initialSamplingParams.numEnvironmentSamples = 0;

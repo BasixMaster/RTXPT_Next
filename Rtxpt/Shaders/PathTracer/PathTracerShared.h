@@ -70,7 +70,7 @@ struct PathTracerConstants
 
     float   denoisingLayersSplitStopThreshold;
     float   _padding3;
-    uint    _padding4;
+    uint    samplingSeed;                  // Validation scramble; zero preserves legacy streams.
     float   denoisingLayersSuppressPrimaryIndirectSpecularK;
 
     float   denoiserRadianceClampK;

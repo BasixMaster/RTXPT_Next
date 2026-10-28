@@ -40,6 +40,7 @@ public:
         bool UseReverseProjection      = true;  // selects Depth clear value (0 for reversed, 1 otherwise)
     };
 
+    nvrhi::TextureHandle NativeRadianceCapture; // Optional diagnostic snapshot; never used by estimator.
     nvrhi::TextureHandle AccumulatedRadiance;   // used only in non-realtime mode
     nvrhi::TextureHandle LdrColor;              // final, post-tonemapped color
     nvrhi::TextureHandle LdrColorScratch;       // used for ping-ponging post-process stuff vs LdrColor

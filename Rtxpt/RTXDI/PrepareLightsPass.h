@@ -58,6 +58,7 @@ private:
 
     uint32_t m_MaxLightsInBuffer;
     bool m_OddFrame = false;
+    int32_t m_PreviousSyntheticEnvironmentOffset = -1;
     
     std::shared_ptr<donut::engine::ShaderFactory> m_shaderFactory;
     std::shared_ptr<donut::engine::CommonRenderPasses> m_commonPasses;

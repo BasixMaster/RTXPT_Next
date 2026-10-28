@@ -6,3 +6,6 @@ Docs/Research/** -text whitespace=cr-at-eol
 
 # Development diagnostics also retain byte-hashed raw captures and CSV.
 Benchmarks/development/** -text whitespace=cr-at-eol
+
+# Retained source patches include original context whitespace verbatim.
+Benchmarks/development/**/renderer-source.patch -whitespace

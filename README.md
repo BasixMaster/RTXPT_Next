@@ -219,3 +219,6 @@ The BibTex entry is
 See [LICENSE.txt](LICENSE.txt)
 
 This project includes NVAPI software. All uses of NVAPI software are governed by the license terms specified here: https://github.com/NVIDIA/nvapi/blob/main/License.txt.
+
+
+Current development checkpoint: [B2 static opaque results](Docs/Research/B2_RESULTS.md) reports corrected ReSTIR PT integration, image-quality metrics and cap-verified native-control comparisons. B2 remains unpromoted; original material/medium and motion coverage are pending.

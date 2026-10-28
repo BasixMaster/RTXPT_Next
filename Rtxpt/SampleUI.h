@@ -220,6 +220,7 @@ struct SampleUIData
     bool                                UseReSTIRDI /*Defaults in CommandLine >*/;
     bool                                UseReSTIRGI /*Defaults in CommandLine >*/;
     bool                                UseReSTIRPT = false;
+    bool                                CaptureNativeRadiance = false;
     bool                                RealtimeMode = true;
     int                                 RealtimeSamplesPerPixel /*Defaults in CommandLine >*/;        // equivalent to m_ui.AccumulationTarget in reference mode (except looping x times within frame)
     bool                                StandaloneDenoiser /*Defaults in CommandLine >*/;

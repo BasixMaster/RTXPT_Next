@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "executable_sha256": "502682d68e34d66ce43454bf47bd2eb8ee9c9e49455cb5b260c3c9c637fe7dd0",
+  "phase": "restored",
+  "global_mutation": false,
+  "exact_executable_profile": true,
+  "restoration_verified": true,
+  "driver_cap_state": {
+    "settings": {
+      "foreground_fps": {
+        "state": "disabled",
+        "value": 0,
+        "location": 0
+      },
+      "background_fps": {
+        "state": "disabled",
+        "value": 0,
+        "location": 0
+      },
+      "vsync": {
+        "state": "forced_off",
+        "value": 138504007,
+        "location": 0
+      }
+    },
+    "driver_cap_coverage": "known",
+    "driver_limit_detected": false,
+    "driver_allows_uncapped_application": true,
+    "external_limiters": "unknown; must be checked separately",
+    "fully_uncapped_verified": false
+  },
+  "external_limiters": "unknown; operator/runtime evidence required separately"
+}

@@ -1,0 +1,60 @@
+{
+  "status": "development diagnostic, not B2 promotion",
+  "metric_scope": "Eight explicitly seeded process trials, finite matched reference; same-seed whole-renderer bit-exact replay not established",
+  "groups": {
+    "0": {
+      "trials": 8,
+      "median_mse": 0.042720695344096615,
+      "median_hdr_flip": 0.1678115278482437,
+      "relative_signed_mean_luminance_drift": -0.0034927093604951148,
+      "exploratory_seed_mean_drift_ci95": [
+        -0.004128889585106092,
+        -0.00273969627908979
+      ],
+      "ensemble_mean_image_error": {
+        "linear_rgb_mse": 0.005410203735194263,
+        "smape_cgns_y100": 6.315531095060163,
+        "full_frame_reference_mean_luminance": 0.34872898087601023,
+        "mape_rgb_ydenom": 0.11356931788419866,
+        "relmse_project": 0.22099025302154426,
+        "relative_metrics_available": true
+      },
+      "ensemble_mean_rgb": [
+        0.3502466035079366,
+        0.3504932806282886,
+        0.30991343059680526
+      ]
+    },
+    "3": {
+      "trials": 8,
+      "median_mse": 0.00563687226018089,
+      "median_hdr_flip": 0.12511895596981049,
+      "relative_signed_mean_luminance_drift": -0.021263849293779585,
+      "exploratory_seed_mean_drift_ci95": [
+        -0.021785343095266748,
+        -0.02074663148192035
+      ],
+      "ensemble_mean_image_error": {
+        "linear_rgb_mse": 0.001098920977791616,
+        "smape_cgns_y100": 3.4616897647958527,
+        "full_frame_reference_mean_luminance": 0.34872898087601023,
+        "mape_rgb_ydenom": 0.06685728433835844,
+        "relmse_project": 0.024620808248600287,
+        "relative_metrics_available": true
+      },
+      "ensemble_mean_rgb": [
+        0.34366924462105897,
+        0.3442296089790762,
+        0.3054925572578537
+      ]
+    }
+  },
+  "flip_parameters": {
+    "ppd": 67.0,
+    "startExposure": -3.258483409881592,
+    "stopExposure": 4.657146453857422,
+    "numExposures": 8,
+    "tonemapper": "ACES"
+  },
+  "reference_sha256": "67c854dfd988d607caa6d88248e2064f7ee2f36ad504e8b38bbf3b89bee2bda6"
+}

@@ -2276,6 +2276,31 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
 
     constants.texLODBias = m_ui.TexLODBias + dlssBias;
     constants.sampleBaseIndex = m_sampleIndex * m_ui.ActualSamplesPerPixel();
+    constants.samplingSeed = m_cmdLine.SamplingSeed;
+    if (m_frameIndex == 0)
+    {
+        std::printf("SAMPLING_CONTRACT seed=%u realtime=%d referencePixelCenter=%d pixelJitterScale=%.9g\n",
+            m_cmdLine.SamplingSeed, int(m_ui.RealtimeMode), int(m_cmdLine.ReferencePixelCenter), constants.perPixelJitterAAScale);
+        std::printf("TRANSPORT_CONTRACT di=%d gi=%d pt=%d diMode=%u neeMIS=%d maxBounces=%d maxDiffuseBounces=%d\n",
+            int(m_ui.ActualUseReSTIRDI()), int(m_ui.ActualUseReSTIRGI()), int(m_ui.ActualUseReSTIRPT()),
+            unsigned(m_ui.RTXDI.restirDI.resamplingMode), m_ui.NEEMISType, m_ui.BounceCount, m_ui.DiffuseBounceCount);
+        std::printf("DI_VALIDATION_CONTRACT strict=%d boiling=%u discountNaive=%u\n", int(m_cmdLine.StrictDIValidation),
+            uint32_t(m_ui.RTXDI.restirDI.boilingFilterParams.enableBoilingFilter),
+            uint32_t(m_ui.RTXDI.restirDI.spatialResamplingParams.discountNaiveSamples));
+        std::printf("PT_REPLAY_CONTRACT replayOnly=%d roughnessThreshold=%.9g\n", int(m_cmdLine.PTReplayOnlyValidation),
+            double(m_ui.RTXDI.restirPT.reconnectionParams.roughnessThreshold));
+        std::printf("PT_HISTORY_CONTRACT ageRejection=%u maxAge=%u maxHistory=%u\n",
+            uint32_t(m_ui.RTXDI.restirPT.temporalResamplingParams.enableAgeBasedRejection),
+            uint32_t(m_ui.RTXDI.restirPT.temporalResamplingParams.maxReservoirAge),
+            uint32_t(m_ui.RTXDI.restirPT.temporalResamplingParams.maxHistoryLength));
+        std::printf("PT_SPATIAL_CONTRACT samples=%u boost=%u\n",
+            uint32_t(m_ui.RTXDI.restirPT.spatialResamplingParams.numSpatialSamples),
+            uint32_t(m_ui.RTXDI.restirPT.spatialResamplingParams.numDisocclusionBoostSamples));
+        std::printf("DI_TEMPORAL_CONTRACT permutation=%u maxHistory=%u\n",
+            uint32_t(m_ui.RTXDI.restirDI.temporalResamplingParams.enablePermutationSampling),
+            uint32_t(m_ui.RTXDI.restirDI.temporalResamplingParams.maxHistoryLength));
+        std::fflush(stdout);
+    }
 
     //constants.subSampleCount = m_ui.ActualSamplesPerPixel();
     constants.invSubSampleCount = 1.0f / (float)m_ui.ActualSamplesPerPixel();
@@ -2365,15 +2390,25 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
 	bridgeParameters.frameDims = renderDims;
 	bridgeParameters.cameraPosition = m_camera.GetPosition();
 	bridgeParameters.userSettings = m_ui.RTXDI;
-    bridgeParameters.userSettings.restirPT.initialSamplingParams.maxBounceDepth = uint32_t(m_ui.BounceCount);
+    // Native B limits scattering surfaces, then permits the terminal emitter.
+    // RTXDI PT path length counts that light vertex too (NEE adds one).
+    const uint32_t ptMaxPathLength = uint32_t(m_ui.BounceCount + 1);
+    bridgeParameters.userSettings.restirPT.initialSamplingParams.maxBounceDepth = ptMaxPathLength;
     bridgeParameters.userSettings.restirPT.initialSamplingParams.maxRcVertexLength = uint32_t(m_ui.BounceCount + 1);
-    bridgeParameters.userSettings.restirPT.hybridShiftParams.maxBounceDepth = uint32_t(m_ui.BounceCount);
+    bridgeParameters.userSettings.restirPT.hybridShiftParams.maxBounceDepth = ptMaxPathLength;
     bridgeParameters.userSettings.restirPT.hybridShiftParams.maxRcVertexLength = uint32_t(m_ui.BounceCount + 1);
+    if (m_cmdLine.PTReplayOnlyValidation)
+    {
+        bridgeParameters.userSettings.restirPT.initialSamplingParams.maxRcVertexLength = ptMaxPathLength + 1;
+        bridgeParameters.userSettings.restirPT.hybridShiftParams.maxRcVertexLength = ptMaxPathLength + 1;
+    }
     bridgeParameters.usingReSTIRPT = m_ui.ActualUseReSTIRPT();
     bridgeParameters.resetReSTIRPT = m_ui.ResetRealtimeCaches || m_ui.ResetAccumulation;
-    bridgeParameters.capturePTDiagnostics = m_cmdLine.CaptureLinearHDR;
+    bridgeParameters.capturePTDiagnostics = m_cmdLine.CapturePTReservoirs;
+    bridgeParameters.samplingSeed = m_cmdLine.SamplingSeed;
     bridgeParameters.usingLightSampling = m_ui.ActualUseReSTIRDI() || m_ui.ActualUseReSTIRPT();
-    bridgeParameters.usingReGIR = m_ui.ActualUseReSTIRDI();
+    // PT NEE uses the same configured ReGIR proposal even when primary DI is off.
+    bridgeParameters.usingReGIR = m_ui.ActualUseReSTIRDI() || m_ui.ActualUseReSTIRPT();
 
     bridgeParameters.userSettings.restirDI.initialSamplingParams.environmentMapImportanceSampling = envMapPresent;
 
@@ -3337,8 +3372,14 @@ void Sample::Render(nvrhi::IFramebuffer* framebuffer)
                 ? m_renderTargets->OutputColor.Get() : m_renderTargets->AccumulatedRadiance.Get();
             if (!rtxpt::SaveLinearHdrPFM(GetDevice(), source, hdrPath, error))
                 throw std::runtime_error("Linear HDR capture failed: " + error);
-            if (m_ui.ActualUseReSTIRPT())
+            if (m_ui.ActualUseReSTIRPT() && m_cmdLine.CapturePTReservoirs)
                 m_rtxdiPass->CapturePTReservoirs(hdrPath.string() + ".pt.bin");
+            if (m_ui.CaptureNativeRadiance && m_ui.RealtimeMode)
+            {
+                if (!m_renderTargets->NativeRadianceCapture || !rtxpt::SaveLinearHdrPFM(GetDevice(),
+                    m_renderTargets->NativeRadianceCapture, hdrPath.string() + ".native.pfm", error))
+                    throw std::runtime_error("Native radiance diagnostic capture failed: " + error);
+            }
         }
         // Present, the swapchain's kept state - Common is the same on D3D12 but means UNDEFINED (discard) on Vulkan.
         return SaveTextureToFile(GetDevice(), m_CommonPasses.get(), framebufferTexture, nvrhi::ResourceStates::Present, fileName);
@@ -3848,7 +3889,7 @@ void Sample::PostProcessAA(nvrhi::IFramebuffer* framebuffer, bool reset)
             GetDeviceManager()->GetStreamline().EvaluateDLSSRR(m_commandList);
             m_commandList->clearState();
         }
-        else if ( !m_ui.ActualUseStandaloneDenoiser() && !m_ui.ActualUseReSTIRPT() )
+        else if ( !m_ui.ActualUseStandaloneDenoiser() && m_ui.RealtimeAA != 0 )
         {
             // If all denoisers disabled, this is a pass-through that just merges and outputs noisy data
             SampleMiniConstants miniConstants = { uint4(0, 0, 0, 0) };

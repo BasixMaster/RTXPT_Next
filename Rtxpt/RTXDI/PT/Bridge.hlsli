@@ -33,7 +33,7 @@ bool RTXPT_PTCanReconnectSurface(RAB_Surface s)
     // Restrict fixed-threshold mid-path reconnection to non-transmissive,
     // out-of-medium vertices. Other prefixes use deterministic random replay.
     return s._ptNativeState.interiorSlots[0] == 0 &&
-        (s._mtl.getActiveLobes() & (uint)LobeType::Transmission) == 0;
+        (FalcorBSDF::getLobes(s._data) & s._mtl.getActiveLobes() & (uint)LobeType::Transmission) == 0;
 }
 float RAB_GetSurfaceRoughness(RAB_Surface s) { return RTXPT_PTCanReconnectSurface(s) ? s.GetRoughness() : 0.0f; }
 float3 RAB_GetSurfaceViewDir(RAB_Surface s) { return s.GetView(); }

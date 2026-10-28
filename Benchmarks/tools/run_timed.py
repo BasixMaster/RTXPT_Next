@@ -3,6 +3,8 @@ from pathlib import Path
 import argparse,subprocess,time,json,datetime,hashlib,csv
 from cap_preflight import validate_audit,validate_runtime
 from capture_identity import transport_settings
+from sampling_contract import seed_value, verify as verify_sampling, verify_di, verify_pt_history, verify_pt_spatial
+from run_capture import scene_argument
 from artifact_manifest import validate as validate_artifacts
 from rtss_caps import RTSSBackend
 from rtss_readonly import collect as collect_rtss,validate as validate_rtss
@@ -19,6 +21,11 @@ def main():
     ap.add_argument('--driver-cap-audit',type=Path)
     ap.add_argument('--max-bounces',type=int);ap.add_argument('--max-diffuse-bounces',type=int)
     ap.add_argument('--pt-mode',type=int,choices=[0,1,2,3],default=3)
+    ap.add_argument('--nee-mis',type=int,choices=[0,1,2])
+    ap.add_argument('--sampling-seed',type=seed_value)
+    ap.add_argument('--strict-di-validation',action='store_true')
+    ap.add_argument('--pt-disable-age-rejection-validation',action='store_true')
+    ap.add_argument('--pt-fixed-spatial-samples',type=int,choices=range(1,33))
     ap.add_argument('--artifact-manifest',type=Path,help='Optional strict frozen source/executable/shader identity; warm/compile caches before freezing.')
     ap.add_argument('--rtss-install-dir',type=Path);ap.add_argument('--rtss-helper',type=Path)
     ap.add_argument('--rtss-user-confirmed-disabled',action='store_true',help='User has disabled RTSS cap; collect only read-only SDK/profile boundary audits.')
@@ -28,6 +35,7 @@ def main():
     if a.rtss_install_dir or a.rtss_helper or a.rtss_user_confirmed_disabled:
         if not (a.rtss_install_dir and a.rtss_helper and a.rtss_user_confirmed_disabled):raise SystemExit('RTSS read-only verification requires install-dir, helper and user-confirmed-disabled together.')
         rtss=RTSSBackend(a.rtss_install_dir,exe,a.rtss_helper)
+    a.scene=scene_argument(a.scene)
     scene_path=exe.parent.parent/'Assets'/a.scene
     scene_data=json.loads(scene_path.read_text(encoding='utf-8-sig'))
     def animates(x):
@@ -36,6 +44,11 @@ def main():
         return False
     if animates(scene_data):raise SystemExit('Static-capture guard requires an original scene with animation disabled.')
     args=[str(exe),'--scene',a.scene,'--width',str(a.width),'--height',str(a.height),'--overrideRadianceCacheMode','0','--useNEE','1','--NEEType','2','--useReSTIRDI',str(int(a.mode in ['digi','dipt'])),'--useReSTIRGI',str(int(a.mode=='digi')),'--standaloneDenoiser','0','--overrideAutoexposureOff','--overrideExposureOffset',str(a.exposure),'--disablePostProcessFilters','--overrideToRealtimeMode','--realtimeSamplesPerPixel','1','--realtimeAA','0','--disableFireflyFilters','--overrideSubSamplingMode','0','--nonInteractive','--captureSequence','--sequenceWarmupStart','0','--sequenceRecordStart','20','--sequenceFPS','60','--sequenceFrameCount','1','--capturePath',str(out/'unused.png'),'--perfLog',str(out/'partial-perf.csv')]
+    if a.nee_mis is not None:args+=['--neeMIS',str(a.nee_mis)]
+    if a.sampling_seed is not None:args+=['--samplingSeed',str(a.sampling_seed)]
+    if a.strict_di_validation:args+=['--strictDIValidation','true']
+    if a.pt_disable_age_rejection_validation:args+=['--ptDisableAgeRejectionValidation','true']
+    if a.pt_fixed_spatial_samples is not None:args+=['--ptFixedSpatialSamples',str(a.pt_fixed_spatial_samples)]
     if a.mode=='dipt':args+=['--useReSTIRPT','1','--restirPTMode',str(a.pt_mode)]
     if a.max_bounces is not None:args+=['--maxBounces',str(a.max_bounces)]
     if a.max_diffuse_bounces is not None:args+=['--maxDiffuseBounces',str(a.max_diffuse_bounces)]
@@ -108,6 +121,19 @@ def main():
             manifest['cap_control']['observed_sync_interval']=0
         except (ValueError,OSError) as exc:
             manifest['status']='failed_cap_verification';manifest['cap_control']['failure']=str(exc)
+    try:
+        receipt_log=(out/'renderer.log').read_text(encoding='utf-8',errors='replace')
+        if a.nee_mis is not None:
+            import re
+            mis=re.findall(r'^TRANSPORT_CONTRACT .* neeMIS=(\d+) ',receipt_log,re.MULTILINE)
+            if len(set(mis))!=1 or int(mis[0])!=a.nee_mis:raise ValueError('Native MIS override lacks matching effective receipt')
+            manifest['effective_native_nee_mis']=int(mis[0])
+        manifest['effective_sampling']=verify_sampling(receipt_log,a.sampling_seed)
+        manifest['effective_di_validation']=verify_di(receipt_log,a.strict_di_validation)
+        manifest['effective_pt_history']=verify_pt_history(receipt_log,a.pt_disable_age_rejection_validation)
+        manifest['effective_pt_spatial']=verify_pt_spatial(receipt_log,a.pt_fixed_spatial_samples)
+    except ValueError as exc:
+        manifest['status']='failed_transport_receipt';manifest['transport_receipt_failure']=str(exc)
     if a.artifact_manifest:
         try:manifest['artifact_identity_after_capture']=validate_artifacts(a.artifact_manifest,exe)
         except (ValueError,OSError) as exc:

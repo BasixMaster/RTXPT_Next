@@ -305,7 +305,7 @@ void Bridge::ExportNonSurface(const PathState path, float3 virtualWorldPos, floa
         const uint idx = GenericTSPixelToAddress(pixelPos, idxPingPong, g_Const.ptConsts.genericTSLineStride, g_Const.ptConsts.genericTSPlaneStride);
 
         PackedPathTracerSurfaceData emptyData = (PackedPathTracerSurfaceData)0;
-        emptyData._viewDepth_planeHash_isEmpty_frontFacing = 0; // <- we actually only need to initialize this (because of isEmpty) but let's write everything to 0 for consistency
+        emptyData._viewDepth_planeHash_isEmpty_frontFacing = 1u << 1; // Packed isEmpty bit; zero denotes a valid surface.
 #if !RTXPT_SKIP_STANDARD_OUTPUTS
         u_SurfaceData[idx] = emptyData;
         if (g_Const.ptConsts.useReSTIRPT)

@@ -58,7 +58,9 @@ const RTXDI_DISpatialResamplingParameters getReSTIRDISpatialResamplingParams()
 	params.depthThreshold = 0.1f;
 	params.normalThreshold = 0.5f;
 	params.samplingRadius = 32.0f;
-	params.discountNaiveSamples = true;
+	// f12037f raytraced spatial MIS counts discounted neighbors in its
+    // normalization after skipping their RIS contribution. Keep this off.
+    params.discountNaiveSamples = false;
 
 	return params;
 }

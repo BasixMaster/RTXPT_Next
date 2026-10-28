@@ -1,3 +1,4 @@
+#include <stdexcept>
 /*
 * Copyright (c) 2025, NVIDIA CORPORATION.  All rights reserved.
 *
@@ -183,6 +184,37 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     m_ui.UseReSTIRDI                = cmdLine.UseReSTIRDI != 0;
     m_ui.UseReSTIRGI                = cmdLine.UseReSTIRGI != 0;
     m_ui.UseReSTIRPT                = cmdLine.UseReSTIRPT != 0;
+    if (cmdLine.OverrideReSTIRDIMode < -1 || cmdLine.OverrideReSTIRDIMode > 3 || cmdLine.OverrideNEEMIS < -1 || cmdLine.OverrideNEEMIS > 2)
+        throw std::runtime_error("DI reuse override must be 0..3 and native NEE MIS override 0..2");
+    if (cmdLine.OverrideReSTIRDIMode >= 0)
+        m_ui.RTXDI.restirDI.resamplingMode = static_cast<rtxdi::ReSTIRDI_ResamplingMode>(cmdLine.OverrideReSTIRDIMode);
+    if (cmdLine.OverrideNEEMIS >= 0) m_ui.NEEMISType = cmdLine.OverrideNEEMIS;
+    if (cmdLine.OverrideDILightMode < -1 || cmdLine.OverrideDILightMode > 2 || cmdLine.OverrideDIBrdfSamples < -1 || cmdLine.OverrideDIBrdfSamples > 32)
+        throw std::runtime_error("DI light mode must be 0..2 and BRDF candidate count 0..32");
+    if (cmdLine.OverrideDILightMode >= 0)
+        m_ui.RTXDI.restirDI.initialSamplingParams.localLightSamplingMode = static_cast<ReSTIRDI_LocalLightSamplingMode>(cmdLine.OverrideDILightMode);
+    if (cmdLine.OverrideDIBrdfSamples >= 0)
+        m_ui.RTXDI.restirDI.initialSamplingParams.numBrdfSamples = cmdLine.OverrideDIBrdfSamples;
+    if (cmdLine.PTFixedSpatialSamples < -1 || cmdLine.PTFixedSpatialSamples == 0 || cmdLine.PTFixedSpatialSamples > 32)
+        throw std::runtime_error("Fixed PT neighbor count must be 1..32");
+    if (cmdLine.PTFixedSpatialSamples > 0)
+    {
+        m_ui.RTXDI.restirPT.spatialResamplingParams.numSpatialSamples = cmdLine.PTFixedSpatialSamples;
+        m_ui.RTXDI.restirPT.spatialResamplingParams.numDisocclusionBoostSamples = cmdLine.PTFixedSpatialSamples;
+    }
+    if (cmdLine.PTDisableAgeRejectionValidation)
+        m_ui.RTXDI.restirPT.temporalResamplingParams.enableAgeBasedRejection = 0;
+    if (cmdLine.PTReplayOnlyValidation)
+        m_ui.RTXDI.restirPT.reconnectionParams.roughnessThreshold = 1.0f;
+    if (cmdLine.StrictDIValidation)
+    {
+        // The static validation track avoids evaluating a permuted neighbor's
+        // normalization visibility from the current pixel under current-TLAS approximation.
+        m_ui.RTXDI.restirDI.temporalResamplingParams.enablePermutationSampling = false;
+        m_ui.RTXDI.restirDI.boilingFilterParams.enableBoilingFilter = false;
+        m_ui.RTXDI.restirDI.spatialResamplingParams.discountNaiveSamples = false;
+    }
+    m_ui.CaptureNativeRadiance = cmdLine.CaptureNativeRadiance && cmdLine.CaptureLinearHDR;
     m_ui.BenchmarkUncapped          = cmdLine.BenchmarkUncapped;
     if (m_ui.UseReSTIRPT)
     {
@@ -197,6 +229,7 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     }
     m_ui.RealtimeSamplesPerPixel    = cmdLine.RealtimeSamplesPerPixel;
     m_ui.AccumulationTarget         = cmdLine.ReferenceSamplesPerPixel;
+    if (cmdLine.ReferencePixelCenter) m_ui.AccumulationAA = false;
     m_ui.StandaloneDenoiser         = cmdLine.StandaloneDenoiser != 0;
     m_ui.RealtimeAA                 = cmdLine.RealtimeAA;
     m_ui.RealtimeSubSamplingPattern = dm::clamp(cmdLine.SubSamplingPattern, 0, (int)SubSamplingPattern::Count - 1);

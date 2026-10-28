@@ -27,7 +27,7 @@ namespace Bridge
 static Ray computeCameraRay(const uint2 pixelPos)
 {
     uint sampleIndex = g_Const.ptConsts.sampleBaseIndex + g_MiniConst.params.x;
-    SampleGenerator sampleGenerator = SampleGenerator::make(SampleGeneratorVertexBase::make(pixelPos, 0, sampleIndex));
+    SampleGenerator sampleGenerator = SampleGenerator::make(SampleGeneratorVertexBase::make(pixelPos, 0, sampleIndex, g_Const.ptConsts.samplingSeed));
 
     // compute camera ray! would make sense to compile out if unused
     float2 subPixelOffset = g_Const.ptConsts.camera.Jitter + (sampleNext2D(sampleGenerator) - 0.5.xx) * g_Const.ptConsts.perPixelJitterAAScale;

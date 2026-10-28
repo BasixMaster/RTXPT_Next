@@ -34,6 +34,9 @@ struct CommandLineOptions
     std::string captureSuffix = "";
     bool captureSimple = false;
     bool CaptureLinearHDR = false;
+    bool CapturePTReservoirs = false;
+    bool ReferencePixelCenter = false;
+    uint32_t SamplingSeed = 0;
     bool captureSequence = false;
     float sequenceWarmupStart = 0;
     float sequenceRecordStart = 0;
@@ -51,6 +54,11 @@ struct CommandLineOptions
     int OverrideMaxBounces         = -1;
     int OverrideMaxDiffuseBounces  = -1;
     int ReSTIRPTMode               = 3;
+    int OverrideReSTIRDIMode       = -1;
+    int OverrideNEEMIS            = -1;
+    int OverrideDILightMode       = -1;
+    int OverrideDIBrdfSamples     = -1;
+    bool CaptureNativeRadiance    = false;
     int  RealtimeSamplesPerPixel    = 1;
     int  ReferenceSamplesPerPixel   = 4096;
     int  StandaloneDenoiser         = true;
@@ -62,6 +70,10 @@ struct CommandLineOptions
     bool OverrideAutoexposureOff    = false;
     float OverrideExposureOffset    = FLT_MAX;
     
+    int PTFixedSpatialSamples      = -1;
+    bool PTDisableAgeRejectionValidation = false;
+    bool PTReplayOnlyValidation    = false;
+    bool StrictDIValidation        = false;
     bool DisableFireflyFilters      = false;
     bool DisablePostProcessFilters  = false;
     bool AsyncPrefix                = true;

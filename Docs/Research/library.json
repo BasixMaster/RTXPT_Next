@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "title": "Basix Pathtracing · RTXPT1.9 baseline, B1 and B2 roadmap",
-  "purpose": "Compare unchanged RTXPT1.9 with future RTXDI3.1 adoption (B1) and isolated optimized variants (B2+).",
-  "scope": "Baseline/scenes, seven focused full-text reviews,20-paper catalog and quality/performance test plan; no B1/B2 implementation or GPU results.",
+  "title": "Basix Pathtracing · RTXPT1.9, B1 and B2 integration",
+  "purpose": "Compare preserved RTXPT1.9 and B1 with the developing ReSTIR PT integration and later PT++ variants.",
+  "scope": "Versioned renderer integration, paper reviews, exploratory B0/B1/B2 GPU evidence, quality/performance protocol and explicit pending validation gates.",
   "updated_on": "2026-10-28",
   "summary": [
-    "RTXPT1.9 and its original assets are the initial baseline; runtime3.0 remains unchanged. RTXDI3.1 is a linked source reference for B1.",
-    "Keep exact RTXPT1.9/B1/B2+ identities and compare raw/reconstructed quality, complete-frame time and memory. B1/B2 are planned, not measured."
+    "RTXPT1.9 and original Assets remain preserved. B1 implements RTXDI3.1 migration for DI/GI; measured scope and limits are in B1_RESULTS.md.",
+    "B2 now has active ReSTIR PT reconnection and scoped static opaque HDR quality plus fresh native-control timing comparisons. It remains unpromoted; wider materials, motion and reconstruction are pending. B3 remains planned."
   ],
   "questions": [
     {
@@ -121,6 +121,27 @@
       "evaluation": "Inspect mechanisms, source implementation, limits and applicability; separate proposals from results.",
       "stop_when": "Source-backed decision and unresolved engineering gates are explicit.",
       "coverage": "Completed scoped review; GPU implementation and performance evaluation remain future work. Breadth full-text coverage varies per source."
+    },
+    {
+      "id": "Q6",
+      "title": "How does NVIDIA engineering guidance change profiling and geometry priorities?",
+      "topic": "Engineering guidance",
+      "priority": "high",
+      "status": "complete",
+      "why": "Translate vendor deployment advice into measured project decisions without conflating it with estimator research.",
+      "depends_on": [
+        "Q5"
+      ],
+      "search_terms": [
+        "NVIDIA Whitepapers path tracing performance",
+        "clustered geometry PTLAS DirectX"
+      ],
+      "source_types": [
+        "official vendor whitepaper"
+      ],
+      "evaluation": "Inspect performance/validation guidance, API prerequisites, applicability and folder-specific licensing.",
+      "stop_when": "Immediate profiling actions and later capability-gated geometry work are separated from measured B2 claims.",
+      "coverage": "Selected performance-guide Markdown sections and geometry-guide text reviewed; figures and linked samples/specs not audited."
     }
   ],
   "sources": [
@@ -467,6 +488,38 @@
       "limitations": "Not installed or run against renderer captures in this pass; pin exact revision/settings before benchmarks.",
       "notes": "HDR-FLIP maximizes over exposure comparisons; LDR-FLIP and HDR-FLIP are distinct. Quality plan records exposure/tone mapper/PPD and scope.",
       "rights": "BSD-3-Clause main evaluator; linked dependencies have their own terms. No evaluator code copied."
+    },
+    {
+      "id": "NV-PT-PERF",
+      "title": "Real-Time Path Tracing in Games: Best Practices for Performance and Scalability",
+      "url": "https://github.com/NVIDIA-RTX/Whitepapers/blob/20463fd355c817a50381343d9d12b7ac811d2e39/pt_performance_whitepaper/README.md",
+      "kind": "vendor_whitepaper",
+      "published_on": "",
+      "publication_period": "2026-06",
+      "checked_on": "2026-10-28",
+      "access": "full",
+      "quality": "Primary NVIDIA engineering Markdown at a fixed commit; text review scope recorded separately from linked media/code.",
+      "limitations": "Vendor recommendations and source-reported case studies; no local reproduction of these optimization claims. Figures and linked implementations/specifications not independently audited.",
+      "notes": "Reviewed required metrics/ray budgets, feature tiers/SER/OMM, precision, tracing-model tradeoffs, debugging/shipping gates and case-study context. See NVIDIA_WHITEPAPERS.md for original project mapping.",
+      "version": "20463fd355c817a50381343d9d12b7ac811d2e39",
+      "family": "NVIDIA-engineering-whitepapers",
+      "rights": "Folder-specific CC BY4.0, copyright NVIDIA2026, license https://github.com/NVIDIA-RTX/Whitepapers/blob/20463fd355c817a50381343d9d12b7ac811d2e39/pt_performance_whitepaper/LICENSE. Geometry folder excludes specified third-party game images. Original summaries only; no images/code copied; not an SDK/driver/asset license."
+    },
+    {
+      "id": "NV-CLAS-PTLAS",
+      "title": "Clustered Geometry and Partitioned TLAS Launch in DirectX12, Standardizing RTX Mega Geometry",
+      "url": "https://github.com/NVIDIA-RTX/Whitepapers/blob/20463fd355c817a50381343d9d12b7ac811d2e39/dx_clusters_and_ptlas/README.md",
+      "kind": "vendor_whitepaper",
+      "published_on": "2026-10-28",
+      "publication_period": "2026-10",
+      "checked_on": "2026-10-28",
+      "access": "full",
+      "quality": "Primary NVIDIA engineering Markdown at a fixed commit; text review scope recorded separately from linked media/code.",
+      "limitations": "Vendor recommendations and source-reported case studies; no local reproduction of these optimization claims. Figures and linked implementations/specifications not independently audited.",
+      "notes": "Reviewed geometry-guide text: CLAS, template topology reuse, partition updates and documented Agility1.722.0-preview/HLSL6.10/driver621.01 launch stack; benchmark driver617.42 not that stack. See NVIDIA_WHITEPAPERS.md for original project mapping.",
+      "version": "20463fd355c817a50381343d9d12b7ac811d2e39",
+      "family": "NVIDIA-engineering-whitepapers",
+      "rights": "Folder-specific CC BY4.0, copyright NVIDIA2026, license https://github.com/NVIDIA-RTX/Whitepapers/blob/20463fd355c817a50381343d9d12b7ac811d2e39/dx_clusters_and_ptlas/LICENSE. Geometry folder excludes specified third-party game images. Original summaries only; no images/code copied; not an SDK/driver/asset license."
     }
   ],
   "findings": [
@@ -1310,6 +1363,64 @@
           "note": "Official evaluator scope and settings."
         }
       ]
+    },
+    {
+      "id": "F-NV-PROFILE",
+      "title": "Profile signal and complete-frame components",
+      "question_ids": [
+        "Q6"
+      ],
+      "topic": "Engineering guidance",
+      "claim": "The guide requests per-preset resolution/ray budgets, AS cost, tracing/reconstruction time, memory and temporal stability.",
+      "evidence_type": "reported",
+      "confidence": "high",
+      "context": "Scoped official vendor guidance at pinned commit; not a measured RTXPT Next result.",
+      "strengths": "Primary, implementation-oriented source with explicit tradeoffs.",
+      "limitations": "Hardware/content-specific case studies and feature prerequisites require local validation.",
+      "implications": "Add measured per-pass/ray/resource instrumentation around B2 before choosing a traversal/SER/OMM optimization.",
+      "tags": [
+        "profiling",
+        "B2",
+        "geometry",
+        "capability"
+      ],
+      "evidence": [
+        {
+          "source_id": "NV-PT-PERF",
+          "locator": "§1 Required performance data and Starting ray-budget model; §§11–13",
+          "relation": "supports",
+          "note": "Directly inspected Markdown sections; project action is separate inference."
+        }
+      ]
+    },
+    {
+      "id": "F-NV-GEOMETRY",
+      "title": "Keep geometry APIs capability-gated",
+      "question_ids": [
+        "Q6"
+      ],
+      "topic": "Engineering guidance",
+      "claim": "The guide describes CLAS/template/PTLAS roles and identifies a preview SDK/HLSL/driver launch stack.",
+      "evidence_type": "reported",
+      "confidence": "high",
+      "context": "Scoped official vendor guidance at pinned commit; not a measured RTXPT Next result.",
+      "strengths": "Primary, implementation-oriented source with explicit tradeoffs.",
+      "limitations": "Hardware/content-specific case studies and feature prerequisites require local validation.",
+      "implications": "Keep AS scalability separate from ReSTIR-LoD estimator mappings and preserve conventional AS fallback; current benchmark driver is not the documented launch driver.",
+      "tags": [
+        "profiling",
+        "B2",
+        "geometry",
+        "capability"
+      ],
+      "evidence": [
+        {
+          "source_id": "NV-CLAS-PTLAS",
+          "locator": "Clusters; Cluster Templates; PTLAS; Get Started",
+          "relation": "supports",
+          "note": "Directly inspected Markdown sections; project action is separate inference."
+        }
+      ]
     }
   ],
   "actions": [
@@ -1323,6 +1434,18 @@
       "rationale": "Establish reproducible raw and reconstructed controls before algorithm changes.",
       "prerequisites": "Build prerequisites and assets, pinned runtime, scene/capture manifest.",
       "success_criterion": "Repeatable captures and complete timing/memory/error metrics; no claimed GPU pass without execution."
+    },
+    {
+      "id": "A-NV-PROFILE",
+      "title": "Extend profiler and gate geometry experiments",
+      "priority": "high",
+      "finding_ids": [
+        "F-NV-PROFILE",
+        "F-NV-GEOMETRY"
+      ],
+      "rationale": "Current GPUBusy/quality evidence does not identify AS/shader/register bottlenecks or prove new API support.",
+      "prerequisites": "Preserve corrected B2 checkpoint; Capability checks and appropriate SDK/driver for a later geometry backend",
+      "success_criterion": "Isolated per-pass/ray/resource evidence and fallback/quality tests before any optimization or API performance claim."
     }
   ],
   "search_log": [
@@ -1365,10 +1488,22 @@
         "P20"
       ],
       "outcome": "Seven full focused texts; breadth reading scope varies. Large-PDF extraction limits handled with local focused caches; caches excluded from exports."
+    },
+    {
+      "date": "2026-10-28",
+      "phase": "update",
+      "engine": "Official GitHub connector and read-only git ref query",
+      "query": "User-supplied NVIDIA-RTX/Whitepapers; pinned HEAD 20463fd355c817a50381343d9d12b7ac811d2e39",
+      "source_ids": [
+        "NV-PT-PERF",
+        "NV-CLAS-PTLAS"
+      ],
+      "outcome": "Two guides retrieved; main and pinned Markdown matched. Reviewed scoped sections and folder licenses; mapped immediate profiling versus later geometry work."
     }
   ],
   "scope_changes": [
-    "Final user-selected scope: RTXPT1.9 renderer+scenes baseline; future B1=RTXDI3.1 adoption; B2+=optimizations. User requested baseline/roadmap first and image-quality metrics."
+    "Final user-selected scope: RTXPT1.9 renderer+scenes baseline; future B1=RTXDI3.1 adoption; B2+=optimizations. User requested baseline/roadmap first and image-quality metrics.",
+    "Added two NVIDIA engineering guides outside the20-paper Wyman ranking; no new renderer feature activation or source-reported speedup treated as a local result."
   ],
   "evidence_page": "evidence/index.html",
   "guide_pages": [

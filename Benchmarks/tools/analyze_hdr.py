@@ -6,6 +6,23 @@ import json
 import numpy as np
 
 
+def hdr_flip(reference, test, parameters):
+    import importlib.metadata
+    import flip_evaluator as evaluator
+    error_map, mean, used = evaluator.evaluate(
+        reference.astype(np.float32), test.astype(np.float32), 'HDR',
+        inputsRGB=False, applyMagma=False, computeMeanError=True, parameters=dict(parameters))
+    values = np.asarray(error_map).squeeze()
+    if values.shape != reference.shape[:2] or not np.isfinite(values).all() or not np.isfinite(mean):
+        raise ValueError('Official HDR-FLIP returned an invalid error map/mean')
+    native = Path(evaluator.nbflip.__file__)
+    return dict(status='measured', metric='HDR-FLIP', evaluator='official NVlabs flip-evaluator',
+                evaluator_version=importlib.metadata.version('flip-evaluator'),
+                native_sha256=hashlib.sha256(native.read_bytes()).hexdigest(),
+                mean=float(mean), p95=float(np.quantile(values, .95)), parameters=used,
+                inputs='Stored nonnegative linear RGB; inputsRGB=False; no external exposure or tonemap transform')
+
+
 def read_pfm(path):
     with Path(path).open('rb') as stream:
         if stream.readline().strip() != b'PF':
@@ -46,13 +63,19 @@ def main():
     ap.add_argument('--reference', type=Path, required=True)
     ap.add_argument('--test', type=Path, required=True)
     ap.add_argument('--output', type=Path, required=True)
+    ap.add_argument('--hdr-flip', action='store_true', help='Requires the separately installed official flip-evaluator')
+    ap.add_argument('--flip-parameters', type=Path, help='Fixed ppd/tonemapper/exposure JSON derived once from the reference')
     args = ap.parse_args()
+    reference, test = read_pfm(args.reference), read_pfm(args.test)
     result = dict(schema_version=1, metric_convention='QUALITY_METRICS.md linear RGB v1; Rec.709 luminance; full frame',
                   scope='single image versus finite-sample reference; not bias or independent-trial evidence',
                   hdr_flip='not measured', value_transform='none',
                   inputs={key: dict(file=path.name, sha256=hashlib.sha256(path.read_bytes()).hexdigest())
                           for key, path in [('reference', args.reference), ('test', args.test)]},
-                  metrics=compare(read_pfm(args.reference), read_pfm(args.test)))
+                  metrics=compare(reference, test))
+    if args.hdr_flip:
+        parameters = json.loads(args.flip_parameters.read_text()) if args.flip_parameters else dict(ppd=67., tonemapper='ACES')
+        result['hdr_flip'] = hdr_flip(reference, test, parameters)
     args.output.write_text(json.dumps(result, indent=2, allow_nan=False)+'\n', encoding='utf-8')
     print(json.dumps(result['metrics']))
 

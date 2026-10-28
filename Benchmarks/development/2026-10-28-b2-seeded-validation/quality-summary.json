@@ -1,0 +1,130 @@
+{
+  "status": "validation_failure: brightness discrepancy, not B2 promotion",
+  "metric_scope": "Explicitly seeded process trials; no exact whole-renderer replay guarantee; fixed HDR-FLIP parameters from reference only",
+  "calibration": {
+    "status": "measured",
+    "metric": "HDR-FLIP",
+    "evaluator": "official NVlabs flip-evaluator",
+    "evaluator_version": "1.7",
+    "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+    "mean": 0.0,
+    "p95": 0.0,
+    "parameters": {
+      "ppd": 67.0,
+      "startExposure": -3.258483409881592,
+      "stopExposure": 4.657146453857422,
+      "numExposures": 8,
+      "tonemapper": "ACES"
+    },
+    "inputs": "Stored nonnegative linear RGB; inputsRGB=False; no external exposure or tonemap transform"
+  },
+  "groups": {
+    "initial": {
+      "trials": 8,
+      "median_mse": 0.10951053295959778,
+      "median_hdr_flip": 0.23279866576194763,
+      "relative_signed_mean_luminance_drift": 0.16274674246037987,
+      "exploratory_seed_mean_drift_ci95": [
+        0.16135955961874965,
+        0.16384217650252678
+      ],
+      "ensemble_mean_image_error": {
+        "linear_rgb_mse": 0.025367395691858335,
+        "smape_cgns_y100": 11.0732744172683,
+        "full_frame_reference_mean_luminance": 0.34872898087601023,
+        "mape_rgb_ydenom": 0.2560349958063664,
+        "relmse_project": 0.5063987800156627,
+        "relative_metrics_available": true
+      },
+      "ensemble_mean_rgb": [
+        0.415628598967289,
+        0.4070192265558095,
+        0.36039744517934097
+      ]
+    },
+    "reuse": {
+      "trials": 8,
+      "median_mse": 0.02473674743232806,
+      "median_hdr_flip": 0.19233492016792297,
+      "relative_signed_mean_luminance_drift": 0.152370756003954,
+      "exploratory_seed_mean_drift_ci95": [
+        0.15166836262833655,
+        0.15300888410482744
+      ],
+      "ensemble_mean_image_error": {
+        "linear_rgb_mse": 0.014536510239427756,
+        "smape_cgns_y100": 8.220590128896266,
+        "full_frame_reference_mean_luminance": 0.34872898087601023,
+        "mape_rgb_ydenom": 0.20132523097958796,
+        "relmse_project": 0.16871538842882292,
+        "relative_metrics_available": true
+      },
+      "ensemble_mean_rgb": [
+        0.4115928810362109,
+        0.4033807372261072,
+        0.3582067806117185
+      ]
+    }
+  },
+  "reference_checks": {
+    "reference-4096-a": {
+      "metrics": {
+        "linear_rgb_mse": 3.691380905139444e-06,
+        "smape_cgns_y100": 0.24138571013073434,
+        "full_frame_reference_mean_luminance": 0.34872898087601023,
+        "mape_rgb_ydenom": 0.004490913493029478,
+        "relmse_project": 0.0001444906304373194,
+        "relative_metrics_available": true
+      },
+      "hdr_flip": {
+        "status": "measured",
+        "metric": "HDR-FLIP",
+        "evaluator": "official NVlabs flip-evaluator",
+        "evaluator_version": "1.7",
+        "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+        "mean": 0.006292921490967274,
+        "p95": 0.020875537768006325,
+        "parameters": {
+          "ppd": 67.0,
+          "startExposure": -3.258483409881592,
+          "stopExposure": 4.657146453857422,
+          "numExposures": 8,
+          "tonemapper": "ACES"
+        },
+        "inputs": "Stored nonnegative linear RGB; inputsRGB=False; no external exposure or tonemap transform"
+      }
+    },
+    "reference-8192-b": {
+      "metrics": {
+        "linear_rgb_mse": 7.096719534602454e-06,
+        "smape_cgns_y100": 0.3391127881854348,
+        "full_frame_reference_mean_luminance": 0.34872898087601023,
+        "mape_rgb_ydenom": 0.0063266756393590565,
+        "relmse_project": 0.0002808037512830154,
+        "relative_metrics_available": true
+      },
+      "hdr_flip": {
+        "status": "measured",
+        "metric": "HDR-FLIP",
+        "evaluator": "official NVlabs flip-evaluator",
+        "evaluator_version": "1.7",
+        "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+        "mean": 0.008060583844780922,
+        "p95": 0.02676648087799549,
+        "parameters": {
+          "ppd": 67.0,
+          "startExposure": -3.258483409881592,
+          "stopExposure": 4.657146453857422,
+          "numExposures": 8,
+          "tonemapper": "ACES"
+        },
+        "inputs": "Stored nonnegative linear RGB; inputsRGB=False; no external exposure or tonemap transform"
+      }
+    }
+  },
+  "reference_mean_rgb": [
+    0.35162600714123854,
+    0.3515844684946617,
+    0.31191246385596766
+  ]
+}

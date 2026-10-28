@@ -432,7 +432,7 @@ namespace PathTracer
         return;
 #endif
         
-        const SampleGeneratorVertexBase sampleGeneratorVertexBase = SampleGeneratorVertexBase::make(path.GetId(), path.getVertexIndex(), Bridge::getSampleIndex() );
+        const SampleGeneratorVertexBase sampleGeneratorVertexBase = SampleGeneratorVertexBase::make(path.GetId(), path.getVertexIndex(), Bridge::getSampleIndex(), workingContext.PtConsts.samplingSeed);
 
         UniformSampleSequenceGenerator uniformSG = UniformSampleSequenceGenerator::make( sampleGeneratorVertexBase, SampleGeneratorEffectSeed::Base );
 
