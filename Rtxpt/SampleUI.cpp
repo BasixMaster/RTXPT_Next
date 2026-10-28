@@ -181,6 +181,13 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     m_ui.NEEType                    = cmdLine.NEEType;
     m_ui.UseReSTIRDI                = cmdLine.UseReSTIRDI != 0;
     m_ui.UseReSTIRGI                = cmdLine.UseReSTIRGI != 0;
+    m_ui.BenchmarkUncapped          = cmdLine.BenchmarkUncapped;
+    if (m_ui.BenchmarkUncapped)
+    {
+        m_ui.EnableVsync = false;
+        m_ui.FPSLimiter = 0;
+        m_ui.RenderWhenOutOfFocus = true;
+    }
     m_ui.RealtimeSamplesPerPixel    = cmdLine.RealtimeSamplesPerPixel;
     m_ui.AccumulationTarget         = cmdLine.ReferenceSamplesPerPixel;
     m_ui.StandaloneDenoiser         = cmdLine.StandaloneDenoiser != 0;

@@ -174,14 +174,14 @@ struct SampleUIData
     int                                 ActualRadianceCacheMode() const { return (RealtimeMode)?RadianceCacheMode:0; }
 
 #if DONUT_WITH_STREAMLINE
-    int                                 ActualReflexMode() const { return (RealtimeMode && IsReflexSupported) ? ((ReflexMode == SI::ReflexMode::eOff && ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (SI::ReflexMode::eLowLatency) : (ReflexMode)) : (SI::ReflexMode::eOff); }
-    SI::DLSSGMode                       ActualDLSSFGMode() const { return (RealtimeMode && IsDLSSFGSupported) ? (DLSSFGMode) : (SI::DLSSGMode::eOff); }
+    int                                 ActualReflexMode() const { return (!BenchmarkUncapped && RealtimeMode && IsReflexSupported) ? ((ReflexMode == SI::ReflexMode::eOff && ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (SI::ReflexMode::eLowLatency) : (ReflexMode)) : (SI::ReflexMode::eOff); }
+    SI::DLSSGMode                       ActualDLSSFGMode() const { return (!BenchmarkUncapped && RealtimeMode && IsDLSSFGSupported) ? (DLSSFGMode) : (SI::DLSSGMode::eOff); }
 
-    bool                                ActualEnableVsync() const { return (ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (false) : (EnableVsync); }
-    int                                 ActualFPSLimiter() const { return (ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (0) : (FPSLimiter); }
+    bool                                ActualEnableVsync() const { return (ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (false) : (!BenchmarkUncapped && EnableVsync); }
+    int                                 ActualFPSLimiter() const { return (ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (0) : (BenchmarkUncapped ? 0 : FPSLimiter); }
 #else
-    bool                                ActualEnableVsync() const { return EnableVsync; }
-    int                                 ActualFPSLimiter() const { return FPSLimiter; }
+    bool                                ActualEnableVsync() const { return !BenchmarkUncapped && EnableVsync; }
+    int                                 ActualFPSLimiter() const { return BenchmarkUncapped ? 0 : FPSLimiter; }
 #endif
 
     bool                                ActualUseApproximateMIS() const { return (RealtimeMode)?(NEEMISType!=0):(NEEMISType==2); }
@@ -191,6 +191,7 @@ struct SampleUIData
     int                                 ActualDenoisingLayersActiveCount() const { return DenoisingLayersActiveCount; }
 
 
+    bool                                BenchmarkUncapped                       = false;
     bool                                ShowUI                                  = true;
     int                                 FPSLimiter                              = 0; // 0 - no limit, otherwise limit fps to FPSLimiter and fix scene update deltaTime to 1./FPSLimiter
     bool                                RenderWhenOutOfFocus                    = false; // if window is out of focus window render loop is paused
