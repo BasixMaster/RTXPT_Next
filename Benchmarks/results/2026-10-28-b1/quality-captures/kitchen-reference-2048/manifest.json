@@ -1,0 +1,180 @@
+{
+  "label": "reference2048",
+  "scene": "kitchen-with-test-stuff.scene.json",
+  "mode": "reference",
+  "output_track": "unreconstructed tonemapped sRGB PNG; not linear HDR",
+  "exe_sha256": "1600bac7ee4ca5f4baf5fece673b25b6cc3cd0c3da7e04cf3b5788847a3210c3",
+  "started_utc": "2026-10-28T16:21:22.375434+00:00",
+  "command": [
+    "<WORKSPACE>\\work\\B0-source\\bin\\Rtxpt.exe",
+    "--scene",
+    "kitchen-with-test-stuff.scene.json",
+    "--width",
+    "1280",
+    "--height",
+    "720",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "0",
+    "--useReSTIRGI",
+    "0",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "2.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "<WORKSPACE>\\work\\reference-kitchen-2048\\frame.png",
+    "--captureSuffix",
+    "reference2048",
+    "--perfLog",
+    "<WORKSPACE>\\work\\reference-kitchen-2048\\partial-perf.csv",
+    "--overrideToReferenceMode",
+    "--referenceSamplesPerPixel",
+    "2048",
+    "--stopAnimations",
+    "--captureSimple"
+  ],
+  "cwd": "<WORKSPACE>\\work\\B0-source\\bin",
+  "settings": {
+    "width": 1280,
+    "height": 720,
+    "exposure": 2.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 0,
+    "restir_gi": 0,
+    "simple": true,
+    "record_start": null,
+    "frames": 1,
+    "reference_spp": 2048
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "process_id": 69944,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 20.40700000000652,
+  "images": [
+    {
+      "name": "frame_reference2048.png",
+      "sha256": "ac16103126888dd032fc244094131ae9e8daaeab31e487b5e2aabb07cc09da95",
+      "bytes": 2888389
+    }
+  ],
+  "resource_scope": "nvidia-smi values cover the whole device including other applications; not renderer-exclusive allocation.",
+  "resource_samples": [
+    {
+      "elapsed_s": 0.0,
+      "device_wide_csv": "8868, 1, 48, 2520, 147.61",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 1.0780000000086147,
+      "device_wide_csv": "8868, 4, 46, 2520, 66.92",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 2.1410000000032596,
+      "device_wide_csv": "8865, 5, 45, 540, 46.70",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 3.2190000000118744,
+      "device_wide_csv": "8876, 3, 45, 390, 41.85",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 4.26600000000326,
+      "device_wide_csv": "8895, 2, 44, 315, 42.06",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 5.282000000006519,
+      "device_wide_csv": "9505, 30, 46, 2520, 60.56",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 6.344000000011874,
+      "device_wide_csv": "11072, 31, 46, 2520, 68.45",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 7.422000000005937,
+      "device_wide_csv": "11338, 1, 46, 2520, 69.91",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 8.485000000000582,
+      "device_wide_csv": "11339, 1, 45, 765, 66.11",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 9.563000000009197,
+      "device_wide_csv": "11339, 2, 44, 435, 39.74",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 10.625,
+      "device_wide_csv": "12280, 18, 45, 2520, 43.78",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 11.64100000000326,
+      "device_wide_csv": "12276, 62, 51, 2520, 151.99",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 12.703000000008615,
+      "device_wide_csv": "12273, 62, 52, 2520, 178.10",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 13.78200000000652,
+      "device_wide_csv": "12269, 62, 52, 2520, 178.17",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 14.844000000011874,
+      "device_wide_csv": "12269, 62, 52, 2520, 177.58",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 15.90700000000652,
+      "device_wide_csv": "11935, 62, 53, 2520, 178.52",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 16.969000000011874,
+      "device_wide_csv": "11934, 61, 53, 2520, 178.73",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 18.047000000005937,
+      "device_wide_csv": "11934, 62, 53, 2520, 178.63",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 19.110000000000582,
+      "device_wide_csv": "11934, 62, 53, 2520, 178.72",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 20.188000000009197,
+      "device_wide_csv": "8872, 1, 49, 2520, 160.05",
+      "exit_code": 0
+    }
+  ]
+}

@@ -1,0 +1,502 @@
+{
+  "convergence": {
+    "reference_spp": 4096,
+    "reference_check": {
+      "schema_version": 1,
+      "kind": "display_quality_pair",
+      "relation": "accuracy_reference",
+      "reference": {
+        "file": "frame_reference4096.png",
+        "sha256": "fe43f82642027576e938cf03fb124fd04596f4993343ab16db21194bf45351f0"
+      },
+      "test": {
+        "file": "frame_reference2048.png",
+        "sha256": "22ff7ba9dfbcf717a044f1499d63b8dc28d8389f7bbafd7fec60194575b58cc3"
+      },
+      "roi": null,
+      "dimensions": {
+        "width": 1280,
+        "height": 720
+      },
+      "metrics": {
+        "selected_pixels": 921600,
+        "total_pixels": 921600,
+        "decoded_rgb_exactly_equal": false,
+        "changed_pixels": 821300,
+        "changed_pixel_fraction": 0.8911675347222222,
+        "max_abs_channel_difference_8bit": 110,
+        "mse_srgb_encoded_rgb": 0.0001722361002089652,
+        "psnr_srgb_encoded_rgb_db": 37.63875816422498,
+        "psnr_identical_infinite": false,
+        "smape_display_luma100": 0.6502016757058479
+      },
+      "flip": {
+        "status": "measured",
+        "metric": "LDR-FLIP",
+        "evaluator": "official NVlabs flip-evaluator",
+        "evaluator_version": "1.7",
+        "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+        "full_frame_mean": 0.027606667950749397,
+        "selected_region_mean": 0.02760740928351879,
+        "selected_region_p95": 0.06541168689727783,
+        "parameters": {
+          "ppd": 67.0
+        },
+        "inactive_hdr_parameters": {
+          "status": "not_applicable_to_LDR",
+          "official_returned_defaults": {
+            "startExposure": "+inf",
+            "stopExposure": "+inf",
+            "numExposures": -1,
+            "tonemapper": "aces"
+          },
+          "sentinel_encoding": "Non-finite inactive HDR defaults are preserved as explicit strings, not numbers or metric substitutes."
+        },
+        "inputs": "normalized sRGB PNG; inputsRGB=True",
+        "note": "Full-frame evaluator map is computed before ROI reduction; not HDR-FLIP."
+      },
+      "definitions": {
+        "rgb": "Decoded 8-bit RGB PNG normalized to [0,1]; alpha excluded.",
+        "mse": "Mean squared RGB channel difference in encoded sRGB; peak value 1 for PSNR.",
+        "smape": "100*mean(|Yref-Ytest|/(|Yref|+|Ytest|+1e-4)); Y=.2126R+.7152G+.0722B applied to encoded sRGB. This is display luma, not scene luminance."
+      },
+      "limitations": [
+        "PNG captures are tonemapped display images, not raw linear HDR radiance.",
+        "A regression comparison against B0 measures cross-version difference, not image accuracy against converged truth.",
+        "An accuracy_reference relation is a user declaration; reference convergence and scene/config parity require external evidence.",
+        "These display-space metrics are not paper-exact HDR SMAPE, MAPE, RelMSE or HDR-FLIP and do not establish unbiasedness."
+      ]
+    },
+    "versions": {
+      "B0": {
+        "samples": [
+          {
+            "repeat": 1,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 887517,
+              "changed_pixel_fraction": 0.963017578125,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.018548755408799324,
+              "psnr_srgb_encoded_rgb_db": 17.316852255219406,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 8.98853045152624
+            },
+            "flip": 0.24355147778987885
+          },
+          {
+            "repeat": 2,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 887507,
+              "changed_pixel_fraction": 0.9630067274305556,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.018596620635136767,
+              "psnr_srgb_encoded_rgb_db": 17.30565968301093,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 8.971771166922018
+            },
+            "flip": 0.24381248652935028
+          },
+          {
+            "repeat": 3,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 887488,
+              "changed_pixel_fraction": 0.9629861111111111,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.01857171887682088,
+              "psnr_srgb_encoded_rgb_db": 17.311478989434832,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 8.970933355860732
+            },
+            "flip": 0.2432115077972412
+          },
+          {
+            "repeat": 4,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 887529,
+              "changed_pixel_fraction": 0.9630305989583333,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.018559979117940748,
+              "psnr_srgb_encoded_rgb_db": 17.314225167469093,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 8.96751671436095
+            },
+            "flip": 0.24294808506965637
+          },
+          {
+            "repeat": 5,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 887495,
+              "changed_pixel_fraction": 0.9629937065972223,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.018585046683433724,
+              "psnr_srgb_encoded_rgb_db": 17.30836343670639,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 8.98036285543645
+            },
+            "flip": 0.24357999861240387
+          }
+        ],
+        "flip_median": 0.24355147778987885,
+        "flip_range": [
+          0.24294808506965637,
+          0.24381248652935028
+        ]
+      },
+      "B1": {
+        "samples": [
+          {
+            "repeat": 1,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 887511,
+              "changed_pixel_fraction": 0.9630110677083333,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.018514963300929485,
+              "psnr_srgb_encoded_rgb_db": 17.32477144441955,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 8.982648970424549
+            },
+            "flip": 0.2438431829214096
+          },
+          {
+            "repeat": 2,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 887501,
+              "changed_pixel_fraction": 0.9630002170138889,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.018494705728832928,
+              "psnr_srgb_encoded_rgb_db": 17.32952574397831,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 8.960684420102302
+            },
+            "flip": 0.24332109093666077
+          },
+          {
+            "repeat": 3,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 887513,
+              "changed_pixel_fraction": 0.9630132378472223,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.018554650371518433,
+              "psnr_srgb_encoded_rgb_db": 17.315472247240283,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 8.972351934080198
+            },
+            "flip": 0.24338334798812866
+          },
+          {
+            "repeat": 4,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 887503,
+              "changed_pixel_fraction": 0.9630023871527778,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.018586319881642745,
+              "psnr_srgb_encoded_rgb_db": 17.30806592654851,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 8.977469505241297
+            },
+            "flip": 0.24371574819087982
+          },
+          {
+            "repeat": 5,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 887525,
+              "changed_pixel_fraction": 0.9630262586805556,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.01849808472658308,
+              "psnr_srgb_encoded_rgb_db": 17.32873235690841,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 8.959912365186277
+            },
+            "flip": 0.24309208989143372
+          }
+        ],
+        "flip_median": 0.24338334798812866,
+        "flip_range": [
+          0.24309208989143372,
+          0.2438431829214096
+        ]
+      }
+    },
+    "interpretation": "Five process captures; no controlled independent seed guarantee. Display metrics against a finite-spp reference, not proof of radiometric correctness or unbiasedness."
+  },
+  "kitchen": {
+    "reference_spp": 4096,
+    "reference_check": {
+      "schema_version": 1,
+      "kind": "display_quality_pair",
+      "relation": "accuracy_reference",
+      "reference": {
+        "file": "frame_reference4096.png",
+        "sha256": "59c6f1aad43753c709978774615d1fb3078b8eca213adf45a28b60dde0ec4aa6"
+      },
+      "test": {
+        "file": "frame_reference2048.png",
+        "sha256": "ac16103126888dd032fc244094131ae9e8daaeab31e487b5e2aabb07cc09da95"
+      },
+      "roi": null,
+      "dimensions": {
+        "width": 1280,
+        "height": 720
+      },
+      "metrics": {
+        "selected_pixels": 921600,
+        "total_pixels": 921600,
+        "decoded_rgb_exactly_equal": false,
+        "changed_pixels": 848948,
+        "changed_pixel_fraction": 0.9211675347222222,
+        "max_abs_channel_difference_8bit": 244,
+        "mse_srgb_encoded_rgb": 0.0007120320142626768,
+        "psnr_srgb_encoded_rgb_db": 31.475004792493063,
+        "psnr_identical_infinite": false,
+        "smape_display_luma100": 3.8857764918405313
+      },
+      "flip": {
+        "status": "measured",
+        "metric": "LDR-FLIP",
+        "evaluator": "official NVlabs flip-evaluator",
+        "evaluator_version": "1.7",
+        "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+        "full_frame_mean": 0.04723281413316727,
+        "selected_region_mean": 0.04723360016942024,
+        "selected_region_p95": 0.10132116079330444,
+        "parameters": {
+          "ppd": 67.0
+        },
+        "inactive_hdr_parameters": {
+          "status": "not_applicable_to_LDR",
+          "official_returned_defaults": {
+            "startExposure": "+inf",
+            "stopExposure": "+inf",
+            "numExposures": -1,
+            "tonemapper": "aces"
+          },
+          "sentinel_encoding": "Non-finite inactive HDR defaults are preserved as explicit strings, not numbers or metric substitutes."
+        },
+        "inputs": "normalized sRGB PNG; inputsRGB=True",
+        "note": "Full-frame evaluator map is computed before ROI reduction; not HDR-FLIP."
+      },
+      "definitions": {
+        "rgb": "Decoded 8-bit RGB PNG normalized to [0,1]; alpha excluded.",
+        "mse": "Mean squared RGB channel difference in encoded sRGB; peak value 1 for PSNR.",
+        "smape": "100*mean(|Yref-Ytest|/(|Yref|+|Ytest|+1e-4)); Y=.2126R+.7152G+.0722B applied to encoded sRGB. This is display luma, not scene luminance."
+      },
+      "limitations": [
+        "PNG captures are tonemapped display images, not raw linear HDR radiance.",
+        "A regression comparison against B0 measures cross-version difference, not image accuracy against converged truth.",
+        "An accuracy_reference relation is a user declaration; reference convergence and scene/config parity require external evidence.",
+        "These display-space metrics are not paper-exact HDR SMAPE, MAPE, RelMSE or HDR-FLIP and do not establish unbiasedness."
+      ]
+    },
+    "versions": {
+      "B0": {
+        "samples": [
+          {
+            "repeat": 1,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 883757,
+              "changed_pixel_fraction": 0.9589377170138889,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.03217013052316061,
+              "psnr_srgb_encoded_rgb_db": 14.925471770410386,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 30.164077349063913
+            },
+            "flip": 0.3521043360233307
+          },
+          {
+            "repeat": 2,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 883741,
+              "changed_pixel_fraction": 0.9589203559027778,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.0322077810005856,
+              "psnr_srgb_encoded_rgb_db": 14.920391954658704,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 30.16743833534511
+            },
+            "flip": 0.35176607966423035
+          },
+          {
+            "repeat": 3,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 883782,
+              "changed_pixel_fraction": 0.95896484375,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.032349577975707346,
+              "psnr_srgb_encoded_rgb_db": 14.90131380652686,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 30.206347485881896
+            },
+            "flip": 0.3526458740234375
+          },
+          {
+            "repeat": 4,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 883769,
+              "changed_pixel_fraction": 0.9589507378472222,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.03220107593611609,
+              "psnr_srgb_encoded_rgb_db": 14.921296169590914,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 30.138576225388146
+            },
+            "flip": 0.35216307640075684
+          },
+          {
+            "repeat": 5,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 883762,
+              "changed_pixel_fraction": 0.9589431423611111,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.032274524360511266,
+              "psnr_srgb_encoded_rgb_db": 14.911401493443446,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 30.178414271448624
+            },
+            "flip": 0.3517497181892395
+          }
+        ],
+        "flip_median": 0.3521043360233307,
+        "flip_range": [
+          0.3517497181892395,
+          0.3526458740234375
+        ]
+      },
+      "B1": {
+        "samples": [
+          {
+            "repeat": 1,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 883760,
+              "changed_pixel_fraction": 0.9589409722222222,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.032313741437365616,
+              "psnr_srgb_encoded_rgb_db": 14.906127544079151,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 30.14402994788572
+            },
+            "flip": 0.35226261615753174
+          },
+          {
+            "repeat": 2,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 883736,
+              "changed_pixel_fraction": 0.9589149305555555,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.032253326812070146,
+              "psnr_srgb_encoded_rgb_db": 14.914254828393151,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 30.152018815849324
+            },
+            "flip": 0.35200050473213196
+          },
+          {
+            "repeat": 3,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 883775,
+              "changed_pixel_fraction": 0.9589572482638888,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.03226884731277678,
+              "psnr_srgb_encoded_rgb_db": 14.91216547910054,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 30.21376350963366
+            },
+            "flip": 0.3526090085506439
+          },
+          {
+            "repeat": 4,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 883754,
+              "changed_pixel_fraction": 0.9589344618055555,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.0322804802862503,
+              "psnr_srgb_encoded_rgb_db": 14.910600122363206,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 30.20072110196986
+            },
+            "flip": 0.3523350954055786
+          },
+          {
+            "repeat": 5,
+            "metrics": {
+              "selected_pixels": 921600,
+              "total_pixels": 921600,
+              "decoded_rgb_exactly_equal": false,
+              "changed_pixels": 883765,
+              "changed_pixel_fraction": 0.9589463975694444,
+              "max_abs_channel_difference_8bit": 255,
+              "mse_srgb_encoded_rgb": 0.032233209516104915,
+              "psnr_srgb_encoded_rgb_db": 14.916964488861648,
+              "psnr_identical_infinite": false,
+              "smape_display_luma100": 30.139626934362546
+            },
+            "flip": 0.35177338123321533
+          }
+        ],
+        "flip_median": 0.35226261615753174,
+        "flip_range": [
+          0.35177338123321533,
+          0.3526090085506439
+        ]
+      }
+    },
+    "interpretation": "Five process captures; no controlled independent seed guarantee. Display metrics against a finite-spp reference, not proof of radiometric correctness or unbiasedness."
+  }
+}

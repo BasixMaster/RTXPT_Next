@@ -1,0 +1,3969 @@
+{
+  "B0": {
+    "root_source": "303b408ab81790a5051abd7573830b7a4112eb8e",
+    "root_gitlinks": [
+      "160000 commit a56be4ed65029d2733fd02f00f4027ffd541eda8\tAssets",
+      "160000 commit e50042f4bbd762971cc90431261e967404855b81\tExternal/Donut",
+      "160000 commit 70d337db9186e968eab622f7e786de7e437faf3d\tExternal/NVAPI",
+      "160000 commit 792eff196afdd350fd9c3f862119017ccb438a0e\tExternal/Nrd",
+      "160000 commit 0c11a42d954e9af7035751ce1f7970f5888b0650\tExternal/Omm",
+      "160000 commit a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6\tExternal/Rtxdi",
+      "160000 commit 2fe3b7c1b1c4aef09219766d8f908d009c5a6df4\tExternal/Rtxtf",
+      "160000 commit 4e21b585c33c83d723ca9a1e11bbb1090d145793\tExternal/SHARC",
+      "160000 commit 573ec27d7224a8a0866c1889737d355b8e4155d7\tExternal/cxxopts"
+    ],
+    "built_artifacts": {
+      "NRD.dll": {
+        "bytes": 589824,
+        "sha256": "65a170799ac9d88c35be5fbe218b61831e180b16556e45b3e9a878f60a5dfbc4"
+      },
+      "NvLowLatencyVk.dll": {
+        "bytes": 57840,
+        "sha256": "2a77dc3e1c724b7eea5755be0ae7423752e79a2459fae72181a9f00e3507e5d6"
+      },
+      "nvngx_dlss.dll": {
+        "bytes": 58956912,
+        "sha256": "d00b5b0ab29c3ca101b70c3a5ecb3a01b7ef33766a3383a28a18623083e6123e"
+      },
+      "nvngx_dlssd.dll": {
+        "bytes": 48343664,
+        "sha256": "b49435ae346f227feafe7bbe937d88277ea0ee7323975ec06488f377fdb46cee"
+      },
+      "nvngx_dlssg.dll": {
+        "bytes": 7506544,
+        "sha256": "8d59d49b36410dd6b62fef2503a5871d347415bd85d943fa0848563a95dd50c7"
+      },
+      "omm-lib.dll": {
+        "bytes": 2932224,
+        "sha256": "2a5117755a788abe72c5bc450880ace003d6b82f80d69e65580c4042cf99a003"
+      },
+      "Rtxpt.exe": {
+        "bytes": 8058368,
+        "sha256": "1600bac7ee4ca5f4baf5fece673b25b6cc3cd0c3da7e04cf3b5788847a3210c3"
+      },
+      "ShaderMake.exe": {
+        "bytes": 1411584,
+        "sha256": "08e37370d6231a7a4cc80922028e4bf386473570efd9999a68d78c23a78708f0"
+      },
+      "sl.common.dll": {
+        "bytes": 843904,
+        "sha256": "38eea3b4209afc455636ea372b5933d65fcc13becec6c84d101dcfc4d8648f75"
+      },
+      "sl.common.json": {
+        "bytes": 366,
+        "sha256": "e5c400efbf8dfa2a529261623e70192aa2244cb3a81ff90fcc72741d2aab347d"
+      },
+      "sl.dlss.dll": {
+        "bytes": 422016,
+        "sha256": "18871eea87c90345da97d8109faa81ea7d5840e8d99b51b55b0e46cfa177f84e"
+      },
+      "sl.dlss_d.dll": {
+        "bytes": 437376,
+        "sha256": "8dff36fd063094eb1f659e8d4dcd52c7423859a9c4a3df3796084c48412d60ac"
+      },
+      "sl.dlss_g.dll": {
+        "bytes": 637056,
+        "sha256": "3ed9538df724993bea8a050195a6a78b9c8c8a566d5b05ade477aab3c390e90f"
+      },
+      "sl.imgui.json": {
+        "bytes": 82,
+        "sha256": "b9a81fb413bc003e47d4ebd60d71833330c6f0776fe94c32470fece9ede5188a"
+      },
+      "sl.interposer.dll": {
+        "bytes": 652928,
+        "sha256": "b1d7395aebd7b9722841d64dcf7433680020b6a8e421f851c16d5ba0c2182edf"
+      },
+      "sl.interposer.json": {
+        "bytes": 520,
+        "sha256": "1219bbc175a6deb172cc76bf4b9e140328d6309d6ec7bc5fd4b61ab484c1f204"
+      },
+      "sl.pcl.dll": {
+        "bytes": 360064,
+        "sha256": "5698c38e722318681f215c9fe68e45b9bedd51378acc699d8eee26e961e57770"
+      },
+      "sl.reflex.dll": {
+        "bytes": 388736,
+        "sha256": "443577e869352436ff7ec8f4d9c90418d3e95368436ce219261e0f4f07a38122"
+      },
+      "sl.reflex.json": {
+        "bytes": 60,
+        "sha256": "2b10d6ebae267b8f6366803ba76939bbb56a4a1a6a0bba41bc62080f3cfb0ed6"
+      },
+      "D3D12/D3D12Core.dll": {
+        "bytes": 5035320,
+        "sha256": "37fa14281a58cc834076971873006feb8a8d25cddc908d1a345bda1b149ffc7d"
+      },
+      "D3D12/d3d12SDKLayers.dll": {
+        "bytes": 4965680,
+        "sha256": "7ab48d56d1c18708ebcf16c7c9259b2d783e2b935b85add4a244573b9f03cab4"
+      },
+      "Release/NRD.exp": {
+        "bytes": 1824,
+        "sha256": "90a6ae20c5c895681483ad1699f5cc3654e2b34b0d099052a0361fcb3bfc0ac7"
+      },
+      "Release/NRD.lib": {
+        "bytes": 3344,
+        "sha256": "39c33f61b91bcb10a0f00113ba9b3d535eca99b087b5e495f92c7a8db57e0b20"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_BakeEmissiveTriangles_fc2e076e7e4a1c92d05b9eb2.bin": {
+        "bytes": 509516,
+        "sha256": "2f20493cf0bb68040e7270131d09b1fa7b732aa559d88f084cdea7693dbfa35e"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ClearFeedbackHistory_5774f643365aeb6b0c825fab.bin": {
+        "bytes": 492416,
+        "sha256": "d7165ea0481ff5d044819ab99422dcd67994d2f7c709d4c2b9c48791de463d7c"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ComputeProxyBaselineOffsets_2c70869bf9dc741ae28d8669.bin": {
+        "bytes": 477764,
+        "sha256": "baf720a4b249b300443607d5d4e9d352d136a8fee1ebfff26e29801a0939b711"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ComputeProxyCounts_14dcc0648ea1ecde92ac5e7f.bin": {
+        "bytes": 486508,
+        "sha256": "739ae7c947d2d07ba1898299e6df9d31a550341917f1852b4f73e6bd1940b1a9"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ComputeWeights_4b7982f79b53159d1ff0396e.bin": {
+        "bytes": 506804,
+        "sha256": "2dd3dea29e10418e9d035bbb6fd2ffa9af674207a6be0513c84fa525f233d032"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_CreateProxyJobs_f7f020ded27388420f0a759a.bin": {
+        "bytes": 477876,
+        "sha256": "fe7bbde5d5e4895a7db1b9b08cf9cb87fc70f2abb76589e41e7146ba6a3b08b7"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_DebugDrawLights_249a9854fcbca078bf26f11d.bin": {
+        "bytes": 587980,
+        "sha256": "a013d8e122852e91dcfd40073481295228eed266bf2c0b5cf6458fd04b8971d4"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_EnvLightsBackupPast_87539413f56ec8054dca044c.bin": {
+        "bytes": 481948,
+        "sha256": "8b09e4ede930d009d96ba033d15ea06d05ec92ad68a1fc907fa135a154304bbd"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_EnvLightsFillLookupMap_75d389a9ee60291d2492906f.bin": {
+        "bytes": 482492,
+        "sha256": "b9a6c30011117401b13b747313388bca4eeda2f57f075f6f5768e74e3adf8d47"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_EnvLightsMapPastToCurrent_a0e18bc96c8c94c11d6589df.bin": {
+        "bytes": 476888,
+        "sha256": "1e512f81a7e3f5acbb57fb30583af8abf3df241a5fe57a23a820a5116df986f8"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_EnvLightsSubdivideBase_917a48ba1dc97b12f02bd60e.bin": {
+        "bytes": 484352,
+        "sha256": "34c7f0b91a5d18acd7a315eea750bcfad67413a4eb9eabfe80e03f47ecbc4df8"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_EnvLightsSubdivideBoost_b4d3c76e3be6d61bf6c2fb37.bin": {
+        "bytes": 503112,
+        "sha256": "68fe609ef65bee938494621cc7ed5ec9e2e3acb3e080341bd73a6fe8531b94dd"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ExecuteProxyJobs_05be453cf3a6e949aba2e727.bin": {
+        "bytes": 476384,
+        "sha256": "4ec160748a376c3ccac296ffc829a450478132b7268e034f06e37032ab04c6e0"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_PatchSubInstanceLightData_704e01e747f2019cc8a2e328.bin": {
+        "bytes": 472052,
+        "sha256": "ff013bb65e96e7f1a6332baea20ac75ea166e5216af296ce37bd11380fd4ad9d"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessClusters_53fb6146d28a40b8dda9c367.bin": {
+        "bytes": 497676,
+        "sha256": "3c6191c56ce49396b071ac6b562cff4892a38f0445fc09d8aac86e1d3c1e518a"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryDebugViz_f076eef03b1ef86978c2ab85.bin": {
+        "bytes": 630268,
+        "sha256": "7b5292177aa46b53ed2d37cebd1b647075981de4fa0bdf5a97a1f68a46bde0b3"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryP0_649a36ebe55bcbe3fdbac238.bin": {
+        "bytes": 500472,
+        "sha256": "f35381336bd7b5962986a79e9e873adc2d3d236c4a6ccb64f4394cb411b33ffa"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryP1a_22c1464ec2cb20e0a79a01c1.bin": {
+        "bytes": 499356,
+        "sha256": "44f8709ac251bbbc25604e03703dbe0cceb5115fd36aaac5835e23d2de3564fe"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryP1b_d3c4f9a14bb7de4156a6d78c.bin": {
+        "bytes": 514440,
+        "sha256": "bdc82da7a0bd7c868b135526ea462be6e5f4fcde1e82319c3fb87919ea7e4405"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryP2_8554a8da215de51062bc6dcc.bin": {
+        "bytes": 487548,
+        "sha256": "c91f9bc858663f0a2a935abdae56e4764fffd67463758b606af02c8fe6bb5347"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryP3_173d19d8a81049e59759e9ba.bin": {
+        "bytes": 489808,
+        "sha256": "cab232a3c2782a53d23629a6edb7fa630c9872beef1f57f0a993c6c34089b74b"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryPreFilterA_211c8183492efffa04d1b649.bin": {
+        "bytes": 494236,
+        "sha256": "1c7b0f8ae3b65318ea1cdf661b98eb8e6e4d7b4c458180821351fc6cf785700d"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryPreFilterB_04b36ad2937782e3db194343.bin": {
+        "bytes": 494152,
+        "sha256": "0f2f247b1f3267e40fc40a92ab989cafeb7d8a17f345a55cf9829c6732cd257d"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ResetLightProxyCounters_b66f988132ca324a901aa656.bin": {
+        "bytes": 475052,
+        "sha256": "88ab51a983d18149502e7123dc5af3c3c284f7f7dac8a6b290bf1eb5d33e4b5d"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ResetPastToCurrentHistory_ba1a1be302b90a74f3262ba9.bin": {
+        "bytes": 476504,
+        "sha256": "57796f3f3dfde0a505735fff7b54fedbff151c26b86253c58840128443d285ad"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_06e4dbcb6bb39c4bc7aa232a.bin": {
+        "bytes": 1650944,
+        "sha256": "2523ddd0ee1556ef84b181a7d99de20a359d4ba2a19d6bedd0a83f6158494923"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_07dd1cdfa5310a216b44e263.bin": {
+        "bytes": 1303440,
+        "sha256": "453335c66e69b2918a55d983dfbe056b9c6355709dd2e637da4037214b874acf"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_0b0c6f01c0e1de82aecb232b.bin": {
+        "bytes": 1552704,
+        "sha256": "5e6eca6485d1068df09374ff121e2a755a2147825d1276e30d501c65e27ed17f"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_25882ebfd5245e4ea6a63f3d.bin": {
+        "bytes": 1488936,
+        "sha256": "0de0baaf17c3a5ee94929a3f6378b3a9db115512b5ac564996e6be03d7126f29"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_2623d2aefc43669d0fcc75cb.bin": {
+        "bytes": 1353436,
+        "sha256": "1733165d0f15d7f597d98d3aa632a0b3af1ed742d9acc61785cdafde1ebe750f"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_360f21d62a0ab7c6b73d6bdd.bin": {
+        "bytes": 1567572,
+        "sha256": "afea62e584b0f04f660bf7fe3394991b956df88f3fe25d6e2de56142eec40bec"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_39afe9a685b8a83b006ed064.bin": {
+        "bytes": 1515064,
+        "sha256": "5873ac3b5ab5183ed75e5445258fbea5c29bed0f6676eb4367eb7ee27fe29848"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_3a3265473c8e06290858e2a1.bin": {
+        "bytes": 1567700,
+        "sha256": "1296300aa9db43ca643145e27e3d909d644358bf5059202193ef15753cfd9ddd"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_49c32b9be116a2ade0de3959.bin": {
+        "bytes": 1488928,
+        "sha256": "a1f18d90de313d5a044e4c04e44d6c2c809c53927c762df717029eab93fa4049"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_6264050d746cbd4d883c6abe.bin": {
+        "bytes": 1624640,
+        "sha256": "e167ee9a14281737a59f792f06adb851561bff14c1cbe5c1a87dcb9be9191bdd"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_6cccd69a85f03a48a812570d.bin": {
+        "bytes": 1303300,
+        "sha256": "68599ddf3b3dca6a145bf7ab8d1ada591793a5c5d3a16c080d09c909d3be4b95"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_6e55dd288de79d5fa722f025.bin": {
+        "bytes": 1624792,
+        "sha256": "cd7f3e86b3ebb588ba2b030d4277a0ddae5462a0883c911aae338deb58a276fc"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_7130e48c423778a9165e653b.bin": {
+        "bytes": 1353156,
+        "sha256": "27623fda353d79a907bbfab52b53203574bddb2098daf1d68b6d1acbcb3ecd14"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_86c698003546d3b193cc059d.bin": {
+        "bytes": 1353292,
+        "sha256": "c6a80fcf6e70138bbb9dcf31e9fe1e1f1a29c46891e5af82a96e7608e62f2963"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_a2b79e5dbe4766c7af3831d4.bin": {
+        "bytes": 1624508,
+        "sha256": "23e379ce555e09c40c84e318463066ab84f7aec665a61ece787d0f967b9200b7"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_a2d201cc3721432ac338c08d.bin": {
+        "bytes": 1552580,
+        "sha256": "9c9085226e0b222b2ebc209e1bead0b18d63c224e38ad0ee10197e1a12a14ab2"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_aa135cddc2557761cf7fabbf.bin": {
+        "bytes": 1651096,
+        "sha256": "58e9217023c02429adb2129d0c83bd166bfa2cb30625e21e360118c8cb507c54"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_ae8545fbb7d592124606ca99.bin": {
+        "bytes": 1488968,
+        "sha256": "9e83fd15365e9046f82e6a0a11922f3bb6d9508d1f5ebff9eb0cece56261ca43"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_b87337303ce6a887ebe0d21b.bin": {
+        "bytes": 1489060,
+        "sha256": "2a2c934d0d4032685ba598c10d4cabde5760553e519f7e70af726e8f0f61692f"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_beda754d24651d8a4c8f2a42.bin": {
+        "bytes": 1650812,
+        "sha256": "ea099fe8956ba55206f80c5588d201e085632de6cdc3c45ff001c4cbe1bdfd7f"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_c225beb2716299116852b332.bin": {
+        "bytes": 1567856,
+        "sha256": "2ae51d39e69a397234309cb3e9b78335900c57f07d2e40aa8c58ccd774640d33"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_c70a119421af0004df2f6dbb.bin": {
+        "bytes": 1515024,
+        "sha256": "9759e643492aeb932f956cb57cfb90cda3c1ca0ceca4738e3250257c266f7ab4"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_c78f89d6290a6a5ba56885ff.bin": {
+        "bytes": 1515156,
+        "sha256": "a00cd3e51aa993162a393dcfe1dbf2a86d6766c069e2f4ea8cbdf171058a580b"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_ce51218495a650a02fd43f6f.bin": {
+        "bytes": 1515296,
+        "sha256": "75a7adc1d23eeff17d972d0943409fc3ff6cd5ddb50da071976024b77f3097f8"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_cf40df44cbf8cf561ed6a3f8.bin": {
+        "bytes": 1515032,
+        "sha256": "896f269541c25078d2bcbc8db82fabe43f7ba2feb293b012a86c5c108386cb3f"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_d2669fd0722fc52b26e53365.bin": {
+        "bytes": 1552860,
+        "sha256": "b1c53fd11c040add3c9aea9121a74d0e99479e66fb3c13bd4584ef2e5fbd7540"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_d49043ef3ba6c4739ce35855.bin": {
+        "bytes": 1489200,
+        "sha256": "f9e8fec5d44504a72e2467f2fe289d1ac1f05c7f467d6d272c8ebdef8b2baa3f"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_f04edf645ae0a11a6a5894d0.bin": {
+        "bytes": 1303168,
+        "sha256": "8a23af639d17db55129fad945dfea4d89ea4799a970c5ae6b4fedf52637153ff"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerSample_168a8016c455cb0fb0c651f3.bin": {
+        "bytes": 935460,
+        "sha256": "4c7a7a3cfc352aa82d99c41a2cadc29839313289097ac35b1d2ffff5aa500c69"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerSample_1bf25355911ab1032d1bff5b.bin": {
+        "bytes": 962272,
+        "sha256": "f44c994076f6993373c343e840cac272569b0a37b088d824ccf907ce60ffbd2a"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerSample_406f3f556cfacb0c35a20c6c.bin": {
+        "bytes": 928592,
+        "sha256": "c05372bc212622a082d930764367266c78296781604da5788f07c95c3bcc7e46"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerSample_5c2b36fd6f9bd9fa24fdbb69.bin": {
+        "bytes": 918484,
+        "sha256": "911deed75ae626f8bc8c7a9978f9783baf10caf5adf35bef7e706c865b698cd1"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerSample_5fbafaff53a29f12841ea834.bin": {
+        "bytes": 917364,
+        "sha256": "95c5a2448d6cd038c64f966c616ac333f09ab6171d53e3754f91b2798166d7dd"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerSample_61303b00257ff06d81f7fe51.bin": {
+        "bytes": 979984,
+        "sha256": "3148927d0a446f53fcd3b7601f04d59fc18edf9548d212652fc0e1a314c9edbb"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerSample_98b453369c2b070eb9bdecea.bin": {
+        "bytes": 1017820,
+        "sha256": "58fada48213f340eca922c9fc7d05914b1199fe1489d2fc81e16d28b31a6d5a4"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerSample_c591e4a3060b3cd14b1612ad.bin": {
+        "bytes": 891864,
+        "sha256": "a324fbea6178e2f24bd91c1fc1bf19672c4435a0996ec59fb1db52c1d6e55e57"
+      },
+      "ShaderDynamic/Bin/dxil/SharcResolve_main_2beceb84cb4fda41f9f9a750.bin": {
+        "bytes": 555112,
+        "sha256": "6640f42c702c074ece0fb77c765a964bc219622d5eee64c85e833960058aacad"
+      },
+      "ShaderDynamic/Bin/dxil/TestRaygenPP_05286c70c92cc2748decead6.bin": {
+        "bytes": 468568,
+        "sha256": "03fb5941aba73f1cd52bb82e6c97815010ff7012839536a1bfa5c2d4bead9a3b"
+      },
+      "ShaderDynamic/Bin/dxil/TestRaygenPP_25cd94faab1b78915e86dbb5.bin": {
+        "bytes": 462540,
+        "sha256": "8f0f4ef5c7068d31a103f584a96961e23aa46effb1946391ba7693c2e6ddb6ed"
+      },
+      "ShaderDynamic/Bin/dxil/TestRaygenPP_63ff6f07526a7a81924a3bb1.bin": {
+        "bytes": 462540,
+        "sha256": "a19c78d82b8f52ee1186180180529c0f742d48d593bee723a3996bde0c784c2c"
+      },
+      "ShaderDynamic/Bin/dxil/TestRaygenPP_f669aac41d424a8e563d4cc1.bin": {
+        "bytes": 468568,
+        "sha256": "41f46b7c57c68d17a0fccec118e48091a3d1ade1b0075e88694e00eaa690b48c"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindless.hlsli": {
+        "bytes": 24537,
+        "sha256": "c34d01f87c07ef1d74d6984a112076ed4cde55f2b9a79b0cdd2d07689327c760"
+      },
+      "ShaderDynamic/Source/Rtxpt/DonutBridgeCommon.hlsli": {
+        "bytes": 8046,
+        "sha256": "1bac0967b60316fd981857daf2986a91d97f092dcc4206689accc56550979969"
+      },
+      "ShaderDynamic/Source/Rtxpt/DonutGeometryHelpers.hlsli": {
+        "bytes": 10105,
+        "sha256": "d8269de4018eacf838a59b95a3f304d5e17dbd94d0d0cac806445331f20634ad"
+      },
+      "ShaderDynamic/Source/Rtxpt/GPUTLASCullData.h": {
+        "bytes": 5087,
+        "sha256": "5350309edcc0dddc30b3bfff76a478802c01044e92f581b4e75d88a1968a949b"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracerBridge.hlsli": {
+        "bytes": 5280,
+        "sha256": "0410ae3f7afe92a04fa415c37feb34b304bd4e6253ade27b16adece07e283819"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracerBridgeDonut.hlsli": {
+        "bytes": 13879,
+        "sha256": "980a645c4e453c711fba0582726662807d8d981f00b546be0507941556b187cd"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracerMaterialSpecializations.hlsl": {
+        "bytes": 1762,
+        "sha256": "3b5e64165692a14b3fb278c9094284b94cf67928d6637b94c662034ee4b12124"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracerSample.hlsl": {
+        "bytes": 15874,
+        "sha256": "d8ba1481b26721724560d01afd7983403540caaca214fa4a1995cad8caadcad8"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracerSurfaceBridge.hlsli": {
+        "bytes": 1207,
+        "sha256": "fc2ae5ab9899572b1f392a8fb4d1f9936592dfd4eec019af1a9bed9de96e6945"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracerSurfaceBridgeDonut.hlsli": {
+        "bytes": 29938,
+        "sha256": "6938fbf066d34a9b8cf2bbee83e7c1faa0063ce13f68b09793297da2f6c93639"
+      },
+      "ShaderDynamic/Source/Rtxpt/SampleConstantBuffer.h": {
+        "bytes": 5047,
+        "sha256": "b10b9c395e37fcb45fe0b1874faa6a9f3bc761a199db5cf2372963ffd0a3bb97"
+      },
+      "ShaderDynamic/Source/Rtxpt/SERUtils.hlsli": {
+        "bytes": 3717,
+        "sha256": "240f7f8246ad5a8fe6cf1318debd75cabb2c4bbf24c8179a7a89577c578a6504"
+      },
+      "ShaderDynamic/Source/Rtxpt/SubInstanceData.h": {
+        "bytes": 3738,
+        "sha256": "29d0d801743257155034e8e0631d2496bd175b6cf7a51265832b656f750081e3"
+      },
+      "ShaderDynamic/Source/Rtxpt/TestRaygenPP.hlsl": {
+        "bytes": 2398,
+        "sha256": "074a84095dca3027df38b627901199f294478d612da95dfa3fc33adc4bf03502"
+      },
+      "ShaderDynamic/Source/Rtxpt/TLASCull.hlsl": {
+        "bytes": 5438,
+        "sha256": "13b7f46b89ca77937ce029d3c20a3d61ea952c399f4dded4d8798c5a4c8feb3f"
+      },
+      "ShaderDynamic/Source/External/NVAPI/nvHLSLExtns.h": {
+        "bytes": 101159,
+        "sha256": "8e641a2691a3f9b4e69b001f5eb247bf3c14cc7ae1bbe2613c1b98d14ab939d8"
+      },
+      "ShaderDynamic/Source/External/NVAPI/nvHLSLExtnsInternal.h": {
+        "bytes": 37016,
+        "sha256": "04f85078c708dea4c76c74309eda6e95d23abbcdf22f230c66119bd8225511d2"
+      },
+      "ShaderDynamic/Source/External/NVAPI/nvShaderExtnEnums.h": {
+        "bytes": 11176,
+        "sha256": "bc1747726d1d15121dbe1fe7653394eb10930f88a66031fd13aca1e45aaa75aa"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/binding_helpers.hlsli": {
+        "bytes": 3814,
+        "sha256": "90e57d553434b61fae56e08da0cb2fae0090a44f2a94033090d185715095f988"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/bindless.h": {
+        "bytes": 6810,
+        "sha256": "9ed9646bb550c1fc76e1083931395287aef30ee9df5ae1807b9ffbb6482f1ffb"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/blit_cb.h": {
+        "bytes": 1385,
+        "sha256": "551282c7ad6f518c100698737ee54eaef66b9a04198520179f7a4a92382a08e5"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/bloom_cb.h": {
+        "bytes": 1373,
+        "sha256": "84d3c48b9d5286c0b938ce1b765433ff1b2bf1e6819c7cbe509b62783dab5b5e"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/brdf.hlsli": {
+        "bytes": 8308,
+        "sha256": "f4df58de45fe0ecbd00d71f2782aa3462803a40b8dec0947e3ac3ae930d4cb15"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/deferred_lighting_cb.h": {
+        "bytes": 2066,
+        "sha256": "6971468054d463abf0ac8ad703ae161eb63ecf03ee7a16b48bd2a777fe5e0573"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/depth_cb.h": {
+        "bytes": 1909,
+        "sha256": "9e31e3edd6cb02e149b9de93f002f6ee843969db6ffa814376ad10f03c7e14d2"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/forward_cb.h": {
+        "bytes": 3316,
+        "sha256": "27ba39b2bc93e85dd28d517b939696ab8207fd1173bf21f5d26f4e0f38687f5d"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/forward_vertex.hlsli": {
+        "bytes": 1418,
+        "sha256": "1b6b52dd2c039df2684570393188af09a3a5d757777b7536a599f0beb95840a5"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/gbuffer.hlsli": {
+        "bytes": 3251,
+        "sha256": "67a96bfe48e0fd6fe48c4608cf6cb797367be9d4abffc0e9c508995f44c4380b"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/gbuffer_cb.h": {
+        "bytes": 2366,
+        "sha256": "d2d5022f8fd2b6d46db1980c44669b03dc8fadb51cac56d778321e3d370159fa"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/hash_based_rng.hlsli": {
+        "bytes": 4888,
+        "sha256": "382faeb2a6fd2764301d37e1c981f38ae26d3f70d5c3ee99d46abac113bb2e4d"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/lighting.hlsli": {
+        "bytes": 6363,
+        "sha256": "0a1533b6c6c3053ffa10d61b7e34df2241e06d30dcd875dc9af86434acdc5c0b"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/light_cb.h": {
+        "bytes": 2314,
+        "sha256": "65534f834f724df274c07b88772a4cc0e7aeff4ca175cffcf429061514f476db"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/light_probe_cb.h": {
+        "bytes": 1373,
+        "sha256": "9b97c711fb6d5abac6118fb14d73f824278f5af20a14b145848a1d46a7b6a975"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/light_types.h": {
+        "bytes": 1568,
+        "sha256": "3d1d4aee286f851b276bf2fb341a6fc6e61be7bdd80d13fc5db18f3d85cf6b5f"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/manipulator_cb.h": {
+        "bytes": 1966,
+        "sha256": "81cd9593b5909fa5bf290c99461616109e04b8c57bb54fd78ee5dfd5763b2e72"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/material_bindings.hlsli": {
+        "bytes": 7437,
+        "sha256": "c936d83c8cb88509ff4c8d4fd94e93203b18da605af69cafd74a837fc893d245"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/material_cb.h": {
+        "bytes": 3802,
+        "sha256": "008aeae4b6f6835595a863cb16f917b720e64ad478c0e365e31879a4d7908741"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/mipmapgen_cb.h": {
+        "bytes": 1685,
+        "sha256": "c2e71b6bf86c1a829f397f7a7359aac378837b2f5b365a3db747404b812838e2"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/motion_vectors.hlsli": {
+        "bytes": 1794,
+        "sha256": "aae71c99e59e42ec25de333e5db5e6c2dec2e12484ea58323edca1fce04bdb6c"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/packing.hlsli": {
+        "bytes": 6465,
+        "sha256": "07d3c38bb9cc1edaf71ff6f0e8421a0cd46b4a13c1f120571ee59cdfb2e98b68"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/pixel_readback_cb.h": {
+        "bytes": 1332,
+        "sha256": "637e1490a1b4dd0e7e3e31d2e274b501333faa60e90f4095dd6f8e96f8553edf"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/scene_material.hlsli": {
+        "bytes": 11073,
+        "sha256": "4869b4e84f8a1bf678dfe95485257642c989b225bbb2130992ac9e28a8dd25bc"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/shadows.hlsli": {
+        "bytes": 7855,
+        "sha256": "224d8f263cd1460fb5bf30b5401a1de00f7c3685f8b5acdd74ffbdb01e9c86ae"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/skinning_cb.h": {
+        "bytes": 1930,
+        "sha256": "335463036ffe676b8b33478202a6e361995eef54e472fee101228e6b12ed5a1a"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/sky.hlsli": {
+        "bytes": 2429,
+        "sha256": "0630ecd321bd70eb973b76803a3ee6f9efff45976364254c1a697a46386a3b7a"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/sky_cb.h": {
+        "bytes": 1680,
+        "sha256": "52b8d41ee3a4335909a03150f8b023981ec70e2884c59ebcbd0b9bed6edb4f0d"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/ssao_cb.h": {
+        "bytes": 1628,
+        "sha256": "f2111d3c0634c5427c89724251963459f235b64b2a829a6f3e25812be52942f3"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/surface.hlsli": {
+        "bytes": 3286,
+        "sha256": "c80efd1a4ea3e5199eba691f3b23b648077f815c61a070b7b84b55ea4ee03077"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/taa_cb.h": {
+        "bytes": 1740,
+        "sha256": "249dceb1fd71a03d1e4796e71e09086f5c414ff37d72d90b9fc4836e51c902e1"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/tonemapping_cb.h": {
+        "bytes": 1742,
+        "sha256": "e58e063576178fd48741670aa20ed142b5550bf410843572bb29029720a5d82b"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/utils.hlsli": {
+        "bytes": 7034,
+        "sha256": "00ae446aedf30570a817c04b6d03a66515b40dbf061f8f955087c9a7de4890fd"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/view_cb.h": {
+        "bytes": 1935,
+        "sha256": "2ca9d1fbe91530ae5ba12babd7ccecc3bb32e6f34277cd7190172522c59845e3"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/vulkan.hlsli": {
+        "bytes": 1426,
+        "sha256": "dc7c3cbfe7551eb7b9b6afb2e37a5bddffd6af0a2aed8db08bde23febfb2de67"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/ImportanceSamplingContext.h": {
+        "bytes": 3498,
+        "sha256": "dde0c9d9892f3e13dc7dcd4e1b9e04bb464135e077ffef26171302acaf6ac2ae"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/RtxdiParameters.h": {
+        "bytes": 4538,
+        "sha256": "47543fcb95b69e912a50d3666ab0e3fb23cf8808d6176d5ce053a6a248378e5d"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/RtxdiTypes.h": {
+        "bytes": 1786,
+        "sha256": "78ad0d8f75acc58ee289e635b926be991bbde1d04fb242118deefbdd0f6f5be5"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/RtxdiUtils.h": {
+        "bytes": 1406,
+        "sha256": "25d8dc0dd1cb7fb79c9a154a4d313f925791bf723ef61fb7a1bdc3f0ae51ff5b"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/BoilingFilter.hlsli": {
+        "bytes": 1508,
+        "sha256": "227a71d6aeff042f50b1ab5365fc5bd70546cafd3e19e885e5b69b358c70e709"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/InitialSampling.hlsli": {
+        "bytes": 24785,
+        "sha256": "b6a505886c893224f1ec598199e8b9701bf720f567caed8418f3988b42ae58ed"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/PairwiseStreaming.hlsli": {
+        "bytes": 5171,
+        "sha256": "746e66aa3e8240e6c612239d1b3e0516a1bcd624b5a3e9af80f4c0d82b4750ee"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/Reservoir.hlsli": {
+        "bytes": 10014,
+        "sha256": "d459abceafbaf36dcf112bf7b0ef05193a55bf398281f78b9383fea2f62be6cc"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/ReservoirStorage.hlsli": {
+        "bytes": 4838,
+        "sha256": "35144255a0e1084e06a898adfae417853b59a86b7b369776817404ad642b1e5f"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/ReSTIRDI.h": {
+        "bytes": 4770,
+        "sha256": "cd84bc7424ba97e7da80eddae4e0617ed42127a9a4b6473a540202d74836de4c"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/ReSTIRDIParameters.h": {
+        "bytes": 8378,
+        "sha256": "96c36815d06f915519c2844005b9a67f4ae8e1597a3107c5c5f1e74a6b6039ce"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/SpatialResampling.hlsli": {
+        "bytes": 13888,
+        "sha256": "e86b21c261357f92024ea4cd723210f1d081a1cbcbd8202e8d06dd066b842a02"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/SpatioTemporalResampling.hlsli": {
+        "bytes": 22989,
+        "sha256": "87bfd3e1fc25932af8390c2c6a0eb82c03aa7ca448c7c143989932a7d7146d39"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/TemporalResampling.hlsli": {
+        "bytes": 8735,
+        "sha256": "66fe98474d3b333794ebe3a241253e52799a6969d159a4ad95b0ca1a19bbc95e"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/BoilingFilter.hlsli": {
+        "bytes": 1259,
+        "sha256": "5c980031ee05895b83d32e74cd1ccfd155c103356407bd560c52365614447486"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/Reservoir.hlsli": {
+        "bytes": 9228,
+        "sha256": "6bb480d8f24946de0bbb5524bbe86aba931bf593b20f1c4c65ee3f39e07cdbb3"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/ReSTIRGI.h": {
+        "bytes": 3641,
+        "sha256": "3b82accf13b4fac6434c3565bddac252a81bc7954626287855b4bb1a9bf86e46"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/ReSTIRGIParameters.h": {
+        "bytes": 7000,
+        "sha256": "4df6df4161e831443135928e893f277db6c7e436d29d35de52d8b313ba005f2c"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/SpatialResampling.hlsli": {
+        "bytes": 8914,
+        "sha256": "f93a3bf92b5c40630f2b15901ed9f0cbfae0a6b7ea62d14911d600382b4b80a6"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/SpatioTemporalResampling.hlsli": {
+        "bytes": 13070,
+        "sha256": "d2a8ef4b42e78494bf15e172cc6b49f55e2fe4198872770acfdaa7aa00b55fdd"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/TemporalResampling.hlsli": {
+        "bytes": 9043,
+        "sha256": "66bac553d8e724ee6a958d5c8ac9ef503b86f08c55dc4ed4a88128f5249fef66"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/LightSampling/LocalLightSelection.hlsli": {
+        "bytes": 3963,
+        "sha256": "d388d2b1889f39200f9ab11eeff2dc7667e975a2e5c3b649f71de81567baf611"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/LightSampling/PresamplingFunctions.hlsli": {
+        "bytes": 8570,
+        "sha256": "15cd40be68b9793917aed401d46207a02376526bc358f79eb4b4f14b93213ea9"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/LightSampling/RISBuffer.hlsli": {
+        "bytes": 1584,
+        "sha256": "9e2c1ddb813203b7dc559fbd1223deedc9d16bf146f750c77074f0e4d2729c9a"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/LightSampling/RISBufferSegmentAllocator.h": {
+        "bytes": 978,
+        "sha256": "16011766aa2016733cd58bb96e625fc4cb069c305160b6318ebc0aa9dfb80933"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/LightSampling/RISBufferSegmentParameters.h": {
+        "bytes": 901,
+        "sha256": "73571c665dc331a45020fdb36dd7c9b38c0a2a0297a6b805d96d078473fdaf8b"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/LightSampling/UniformSampling.hlsli": {
+        "bytes": 1081,
+        "sha256": "40ecea3503a1eeeb734db65e09fef1f4dbea7574883f80d6043a59dca3a4b86e"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/BoilingFilter.hlsli": {
+        "bytes": 1265,
+        "sha256": "3b9467a0db4e3cfafd9266f75cb28263be9dcb500c25275b0e50f15f11b11e07"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/HybridShift.hlsli": {
+        "bytes": 18929,
+        "sha256": "2df802088d82226df1f2286202fd24dcf96a8a59fad67bf45ebad23b37a33a89"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/HybridShiftPathTracerContext.hlsli": {
+        "bytes": 17423,
+        "sha256": "15c5f5f1575a3106800a146dbe698977fc7eac90494e54aa351e1d887e1440cb"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/InitialSampling.hlsli": {
+        "bytes": 5120,
+        "sha256": "066f1351ffd063697b3a8de2f600122a2338ab863d140f847b210434505bed51"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/InitialSamplingPathTracerContext.hlsli": {
+        "bytes": 23708,
+        "sha256": "0a02106b9468758a03885b9f4e425bc0c424a5a7a378ecbbc5654723cacba8ba"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/PathReconnectibility.hlsli": {
+        "bytes": 3284,
+        "sha256": "437af214bb85b6ae95ed730a0159dad7509bf3f837044c3f81460da955a56e27"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/PathTracerContext.hlsli": {
+        "bytes": 13027,
+        "sha256": "65e247e068f4fff8ccb3a1ec24dd6dc56dc54e66af840dd3fa28f1f22dbee6c4"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/PathTracerContextParameters.hlsli": {
+        "bytes": 1120,
+        "sha256": "1d4c5f88215268d5e058ec9c979707ddd091c88c47db804d306f8398ff277fb5"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/PathTracerRandomContext.hlsli": {
+        "bytes": 1569,
+        "sha256": "b2f29ef9c8db110450d8722bc8731352a448e4156d16d259f64c1d79e637b69f"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/PathTracerState.hlsli": {
+        "bytes": 4763,
+        "sha256": "afd163240b912617131c7d89cff4bce4a5a163304eb9f1da82c6512ec25edf99"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/Reservoir.hlsli": {
+        "bytes": 13437,
+        "sha256": "b47d895996d48763ed11d065b966a89b1831cc8bc131f17a66fdda3455cab111"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/ReSTIRPT.h": {
+        "bytes": 3866,
+        "sha256": "4981afd8a3b69eb6f09958de673bf430f984e1e85977b2d6d7bfd080084b8bf6"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/ReSTIRPTParameters.h": {
+        "bytes": 4691,
+        "sha256": "19592262aa4f351577530c9573a31e30378f920718b8886288178cdcf0902436"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/SpatialResampling.hlsli": {
+        "bytes": 15852,
+        "sha256": "cb7aa3dd18ac9898acba2d964ea514005e3987ee2ebf1b4b39a2dc9d2905d205"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/TemporalResampling.hlsli": {
+        "bytes": 20119,
+        "sha256": "e8a2ca1b231e809d05340561175a301bacae79356940ce1ee6934e20eb02deab"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/ReGIR/ReGIR.h": {
+        "bytes": 6623,
+        "sha256": "9bfd6682ef0e1ccf893c799b9c1b18a4f6e7e0050799553f93e6d6f46dc6a212"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/ReGIR/ReGIRParameters.h": {
+        "bytes": 2619,
+        "sha256": "ed4ec974469089e21661117c09c2e7383d4c0ee563c055d16958e4c37127567a"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/ReGIR/ReGIRSampling.hlsli": {
+        "bytes": 9028,
+        "sha256": "a40f21d02df3ae7e546e8e2f1435482fbb0d6cf073a8a08c7d580c2efc6b43a7"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/BoilingFilter.hlsli": {
+        "bytes": 3392,
+        "sha256": "964df8014aa091ec0deac197aa5a601687b05a420743356992ba49d04bea5ba8"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/BrdfRaySample.hlsli": {
+        "bytes": 3263,
+        "sha256": "ecdf91ae785b52606eb5444a30454230a543d356da571afdcf80457448ff7794"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/Checkerboard.hlsli": {
+        "bytes": 1710,
+        "sha256": "ce3ec2485c4325a3f32c9d8d58d6c63b62b803da873038ae999584a9d04d6e2f"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/Color.hlsli": {
+        "bytes": 4529,
+        "sha256": "4ef47f29acaec96b75fe08b310e6b4504f75373cfaa7e4992fab2a7c2bb2db53"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/Math.hlsli": {
+        "bytes": 6041,
+        "sha256": "4099bb0359d8e2732f46f80b74ad62a01365cd2012d537786cab66680df9ff82"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/RandomSamplerPerPassSeeds.hlsli": {
+        "bytes": 1651,
+        "sha256": "df9e3a92f7a5f8260ddd87f9b565a8583788c422122fff8afdd1352bceaea457"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/RandomSamplerState.hlsli": {
+        "bytes": 3618,
+        "sha256": "f2b1e6d4080ee68e79bb95394d39c17a94d8c562afd55f115e3531be592fee39"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/ReservoirAddressing.hlsli": {
+        "bytes": 2279,
+        "sha256": "cfe65684fb4fd958534e92a107e9db2cf47aae443395164c1c18d833d768b261"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/SampledLightData.hlsli": {
+        "bytes": 2676,
+        "sha256": "02733a5a4697e319c9be2954bc224f4e8fa0db506d6ef62daf7bcf9a3570984d"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/TypePacking.hlsli": {
+        "bytes": 3243,
+        "sha256": "9d15b2aa75f133d33870fa2b2cd25a647e7d632fecf01c065c0da19b09dace8f"
+      },
+      "ShaderDynamic/Source/External/SHARC/include/HashGridCommon.h": {
+        "bytes": 17724,
+        "sha256": "27748b49e79c5a470b21d9d5372ebfa7a4e36f14329d8dab078840cf9d980bd3"
+      },
+      "ShaderDynamic/Source/External/SHARC/include/HashGridTypes.h": {
+        "bytes": 1193,
+        "sha256": "1c684e83ccae138b9b36df95e8ce4a4f3cb84c25c869248a15e4447632412e7f"
+      },
+      "ShaderDynamic/Source/External/SHARC/include/SharcCommon.h": {
+        "bytes": 44596,
+        "sha256": "e94f70b4d1f8d7c2665c440dfc6da2ee0777aa3eaebaf41100f81261a3d18872"
+      },
+      "ShaderDynamic/Source/External/SHARC/include/SharcGlslHelpers.h": {
+        "bytes": 2627,
+        "sha256": "a654eaa96207f87229c8c138ebe4f4e32ce666890e085b3e47af69015c9ccf45"
+      },
+      "ShaderDynamic/Source/External/SHARC/include/SharcTypes.h": {
+        "bytes": 1539,
+        "sha256": "f1f34c291c504dc818833b070c82209d1a76f2c2da7eabb417455d451f5f8d1e"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/BindingDataTypes.hlsli": {
+        "bytes": 1492,
+        "sha256": "4102c6280a65cf63c05f60e0585a534ffefb77875247712c01a863f12bcff8f3"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/GBufferBindings.hlsli": {
+        "bytes": 4432,
+        "sha256": "57c0a0d404d607c843d4b7ef53d98dc050e7b1edc4c7cd7245d68c65a4fecf40"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/LightingBindings.hlsli": {
+        "bytes": 2240,
+        "sha256": "f9d433e699a918e5756d20f04ba7357e9ddadf095c2695e355d7ea481e655a64"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/PrepareLightsTask.h": {
+        "bytes": 1065,
+        "sha256": "1a43afa86734e566c056bf34e118ef7b8f2dbdcb4d9cda1cff42dba437bf21ad"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/ReSTIRBindings.hlsli": {
+        "bytes": 1783,
+        "sha256": "6140094b45ac3eed597e56638d8732ada5e4bca3daba4fcfd2728848127c285e"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/SamplerBindings.hlsli": {
+        "bytes": 1141,
+        "sha256": "7aa17d85564eaaa96c2d2b32afa11e3d814bf61364c0f6eb974d5cd11b2aecde"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/SceneBindings.hlsli": {
+        "bytes": 1623,
+        "sha256": "5ef9256c949334d48750560d3f833801c3bb44055c39b56047bc96994e00c8c1"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/ShaderResourceBindings.hlsli": {
+        "bytes": 5938,
+        "sha256": "8f4a37d873e3f14cf8fc2fe83a938211b735162508fa11ba93be52901e9bd1c4"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/SharcBindings.hlsli": {
+        "bytes": 7063,
+        "sha256": "78523f8a74ac38d3801598f82a0b6020020396c9a60600e724969fbdbffb408f"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/AOSpatialPass.hlsl": {
+        "bytes": 3221,
+        "sha256": "a3d29dc6a0f0209da0fc094443071ec0e87172d4addadade7f02b0bda3d31e3e"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/AOTemporalUpscale.hlsl": {
+        "bytes": 8839,
+        "sha256": "0ee95f0f6ed68b4b90893406c0752e967ec70e816349b81f48cf86474ba851d7"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/DeferredLightingCombine.hlsl": {
+        "bytes": 7003,
+        "sha256": "9e5f2d6a100f926f2c70721f5e9c3b91be04677ae5ee5773173669dae0469cf7"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/DirectLightingPass.hlsl": {
+        "bytes": 8287,
+        "sha256": "be62c527a2e667378ec563d022061c95f0c070bfe4b2c4082bdeb732a1e3f098"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/FastHitShaders.hlsl": {
+        "bytes": 2892,
+        "sha256": "eb824e81c82c36132e5ba694905b4ad7f462f949aaeb3c724130045571e57ba0"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/GTAOPass.hlsl": {
+        "bytes": 7780,
+        "sha256": "fc6f44e0503bf6e29ca4afe6eea47f64858f6171f5d0f040a29ccb235ef1bfcf"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IndirectPathTracer.hlsl": {
+        "bytes": 8361,
+        "sha256": "d5c9eca0272101ba609ba96f26d8f95e18278f88d6dd2341c186b3c1f85f4ca9"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroBridge.hlsli": {
+        "bytes": 861,
+        "sha256": "836e553afd2e493be1488842c1ad6acc1b6a7f09040aff56770fea36c67b1667"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroCommon.hlsli": {
+        "bytes": 7389,
+        "sha256": "e1d2f377b7580f9c2bb5c15746fa23b8fc058343463e7d500d5e3d173169fa02"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroHitLighting.hlsli": {
+        "bytes": 8422,
+        "sha256": "7590cd58637f6029a164c4c40213e3f2d068691b3e9ed8c172753766475f977a"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroHitShaders.hlsl": {
+        "bytes": 1317,
+        "sha256": "c3055d8df832cc7a93daa3db41231b8b672ec2d66304762f5061c54d480e38e8"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroLightBindings.hlsli": {
+        "bytes": 862,
+        "sha256": "e31218d31d192180468dd41224cf4d893a944b870e30e20363f7ef900d681dd2"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroPathTracer.hlsl": {
+        "bytes": 23755,
+        "sha256": "4e39a5d6e058d307127d1ac9205cc69d6eb1d5892acbc5f9fdad5679140e1002"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroPrepareLights.hlsl": {
+        "bytes": 9517,
+        "sha256": "169266d3efa94d87a399c1a0882fa9b967983766551849e590c0a98bc76a11dd"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDICommon.hlsli": {
+        "bytes": 9508,
+        "sha256": "35c2b598dd09a9c10eb34a543887ae1f9da30929e2d7e69342aed7b738ae8193"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDIConstants.hlsli": {
+        "bytes": 1522,
+        "sha256": "05d29460816f374e77d5e42ddab0131006ed5d0b6a27309a83c804831dac5149"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDIEnvLight.hlsli": {
+        "bytes": 3219,
+        "sha256": "9d391c252218995ff5d0c2ee2f6999d65751e3e7d01911299e866a23a459f6c7"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDI_Final.hlsl": {
+        "bytes": 4966,
+        "sha256": "6ee03f8565668a76144514070c62ea27c1c2ab8e2c685e4ff9ae4fec106f6afb"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDI_Initial.hlsl": {
+        "bytes": 9440,
+        "sha256": "96595313146393656775ec6ce969737e396fae6228bea6b7dc087c57cde4c8f1"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDI_Shading.hlsli": {
+        "bytes": 1935,
+        "sha256": "655f49b046aa43ab56a9b3a98e16701293ecb4f4020ae6918eb919fe4f64d11e"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDI_Spatial.hlsl": {
+        "bytes": 3434,
+        "sha256": "c80abf04e131becbbc8658bdf0e7fb0312b9cbfbf58e8fbf044e6f7bb00b9dc0"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDI_Temporal.hlsl": {
+        "bytes": 4977,
+        "sha256": "9fc9cd4f3f2f1065451c5eafc0a041a6964a1fb5d031e3720b563e2fce16f949"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroRTXDIBridge.hlsli": {
+        "bytes": 20302,
+        "sha256": "95767b95d9d52ae682e08c5c63c49ab366d614bcb67def55bbea58a5b640e77d"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroSampleCommon.hlsli": {
+        "bytes": 15021,
+        "sha256": "4dc72d14d37d8376fb3e4c085fec0bf76bca9d86070849b90bc92280be3338b0"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroSampleShadowRay.hlsli": {
+        "bytes": 1962,
+        "sha256": "2858ca57ec3b2981eeb2107859d7b03862e4fc8a4e9ce74c9ade21c7fba860e1"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/MaterialEvalSimplified.hlsli": {
+        "bytes": 3315,
+        "sha256": "96ef608f293663f16132a0ef06b2df8c21251465bd5b5d671c442a2e82565afb"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/PopulateGBuffer.hlsl": {
+        "bytes": 3282,
+        "sha256": "3140bc65902523a0e73e9dd54533abbf415c56335c06f56ab3687023a3669941"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/PrepareGuideBuffers.hlsl": {
+        "bytes": 3015,
+        "sha256": "ecdd51269401803c5d99dc38d10565b6a324639e14069c00d90ed36033ceee2b"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/RTAOTrace.hlsl": {
+        "bytes": 3697,
+        "sha256": "040384413859989a2bf48dd5a9e2352415e7dc637aaf755be813a228b92ac861"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/RTGI.hlsl": {
+        "bytes": 7196,
+        "sha256": "e8a3789c16efd7ada7fa7ab5570f478c5559eefe8f0949995b84938bbad99fd3"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/RTGIDebugOutput.hlsl": {
+        "bytes": 1266,
+        "sha256": "19139086a4894305fa82e5abef0b4f0f6f130f428491aa16dfe72c8e207883b3"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/RTReflections.hlsl": {
+        "bytes": 4558,
+        "sha256": "5feb46cd0a8f07e98fb10e1ce9c18ff41ca1327c78509926c1611b9cf0ba954d"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/RTXDIStreamingRISLightingPass.hlsl": {
+        "bytes": 5360,
+        "sha256": "cbc959c595eccb7f2dc3eb44cabc83b5b518915d76034798384ffda3defbdaf3"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/SHaRCDebugCache.hlsl": {
+        "bytes": 3329,
+        "sha256": "37d1993b8c6bc56e7ba1c1bdb7606765be0917c99e02da90cf6459dc631705b1"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/SHaRCResolve.hlsl": {
+        "bytes": 1927,
+        "sha256": "4d1e4ed7f2897f97ec3a7d637c6dd814a2ec6df9e2142a2b56b8c9188c2f6914"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/SHaRCUpdate.hlsl": {
+        "bytes": 7090,
+        "sha256": "6d1a820a4d5494dddd85cf9ef51b7290da00d16e18e2b7ec98bc434cef539ea4"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/SSRPasses.hlsl": {
+        "bytes": 27202,
+        "sha256": "c760ab2b430982e9480ac08f789fbdfa4f0a272cbf3b0fab003e1ed39853e4c9"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/StochasticLightingPass.hlsl": {
+        "bytes": 11558,
+        "sha256": "94d2a7e87317569763861e3dce71349e65bd16d83e0e2c005899c829818321f0"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/MicroRng.hlsli": {
+        "bytes": 2191,
+        "sha256": "ff29d095c989c213040e18c1a029668766905162bc775b4c64061508bd857a03"
+      },
+      "ShaderDynamic/Source/Rtxpt/Misc/GBufferHelpers.hlsli": {
+        "bytes": 12577,
+        "sha256": "30d06c7a97dae2f15ed199561c472d9f73a834d227e3cd4ed60ad4f3fccef05e"
+      },
+      "ShaderDynamic/Source/Rtxpt/Misc/OmmDebug.hlsli": {
+        "bytes": 6667,
+        "sha256": "a614b2870ff6d2e9bafdaf864e578e347b032f28ad594f08bbbb1537df0f11cf"
+      },
+      "ShaderDynamic/Source/Rtxpt/Misc/OmmGeometryDebugData.hlsli": {
+        "bytes": 1069,
+        "sha256": "d880c98d0e1b11239e74262162efaaf6df5aa853e62258805c829c1f273dc3d9"
+      },
+      "ShaderDynamic/Source/Rtxpt/Misc/SubSampling.h": {
+        "bytes": 10652,
+        "sha256": "f7aa37948c362e4b43eabf5369330b0ff658957b60b232fd4209882e2a10617d"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Config.h": {
+        "bytes": 7245,
+        "sha256": "a80ccc84140818c7cd0c9abf5059f4b7987263725635c80776b5ea67416725f1"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/DenoisingLayers.hlsli": {
+        "bytes": 20920,
+        "sha256": "e8780aeecc213e346de5cd55c1292c3eded15af58503643cabbf184fa2801422"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathPayload.hlsli": {
+        "bytes": 3635,
+        "sha256": "d5bcb1f1d71db3f4707a474df1523d909a07745497d1ad112926bfe60d62d91c"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathState.hlsli": {
+        "bytes": 18109,
+        "sha256": "a62443158e3f21574146c696b462a45fc13052986a4d846cad463457452e1b3f"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracer.hlsli": {
+        "bytes": 16393,
+        "sha256": "e445807cff681e02141d60fed5b5d3f128d2c83732983aa73a2bd5ce3687b207"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerDebug.hlsli": {
+        "bytes": 20647,
+        "sha256": "57e62482a16f43cddf55da439ba96212d195a474350e900c3a0dce7be862743a"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerDenoisingLayers.hlsli": {
+        "bytes": 3080,
+        "sha256": "9daab1ef01527f6a4ca9d1f93edc5c3a2241620b4c19cf84e9933d88aa1ebfc2"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerDenoisingLayersHandleHit.hlsli": {
+        "bytes": 28242,
+        "sha256": "dc657d6dca7065fc51fd1ef7c96b1dc602b4e02de14f488c789aee7037bd12e7"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerHandleHit.hlsli": {
+        "bytes": 28624,
+        "sha256": "2343abc4945407c853e993ecd15b01641823eeb8a0d5e0ad3093248f1051a02f"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerHelpers.hlsli": {
+        "bytes": 15650,
+        "sha256": "27e2ee926986aa1b164bae03e7e4284e288411b52fb61e8939ad4b23262a5bed"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerNEE.hlsli": {
+        "bytes": 20902,
+        "sha256": "dba2555f5f0217ea004da011c05e993f3c77cb420af22ee8f1ee99dbcf8a5521"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerNestedDielectrics.hlsli": {
+        "bytes": 7525,
+        "sha256": "a9c5b7e7c98407bcc4f82a21a39f02207d8b49abba3f4b932252a2a1895c6464"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerSHaRC.hlsli": {
+        "bytes": 22605,
+        "sha256": "cb55fbf8305df4b68193f1fa0096c6c42b995086c9fd95553896a77315a329e7"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerShared.h": {
+        "bytes": 6214,
+        "sha256": "a6b9b0629bff178e4b4480a3d829661f75cf5109bb35792d0f8cd12918c4a2bb"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerTypes.hlsli": {
+        "bytes": 6705,
+        "sha256": "6b49b2a6319d171dd21d1300088eed5527221e8dec725f955a861347ab2f686e"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/LightsBaker/CubemapProcessing.hlsl": {
+        "bytes": 9078,
+        "sha256": "448c43aefa715f5bd64729b1758390f72cfbbcfeab2fc7b63103e6d989b38f53"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/LightsBaker/CubemapUtils.hlsli": {
+        "bytes": 3882,
+        "sha256": "4ffa5f1e99e689ec045d1459eebbf89d5413ae45e3b4d2160e5338b4985c7e88"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/LightsBaker/LightsBaker.hlsl": {
+        "bytes": 130785,
+        "sha256": "0ceefe9cdfd51c3980e4cd7864a61535d720f316e9cdc282959bdb2061c9148d"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/NEE-AT/NEEATBaker.hlsli": {
+        "bytes": 9562,
+        "sha256": "432cb9d224a3ba0e3693be4b9cd94d78d37b6da951d2dbfab2d5f3da426f23d2"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/NEE-AT/NEEATBakerEnvMap.hlsli": {
+        "bytes": 609,
+        "sha256": "0a4917c81184bf9e2c95dfb7d19978d671929e5c987358b8eaed966489fa7a62"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/NEE-AT/NEEATConfig.h": {
+        "bytes": 8713,
+        "sha256": "16045f51b8a7769754be1bcfd9b5b642b5419699b6a2db0a6e25a3c58f3f4fe1"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/NEE-AT/NEEATShared.hlsli": {
+        "bytes": 14948,
+        "sha256": "912fe8e8313edd4506ba6a9dfb7f3f95402a1a8be25bf6d0e59d2c5d82797154"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/ShaderDebug/ShaderDebug.hlsl": {
+        "bytes": 38443,
+        "sha256": "a224c64ade1f1866de16cf83524290d669b53f2ffa2060df02789e5b7a4354a4"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/SHaRC/SharcConstants.h": {
+        "bytes": 2009,
+        "sha256": "5f92701f3829d17a7aae5060b36b59a45c24e5569c56af8830c7e184ca2f1ed0"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/SHaRC/SharcResolve.hlsl": {
+        "bytes": 1448,
+        "sha256": "48f1d7737022e35d39eb75096809f629f85a64ed722ae24e4d8dc270580dd489"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/BxDF.hlsli": {
+        "bytes": 43680,
+        "sha256": "dff1ee0c4786ad13c474ca177e341eeaf172168c095118f324728f767cb2135d"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/BxDFConfig.hlsli": {
+        "bytes": 1373,
+        "sha256": "032b33e86ed05e3f018fd2d6a3218aa6d97fd8e9618211c6b4e317d4ba81e214"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/Fresnel.hlsli": {
+        "bytes": 5565,
+        "sha256": "3641d731b596e6d00485d940a653daeeb863b2f27b7563bd3b3ab5893437e06c"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/IBSDF.hlsli": {
+        "bytes": 10415,
+        "sha256": "737c066ee895553fc9992f4c24b6d0560967326e747499bc3b1a0069d5eb4c77"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/InteriorList.hlsli": {
+        "bytes": 8576,
+        "sha256": "23ef4c28c9f024ba13cb7e2a2097242dcdc77408bda14932fefb0ca24051b807"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/LobeType.hlsli": {
+        "bytes": 1384,
+        "sha256": "a8343ddc437a46466caad722c64826de62063adcb8ec307e065dbfbc34c10b36"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/Microfacet.hlsli": {
+        "bytes": 15898,
+        "sha256": "8e7280fce281576e666bf66a4510171a615e0d954511d437b6eb68d8bb2c0fe6"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/StandardBSDF.hlsli": {
+        "bytes": 10349,
+        "sha256": "fbffc8fea0c19aef66ab2592214638b986bb65a003631ed83686e0aeaf8a48c3"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/EnvMap.hlsli": {
+        "bytes": 10256,
+        "sha256": "37bc9781aa7549c717b2050ba589a50059a1ef6cd5ed2faa0ea47cfd3080f816"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/LightingAlgorithms.hlsli": {
+        "bytes": 25578,
+        "sha256": "0daeb1616e0818fb3389c3f9dc1b0945e954f99b1509ca0a6eb2508a51c02591"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/LightingTypes.hlsli": {
+        "bytes": 643,
+        "sha256": "d5f2a7950989ff23ff457d016fd231e1581a401458f0e54d164062f4dad35167"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/LightSampler.hlsli": {
+        "bytes": 29859,
+        "sha256": "0700a2bb3383992ef24d93fb2a5ebb75cd43401c5e5c8ba6379343835c3e1936"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/LightShaping.hlsli": {
+        "bytes": 7665,
+        "sha256": "c5e9fb217620534d7ce6a13524f2a4953d572b706ea3ec159f2b5d321c46c6bf"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/PolymorphicLight.h": {
+        "bytes": 6645,
+        "sha256": "520d3cd1b2a4d5d5c6a3b40822f7b8bb317c6b2ee7886a0a209218b6b556339c"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/PolymorphicLight.hlsli": {
+        "bytes": 40481,
+        "sha256": "bc0caa26353ad39c5cadb47aae23debb910e915fe557533f719e23c9ae8c37fc"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/PolymorphicLightPTConfig.h": {
+        "bytes": 1245,
+        "sha256": "da7e9b85fc79e9d9e7b65385682db62da86088a3b92f6e2d8517b47bb9c689f6"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Materials/MaterialPT.h": {
+        "bytes": 3381,
+        "sha256": "78dd86b0306a77c0b169a19070878b336e10d79c8784fef58e28097fd937c8cd"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Materials/MaterialTypes.hlsli": {
+        "bytes": 2028,
+        "sha256": "ebacd7da1d4fe1f00317e00b88205de4d49953120888c58a82d0d9fdcb36c1ea"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Surface/ShadingData.hlsli": {
+        "bytes": 12106,
+        "sha256": "f07e609f3ab35179c5a33aed4df0f9f42686d459f7dc16b6fff2c40d76a36a0d"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Surface/ShadingFlags.hlsli": {
+        "bytes": 4355,
+        "sha256": "ff0fc4b1edf6ce6b964959d29360c02ac7f9f910d60696b064df0b95879cb3e8"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Surface/Surface.hlsli": {
+        "bytes": 1775,
+        "sha256": "1ec2f416fd1af11763e33602aa26a507ae45aed143b74c9deeb220ffc654c28d"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/ColorHelpers.hlsli": {
+        "bytes": 9414,
+        "sha256": "8451526865540aceeb0f3c2cdd30fe938a0baff903b980909b8aba513da3f9d4"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Geometry.hlsli": {
+        "bytes": 4717,
+        "sha256": "fbec10dd42eef29b2d979f3d4ead9322434219176e47c1f698333cd94b04686e"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/HomogeneousVolumeData.hlsli": {
+        "bytes": 897,
+        "sha256": "9d6b23c7057a572d9a4d8cc4133356727ef3bbafa70fafbeb31177499da707fa"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/HomogeneousVolumeSampler.hlsli": {
+        "bytes": 5397,
+        "sha256": "c5ae10cb4be2e53b7613d4ece4f22914294c4a682e550c3b739ff4a9e23bcc4c"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/NoiseAndSequences.hlsli": {
+        "bytes": 24301,
+        "sha256": "cfaade0f491c0e7e12ae8b289b908be72a99286fc55bdf7f594d26690387f115"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Packing.hlsli": {
+        "bytes": 10356,
+        "sha256": "de7af161e546333b809e688a724bc642a2be3087787829b81ce03c6c5a9ec7f8"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/SampleGenerators.hlsli": {
+        "bytes": 6824,
+        "sha256": "ff688b1f3866a82ad67a47cc294dfc79925fc9ae75caac44b1dd3dbfeb8115c4"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/StatelessSampleGenerators.hlsli": {
+        "bytes": 14133,
+        "sha256": "bcdac1016de50cbae69a9a2ca8a6d6e2d29ef2d462b387ce4a011f681c4e2552"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/TexLODHelpers.hlsli": {
+        "bytes": 23650,
+        "sha256": "cbbe8b7b13210c7aee4fba939471661400cbc2756924cc1dacec68ad12d36700"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/TextureSampler.hlsli": {
+        "bytes": 9615,
+        "sha256": "6b1c4b4020de734a8c8b7592daf1e91b51f94190bb4a5aa6eeb18c60bfaa7b4e"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Utils.hlsli": {
+        "bytes": 21669,
+        "sha256": "ee4c6fe8830c1e8f2f37a8d7a6cbdea0f0bc7fbb05d41d2ff2a59ca2e1acda5e"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/BitTricks.hlsli": {
+        "bytes": 5406,
+        "sha256": "59aab844b46642edaad5df5f20b5ac2e3416148cbf10dc534b3c921698145d9d"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/FormatConversion.hlsli": {
+        "bytes": 12014,
+        "sha256": "d653fe589479011677793d916cf1a01237b844c701c53dd14a56b0a47aeaba9a"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/HashUtils.hlsli": {
+        "bytes": 1727,
+        "sha256": "0079275c60db10d328bbb7f67b3059937d9ccf5387340206ec95298f1c9e728d"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/MathConstants.hlsli": {
+        "bytes": 6180,
+        "sha256": "e7c5630a5145be39f309cf4d56ad93465c7a725d218d2fda5f1ef9fad77ff5d6"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/MathHelpers.hlsli": {
+        "bytes": 21908,
+        "sha256": "92de9deeb018e51f8db3fd2ba70640f90c739aeb0d8c9a67b241a5d7302868db"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/PackedFormats.hlsli": {
+        "bytes": 5837,
+        "sha256": "6dbb0acf8213d8a32b8111be089788d476f08602cda35ec897c6835b15805ea0"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/Quaternion.hlsli": {
+        "bytes": 2530,
+        "sha256": "491c115f314b57062e4937b8f597c0f350ba0150b9d40fbbbf0f31bc57d8917e"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/Ray.hlsli": {
+        "bytes": 1791,
+        "sha256": "edbe23e433604f99ca9189fda31361e67c8ac5371c080f2eb9e1c241f95a9702"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Sampling/Sampling.hlsli": {
+        "bytes": 2177,
+        "sha256": "87f868dab19000289e0ec8a31faa34f32ed92ecdaa9d8983e1bcd947a2d8a844"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Sampling/Pseudorandom/LCG.hlsli": {
+        "bytes": 1452,
+        "sha256": "331fe8e40dfb8dcd5fb493d70154006ef688d17d6aa8a5e90b09aeb8d626c22e"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Sampling/Pseudorandom/SplitMix64.hlsli": {
+        "bytes": 2018,
+        "sha256": "0fddd73fd716a22f706b6bef6fea6ded3077ecfe317ce06220d587ead63fb2cd"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Sampling/Pseudorandom/Xorshift32.hlsli": {
+        "bytes": 1227,
+        "sha256": "cbe0a0e123cbf2503bd1032299b0c82fc95cb2367d1f002e4bc6039acb83ab39"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Sampling/Pseudorandom/Xoshiro.hlsli": {
+        "bytes": 2960,
+        "sha256": "3db19d36a10fa394ab3418a97d89c3b07c5cee7312ab658ceb9aa953666987c9"
+      },
+      "ShaderDynamic/Tools/d3d12/x64/dxc.exe": {
+        "bytes": 1359640,
+        "sha256": "aa7965b3763d9c710baaa5a28cedcc633449962a75d1391d161a85304a41b3e2"
+      },
+      "ShaderDynamic/Tools/d3d12/x64/dxcompiler.dll": {
+        "bytes": 22274872,
+        "sha256": "0689e2fee0a1c9df8662a59680469f24e2a3ad7ce6bbbcc9284f7a83172bfc59"
+      },
+      "ShaderDynamic/Tools/d3d12/x64/dxil.dll": {
+        "bytes": 1995584,
+        "sha256": "64be2368211d257a038a7d4ea6bb3e24c878eb8d588c7b8414fccf759b69c2ac"
+      },
+      "ShaderDynamic/Tools/d3d12/x64/dxv.exe": {
+        "bytes": 448816,
+        "sha256": "74528e8e86cdafcb9ecaa26f21a9ad9de9102b0d84213b67435de798b5a807f9"
+      },
+      "ShaderDynamic/Tools/vk/x64/dxc.exe": {
+        "bytes": 1359640,
+        "sha256": "aa7965b3763d9c710baaa5a28cedcc633449962a75d1391d161a85304a41b3e2"
+      },
+      "ShaderDynamic/Tools/vk/x64/dxcompiler.dll": {
+        "bytes": 22274872,
+        "sha256": "0689e2fee0a1c9df8662a59680469f24e2a3ad7ce6bbbcc9284f7a83172bfc59"
+      },
+      "ShaderDynamic/Tools/vk/x64/dxil.dll": {
+        "bytes": 1995584,
+        "sha256": "64be2368211d257a038a7d4ea6bb3e24c878eb8d588c7b8414fccf759b69c2ac"
+      },
+      "ShaderDynamic/Tools/vk/x64/dxv.exe": {
+        "bytes": 448816,
+        "sha256": "74528e8e86cdafcb9ecaa26f21a9ad9de9102b0d84213b67435de798b5a807f9"
+      },
+      "ShaderPrecompiled/framework/dxil/.ShaderMake.DXIL.789C025168BAD230.signature": {
+        "bytes": 1310,
+        "sha256": "dd5f104335fcdab2aede26a625e1e719931c2f8e42a8678a54f4e0c0edea3608"
+      },
+      "ShaderPrecompiled/framework/dxil/blit_ps.bin": {
+        "bytes": 17754,
+        "sha256": "f08021bc3f4ac54a69af65d0fad8cc03fab60a25a801f5f79629e8a65c252d85"
+      },
+      "ShaderPrecompiled/framework/dxil/fullscreen_vs.bin": {
+        "bytes": 15352,
+        "sha256": "20915cab88cf73e7fc6176e2fbf4982cf834a181fa6213a16bcc7607e379fee6"
+      },
+      "ShaderPrecompiled/framework/dxil/ies_profile_cs.bin": {
+        "bytes": 19444,
+        "sha256": "edef5de4bbe6cdfa0d1bfac0344d015fcdefdab2078d57e470b6f2605ecb35cb"
+      },
+      "ShaderPrecompiled/framework/dxil/imgui_pixel.bin": {
+        "bytes": 9548,
+        "sha256": "0c5413d345f076e049bc8043145bb745b7be9ae1ce2ba35c065d809f619b6d10"
+      },
+      "ShaderPrecompiled/framework/dxil/imgui_vertex.bin": {
+        "bytes": 14452,
+        "sha256": "f2c1ff1ffc43dfb708c94814adec740dc2ed2c9bc35ceaf7b3977137d7029a1e"
+      },
+      "ShaderPrecompiled/framework/dxil/rect_vs.bin": {
+        "bytes": 15344,
+        "sha256": "99b7dfcefd69c71cc666e19fc7e9cf3bf364411a9ee857f557702f8ef1e30d64"
+      },
+      "ShaderPrecompiled/framework/dxil/sharpen_ps.bin": {
+        "bytes": 30990,
+        "sha256": "438d77201624cad06d7b73795ffd52149fb2cbe6fb116f709cf7e25db07b237c"
+      },
+      "ShaderPrecompiled/framework/dxil/skinning_cs.bin": {
+        "bytes": 61700,
+        "sha256": "46c216f0846a544239ecca739882dbf6f9027ba8e95339130d2e56d1fa710b4d"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/bloom_ps.bin": {
+        "bytes": 15120,
+        "sha256": "6d608f241a181660107cea511e192c2166b63e3f8d85223254e0e7ab715e34a9"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/cubemap_gs.bin": {
+        "bytes": 18960,
+        "sha256": "002054e1fe6dfe28b0f882c686a7d3e7d92bd31bf423304e3713a762169157f8"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/deferred_lighting_cs.bin": {
+        "bytes": 137612,
+        "sha256": "e9dbb5824edd521e33a0d86b0b85ab244413aeab36a7635a041efef58a15d2fd"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/depth_ps.bin": {
+        "bytes": 59808,
+        "sha256": "926ffd0cbb61d63d0dc0bbb2adfe5d3d12152f52a2fbb0b0f348178d43a7d91b"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/depth_vs_buffer_loads.bin": {
+        "bytes": 35780,
+        "sha256": "126c9277e9e02adb24b3cde7c0bb07f611bff504978844f644037cfd6d7e393f"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/depth_vs_input_assembler.bin": {
+        "bytes": 33524,
+        "sha256": "465b2fd3d4fa62deef9aaf8daf0a78fa9e5ba1af378bf2848f0a10ae05ccf2df"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/dlss_exposure_cs.bin": {
+        "bytes": 12856,
+        "sha256": "42d3de1d604b866ec6dfbdc8185ff03e80ccc998bfba7e395877b0777c50efa3"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/environment_map_ps.bin": {
+        "bytes": 32306,
+        "sha256": "2be1920cf642852cb98d1ba2c0fe95ceaa727051422d132af0e4ce3c6cee09e5"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/exposure_cs.bin": {
+        "bytes": 33462,
+        "sha256": "7d1bb4a93149fe8a3b663eec685be33f9ad269fd90d63a1a2c99054c425c09da"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/forward_ps.bin": {
+        "bytes": 362358,
+        "sha256": "5ff59683363aaa7bdfbebe6af4d78e908d94543b270bc5b8b0d318496c15fde1"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/forward_vs_buffer_loads.bin": {
+        "bytes": 59788,
+        "sha256": "1efe124a8dd7e3d36112059d12452a5022c23d91b67afc5190b78d787501392c"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/forward_vs_input_assembler.bin": {
+        "bytes": 57344,
+        "sha256": "c3d9b09161dd3257553cbe3cb7079ac5fa77eec80801a29e231779fc95840d34"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/gbuffer_ps.bin": {
+        "bytes": 385864,
+        "sha256": "1e5eecd7a4b671d72f0552a09da97a8f8371b12e4bc60ac3ab6cde84398bfa53"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/gbuffer_vs_buffer_loads.bin": {
+        "bytes": 112672,
+        "sha256": "2d189726a54ab7f1908e319c5e1c1b880f71769bf41c775d512ad8327550dd3b"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/gbuffer_vs_input_assembler.bin": {
+        "bytes": 110484,
+        "sha256": "4b3d9099be9d66c27b7fffaec8501a17fe8c6c51feb2120542b9575c5e620ae3"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/histogram_cs.bin": {
+        "bytes": 35798,
+        "sha256": "f9303a621d10c52cb28607ce268e7f9fbb1c62f00957b4daf2816f4fa0fee631"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/joints_main_ps.bin": {
+        "bytes": 22012,
+        "sha256": "736da806bb642daaef03e0db34fea4ced1a66ba70ec442e44e917ddbb36109f5"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/joints_main_vs.bin": {
+        "bytes": 26832,
+        "sha256": "e7b9242028cc0900925fb1278b6413a91d0f86d595b941f9caf489c2509ec659"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/light_probe_cubemap_gs.bin": {
+        "bytes": 33440,
+        "sha256": "a91d96057368a4fafb76b3c04d3b4b3f80e8829196996f59613d5fd9dbe9016a"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/light_probe_diffuse_probe_ps.bin": {
+        "bytes": 40144,
+        "sha256": "e44029caf1090a3a223cbb116cb7a841835b8f1c4c6d825b0d7d8065f4392105"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/light_probe_environment_brdf_ps.bin": {
+        "bytes": 35944,
+        "sha256": "87a1f33ac1ca110170ca27d468ca35584d70d9164a270bda82d8d8c4cd3288ff"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/light_probe_mip_ps.bin": {
+        "bytes": 34164,
+        "sha256": "7540b1ba1b9194e4ae75c634f5b03bbd36fa36f7f13ed9e612b292bfe13dcad8"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/light_probe_specular_probe_ps.bin": {
+        "bytes": 41648,
+        "sha256": "3e913d0fdad957efc3f788161c0b819692dae09853ef132644f95398e0231a91"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/manipulator_gs_main.bin": {
+        "bytes": 371550,
+        "sha256": "3868a3583098ac0f341915f1d3afacf11e4a9dc72e47b045739eeb9abc6066a2"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/manipulator_ps_main.bin": {
+        "bytes": 447692,
+        "sha256": "6b3a80ea249c26f3f0962103050f57163966723aea3bfce487d0ad26b0309e6f"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/manipulator_scan_cs.bin": {
+        "bytes": 16140,
+        "sha256": "77fed9d52257b8473f3fd41b6a2ac6afae141bc0f7e86b154c573f08f0ef46f7"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/manipulator_vs_main.bin": {
+        "bytes": 33792,
+        "sha256": "0b7f627edf684a248324ca011b087c555f3a496eaf728ba3f8a3d9a921a3e094"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/material_id_ps.bin": {
+        "bytes": 149752,
+        "sha256": "c9ee900c627291e7897836541aa9eb1fb04016653d359d9d71214915b6902d74"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/mipmapgen_cs.bin": {
+        "bytes": 95912,
+        "sha256": "c328d47d1b9c45b2721e50113e9783c9ec8bc99fcd2390c26c9be77edf85eed8"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/motion_vectors_ps.bin": {
+        "bytes": 34074,
+        "sha256": "f814ae651b0f188c97f2277f06173991b5c9cad6216bddbc4e517dcd25a6e6ff"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/pixel_readback_cs.bin": {
+        "bytes": 62626,
+        "sha256": "b916a70356d5757c6520bfd5c6619333a30e3d56b17119243bf36315a49b9aa8"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/sky_ps.bin": {
+        "bytes": 20596,
+        "sha256": "0521b3e35a17f8d6646c9a51251596d451e1b80251826433417ae74e17496e63"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/ssao_blur_cs.bin": {
+        "bytes": 75654,
+        "sha256": "27d132d0e3486b53305955313fdbe7bb2a9d89ccabd0ce6a6b50a8971379555f"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/ssao_compute_cs.bin": {
+        "bytes": 355136,
+        "sha256": "20c246da367f92d543ee3546e81f1766f3af48c4e41042e759ca23f3b51e08d7"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/ssao_deinterleave_cs.bin": {
+        "bytes": 59680,
+        "sha256": "48d2504e36c29ec7a2b9145d7149c89cca6f232847801a1dd3df45998d6e32fc"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/taa_cs.bin": {
+        "bytes": 624876,
+        "sha256": "2aa667317ed17151c03743fe1567ebed1e88082b134f338145af2311aae8103b"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/tonemapping_ps.bin": {
+        "bytes": 41274,
+        "sha256": "a646f69f0f1b58b00b13aa39e5ef57ef4c62072e20f70a796a026158d7a99f63"
+      },
+      "ShaderPrecompiled/nrd/dxil/.ShaderMake.DXIL.B097A575FBF76BE8.signature": {
+        "bytes": 1498,
+        "sha256": "4dcd5833dc8122551c79d59ea30e0c5cdc1147f982869e64d8c495522aafcc8d"
+      },
+      "ShaderPrecompiled/nrd/dxil/Clear.cs.bin": {
+        "bytes": 428730,
+        "sha256": "79cc87f932cbddab993b86ce2cb21785ccdd9849c564df1b235e25a9e02b1245"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_Blur.cs.bin": {
+        "bytes": 3854513,
+        "sha256": "6d48bdb4a6f9f646fc123fcb63b70429936c8f27f35a2543d74b418ad0aa731a"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_ClassifyTiles.cs.bin": {
+        "bytes": 246444,
+        "sha256": "ebbd760786dec80940149040a44036485736b742dbef273a5165e9789631904d"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_HistoryFix.cs.bin": {
+        "bytes": 4977869,
+        "sha256": "903ec4ccc982c3ba35031735818a4e60fb8f41addd5dc86aaf319e63444fb5e8"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_HitDistReconstruction.cs.bin": {
+        "bytes": 4130874,
+        "sha256": "3e66195eb71ffd308bd57b66bfceb1b6fa0f72c0e11cb54addd8743078e62cbd"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_PostBlur.cs.bin": {
+        "bytes": 6651381,
+        "sha256": "1d7f930696d0eb30e716494f885e6b4a74e58242a3833277b23581b2f2b0aadc"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_PrePass.cs.bin": {
+        "bytes": 2805155,
+        "sha256": "a10a581e2c9239950f258a686195707a843e378034bd4c9a0bbb14703fa8eda2"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_SplitScreen.cs.bin": {
+        "bytes": 1562356,
+        "sha256": "de610bc230c1e67e13f439af409c567f932385f8120f7045b965037be9daa46f"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_TemporalAccumulation.cs.bin": {
+        "bytes": 4603497,
+        "sha256": "cb0329ccbf5024c51a4c31c4bf272e7607c928cc347b80ea802687b6e173add7"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_TemporalStabilization.cs.bin": {
+        "bytes": 2283811,
+        "sha256": "0691b39b65d5798f53439721605061082c57334820809a495943666dc9171496"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_Validation.cs.bin": {
+        "bytes": 446804,
+        "sha256": "9555fbba4a410c20db92c107b8f81242932fce4535644d58dfc1428e2f1dc084"
+      },
+      "ShaderPrecompiled/nrd/dxil/REFERENCE_Copy.cs.bin": {
+        "bytes": 216948,
+        "sha256": "926c1a55bd0a9cfe1956fe7eb0ccdbc63471153e74eb482d8e6163a3047d87d3"
+      },
+      "ShaderPrecompiled/nrd/dxil/REFERENCE_TemporalAccumulation.cs.bin": {
+        "bytes": 217540,
+        "sha256": "2398aedae61b0d6801853a4f1c28b536fec70bdd5ad273d705d1a2c5688a9879"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_AntiFirefly.cs.bin": {
+        "bytes": 1710240,
+        "sha256": "b0814b6f89b528328880a296e775b8b2b0621a915915f38b3346fb62721d6382"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_Atrous.cs.bin": {
+        "bytes": 2113724,
+        "sha256": "6a201f548b00c600b379ca836ecf1b66f28cf6f0c2b87b50a0d4487ef2873687"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_AtrousSmem.cs.bin": {
+        "bytes": 2713012,
+        "sha256": "6ecf47676b4367baf7b1e1df894d5b4ea1890a04ee25d64d6ac9885a928be347"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_ClassifyTiles.cs.bin": {
+        "bytes": 239452,
+        "sha256": "ec16aa5f7c0ad707f246092ca737dfcb3cf4c477918424d7c86ab1045a7bc48e"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_Copy.cs.bin": {
+        "bytes": 1458892,
+        "sha256": "26676a9c708a84816cbec28315d699212e62102d87361815b4878220f5268f32"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_HistoryClamping.cs.bin": {
+        "bytes": 2257756,
+        "sha256": "aba5d373cdf45c5e997a7d28ea841591620e0f91e6c317f60ec235e536ec8eab"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_HistoryFix.cs.bin": {
+        "bytes": 2555628,
+        "sha256": "22b8974ddc31983e32d70c48230254cd1305aa47b3cfb254a6f8357b005afb2b"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_HitDistReconstruction.cs.bin": {
+        "bytes": 1869340,
+        "sha256": "9c61c1a6d5ff35004b531020f5b7f80bcd260075188bb1c1c5ef08b437dd6c74"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_PrePass.cs.bin": {
+        "bytes": 2302388,
+        "sha256": "f937c53474952542c10b20410552bcb9db60f1bd234543cb65a16b4155d84ea9"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_SplitScreen.cs.bin": {
+        "bytes": 1494688,
+        "sha256": "4b8729843d7c9ead4ff923a7e5416d41f8e3d3abe55fa7aad2285c283184fa19"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_TemporalAccumulation.cs.bin": {
+        "bytes": 2587668,
+        "sha256": "f2d351bdbe33ff93b81ed8003072f690e864ed90e0e5d91b8f5c62822d6ecea7"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_Validation.cs.bin": {
+        "bytes": 359524,
+        "sha256": "b46fdb5a793581a9015b49c37b64fe1eca799d3d830d1bae7d20fc67fb30dfb1"
+      },
+      "ShaderPrecompiled/nrd/dxil/SIGMA_Blur.cs.bin": {
+        "bytes": 1514380,
+        "sha256": "890499c68e61320e68847e00b48b96f1c2962c76f709c604988b6f35aff6df49"
+      },
+      "ShaderPrecompiled/nrd/dxil/SIGMA_ClassifyTiles.cs.bin": {
+        "bytes": 496604,
+        "sha256": "38a8c3c09f4968a221274b62c70cb72c2b00d2609d0b7312482406b5d2f4ab34"
+      },
+      "ShaderPrecompiled/nrd/dxil/SIGMA_Copy.cs.bin": {
+        "bytes": 227732,
+        "sha256": "98b806d7e6c1cd4688bd96a87686e804d996730e2e487b7450fb4415eae03b4d"
+      },
+      "ShaderPrecompiled/nrd/dxil/SIGMA_SmoothTiles.cs.bin": {
+        "bytes": 235692,
+        "sha256": "34e184026e1385052e0797ead1adbddc4425e5eba7a6207a5e2569495e26cb75"
+      },
+      "ShaderPrecompiled/nrd/dxil/SIGMA_SplitScreen.cs.bin": {
+        "bytes": 461936,
+        "sha256": "e7aa6c9096c5b13c99b97181c46ee0b91f32c20dd3b88054bccd5451e5002bb7"
+      },
+      "ShaderPrecompiled/nrd/dxil/SIGMA_TemporalStabilization.cs.bin": {
+        "bytes": 621048,
+        "sha256": "34b59296573173c53fffc84e0279db3c4e8259f6b0a8b7a7317d8b56d632a40a"
+      },
+      "ShaderPrecompiled/omm/dxil/.ShaderMake.DXIL.4FC62840A7663CEB.signature": {
+        "bytes": 1267,
+        "sha256": "6c9e6083fb4862c579513831d7780b8bd49c1a5320e0d5a2ad2ffc47b5f9ee2e"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_clear_buffer.cs.bin": {
+        "bytes": 3326,
+        "sha256": "b25c505f74683aa85c296d150eb8ec3660e25ca872c09f99e98df5264f99a6a4"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_compress.cs.bin": {
+        "bytes": 7686,
+        "sha256": "00e5ba66b203138667b4af3a46f96e994718c8eb9d0abf9f742fd0b29cc2581b"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_desc_patch.cs.bin": {
+        "bytes": 6762,
+        "sha256": "ea68a5fc2a1044943e5698d734e8b037ac7baf9bcbf77a274931d08e9a56bee1"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_index_write.cs.bin": {
+        "bytes": 6046,
+        "sha256": "ed80baf90fccbbb6c550e0176ed8eecb62f606479c9751134715cb5b9478a11c"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_init_buffers_cs.cs.bin": {
+        "bytes": 5694,
+        "sha256": "4967c84cdea7e5fc30d1972e175ad535c789bcfa0f672407ecc4e4be2cf3714a"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_init_buffers_gfx.cs.bin": {
+        "bytes": 6014,
+        "sha256": "029e95d2f55902aa0aa0af66c555cb7a0da442af5b73fa372f652e1641dfc2d1"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_post_build_info.cs.bin": {
+        "bytes": 5722,
+        "sha256": "570ac3d2d6c0e84a03e09e3c880973b25ecaf9e20811d80a2808c49ba14671d6"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize.gs.bin": {
+        "bytes": 8522,
+        "sha256": "74e31680a2eb910f77788a2ad65dadc55dd4dc3318f2f8e644d803aa2a81b8f3"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize.vs.bin": {
+        "bytes": 9266,
+        "sha256": "cd5aa5788937991206bd4721d910d521a2f51bdcc10b3cffe7d6b4409e212eb2"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_cs_a.cs.bin": {
+        "bytes": 14254,
+        "sha256": "4300b0f61194a62d30b54b9367a7304c9428a7fedbaef9ce0f7cb7e4e8ffa800"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_cs_b.cs.bin": {
+        "bytes": 14254,
+        "sha256": "025882c7932637e97a4995702ab63c133845aef558ed6214a6f422bb21c0d1e4"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_cs_g.cs.bin": {
+        "bytes": 14254,
+        "sha256": "5f0607304c6d1cb5ce6fa88c94ab332a501242993a84c8e4414028c55d44073c"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_cs_r.cs.bin": {
+        "bytes": 14254,
+        "sha256": "ea5d20d937f92f8a5d8109edf653c7eb64b186ba3688996f7483d898ecc4e306"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_debug.ps.bin": {
+        "bytes": 8050,
+        "sha256": "f82d11036bbfc0d31bd8b4100b0b0c54111e1f30794648df0c99c92997db2784"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_debug.vs.bin": {
+        "bytes": 8034,
+        "sha256": "060f40db591194e1f4a4c3fdf1b2213bb2008b9a486121078e2b620b5408c45e"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_ps_a.ps.bin": {
+        "bytes": 11762,
+        "sha256": "3edcd1739d8bbb81398d1aec2b4876385e6fb72ee2805a3eaf59f000f4a546a2"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_ps_b.ps.bin": {
+        "bytes": 11762,
+        "sha256": "31ef4cd61d9e884f4ea8698276767d3f4054d64cce58a3c64841fe98174cbc2f"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_ps_g.ps.bin": {
+        "bytes": 11762,
+        "sha256": "9f3e3794a2e2922c150e72116114961eb1e670ece2ad160aa00f1c21c5bd3784"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_ps_r.ps.bin": {
+        "bytes": 11762,
+        "sha256": "54c6459cbf5de14e3b947cb09212f2d8ce34a1d11cff68b8b7725f8b2b90056f"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_render_target_clear.ps.bin": {
+        "bytes": 2578,
+        "sha256": "f26c3760bf71ab256ead8d19dc2dcbbf16df42534bd7b247e54728a6eb0883cd"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_work_setup_bake_only_cs.cs.bin": {
+        "bytes": 6714,
+        "sha256": "2a92dd0af7ab4542c1d0b98c653b4ae852888792d71c31d0973323fa7c67af72"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_work_setup_bake_only_gfx.cs.bin": {
+        "bytes": 6914,
+        "sha256": "968bea26f488f82f4f2892404db1e83148dac71ff5b8d6b97fc1ccdfabd2e21b"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_work_setup_cs.cs.bin": {
+        "bytes": 8546,
+        "sha256": "06d2787246ac9b2c60ffa099df6282efba3f6e67cb81a1ab9071e6881ce5c187"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_work_setup_gfx.cs.bin": {
+        "bytes": 8746,
+        "sha256": "ecb29b0bb5b212ca8a7352f5c6a33d56971d0543f0505066ef7d9f04fdc5c2eb"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/.ShaderMake.DXIL.1A498E82AE6C0159.signature": {
+        "bytes": 1562,
+        "sha256": "b5753820caaa193de557d7defc9af1affe07b0d4a38fc2b60b0a3ba9a1aec8d8"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_Count.bin": {
+        "bytes": 130540,
+        "sha256": "c6e97082b4d99d326c029a1cb5ef909ab7843ca8dc0019feeed174b65f111358"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_CountIIFP.bin": {
+        "bytes": 130287,
+        "sha256": "de6e64d504a308f642244d3ede71920de16fe7fb27259cbb7166d7592d6f58ec"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_CountReduce.bin": {
+        "bytes": 126732,
+        "sha256": "b5fd3488371b5cbb3aea1e0d214d6d865dff7c793f4dae9e0f8fdd01e693c006"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_ScanAdd.bin": {
+        "bytes": 130604,
+        "sha256": "bdeaeab3cd388cd54a71e8fc24c175c665f47e6d2cd8ac231de370a899a8b5e9"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_ScanPrefix.bin": {
+        "bytes": 129860,
+        "sha256": "484d766b2c58f092cb7332f0f1db9a75e6b9023249d96a90b0dc1cea1e557743"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_Scatter.bin": {
+        "bytes": 133328,
+        "sha256": "8426327c158fe819de10f54edf6673d337d6b51d413cc6b28cb5121d8283cdf9"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_ScatterIIFP.bin": {
+        "bytes": 133071,
+        "sha256": "48716ad884aaf19dcc59e545504d9bd0bce8dcba9beabf8816a877052c0fe74f"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_SetupIndirect.bin": {
+        "bytes": 124264,
+        "sha256": "fd949edaaf050cea9ae44f67a75b34779d4da813eea1be450ca9f526fb3085da"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_Validate.bin": {
+        "bytes": 119156,
+        "sha256": "1c94e6635e4d7330da352765083c7d48cee4613a621b7036a87c154f8864b027"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Misc/DebugLines_main_ps.bin": {
+        "bytes": 391020,
+        "sha256": "ca1c3aca2dcbc1a73ad82acabe7e91cc9da18a0bfe9f302e4f1babe39c7454ac"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Misc/DebugLines_main_vs.bin": {
+        "bytes": 399000,
+        "sha256": "fecfee52f3b847671d7f3d900602cb07ccbec675fc8c9dc0fe80cb91be091982"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Misc/ZoomTool.bin": {
+        "bytes": 22348,
+        "sha256": "4d8021aceb004d6ce2c9dbd7e9a0a8f0404f1d33bed11ce885f1a7281ba2029f"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/AccumulationPass.bin": {
+        "bytes": 17940,
+        "sha256": "4d3fc4b439634a0939284f9ce9857e2812073d8873f5ba9357b867bd8b966e5c"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/DenoisingGuidesBaker_ComputeAvgLayerRadiance.bin": {
+        "bytes": 692964,
+        "sha256": "1bc021da711c2f70282baa05a9ae662f16f41aa0c417a64028094cbbf9dea34b"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/DenoisingGuidesBaker_DebugViz.bin": {
+        "bytes": 693256,
+        "sha256": "c78f90c0c726c57ad640d231e787db6a36f5926b8714d1041aff6003cd6f25bb"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/DenoisingGuidesBaker_DenoiseSpecHitT.bin": {
+        "bytes": 705072,
+        "sha256": "97773d90ae75f67b7642584511f79e4763238b5295a0b30287981ffe551992eb"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/DenoisingGuidesBaker_PrepareDLSSRRGuides.bin": {
+        "bytes": 752936,
+        "sha256": "f927ceea9834d48c0f2f7676ad1a02d43f397d7e709137594eb0a97ec0f5005a"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/ExportVisibilityBuffer.bin": {
+        "bytes": 681852,
+        "sha256": "111f5bf8dd7b98aa6c15a24992606b4c80b365f733d4a38cb2b78b01b947c64c"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/PostProcess.bin": {
+        "bytes": 4108893,
+        "sha256": "944e141b1e16b2cc36c093952bae18fbcc29086766fdcb8a282e4dbe0c7cd1ac"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/SubSamplingCompaction.bin": {
+        "bytes": 437980,
+        "sha256": "c78f31d8d27baad8f5fcec66051924b359bff972cd9a5dd78ebcb62d02e1311c"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/DIFinalShading.bin": {
+        "bytes": 2119356,
+        "sha256": "672eb2650a3a5b0922ba6ceb535eeffa6ad423c0f9fd0f0587c8c4f72a704358"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/FusedDIGIFinalShading.bin": {
+        "bytes": 2364260,
+        "sha256": "8f6b08462411e97f0e24138a1d6ba7bcbcd0b8f530df1ae285bb2e6f8ad51a4e"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/GenerateInitialSamples.bin": {
+        "bytes": 18788776,
+        "sha256": "53d41f938ebe77571bfddbd0763b91eaba0a0022a12d7f59b8de4bed4f58174b"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/GIFinalShading.bin": {
+        "bytes": 2016984,
+        "sha256": "20597133e38b6a143e8b22d0b5a4ca18f2a8d75c5cd0dc195d49079e1256674d"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/GISpatialResampling.bin": {
+        "bytes": 2220204,
+        "sha256": "a8622cb7b59e2b7ec5c3924d4a9d06883af65b3ff044871e438d1e79c446d52c"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/GITemporalResampling.bin": {
+        "bytes": 2232692,
+        "sha256": "2b112d6969c05f273e52ef4557606bdc16908a12bd4c85d9318ce8539b9efa23"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/PrepareLights.bin": {
+        "bytes": 571952,
+        "sha256": "3d4cc15d1166d9447812cf237fa3af7b7333025db59843803c83657c4cdc1da1"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/PreprocessEnvironmentMap.bin": {
+        "bytes": 421618,
+        "sha256": "5ff2a58d7f2201b8cd943df85db8d5c397423deb6bd5d9b23de26163b462c592"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/PresampleEnvironmentMap.bin": {
+        "bytes": 860344,
+        "sha256": "4680b2604be45cde83793aa9dc752d77ce593f82b671a6693cc5fb24d5a0bec6"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/PresampleLights.bin": {
+        "bytes": 862360,
+        "sha256": "2e025d5959472321bb0baa60c6e969f467f7a23f9b719a36557b43313a50d1af"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/PresampleReGIR.bin": {
+        "bytes": 1840643,
+        "sha256": "18480b001c5d698fe5962f4ff4ebc7a6d97a729b8415580fbae0e511ba634052"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/SpatialResampling.bin": {
+        "bytes": 6095796,
+        "sha256": "b02d48510e8f69d5e136e8e18b68c3c18126fee6a9eaaa4c09b9c408edb9c780"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/TemporalResampling.bin": {
+        "bytes": 4931228,
+        "sha256": "95d590470a8c2b01dc5706c1562b372690bc17153dd08fff8b9f479359b94150"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/TLASCull.bin": {
+        "bytes": 45108,
+        "sha256": "d8848d7457317c5f77cb0224b7017e0af3fd56e2df2ac06679cdd5c05c58dcce"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ToneMapper/luminance_ps.bin": {
+        "bytes": 9944,
+        "sha256": "55c7d2ed71571e28bd1c2c83f28670109c6494f37684c20ea993102e232c36fe"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ToneMapper/ToneMapping_capture_cs.bin": {
+        "bytes": 16680,
+        "sha256": "bd26513265b20800d94fd798a78ff64069f6b7191d95abc39b693304adae3ceb"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ToneMapper/ToneMapping_main_ps.bin": {
+        "bytes": 26704,
+        "sha256": "2a224aca1e2af8d0a71e7f712c8c417252bee52ddf5e4a5c77dd5003589fcd99"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Lighting/Distant/BC6UCompress_CSMain.bin": {
+        "bytes": 172926,
+        "sha256": "a1518f83b101822bcf655e50753cd706acbddc21178ad635e7e0603f459214ce"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Lighting/Distant/BRDFLUTGenerator.bin": {
+        "bytes": 100464,
+        "sha256": "4591b0cea29df5509879083c6d95cb4d553eedd29d9e37f620742d8463eac87e"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Lighting/Distant/EnvMapBaker_BaseLayerCS.bin": {
+        "bytes": 515840,
+        "sha256": "5a760cb6c5762f541bd9270a9030e279e3ef977bbe89c9d0364de69b6905ba41"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Lighting/Distant/EnvMapBaker_LowResPrePassLayerCS.bin": {
+        "bytes": 242080,
+        "sha256": "97ab2999e7ca7227c45262aef29061eaf46c3db27488710ff9cc58f1c70b8f3f"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Lighting/Distant/EnvMapBaker_MIPReduceCS.bin": {
+        "bytes": 221240,
+        "sha256": "f17dce78459a2e14a767372054a429735ccf277dcd10844c93e664545b77e39e"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Lighting/Distant/EnvMapImportanceSamplingBaker_BuildMIPDescentImportanceMapCS.bin": {
+        "bytes": 195648,
+        "sha256": "17f6719afdc15b7585c855b7aaf8747576f78e79ade464a2e3146d6d99786855"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/AOSpatialPass.bin": {
+        "bytes": 249908,
+        "sha256": "b0b5ddbdd60c9f0d9b49d38df460739b576c66a9c761268bc9ca15e34299d36e"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/AOTemporalUpscale.bin": {
+        "bytes": 252948,
+        "sha256": "884c21e507079c4e94be6b47bbacc6f0c845b06cde58d17232fd9da8b1e02b0a"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/DeferredLightingCombine.bin": {
+        "bytes": 1416136,
+        "sha256": "a487833e9da536ac267e57e57c26dea195de6bb84d785b85ef8a30bf36838a7e"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/DirectLightingPass.bin": {
+        "bytes": 657864,
+        "sha256": "cdc859c3a5f0f10a9d71e3f26b233b401882d62afe12939470ceac67f8da9191"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/GTAOPass.bin": {
+        "bytes": 641740,
+        "sha256": "b8787c2cd39083ace64e5e9cacb06895b9ebc19f5237bafb64d2ea17802d1c2f"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/IntroPrepareLights.bin": {
+        "bytes": 271176,
+        "sha256": "c954a88614fc50a2484a1035db7ff76b429e0d80656f1e9cf029d12df1c14e47"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/IntroReSTIRDI_Final.bin": {
+        "bytes": 860264,
+        "sha256": "ac6002dc74df4e90a9bf6760bbf40b34d5ccc6e7775d014e2fcfdadc264440a3"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/IntroReSTIRDI_Initial.bin": {
+        "bytes": 1024688,
+        "sha256": "aa7a8d6f8ede89ad7ad9026bb6c67513884b4c3dc998a567acd5c2fa5eeb5780"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/IntroReSTIRDI_Spatial.bin": {
+        "bytes": 1122684,
+        "sha256": "33482b6d9f08510fce43389013aace3d7c7ad29e1933e23fdf3f7113ef1d3ff1"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/IntroReSTIRDI_Temporal.bin": {
+        "bytes": 907440,
+        "sha256": "8aabb966cd70d431124c25eac1dcba96b607e33ede9788d6752c65e8812bf211"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/RTXDIStreamingRISLightingPass.bin": {
+        "bytes": 864568,
+        "sha256": "18ddf60d955dc26e069948e788f125ad0824dbe4e379c6d49177fcea974a5e01"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/SHaRCDebugCache.bin": {
+        "bytes": 643696,
+        "sha256": "5965060de3330798becef0c9f9c06f12430f73c5f76033c2bcccbf1638632f7f"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/SSRPasses_DepthHierarchyCS.bin": {
+        "bytes": 591032,
+        "sha256": "e4713c0a95ecacb748666d86eada743c119514f70a70829f7ddd52798c85ccfe"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/SSRPasses_SSRBlurCS.bin": {
+        "bytes": 576280,
+        "sha256": "168ffaabae4ca8f5d115f31e9a75042c51ce399bc7b53d28a1f759e5dbcf9e70"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/SSRPasses_SSRCS.bin": {
+        "bytes": 605112,
+        "sha256": "0d8a8355a2b56d20b5196b978eefd14056ec0eaf2ddfdd285afcbb435afaa63e"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/Libraries/LightsBaker/CubemapProcessing_ConvolveIrradianceCS.bin": {
+        "bytes": 190060,
+        "sha256": "73087984e46e7731f95b4734b0c3c2966dd1198c30b9954b5efabb5dc45d44de"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/Libraries/LightsBaker/CubemapProcessing_GGXPrefilterCS.bin": {
+        "bytes": 187896,
+        "sha256": "8f63c2eda85bfe7082d0b43730b93b9ab0edf3979fe77302253911d2c3e70361"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/Libraries/ShaderDebug/ShaderDebug.bin": {
+        "bytes": 180152,
+        "sha256": "7c2670b620715b49e721dc857fb6da4af1fcf3058ec1cabf7bea4faa6d59ee5a"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/Libraries/ShaderDebug/ShaderDebug_main_cs.bin": {
+        "bytes": 81694,
+        "sha256": "34bbcbe59f82bbc23fb01a73f1c4608d91fb71e27f395efa85e9724246899d60"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/Libraries/ShaderDebug/ShaderDebug_main_ps.bin": {
+        "bytes": 174512,
+        "sha256": "eb54be6af06687ff4fbbd7b624e5e40afb034506941352801b0bd9b53494fbe0"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/Libraries/ShaderDebug/ShaderDebug_main_vs.bin": {
+        "bytes": 173564,
+        "sha256": "73a2ba2510fe7d6cb955716893078314f9d469be0b2f3821b57b260a503e4cd3"
+      }
+    },
+    "artifact_note": "Post-capture on-disk snapshot, including shader files/cache observed at delivery. Dynamically cached shaders may be generated on demand; root/runtime pins identify source. Binaries are not redistributed."
+  },
+  "B1": {
+    "root_source": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
+    "root_gitlinks": [
+      "160000 commit a56be4ed65029d2733fd02f00f4027ffd541eda8\tAssets",
+      "160000 commit e50042f4bbd762971cc90431261e967404855b81\tExternal/Donut",
+      "160000 commit 70d337db9186e968eab622f7e786de7e437faf3d\tExternal/NVAPI",
+      "160000 commit 792eff196afdd350fd9c3f862119017ccb438a0e\tExternal/Nrd",
+      "160000 commit 0c11a42d954e9af7035751ce1f7970f5888b0650\tExternal/Omm",
+      "160000 commit a6efab966b7c3b272da0461578eb56ac61c7cbff\tExternal/RTXDI-SDK",
+      "160000 commit f12037fa8e97ebc08e9e3edfd2de528ed1772a4b\tExternal/Rtxdi",
+      "160000 commit 2fe3b7c1b1c4aef09219766d8f908d009c5a6df4\tExternal/Rtxtf",
+      "160000 commit 4e21b585c33c83d723ca9a1e11bbb1090d145793\tExternal/SHARC",
+      "160000 commit 573ec27d7224a8a0866c1889737d355b8e4155d7\tExternal/cxxopts"
+    ],
+    "built_artifacts": {
+      "NRD.dll": {
+        "bytes": 589824,
+        "sha256": "ecd875b1a791bfa907c9a94ec6a3a93ccbf7b44717ab14df834354b190bfea65"
+      },
+      "NvLowLatencyVk.dll": {
+        "bytes": 57840,
+        "sha256": "2a77dc3e1c724b7eea5755be0ae7423752e79a2459fae72181a9f00e3507e5d6"
+      },
+      "nvngx_dlss.dll": {
+        "bytes": 58956912,
+        "sha256": "d00b5b0ab29c3ca101b70c3a5ecb3a01b7ef33766a3383a28a18623083e6123e"
+      },
+      "nvngx_dlssd.dll": {
+        "bytes": 48343664,
+        "sha256": "b49435ae346f227feafe7bbe937d88277ea0ee7323975ec06488f377fdb46cee"
+      },
+      "nvngx_dlssg.dll": {
+        "bytes": 7506544,
+        "sha256": "8d59d49b36410dd6b62fef2503a5871d347415bd85d943fa0848563a95dd50c7"
+      },
+      "omm-lib.dll": {
+        "bytes": 2932224,
+        "sha256": "f91e5684a43b1ec4646c28bd93f1769fb26be6f2f12a160ccddae1988280af8b"
+      },
+      "Rtxpt.exe": {
+        "bytes": 8058880,
+        "sha256": "bd1efc2b6e2002c90ada10ad96be4187a80f37e0b3c54f9020ac7123fbc6940e"
+      },
+      "ShaderMake.exe": {
+        "bytes": 1411584,
+        "sha256": "854f36347833447f2a1d33fc6f628e455d8227daf4184c02e5afce301ae4bf58"
+      },
+      "sl.common.dll": {
+        "bytes": 843904,
+        "sha256": "38eea3b4209afc455636ea372b5933d65fcc13becec6c84d101dcfc4d8648f75"
+      },
+      "sl.common.json": {
+        "bytes": 366,
+        "sha256": "e5c400efbf8dfa2a529261623e70192aa2244cb3a81ff90fcc72741d2aab347d"
+      },
+      "sl.dlss.dll": {
+        "bytes": 422016,
+        "sha256": "18871eea87c90345da97d8109faa81ea7d5840e8d99b51b55b0e46cfa177f84e"
+      },
+      "sl.dlss_d.dll": {
+        "bytes": 437376,
+        "sha256": "8dff36fd063094eb1f659e8d4dcd52c7423859a9c4a3df3796084c48412d60ac"
+      },
+      "sl.dlss_g.dll": {
+        "bytes": 637056,
+        "sha256": "3ed9538df724993bea8a050195a6a78b9c8c8a566d5b05ade477aab3c390e90f"
+      },
+      "sl.imgui.json": {
+        "bytes": 82,
+        "sha256": "b9a81fb413bc003e47d4ebd60d71833330c6f0776fe94c32470fece9ede5188a"
+      },
+      "sl.interposer.dll": {
+        "bytes": 652928,
+        "sha256": "b1d7395aebd7b9722841d64dcf7433680020b6a8e421f851c16d5ba0c2182edf"
+      },
+      "sl.interposer.json": {
+        "bytes": 520,
+        "sha256": "1219bbc175a6deb172cc76bf4b9e140328d6309d6ec7bc5fd4b61ab484c1f204"
+      },
+      "sl.pcl.dll": {
+        "bytes": 360064,
+        "sha256": "5698c38e722318681f215c9fe68e45b9bedd51378acc699d8eee26e961e57770"
+      },
+      "sl.reflex.dll": {
+        "bytes": 388736,
+        "sha256": "443577e869352436ff7ec8f4d9c90418d3e95368436ce219261e0f4f07a38122"
+      },
+      "sl.reflex.json": {
+        "bytes": 60,
+        "sha256": "2b10d6ebae267b8f6366803ba76939bbb56a4a1a6a0bba41bc62080f3cfb0ed6"
+      },
+      "D3D12/D3D12Core.dll": {
+        "bytes": 5035320,
+        "sha256": "37fa14281a58cc834076971873006feb8a8d25cddc908d1a345bda1b149ffc7d"
+      },
+      "D3D12/d3d12SDKLayers.dll": {
+        "bytes": 4965680,
+        "sha256": "7ab48d56d1c18708ebcf16c7c9259b2d783e2b935b85add4a244573b9f03cab4"
+      },
+      "Release/NRD.exp": {
+        "bytes": 1828,
+        "sha256": "6e3f33b3731efc795b6b9210927460850a605e79820cf393333ffbc1e38e6363"
+      },
+      "Release/NRD.lib": {
+        "bytes": 3344,
+        "sha256": "39c33f61b91bcb10a0f00113ba9b3d535eca99b087b5e495f92c7a8db57e0b20"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_BakeEmissiveTriangles_bcba73b6f5eee6d9534ae0e1.bin": {
+        "bytes": 509736,
+        "sha256": "fa229d6603d8229bcd99476f82f78bd03b7d8b3d225f2eebf2dc713918db1dc0"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ClearFeedbackHistory_49a40b67462fe522912bc32b.bin": {
+        "bytes": 492636,
+        "sha256": "8299e730238fdd8ee04bcf500e84cc44fc44f8ec64874d9fdc7d9a5bfa90e98d"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ComputeProxyBaselineOffsets_c1316a6eef196f46395350fc.bin": {
+        "bytes": 477976,
+        "sha256": "722748f1413795c5d5087f5d2c2123dfc39cc07cf543672c4d77ea1017e6bc38"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ComputeProxyCounts_5a204ef50b0929e974f41361.bin": {
+        "bytes": 486724,
+        "sha256": "bb9d51ee97018b4bce32fce5945351e7dd91459a13b037f42edbb1494e248aa0"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ComputeWeights_dde055c3874c3043ce9059b7.bin": {
+        "bytes": 507028,
+        "sha256": "2898f24cb05ab41644489266bf0451a089faec2a23010432c52e5069651175dd"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_CreateProxyJobs_6e5ec6679cff15f18f15d2d7.bin": {
+        "bytes": 478092,
+        "sha256": "1d1f2dbeeb8be3c42931f6e6cda1db3224225e908afb0b4c8f6aeb43072606d0"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_DebugDrawLights_c83d4dce8750d30a493a4bac.bin": {
+        "bytes": 588208,
+        "sha256": "f31df629c0bfcbd0e6521416567897a46ac93497901c5875581f64ee1124680b"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_EnvLightsBackupPast_3da910bbdad9256218f5b96f.bin": {
+        "bytes": 482164,
+        "sha256": "99142912116e48f148ca3dc2bedfda05e17e9d723e6c64f966452b52f8ee853c"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_EnvLightsFillLookupMap_d2b3ec7d2978a6b2a0ac28d2.bin": {
+        "bytes": 482708,
+        "sha256": "98ef0b90b4ca6202d78aac4b2f6d15a970fc8f2f04b285b83a5976e0d1d63218"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_EnvLightsMapPastToCurrent_ab9e7b2ef65f2cc4ac7bd545.bin": {
+        "bytes": 477100,
+        "sha256": "c9c1816ca2f71be911ca4152f6b96c4f4a2424975b712a4fc73c39a8405aa556"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_EnvLightsSubdivideBase_b1786066517eb3798ea9be39.bin": {
+        "bytes": 484568,
+        "sha256": "1b2c129aefbbf8bdd65e04d778b6ace8288eb3a8f8c3aac4c5f420ba334930bd"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_EnvLightsSubdivideBoost_582d82b4acfb0a2d84706f93.bin": {
+        "bytes": 503336,
+        "sha256": "097be96ffd4c07797096cb166a68aeb383679ff1cc613db9a559c0bbcf91fa4b"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ExecuteProxyJobs_9a8d4be653dba1ee00190072.bin": {
+        "bytes": 476600,
+        "sha256": "c353de228c88efec7ee560bdbaab8eb554238a5ca43588d5293a8492556ce4ee"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_PatchSubInstanceLightData_701bc857037da2b675395a1d.bin": {
+        "bytes": 472264,
+        "sha256": "7a89959a2fdf67bdef42a74b70daa79d353c47e9e39e3ac25594f8f68cd66c6c"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessClusters_c9569b49202802ca106bd35c.bin": {
+        "bytes": 497892,
+        "sha256": "2c522c46568cf7e80b753fb30f68f3ee2190c97df7ac50ff53124675540d8502"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryDebugViz_d839c58529023b987ec5b992.bin": {
+        "bytes": 630504,
+        "sha256": "1c74c386cb0a081d2476d24244425845efda7fe5c2ca30b96e537094b30d793e"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryP0_a0d05a6d0133516e4fd01769.bin": {
+        "bytes": 500696,
+        "sha256": "e76659788e2af705f6c1ffe1d12d2de1b9f20fac93f9595923f6eeaba400f094"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryP1a_f321fae63513bf31a4727848.bin": {
+        "bytes": 499576,
+        "sha256": "493734da73f963b1bb0381ba89cd2d747fa961cfdb6a2d66f950618bd77922c5"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryP1b_6b5c4462d5ea2a543bf91d0b.bin": {
+        "bytes": 514660,
+        "sha256": "5a107cc9cccf43802661fc2225bab2295fa1659ce8af30815d1cd36932598979"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryP2_72225e850e9f38caabc0e00f.bin": {
+        "bytes": 487764,
+        "sha256": "992de73021231e8d461b4057e02b65066bbace3a73d680707d588e4fa258c001"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryP3_f45fbf495a07e114db80a930.bin": {
+        "bytes": 490020,
+        "sha256": "3e475ef00979e1ccc8a74927821b8d637fa8c07f4b06e5165252b5872e3b11c5"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryPreFilterA_2157eb50d9a8058d4d6f4789.bin": {
+        "bytes": 494452,
+        "sha256": "eb0affaca130a14aab582b8e63ae0ca6357739dab7ab0379ea0865d1393462b7"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ProcessFeedbackHistoryPreFilterB_1bf8e78cb635fe3e20e89e80.bin": {
+        "bytes": 494368,
+        "sha256": "ab0b5e1359a8f3b6382095617cd61ed07caa77c788d7b51977176468e2d232f0"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ResetLightProxyCounters_5b407c3e38648c2a4a12cf76.bin": {
+        "bytes": 475264,
+        "sha256": "ad56274a954a76c6a329a42ddf91704c0c3bbc65d8c2a5ac128b9a85bf1246ed"
+      },
+      "ShaderDynamic/Bin/dxil/LightsBaker_ResetPastToCurrentHistory_93985f853d2926c236b6902c.bin": {
+        "bytes": 476720,
+        "sha256": "49a2fd4b5dab3e9c16050b4a252575e66ad13ec3883e422fdb825d76a4648e74"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_108a9796eed636ccbb286ad8.bin": {
+        "bytes": 1353936,
+        "sha256": "1c4e3db869a314f06ae1f9f37e5e4af7d88bb79a90f2cecb153fb5b242866953"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_1a8099e4843dee86a35a6780.bin": {
+        "bytes": 1489688,
+        "sha256": "667b73e6c77a523dc95d53667da2712a4904ab6b14ba5b1256223abc911d8a39"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_1bc38248e8899d95dfe10355.bin": {
+        "bytes": 1354216,
+        "sha256": "b412ee0ec6465ab33ed718d20c2116fd64c2faf497acdf68357c1ba578295b03"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_31d60161fa00c74dc025f1bb.bin": {
+        "bytes": 1553344,
+        "sha256": "31adfa5a14804140a9b2d2191b9111bc8988fec16740c628e2fd749fafb3df3e"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_62567bb9bb0a1f45fa597027.bin": {
+        "bytes": 1489820,
+        "sha256": "cd589a5ef9c3d3c7fb11ea380ca4fca7fc9ba38d399064969d65961ca2a17a58"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_652f96dd5780f5635b594aad.bin": {
+        "bytes": 1553468,
+        "sha256": "ffc92a8021861433241b444990f53405ae96d6cc2334b94fd189541871d94f46"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_78bcb49abc3afd9de53c8b8b.bin": {
+        "bytes": 1489728,
+        "sha256": "7a4b7d14c6058a665ca46e67adbda820e9589c97e823603b0fd6333e17f5fdc6"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_7a3b7f0bffdb4f7f3b51272a.bin": {
+        "bytes": 1489696,
+        "sha256": "9b89c993d551a10030830e7716e91d219e6f9f358107f035e01f18b241c95de8"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_894038639e0655c4ae4d398e.bin": {
+        "bytes": 1625324,
+        "sha256": "4e3fa021d8e316a7b1e8cfa5d8a94a52b2ca18238f0aa8d5cf6d0fc24a44ecce"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_b8b676040a72bb9965a491a2.bin": {
+        "bytes": 1625608,
+        "sha256": "7d5f630242b93615224763110b581153d02b54d935288acbadf33d781f3f7bd6"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_db6955df55451d92f04b3087.bin": {
+        "bytes": 1489960,
+        "sha256": "a4d01ad4890c4db1d7c52463d08e6e3344df3b719cc5814038a87bf45e815610"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_e276199adb30aec649812a40.bin": {
+        "bytes": 1625456,
+        "sha256": "cc51b4f6dbb152ce845ab116ab50b05b6b566bcbc7c3c72bbd4f4e5cb96040a7"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_f2a2628ea8c70df74d76b5cc.bin": {
+        "bytes": 1354072,
+        "sha256": "7cc61fc27c8090550991295ca3f2f352da3ea24254f93edfdfc7abcb8263d439"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerMaterialSpecializations_fb2733b9906491476c0b59a2.bin": {
+        "bytes": 1553624,
+        "sha256": "4e9f08a573133fdc740e6bbfc1af2d7d1d90d8e5cdd1cc70b60c031fa872d82a"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerSample_46ddac67daa203465e90ba86.bin": {
+        "bytes": 892444,
+        "sha256": "27a6953d9fa366aa08fac78fe2eff377e2ef7e8748a76a94da312f1638bbd0c9"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerSample_48be936ade367fe2fc27faf0.bin": {
+        "bytes": 936044,
+        "sha256": "2f8576771964f35915a018fe4cb4bcf025bb484173b4ddcd0446845e476f89fa"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerSample_6ae178f66d354a70f96f517b.bin": {
+        "bytes": 929172,
+        "sha256": "4e1a6137a04290731cfb5143b2ddf2e5e8c218457999edc80063452a801e3a5f"
+      },
+      "ShaderDynamic/Bin/dxil/PathTracerSample_bc5b10d10e059617a4252ff4.bin": {
+        "bytes": 980620,
+        "sha256": "f7bdbd8aa4fa736b548d29440acaa82932014fd91337679f80087c016e925237"
+      },
+      "ShaderDynamic/Bin/dxil/SharcResolve_main_977d3cda3966137e471e0ec6.bin": {
+        "bytes": 555452,
+        "sha256": "cd25a5bdf70233030ef9adbffbe1ea2f0d17c1baac27614f6a2dab5a86be4630"
+      },
+      "ShaderDynamic/Bin/dxil/TestRaygenPP_6966a748b60c5c9cdb13411c.bin": {
+        "bytes": 462872,
+        "sha256": "8188e213c8d5fba7f6706da7221743f9f4739eff5ce0b3e01f22553fdf34d11c"
+      },
+      "ShaderDynamic/Bin/dxil/TestRaygenPP_da80addf692c6cc9c998efb8.bin": {
+        "bytes": 468900,
+        "sha256": "fc3e5a797c11ec2be7b475b5b57eb016f44956b1aa1523f212dced2b0f180c93"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindless.hlsli": {
+        "bytes": 24537,
+        "sha256": "c34d01f87c07ef1d74d6984a112076ed4cde55f2b9a79b0cdd2d07689327c760"
+      },
+      "ShaderDynamic/Source/Rtxpt/DonutBridgeCommon.hlsli": {
+        "bytes": 8046,
+        "sha256": "1bac0967b60316fd981857daf2986a91d97f092dcc4206689accc56550979969"
+      },
+      "ShaderDynamic/Source/Rtxpt/DonutGeometryHelpers.hlsli": {
+        "bytes": 10105,
+        "sha256": "d8269de4018eacf838a59b95a3f304d5e17dbd94d0d0cac806445331f20634ad"
+      },
+      "ShaderDynamic/Source/Rtxpt/GPUTLASCullData.h": {
+        "bytes": 5087,
+        "sha256": "5350309edcc0dddc30b3bfff76a478802c01044e92f581b4e75d88a1968a949b"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracerBridge.hlsli": {
+        "bytes": 5280,
+        "sha256": "0410ae3f7afe92a04fa415c37feb34b304bd4e6253ade27b16adece07e283819"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracerBridgeDonut.hlsli": {
+        "bytes": 13879,
+        "sha256": "980a645c4e453c711fba0582726662807d8d981f00b546be0507941556b187cd"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracerMaterialSpecializations.hlsl": {
+        "bytes": 1762,
+        "sha256": "3b5e64165692a14b3fb278c9094284b94cf67928d6637b94c662034ee4b12124"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracerSample.hlsl": {
+        "bytes": 15874,
+        "sha256": "d8ba1481b26721724560d01afd7983403540caaca214fa4a1995cad8caadcad8"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracerSurfaceBridge.hlsli": {
+        "bytes": 1207,
+        "sha256": "fc2ae5ab9899572b1f392a8fb4d1f9936592dfd4eec019af1a9bed9de96e6945"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracerSurfaceBridgeDonut.hlsli": {
+        "bytes": 29938,
+        "sha256": "6938fbf066d34a9b8cf2bbee83e7c1faa0063ce13f68b09793297da2f6c93639"
+      },
+      "ShaderDynamic/Source/Rtxpt/SampleConstantBuffer.h": {
+        "bytes": 5047,
+        "sha256": "b10b9c395e37fcb45fe0b1874faa6a9f3bc761a199db5cf2372963ffd0a3bb97"
+      },
+      "ShaderDynamic/Source/Rtxpt/SERUtils.hlsli": {
+        "bytes": 3717,
+        "sha256": "240f7f8246ad5a8fe6cf1318debd75cabb2c4bbf24c8179a7a89577c578a6504"
+      },
+      "ShaderDynamic/Source/Rtxpt/SubInstanceData.h": {
+        "bytes": 3738,
+        "sha256": "29d0d801743257155034e8e0631d2496bd175b6cf7a51265832b656f750081e3"
+      },
+      "ShaderDynamic/Source/Rtxpt/TestRaygenPP.hlsl": {
+        "bytes": 2398,
+        "sha256": "074a84095dca3027df38b627901199f294478d612da95dfa3fc33adc4bf03502"
+      },
+      "ShaderDynamic/Source/Rtxpt/TLASCull.hlsl": {
+        "bytes": 5438,
+        "sha256": "13b7f46b89ca77937ce029d3c20a3d61ea952c399f4dded4d8798c5a4c8feb3f"
+      },
+      "ShaderDynamic/Source/External/NVAPI/nvHLSLExtns.h": {
+        "bytes": 101159,
+        "sha256": "8e641a2691a3f9b4e69b001f5eb247bf3c14cc7ae1bbe2613c1b98d14ab939d8"
+      },
+      "ShaderDynamic/Source/External/NVAPI/nvHLSLExtnsInternal.h": {
+        "bytes": 37016,
+        "sha256": "04f85078c708dea4c76c74309eda6e95d23abbcdf22f230c66119bd8225511d2"
+      },
+      "ShaderDynamic/Source/External/NVAPI/nvShaderExtnEnums.h": {
+        "bytes": 11176,
+        "sha256": "bc1747726d1d15121dbe1fe7653394eb10930f88a66031fd13aca1e45aaa75aa"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/binding_helpers.hlsli": {
+        "bytes": 3814,
+        "sha256": "90e57d553434b61fae56e08da0cb2fae0090a44f2a94033090d185715095f988"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/bindless.h": {
+        "bytes": 6810,
+        "sha256": "9ed9646bb550c1fc76e1083931395287aef30ee9df5ae1807b9ffbb6482f1ffb"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/blit_cb.h": {
+        "bytes": 1385,
+        "sha256": "551282c7ad6f518c100698737ee54eaef66b9a04198520179f7a4a92382a08e5"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/bloom_cb.h": {
+        "bytes": 1373,
+        "sha256": "84d3c48b9d5286c0b938ce1b765433ff1b2bf1e6819c7cbe509b62783dab5b5e"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/brdf.hlsli": {
+        "bytes": 8308,
+        "sha256": "f4df58de45fe0ecbd00d71f2782aa3462803a40b8dec0947e3ac3ae930d4cb15"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/deferred_lighting_cb.h": {
+        "bytes": 2066,
+        "sha256": "6971468054d463abf0ac8ad703ae161eb63ecf03ee7a16b48bd2a777fe5e0573"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/depth_cb.h": {
+        "bytes": 1909,
+        "sha256": "9e31e3edd6cb02e149b9de93f002f6ee843969db6ffa814376ad10f03c7e14d2"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/forward_cb.h": {
+        "bytes": 3316,
+        "sha256": "27ba39b2bc93e85dd28d517b939696ab8207fd1173bf21f5d26f4e0f38687f5d"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/forward_vertex.hlsli": {
+        "bytes": 1418,
+        "sha256": "1b6b52dd2c039df2684570393188af09a3a5d757777b7536a599f0beb95840a5"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/gbuffer.hlsli": {
+        "bytes": 3251,
+        "sha256": "67a96bfe48e0fd6fe48c4608cf6cb797367be9d4abffc0e9c508995f44c4380b"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/gbuffer_cb.h": {
+        "bytes": 2366,
+        "sha256": "d2d5022f8fd2b6d46db1980c44669b03dc8fadb51cac56d778321e3d370159fa"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/hash_based_rng.hlsli": {
+        "bytes": 4888,
+        "sha256": "382faeb2a6fd2764301d37e1c981f38ae26d3f70d5c3ee99d46abac113bb2e4d"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/lighting.hlsli": {
+        "bytes": 6363,
+        "sha256": "0a1533b6c6c3053ffa10d61b7e34df2241e06d30dcd875dc9af86434acdc5c0b"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/light_cb.h": {
+        "bytes": 2314,
+        "sha256": "65534f834f724df274c07b88772a4cc0e7aeff4ca175cffcf429061514f476db"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/light_probe_cb.h": {
+        "bytes": 1373,
+        "sha256": "9b97c711fb6d5abac6118fb14d73f824278f5af20a14b145848a1d46a7b6a975"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/light_types.h": {
+        "bytes": 1568,
+        "sha256": "3d1d4aee286f851b276bf2fb341a6fc6e61be7bdd80d13fc5db18f3d85cf6b5f"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/manipulator_cb.h": {
+        "bytes": 1966,
+        "sha256": "81cd9593b5909fa5bf290c99461616109e04b8c57bb54fd78ee5dfd5763b2e72"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/material_bindings.hlsli": {
+        "bytes": 7437,
+        "sha256": "c936d83c8cb88509ff4c8d4fd94e93203b18da605af69cafd74a837fc893d245"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/material_cb.h": {
+        "bytes": 3802,
+        "sha256": "008aeae4b6f6835595a863cb16f917b720e64ad478c0e365e31879a4d7908741"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/mipmapgen_cb.h": {
+        "bytes": 1685,
+        "sha256": "c2e71b6bf86c1a829f397f7a7359aac378837b2f5b365a3db747404b812838e2"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/motion_vectors.hlsli": {
+        "bytes": 1794,
+        "sha256": "aae71c99e59e42ec25de333e5db5e6c2dec2e12484ea58323edca1fce04bdb6c"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/packing.hlsli": {
+        "bytes": 6465,
+        "sha256": "07d3c38bb9cc1edaf71ff6f0e8421a0cd46b4a13c1f120571ee59cdfb2e98b68"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/pixel_readback_cb.h": {
+        "bytes": 1332,
+        "sha256": "637e1490a1b4dd0e7e3e31d2e274b501333faa60e90f4095dd6f8e96f8553edf"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/scene_material.hlsli": {
+        "bytes": 11073,
+        "sha256": "4869b4e84f8a1bf678dfe95485257642c989b225bbb2130992ac9e28a8dd25bc"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/shadows.hlsli": {
+        "bytes": 7855,
+        "sha256": "224d8f263cd1460fb5bf30b5401a1de00f7c3685f8b5acdd74ffbdb01e9c86ae"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/skinning_cb.h": {
+        "bytes": 1930,
+        "sha256": "335463036ffe676b8b33478202a6e361995eef54e472fee101228e6b12ed5a1a"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/sky.hlsli": {
+        "bytes": 2429,
+        "sha256": "0630ecd321bd70eb973b76803a3ee6f9efff45976364254c1a697a46386a3b7a"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/sky_cb.h": {
+        "bytes": 1680,
+        "sha256": "52b8d41ee3a4335909a03150f8b023981ec70e2884c59ebcbd0b9bed6edb4f0d"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/ssao_cb.h": {
+        "bytes": 1628,
+        "sha256": "f2111d3c0634c5427c89724251963459f235b64b2a829a6f3e25812be52942f3"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/surface.hlsli": {
+        "bytes": 3286,
+        "sha256": "c80efd1a4ea3e5199eba691f3b23b648077f815c61a070b7b84b55ea4ee03077"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/taa_cb.h": {
+        "bytes": 1740,
+        "sha256": "249dceb1fd71a03d1e4796e71e09086f5c414ff37d72d90b9fc4836e51c902e1"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/tonemapping_cb.h": {
+        "bytes": 1742,
+        "sha256": "e58e063576178fd48741670aa20ed142b5550bf410843572bb29029720a5d82b"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/utils.hlsli": {
+        "bytes": 7034,
+        "sha256": "00ae446aedf30570a817c04b6d03a66515b40dbf061f8f955087c9a7de4890fd"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/view_cb.h": {
+        "bytes": 1935,
+        "sha256": "2ca9d1fbe91530ae5ba12babd7ccecc3bb32e6f34277cd7190172522c59845e3"
+      },
+      "ShaderDynamic/Source/External/donut/shaders/vulkan.hlsli": {
+        "bytes": 1426,
+        "sha256": "dc7c3cbfe7551eb7b9b6afb2e37a5bddffd6af0a2aed8db08bde23febfb2de67"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/ImportanceSamplingContext.h": {
+        "bytes": 3498,
+        "sha256": "dde0c9d9892f3e13dc7dcd4e1b9e04bb464135e077ffef26171302acaf6ac2ae"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/RtxdiParameters.h": {
+        "bytes": 5019,
+        "sha256": "eff40446099cabde4896488b4765552ea070d82e6aba68c09793fa575fa36ee8"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/RtxdiTypes.h": {
+        "bytes": 1786,
+        "sha256": "78ad0d8f75acc58ee289e635b926be991bbde1d04fb242118deefbdd0f6f5be5"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/RtxdiUtils.h": {
+        "bytes": 1406,
+        "sha256": "25d8dc0dd1cb7fb79c9a154a4d313f925791bf723ef61fb7a1bdc3f0ae51ff5b"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/BoilingFilter.hlsli": {
+        "bytes": 1508,
+        "sha256": "227a71d6aeff042f50b1ab5365fc5bd70546cafd3e19e885e5b69b358c70e709"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/InitialSampling.hlsli": {
+        "bytes": 24785,
+        "sha256": "b6a505886c893224f1ec598199e8b9701bf720f567caed8418f3988b42ae58ed"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/PairwiseStreaming.hlsli": {
+        "bytes": 5174,
+        "sha256": "7ceaabe2e84bde53383c746e5b4e3485b7b36cad09738ee6662d4257e336b840"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/Reservoir.hlsli": {
+        "bytes": 10014,
+        "sha256": "814a17f8e6961c5d745d51a880e726821eb3f6295c775522b891d58d1908a55f"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/ReservoirStorage.hlsli": {
+        "bytes": 4838,
+        "sha256": "35144255a0e1084e06a898adfae417853b59a86b7b369776817404ad642b1e5f"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/ReSTIRDI.h": {
+        "bytes": 4770,
+        "sha256": "cd84bc7424ba97e7da80eddae4e0617ed42127a9a4b6473a540202d74836de4c"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/ReSTIRDIParameters.h": {
+        "bytes": 8378,
+        "sha256": "96c36815d06f915519c2844005b9a67f4ae8e1597a3107c5c5f1e74a6b6039ce"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/SpatialResampling.hlsli": {
+        "bytes": 13902,
+        "sha256": "0b6f063cbbcc3eacdfb38c25987e6dc9978039830e87630ab4b301277ebfd3a5"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/SpatioTemporalResampling.hlsli": {
+        "bytes": 23040,
+        "sha256": "50a69b8b366466cf77668aa1b61614faccae440ebbbdbbf17747ac4e7f3997c6"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/DI/TemporalResampling.hlsli": {
+        "bytes": 8739,
+        "sha256": "f221b4e0bcbb9250ebf839bbb623edcdd65da86095062e3379bc9b02baafe195"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/BoilingFilter.hlsli": {
+        "bytes": 1259,
+        "sha256": "5c980031ee05895b83d32e74cd1ccfd155c103356407bd560c52365614447486"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/Reservoir.hlsli": {
+        "bytes": 9228,
+        "sha256": "6bb480d8f24946de0bbb5524bbe86aba931bf593b20f1c4c65ee3f39e07cdbb3"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/ReSTIRGI.h": {
+        "bytes": 3641,
+        "sha256": "3b82accf13b4fac6434c3565bddac252a81bc7954626287855b4bb1a9bf86e46"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/ReSTIRGIParameters.h": {
+        "bytes": 7000,
+        "sha256": "05589e489fbf0aaae961cc36c0ae10ff121bff389eadeb403be20c8e82dfdd26"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/SpatialResampling.hlsli": {
+        "bytes": 8906,
+        "sha256": "5c8054abeae7fe68d1e244366f5b04d3a6d463a85b54445cdab2f5c5764382eb"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/SpatioTemporalResampling.hlsli": {
+        "bytes": 13071,
+        "sha256": "c97c37dae503c4617b78177b11125f0fbddbf4b5a312c4de907454098680ed05"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/GI/TemporalResampling.hlsli": {
+        "bytes": 9063,
+        "sha256": "14850cac8cdd7cbfaaf88d6c45b612a554eb6cc03b18c637bfa16f235bb41358"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/LightSampling/LocalLightSelection.hlsli": {
+        "bytes": 3963,
+        "sha256": "d388d2b1889f39200f9ab11eeff2dc7667e975a2e5c3b649f71de81567baf611"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/LightSampling/PresamplingFunctions.hlsli": {
+        "bytes": 8570,
+        "sha256": "15cd40be68b9793917aed401d46207a02376526bc358f79eb4b4f14b93213ea9"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/LightSampling/RISBuffer.hlsli": {
+        "bytes": 1584,
+        "sha256": "9e2c1ddb813203b7dc559fbd1223deedc9d16bf146f750c77074f0e4d2729c9a"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/LightSampling/RISBufferSegmentAllocator.h": {
+        "bytes": 978,
+        "sha256": "86f8a95bc8d0eb7809f62e964b7d9d0be74041061bda9f2f5d30b7c8facab36c"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/LightSampling/RISBufferSegmentParameters.h": {
+        "bytes": 901,
+        "sha256": "73571c665dc331a45020fdb36dd7c9b38c0a2a0297a6b805d96d078473fdaf8b"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/LightSampling/UniformSampling.hlsli": {
+        "bytes": 1081,
+        "sha256": "40ecea3503a1eeeb734db65e09fef1f4dbea7574883f80d6043a59dca3a4b86e"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/BoilingFilter.hlsli": {
+        "bytes": 1265,
+        "sha256": "bdd882f8143d204b65f6387297cea88566fb21c8c16322638d78e01af5dd7828"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/Decorrelation.hlsli": {
+        "bytes": 5837,
+        "sha256": "2939c30dddee4b54c7866823194a7747064fb6c1e23cbf0ce1375519036e9ca0"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/DuplicationMap.hlsli": {
+        "bytes": 7751,
+        "sha256": "d7fca54d5d6ca57b49fc00ccd59ff04e560919395690330e2bb96b17c19271f7"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/HybridShift.hlsli": {
+        "bytes": 19114,
+        "sha256": "5ed4787a38d559cbf7b27222b359d4c6e24ff42c14e703c2e27b53f09949ccdf"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/HybridShiftPathTracerContext.hlsli": {
+        "bytes": 17336,
+        "sha256": "d2ef5969f6b0f55e7225281bb8685403abae23e00f94910c48229d8aa68aa9c0"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/InitialSampling.hlsli": {
+        "bytes": 5081,
+        "sha256": "5650cf7875e1608ace35a4cd67ca6acd5ee174b20267cd34fae71b455257b63f"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/InitialSamplingPathTracerContext.hlsli": {
+        "bytes": 23574,
+        "sha256": "4dfde3c9077e9a78bca562649c6ec32a2f61aecac3b80b77b58e56baf3e41938"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/PathReconnectibility.hlsli": {
+        "bytes": 3303,
+        "sha256": "aff8c0b670344f9e6b3dae36458a216a18dd539613e9c670611a5a3655cfd8a3"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/PathTracerContext.hlsli": {
+        "bytes": 12461,
+        "sha256": "4762da3e2994e85a629cd9c47353a98682c17279fe46c78d6af290a045c62afb"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/PathTracerContextParameters.hlsli": {
+        "bytes": 1122,
+        "sha256": "54f0c55d32935056147ca79e27faac363fce7cb32708f29ce4d0ed3f4bd4350d"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/PathTracerRandomContext.hlsli": {
+        "bytes": 1569,
+        "sha256": "fad3dbfc538027c159b89ab097bbac5bd4e16cc8a1932f65a53f2b83c7b1e1da"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/PathTracerState.hlsli": {
+        "bytes": 4759,
+        "sha256": "60c0442f8a523723fe682866fa5bfda2338687daacd7922102329ea0f73c7fe2"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/Reservoir.hlsli": {
+        "bytes": 14936,
+        "sha256": "c475a4eb0e6ac9b3ccd33e44460b6d85c633468cea390534d7766ef98c1068a4"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/ReSTIRPT.h": {
+        "bytes": 4612,
+        "sha256": "c8431f5198d50f679919380c2c206d492af691fb5ec16d5478422813b1dea031"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/ReSTIRPTParameters.h": {
+        "bytes": 6333,
+        "sha256": "37051bd80f2cb410ef3d24641782140dd963b66ae805bf6eb18eaba50552693d"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/SpatialNeighborSelection.hlsli": {
+        "bytes": 5367,
+        "sha256": "73a839c04458214c3bbbb2eff7dfd22d5fa07fbaee563b3b3d048f24e468673d"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/SpatialResampling.hlsli": {
+        "bytes": 16889,
+        "sha256": "b0b3a54985dc090d722bf253f2125db5cc0fac0eb5a755ff008eecd8214fa1d1"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/PT/TemporalResampling.hlsli": {
+        "bytes": 20789,
+        "sha256": "4f6e66ba0cf5d0e44185e9045c303db763e4b0b9925deecd253cf9de7335f604"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/ReGIR/ReGIR.h": {
+        "bytes": 6624,
+        "sha256": "8b73351c3c0c71883e5bbfbd3a0cfb026ad094b079d78adabdf21b660e915bfc"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/ReGIR/ReGIRParameters.h": {
+        "bytes": 2619,
+        "sha256": "ed4ec974469089e21661117c09c2e7383d4c0ee563c055d16958e4c37127567a"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/ReGIR/ReGIRSampling.hlsli": {
+        "bytes": 9028,
+        "sha256": "a40f21d02df3ae7e546e8e2f1435482fbb0d6cf073a8a08c7d580c2efc6b43a7"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/BoilingFilter.hlsli": {
+        "bytes": 3392,
+        "sha256": "964df8014aa091ec0deac197aa5a601687b05a420743356992ba49d04bea5ba8"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/BrdfRaySample.hlsli": {
+        "bytes": 3263,
+        "sha256": "e78231e25b65fd5a2587ae02468c20cfc81354ae674d5e8bae83682e8008ae93"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/Checkerboard.hlsli": {
+        "bytes": 1682,
+        "sha256": "f26ad86599175d73b9626a48ccd2c561c1b5281636a523e3cf5c73d67227d8c4"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/Color.hlsli": {
+        "bytes": 4529,
+        "sha256": "4ef47f29acaec96b75fe08b310e6b4504f75373cfaa7e4992fab2a7c2bb2db53"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/Math.hlsli": {
+        "bytes": 6041,
+        "sha256": "5eb8ea41cebfacda6f6928b2d7d6fc4b928c1b5accc5d67ac039e178b7565040"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/RandomSamplerPerPassSeeds.hlsli": {
+        "bytes": 1757,
+        "sha256": "b9dcc43d1e578b5276cb71f1b23f58c38cb10690a128f7b49a8d294f39ffd520"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/RandomSamplerState.hlsli": {
+        "bytes": 3165,
+        "sha256": "47f14c16afdab0cf9734cf21c2ef2389532d389d194732aa3bda831dab3d142a"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/ReservoirAddressing.hlsli": {
+        "bytes": 2279,
+        "sha256": "cfe65684fb4fd958534e92a107e9db2cf47aae443395164c1c18d833d768b261"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/SampledLightData.hlsli": {
+        "bytes": 2676,
+        "sha256": "02733a5a4697e319c9be2954bc224f4e8fa0db506d6ef62daf7bcf9a3570984d"
+      },
+      "ShaderDynamic/Source/External/Rtxdi/Include/Rtxdi/Utils/TypePacking.hlsli": {
+        "bytes": 3243,
+        "sha256": "9d15b2aa75f133d33870fa2b2cd25a647e7d632fecf01c065c0da19b09dace8f"
+      },
+      "ShaderDynamic/Source/External/SHARC/include/HashGridCommon.h": {
+        "bytes": 17724,
+        "sha256": "27748b49e79c5a470b21d9d5372ebfa7a4e36f14329d8dab078840cf9d980bd3"
+      },
+      "ShaderDynamic/Source/External/SHARC/include/HashGridTypes.h": {
+        "bytes": 1193,
+        "sha256": "1c684e83ccae138b9b36df95e8ce4a4f3cb84c25c869248a15e4447632412e7f"
+      },
+      "ShaderDynamic/Source/External/SHARC/include/SharcCommon.h": {
+        "bytes": 44596,
+        "sha256": "e94f70b4d1f8d7c2665c440dfc6da2ee0777aa3eaebaf41100f81261a3d18872"
+      },
+      "ShaderDynamic/Source/External/SHARC/include/SharcGlslHelpers.h": {
+        "bytes": 2627,
+        "sha256": "a654eaa96207f87229c8c138ebe4f4e32ce666890e085b3e47af69015c9ccf45"
+      },
+      "ShaderDynamic/Source/External/SHARC/include/SharcTypes.h": {
+        "bytes": 1539,
+        "sha256": "f1f34c291c504dc818833b070c82209d1a76f2c2da7eabb417455d451f5f8d1e"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/BindingDataTypes.hlsli": {
+        "bytes": 1492,
+        "sha256": "4102c6280a65cf63c05f60e0585a534ffefb77875247712c01a863f12bcff8f3"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/GBufferBindings.hlsli": {
+        "bytes": 4432,
+        "sha256": "57c0a0d404d607c843d4b7ef53d98dc050e7b1edc4c7cd7245d68c65a4fecf40"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/LightingBindings.hlsli": {
+        "bytes": 2240,
+        "sha256": "f9d433e699a918e5756d20f04ba7357e9ddadf095c2695e355d7ea481e655a64"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/PrepareLightsTask.h": {
+        "bytes": 1065,
+        "sha256": "1a43afa86734e566c056bf34e118ef7b8f2dbdcb4d9cda1cff42dba437bf21ad"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/ReSTIRBindings.hlsli": {
+        "bytes": 1783,
+        "sha256": "6140094b45ac3eed597e56638d8732ada5e4bca3daba4fcfd2728848127c285e"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/SamplerBindings.hlsli": {
+        "bytes": 1141,
+        "sha256": "7aa17d85564eaaa96c2d2b32afa11e3d814bf61364c0f6eb974d5cd11b2aecde"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/SceneBindings.hlsli": {
+        "bytes": 1623,
+        "sha256": "5ef9256c949334d48750560d3f833801c3bb44055c39b56047bc96994e00c8c1"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/ShaderResourceBindings.hlsli": {
+        "bytes": 5938,
+        "sha256": "8f4a37d873e3f14cf8fc2fe83a938211b735162508fa11ba93be52901e9bd1c4"
+      },
+      "ShaderDynamic/Source/Rtxpt/Bindings/SharcBindings.hlsli": {
+        "bytes": 7063,
+        "sha256": "78523f8a74ac38d3801598f82a0b6020020396c9a60600e724969fbdbffb408f"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/AOSpatialPass.hlsl": {
+        "bytes": 3221,
+        "sha256": "a3d29dc6a0f0209da0fc094443071ec0e87172d4addadade7f02b0bda3d31e3e"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/AOTemporalUpscale.hlsl": {
+        "bytes": 8839,
+        "sha256": "0ee95f0f6ed68b4b90893406c0752e967ec70e816349b81f48cf86474ba851d7"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/DeferredLightingCombine.hlsl": {
+        "bytes": 7003,
+        "sha256": "9e5f2d6a100f926f2c70721f5e9c3b91be04677ae5ee5773173669dae0469cf7"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/DirectLightingPass.hlsl": {
+        "bytes": 8287,
+        "sha256": "be62c527a2e667378ec563d022061c95f0c070bfe4b2c4082bdeb732a1e3f098"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/FastHitShaders.hlsl": {
+        "bytes": 2892,
+        "sha256": "eb824e81c82c36132e5ba694905b4ad7f462f949aaeb3c724130045571e57ba0"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/GTAOPass.hlsl": {
+        "bytes": 7780,
+        "sha256": "fc6f44e0503bf6e29ca4afe6eea47f64858f6171f5d0f040a29ccb235ef1bfcf"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IndirectPathTracer.hlsl": {
+        "bytes": 8361,
+        "sha256": "d5c9eca0272101ba609ba96f26d8f95e18278f88d6dd2341c186b3c1f85f4ca9"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroBridge.hlsli": {
+        "bytes": 861,
+        "sha256": "836e553afd2e493be1488842c1ad6acc1b6a7f09040aff56770fea36c67b1667"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroCommon.hlsli": {
+        "bytes": 7389,
+        "sha256": "e1d2f377b7580f9c2bb5c15746fa23b8fc058343463e7d500d5e3d173169fa02"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroHitLighting.hlsli": {
+        "bytes": 8422,
+        "sha256": "7590cd58637f6029a164c4c40213e3f2d068691b3e9ed8c172753766475f977a"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroHitShaders.hlsl": {
+        "bytes": 1317,
+        "sha256": "c3055d8df832cc7a93daa3db41231b8b672ec2d66304762f5061c54d480e38e8"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroLightBindings.hlsli": {
+        "bytes": 862,
+        "sha256": "e31218d31d192180468dd41224cf4d893a944b870e30e20363f7ef900d681dd2"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroPathTracer.hlsl": {
+        "bytes": 23755,
+        "sha256": "4e39a5d6e058d307127d1ac9205cc69d6eb1d5892acbc5f9fdad5679140e1002"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroPrepareLights.hlsl": {
+        "bytes": 9517,
+        "sha256": "169266d3efa94d87a399c1a0882fa9b967983766551849e590c0a98bc76a11dd"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDICommon.hlsli": {
+        "bytes": 9508,
+        "sha256": "35c2b598dd09a9c10eb34a543887ae1f9da30929e2d7e69342aed7b738ae8193"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDIConstants.hlsli": {
+        "bytes": 1522,
+        "sha256": "05d29460816f374e77d5e42ddab0131006ed5d0b6a27309a83c804831dac5149"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDIEnvLight.hlsli": {
+        "bytes": 3219,
+        "sha256": "9d391c252218995ff5d0c2ee2f6999d65751e3e7d01911299e866a23a459f6c7"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDI_Final.hlsl": {
+        "bytes": 4966,
+        "sha256": "6ee03f8565668a76144514070c62ea27c1c2ab8e2c685e4ff9ae4fec106f6afb"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDI_Initial.hlsl": {
+        "bytes": 9440,
+        "sha256": "96595313146393656775ec6ce969737e396fae6228bea6b7dc087c57cde4c8f1"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDI_Shading.hlsli": {
+        "bytes": 1935,
+        "sha256": "655f49b046aa43ab56a9b3a98e16701293ecb4f4020ae6918eb919fe4f64d11e"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDI_Spatial.hlsl": {
+        "bytes": 3434,
+        "sha256": "c80abf04e131becbbc8658bdf0e7fb0312b9cbfbf58e8fbf044e6f7bb00b9dc0"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroReSTIRDI_Temporal.hlsl": {
+        "bytes": 4977,
+        "sha256": "9fc9cd4f3f2f1065451c5eafc0a041a6964a1fb5d031e3720b563e2fce16f949"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroRTXDIBridge.hlsli": {
+        "bytes": 20302,
+        "sha256": "95767b95d9d52ae682e08c5c63c49ab366d614bcb67def55bbea58a5b640e77d"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroSampleCommon.hlsli": {
+        "bytes": 15021,
+        "sha256": "4dc72d14d37d8376fb3e4c085fec0bf76bca9d86070849b90bc92280be3338b0"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/IntroSampleShadowRay.hlsli": {
+        "bytes": 1962,
+        "sha256": "2858ca57ec3b2981eeb2107859d7b03862e4fc8a4e9ce74c9ade21c7fba860e1"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/MaterialEvalSimplified.hlsli": {
+        "bytes": 3315,
+        "sha256": "96ef608f293663f16132a0ef06b2df8c21251465bd5b5d671c442a2e82565afb"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/PopulateGBuffer.hlsl": {
+        "bytes": 3282,
+        "sha256": "3140bc65902523a0e73e9dd54533abbf415c56335c06f56ab3687023a3669941"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/PrepareGuideBuffers.hlsl": {
+        "bytes": 3015,
+        "sha256": "ecdd51269401803c5d99dc38d10565b6a324639e14069c00d90ed36033ceee2b"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/RTAOTrace.hlsl": {
+        "bytes": 3697,
+        "sha256": "040384413859989a2bf48dd5a9e2352415e7dc637aaf755be813a228b92ac861"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/RTGI.hlsl": {
+        "bytes": 7196,
+        "sha256": "e8a3789c16efd7ada7fa7ab5570f478c5559eefe8f0949995b84938bbad99fd3"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/RTGIDebugOutput.hlsl": {
+        "bytes": 1266,
+        "sha256": "19139086a4894305fa82e5abef0b4f0f6f130f428491aa16dfe72c8e207883b3"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/RTReflections.hlsl": {
+        "bytes": 4558,
+        "sha256": "5feb46cd0a8f07e98fb10e1ce9c18ff41ca1327c78509926c1611b9cf0ba954d"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/RTXDIStreamingRISLightingPass.hlsl": {
+        "bytes": 5360,
+        "sha256": "cbc959c595eccb7f2dc3eb44cabc83b5b518915d76034798384ffda3defbdaf3"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/SHaRCDebugCache.hlsl": {
+        "bytes": 3329,
+        "sha256": "37d1993b8c6bc56e7ba1c1bdb7606765be0917c99e02da90cf6459dc631705b1"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/SHaRCResolve.hlsl": {
+        "bytes": 1927,
+        "sha256": "4d1e4ed7f2897f97ec3a7d637c6dd814a2ec6df9e2142a2b56b8c9188c2f6914"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/SHaRCUpdate.hlsl": {
+        "bytes": 7090,
+        "sha256": "6d1a820a4d5494dddd85cf9ef51b7290da00d16e18e2b7ec98bc434cef539ea4"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/SSRPasses.hlsl": {
+        "bytes": 27202,
+        "sha256": "c760ab2b430982e9480ac08f789fbdfa4f0a272cbf3b0fab003e1ed39853e4c9"
+      },
+      "ShaderDynamic/Source/Rtxpt/IntroSample/StochasticLightingPass.hlsl": {
+        "bytes": 11558,
+        "sha256": "94d2a7e87317569763861e3dce71349e65bd16d83e0e2c005899c829818321f0"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/MicroRng.hlsli": {
+        "bytes": 2191,
+        "sha256": "ff29d095c989c213040e18c1a029668766905162bc775b4c64061508bd857a03"
+      },
+      "ShaderDynamic/Source/Rtxpt/Misc/GBufferHelpers.hlsli": {
+        "bytes": 12577,
+        "sha256": "30d06c7a97dae2f15ed199561c472d9f73a834d227e3cd4ed60ad4f3fccef05e"
+      },
+      "ShaderDynamic/Source/Rtxpt/Misc/OmmDebug.hlsli": {
+        "bytes": 6667,
+        "sha256": "a614b2870ff6d2e9bafdaf864e578e347b032f28ad594f08bbbb1537df0f11cf"
+      },
+      "ShaderDynamic/Source/Rtxpt/Misc/OmmGeometryDebugData.hlsli": {
+        "bytes": 1069,
+        "sha256": "d880c98d0e1b11239e74262162efaaf6df5aa853e62258805c829c1f273dc3d9"
+      },
+      "ShaderDynamic/Source/Rtxpt/Misc/SubSampling.h": {
+        "bytes": 10652,
+        "sha256": "f7aa37948c362e4b43eabf5369330b0ff658957b60b232fd4209882e2a10617d"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Config.h": {
+        "bytes": 7245,
+        "sha256": "a80ccc84140818c7cd0c9abf5059f4b7987263725635c80776b5ea67416725f1"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/DenoisingLayers.hlsli": {
+        "bytes": 20920,
+        "sha256": "e8780aeecc213e346de5cd55c1292c3eded15af58503643cabbf184fa2801422"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathPayload.hlsli": {
+        "bytes": 3635,
+        "sha256": "d5bcb1f1d71db3f4707a474df1523d909a07745497d1ad112926bfe60d62d91c"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathState.hlsli": {
+        "bytes": 18109,
+        "sha256": "a62443158e3f21574146c696b462a45fc13052986a4d846cad463457452e1b3f"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracer.hlsli": {
+        "bytes": 16393,
+        "sha256": "e445807cff681e02141d60fed5b5d3f128d2c83732983aa73a2bd5ce3687b207"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerDebug.hlsli": {
+        "bytes": 20647,
+        "sha256": "57e62482a16f43cddf55da439ba96212d195a474350e900c3a0dce7be862743a"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerDenoisingLayers.hlsli": {
+        "bytes": 3080,
+        "sha256": "9daab1ef01527f6a4ca9d1f93edc5c3a2241620b4c19cf84e9933d88aa1ebfc2"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerDenoisingLayersHandleHit.hlsli": {
+        "bytes": 28242,
+        "sha256": "dc657d6dca7065fc51fd1ef7c96b1dc602b4e02de14f488c789aee7037bd12e7"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerHandleHit.hlsli": {
+        "bytes": 28624,
+        "sha256": "2343abc4945407c853e993ecd15b01641823eeb8a0d5e0ad3093248f1051a02f"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerHelpers.hlsli": {
+        "bytes": 15650,
+        "sha256": "27e2ee926986aa1b164bae03e7e4284e288411b52fb61e8939ad4b23262a5bed"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerNEE.hlsli": {
+        "bytes": 20902,
+        "sha256": "dba2555f5f0217ea004da011c05e993f3c77cb420af22ee8f1ee99dbcf8a5521"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerNestedDielectrics.hlsli": {
+        "bytes": 7525,
+        "sha256": "a9c5b7e7c98407bcc4f82a21a39f02207d8b49abba3f4b932252a2a1895c6464"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerSHaRC.hlsli": {
+        "bytes": 22605,
+        "sha256": "cb55fbf8305df4b68193f1fa0096c6c42b995086c9fd95553896a77315a329e7"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerShared.h": {
+        "bytes": 6214,
+        "sha256": "a6b9b0629bff178e4b4480a3d829661f75cf5109bb35792d0f8cd12918c4a2bb"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/PathTracerTypes.hlsli": {
+        "bytes": 6705,
+        "sha256": "6b49b2a6319d171dd21d1300088eed5527221e8dec725f955a861347ab2f686e"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/LightsBaker/CubemapProcessing.hlsl": {
+        "bytes": 9078,
+        "sha256": "448c43aefa715f5bd64729b1758390f72cfbbcfeab2fc7b63103e6d989b38f53"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/LightsBaker/CubemapUtils.hlsli": {
+        "bytes": 3882,
+        "sha256": "4ffa5f1e99e689ec045d1459eebbf89d5413ae45e3b4d2160e5338b4985c7e88"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/LightsBaker/LightsBaker.hlsl": {
+        "bytes": 130785,
+        "sha256": "0ceefe9cdfd51c3980e4cd7864a61535d720f316e9cdc282959bdb2061c9148d"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/NEE-AT/NEEATBaker.hlsli": {
+        "bytes": 9562,
+        "sha256": "432cb9d224a3ba0e3693be4b9cd94d78d37b6da951d2dbfab2d5f3da426f23d2"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/NEE-AT/NEEATBakerEnvMap.hlsli": {
+        "bytes": 609,
+        "sha256": "0a4917c81184bf9e2c95dfb7d19978d671929e5c987358b8eaed966489fa7a62"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/NEE-AT/NEEATConfig.h": {
+        "bytes": 8713,
+        "sha256": "16045f51b8a7769754be1bcfd9b5b642b5419699b6a2db0a6e25a3c58f3f4fe1"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/NEE-AT/NEEATShared.hlsli": {
+        "bytes": 14948,
+        "sha256": "912fe8e8313edd4506ba6a9dfb7f3f95402a1a8be25bf6d0e59d2c5d82797154"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/ShaderDebug/ShaderDebug.hlsl": {
+        "bytes": 38443,
+        "sha256": "a224c64ade1f1866de16cf83524290d669b53f2ffa2060df02789e5b7a4354a4"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/SHaRC/SharcConstants.h": {
+        "bytes": 2009,
+        "sha256": "5f92701f3829d17a7aae5060b36b59a45c24e5569c56af8830c7e184ca2f1ed0"
+      },
+      "ShaderDynamic/Source/Rtxpt/Libraries/SHaRC/SharcResolve.hlsl": {
+        "bytes": 1448,
+        "sha256": "48f1d7737022e35d39eb75096809f629f85a64ed722ae24e4d8dc270580dd489"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/BxDF.hlsli": {
+        "bytes": 43680,
+        "sha256": "dff1ee0c4786ad13c474ca177e341eeaf172168c095118f324728f767cb2135d"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/BxDFConfig.hlsli": {
+        "bytes": 1373,
+        "sha256": "032b33e86ed05e3f018fd2d6a3218aa6d97fd8e9618211c6b4e317d4ba81e214"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/Fresnel.hlsli": {
+        "bytes": 5565,
+        "sha256": "3641d731b596e6d00485d940a653daeeb863b2f27b7563bd3b3ab5893437e06c"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/IBSDF.hlsli": {
+        "bytes": 10415,
+        "sha256": "737c066ee895553fc9992f4c24b6d0560967326e747499bc3b1a0069d5eb4c77"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/InteriorList.hlsli": {
+        "bytes": 8576,
+        "sha256": "23ef4c28c9f024ba13cb7e2a2097242dcdc77408bda14932fefb0ca24051b807"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/LobeType.hlsli": {
+        "bytes": 1384,
+        "sha256": "a8343ddc437a46466caad722c64826de62063adcb8ec307e065dbfbc34c10b36"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/Microfacet.hlsli": {
+        "bytes": 15898,
+        "sha256": "8e7280fce281576e666bf66a4510171a615e0d954511d437b6eb68d8bb2c0fe6"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/BSDFs/StandardBSDF.hlsli": {
+        "bytes": 10349,
+        "sha256": "fbffc8fea0c19aef66ab2592214638b986bb65a003631ed83686e0aeaf8a48c3"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/EnvMap.hlsli": {
+        "bytes": 10256,
+        "sha256": "37bc9781aa7549c717b2050ba589a50059a1ef6cd5ed2faa0ea47cfd3080f816"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/LightingAlgorithms.hlsli": {
+        "bytes": 25578,
+        "sha256": "0daeb1616e0818fb3389c3f9dc1b0945e954f99b1509ca0a6eb2508a51c02591"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/LightingTypes.hlsli": {
+        "bytes": 643,
+        "sha256": "d5f2a7950989ff23ff457d016fd231e1581a401458f0e54d164062f4dad35167"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/LightSampler.hlsli": {
+        "bytes": 29859,
+        "sha256": "0700a2bb3383992ef24d93fb2a5ebb75cd43401c5e5c8ba6379343835c3e1936"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/LightShaping.hlsli": {
+        "bytes": 7665,
+        "sha256": "c5e9fb217620534d7ce6a13524f2a4953d572b706ea3ec159f2b5d321c46c6bf"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/PolymorphicLight.h": {
+        "bytes": 6645,
+        "sha256": "520d3cd1b2a4d5d5c6a3b40822f7b8bb317c6b2ee7886a0a209218b6b556339c"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/PolymorphicLight.hlsli": {
+        "bytes": 40481,
+        "sha256": "bc0caa26353ad39c5cadb47aae23debb910e915fe557533f719e23c9ae8c37fc"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Lighting/PolymorphicLightPTConfig.h": {
+        "bytes": 1245,
+        "sha256": "da7e9b85fc79e9d9e7b65385682db62da86088a3b92f6e2d8517b47bb9c689f6"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Materials/MaterialPT.h": {
+        "bytes": 3381,
+        "sha256": "78dd86b0306a77c0b169a19070878b336e10d79c8784fef58e28097fd937c8cd"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Materials/MaterialTypes.hlsli": {
+        "bytes": 2028,
+        "sha256": "ebacd7da1d4fe1f00317e00b88205de4d49953120888c58a82d0d9fdcb36c1ea"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Surface/ShadingData.hlsli": {
+        "bytes": 12106,
+        "sha256": "f07e609f3ab35179c5a33aed4df0f9f42686d459f7dc16b6fff2c40d76a36a0d"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Surface/ShadingFlags.hlsli": {
+        "bytes": 4355,
+        "sha256": "ff0fc4b1edf6ce6b964959d29360c02ac7f9f910d60696b064df0b95879cb3e8"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Surface/Surface.hlsli": {
+        "bytes": 1775,
+        "sha256": "1ec2f416fd1af11763e33602aa26a507ae45aed143b74c9deeb220ffc654c28d"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/ColorHelpers.hlsli": {
+        "bytes": 9414,
+        "sha256": "8451526865540aceeb0f3c2cdd30fe938a0baff903b980909b8aba513da3f9d4"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Geometry.hlsli": {
+        "bytes": 4717,
+        "sha256": "fbec10dd42eef29b2d979f3d4ead9322434219176e47c1f698333cd94b04686e"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/HomogeneousVolumeData.hlsli": {
+        "bytes": 897,
+        "sha256": "9d6b23c7057a572d9a4d8cc4133356727ef3bbafa70fafbeb31177499da707fa"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/HomogeneousVolumeSampler.hlsli": {
+        "bytes": 5397,
+        "sha256": "c5ae10cb4be2e53b7613d4ece4f22914294c4a682e550c3b739ff4a9e23bcc4c"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/NoiseAndSequences.hlsli": {
+        "bytes": 24301,
+        "sha256": "cfaade0f491c0e7e12ae8b289b908be72a99286fc55bdf7f594d26690387f115"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Packing.hlsli": {
+        "bytes": 10356,
+        "sha256": "de7af161e546333b809e688a724bc642a2be3087787829b81ce03c6c5a9ec7f8"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/SampleGenerators.hlsli": {
+        "bytes": 6824,
+        "sha256": "ff688b1f3866a82ad67a47cc294dfc79925fc9ae75caac44b1dd3dbfeb8115c4"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/StatelessSampleGenerators.hlsli": {
+        "bytes": 14133,
+        "sha256": "bcdac1016de50cbae69a9a2ca8a6d6e2d29ef2d462b387ce4a011f681c4e2552"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/TexLODHelpers.hlsli": {
+        "bytes": 23650,
+        "sha256": "cbbe8b7b13210c7aee4fba939471661400cbc2756924cc1dacec68ad12d36700"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/TextureSampler.hlsli": {
+        "bytes": 9615,
+        "sha256": "6b1c4b4020de734a8c8b7592daf1e91b51f94190bb4a5aa6eeb18c60bfaa7b4e"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Utils.hlsli": {
+        "bytes": 21669,
+        "sha256": "ee4c6fe8830c1e8f2f37a8d7a6cbdea0f0bc7fbb05d41d2ff2a59ca2e1acda5e"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/BitTricks.hlsli": {
+        "bytes": 5406,
+        "sha256": "59aab844b46642edaad5df5f20b5ac2e3416148cbf10dc534b3c921698145d9d"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/FormatConversion.hlsli": {
+        "bytes": 12014,
+        "sha256": "d653fe589479011677793d916cf1a01237b844c701c53dd14a56b0a47aeaba9a"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/HashUtils.hlsli": {
+        "bytes": 1727,
+        "sha256": "0079275c60db10d328bbb7f67b3059937d9ccf5387340206ec95298f1c9e728d"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/MathConstants.hlsli": {
+        "bytes": 6180,
+        "sha256": "e7c5630a5145be39f309cf4d56ad93465c7a725d218d2fda5f1ef9fad77ff5d6"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/MathHelpers.hlsli": {
+        "bytes": 21908,
+        "sha256": "92de9deeb018e51f8db3fd2ba70640f90c739aeb0d8c9a67b241a5d7302868db"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/PackedFormats.hlsli": {
+        "bytes": 5837,
+        "sha256": "6dbb0acf8213d8a32b8111be089788d476f08602cda35ec897c6835b15805ea0"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/Quaternion.hlsli": {
+        "bytes": 2530,
+        "sha256": "491c115f314b57062e4937b8f597c0f350ba0150b9d40fbbbf0f31bc57d8917e"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Math/Ray.hlsli": {
+        "bytes": 1791,
+        "sha256": "edbe23e433604f99ca9189fda31361e67c8ac5371c080f2eb9e1c241f95a9702"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Sampling/Sampling.hlsli": {
+        "bytes": 2177,
+        "sha256": "87f868dab19000289e0ec8a31faa34f32ed92ecdaa9d8983e1bcd947a2d8a844"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Sampling/Pseudorandom/LCG.hlsli": {
+        "bytes": 1452,
+        "sha256": "331fe8e40dfb8dcd5fb493d70154006ef688d17d6aa8a5e90b09aeb8d626c22e"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Sampling/Pseudorandom/SplitMix64.hlsli": {
+        "bytes": 2018,
+        "sha256": "0fddd73fd716a22f706b6bef6fea6ded3077ecfe317ce06220d587ead63fb2cd"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Sampling/Pseudorandom/Xorshift32.hlsli": {
+        "bytes": 1227,
+        "sha256": "cbe0a0e123cbf2503bd1032299b0c82fc95cb2367d1f002e4bc6039acb83ab39"
+      },
+      "ShaderDynamic/Source/Rtxpt/PathTracer/Utils/Sampling/Pseudorandom/Xoshiro.hlsli": {
+        "bytes": 2960,
+        "sha256": "3db19d36a10fa394ab3418a97d89c3b07c5cee7312ab658ceb9aa953666987c9"
+      },
+      "ShaderDynamic/Tools/d3d12/x64/dxc.exe": {
+        "bytes": 1359640,
+        "sha256": "aa7965b3763d9c710baaa5a28cedcc633449962a75d1391d161a85304a41b3e2"
+      },
+      "ShaderDynamic/Tools/d3d12/x64/dxcompiler.dll": {
+        "bytes": 22274872,
+        "sha256": "0689e2fee0a1c9df8662a59680469f24e2a3ad7ce6bbbcc9284f7a83172bfc59"
+      },
+      "ShaderDynamic/Tools/d3d12/x64/dxil.dll": {
+        "bytes": 1995584,
+        "sha256": "64be2368211d257a038a7d4ea6bb3e24c878eb8d588c7b8414fccf759b69c2ac"
+      },
+      "ShaderDynamic/Tools/d3d12/x64/dxv.exe": {
+        "bytes": 448816,
+        "sha256": "74528e8e86cdafcb9ecaa26f21a9ad9de9102b0d84213b67435de798b5a807f9"
+      },
+      "ShaderDynamic/Tools/vk/x64/dxc.exe": {
+        "bytes": 1359640,
+        "sha256": "aa7965b3763d9c710baaa5a28cedcc633449962a75d1391d161a85304a41b3e2"
+      },
+      "ShaderDynamic/Tools/vk/x64/dxcompiler.dll": {
+        "bytes": 22274872,
+        "sha256": "0689e2fee0a1c9df8662a59680469f24e2a3ad7ce6bbbcc9284f7a83172bfc59"
+      },
+      "ShaderDynamic/Tools/vk/x64/dxil.dll": {
+        "bytes": 1995584,
+        "sha256": "64be2368211d257a038a7d4ea6bb3e24c878eb8d588c7b8414fccf759b69c2ac"
+      },
+      "ShaderDynamic/Tools/vk/x64/dxv.exe": {
+        "bytes": 448816,
+        "sha256": "74528e8e86cdafcb9ecaa26f21a9ad9de9102b0d84213b67435de798b5a807f9"
+      },
+      "ShaderPrecompiled/framework/dxil/.ShaderMake.DXIL.EDD0F6A5405F953C.signature": {
+        "bytes": 1340,
+        "sha256": "4f226d69ce64f80e6a1825ca82af8b7e8b29a03b7c642579dfbbb9a2660ac624"
+      },
+      "ShaderPrecompiled/framework/dxil/blit_ps.bin": {
+        "bytes": 17786,
+        "sha256": "804dbba2178a90a60a0b05fbff5161aa643269e077ddefa421294b139999b70d"
+      },
+      "ShaderPrecompiled/framework/dxil/fullscreen_vs.bin": {
+        "bytes": 15384,
+        "sha256": "aa53134007bb960a74c0661858d11142a54c816a2b0f7ecfa8e647e7917f926f"
+      },
+      "ShaderPrecompiled/framework/dxil/ies_profile_cs.bin": {
+        "bytes": 19464,
+        "sha256": "5c3da89ff84fa6c1381a19d64801275f73e3de6cadc8992bb873333c852eef59"
+      },
+      "ShaderPrecompiled/framework/dxil/imgui_pixel.bin": {
+        "bytes": 9564,
+        "sha256": "f9de8f4815715cafd6bc7d691394d8234b5e421b38dad275234c5e83aa891d8e"
+      },
+      "ShaderPrecompiled/framework/dxil/imgui_vertex.bin": {
+        "bytes": 14472,
+        "sha256": "bf7df55bf5e249008af45a71e7147e2942162adf8fc38c863062ea03f9458591"
+      },
+      "ShaderPrecompiled/framework/dxil/rect_vs.bin": {
+        "bytes": 15372,
+        "sha256": "80119f67907c378515136910600c198650f8593b1f36a8fe3265107d7272347f"
+      },
+      "ShaderPrecompiled/framework/dxil/sharpen_ps.bin": {
+        "bytes": 31038,
+        "sha256": "bac2f82a5be07279543508bc11fdb57fcce8cf2f9e4d661af2a55d69dd451fda"
+      },
+      "ShaderPrecompiled/framework/dxil/skinning_cs.bin": {
+        "bytes": 61752,
+        "sha256": "eb1129ceb02aa952810420dd0c3b9a5963ed298c62383b9d9819e1548c835636"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/bloom_ps.bin": {
+        "bytes": 15144,
+        "sha256": "60c5e10075e08bc32f0be5411b2bf3819c1ad8c99940dac45ef58fd9bdd93276"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/cubemap_gs.bin": {
+        "bytes": 18984,
+        "sha256": "9029320fe717a26f84bd910dd13abe42bcce00c19172bcfca3023e94e5e5f6b9"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/deferred_lighting_cs.bin": {
+        "bytes": 137712,
+        "sha256": "0cddb400664943855828042577b2745a9575d0ea736ba4c191ed062bfebcdc32"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/depth_ps.bin": {
+        "bytes": 59868,
+        "sha256": "bb286d79fd20ba8b46086334bb9a7e2644fa01a09f265529abd8c43b17033cb8"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/depth_vs_buffer_loads.bin": {
+        "bytes": 35824,
+        "sha256": "82018106866d18b600bd2c6981c39c5c981ae241b024e8974120ec08fdb5e781"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/depth_vs_input_assembler.bin": {
+        "bytes": 33568,
+        "sha256": "a5adbb4846c826b74494b8de412fd7f47ba510854d65bb41c74eae4bae510fb8"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/dlss_exposure_cs.bin": {
+        "bytes": 12876,
+        "sha256": "c7c4e178bf6ffe7a2de7eecaaf0ad6e86c2ec34cbeadff00d7b6abd7e1ac0f91"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/environment_map_ps.bin": {
+        "bytes": 32354,
+        "sha256": "e5031cfcb5f2e851136c3725cfce3a7a8144a112dbbfab021e5a0b87e5251307"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/exposure_cs.bin": {
+        "bytes": 33510,
+        "sha256": "010c212ac039e1599ebd965e792835936c295c203dc6b9bdde96ec76ccd32f08"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/forward_ps.bin": {
+        "bytes": 362606,
+        "sha256": "a153ca593fc8727a4d27d22701408daa744c5e27c0bd3f6194a30b99ae751205"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/forward_vs_buffer_loads.bin": {
+        "bytes": 59868,
+        "sha256": "d8cab307d066af3614aa286a5fa960603cb85192a159df7c2c9ce0c56099cd7b"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/forward_vs_input_assembler.bin": {
+        "bytes": 57420,
+        "sha256": "ec0cd4774241793fe948be3808b15ac082e6a4ad5787bea954b97fa29847d11f"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/gbuffer_ps.bin": {
+        "bytes": 386240,
+        "sha256": "0662c182fee1ad57e88007396c0db084fc63c23fa61247fc53add1d377645ef3"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/gbuffer_vs_buffer_loads.bin": {
+        "bytes": 112808,
+        "sha256": "bf822330631b62535b058a3936716435e5fcf7a25f8f32e91db0ea160ebbcd14"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/gbuffer_vs_input_assembler.bin": {
+        "bytes": 110612,
+        "sha256": "64a60dd4a0da5e9a28de8ed584aa9ffc541c0e6e9f7af0a0438113784fddadc4"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/histogram_cs.bin": {
+        "bytes": 35846,
+        "sha256": "531da3125133f86081583bb6c17abb1a76ebe2a3f0666d8ea2982c92df3d9042"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/joints_main_ps.bin": {
+        "bytes": 22044,
+        "sha256": "910b0f1212327bd6d04455f433c66217f529256f3894236fc950a1125fc5116d"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/joints_main_vs.bin": {
+        "bytes": 26868,
+        "sha256": "7dfb69bba4790a5737eba0de7cd487c55d7409db2f439973c54466e64479c74f"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/light_probe_cubemap_gs.bin": {
+        "bytes": 33476,
+        "sha256": "3a082ccbc96c0eab7b9f7a2bc460a8e299d1a4be2c91ea469d83dc4f2ca9db56"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/light_probe_diffuse_probe_ps.bin": {
+        "bytes": 40184,
+        "sha256": "a06b54a181e98e76bd1bef217a6ef58e430c0fdf7bea87fcbc5afe5f8f9e4a29"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/light_probe_environment_brdf_ps.bin": {
+        "bytes": 35984,
+        "sha256": "b554077e93ff9cc725b8ffc838a3e5970d49408104144b75d7da6fc5a9b99dec"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/light_probe_mip_ps.bin": {
+        "bytes": 34200,
+        "sha256": "b1a2047d2e23435c943c673527a49b335fee69b7936d555a9e5bea1c6fe20acb"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/light_probe_specular_probe_ps.bin": {
+        "bytes": 41688,
+        "sha256": "0cdaae55b137c7c4502c5203f1e2f48db1f46b4539178f104a3ffd1dda2a383b"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/manipulator_gs_main.bin": {
+        "bytes": 371742,
+        "sha256": "9c265a263ece6adc5e57f359aad5fb38f5be85e78c9d4e2ca6d14e41efdd0d4f"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/manipulator_ps_main.bin": {
+        "bytes": 448076,
+        "sha256": "74a7464bb0c1e60850b0f407f2169a9994e5e5698b766b6771552d3659ae4c82"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/manipulator_scan_cs.bin": {
+        "bytes": 16164,
+        "sha256": "ea2dbf285bd0e500b0ca28437efc5f5a05b6d269169eecb18afa259f2f0929e4"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/manipulator_vs_main.bin": {
+        "bytes": 33824,
+        "sha256": "d0d6acdd6eb4049bfabc72d71d0b46b5ce82e7c2cd5f8954e58642ddd21af3ae"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/material_id_ps.bin": {
+        "bytes": 149924,
+        "sha256": "e501baf84daa7428ac8b1fe9fac5fb5c5e22dd7dbc36e96246a79fd65da129c2"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/mipmapgen_cs.bin": {
+        "bytes": 96008,
+        "sha256": "c9cb949caa0cbebe33844dd97f5d6e4755d082fdfe75918cf88f656f3f73f889"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/motion_vectors_ps.bin": {
+        "bytes": 34122,
+        "sha256": "f14b1799fd22d50ac0d0e371f6577cffff950ae89aa9c3e6de6a8a7552ce22d2"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/pixel_readback_cs.bin": {
+        "bytes": 62770,
+        "sha256": "857cf30e681f910cb3a8d1ed4da89572e29679fec7606de867b5a0496c3ac640"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/sky_ps.bin": {
+        "bytes": 20628,
+        "sha256": "401059b9c74956ee434dccb904b1437993f0278a00635fc5d233a512911fffac"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/ssao_blur_cs.bin": {
+        "bytes": 75726,
+        "sha256": "45a906dd48ac88344be4f754152a5dce42b7277c1e69c7981682d5a94e21a137"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/ssao_compute_cs.bin": {
+        "bytes": 355312,
+        "sha256": "ee3b40b437fbe3846af0e1d2731f9d5a9d1b0f46e4d75c51830e8d9e495668ea"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/ssao_deinterleave_cs.bin": {
+        "bytes": 59752,
+        "sha256": "b786e498120ada86cd6463e9672fdeea25519edddf8351caf1e0a0a0daad32fc"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/taa_cs.bin": {
+        "bytes": 625100,
+        "sha256": "70a6a80409465a626dffbb55cabd3208ba69b4cc3e77e523ecf9d4e0c598ef34"
+      },
+      "ShaderPrecompiled/framework/dxil/passes/tonemapping_ps.bin": {
+        "bytes": 41322,
+        "sha256": "f72a9e63e0b0002bdea4fa65d3ea7e5b5ce0db3adc5c474daad5da8aa39fa1bc"
+      },
+      "ShaderPrecompiled/nrd/dxil/.ShaderMake.DXIL.7E1C0EA5AFD1589C.signature": {
+        "bytes": 1530,
+        "sha256": "c6bea00c3903827c624f7889d6d4d8f8507e83d8abe94ea886331fa461110e2f"
+      },
+      "ShaderPrecompiled/nrd/dxil/Clear.cs.bin": {
+        "bytes": 428834,
+        "sha256": "208a06151f0b90d1680363c3884928a29c9755f9eac26239999072445904c969"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_Blur.cs.bin": {
+        "bytes": 3855273,
+        "sha256": "90e54c62ecb1dca933ab5c2ec1053d4a62ed901bfd18fc9c5e9674b04fcbc625"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_ClassifyTiles.cs.bin": {
+        "bytes": 246500,
+        "sha256": "0676848d0fa5c261f37c9be74263c0bbdf1b627d0d812b7cfc70b0938cc56f22"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_HistoryFix.cs.bin": {
+        "bytes": 4978549,
+        "sha256": "ba9e1116dafbe3a6b7dfbd1a5abfaa5bd0674a34b975ca25941ba09f164fdc37"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_HitDistReconstruction.cs.bin": {
+        "bytes": 4131690,
+        "sha256": "d0a58b0b790aff884593bf11a5fffc37d8a59388bb1709a53590e82b4d803f7e"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_PostBlur.cs.bin": {
+        "bytes": 6652673,
+        "sha256": "58cb28ee41a1e2adad42bc89287b0ce522579f4913f5de03fc391f4c31fc10bc"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_PrePass.cs.bin": {
+        "bytes": 2805687,
+        "sha256": "ced97106065596d1c62fe6a6ebeb02205fb1ca0e51b0a2e743360a107726d171"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_SplitScreen.cs.bin": {
+        "bytes": 1562716,
+        "sha256": "826101403573c24d685bd88f5c1de26c631669a9a5b8d8f8f31398ec64807a0e"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_TemporalAccumulation.cs.bin": {
+        "bytes": 4604177,
+        "sha256": "89a3c35b6b95d5713849811ef5a045e33ab90e7c21d56f155356bf31032fda96"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_TemporalStabilization.cs.bin": {
+        "bytes": 2284287,
+        "sha256": "91e61307ddcca56e094ec726611368671ef0f9902f43ab36910011c758a9b77d"
+      },
+      "ShaderPrecompiled/nrd/dxil/REBLUR_Validation.cs.bin": {
+        "bytes": 446872,
+        "sha256": "2e8b1890455cbcc9096e45ab6efaf44ddeaf54d153633b531da5d0a13f5f77db"
+      },
+      "ShaderPrecompiled/nrd/dxil/REFERENCE_Copy.cs.bin": {
+        "bytes": 217000,
+        "sha256": "c57b50f060d94d414d3a03e2873fe907bf4f296e1750fa271d8b85ea362c2ebb"
+      },
+      "ShaderPrecompiled/nrd/dxil/REFERENCE_TemporalAccumulation.cs.bin": {
+        "bytes": 217592,
+        "sha256": "c41afdd3a94d5a30696be906887ae899f65b01eade7d52cf7dadf7e3d628bf3e"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_AntiFirefly.cs.bin": {
+        "bytes": 1710624,
+        "sha256": "f848746881a5894efae0457ec87e2d4baca890a6ff1d4dfbef51f76f8019ed41"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_Atrous.cs.bin": {
+        "bytes": 2114132,
+        "sha256": "ec7277b906d693aaa6016fdbad2726ac7fa2eb273d433d8181eb45c391edcdf7"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_AtrousSmem.cs.bin": {
+        "bytes": 2713420,
+        "sha256": "f3517aa696b888c21a5fb36965d7f97776ae92dd9393fc14665dcc591e8b7b9f"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_ClassifyTiles.cs.bin": {
+        "bytes": 239508,
+        "sha256": "a9bdc6d9119b6be6f11aa8bd2f411c9909a5e5975558e0853b13bfe04650fd0d"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_Copy.cs.bin": {
+        "bytes": 1459252,
+        "sha256": "584b78dbd5241768378fbd90eb893069478d57b956443a16ff9e993c51795cd3"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_HistoryClamping.cs.bin": {
+        "bytes": 2258116,
+        "sha256": "10b3ca17f182677eb3d032656fcdf9662a8045220eed52ce784195c171eb1bac"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_HistoryFix.cs.bin": {
+        "bytes": 2556036,
+        "sha256": "51af0b47461aaa0ed774e8ea63667ccee845710bd6294cb38244b759f2931de2"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_HitDistReconstruction.cs.bin": {
+        "bytes": 1869724,
+        "sha256": "42178ebca1d9d97d1a3ca33113474685afcdfad34b001cdea2e612ca0b3c6cd0"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_PrePass.cs.bin": {
+        "bytes": 2302796,
+        "sha256": "d944fc8c32df2584badf6c5c866bad72715c6f630f08faa28419103e276632ea"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_SplitScreen.cs.bin": {
+        "bytes": 1495060,
+        "sha256": "2565c6c7803609cff589eeea8c64861da13723703544630da30327bc6ced27cb"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_TemporalAccumulation.cs.bin": {
+        "bytes": 2588076,
+        "sha256": "398ac3ff7938eafc846ee9087d4f416acdd77e92f89ca79626d61f6b6ecdc498"
+      },
+      "ShaderPrecompiled/nrd/dxil/RELAX_Validation.cs.bin": {
+        "bytes": 359592,
+        "sha256": "173ea2d6d3c8a557a6b8206752d2212a0240b72ae0466b5fafd712f6704c370b"
+      },
+      "ShaderPrecompiled/nrd/dxil/SIGMA_Blur.cs.bin": {
+        "bytes": 1514652,
+        "sha256": "80b4f25f203f95a03d47ae4909adeb4cadecc466cb6e26cb7b9b9c594c36a0de"
+      },
+      "ShaderPrecompiled/nrd/dxil/SIGMA_ClassifyTiles.cs.bin": {
+        "bytes": 496732,
+        "sha256": "f8396b078cb1478e3ce02a9d42617718570248f8994da710eb7a525dfa8b0ac0"
+      },
+      "ShaderPrecompiled/nrd/dxil/SIGMA_Copy.cs.bin": {
+        "bytes": 227788,
+        "sha256": "ce53f94842b851ee7ffb4a2aa88b91228f9aac5e93a3dcf56d3678b475ab11f7"
+      },
+      "ShaderPrecompiled/nrd/dxil/SIGMA_SmoothTiles.cs.bin": {
+        "bytes": 235752,
+        "sha256": "0de5b994ef653d32a933c9fa971cda17d9aada20c612b786b498e86eec64827e"
+      },
+      "ShaderPrecompiled/nrd/dxil/SIGMA_SplitScreen.cs.bin": {
+        "bytes": 462056,
+        "sha256": "17fe11dd14fb3ceb81e02de30d7b7512f68e05e70191bda3d2386ec920266017"
+      },
+      "ShaderPrecompiled/nrd/dxil/SIGMA_TemporalStabilization.cs.bin": {
+        "bytes": 621176,
+        "sha256": "47b2efacdb1d276aba635be1fa260c3722f2612c89486ee9fc1703314d3c9e49"
+      },
+      "ShaderPrecompiled/omm/dxil/.ShaderMake.DXIL.3AE9A3695AD5B117.signature": {
+        "bytes": 1295,
+        "sha256": "ba6c382b5156bf78e868e4f195a53feb34860fecc94497ba2eb1d494f53d7c25"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_clear_buffer.cs.bin": {
+        "bytes": 3326,
+        "sha256": "b25c505f74683aa85c296d150eb8ec3660e25ca872c09f99e98df5264f99a6a4"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_compress.cs.bin": {
+        "bytes": 7686,
+        "sha256": "00e5ba66b203138667b4af3a46f96e994718c8eb9d0abf9f742fd0b29cc2581b"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_desc_patch.cs.bin": {
+        "bytes": 6762,
+        "sha256": "ea68a5fc2a1044943e5698d734e8b037ac7baf9bcbf77a274931d08e9a56bee1"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_index_write.cs.bin": {
+        "bytes": 6046,
+        "sha256": "ed80baf90fccbbb6c550e0176ed8eecb62f606479c9751134715cb5b9478a11c"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_init_buffers_cs.cs.bin": {
+        "bytes": 5694,
+        "sha256": "4967c84cdea7e5fc30d1972e175ad535c789bcfa0f672407ecc4e4be2cf3714a"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_init_buffers_gfx.cs.bin": {
+        "bytes": 6014,
+        "sha256": "029e95d2f55902aa0aa0af66c555cb7a0da442af5b73fa372f652e1641dfc2d1"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_post_build_info.cs.bin": {
+        "bytes": 5722,
+        "sha256": "570ac3d2d6c0e84a03e09e3c880973b25ecaf9e20811d80a2808c49ba14671d6"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize.gs.bin": {
+        "bytes": 8522,
+        "sha256": "74e31680a2eb910f77788a2ad65dadc55dd4dc3318f2f8e644d803aa2a81b8f3"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize.vs.bin": {
+        "bytes": 9266,
+        "sha256": "cd5aa5788937991206bd4721d910d521a2f51bdcc10b3cffe7d6b4409e212eb2"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_cs_a.cs.bin": {
+        "bytes": 14254,
+        "sha256": "4300b0f61194a62d30b54b9367a7304c9428a7fedbaef9ce0f7cb7e4e8ffa800"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_cs_b.cs.bin": {
+        "bytes": 14254,
+        "sha256": "025882c7932637e97a4995702ab63c133845aef558ed6214a6f422bb21c0d1e4"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_cs_g.cs.bin": {
+        "bytes": 14254,
+        "sha256": "5f0607304c6d1cb5ce6fa88c94ab332a501242993a84c8e4414028c55d44073c"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_cs_r.cs.bin": {
+        "bytes": 14254,
+        "sha256": "ea5d20d937f92f8a5d8109edf653c7eb64b186ba3688996f7483d898ecc4e306"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_debug.ps.bin": {
+        "bytes": 8050,
+        "sha256": "f82d11036bbfc0d31bd8b4100b0b0c54111e1f30794648df0c99c92997db2784"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_debug.vs.bin": {
+        "bytes": 8034,
+        "sha256": "060f40db591194e1f4a4c3fdf1b2213bb2008b9a486121078e2b620b5408c45e"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_ps_a.ps.bin": {
+        "bytes": 11762,
+        "sha256": "3edcd1739d8bbb81398d1aec2b4876385e6fb72ee2805a3eaf59f000f4a546a2"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_ps_b.ps.bin": {
+        "bytes": 11762,
+        "sha256": "31ef4cd61d9e884f4ea8698276767d3f4054d64cce58a3c64841fe98174cbc2f"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_ps_g.ps.bin": {
+        "bytes": 11762,
+        "sha256": "9f3e3794a2e2922c150e72116114961eb1e670ece2ad160aa00f1c21c5bd3784"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_rasterize_ps_r.ps.bin": {
+        "bytes": 11762,
+        "sha256": "54c6459cbf5de14e3b947cb09212f2d8ce34a1d11cff68b8b7725f8b2b90056f"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_render_target_clear.ps.bin": {
+        "bytes": 2578,
+        "sha256": "f26c3760bf71ab256ead8d19dc2dcbbf16df42534bd7b247e54728a6eb0883cd"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_work_setup_bake_only_cs.cs.bin": {
+        "bytes": 6714,
+        "sha256": "2a92dd0af7ab4542c1d0b98c653b4ae852888792d71c31d0973323fa7c67af72"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_work_setup_bake_only_gfx.cs.bin": {
+        "bytes": 6914,
+        "sha256": "968bea26f488f82f4f2892404db1e83148dac71ff5b8d6b97fc1ccdfabd2e21b"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_work_setup_cs.cs.bin": {
+        "bytes": 8546,
+        "sha256": "06d2787246ac9b2c60ffa099df6282efba3f6e67cb81a1ab9071e6881ce5c187"
+      },
+      "ShaderPrecompiled/omm/dxil/Omm/libraries/omm-lib/shaders/omm_work_setup_gfx.cs.bin": {
+        "bytes": 8746,
+        "sha256": "ecb29b0bb5b212ca8a7352f5c6a33d56971d0543f0505066ef7d9f04fdc5c2eb"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/.ShaderMake.DXIL.39AB1AEA295D274D.signature": {
+        "bytes": 1602,
+        "sha256": "23bf6e77f2ac135dab630e3e38c1388dd60954c6e50db8cf048a2e940467e2f7"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_Count.bin": {
+        "bytes": 130608,
+        "sha256": "54f39a0090abb00229da7eeca2387efa38edaded579a47cf8a000cc2c2ae242a"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_CountIIFP.bin": {
+        "bytes": 130355,
+        "sha256": "e3b533b981a25048c3e833cf97c7ea44b638be9464593c8b2a0c43bd952ba656"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_CountReduce.bin": {
+        "bytes": 126800,
+        "sha256": "5bb09d05b67d7d8214c91226392a288009ac2705b4c0bdd1359990680e755f8b"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_ScanAdd.bin": {
+        "bytes": 130672,
+        "sha256": "e00614ae00105c5dbd2b2d0e415f50b244ab3e975d2375ae3322c28f2f010502"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_ScanPrefix.bin": {
+        "bytes": 129928,
+        "sha256": "f6b4d6ebca8a335c27fa0c0f11286eae6c9c26f678381f92e8b634eee0c12cd8"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_Scatter.bin": {
+        "bytes": 133396,
+        "sha256": "c374da7f52f53af985f6baf9bf1ae20d9cb89edccf46fe0683625e6ef627ceb3"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_ScatterIIFP.bin": {
+        "bytes": 133139,
+        "sha256": "7d8e8c2590e42aa9f75e03a16a7d8db8f16d2c4ffc6528294fad3d4670e7f303"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_SetupIndirect.bin": {
+        "bytes": 124332,
+        "sha256": "a75d7205a906a96c8f82e5ef7f2afbe6a85e8b6f69dbce0cb42e4e52e6a9e5a1"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/GPUSort/GPUSort_Validate.bin": {
+        "bytes": 119224,
+        "sha256": "fe523eb388318c0590e702966ec67aff02e5bf092fa696c1ff05c31c65b8ace8"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Misc/DebugLines_main_ps.bin": {
+        "bytes": 391272,
+        "sha256": "e2feb83f29feb941687445c2d4b2ea4ef9924e0bb2678895754d0f13072cbf84"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Misc/DebugLines_main_vs.bin": {
+        "bytes": 399252,
+        "sha256": "2a5d59a2120d94ed2804ee09ce5458ca333296318c32ab5c9f146a56318b66d0"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Misc/ZoomTool.bin": {
+        "bytes": 22376,
+        "sha256": "393a80f66ea9b0ff847f991fc98620a380a14f0335d2e455a60e3cef31118a3e"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/AccumulationPass.bin": {
+        "bytes": 17972,
+        "sha256": "bda09990ab1032926d5a49551640377281f282cd0bcb6aecf7a6aac1c6d62c30"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/DenoisingGuidesBaker_ComputeAvgLayerRadiance.bin": {
+        "bytes": 693480,
+        "sha256": "47db35ce00a9f98aa6d9290fb5608a7943c3343711bea349058c56cd6305e40a"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/DenoisingGuidesBaker_DebugViz.bin": {
+        "bytes": 693772,
+        "sha256": "86d3d657c72889737010e9fc1df22b9fa2573826c86657fbe14df741ad099a15"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/DenoisingGuidesBaker_DenoiseSpecHitT.bin": {
+        "bytes": 705588,
+        "sha256": "4c7d4814f1d7d298f0a5ab374a8cce28c1c6a569331aa24bcb4519d6ea8ba0e6"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/DenoisingGuidesBaker_PrepareDLSSRRGuides.bin": {
+        "bytes": 753484,
+        "sha256": "a83d5768e190b5863f176eb2446b9f4acf7f58eefb65897dccfe78e40dfdb506"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/ExportVisibilityBuffer.bin": {
+        "bytes": 682368,
+        "sha256": "7a8bcee3743c783d83972b881f4eb08fb32c66597a46b55853d6a807c6d6a661"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/PostProcess.bin": {
+        "bytes": 4111713,
+        "sha256": "9aa19b28a52427a27b724bfc09eefed976cc822082aed68cba1781ad742126b0"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ProcessingPasses/SubSamplingCompaction.bin": {
+        "bytes": 438272,
+        "sha256": "32d212126295bda41c37f2ce6f4d41b5d6a5b2f17719e3f696a4f600a7e76a1c"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/DIFinalShading.bin": {
+        "bytes": 2122004,
+        "sha256": "d7155cd94c58b21888c5d9b463cfb07b8eebd7de73628a45afb152ea64205cd0"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/FusedDIGIFinalShading.bin": {
+        "bytes": 2366996,
+        "sha256": "585f89f5e674cfa545508cd4d2649a00adbc517102e7f9546c840b26bdb3f949"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/GenerateInitialSamples.bin": {
+        "bytes": 18804296,
+        "sha256": "eaf511c8766ab4ef2626b031aeea09ec9c26e8b77a443f05b1687bdfc9640a6b"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/GIFinalShading.bin": {
+        "bytes": 2019436,
+        "sha256": "766a4233b5ffe3056b64fa9c87ae972816cee885ac75dfabd5e9700f77b79b9c"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/GISpatialResampling.bin": {
+        "bytes": 2222708,
+        "sha256": "df7ada2ea1d4c98623dd7c2c083f2a11010a2f4ebf6093e938dbce5727c4325c"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/GITemporalResampling.bin": {
+        "bytes": 2235180,
+        "sha256": "0b8a3fae0a7ed79465da286d755a89db61fd021664948204ab95157d5e0d9200"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/PrepareLights.bin": {
+        "bytes": 572792,
+        "sha256": "f50c0c470dc107e1a1fd921f283c1df50213f3935c591022271a35f04a8f3d8d"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/PreprocessEnvironmentMap.bin": {
+        "bytes": 422946,
+        "sha256": "ee2fc9ba817576c26883d80e516249e11d35230abc1699534814c3c86ac7946a"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/PresampleEnvironmentMap.bin": {
+        "bytes": 861532,
+        "sha256": "2ebf26fee8c264b021c538bba3a89571d7cd7d108ff88727a07d820ab69fc111"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/PresampleLights.bin": {
+        "bytes": 863552,
+        "sha256": "9fac3c8199e6e10c8811cdbc644883fa8cef9a7baa2280bd8de549730b58ece4"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/PresampleReGIR.bin": {
+        "bytes": 1843067,
+        "sha256": "2a0f9f54ff94259bf5873e8e15c30aced7038b48bb039056940c51c64a58f109"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/SpatialResampling.bin": {
+        "bytes": 6101144,
+        "sha256": "6e2d581bc141a307cfba883221afdcff8f32fed91d5473f5107e5b68bdd47480"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/RTXDI/TemporalResampling.bin": {
+        "bytes": 4936708,
+        "sha256": "c6982bb5cbd0f343fab87fc1d08252874a07124b6fb069bf633303411179c81f"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/TLASCull.bin": {
+        "bytes": 45160,
+        "sha256": "d03e63df5bff580e6c42f46a1266ee72ca453d6b3cc613a11af029638486cb3a"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ToneMapper/luminance_ps.bin": {
+        "bytes": 9972,
+        "sha256": "849a44e7c8dce9911af2df86ef0ec0a9b1c572d9e7350f5188a75d1dc7591f91"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ToneMapper/ToneMapping_capture_cs.bin": {
+        "bytes": 16724,
+        "sha256": "0cb57d6f7108d9f8a38eb4f8a9d4b45d60bb0e01b376724bd90705b26e371eb4"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/ToneMapper/ToneMapping_main_ps.bin": {
+        "bytes": 26748,
+        "sha256": "2a081d498e039e9c9df38a44437f26dcd0a016fcbfde822c163d3252dbcd539c"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Lighting/Distant/BC6UCompress_CSMain.bin": {
+        "bytes": 172982,
+        "sha256": "54142348401c50b4ad0fe1c5639123b4d3e543b95e77e3bf3b496933a8c34cb7"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Lighting/Distant/BRDFLUTGenerator.bin": {
+        "bytes": 100536,
+        "sha256": "c7f10f4b3ba1c643e9775271552878d854cc7c3633b1880c2ccca7d4f5b5a73d"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Lighting/Distant/EnvMapBaker_BaseLayerCS.bin": {
+        "bytes": 515968,
+        "sha256": "5433b79ccf5136ad111c8acf3c4488e8bc2efc9964e63ea8102b39e1300e252c"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Lighting/Distant/EnvMapBaker_LowResPrePassLayerCS.bin": {
+        "bytes": 242204,
+        "sha256": "fa23721181267014ed2084d401f81fedf5ff258179618528de8ce129c7b6d494"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Lighting/Distant/EnvMapBaker_MIPReduceCS.bin": {
+        "bytes": 221364,
+        "sha256": "918e22dc624ec8e8a45245e0d4b539e5b97b7a3c3e5b4685310020867b4f325c"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Lighting/Distant/EnvMapImportanceSamplingBaker_BuildMIPDescentImportanceMapCS.bin": {
+        "bytes": 195784,
+        "sha256": "031b6327b1eb8f41309324d2ca16bd81e143f8177e96f3f05d7cf87528c2bd81"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/AOSpatialPass.bin": {
+        "bytes": 250056,
+        "sha256": "0f284e1f6af269bcda77ad4461dcbf293928a6c9011333970aacd2353bb97fe5"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/AOTemporalUpscale.bin": {
+        "bytes": 253096,
+        "sha256": "39410666ca57680acad137cd85e2759c03109387a9c63aa1334964cf68b866bc"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/DeferredLightingCombine.bin": {
+        "bytes": 1417256,
+        "sha256": "534a49a404fde6e015f5f6e05f4e6074d50fe8367b94d6c771f86eac69d888ca"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/DirectLightingPass.bin": {
+        "bytes": 658376,
+        "sha256": "7588c2cb8dd2470bbf40f3e8ae4d748ba3e690bfa78939979bb868bc93fc9f47"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/GTAOPass.bin": {
+        "bytes": 642108,
+        "sha256": "149ed0a1826b9d1e32a17b089ae9d418602603e414d214c8868c4c1241843733"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/IntroPrepareLights.bin": {
+        "bytes": 271368,
+        "sha256": "6dc116465b10691b84e19b87c0d8851e67c45e48ab346c84e661398b665729db"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/IntroReSTIRDI_Final.bin": {
+        "bytes": 861388,
+        "sha256": "a92698c0126a367f3a26caf706a72db26a1aeaa59182fead34e15dfd2de86192"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/IntroReSTIRDI_Initial.bin": {
+        "bytes": 1025824,
+        "sha256": "08a792cb735dd3298fcd72a89b46de5436aa8e34b36eecec0d6ed05271c1559c"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/IntroReSTIRDI_Spatial.bin": {
+        "bytes": 1123812,
+        "sha256": "90a97633a407318bd352787e20df99e93eca987ae75d7e015f16a68118e5a0c0"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/IntroReSTIRDI_Temporal.bin": {
+        "bytes": 908572,
+        "sha256": "3623594898a6c529093d9c12868de03d7a14a17a3bd52a9b7b3fd1ddc1193bd5"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/RTXDIStreamingRISLightingPass.bin": {
+        "bytes": 865676,
+        "sha256": "5403a36102133e2fa01b9dd860d7d166b20f0bf32631ec17a13a1dfc97419fba"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/SHaRCDebugCache.bin": {
+        "bytes": 644208,
+        "sha256": "28924e471fca33b01815b732173f77817fe0125e6bd9fb0c61b219a75be37e42"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/SSRPasses_DepthHierarchyCS.bin": {
+        "bytes": 591424,
+        "sha256": "1a0b79f00dd925bf81a6c25263dc31e42d3b5d161f9866f5d0d33f7143524651"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/SSRPasses_SSRBlurCS.bin": {
+        "bytes": 576672,
+        "sha256": "b8bf153a74f8375f70a3e08a16d0578251e5f496885ede93cd2be7222da7ef5d"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/IntroSample/SSRPasses_SSRCS.bin": {
+        "bytes": 605512,
+        "sha256": "c450151688e56d829a5c5992bd1bc34c2b8f1cba7371cb824257d3ea4ca58bc8"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/Libraries/LightsBaker/CubemapProcessing_ConvolveIrradianceCS.bin": {
+        "bytes": 190188,
+        "sha256": "83e1232731b13a6a0e9747d9d033341624a959e2acea924716dc6b479e373fe9"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/Libraries/LightsBaker/CubemapProcessing_GGXPrefilterCS.bin": {
+        "bytes": 188024,
+        "sha256": "d144e9d271cb337ff875248d82c29214639c710aec84391a6a191df9ee2c4076"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/Libraries/ShaderDebug/ShaderDebug.bin": {
+        "bytes": 180248,
+        "sha256": "f0729c41bbf2069e6f02a858f386bb4a78becdefe13b23c98107d6f63ff988b5"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/Libraries/ShaderDebug/ShaderDebug_main_cs.bin": {
+        "bytes": 81742,
+        "sha256": "86734b2f8fb4522c5930fb9971e4cd9363ad6ebdd8bd3bd44131cd682af402d8"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/Libraries/ShaderDebug/ShaderDebug_main_ps.bin": {
+        "bytes": 174608,
+        "sha256": "d8bbbfb9bb18ccb6ad6ae347322f51be395c62437536690a05cdaa1f2878af28"
+      },
+      "ShaderPrecompiled/Rtxpt/dxil/Shaders/Libraries/ShaderDebug/ShaderDebug_main_vs.bin": {
+        "bytes": 173660,
+        "sha256": "a5f3d0e90a56ebd040e8253bcaa01f41ccbd38bf371c752d75de9c99dbedb4f1"
+      }
+    },
+    "artifact_note": "Post-capture on-disk snapshot, including shader files/cache observed at delivery. Dynamically cached shaders may be generated on demand; root/runtime pins identify source. Binaries are not redistributed."
+  }
+}

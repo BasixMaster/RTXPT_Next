@@ -1,0 +1,125 @@
+{
+  "label": "B0-kitchen-r3",
+  "scene": "kitchen-with-test-stuff.scene.json",
+  "mode": "digi",
+  "output_track": "unreconstructed tonemapped sRGB PNG; not linear HDR",
+  "exe_sha256": "1600bac7ee4ca5f4baf5fece673b25b6cc3cd0c3da7e04cf3b5788847a3210c3",
+  "started_utc": "2026-10-28T16:20:29.429680+00:00",
+  "command": [
+    "<WORKSPACE>\\work\\B0-source\\bin\\Rtxpt.exe",
+    "--scene",
+    "kitchen-with-test-stuff.scene.json",
+    "--width",
+    "1280",
+    "--height",
+    "720",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "1",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "2.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "<WORKSPACE>\\work\\quality-B0-kitchen-r3\\frame.png",
+    "--captureSuffix",
+    "B0-kitchen-r3",
+    "--perfLog",
+    "<WORKSPACE>\\work\\quality-B0-kitchen-r3\\partial-perf.csv",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--stopAnimations",
+    "--captureSimple"
+  ],
+  "cwd": "<WORKSPACE>\\work\\B0-source\\bin",
+  "settings": {
+    "width": 1280,
+    "height": 720,
+    "exposure": 2.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 1,
+    "restir_gi": 1,
+    "simple": true,
+    "record_start": null,
+    "frames": 1,
+    "reference_spp": null
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "process_id": 51272,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 8.812999999994645,
+  "images": [
+    {
+      "name": "frame_B0-kitchen-r3.png",
+      "sha256": "8d1b2b598e063bfcebf31fdc47ae4647f2b0c7c90ea5f0f8dc1b8b5118757ffe",
+      "bytes": 3135265
+    }
+  ],
+  "resource_scope": "nvidia-smi values cover the whole device including other applications; not renderer-exclusive allocation.",
+  "resource_samples": [
+    {
+      "elapsed_s": 0.01600000000325963,
+      "device_wide_csv": "8874, 3, 49, 2520, 140.50",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 1.0779999999940628,
+      "device_wide_csv": "8881, 1, 48, 2520, 67.48",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 2.1560000000026776,
+      "device_wide_csv": "8874, 5, 47, 495, 46.85",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 3.2189999999973224,
+      "device_wide_csv": "8879, 3, 47, 360, 42.05",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 4.26600000000326,
+      "device_wide_csv": "8888, 2, 46, 315, 42.04",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 5.3439999999973224,
+      "device_wide_csv": "9497, 16, 48, 2520, 61.85",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 6.39100000000326,
+      "device_wide_csv": "11337, 36, 48, 2520, 70.59",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 7.4689999999973224,
+      "device_wide_csv": "11836, 1, 47, 1530, 56.31",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 8.531000000002678,
+      "device_wide_csv": "8865, 2, 49, 2520, 125.53",
+      "exit_code": 0
+    }
+  ]
+}

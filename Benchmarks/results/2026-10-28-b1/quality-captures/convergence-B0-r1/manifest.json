@@ -1,0 +1,115 @@
+{
+  "label": "B0",
+  "scene": "convergence-test.scene.json",
+  "mode": "digi",
+  "output_track": "unreconstructed tonemapped sRGB PNG; not linear HDR",
+  "exe_sha256": "1600bac7ee4ca5f4baf5fece673b25b6cc3cd0c3da7e04cf3b5788847a3210c3",
+  "started_utc": "2026-10-28T15:31:47.809797+00:00",
+  "command": [
+    "<WORKSPACE>\\work\\B0-source\\bin\\Rtxpt.exe",
+    "--scene",
+    "convergence-test.scene.json",
+    "--width",
+    "1280",
+    "--height",
+    "720",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "1",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "<WORKSPACE>\\work\\quality-B0-convergence\\frame.png",
+    "--captureSuffix",
+    "B0",
+    "--perfLog",
+    "<WORKSPACE>\\work\\quality-B0-convergence\\partial-perf.csv",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--stopAnimations",
+    "--captureSimple"
+  ],
+  "cwd": "<WORKSPACE>\\work\\B0-source\\bin",
+  "settings": {
+    "width": 1280,
+    "height": 720,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 1,
+    "restir_gi": 1,
+    "simple": true,
+    "record_start": null,
+    "frames": 1,
+    "reference_spp": null
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "process_id": 42644,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 7.077999999994063,
+  "images": [
+    {
+      "name": "frame_B0.png",
+      "sha256": "9efc4f3135a634f6398c425521e730971f7250817f069b0d2a65cacd49945462",
+      "bytes": 3533668
+    }
+  ],
+  "resource_scope": "nvidia-smi values cover the whole device including other applications; not renderer-exclusive allocation.",
+  "resource_samples": [
+    {
+      "elapsed_s": 0.01600000000325963,
+      "device_wide_csv": "10723, 6, 47, 285, 40.85",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 1.062999999994645,
+      "device_wide_csv": "10730, 3, 47, 240, 35.56",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 2.0939999999973224,
+      "device_wide_csv": "10713, 3, 47, 210, 35.86",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 3.125,
+      "device_wide_csv": "10731, 7, 47, 210, 35.62",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 4.1560000000026776,
+      "device_wide_csv": "10751, 3, 47, 315, 35.59",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 5.202999999994063,
+      "device_wide_csv": "11981, 2, 48, 2520, 63.14",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 6.25,
+      "device_wide_csv": "12761, 1, 48, 2520, 67.18",
+      "exit_code": 0
+    }
+  ]
+}

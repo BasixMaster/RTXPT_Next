@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "kind": "presentmon_comparison",
+  "baseline": "B0",
+  "candidate": "B1",
+  "comparisons": {
+    "CPUFrameTime": {
+      "status": "measured",
+      "baseline_ms": 5.433999999999999,
+      "candidate_ms": 5.41965,
+      "candidate_change_percent": -0.26407802723591445,
+      "baseline_over_candidate_ratio": 1.0026477724576308,
+      "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+      "paired_run_bootstrap_change_ci95_percent": [
+        -7.712004567091768,
+        1.8252700798496946
+      ],
+      "inference_limit": "Exploratory5process paired-index bootstrap; temporal frames not independent replicates; clocks not fixed."
+    },
+    "CPUBusy": {
+      "status": "measured",
+      "baseline_ms": 5.32205,
+      "candidate_ms": 5.2896,
+      "candidate_change_percent": -0.6097274546462361,
+      "baseline_over_candidate_ratio": 1.0061346793708408,
+      "meaning": "CPU work interval before present; not accumulated CPU core time."
+    },
+    "CPUWait": {
+      "status": "measured",
+      "baseline_ms": 0.1109,
+      "candidate_ms": 0.10855000000000001,
+      "candidate_change_percent": -2.1190261496843887,
+      "baseline_over_candidate_ratio": 1.0216490096729618,
+      "meaning": "CPU waiting before starting the next frame."
+    },
+    "GPUTime": {
+      "status": "measured",
+      "baseline_ms": 5.3444,
+      "candidate_ms": 5.3636,
+      "candidate_change_percent": 0.3592545468153574,
+      "baseline_over_candidate_ratio": 0.9964203147139982,
+      "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+      "paired_run_bootstrap_change_ci95_percent": [
+        -6.926866886594407,
+        3.277720641450488
+      ],
+      "inference_limit": "Exploratory5process paired-index bootstrap; temporal frames not independent replicates; clocks not fixed."
+    },
+    "GPUBusy": {
+      "status": "measured",
+      "baseline_ms": 5.33975,
+      "candidate_ms": 5.35915,
+      "candidate_change_percent": 0.36331288918018956,
+      "baseline_over_candidate_ratio": 0.996380022951401,
+      "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+      "paired_run_bootstrap_change_ci95_percent": [
+        -6.893003232971184,
+        3.3183035756841894
+      ],
+      "inference_limit": "Exploratory5process paired-index bootstrap; temporal frames not independent replicates; clocks not fixed."
+    },
+    "GPUWait": {
+      "status": "measured",
+      "baseline_ms": 0.0041,
+      "candidate_ms": 0.0038,
+      "candidate_change_percent": -7.317073170731714,
+      "baseline_over_candidate_ratio": 1.0789473684210527,
+      "meaning": "GPU idle time inside the frame GPU interval."
+    },
+    "GPULatency": {
+      "status": "measured",
+      "baseline_ms": 6.8325499999999995,
+      "candidate_ms": 6.7605,
+      "candidate_change_percent": -1.0545111268852603,
+      "baseline_over_candidate_ratio": 1.0106574957473557,
+      "meaning": "CPU frame start until GPU work begins; not GPU execution time."
+    },
+    "DisplayedTime": {
+      "status": "measured",
+      "baseline_ms": 4.17105,
+      "candidate_ms": 4.17145,
+      "candidate_change_percent": 0.009589911413199204,
+      "baseline_over_candidate_ratio": 0.9999041100816263,
+      "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time."
+    },
+    "DisplayLatency": {
+      "status": "measured",
+      "baseline_ms": 22.62155,
+      "candidate_ms": 22.595100000000002,
+      "candidate_change_percent": -0.11692390662884078,
+      "baseline_over_candidate_ratio": 1.0011706077866438,
+      "meaning": "CPU frame start until display; not GPU execution time."
+    }
+  },
+  "inference": "Descriptive per-metric changes only; compare matching source/configuration and run uncertainty before claiming improvement.",
+  "limitations": [
+    "Ratios are specific to each metric. Do not present inverse GPUBusy/GPUTime as complete renderer FPS.",
+    "Matching CSV selection policies do not establish matching resolution, scene, reconstruction, clocks or presentation state."
+  ],
+  "resources": {
+    "B0": {
+      "scope": "Whole-device readings include background applications; not exclusive renderer allocation.",
+      "device_memory_used_MiB": {
+        "min": 12058.0,
+        "median": 12303.0,
+        "max": 12920.0
+      },
+      "temperature_C": {
+        "min": 62.0,
+        "median": 69.0,
+        "max": 70.0
+      },
+      "graphics_clock_MHz": {
+        "min": 2430.0,
+        "median": 2505.0,
+        "max": 2520.0
+      }
+    },
+    "B1": {
+      "scope": "Whole-device readings include background applications; not exclusive renderer allocation.",
+      "device_memory_used_MiB": {
+        "min": 11985.0,
+        "median": 12222.5,
+        "max": 12924.0
+      },
+      "temperature_C": {
+        "min": 67.0,
+        "median": 70.0,
+        "max": 71.0
+      },
+      "graphics_clock_MHz": {
+        "min": 2400.0,
+        "median": 2475.0,
+        "max": 2520.0
+      }
+    }
+  },
+  "run_validation": [
+    {
+      "run": "kitchen-B0-r1",
+      "internal_frames": 8700,
+      "last_app_frame": "8699",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "kitchen-B0-r2",
+      "internal_frames": 8613,
+      "last_app_frame": "8612",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "kitchen-B0-r3",
+      "internal_frames": 8902,
+      "last_app_frame": "8901",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "kitchen-B0-r4",
+      "internal_frames": 9660,
+      "last_app_frame": "9659",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "kitchen-B0-r5",
+      "internal_frames": 9781,
+      "last_app_frame": "9780",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "kitchen-B1-r1",
+      "internal_frames": 9180,
+      "last_app_frame": "9179",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "kitchen-B1-r2",
+      "internal_frames": 9591,
+      "last_app_frame": "9590",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "kitchen-B1-r3",
+      "internal_frames": 9728,
+      "last_app_frame": "9727",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "kitchen-B1-r4",
+      "internal_frames": 9445,
+      "last_app_frame": "9444",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "kitchen-B1-r5",
+      "internal_frames": 9842,
+      "last_app_frame": "9841",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    }
+  ]
+}

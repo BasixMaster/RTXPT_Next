@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "frozen_on": "2026-10-28",
+  "scope": "Initial runtime/API migration comparison; no ReSTIR PT integration or B2 optimization",
+  "versions": {
+    "B0": "303b408ab81790a5051abd7573830b7a4112eb8e",
+    "B1": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee"
+  },
+  "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+  "scenes": [
+    {
+      "id": "convergence",
+      "file": "convergence-test.scene.json",
+      "exposure": 0
+    },
+    {
+      "id": "kitchen",
+      "file": "kitchen-with-test-stuff.scene.json",
+      "exposure": 2
+    }
+  ],
+  "render_settings": {
+    "width": 1280,
+    "height": 720,
+    "spp": 1,
+    "restir_di": true,
+    "restir_gi": true,
+    "reconstruction": "none",
+    "sharc": false,
+    "animation": "disabled",
+    "exposure": "fixed per upstream regression scene",
+    "post_filters": false,
+    "firefly_filters": false,
+    "subsampling": false,
+    "frame_generation": false
+  },
+  "timing": {
+    "tool": "PresentMon 2.6.0 standalone x64",
+    "tool_sha256": "b2a706bc6ad475749e3b7e3409263aa1e6906d45bdcf993f6dbc0f660188f1af",
+    "warmup_wall_seconds": 45,
+    "measurement_wall_seconds": 15,
+    "repetitions_per_scene_version": 5,
+    "pair_order": [
+      [
+        "B0",
+        "B1"
+      ],
+      [
+        "B1",
+        "B0"
+      ],
+      [
+        "B0",
+        "B1"
+      ],
+      [
+        "B1",
+        "B0"
+      ],
+      [
+        "B0",
+        "B1"
+      ]
+    ],
+    "selection": "Last600 target-process/swapchain frames, drop final16; record unavailable FrameType field and require frame generation disabled in renderer config",
+    "primary": "GPUBusy process active-engine duration in ms; not exclusive DI/GI cost",
+    "secondary": [
+      "FrameTime CPU frame cadence",
+      "GPUTime including GPU wait",
+      "per-run p95"
+    ],
+    "aggregation": "Median of process-run medians, across-run bootstrap intervals; no frame pooling as independent trials",
+    "no_image_writes": true,
+    "resource_telemetry": "nvidia-smi device-wide; background allocations remain included, not renderer-exclusive VRAM",
+    "render_unfocused_guard": "Keep original static-scene captureSequence active; first1200warmupframes finish before timed sample, sceneTime stays0 and noPNG is reached; ShouldRenderUnfocused remains true. Process termination is bounded.",
+    "validation": "Reject missing CSV, fewer than616 matchingPID rows, unexpectedPNG writes, multiple swapchains or parser failures."
+  },
+  "quality": {
+    "track": "Captured tonemapped sRGB PNG; not linear HDR or paper-exact radiometric scores",
+    "captures": "Static captureSimple64frame warmup, separate from timed runs",
+    "reference": "B0 reference renderer2048spp; assess reference uncertainty separately",
+    "metrics": [
+      "RGB MSE/PSNR",
+      "display-luma SMAPE100",
+      "official LDR-FLIP1.7 at67PPD",
+      "decoded RGB equality"
+    ],
+    "repeat_control": "Compare B0 repeat differences before attributing stochastic pixel differences to migration",
+    "seed_limit": "No verified CLI seed selector; repeated processes are not claimed independent Monte Carlo draws"
+  },
+  "exclusions": [
+    "Early command-launch failures and child-debugger smoke are diagnostics only",
+    "Static-scene sequence pilot timed out because upstream sceneTime remains0; excluded from comparisons",
+    "Startup shader compilation, PNG readback/write, synthetic tool tests and paper tables are not benchmark samples",
+    "Unguarded wall-clock timing trials excluded because focus-dependent rendering caused missing frame data; retained under work/b1-first-runs as setup diagnostics."
+  ],
+  "promotion": "Runtime build plus valid image/quality and timing checks; report inconclusive/mixed effects honestly, no assumed performance gain",
+  "protocol_revision": 2
+}

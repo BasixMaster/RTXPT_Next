@@ -1,8 +1,8 @@
 # Wyman recent-paper breadth review
 
-Ranks 6, 8, 9, 11–20 in Wyman conference/journal list; other seven covered separately. Final integration basis: RTXDI_Next has RTXPT 1.9 at the repository root, with its Assets scenes and existing RTXDI 3.0 integration as B0. B1 is a planned RTXDI 3.1 runtime/integration update; B2+ are future independently pinned optimization versions. Priorities below are roadmap proposals only; no technique implementation or GPU benchmark was performed.
+Ranks 6, 8, 9, 11–20 in Wyman conference/journal list; other seven covered separately. Final integration basis: RTXPT_Next has RTXPT 1.9 at the repository root, with its Assets scenes and existing RTXDI 3.0 integration as B0. B1 is the implemented RTXDI3.1 DI/GI runtime/API migration; see [first results](B1_RESULTS.md); B2+ are future independently pinned optimization versions. Priorities below remain research proposals; the migration-only GPU comparison is documented separately.
 
-Many cwyman PDFs exceed web extraction size limits. Full-text access is marked only for publisher HTML read; indexed excerpts/abstracts are labelled. No performance measurements were run.
+Many cwyman PDFs exceed web extraction size limits. Full-text access is marked only for publisher HTML read; indexed excerpts/abstracts are labelled. No paper-algorithm reproduction was run in this breadth review.
 
 ## 6. Gradient-Domain ReSTIR Path Tracing (2026)
 

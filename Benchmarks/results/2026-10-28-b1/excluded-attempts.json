@@ -1,0 +1,20 @@
+{
+  "exclusions": [
+    {
+      "name": "kitchen-B0-r2-interrupted",
+      "status": "running",
+      "reason": "Interrupted process or sandbox trace denied; no accepted measurement."
+    },
+    {
+      "name": "kitchen-B0-r2-trace-denied",
+      "status": "failed",
+      "reason": "Interrupted process or sandbox trace denied; no accepted measurement."
+    },
+    {
+      "name": "kitchen-B0-r2-trace-loss",
+      "status": "failed",
+      "reason": "Interrupted process or sandbox trace denied; no accepted measurement."
+    }
+  ],
+  "earlier": "Launch diagnostics, static-scene capture timeout and unguarded focus-throttled trials excluded; see frozen protocol and report."
+}

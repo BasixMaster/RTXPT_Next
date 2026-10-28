@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "kind": "presentmon_comparison",
+  "baseline": "B0",
+  "candidate": "B1",
+  "comparisons": {
+    "CPUFrameTime": {
+      "status": "measured",
+      "baseline_ms": 4.50905,
+      "candidate_ms": 4.555899999999999,
+      "candidate_change_percent": 1.0390215233807343,
+      "baseline_over_candidate_ratio": 0.989716631181545,
+      "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+      "paired_run_bootstrap_change_ci95_percent": [
+        -3.334862619156853,
+        5.370096796242829
+      ],
+      "inference_limit": "Exploratory5process paired-index bootstrap; temporal frames not independent replicates; clocks not fixed."
+    },
+    "CPUBusy": {
+      "status": "measured",
+      "baseline_ms": 4.3855,
+      "candidate_ms": 4.4331,
+      "candidate_change_percent": 1.0853950518754818,
+      "baseline_over_candidate_ratio": 0.9892625927680406,
+      "meaning": "CPU work interval before present; not accumulated CPU core time."
+    },
+    "CPUWait": {
+      "status": "measured",
+      "baseline_ms": 0.11135,
+      "candidate_ms": 0.11424999999999999,
+      "candidate_change_percent": 2.604400538841478,
+      "baseline_over_candidate_ratio": 0.9746170678336982,
+      "meaning": "CPU waiting before starting the next frame."
+    },
+    "GPUTime": {
+      "status": "measured",
+      "baseline_ms": 4.462149999999999,
+      "candidate_ms": 4.45825,
+      "candidate_change_percent": -0.08740181302734351,
+      "baseline_over_candidate_ratio": 1.0008747827062188,
+      "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+      "paired_run_bootstrap_change_ci95_percent": [
+        -5.763174026083839,
+        4.965408139392413
+      ],
+      "inference_limit": "Exploratory5process paired-index bootstrap; temporal frames not independent replicates; clocks not fixed."
+    },
+    "GPUBusy": {
+      "status": "measured",
+      "baseline_ms": 4.458399999999999,
+      "candidate_ms": 4.452999999999999,
+      "candidate_change_percent": -0.12111968419163954,
+      "baseline_over_candidate_ratio": 1.001212665618684,
+      "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+      "paired_run_bootstrap_change_ci95_percent": [
+        -5.774561459192961,
+        4.967655587776032
+      ],
+      "inference_limit": "Exploratory5process paired-index bootstrap; temporal frames not independent replicates; clocks not fixed."
+    },
+    "GPUWait": {
+      "status": "measured",
+      "baseline_ms": 0.0039,
+      "candidate_ms": 0.004,
+      "candidate_change_percent": 2.564102564102577,
+      "baseline_over_candidate_ratio": 0.975,
+      "meaning": "GPU idle time inside the frame GPU interval."
+    },
+    "GPULatency": {
+      "status": "measured",
+      "baseline_ms": 5.91125,
+      "candidate_ms": 5.9528,
+      "candidate_change_percent": 0.7028970183971195,
+      "baseline_over_candidate_ratio": 0.9930200913855665,
+      "meaning": "CPU frame start until GPU work begins; not GPU execution time."
+    },
+    "DisplayedTime": {
+      "status": "measured",
+      "baseline_ms": 4.1664,
+      "candidate_ms": 4.1667,
+      "candidate_change_percent": 0.0072004608294706784,
+      "baseline_over_candidate_ratio": 0.9999280005759955,
+      "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time."
+    },
+    "DisplayLatency": {
+      "status": "measured",
+      "baseline_ms": 20.60775,
+      "candidate_ms": 20.752299999999998,
+      "candidate_change_percent": 0.7014351396925855,
+      "baseline_over_candidate_ratio": 0.9930345070184992,
+      "meaning": "CPU frame start until display; not GPU execution time."
+    }
+  },
+  "inference": "Descriptive per-metric changes only; compare matching source/configuration and run uncertainty before claiming improvement.",
+  "limitations": [
+    "Ratios are specific to each metric. Do not present inverse GPUBusy/GPUTime as complete renderer FPS.",
+    "Matching CSV selection policies do not establish matching resolution, scene, reconstruction, clocks or presentation state."
+  ],
+  "resources": {
+    "B0": {
+      "scope": "Whole-device readings include background applications; not exclusive renderer allocation.",
+      "device_memory_used_MiB": {
+        "min": 12703.0,
+        "median": 12800.0,
+        "max": 13300.0
+      },
+      "temperature_C": {
+        "min": 61.0,
+        "median": 69.0,
+        "max": 70.0
+      },
+      "graphics_clock_MHz": {
+        "min": 2475.0,
+        "median": 2520.0,
+        "max": 2520.0
+      }
+    },
+    "B1": {
+      "scope": "Whole-device readings include background applications; not exclusive renderer allocation.",
+      "device_memory_used_MiB": {
+        "min": 12706.0,
+        "median": 12791.0,
+        "max": 13261.0
+      },
+      "temperature_C": {
+        "min": 63.0,
+        "median": 70.0,
+        "max": 71.0
+      },
+      "graphics_clock_MHz": {
+        "min": 2460.0,
+        "median": 2505.0,
+        "max": 2520.0
+      }
+    }
+  },
+  "run_validation": [
+    {
+      "run": "convergence-B0-r1",
+      "internal_frames": 12278,
+      "last_app_frame": "12277",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "convergence-B0-r2",
+      "internal_frames": 12123,
+      "last_app_frame": "12122",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "convergence-B0-r3",
+      "internal_frames": 12001,
+      "last_app_frame": "12000",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "convergence-B0-r4",
+      "internal_frames": 11547,
+      "last_app_frame": "11546",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "convergence-B0-r5",
+      "internal_frames": 11617,
+      "last_app_frame": "11616",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "convergence-B1-r1",
+      "internal_frames": 11711,
+      "last_app_frame": "11710",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "convergence-B1-r2",
+      "internal_frames": 12147,
+      "last_app_frame": "12146",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "convergence-B1-r3",
+      "internal_frames": 12166,
+      "last_app_frame": "12165",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "convergence-B1-r4",
+      "internal_frames": 11610,
+      "last_app_frame": "11609",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "run": "convergence-B1-r5",
+      "internal_frames": 11809,
+      "last_app_frame": "11808",
+      "static_scene_time": 0,
+      "render_size": [
+        1280,
+        720
+      ]
+    }
+  ]
+}

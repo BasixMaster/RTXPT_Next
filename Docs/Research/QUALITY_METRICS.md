@@ -1,6 +1,6 @@
 # Image quality and temporal stability measurement plan
 
-Checked 2026-10-28. This is a source-backed metric specification and proposed comparison protocol, not metrics code, renderer implementation, captured images or measured results. Final comparison basis remains B0: untouched RTXPT 1.9 with its scenes and original dependency pins; B1: future RTXDI 3.1 adoption; B2+: future isolated optimization variants. RTXDI 3.1 is currently a linked reference, not an applied B0 runtime change.
+Checked 2026-10-28. This chapter retains the paper-backed metric specification and broader proposed protocol. Implemented initial tools measure tonemapped display RGB MSE/PSNR, display-luma SMAPE and official LDR-FLIP; see [B1 results](B1_RESULTS.md). HDR-FLIP, linear-HDR error, independent-seed statistics and temporal metrics remain future instrumentation. B0 is exact RTXPT1.9; B1 is the runtime3.1 DI/GI API migration; B2+ are future research changes.
 
 ## What the selected papers actually report
 
@@ -142,4 +142,4 @@ Retain raw max/high-percentile errors, firefly counts with a declared scale-awar
 
 ## Summary and lessons learned
 
-The selected papers support a complementary suite: radiometric error (MSE/explicit RelMSE and MAPE), luminance-balanced SMAPE, perceptual HDR/display FLIP, and spatial/temporal covariance. Their metric names do not imply identical preprocessing or normalization. Exact CGNS equations and paper-specific settings are preserved above; unspecified choices are labelled project conventions. The next action is to record this schema and capture matrix in the roadmap, preserve B0, then implement evaluation and B1 only in a later authorized stage. No quality or performance improvement has been measured by this document.
+The selected papers support a complementary suite: radiometric error (MSE/explicit RelMSE and MAPE), luminance-balanced SMAPE, perceptual HDR/display FLIP, and spatial/temporal covariance. Their metric names do not imply identical preprocessing or normalization. Exact CGNS equations and paper-specific settings are preserved above; unspecified choices are labelled project conventions. B1's first implemented evaluation uses the explicitly labelled display-space subset in [B1 results](B1_RESULTS.md); it does not establish radiometric accuracy, temporal stability or paper-exact metric parity. Preserve B0 and add verified HDR/seed controls before those stronger claims.

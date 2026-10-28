@@ -1,0 +1,24 @@
+{
+  "gpu": "NVIDIA GeForce RTX4090",
+  "dedicated_memory_MiB": 24564,
+  "driver": "617.42",
+  "cpu": {
+    "Name": "AMD Ryzen 7 5800X3D 8-Core Processor           ",
+    "NumberOfCores": 8,
+    "NumberOfLogicalProcessors": 16
+  },
+  "os": {
+    "Caption": "Microsoft Windows 10 Home",
+    "Version": "10.0.19045",
+    "BuildNumber": "19045",
+    "TotalVisibleMemorySize": 33473068
+  },
+  "cmake": "4.1.3",
+  "compiler": "MSVC19.44.35222",
+  "configuration": "Release",
+  "baseline_source": "303b408ab81790a5051abd7573830b7a4112eb8e",
+  "candidate_source": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
+  "assets": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+  "builds": "B0 and B1 succeeded; first B1 parallel build hit host commit-memory limit and retry succeeded with bounded compiler concurrency.",
+  "memory_scope": "nvidia-smi is whole device, includes background allocations; not renderer-exclusive VRAM."
+}

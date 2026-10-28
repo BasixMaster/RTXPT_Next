@@ -1,13 +1,13 @@
 # Version comparison protocol for Basix Pathtracing / RTXPT_Next
 
-This is a plan for later benchmark execution. No optimized renderer, B1 integration, benchmark harness or GPU results are implemented here. The final repository basis is **RTXPT 1.9 at the root**, including its Assets scene repository. The current RTXDI 3.0 runtime integration is the baseline. The optional RTXDI SDK source checkout is a reference, and does not establish that RTXDI 3.1 is integrated or enabled.
+This chapter defines the general comparison contract. The initial B1 migration and bounded capture/timing tools are now implemented; the first measured subset and its explicit gaps are in [B1 results](B1_RESULTS.md). The final repository basis is **RTXPT 1.9 at the root**, including its Assets scene repository. The current RTXDI 3.0 runtime integration is the baseline. B1 applies runtime3.1 to the existing DI/GI path; the separate optional SDK checkout remains a reference and does not establish PT integration.
 
 ## Immutable experiment versions
 
 | ID | Exact source basis / planned scope | Comparison |
 | --- | --- | --- |
 | B0 | NVIDIA RTXPT 1.9 source commit `303b408ab81790a5051abd7573830b7a4112eb8e`, retained as tag `rtxpt-1.9-baseline` and branch `baseline/rtxpt-1.9`; existing `External/Rtxdi` gitlink `a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6`; Assets gitlink `a56be4ed65029d2733fd02f00f4027ffd541eda8` | Preserve original rendering behavior, feature defaults and binaries. |
-| B1 | Future single immutable commit containing only the RTXDI 3.1 runtime/integration update and necessary compatibility fixes; pin its exact runtime gitlink in the run manifest | B1 vs B0 isolates the version update. Merely adding `External/RTXDI-SDK` is insufficient. |
+| B1 | `7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee`: RTXDI3.1 runtime/API update and necessary compatibility fixes; runtime `f12037fa8e97ebc08e9e3edfd2de528ed1772a4b` | B1 vs B0 isolates the version update. Merely adding `External/RTXDI-SDK` is insufficient. |
 | B2 | Future single immutable commit: audited PT++ baseline and required ReSTIR PT host integration, if absent after B1 | B2 vs B1; document already-shipped PT++ components to avoid counting them twice. |
 | B3+ | One named technique/ablation per immutable commit, then separately named combinations: compatible neighbors, stochastic MIS, single/multi-layer splatting, guiding, geometry LoD and BDPT | Each vs its immediate parent and B0/B1; combination vs each constituent. Do not pool builds with different estimator settings. |
 
@@ -42,7 +42,7 @@ There is no source-verified general command-line random-seed selector in the ins
 
 ## Exact upstream examples, for later execution
 
-Run each command from that version's repository root using its preserved `bin/Rtxpt.exe`. The commands below use only inspected B0 flags. Create each output directory beforehand. These are **image validation templates**, not complete performance benchmarks.
+Use each version's preserved `bin/Rtxpt.exe` with its `bin` directory as the working directory. The wrapper resolves absolute output paths; relative template paths must be adjusted accordingly. The commands below use only inspected B0 flags. Create each output directory beforehand. These are **image validation templates**, not complete performance benchmarks.
 
 Raw here means the unreconstructed captured display image, with no AA or denoiser. The current PNG path is tonemapped sRGB; it is **not linear HDR radiance**.
 
@@ -74,7 +74,7 @@ Separate first-use loading/shader compilation/OMM construction/cache initializat
 
 Use at least five process-level repetitions per version/scene/configuration in randomized or balanced order, with GPU temperatures/clocks checked. Repeat the complete paired workload, not individual pixels treated as independent samples. Report the median of run-level medians and across-run confidence intervals; include frame-time p50/p95/p99, mean and standard deviation, sample count and run duration. When runs have correlated frames, compute uncertainty from run blocks or suitable block bootstraps, not a naive confidence interval over all frames. Preserve dropped frames, crashes and outliers with stated exclusion rules.
 
-Use `perfLog` for attribution only. Add an external GPU timeline/profiler measurement of complete submitted-frame critical-path latency, plus CPU frame time and steady-state throughput in a no-image-write measurement interval. Screenshot readback/PNG writing may stall queues and alter CPU throughput; report capture timing separately. With asyncPrefix/async DLSS, summing per-pass durations can double-count overlap; report both individual durations and actual critical path. VSync/frame limit/window composition/Reflex state must be fixed and recorded. Debug layers, GPU validation and intrusive captures are disabled for final performance timing. No verified no-image-write timed-run CLI is claimed; agreeing on that measurement route is a prerequisite to publishing speedups.
+Use `perfLog` for attribution only. Add an external GPU timeline/profiler measurement of complete submitted-frame critical-path latency, plus CPU frame time and steady-state throughput in a no-image-write measurement interval. Screenshot readback/PNG writing may stall queues and alter CPU throughput; report capture timing separately. With asyncPrefix/async DLSS, summing per-pass durations can double-count overlap; report both individual durations and actual critical path. VSync/frame limit/window composition/Reflex state must be fixed and recorded. Debug layers, GPU validation and intrusive captures are disabled for final performance timing. The first benchmark uses an explicit bounded wrapper and the upstream static active-capture guard to keep rendering while unfocused without writing PNGs. See B1 results; this measures process GPU engine active time and CPU cadence, not a full critical-path profiler trace.
 
 ## Quality and efficiency comparisons
 
@@ -95,11 +95,11 @@ Required manifest fields: version ID/root SHA; all recursive submodule SHAs; exe
 
 | Version pair | Scene/config | Raw or reconstructed | Frame p50/p95/p99 | Error / temporal metric | VRAM | Equal-time gain | Equal-quality gain |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| B1 vs B0 | Pending immutable run manifest | Pending | Not measured | Not measured | Not measured | Not measured | Not measured |
+| B1 vs B0 | Convergence and Kitchen,1280×720 isolated DI/GI | Unreconstructed display captures | [Measured scope](B1_RESULTS.md) | [Display-space metrics](B1_RESULTS.md) | Device-wide only | Not established | Not established |
 | B2+ vs parent and B0/B1 | Pending implementation and manifest | Pending | Not measured | Not measured | Not measured | Not measured | Not measured |
 
-Hardware identity and effective rendering configuration have not been measured in this documentation pass. Do not invent them from paper hardware or workstation assumptions.
+Initial hardware: RTX4090/24GiB, driver617.42, Ryzen7 5800X3D, Windows10. Full first-run details and measured configuration are in B1 results; paper hardware does not substitute for this machine.
 
 ## Summary and lessons learned
 
-RTXPT already supplies repeatable screenshot/sequence controls and limited GPU-pass CSV logging. Those are sufficient to preserve visual regression inputs, but do not establish full-frame performance, independent-seed statistics or linear HDR estimator correctness. Keep B0 immutable, isolate the future B1 SDK update, then add one research change per B2+ identity. Publish gains only after complete-frame, paired-configuration experiments; paper-reported speedups and generated FPS do not substitute for these measurements.
+RTXPT already supplies repeatable screenshot/sequence controls and limited GPU-pass CSV logging. Those are sufficient to preserve visual regression inputs, but do not establish full-frame performance, independent-seed statistics or linear HDR estimator correctness. Keep B0 immutable, isolate the B1 runtime/API update, then add one research change per B2+ identity. Publish gains only after complete-frame, paired-configuration experiments; paper-reported speedups and generated FPS do not substitute for these measurements.

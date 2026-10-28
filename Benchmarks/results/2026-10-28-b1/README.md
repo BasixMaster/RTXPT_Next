@@ -1,0 +1,5 @@
+# First B1 evidence —2026-10-28
+
+See [the report](../../../Docs/Research/B1_RESULTS.md) for conclusions and limitations. `analysis/` contains five-run groups and comparisons; `timing/` retains raw PresentMon CSV, profiler diagnostics, original partial-stage CSV and sanitized run manifests. `quality-captures/` contains lossless images and manifests; `quality/` contains official LDR-FLIP and display-space scores against finite4096spp B0 references, plus2048/4096reference checks. `checksums.json` hashes files. Workspace paths are replaced with `<WORKSPACE>`; binaries, full papers and private cost telemetry are excluded.
+
+Reproduce analysis using `Benchmarks/tools/summarize_protocol.py` with `first-b1-protocol-v2.json`, this timing directory and a new output directory. Use `analyze_captures.py quality` with matching reference/capture images for display metrics. Install official `flip-evaluator==1.7` separately for LDR-FLIP; it is not vendored. The frozen original reference plan2048spp was strengthened to4096spp before final scoring; both are retained. Repeated processes lack a verified explicit seed control and are not independent-seed confidence evidence.

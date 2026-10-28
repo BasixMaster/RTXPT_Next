@@ -1,0 +1,455 @@
+{
+  "label": "convergence-B1-r5",
+  "scene": "convergence-test.scene.json",
+  "mode": "digi",
+  "started_utc": "2026-10-28T15:52:16.609412+00:00",
+  "command": [
+    "<WORKSPACE>\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+    "--scene",
+    "convergence-test.scene.json",
+    "--width",
+    "1280",
+    "--height",
+    "720",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "1",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--captureSequence",
+    "--sequenceWarmupStart",
+    "0",
+    "--sequenceRecordStart",
+    "20",
+    "--sequenceFPS",
+    "60",
+    "--sequenceFrameCount",
+    "1",
+    "--capturePath",
+    "<WORKSPACE>\\work\\b1-guarded-runs\\convergence-B1-r5\\unused.png",
+    "--perfLog",
+    "<WORKSPACE>\\work\\b1-guarded-runs\\convergence-B1-r5\\partial-perf.csv"
+  ],
+  "cwd": "<WORKSPACE>\\outputs\\RTXDI_Next\\bin",
+  "exe_sha256": "bd1efc2b6e2002c90ada10ad96be4187a80f37e0b3c54f9020ac7123fbc6940e",
+  "presentmon_sha256": "b2a706bc6ad475749e3b7e3409263aa1e6906d45bdcf993f6dbc0f660188f1af",
+  "settings": {
+    "width": 1280,
+    "height": 720,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "sharc": 0,
+    "restir_di": 1,
+    "restir_gi": 1,
+    "animations": false
+  },
+  "warmup_wall_s": 45.0,
+  "measurement_wall_s": 15,
+  "no_image_writes": true,
+  "selection": "Last600 Original/NotSet process/swapchain rows, dropping final16, preregistered.",
+  "timing_scope": "PresentMon CPU frame cadence and process GPU engine busy/wait intervals; not exclusive DI/GI feature time or display latency.",
+  "resource_scope": "nvidia-smi whole-device allocation/utilization includes background applications, not exclusive renderer VRAM.",
+  "status": "timed_completed",
+  "render_unfocused_guard": "Existing active capture keeps ShouldRenderUnfocused true. Original static sceneTime remains0, so20s capture never writes; owned process is bounded and terminated after timing.",
+  "scene_sha256": "c3afaa933c5084ba04f8e5100b64bb8b488ab312f4042849705a15e5bf5af549",
+  "process_id": 56888,
+  "presentmon_command": [
+    "<WORKSPACE>\\work\\tools\\PresentMon-2.6.0-x64.exe",
+    "--process_id",
+    "56888",
+    "--output_file",
+    "<WORKSPACE>\\work\\b1-guarded-runs\\convergence-B1-r5\\presentmon.csv",
+    "--v2_metrics",
+    "--no_console_stats",
+    "--session_name",
+    "BasixPT_56888",
+    "--timed",
+    "15",
+    "--terminate_after_timed"
+  ],
+  "capture_started_after_wall_s": 45.01499999999942,
+  "presentmon_exit_code": 0,
+  "renderer_intentionally_terminated": true,
+  "renderer_exit_code": 1,
+  "wall_s": 60.60900000001129,
+  "resource_samples": [
+    {
+      "elapsed_s": 0.014999999999417923,
+      "phase": "warmup",
+      "device_wide_csv": "10964, 25, 63, 2520, 229.30",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 1.062000000005355,
+      "phase": "warmup",
+      "device_wide_csv": "10930, 3, 59, 2520, 85.35",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 2.0780000000086147,
+      "phase": "warmup",
+      "device_wide_csv": "10931, 7, 58, 885, 68.11",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 3.139999999999418,
+      "phase": "warmup",
+      "device_wide_csv": "10943, 21, 57, 660, 50.27",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 4.187000000005355,
+      "phase": "warmup",
+      "device_wide_csv": "10961, 10, 57, 510, 48.03",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 5.218000000008033,
+      "phase": "warmup",
+      "device_wide_csv": "12578, 5, 58, 2520, 70.52",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 6.264999999999418,
+      "phase": "warmup",
+      "device_wide_csv": "12960, 99, 68, 2520, 177.83",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 7.312000000005355,
+      "phase": "warmup",
+      "device_wide_csv": "12958, 98, 68, 2520, 282.28",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 8.328000000008615,
+      "phase": "warmup",
+      "device_wide_csv": "12953, 99, 69, 2505, 286.83",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 9.375,
+      "phase": "warmup",
+      "device_wide_csv": "12953, 99, 69, 2505, 287.26",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 10.422000000005937,
+      "phase": "warmup",
+      "device_wide_csv": "12958, 99, 69, 2520, 285.82",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 11.484000000011292,
+      "phase": "warmup",
+      "device_wide_csv": "12965, 98, 69, 2520, 279.03",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 12.547000000005937,
+      "phase": "warmup",
+      "device_wide_csv": "12945, 99, 70, 2505, 285.99",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 13.593000000008033,
+      "phase": "warmup",
+      "device_wide_csv": "12945, 99, 70, 2490, 287.06",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 14.625,
+      "phase": "warmup",
+      "device_wide_csv": "12948, 99, 69, 2505, 286.46",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 15.639999999999418,
+      "phase": "warmup",
+      "device_wide_csv": "12943, 99, 70, 2520, 283.07",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 16.687000000005355,
+      "phase": "warmup",
+      "device_wide_csv": "12948, 99, 70, 2505, 287.30",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 17.734000000011292,
+      "phase": "warmup",
+      "device_wide_csv": "12940, 99, 70, 2505, 287.35",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 18.764999999999418,
+      "phase": "warmup",
+      "device_wide_csv": "12938, 99, 70, 2520, 286.91",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 19.781000000002678,
+      "phase": "warmup",
+      "device_wide_csv": "12952, 97, 70, 2505, 287.21",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 20.812000000005355,
+      "phase": "warmup",
+      "device_wide_csv": "12938, 98, 70, 2505, 284.69",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 21.843000000008033,
+      "phase": "warmup",
+      "device_wide_csv": "12939, 98, 70, 2505, 287.18",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 22.875,
+      "phase": "warmup",
+      "device_wide_csv": "13246, 98, 69, 2520, 275.46",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 23.906000000002678,
+      "phase": "warmup",
+      "device_wide_csv": "13044, 98, 70, 2505, 287.09",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 24.922000000005937,
+      "phase": "warmup",
+      "device_wide_csv": "12953, 98, 70, 2505, 287.77",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 25.968000000008033,
+      "phase": "warmup",
+      "device_wide_csv": "12948, 98, 70, 2490, 287.51",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 27.0,
+      "phase": "warmup",
+      "device_wide_csv": "12948, 98, 70, 2505, 287.46",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 28.047000000005937,
+      "phase": "warmup",
+      "device_wide_csv": "12766, 98, 70, 2490, 287.84",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 29.078000000008615,
+      "phase": "warmup",
+      "device_wide_csv": "12762, 98, 70, 2490, 287.55",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 30.109000000011292,
+      "phase": "warmup",
+      "device_wide_csv": "12762, 97, 70, 2460, 287.77",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 31.156000000002678,
+      "phase": "warmup",
+      "device_wide_csv": "12771, 98, 70, 2505, 287.48",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 32.187000000005355,
+      "phase": "warmup",
+      "device_wide_csv": "12773, 98, 70, 2460, 287.86",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 33.21800000000803,
+      "phase": "warmup",
+      "device_wide_csv": "12773, 98, 70, 2475, 287.68",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 34.25,
+      "phase": "warmup",
+      "device_wide_csv": "12774, 98, 70, 2505, 286.98",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 35.28100000000268,
+      "phase": "warmup",
+      "device_wide_csv": "12774, 98, 70, 2475, 287.58",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 36.312000000005355,
+      "phase": "warmup",
+      "device_wide_csv": "12812, 98, 70, 2505, 286.85",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 37.375,
+      "phase": "warmup",
+      "device_wide_csv": "12803, 98, 70, 2460, 287.27",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 38.40600000000268,
+      "phase": "warmup",
+      "device_wide_csv": "12808, 98, 70, 2475, 287.25",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 39.453000000008615,
+      "phase": "warmup",
+      "device_wide_csv": "12808, 98, 70, 2520, 285.65",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 40.48400000001129,
+      "phase": "warmup",
+      "device_wide_csv": "12759, 98, 70, 2475, 287.96",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 41.5,
+      "phase": "warmup",
+      "device_wide_csv": "12762, 98, 70, 2505, 287.41",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 42.53100000000268,
+      "phase": "warmup",
+      "device_wide_csv": "12768, 98, 70, 2490, 287.39",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 43.578000000008615,
+      "phase": "warmup",
+      "device_wide_csv": "12773, 98, 70, 2490, 287.49",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 44.625,
+      "phase": "warmup",
+      "device_wide_csv": "12772, 98, 70, 2490, 287.79",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 45.67200000000594,
+      "phase": "measurement",
+      "device_wide_csv": "12763, 78, 69, 2505, 277.57",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 46.703000000008615,
+      "phase": "measurement",
+      "device_wide_csv": "12773, 98, 70, 2460, 286.20",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 47.75,
+      "phase": "measurement",
+      "device_wide_csv": "12769, 98, 70, 2505, 287.72",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 48.76499999999942,
+      "phase": "measurement",
+      "device_wide_csv": "12767, 98, 70, 2490, 287.57",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 49.812000000005355,
+      "phase": "measurement",
+      "device_wide_csv": "13071, 95, 71, 2505, 286.75",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 50.84300000000803,
+      "phase": "measurement",
+      "device_wide_csv": "13261, 97, 70, 2520, 274.22",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 51.875,
+      "phase": "measurement",
+      "device_wide_csv": "13259, 98, 70, 2520, 277.63",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 52.90600000000268,
+      "phase": "measurement",
+      "device_wide_csv": "13204, 98, 70, 2520, 283.70",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 53.937000000005355,
+      "phase": "measurement",
+      "device_wide_csv": "13157, 98, 70, 2520, 283.14",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 54.96800000000803,
+      "phase": "measurement",
+      "device_wide_csv": "13102, 98, 70, 2520, 279.52",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 56.0,
+      "phase": "measurement",
+      "device_wide_csv": "12943, 98, 70, 2520, 278.12",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 57.04700000000594,
+      "phase": "measurement",
+      "device_wide_csv": "12939, 98, 71, 2505, 287.00",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 58.062000000005355,
+      "phase": "measurement",
+      "device_wide_csv": "12944, 98, 71, 2505, 286.82",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 59.10900000001129,
+      "phase": "measurement",
+      "device_wide_csv": "12943, 97, 70, 2520, 281.90",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 60.125,
+      "phase": "measurement",
+      "device_wide_csv": "12943, 98, 71, 2520, 282.26",
+      "exit_code": 0
+    }
+  ],
+  "presentmon_csv_sha256": "183545922d58f8e66556dcc38f9c709034549f6709eddc74a14c71f68847c8b5",
+  "observed_present_rows": 3185,
+  "image_write_count": 0
+}

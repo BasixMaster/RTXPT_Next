@@ -1,0 +1,125 @@
+{
+  "scope": "Static DI/GI implementation token audit after explicit parameter-local identifier canonicalization and comment/whitespace removal; not shader compilation or performance proof.",
+  "old_runtime": "a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6",
+  "new_runtime": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+  "identifier_canonicalization": {
+    "params": "rParams",
+    "priorFrame": "prevFrame",
+    "canonicalReservor": "canonicalReservoir",
+    "previousM": "prevM"
+  },
+  "files": [
+    {
+      "path": "Include/Rtxdi/DI/BoilingFilter.hlsli",
+      "normalized_tokens_equal": true,
+      "old_sha256": "28530097ce3ea47156d345152e14e4c1f9661d210f0e719af7694dee3fdb6806",
+      "new_sha256": "28530097ce3ea47156d345152e14e4c1f9661d210f0e719af7694dee3fdb6806"
+    },
+    {
+      "path": "Include/Rtxdi/DI/InitialSampling.hlsli",
+      "normalized_tokens_equal": true,
+      "old_sha256": "53f27901d296bac2a1d5fb9c4f73b643a4c39c632c970407ab595e6ddaf098ec",
+      "new_sha256": "53f27901d296bac2a1d5fb9c4f73b643a4c39c632c970407ab595e6ddaf098ec"
+    },
+    {
+      "path": "Include/Rtxdi/DI/PairwiseStreaming.hlsli",
+      "normalized_tokens_equal": true,
+      "old_sha256": "7f8ffbb013691fd928670accf82718f3b925618a56568049364eaca654a91f0d",
+      "new_sha256": "fd15e9051036a211a3f516a186edef0f36cf99f9392bd840121b0dbe449fac8c"
+    },
+    {
+      "path": "Include/Rtxdi/DI/ReSTIRDI.h",
+      "normalized_tokens_equal": true,
+      "old_sha256": "ff8572e7852e7e3a271641721be101adbcdec50539282481b7f8561487038256",
+      "new_sha256": "ff8572e7852e7e3a271641721be101adbcdec50539282481b7f8561487038256"
+    },
+    {
+      "path": "Include/Rtxdi/DI/ReSTIRDIParameters.h",
+      "normalized_tokens_equal": true,
+      "old_sha256": "39fc383642be6b3c0f90c376b8be261b1d5eccf361efc002e684bfc28c6e4e39",
+      "new_sha256": "39fc383642be6b3c0f90c376b8be261b1d5eccf361efc002e684bfc28c6e4e39"
+    },
+    {
+      "path": "Include/Rtxdi/DI/Reservoir.hlsli",
+      "normalized_tokens_equal": true,
+      "old_sha256": "626699525cdbdf36cbcdef91cdca6f634ee2f3d6b2967c78ad64a3d8dc160ac3",
+      "new_sha256": "be474731482b1edb0669f19a1c07f4abe23d8ceee895948e933f685566a0111d"
+    },
+    {
+      "path": "Include/Rtxdi/DI/ReservoirStorage.hlsli",
+      "normalized_tokens_equal": true,
+      "old_sha256": "564bdaf5e82dc214f9f90a055e388eae33280347d5aed531cecdc3ab47afa139",
+      "new_sha256": "564bdaf5e82dc214f9f90a055e388eae33280347d5aed531cecdc3ab47afa139"
+    },
+    {
+      "path": "Include/Rtxdi/DI/SpatialResampling.hlsli",
+      "normalized_tokens_equal": true,
+      "old_sha256": "cc22daeb23f50d858501b7db6b794ab08a5b2f690c6d08a1ccc5dee5f0adf436",
+      "new_sha256": "7ece19806068de3e12a088544af90a2597bf3444b50b7d1331b5e2a61cda55f5"
+    },
+    {
+      "path": "Include/Rtxdi/DI/SpatioTemporalResampling.hlsli",
+      "normalized_tokens_equal": true,
+      "old_sha256": "e8d9bdf295daf16e6b5552fc4f495b0e18e4da32b7c602faf1d9054ef5a160b1",
+      "new_sha256": "f1d6c303aa9500db46426d93b80dd0ea5868e190671727649de2ce9c357adb6e"
+    },
+    {
+      "path": "Include/Rtxdi/DI/TemporalResampling.hlsli",
+      "normalized_tokens_equal": true,
+      "old_sha256": "c2db5745a4d2a12af29fbb918f7bd86729f9a7536ba60b306bbe57c74252c400",
+      "new_sha256": "ef2394f6959b24fb2098a41aae2c14284708c410f17ea071eb3216ea4ec90d59"
+    },
+    {
+      "path": "Include/Rtxdi/GI/BoilingFilter.hlsli",
+      "normalized_tokens_equal": true,
+      "old_sha256": "820253d7059cf3493bffd3c6e757192a721abb34bb761a233acb282a4264b653",
+      "new_sha256": "820253d7059cf3493bffd3c6e757192a721abb34bb761a233acb282a4264b653"
+    },
+    {
+      "path": "Include/Rtxdi/GI/ReSTIRGI.h",
+      "normalized_tokens_equal": true,
+      "old_sha256": "aeb21b7af6d43a4b5d90f0bf83f8b4afe28b52e3f91193723f7d8c52e55b2b80",
+      "new_sha256": "aeb21b7af6d43a4b5d90f0bf83f8b4afe28b52e3f91193723f7d8c52e55b2b80"
+    },
+    {
+      "path": "Include/Rtxdi/GI/ReSTIRGIParameters.h",
+      "normalized_tokens_equal": true,
+      "old_sha256": "3c3b8e8aa788dd9dabdc04778b634322f371c31449aa91e26fbfbd2ec69ea393",
+      "new_sha256": "35e5dbc5a54b18d786498b272ab9ff74e0ee3da9589723344586dd529aeaa4ad"
+    },
+    {
+      "path": "Include/Rtxdi/GI/Reservoir.hlsli",
+      "normalized_tokens_equal": true,
+      "old_sha256": "0de6dc6ed185f0896ec143e48149f155a3f4cfaee6f8bf9e5532488c9dab15a6",
+      "new_sha256": "0de6dc6ed185f0896ec143e48149f155a3f4cfaee6f8bf9e5532488c9dab15a6"
+    },
+    {
+      "path": "Include/Rtxdi/GI/SpatialResampling.hlsli",
+      "normalized_tokens_equal": true,
+      "old_sha256": "efa2f4e0900e3349ed2e3c0e712c7accec71237223f878587088cc84e7835a0d",
+      "new_sha256": "8dcf085d6254f998ab4c2be89404b8d5e3e56a1f34790e8c35d9f2e7e7afd94d"
+    },
+    {
+      "path": "Include/Rtxdi/GI/SpatioTemporalResampling.hlsli",
+      "normalized_tokens_equal": true,
+      "old_sha256": "aa96ba55685ec42878b62c14eaee95f6a51bc592204b3a9fa8ab2c0b50670a53",
+      "new_sha256": "a283eadebcaccc9b96a28c628459316e4b5de7b3c52ac367dbfea914488343f8"
+    },
+    {
+      "path": "Include/Rtxdi/GI/TemporalResampling.hlsli",
+      "normalized_tokens_equal": true,
+      "old_sha256": "3a3fe63364ed2502208738eed970ad095ba8ff863ac21dfa873aaf57e6c4e62d",
+      "new_sha256": "36c0fb514a139611f504f5b08343848fc70f655870fd23331dc4752e45ed12c6"
+    }
+  ],
+  "all_di_gi_equal": true,
+  "host_changes": [
+    "ReGIRStaticParameters.Mode -> mode",
+    "ReGIRStaticParameters.LightsPerCell -> lightsPerCell",
+    "ReGIRGridStaticParameters.GridSize -> gridSize",
+    "RISBufferSegmentAllocator.getTotalSizeInElements -> GetTotalSizeInElements"
+  ],
+  "runtime_dirty": false,
+  "renderer_scope": "Migration-only DI/GI consumer; no new ReSTIR PT pipeline or B2 feature activated.",
+  "compilation": "Parent build pending"
+}

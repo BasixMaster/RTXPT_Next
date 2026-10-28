@@ -15,9 +15,28 @@
       "papers": 20
     },
     {
-      "name": "Baseline refs, renderer/build/test source and original dependency/asset pins",
+      "name": "Immutable baseline, exact four-file B1 API migration and pinned runtime/assets",
       "status": "passed",
-      "source_sha": "303b408ab81790a5051abd7573830b7a4112eb8e"
+      "baseline_sha": "303b408ab81790a5051abd7573830b7a4112eb8e",
+      "b1_sha": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
+      "host_diff": {
+        "Rtxpt/AdvancedSampleUI.cpp": [
+          1,
+          1
+        ],
+        "Rtxpt/RTXDI/RtxdiPass.cpp": [
+          10,
+          10
+        ],
+        "Rtxpt/RTXDI/RtxdiResources.cpp": [
+          2,
+          2
+        ],
+        "Rtxpt/SampleUI.cpp": [
+          1,
+          1
+        ]
+      }
     },
     {
       "name": "Pinned original scene files present",
@@ -37,8 +56,9 @@
       ]
     },
     {
-      "name": "B1/B2 planned state and no fabricated results",
-      "status": "passed"
+      "name": "Measured B0/B1 registry,20 accepted process runs and preserved CSV hashes; B2 remains planned",
+      "status": "passed",
+      "evidence": "Benchmarks/results/2026-10-28-b1"
     },
     {
       "name": "Brand assets valid SVG, final titles and native MathML",
@@ -57,20 +77,17 @@
       "status": "passed"
     },
     {
-      "name": "Renderer/shader build and GPU benchmarks",
-      "status": "not_run",
-      "reason": "Baseline/roadmap stage; no renderer changes. Available CMake3.31.5 is below upstream4.1 requirement; other build dependencies not initialized."
-    },
-    {
-      "name": "Image quality evaluator implementation / captured results",
-      "status": "planned",
-      "reason": "Paper-specific specification and capture gaps documented; no metric code or GPU results claimed."
+      "name": "Build/GPU and display-quality evidence recorded",
+      "status": "evidence_present",
+      "reason": "This checker validates retained identity/completeness; it does not rebuild binaries, rerun GPU measurements or prove estimator correctness. See B1_RESULTS.md and result manifests."
     }
   ],
   "passed": true,
   "limits": [
-    "Static source audit, not algorithm correctness proof.",
-    "Original scene files fetched but not rendered.",
-    "Renderer and B1/B2 benchmarks remain future stages."
+    "Source audit is not algorithm correctness proof.",
+    "Two static scenes on one GPU; five process pairs per scene.",
+    "PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.",
+    "Tonemapped display metrics; HDR/temporal/independent-seed validation remains future.",
+    "B1 migrates existing DI/GI APIs; ReSTIR PT integration and B2+ remain planned."
   ]
 }
