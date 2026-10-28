@@ -45,6 +45,9 @@ struct CommandLineOptions
     int  NEEType                    = 2;
     int  UseReSTIRDI                = false;
     int  UseReSTIRGI                = true;
+    bool BenchmarkUncapped         = false;
+    int OverrideMaxBounces         = -1;
+    int OverrideMaxDiffuseBounces  = -1;
     int  RealtimeSamplesPerPixel    = 1;
     int  ReferenceSamplesPerPixel   = 4096;
     int  StandaloneDenoiser         = true;
