@@ -1,0 +1,9 @@
+/* Offline mathematical typesetting. Scoped: preserves existing artwork colors/geometry. */
+.doc-typeset-math {font-family:"Cambria Math","STIX Two Math",math;font-size:1.16rem;line-height:1.7;color:inherit;max-width:100%;margin:.8rem auto;}
+.formula:has(.doc-typeset-math),.doc-math-scroll {max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;padding:1rem 1.25rem;border-inline-start:3px solid #438b98;border-radius:6px;background:color-mix(in srgb,currentColor 4%,transparent);}
+.doc-typeset-math mtext {font-family:system-ui,sans-serif;font-size:.88em;}
+.doc-typeset-math mfrac {padding-inline:.12em;}
+.doc-typeset-math mtd {text-align:left;}
+.doc-typeset-math[display="inline"] {font-size:1.06em;margin:0 .08em;line-height:1.4;}
+@media(max-width:600px){.doc-typeset-math{font-size:1.1rem}.formula:has(.doc-typeset-math){padding:.8rem;}}
+@media print{.doc-typeset-math{font-size:12pt}.doc-math-scroll{overflow:visible}}

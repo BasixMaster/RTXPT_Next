@@ -1,0 +1,76 @@
+{
+  "updated_on": "2026-10-28",
+  "project": "Basix Pathtracing",
+  "product": "RTXPT Next",
+  "repository": "BasixMaster/RTXPT_Next",
+  "checks": [
+    {
+      "name": "HTML unique anchors and local links",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "Newest12/wider20 catalog",
+      "status": "passed",
+      "papers": 20
+    },
+    {
+      "name": "Baseline refs, renderer/build/test source and original dependency/asset pins",
+      "status": "passed",
+      "source_sha": "303b408ab81790a5051abd7573830b7a4112eb8e"
+    },
+    {
+      "name": "Pinned original scene files present",
+      "status": "passed",
+      "scenes": [
+        "bistro-programmer-art.scene.json",
+        "bistro_with_mirrors-rtxdi.scene.json",
+        "convergence-test.scene.json",
+        "kitchen-proc-sky.scene.json",
+        "kitchen-with-test-stuff.scene.json",
+        "kitchen.scene.json",
+        "living-room.scene.json",
+        "programmer-art-proc-sky.scene.json",
+        "programmer-art.scene.json",
+        "transparent-machines-proc-sky.scene.json",
+        "transparent-machines.scene.json"
+      ]
+    },
+    {
+      "name": "B1/B2 planned state and no fabricated results",
+      "status": "passed"
+    },
+    {
+      "name": "Brand assets valid SVG, final titles and native MathML",
+      "status": "passed",
+      "math_expressions": 47
+    },
+    {
+      "name": "Structured evidence schema separately validated; SQLite metric search",
+      "status": "passed",
+      "smape_matches": 2,
+      "sources": 25,
+      "findings": 30
+    },
+    {
+      "name": "No full-paper PDFs exported",
+      "status": "passed"
+    },
+    {
+      "name": "Renderer/shader build and GPU benchmarks",
+      "status": "not_run",
+      "reason": "Baseline/roadmap stage; no renderer changes. Available CMake3.31.5 is below upstream4.1 requirement; other build dependencies not initialized."
+    },
+    {
+      "name": "Image quality evaluator implementation / captured results",
+      "status": "planned",
+      "reason": "Paper-specific specification and capture gaps documented; no metric code or GPU results claimed."
+    }
+  ],
+  "passed": true,
+  "limits": [
+    "Static source audit, not algorithm correctness proof.",
+    "Original scene files fetched but not rendered.",
+    "Renderer and B1/B2 benchmarks remain future stages."
+  ]
+}

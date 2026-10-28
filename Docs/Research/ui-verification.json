@@ -1,0 +1,31 @@
+{
+  "updated_on": "2026-10-28",
+  "html_sha256": "533179cb1464d2d16ae51955b13626d0f74a1eb94c752553f86548401f41b398",
+  "checks": [
+    {
+      "name": "Study-wide search",
+      "status": "passed",
+      "detail": "SMAPE matches relevant sections; absent term reports0; clearing resets."
+    },
+    {
+      "name": "Responsive layout",
+      "status": "passed",
+      "detail": "Desktop and390x844 narrow view inspected; no global horizontal overflow; local tables/diagram/equations scroll."
+    },
+    {
+      "name": "Theme and branding",
+      "status": "passed",
+      "detail": "Dark and System checked; System restored. Basix Pathtracing header, RTXPT Next title, custom icon/banner present."
+    },
+    {
+      "name": "Metric equations and deep link",
+      "status": "passed",
+      "detail": "47 native MathML expressions; SMAPE equation inspected in narrow dark mode; deep-link target below sticky header."
+    },
+    {
+      "name": "Preview",
+      "status": "passed",
+      "detail": "preview.png saved from final desktop study."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "updated_on": "2026-10-28",
+  "baseline": "RTXPT1.9",
+  "planned_versions": [
+    "B1 RTXDI3.1 adoption",
+    "B2+ optimizations"
+  ],
+  "chapters": [
+    "README",
+    "ROADMAP",
+    "BENCHMARK_VERSIONS",
+    "QUALITY_METRICS",
+    "PTPP_AUDIT",
+    "ARCHITECTURE",
+    "RTXDI_VS_RTXPT",
+    "SCENE_COMPATIBILITY",
+    "FOCUSED_A",
+    "FOCUSED_B",
+    "PAPER_CATALOG",
+    "BREADTH",
+    "VALIDATION",
+    "SOURCES_AND_RIGHTS",
+    "RESEARCH_MAP"
+  ],
+  "files": {
+    "ARCHITECTURE.md": "4cb1fb876b358596fac3bcd1fbdf331ee6db1c3821f15f3db26cfa8a91a2932b",
+    "BENCHMARK_VERSIONS.md": "e13f307b8c5a914a1da794c8f4ed9630f4eb7ec35b9fe9db868560d580040cef",
+    "BREADTH.md": "306777674086bb975edb608d28c44100b0650d6f8e264652d5db285f9181850e",
+    "FOCUSED_A.md": "40846b4fff7c39f2af30829f699d5ec4d90cb6389fc15fe27e9f2572f47b5f4b",
+    "FOCUSED_B.md": "121b67f6a4ae2966ab793fec1d31acadd697a20161abfaabe67e2e7bb9132e6f",
+    "PAPER_CATALOG.md": "5780c6eb0d410b74896559181b2ef58e2d04b4976d92aa1ff0eedf6eb46ea3f2",
+    "PTPP_AUDIT.md": "b3bef9c30d82d750b9e5b3bdb2dbda3639d355e112fbc0824aff9f975d212c02",
+    "QUALITY_METRICS.md": "1c46bca7a9e137476636acae7066be6850d267a49a02c08fe2f998ee1b5c1a20",
+    "README.md": "20e72f5abf26b93b91a5eb72a334142ff07fe358a2bbeab87d168f23b98cf107",
+    "RESEARCH_MAP.md": "4b69546c446e7896192350ed1bd5bd55923755c7fd5413ba6b5356c90585bde5",
+    "ROADMAP.md": "c79db57e19e86c8bc470b61ea2c3933360cf63cfed3586b54ccc2731be10072e",
+    "RTXDI_VS_RTXPT.md": "b69de47dd9114d3d5d4621982f18e8e4f3700321a85967288aa9803e92761b16",
+    "SCENE_COMPATIBILITY.md": "157921d825956bc26ae47c3d1251a0d3f302eb4404ead2ec92c38208c5f7dadb",
+    "SOURCES_AND_RIGHTS.md": "42ba0f3da1593b2273b1c845282d62ee9bc3f948ca9848fcf46db4a57eac2e9f",
+    "VALIDATION.md": "1b3c16f57dc26fef64c409b1943fed21d69ef013ab10607d9483421fe2ec465e"
+  },
+  "project": "Basix Pathtracing",
+  "product": "RTXPT Next",
+  "repository": "BasixMaster/RTXPT_Next"
+}

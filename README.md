@@ -1,3 +1,11 @@
+<!-- basix-research:start -->
+# Basix Pathtracing · RTXPT Next
+
+**Initial baseline: RTXPT1.9 and its original scenes.** Future **B1** adopts RTXDI3.1; **B2+** contain isolated measured optimizations. Current renderer/runtime remain unchanged. [Research and roadmap](Docs/Research/README.md) · [Offline study](Docs/Research/index.html) · [Version comparisons](Benchmarks/README.md) · [Image quality metrics](Docs/Research/QUALITY_METRICS.md).
+
+Baseline ref: `rtxpt-1.9-baseline` (`303b408`). RTXDI3.1 is linked at `External/RTXDI-SDK` for reference; it is not yet the active runtime. Original upstream documentation follows.
+<!-- basix-research:end -->
+
 # RTX Path Tracing v1.9.0
 
 ![Title](./Docs/r-title.png)
