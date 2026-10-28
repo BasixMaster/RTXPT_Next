@@ -1,6 +1,11 @@
 """Capture no-image-write, process-filtered PresentMon timing of an owned renderer."""
 from pathlib import Path
 import argparse,subprocess,time,json,datetime,hashlib,csv
+from cap_preflight import validate_audit,validate_runtime
+from capture_identity import transport_settings
+from artifact_manifest import validate as validate_artifacts
+from rtss_caps import RTSSBackend
+from rtss_readonly import collect as collect_rtss,validate as validate_rtss
 
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def main():
@@ -9,9 +14,20 @@ def main():
     ap.add_argument('--label',required=True);ap.add_argument('--scene',required=True);ap.add_argument('--exposure',type=float,required=True)
     ap.add_argument('--width',type=int,default=1280);ap.add_argument('--height',type=int,default=720)
     ap.add_argument('--warmup-seconds',type=float,default=45);ap.add_argument('--measure-seconds',type=int,default=15)
-    ap.add_argument('--mode',choices=['digi','default'],default='digi')
+    ap.add_argument('--mode',choices=['digi','dipt','default'],default='digi')
+    ap.add_argument('--benchmark-uncapped',action='store_true',help='New builds only: require effective renderer log and matching active driver cap audit.')
+    ap.add_argument('--driver-cap-audit',type=Path)
+    ap.add_argument('--max-bounces',type=int);ap.add_argument('--max-diffuse-bounces',type=int)
+    ap.add_argument('--pt-mode',type=int,choices=[0,1,2,3],default=3)
+    ap.add_argument('--artifact-manifest',type=Path,help='Optional strict frozen source/executable/shader identity; warm/compile caches before freezing.')
+    ap.add_argument('--rtss-install-dir',type=Path);ap.add_argument('--rtss-helper',type=Path)
+    ap.add_argument('--rtss-user-confirmed-disabled',action='store_true',help='User has disabled RTSS cap; collect only read-only SDK/profile boundary audits.')
     a=ap.parse_args();exe=a.exe.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
     if any(out.iterdir()):raise SystemExit('Run directory must be new/empty.')
+    rtss=None
+    if a.rtss_install_dir or a.rtss_helper or a.rtss_user_confirmed_disabled:
+        if not (a.rtss_install_dir and a.rtss_helper and a.rtss_user_confirmed_disabled):raise SystemExit('RTSS read-only verification requires install-dir, helper and user-confirmed-disabled together.')
+        rtss=RTSSBackend(a.rtss_install_dir,exe,a.rtss_helper)
     scene_path=exe.parent.parent/'Assets'/a.scene
     scene_data=json.loads(scene_path.read_text(encoding='utf-8-sig'))
     def animates(x):
@@ -19,10 +35,26 @@ def main():
         if isinstance(x,list):return any(animates(v) for v in x)
         return False
     if animates(scene_data):raise SystemExit('Static-capture guard requires an original scene with animation disabled.')
-    args=[str(exe),'--scene',a.scene,'--width',str(a.width),'--height',str(a.height),'--overrideRadianceCacheMode','0','--useNEE','1','--NEEType','2','--useReSTIRDI',str(int(a.mode=='digi')),'--useReSTIRGI',str(int(a.mode=='digi')),'--standaloneDenoiser','0','--overrideAutoexposureOff','--overrideExposureOffset',str(a.exposure),'--disablePostProcessFilters','--overrideToRealtimeMode','--realtimeSamplesPerPixel','1','--realtimeAA','0','--disableFireflyFilters','--overrideSubSamplingMode','0','--nonInteractive','--captureSequence','--sequenceWarmupStart','0','--sequenceRecordStart','20','--sequenceFPS','60','--sequenceFrameCount','1','--capturePath',str(out/'unused.png'),'--perfLog',str(out/'partial-perf.csv')]
+    args=[str(exe),'--scene',a.scene,'--width',str(a.width),'--height',str(a.height),'--overrideRadianceCacheMode','0','--useNEE','1','--NEEType','2','--useReSTIRDI',str(int(a.mode in ['digi','dipt'])),'--useReSTIRGI',str(int(a.mode=='digi')),'--standaloneDenoiser','0','--overrideAutoexposureOff','--overrideExposureOffset',str(a.exposure),'--disablePostProcessFilters','--overrideToRealtimeMode','--realtimeSamplesPerPixel','1','--realtimeAA','0','--disableFireflyFilters','--overrideSubSamplingMode','0','--nonInteractive','--captureSequence','--sequenceWarmupStart','0','--sequenceRecordStart','20','--sequenceFPS','60','--sequenceFrameCount','1','--capturePath',str(out/'unused.png'),'--perfLog',str(out/'partial-perf.csv')]
+    if a.mode=='dipt':args+=['--useReSTIRPT','1','--restirPTMode',str(a.pt_mode)]
+    if a.max_bounces is not None:args+=['--maxBounces',str(a.max_bounces)]
+    if a.max_diffuse_bounces is not None:args+=['--maxDiffuseBounces',str(a.max_diffuse_bounces)]
+    driver_state=None
+    if a.benchmark_uncapped:
+        if a.driver_cap_audit is None:raise SystemExit('Uncapped mode requires a matching active --driver-cap-audit; unknown caps are not disabled.')
+        driver_state=validate_audit(json.loads(a.driver_cap_audit.read_text(encoding='utf-8')),sha(exe))
+        args+=['--benchmarkUncapped=true']
     manifest=dict(label=a.label,scene=a.scene,mode=a.mode,started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),command=args,cwd=str(exe.parent),exe_sha256=sha(exe),presentmon_sha256=sha(a.presentmon),settings=dict(width=a.width,height=a.height,exposure=a.exposure,aa=0,denoiser=0,sharc=0,restir_di=int(a.mode=='digi'),restir_gi=int(a.mode=='digi'),animations=False),warmup_wall_s=a.warmup_seconds,measurement_wall_s=a.measure_seconds,no_image_writes=True,selection='Last600 Original/NotSet process/swapchain rows, dropping final16, preregistered.',timing_scope='PresentMon CPU frame cadence and process GPU engine busy/wait intervals; not exclusive DI/GI feature time or display latency.',resource_scope='nvidia-smi whole-device allocation/utilization includes background applications, not exclusive renderer VRAM.',status='running')
     manifest['render_unfocused_guard']='Existing active capture keeps ShouldRenderUnfocused true. Original static sceneTime remains0, so20s capture never writes; owned process is bounded and terminated after timing.'
     manifest['scene_sha256']=sha(scene_path)
+    if a.artifact_manifest:manifest['artifact_identity']=validate_artifacts(a.artifact_manifest,exe)
+    manifest['settings'].update(transport_settings(args))
+    manifest['settings'].update(max_bounces_override=a.max_bounces,max_diffuse_bounces_override=a.max_diffuse_bounces,pt_mode=a.pt_mode if a.mode=='dipt' else None)
+    manifest['cap_control']=dict(renderer_override_requested=a.benchmark_uncapped,driver=driver_state,external_limiters='unknown; not covered by renderer/NVAPI',fully_uncapped_verified=False)
+    if rtss:
+        manifest['cap_control']['rtss_before_launch']=validate_rtss(collect_rtss(rtss),sha(exe))
+        manifest['cap_control']['external_limiters']='Known RTSS settings read-only verified; other external limiters remain unknown.'
+    if a.driver_cap_audit:manifest['cap_control']['audit_sha256']=sha(a.driver_cap_audit)
     samples=[];pm=None;start=time.monotonic();renderer=None
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
     with (out/'renderer.log').open('w',encoding='utf-8') as log,(out/'presentmon.log').open('w',encoding='utf-8') as pm_log:
@@ -33,12 +65,14 @@ def main():
                 now=time.monotonic();elapsed=now-start
                 if renderer.poll() is not None:raise RuntimeError('Renderer exited before timed capture completed: '+str(renderer.returncode))
                 if now>=warm_end and pm is None:
+                    if rtss:manifest['cap_control']['rtss_before_measurement']=validate_rtss(collect_rtss(rtss),manifest['exe_sha256'])
                     pm_args=[str(a.presentmon.resolve()),'--process_id',str(renderer.pid),'--output_file',str(out/'presentmon.csv'),'--v2_metrics','--no_console_stats','--session_name','BasixPT_'+str(renderer.pid),'--timed',str(a.measure_seconds),'--terminate_after_timed']
                     manifest['presentmon_command']=pm_args;manifest['capture_started_after_wall_s']=elapsed
                     pm=subprocess.Popen(pm_args,stdout=pm_log,stderr=subprocess.STDOUT,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
                 if pm is not None and pm.poll() is not None:
                     manifest['presentmon_exit_code']=pm.returncode
                     if pm.returncode:raise RuntimeError('PresentMon failed: '+str(pm.returncode))
+                    if rtss:manifest['cap_control']['rtss_after_measurement']=validate_rtss(collect_rtss(rtss),manifest['exe_sha256'])
                     break
                 if elapsed>a.warmup_seconds+a.measure_seconds+20:raise TimeoutError('Owned timed run exceeded its bound.')
                 if elapsed>=next_sample:
@@ -66,6 +100,18 @@ def main():
     trace_log=(out/'presentmon.log').read_text(encoding='utf-8',errors='replace')
     manifest['reported_trace_loss']='ETW events were lost' in trace_log
     if manifest['reported_trace_loss']:manifest['status']='failed_trace_loss'
+    if a.benchmark_uncapped:
+        try:
+            manifest['cap_control']['effective_renderer']=validate_runtime((out/'renderer.log').read_text(encoding='utf-8',errors='replace'))
+            with (out/'presentmon.csv').open(newline='',encoding='utf-8-sig') as f:sync={r.get('SyncInterval') for r in csv.DictReader(f) if r.get('ProcessID')==str(renderer.pid)}
+            if sync!={'0'}:raise ValueError('Observed application presentation was not consistently SyncInterval0.')
+            manifest['cap_control']['observed_sync_interval']=0
+        except (ValueError,OSError) as exc:
+            manifest['status']='failed_cap_verification';manifest['cap_control']['failure']=str(exc)
+    if a.artifact_manifest:
+        try:manifest['artifact_identity_after_capture']=validate_artifacts(a.artifact_manifest,exe)
+        except (ValueError,OSError) as exc:
+            manifest['status']='failed_artifact_identity';manifest['artifact_failure']=str(exc)
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(dict(label=a.label,status=manifest['status'],wall_s=manifest['wall_s'],presentmon_exit=manifest.get('presentmon_exit_code'))))
     if manifest['status']!='timed_completed':raise SystemExit('Run failed timing/image-write completeness checks; no benchmark sample accepted.')

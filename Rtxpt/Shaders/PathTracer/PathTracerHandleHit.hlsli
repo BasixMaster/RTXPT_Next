@@ -44,6 +44,16 @@ namespace PathTracer
 
         bool onDominantDenoisingLayer = path.hasFlag(PathFlags::denoisingLayerOnPlane) && path.hasFlag(PathFlags::denoisingLayerOnDominantBranch);
 
+        #if PATH_TRACER_MODE==PT_DENOISING_LAYERS_FILL && PT_USE_RESTIR_PT
+        // The PT reservoir pass owns the non-delta indirect continuation.
+        // Keep native primary emission/direct lighting and avoid adding a second indirect estimate.
+        const uint ownerPlane = (g_Const.ptConsts.frameIndex % 2) == 0;
+        const uint ownerAddress = GenericTSPixelToAddress(path.GetPixelPos(), ownerPlane,
+            g_Const.ptConsts.genericTSLineStride, g_Const.ptConsts.genericTSPlaneStride);
+        if (onDominantDenoisingLayer && RTXPT_PTOwnsPrimary(u_PTPrimaryData[ownerAddress], g_Const.ptConsts.frameIndex))
+            return false;
+        #endif
+
         #if PATH_TRACER_MODE==PT_DENOISING_LAYERS_FILL && PT_USE_RESTIR_GI
         if (onDominantDenoisingLayer && !path.hasFlag(PathFlags::restirGIStarted) && bs.pdf != 0 )
         {

@@ -1,0 +1,35 @@
+{
+  "models": [
+    "opaque-room.gltf"
+  ],
+  "graph": [
+    {
+      "name": "OpaqueRoom",
+      "model": 0
+    },
+    {
+      "name": "Cameras",
+      "children": [
+        {
+          "name": "Default",
+          "type": "PerspectiveCameraEx",
+          "translation": [
+            0,
+            1,
+            4
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "verticalFov": 0.62,
+          "zNear": 0.001,
+          "exposureCompensation": 0,
+          "enableAutoExposure": false
+        }
+      ]
+    }
+  ]
+}

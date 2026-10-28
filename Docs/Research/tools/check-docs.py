@@ -40,7 +40,8 @@ actual={}
 for row in git('diff','--ignore-submodules=all','--numstat',baseline,b1,'--','Rtxpt','CMakeLists.txt','Testing','Docs/Design.md').splitlines():
     added,removed,name=row.split('\t');actual[name]=(int(added),int(removed))
 assert actual==expected,actual
-assert not git('diff','--ignore-submodules=all','--name-only',b1,'--','Rtxpt','CMakeLists.txt','Testing','Docs/Design.md')
+development_source_changes=git('diff','--ignore-submodules=all','--name-only',b1,'--','Rtxpt','CMakeLists.txt','Testing','Docs/Design.md').splitlines()
+development_source_changes+=git('ls-files','--others','--exclude-standard','--','Rtxpt').splitlines()
 for ref,runtime in [(baseline,'a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6'),(b1,'f12037fa8e97ebc08e9e3edfd2de528ed1772a4b'),('HEAD','f12037fa8e97ebc08e9e3edfd2de528ed1772a4b')]:
     assert 'a56be4ed65029d2733fd02f00f4027ffd541eda8' in git('ls-tree',ref,'Assets')
     assert runtime in git('ls-tree',ref,'External/Rtxdi')
@@ -52,7 +53,10 @@ checks.append(dict(name='Pinned original scene files present',status='passed',sc
 versions=json.loads((P/'Benchmarks/versions.json').read_text(encoding='utf-8'))
 by_id={x['id']:x for x in versions['versions']}
 assert by_id['RTXPT-1.9']['source_sha']==baseline and by_id['B1']['source_sha']==b1
-assert by_id['B1']['status']!='planned' and by_id['B2']['status']=='planned'
+assert by_id['B1']['status']!='planned' and by_id['B2']['status']=='in_progress' and by_id['B3']['status']=='planned'
+assert by_id['B2']['source_sha'] is None and by_id['B3']['source_sha'] is None
+assert (D/'B2_IMPLEMENTATION.md').is_file()
+checks.append(dict(name='B2 integration/B3 PT++ development states remain distinct from immutable B1 evidence',status='in_progress',development_source_changes=development_source_changes,reason='Development source is allowed to differ from B1; this checker proves neither B2 compilation nor runtime activation.'))
 result=next(x for x in versions['results'] if x['id']=='2026-10-28-b1')
 assert result['status']=='measured' and (P/result['report']).is_file()
 evidence=P/result['path'];assert evidence.is_dir()
@@ -83,7 +87,7 @@ for scene in ['convergence','kitchen']:
             ref=evidence/'quality-captures'/f'{scene}-reference-4096'/q['reference']['file']
             assert hashlib.sha256(capture.read_bytes()).hexdigest()==q['test']['sha256']
             assert hashlib.sha256(ref.read_bytes()).hexdigest()==q['reference']['sha256']
-checks.append(dict(name='Measured B0/B1 registry,20 accepted process runs and preserved CSV hashes; B2 remains planned',status='passed',evidence=result['path']))
+checks.append(dict(name='Measured B0/B1 registry,20 accepted process runs and preserved CSV hashes; B2/B3 have no fabricated results',status='passed',evidence=result['path']))
 for p in (D/'assets').glob('*.svg'):ET.parse(p)
 page=(D/'index.html').read_text(encoding='utf-8');assert page.count('<math ')>=40
 assert '<h1>RTXPT Next</h1>' in page and 'Basix Pathtracing' in page
@@ -97,7 +101,7 @@ checks.append(dict(name='Structured evidence schema separately validated; SQLite
 assert not list(D.rglob('*.pdf'))
 checks.append(dict(name='No full-paper PDFs exported',status='passed'))
 checks.append(dict(name='Build/GPU and display-quality evidence recorded',status='evidence_present',reason='This checker validates retained identity/completeness; it does not rebuild binaries, rerun GPU measurements or prove estimator correctness. See B1_RESULTS.md and result manifests.'))
-receipt=dict(updated_on='2026-10-28',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','Two static scenes on one GPU; five process pairs per scene.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Tonemapped display metrics; HDR/temporal/independent-seed validation remains future.','B1 migrates existing DI/GI APIs; ReSTIR PT integration and B2+ remain planned.'])
+receipt=dict(updated_on='2026-10-28',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','Two static scenes on one GPU; five process pairs per scene.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Tonemapped display metrics; HDR/temporal/independent-seed validation remains future.','B1 migrates existing DI/GI APIs; B2 ReSTIR PT integration is in progress and B3 PT++ remains planned.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))
 print(json.dumps(dict(passed=True,checks=len(checks),scenes=len(scenes),math_expressions=page.count('<math '))))

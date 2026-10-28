@@ -41,3 +41,7 @@ The PT++ audit uses paths relative to `External/RTXDI-SDK`, not the root RTXPT r
 Any later edit inside runtime or SDK/renderer submodules requires a reachable owned child commit and updated gitlink, or an explicitly reviewed tracked-vendor strategy. This pass creates no guessed child fork. Keep upstream originals reachable.
 
 Every new estimator declares sample domain, target, PDF measure, Jacobian, confidence, replay RNG/model version, immutable pass inputs and output ownership. Handle camera cuts, resize, geometry/material/light identity changes and mode switches. Guiding models and geometry LoD mappings must stay consistent with reused samples. Define bounded queue/cell/domain overflow and canonical fallback semantics before implementation.
+
+## B2/B3 version clarification —2026-10-28
+
+B2 now denotes the ReSTIR PT renderer integration; B3 denotes PT++ activation and missing-mechanism work. Both retain DI/GI as selectable controls with explicit contribution ownership. See [implementation status](B2_IMPLEMENTATION.md). B1 results remain historical measurements of ordinary PT with DI+GI, without ReSTIR PT. The B1 run settings were not a comprehensive driver/external frame-cap audit; do not retroactively claim they were. Future performance runs must record the uncapped renderer override, driver profile state and unknown external limiters, separately from simulated capture timestep.

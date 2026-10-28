@@ -33,6 +33,7 @@ struct CommandLineOptions
     std::string capturePath = "";
     std::string captureSuffix = "";
     bool captureSimple = false;
+    bool CaptureLinearHDR = false;
     bool captureSequence = false;
     float sequenceWarmupStart = 0;
     float sequenceRecordStart = 0;
@@ -45,6 +46,11 @@ struct CommandLineOptions
     int  NEEType                    = 2;
     int  UseReSTIRDI                = false;
     int  UseReSTIRGI                = true;
+    int  UseReSTIRPT                = false;
+    bool BenchmarkUncapped         = false;
+    int OverrideMaxBounces         = -1;
+    int OverrideMaxDiffuseBounces  = -1;
+    int ReSTIRPTMode               = 3;
     int  RealtimeSamplesPerPixel    = 1;
     int  ReferenceSamplesPerPixel   = 4096;
     int  StandaloneDenoiser         = true;

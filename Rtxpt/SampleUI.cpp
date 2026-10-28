@@ -12,6 +12,7 @@
 #include "SampleCommon/SampleBaseApp.h"
 
 #include <inttypes.h>
+#include <donut/core/log.h>
 
 #include <donut/app/UserInterfaceUtils.h>
 #include <donut/core/vfs/VFS.h>
@@ -181,6 +182,19 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     m_ui.NEEType                    = cmdLine.NEEType;
     m_ui.UseReSTIRDI                = cmdLine.UseReSTIRDI != 0;
     m_ui.UseReSTIRGI                = cmdLine.UseReSTIRGI != 0;
+    m_ui.UseReSTIRPT                = cmdLine.UseReSTIRPT != 0;
+    m_ui.BenchmarkUncapped          = cmdLine.BenchmarkUncapped;
+    if (m_ui.UseReSTIRPT)
+    {
+        donut::log::warning("Experimental ReSTIR PT selected: indirect GI estimator superseded; one plane, PSR/cache/subsampling disabled. Opaque transport validation is pending.");
+    }
+    if (m_ui.BenchmarkUncapped)
+    {
+        m_ui.EnableVsync = false;
+        m_ui.FPSLimiter = 0;
+        m_ui.RenderWhenOutOfFocus = true;
+        donut::log::info("BENCHMARK_UNCAPPED: app VSync=off FPSLimiter=0 ReflexCap=0 Reflex=off FG=off unfocusedRendering=on; driver/overlay caps require external verification.");
+    }
     m_ui.RealtimeSamplesPerPixel    = cmdLine.RealtimeSamplesPerPixel;
     m_ui.AccumulationTarget         = cmdLine.ReferenceSamplesPerPixel;
     m_ui.StandaloneDenoiser         = cmdLine.StandaloneDenoiser != 0;

@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "updated_on": "2026-10-28",
+  "workstream_status": "in_progress",
+  "version_policy": {
+    "B0": "Exact RTXPT1.9 source and original scenes",
+    "B1": "RTXDI3.1 API migration for DI/GI",
+    "B2": "ReSTIR PT renderer integration; not promoted",
+    "B3": "PT++ activations and missing paper mechanisms; planned"
+  },
+  "milestones": [
+    {
+      "id": "B2-host",
+      "status": "partial",
+      "acceptance": "PT resources, bindings, initial/temporal/spatial/final dispatch, history/reset handling and latest ABI build pass",
+      "evidence": "First host Release build and opaque GPU smoke passed; new native auxiliary-state export requires renewed validation."
+    },
+    {
+      "id": "B2-shaders",
+      "status": "partial",
+      "acceptance": "Native material/BSDF/lighting/replay contracts compile and pass numerical and GPU checks",
+      "evidence": "Four direct shaders and eight precompiled OMM variants compile; first component-mixture/delta-PDF mismatch corrected. Earlier pilot images excluded from quality conclusions."
+    },
+    {
+      "id": "B2-partition",
+      "status": "in_progress",
+      "acceptance": "Direct/indirect, native/PT, delta/non-delta and fallback contributions counted exactly once",
+      "evidence": "Shared native-export eligibility bit controls both PT receivers/donors and native continuation; raw native radiance merged before DI/PT additions. Opaque four-mode GPU smoke passed; broader path-domain validation pending."
+    },
+    {
+      "id": "B2-medium",
+      "status": "in_progress",
+      "acceptance": "Primary native medium metadata, replay, false-hit handling, eta and Beer attenuation correct for eligible transport",
+      "evidence": "48-byte primary state export foundation added; transmission still rejected by explicit prototype scene gate."
+    },
+    {
+      "id": "B2-diffuse-budget",
+      "status": "partial",
+      "acceptance": "Supported bounce-domain settings declared and validated; binding native lobe-dependent caps require exact accounting",
+      "evidence": "Prototype requires a nonbinding diffuse cap. Inactive RGB survival-polynomial helper has independent finite-domain tests; not runtime integration."
+    },
+    {
+      "id": "B2-quality",
+      "status": "in_progress",
+      "acceptance": "Raw/reference, replay/history, materials and reconstruction checks under matched contracts",
+      "evidence": "Corrected capture warm-up permits PT history; temporal/combined reservoir readback confirms positive ages and accumulated M. Four finite HDR captures and explicit linear metrics recorded; one image per mode, no bias/independent-seed acceptance yet."
+    },
+    {
+      "id": "B2-caps",
+      "status": "partial",
+      "acceptance": "App, driver and active external limiter controls disabled, read back and restored for tests",
+      "evidence": "Three timing processes verified effective app caps, driver caps0/VSync forced off, RTSS installed application profile0 at launch/start/end, SyncInterval0 and restoration. Other external limiters remain unknown; historical B1 coverage remains unverified."
+    },
+    {
+      "id": "B2-comparison",
+      "status": "partial",
+      "acceptance": "B0/B1/B2 matched transport, scene, cap audit and process repetitions with quality and timing evidence",
+      "evidence": "One cap-verified 640x360 opaque-scene process per B0+controls/B1+controls/B2 passed, with frozen artifacts and driver restoration. Exploratory timings recorded; independent repetitions and matched HDR quality comparisons remain pending."
+    },
+    {
+      "id": "B2-promotion",
+      "status": "pending",
+      "acceptance": "Supported scope, checks and immutable source identity complete before assigning release tag",
+      "evidence": "Development branch only; no B2 tag or completed-release claim."
+    },
+    {
+      "id": "B3-ptpp",
+      "status": "pending",
+      "acceptance": "Paper feature matrix, activations, missing mechanisms and isolated ablations implemented and validated",
+      "evidence": "Planned after B2; inherited RTXDI3.1 mechanisms are not counted as new B3 work."
+    }
+  ],
+  "transitions": [
+    {
+      "date": "2026-10-28",
+      "id": "B2-workstream",
+      "from": "planned",
+      "to": "in_progress",
+      "reason": "User resumed integration and explicitly separated B2 ReSTIR PT from B3 PT++. Current release gate remains pending."
+    }
+  ],
+  "limits": [
+    "Source presence, synthetic tests and successful shader compilation do not establish renderer correctness.",
+    "Prototype gates are deliberate and do not imply original transmissive scenes are supported.",
+    "Historical B1 results remain measured exploratory evidence, with external cap coverage unverified."
+  ]
+}

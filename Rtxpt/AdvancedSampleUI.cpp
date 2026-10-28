@@ -398,13 +398,20 @@ void AdvancedSampleUI::DrawSampleUI(float indent, float defItemWidth, const ImVe
 
                 {
                     bool nullCheckbox = false;
-                    bool disabled = m_ui.RealtimeAA == 3 && m_ui.DisableReSTIRsWithDLSSRR;
+                    bool disabled = m_ui.ActualUseReSTIRPT() || (m_ui.RealtimeAA == 3 && m_ui.DisableReSTIRsWithDLSSRR);
                     UI_SCOPED_DISABLE(disabled);
                     RESET_ON_CHANGE(ImGui::Checkbox("Use ReSTIR GI (RTXDI)", (disabled) ? &nullCheckbox : &m_ui.UseReSTIRGI));
                     if (ImGui::IsMouseClicked(ImGuiMouseButton_Middle) && ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
                         m_ui.DisableReSTIRsWithDLSSRR = !m_ui.DisableReSTIRsWithDLSSRR;
                 }
                 if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) ImGui::SetTooltip("ReSTIR GI (RTXDI) is currently not tuned to work well with DLSS-RR\nUse middle mouse button to enable anyway");
+            }
+
+            if (m_ui.RealtimeMode)
+            {
+                RESET_ON_CHANGE(ImGui::Checkbox("ReSTIR PT (B2 experimental)", &m_ui.UseReSTIRPT));
+                if (ImGui::IsItemHovered()) ImGui::SetTooltip("PT replaces the GI indirect estimator. Initial integration: one plane, no PSR, SHaRC or subsampling. Opaque-transport validation pending.");
+                if (m_ui.ActualUseReSTIRPT()) ImGui::TextWrapped("Indirect estimator: ReSTIR PT; GI inactive to avoid double counting.");
             }
 
             RESET_ON_CHANGE(ImGui::Checkbox("Use Next Event Estimation", &m_ui.UseNEE));

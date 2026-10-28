@@ -11,6 +11,10 @@
 #ifndef __CONFIG_H__ // using instead of "#pragma once" due to https://github.com/microsoft/DirectXShaderCompiler/issues/3943
 #define __CONFIG_H__
 
+#ifndef PT_USE_RESTIR_PT
+#define PT_USE_RESTIR_PT 0
+#endif
+
 #if !defined(__cplusplus)
 #pragma pack_matrix(row_major)
 #endif

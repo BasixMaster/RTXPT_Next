@@ -1,0 +1,568 @@
+{
+  "label": "B0-controls-opaque-uncapped-pilot",
+  "scene": "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room.scene.json",
+  "mode": "digi",
+  "started_utc": "2026-10-28T18:01:30.857357+00:00",
+  "command": [
+    "[WORKSPACE]\\work\\controls-B0\\bin\\Rtxpt.exe",
+    "--scene",
+    "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room.scene.json",
+    "--width",
+    "640",
+    "--height",
+    "360",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "1",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--captureSequence",
+    "--sequenceWarmupStart",
+    "0",
+    "--sequenceRecordStart",
+    "20",
+    "--sequenceFPS",
+    "60",
+    "--sequenceFrameCount",
+    "1",
+    "--capturePath",
+    "[WORKSPACE]\\work\\B2-first-uncapped-v2\\B0-controls\\timing\\unused.png",
+    "--perfLog",
+    "[WORKSPACE]\\work\\B2-first-uncapped-v2\\B0-controls\\timing\\partial-perf.csv",
+    "--maxBounces",
+    "3",
+    "--maxDiffuseBounces",
+    "3",
+    "--benchmarkUncapped=true"
+  ],
+  "cwd": "[WORKSPACE]\\work\\controls-B0\\bin",
+  "exe_sha256": "502682d68e34d66ce43454bf47bd2eb8ee9c9e49455cb5b260c3c9c637fe7dd0",
+  "presentmon_sha256": "b2a706bc6ad475749e3b7e3409263aa1e6906d45bdcf993f6dbc0f660188f1af",
+  "settings": {
+    "width": 640,
+    "height": 360,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "sharc": 0,
+    "restir_di": 1,
+    "restir_gi": 1,
+    "animations": false,
+    "restir_pt": 0,
+    "max_bounces_override": 3,
+    "max_diffuse_bounces_override": 3,
+    "pt_mode": null
+  },
+  "warmup_wall_s": 45.0,
+  "measurement_wall_s": 15,
+  "no_image_writes": true,
+  "selection": "Last600 Original/NotSet process/swapchain rows, dropping final16, preregistered.",
+  "timing_scope": "PresentMon CPU frame cadence and process GPU engine busy/wait intervals; not exclusive DI/GI feature time or display latency.",
+  "resource_scope": "nvidia-smi whole-device allocation/utilization includes background applications, not exclusive renderer VRAM.",
+  "status": "timed_completed",
+  "render_unfocused_guard": "Existing active capture keeps ShouldRenderUnfocused true. Original static sceneTime remains0, so20s capture never writes; owned process is bounded and terminated after timing.",
+  "scene_sha256": "56625abdeaff143ea4bf8acf9e4201a43cc7d142150d5ce5ff9ab7d8ccd1ec26",
+  "artifact_identity": {
+    "manifest_sha256": "e28801199d96b2de83a98aea0aa7fbe6b18e5a6c00f6804d769f9373fcb2c0d6",
+    "root_source_sha": "303b408ab81790a5051abd7573830b7a4112eb8e",
+    "working_diff_sha256": "540a25db7aef1259e47add94149b7ee19f1661e1e43c2a056f133606d9a42c22",
+    "executable_sha256": "502682d68e34d66ce43454bf47bd2eb8ee9c9e49455cb5b260c3c9c637fe7dd0",
+    "shader_files": 445,
+    "validated": true
+  },
+  "cap_control": {
+    "renderer_override_requested": true,
+    "driver": {
+      "settings": {
+        "foreground_fps": {
+          "state": "disabled",
+          "value": 0,
+          "location": 0
+        },
+        "background_fps": {
+          "state": "disabled",
+          "value": 0,
+          "location": 0
+        },
+        "vsync": {
+          "state": "forced_off",
+          "value": 138504007,
+          "location": 0
+        }
+      },
+      "driver_cap_coverage": "known",
+      "driver_limit_detected": false,
+      "driver_allows_uncapped_application": true,
+      "external_limiters": "unknown; must be checked separately",
+      "fully_uncapped_verified": false
+    },
+    "external_limiters": "Known RTSS settings read-only verified; other external limiters remain unknown.",
+    "fully_uncapped_verified": false,
+    "rtss_before_launch": {
+      "authority": "user_confirmed+SDK_readback+physical_profile",
+      "collected_utc": "2026-10-28T18:01:32.092832+00:00",
+      "executable_sha256": "502682d68e34d66ce43454bf47bd2eb8ee9c9e49455cb5b260c3c9c637fe7dd0",
+      "read_only": true,
+      "mutation_performed": false,
+      "restoration_required": false,
+      "rtss_known_caps_disabled": true,
+      "global_limit_observed": 232,
+      "effective_limit": 0,
+      "selected_physical_profile": "installed_application_profile",
+      "selected_physical_profile_sha256": "8ec8a1019cb081b792479f5c1e076ecd698f29f608ca197c495d626e02fe68fa",
+      "physical_selected_caps_zero": true,
+      "application_profile_absent": false,
+      "virtual_store_application_profile_absent": true,
+      "helper_sha256": "8efc469ae53ff0aa17ec0e9faf59c305d1642adb2e713a6f1355c81c368acc8d",
+      "sdk_dll_sha256": "61f3e02cde1588446047da7cf04c18d19fcd762f72471200c370b267e32089a9",
+      "coverage": "known RTSS frame/frametime/scanline settings at the observed boundary; other external limiters remain unknown",
+      "fully_uncapped_system_verified": false
+    },
+    "audit_sha256": "d320719aab93d5015fa36c88152d05fa61c6b5cde8be2609636791973fe6fb1e",
+    "rtss_before_measurement": {
+      "authority": "user_confirmed+SDK_readback+physical_profile",
+      "collected_utc": "2026-10-28T18:02:17.293041+00:00",
+      "executable_sha256": "502682d68e34d66ce43454bf47bd2eb8ee9c9e49455cb5b260c3c9c637fe7dd0",
+      "read_only": true,
+      "mutation_performed": false,
+      "restoration_required": false,
+      "rtss_known_caps_disabled": true,
+      "global_limit_observed": 232,
+      "effective_limit": 0,
+      "selected_physical_profile": "installed_application_profile",
+      "selected_physical_profile_sha256": "8ec8a1019cb081b792479f5c1e076ecd698f29f608ca197c495d626e02fe68fa",
+      "physical_selected_caps_zero": true,
+      "application_profile_absent": false,
+      "virtual_store_application_profile_absent": true,
+      "helper_sha256": "8efc469ae53ff0aa17ec0e9faf59c305d1642adb2e713a6f1355c81c368acc8d",
+      "sdk_dll_sha256": "61f3e02cde1588446047da7cf04c18d19fcd762f72471200c370b267e32089a9",
+      "coverage": "known RTSS frame/frametime/scanline settings at the observed boundary; other external limiters remain unknown",
+      "fully_uncapped_system_verified": false
+    },
+    "rtss_after_measurement": {
+      "authority": "user_confirmed+SDK_readback+physical_profile",
+      "collected_utc": "2026-10-28T18:02:32.669246+00:00",
+      "executable_sha256": "502682d68e34d66ce43454bf47bd2eb8ee9c9e49455cb5b260c3c9c637fe7dd0",
+      "read_only": true,
+      "mutation_performed": false,
+      "restoration_required": false,
+      "rtss_known_caps_disabled": true,
+      "global_limit_observed": 232,
+      "effective_limit": 0,
+      "selected_physical_profile": "installed_application_profile",
+      "selected_physical_profile_sha256": "8ec8a1019cb081b792479f5c1e076ecd698f29f608ca197c495d626e02fe68fa",
+      "physical_selected_caps_zero": true,
+      "application_profile_absent": false,
+      "virtual_store_application_profile_absent": true,
+      "helper_sha256": "8efc469ae53ff0aa17ec0e9faf59c305d1642adb2e713a6f1355c81c368acc8d",
+      "sdk_dll_sha256": "61f3e02cde1588446047da7cf04c18d19fcd762f72471200c370b267e32089a9",
+      "coverage": "known RTSS frame/frametime/scanline settings at the observed boundary; other external limiters remain unknown",
+      "fully_uncapped_system_verified": false
+    },
+    "effective_renderer": {
+      "vsync": 0,
+      "fps_limiter": 0,
+      "reflex_cap": 0,
+      "reflex_mode": 0,
+      "frame_generation": 0,
+      "render_unfocused": true
+    },
+    "observed_sync_interval": 0
+  },
+  "process_id": 15488,
+  "presentmon_command": [
+    "[WORKSPACE]\\work\\tools\\PresentMon-2.6.0-x64.exe",
+    "--process_id",
+    "15488",
+    "--output_file",
+    "[WORKSPACE]\\work\\B2-first-uncapped-v2\\B0-controls\\timing\\presentmon.csv",
+    "--v2_metrics",
+    "--no_console_stats",
+    "--session_name",
+    "BasixPT_15488",
+    "--timed",
+    "15",
+    "--terminate_after_timed"
+  ],
+  "capture_started_after_wall_s": 45.01499999999942,
+  "presentmon_exit_code": 0,
+  "renderer_intentionally_terminated": true,
+  "renderer_exit_code": 1,
+  "wall_s": 60.76499999999942,
+  "resource_samples": [
+    {
+      "elapsed_s": 0.0,
+      "phase": "warmup",
+      "device_wide_csv": "9195, 4, 41, 210, 32.58",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 1.062000000005355,
+      "phase": "warmup",
+      "device_wide_csv": "9202, 6, 41, 390, 33.68",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 2.125,
+      "phase": "warmup",
+      "device_wide_csv": "9197, 3, 40, 270, 33.63",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 3.172000000005937,
+      "phase": "warmup",
+      "device_wide_csv": "9211, 3, 40, 240, 33.76",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 4.234000000011292,
+      "phase": "warmup",
+      "device_wide_csv": "9770, 7, 41, 2535, 34.99",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 5.297000000005937,
+      "phase": "warmup",
+      "device_wide_csv": "10666, 32, 45, 2535, 75.03",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 6.343000000008033,
+      "phase": "warmup",
+      "device_wide_csv": "10666, 95, 49, 2520, 188.58",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 7.422000000005937,
+      "phase": "warmup",
+      "device_wide_csv": "10666, 95, 49, 2520, 196.43",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 8.484000000011292,
+      "phase": "warmup",
+      "device_wide_csv": "10663, 95, 50, 2520, 196.36",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 9.562000000005355,
+      "phase": "warmup",
+      "device_wide_csv": "10604, 95, 50, 2520, 195.51",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 10.625,
+      "phase": "warmup",
+      "device_wide_csv": "10671, 95, 50, 2520, 196.08",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 11.703000000008615,
+      "phase": "warmup",
+      "device_wide_csv": "10638, 95, 50, 2520, 195.41",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 12.764999999999418,
+      "phase": "warmup",
+      "device_wide_csv": "10637, 96, 51, 2520, 199.61",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 13.828000000008615,
+      "phase": "warmup",
+      "device_wide_csv": "10625, 95, 50, 2520, 199.78",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 14.889999999999418,
+      "phase": "warmup",
+      "device_wide_csv": "10621, 95, 51, 2520, 197.89",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 15.968000000008033,
+      "phase": "warmup",
+      "device_wide_csv": "10617, 96, 51, 2520, 199.91",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 17.014999999999418,
+      "phase": "warmup",
+      "device_wide_csv": "10615, 96, 51, 2520, 199.91",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 18.078000000008615,
+      "phase": "warmup",
+      "device_wide_csv": "10619, 96, 51, 2520, 199.71",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 19.139999999999418,
+      "phase": "warmup",
+      "device_wide_csv": "10637, 96, 51, 2520, 198.49",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 20.203000000008615,
+      "phase": "warmup",
+      "device_wide_csv": "10637, 96, 51, 2520, 200.21",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 21.264999999999418,
+      "phase": "warmup",
+      "device_wide_csv": "10629, 96, 51, 2520, 200.73",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 22.328000000008615,
+      "phase": "warmup",
+      "device_wide_csv": "10623, 96, 52, 2520, 200.82",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 23.389999999999418,
+      "phase": "warmup",
+      "device_wide_csv": "10628, 95, 51, 2520, 200.13",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 24.468000000008033,
+      "phase": "warmup",
+      "device_wide_csv": "10628, 95, 52, 2520, 199.37",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 25.531000000002678,
+      "phase": "warmup",
+      "device_wide_csv": "10626, 95, 52, 2520, 199.39",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 26.593000000008033,
+      "phase": "warmup",
+      "device_wide_csv": "10616, 95, 52, 2520, 200.09",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 27.672000000005937,
+      "phase": "warmup",
+      "device_wide_csv": "10629, 95, 52, 2520, 200.32",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 28.734000000011292,
+      "phase": "warmup",
+      "device_wide_csv": "10629, 96, 52, 2520, 200.63",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 29.797000000005937,
+      "phase": "warmup",
+      "device_wide_csv": "10625, 96, 52, 2520, 200.53",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 30.875,
+      "phase": "warmup",
+      "device_wide_csv": "10629, 96, 52, 2520, 200.63",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 31.937000000005355,
+      "phase": "warmup",
+      "device_wide_csv": "10629, 96, 52, 2520, 200.45",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 33.0,
+      "phase": "warmup",
+      "device_wide_csv": "10634, 96, 52, 2520, 200.44",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 34.078000000008615,
+      "phase": "warmup",
+      "device_wide_csv": "10716, 96, 52, 2520, 200.29",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 35.13999999999942,
+      "phase": "warmup",
+      "device_wide_csv": "10712, 95, 52, 2520, 199.42",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 36.203000000008615,
+      "phase": "warmup",
+      "device_wide_csv": "10925, 95, 52, 2520, 196.25",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 37.28100000000268,
+      "phase": "warmup",
+      "device_wide_csv": "10855, 95, 53, 2520, 196.44",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 38.34300000000803,
+      "phase": "warmup",
+      "device_wide_csv": "10790, 95, 53, 2520, 198.39",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 39.42200000000594,
+      "phase": "warmup",
+      "device_wide_csv": "10751, 95, 53, 2520, 199.00",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 40.48400000001129,
+      "phase": "warmup",
+      "device_wide_csv": "10659, 95, 53, 2520, 198.75",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 41.562000000005355,
+      "phase": "warmup",
+      "device_wide_csv": "10710, 94, 53, 2520, 198.65",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 42.625,
+      "phase": "warmup",
+      "device_wide_csv": "10707, 95, 53, 2520, 197.24",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 43.687000000005355,
+      "phase": "warmup",
+      "device_wide_csv": "10832, 95, 53, 2520, 198.85",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 44.76499999999942,
+      "phase": "warmup",
+      "device_wide_csv": "10824, 95, 53, 2520, 195.93",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 45.79700000000594,
+      "phase": "measurement",
+      "device_wide_csv": "10994, 94, 53, 2520, 193.84",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 46.85900000001129,
+      "phase": "measurement",
+      "device_wide_csv": "10989, 94, 53, 2520, 197.39",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 47.92200000000594,
+      "phase": "measurement",
+      "device_wide_csv": "10916, 94, 53, 2520, 197.76",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 48.98400000001129,
+      "phase": "measurement",
+      "device_wide_csv": "10969, 94, 53, 2520, 197.64",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 50.04700000000594,
+      "phase": "measurement",
+      "device_wide_csv": "10918, 95, 53, 2520, 198.24",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 51.10900000001129,
+      "phase": "measurement",
+      "device_wide_csv": "10875, 95, 53, 2520, 200.11",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 52.17200000000594,
+      "phase": "measurement",
+      "device_wide_csv": "10821, 95, 54, 2520, 200.35",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 53.23400000001129,
+      "phase": "measurement",
+      "device_wide_csv": "10749, 95, 53, 2520, 199.26",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 54.312000000005355,
+      "phase": "measurement",
+      "device_wide_csv": "11006, 94, 54, 2520, 197.86",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 55.38999999999942,
+      "phase": "measurement",
+      "device_wide_csv": "10995, 95, 54, 2520, 197.23",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 56.453000000008615,
+      "phase": "measurement",
+      "device_wide_csv": "10893, 95, 54, 2520, 199.80",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 57.51499999999942,
+      "phase": "measurement",
+      "device_wide_csv": "10836, 95, 54, 2520, 200.50",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 58.578000000008615,
+      "phase": "measurement",
+      "device_wide_csv": "10905, 95, 54, 2520, 200.14",
+      "exit_code": 0
+    },
+    {
+      "elapsed_s": 59.63999999999942,
+      "phase": "measurement",
+      "device_wide_csv": "10919, 95, 54, 2520, 197.83",
+      "exit_code": 0
+    }
+  ],
+  "presentmon_csv_sha256": "0acbe2674c135a116efa2c258ca2cd86569ac96ec6ae44b81bb1f76df51a1f2d",
+  "observed_present_rows": 9747,
+  "image_write_count": 0,
+  "reported_trace_loss": false,
+  "artifact_identity_after_capture": {
+    "manifest_sha256": "e28801199d96b2de83a98aea0aa7fbe6b18e5a6c00f6804d769f9373fcb2c0d6",
+    "root_source_sha": "303b408ab81790a5051abd7573830b7a4112eb8e",
+    "working_diff_sha256": "540a25db7aef1259e47add94149b7ee19f1661e1e43c2a056f133606d9a42c22",
+    "executable_sha256": "502682d68e34d66ce43454bf47bd2eb8ee9c9e49455cb5b260c3c9c637fe7dd0",
+    "shader_files": 445,
+    "validated": true
+  }
+}

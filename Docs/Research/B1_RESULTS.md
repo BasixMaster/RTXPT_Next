@@ -92,3 +92,9 @@ This first comparison covers two original static scenes, one GPU, one isolated r
 |---|---|---|
 | [![kitchen B0 capture](assets/b1/kitchen-B0.png)](assets/b1/kitchen-B0.png) | [![kitchen B1 capture](assets/b1/kitchen-B1.png)](assets/b1/kitchen-B1.png) | [![kitchen reference capture](assets/b1/kitchen-reference.png)](assets/b1/kitchen-reference.png) |
 
+
+## Later frame-cap audit —2026-10-28
+
+A subsequent read-only RTSS SDK audit found a current global232-FPS cap inherited by `Rtxpt.exe`, with no application-specific profile. This discovery describes the later audit time; no retained RTSS snapshot proves the state during the original B0/B1 runs. Their cap coverage is therefore **historical_unverified**. Preserve the numeric observations as exploratory migration measurements, not verified uncapped performance or maximum-throughput claims. SyncInterval0 did not rule out this external limiter. Future runs require explicit renderer controls, verified NVIDIA driver settings, an RTSS per-application zero-limit override/readback where needed, and restoration evidence. The frozen timing/capture files and their hashes remain unchanged.
+
+The user then disabled the limiter in a user-owned RTXPT application profile. A fresh read-only audit verifies application SDK cap0 and the installed profile's frame/frametime/scanline settings0 while global232 remains unchanged. Future runs preserve that profile and use read-only boundary verification; no RTSS restoration is required or performed. This later correction does not retroactively establish the original runs' cap state.

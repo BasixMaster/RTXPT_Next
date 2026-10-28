@@ -1,0 +1,154 @@
+{
+  "kind": "Single-image post-warm-up-fix HDR diagnostic; no independent-run performance/bias claim",
+  "scene": "Testing/B2/Scenes/opaque-room.scene.json",
+  "settings": {
+    "width": 640,
+    "height": 360,
+    "bounce_caps": [
+      3,
+      3
+    ],
+    "spp": 1,
+    "reference_spp": 4096,
+    "aa": 0,
+    "denoiser": 0
+  },
+  "reference": "Reused RGBA32F accumulated reference from earlier opaque run; native reference integration/scene/bounce settings unchanged.",
+  "configurations": [
+    {
+      "mode": "initial",
+      "exit_code": 0,
+      "executable_sha256": "fab46cf72b416b0797a9b39079c5eb68a280a19d161e9f4603f286cd78b0b11f",
+      "reservoir_binary_sha256": "ee2400ca3dcd88c951dfff304cb77295e3cfeed343c341080f69c6c81f0911e2",
+      "raw_reservoir_binary": "Retained in private local workbench; large binary not copied into public report."
+    },
+    {
+      "mode": "temporal",
+      "exit_code": 0,
+      "executable_sha256": "fab46cf72b416b0797a9b39079c5eb68a280a19d161e9f4603f286cd78b0b11f",
+      "reservoir_binary_sha256": "09279df3c8015757b8b3d56f1077e3b0a1c1a107073b8511a981353454da5e74",
+      "raw_reservoir_binary": "Retained in private local workbench; large binary not copied into public report."
+    },
+    {
+      "mode": "spatial",
+      "exit_code": 0,
+      "executable_sha256": "fab46cf72b416b0797a9b39079c5eb68a280a19d161e9f4603f286cd78b0b11f",
+      "reservoir_binary_sha256": "3f0da904bb36d7706ab9c127d52f94d18ab72cf5a4f047907f8fa2f912a8a059",
+      "raw_reservoir_binary": "Retained in private local workbench; large binary not copied into public report."
+    },
+    {
+      "mode": "reuse",
+      "exit_code": 0,
+      "executable_sha256": "fab46cf72b416b0797a9b39079c5eb68a280a19d161e9f4603f286cd78b0b11f",
+      "reservoir_binary_sha256": "da1376a3e53f700615ec2e725fb0ed038dab5c0304ba602135e278d6a6c740b8",
+      "raw_reservoir_binary": "Retained in private local workbench; large binary not copied into public report."
+    }
+  ],
+  "metrics": {
+    "initial": {
+      "linear_rgb_mse": 0.1880601013412182,
+      "smape_cgns_y100": 16.179126010323767,
+      "full_frame_reference_mean_luminance": 0.34873370728122316,
+      "mape_rgb_ydenom": 0.3583522564040329,
+      "relmse_project": 3.1057154644399807,
+      "relative_metrics_available": true
+    },
+    "temporal": {
+      "linear_rgb_mse": 0.08866611785136425,
+      "smape_cgns_y100": 10.897730956057115,
+      "full_frame_reference_mean_luminance": 0.34873370728122316,
+      "mape_rgb_ydenom": 0.27006225476167384,
+      "relmse_project": 0.6201262178983319,
+      "relative_metrics_available": true
+    },
+    "spatial": {
+      "linear_rgb_mse": 0.17983489303767825,
+      "smape_cgns_y100": 15.270094995466224,
+      "full_frame_reference_mean_luminance": 0.34873370728122316,
+      "mape_rgb_ydenom": 0.3411402331881506,
+      "relmse_project": 2.7464807539003404,
+      "relative_metrics_available": true
+    },
+    "reuse": {
+      "linear_rgb_mse": 0.08488106097784753,
+      "smape_cgns_y100": 10.593776640666555,
+      "full_frame_reference_mean_luminance": 0.34873370728122316,
+      "mape_rgb_ydenom": 0.25832115443835474,
+      "relmse_project": 0.40124717586975595,
+      "relative_metrics_available": true
+    }
+  },
+  "history_statistics": {
+    "initial": {
+      "slot": 0,
+      "pixels": 230400,
+      "valid": 134640,
+      "m_greater_than_one": 0,
+      "positive_age_valid": 0,
+      "max_age_valid": 0,
+      "mean_m_valid": 1.0,
+      "valid_with_positive_weight": 73196,
+      "nonfinite_m": 0,
+      "nonfinite_weight_valid": 0,
+      "nonfinite_target_valid": 0
+    },
+    "temporal": {
+      "slot": 1,
+      "pixels": 230400,
+      "valid": 134640,
+      "m_greater_than_one": 134068,
+      "positive_age_valid": 117591,
+      "max_age_valid": 30,
+      "mean_m_valid": 8.845142602495544,
+      "valid_with_positive_weight": 131131,
+      "nonfinite_m": 0,
+      "nonfinite_weight_valid": 0,
+      "nonfinite_target_valid": 0
+    },
+    "reuse": {
+      "slot": 1,
+      "pixels": 230400,
+      "valid": 134640,
+      "m_greater_than_one": 134513,
+      "positive_age_valid": 118872,
+      "max_age_valid": 30,
+      "mean_m_valid": 14.90017825311943,
+      "valid_with_positive_weight": 133218,
+      "nonfinite_m": 0,
+      "nonfinite_weight_valid": 0,
+      "nonfinite_target_valid": 0
+    }
+  },
+  "limitations": [
+    "One image per mode; finite-reference HDR uncertainty remains unmeasured.",
+    "Stored history participation does not prove unbiased weighting.",
+    "No matched B0/B1 HDR quality comparison or B2 promotion."
+  ],
+  "files": {
+    "initial/frame_B2-history-fixed-initial.pfm": "96b9d641e1e12c79f054767ba2ef7e18bab553a6e92700b659c0806896ea2f2a",
+    "initial/frame_B2-history-fixed-initial.pfm.json": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+    "initial/frame_B2-history-fixed-initial.pfm.pt.bin.json": "ea0d17d9fb250451c50d2bc8a4f789d32630103772e37522b4b3754b930044c2",
+    "initial/frame_B2-history-fixed-initial.png": "fe0967d32fde16e179112e46568cfb8b74f929bf0939e221b18caed90a40c8b3",
+    "initial/linear-quality.json": "8dc138611d05c3e7cde5def6258c1ebf8291facc78ae000d8e123ec443d55909",
+    "initial/reservoir-stats.json": "e9a0a6526631295a9f32fd8da501ee4b26f83b1118a01394af4a821972878920",
+    "reference/frame_B2-owner-hdr-reference.pfm": "93726f4b88720d808fa16de3b084bb52f80ee88f725d51fb1d2c44c94b4aedf9",
+    "reference/frame_B2-owner-hdr-reference.pfm.json": "9e3b147ada587a1500700d0e771886e8b355354ae673a29bcc2abc047cc1e84c",
+    "reuse/frame_B2-history-fixed-reuse.pfm": "5cd05453039a665bad7dcf3ef5a42c29796144700a08ddc8e03b5bbcb1fefe19",
+    "reuse/frame_B2-history-fixed-reuse.pfm.json": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+    "reuse/frame_B2-history-fixed-reuse.pfm.pt.bin.json": "af54098f83ebd4f3b452dee8edb299d66463cade4e69bde3246afbb7893a89d9",
+    "reuse/frame_B2-history-fixed-reuse.png": "0f7557eeca1346cac05e2df1ab912745241a8c88913203b379db10034859093d",
+    "reuse/linear-quality.json": "b63c9e478a0ddb443ff8ccbd1c31cf49bf6a62ae2dc74a835a77577ab4d271b1",
+    "reuse/reservoir-stats.json": "ced5b88add92c7051cb83ef7db6118f040e8222efdd468c334fe348c304fddce",
+    "spatial/frame_B2-history-fixed-spatial.pfm": "f035e1586471a107f744123b033be51fc65beab069570cb2c544968fea87d2c8",
+    "spatial/frame_B2-history-fixed-spatial.pfm.json": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+    "spatial/frame_B2-history-fixed-spatial.pfm.pt.bin.json": "bed32b768f2d098f00f46e830eb4090eec88dee3903c21e0c34da042ad5310e9",
+    "spatial/frame_B2-history-fixed-spatial.png": "4b359bf813c7b80403baa69ca4b1e8d1859937d1dd3a37838f6a6ea72f2da419",
+    "spatial/linear-quality.json": "f43f2685a2541e9ae8e1881d670d5efe377f4885fce59fae4927d75381b9b78f",
+    "temporal/frame_B2-history-fixed-temporal.pfm": "46e167a0a630666fc2d146c9fef0a032f97ff288c55b9bb1cd747c685c728c9a",
+    "temporal/frame_B2-history-fixed-temporal.pfm.json": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+    "temporal/frame_B2-history-fixed-temporal.pfm.pt.bin.json": "fe086ac819090baa2dabb362f710cc3752dd9e10821a042f5b722ea2457a6b15",
+    "temporal/frame_B2-history-fixed-temporal.png": "5c63bd30aa596d68d1b28118c2e77800004ad21180c3b2b3817f1211e2b86f3a",
+    "temporal/linear-quality.json": "131b96860f0943b0ebcfbdfb0280cd128f8471aa86bf54450f36c0b76b86880b",
+    "temporal/reservoir-stats.json": "d7a32d94ad14823a1233c3052b876d43becebb3d0a87a5a83330c2d45080cba7"
+  }
+}

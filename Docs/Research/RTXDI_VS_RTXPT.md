@@ -1,4 +1,4 @@
-**Current project context (2026-10-28):** RTXPT1.9 with its original scenes is the immutable B0 baseline. B1 at `7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee` applies the RTXDI3.1 runtime/API migration to the existing DI/GI path. It does not add a ReSTIR PT renderer or activate PT++/CGNS features. `External/RTXDI-SDK` remains reference-only. See [B1 results](B1_RESULTS.md) for measured scope and limitations. B2+ remain planned.
+**Current project context (2026-10-28):** RTXPT1.9 with its original scenes is the immutable B0 baseline. B1 at `7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee` applies the RTXDI3.1 runtime/API migration to the existing DI/GI path. It does not add a ReSTIR PT renderer or activate PT++/CGNS features. `External/RTXDI-SDK` remains reference-only. See [B1 results](B1_RESULTS.md) for measured scope and limitations. B2 integration is in progress; B3 PT++ remains planned. See [implementation status](B2_IMPLEMENTATION.md).
 
 # RTXDI versus RTXPT: dependency and renderer comparison
 

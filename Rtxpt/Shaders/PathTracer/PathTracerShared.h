@@ -66,7 +66,7 @@ struct PathTracerConstants
     uint    frameIndex;                     // sampleIndex != frameIndex since we can have multiple samples per frame
     uint    useReSTIRDI;
     uint    useReSTIRGI;
-    uint    _padding5;
+    uint    useReSTIRPT;
 
     float   denoisingLayersSplitStopThreshold;
     float   _padding3;

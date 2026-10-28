@@ -11,6 +11,8 @@
 #ifndef __BINDING_DATA_TYPES_HLSLI__ // using instead of "#pragma once" due to https://github.com/microsoft/DirectXShaderCompiler/issues/3943
 #define __BINDING_DATA_TYPES_HLSLI__
 
+#include "PTPrimaryData.h"
+
 struct PackedPathTracerSurfaceData
 {
     float3 _posW;

@@ -56,7 +56,50 @@
       ]
     },
     {
-      "name": "Measured B0/B1 registry,20 accepted process runs and preserved CSV hashes; B2 remains planned",
+      "name": "B2 integration/B3 PT++ development states remain distinct from immutable B1 evidence",
+      "status": "in_progress",
+      "development_source_changes": [
+        "Rtxpt/AdvancedSample.cpp",
+        "Rtxpt/AdvancedSampleUI.cpp",
+        "Rtxpt/RTXDI/RtxdiApplicationBridge.hlsli",
+        "Rtxpt/RTXDI/RtxdiPass.cpp",
+        "Rtxpt/RTXDI/RtxdiPass.h",
+        "Rtxpt/RTXDI/RtxdiResources.cpp",
+        "Rtxpt/RTXDI/RtxdiResources.h",
+        "Rtxpt/RTXDI/ShaderParameters.h",
+        "Rtxpt/RTXDI/SurfaceData.hlsli",
+        "Rtxpt/Sample.cpp",
+        "Rtxpt/SampleCommon/CaptureScriptManager.cpp",
+        "Rtxpt/SampleCommon/CommandLine.cpp",
+        "Rtxpt/SampleCommon/CommandLine.h",
+        "Rtxpt/SampleCommon/RenderTargets.cpp",
+        "Rtxpt/SampleCommon/RenderTargets.h",
+        "Rtxpt/SampleUI.cpp",
+        "Rtxpt/SampleUI.h",
+        "Rtxpt/Shaders/Bindings/BindingDataTypes.hlsli",
+        "Rtxpt/Shaders/Bindings/ShaderResourceBindings.hlsli",
+        "Rtxpt/Shaders/Misc/GBufferHelpers.hlsli",
+        "Rtxpt/Shaders/PathTracer/Config.h",
+        "Rtxpt/Shaders/PathTracer/PathTracerHandleHit.hlsli",
+        "Rtxpt/Shaders/PathTracer/PathTracerShared.h",
+        "Rtxpt/Shaders/PathTracerBridgeDonut.hlsli",
+        "Rtxpt/Shaders/PathTracerSurfaceBridgeDonut.hlsli",
+        "Rtxpt/shaders.cfg",
+        "Rtxpt/RTXDI/PT/Bridge.hlsli",
+        "Rtxpt/RTXDI/PT/FinalShading.hlsl",
+        "Rtxpt/RTXDI/PT/GenerateInitialSamples.hlsl",
+        "Rtxpt/RTXDI/PT/Runtime/DiffuseBudget.hlsli",
+        "Rtxpt/RTXDI/PT/Runtime/DiffuseBudget.md",
+        "Rtxpt/RTXDI/PT/SpatialResampling.hlsl",
+        "Rtxpt/RTXDI/PT/TemporalResampling.hlsl",
+        "Rtxpt/SampleCommon/HdrCapture.cpp",
+        "Rtxpt/SampleCommon/HdrCapture.h",
+        "Rtxpt/Shaders/Bindings/PTPrimaryData.h"
+      ],
+      "reason": "Development source is allowed to differ from B1; this checker proves neither B2 compilation nor runtime activation."
+    },
+    {
+      "name": "Measured B0/B1 registry,20 accepted process runs and preserved CSV hashes; B2/B3 have no fabricated results",
       "status": "passed",
       "evidence": "Benchmarks/results/2026-10-28-b1"
     },
@@ -88,6 +131,6 @@
     "Two static scenes on one GPU; five process pairs per scene.",
     "PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.",
     "Tonemapped display metrics; HDR/temporal/independent-seed validation remains future.",
-    "B1 migrates existing DI/GI APIs; ReSTIR PT integration and B2+ remain planned."
+    "B1 migrates existing DI/GI APIs; B2 ReSTIR PT integration is in progress and B3 PT++ remains planned."
   ]
 }

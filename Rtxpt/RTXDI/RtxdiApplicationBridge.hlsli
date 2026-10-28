@@ -59,6 +59,11 @@ StructuredBuffer<uint> t_GeometryInstanceToLight            : register(t26 VK_DE
 // Screen-sized UAVs
 RWStructuredBuffer<RTXDI_PackedDIReservoir> u_LightReservoirs : register(u13 VK_DESCRIPTOR_SET(2));
 RWStructuredBuffer<RTXDI_PackedGIReservoir> u_GIReservoirs  : register(u14 VK_DESCRIPTOR_SET(2));
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+RWStructuredBuffer<RTXDI_PackedPTReservoir> u_PTReservoirs : register(u17 VK_DESCRIPTOR_SET(2));
+RWByteAddressBuffer u_PTSpatialNeighbors : register(u18 VK_DESCRIPTOR_SET(2));
+#define RTXDI_PT_RESERVOIR_BUFFER u_PTReservoirs
+#endif
 
 // RTXDI UAVs
 RWBuffer<uint2> u_RisBuffer                                 : register(u15 VK_DESCRIPTOR_SET(2));
@@ -236,8 +241,15 @@ struct RAB_LightSample
 
 typedef PolymorphicLightInfoFull RAB_LightInfo;
 // Using the RTXPT Sample Generator
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+// PT reservoirs store the replay generator's seed and draw index. DI/GI keep
+// their existing generator; only the PT bridge uses the runtime's replay RNG.
+#include <Rtxdi/Utils/RandomSamplerState.hlsli>
+typedef RTXDI_RandomSamplerState RAB_RandomSamplerState;
+#else
 typedef SampleGenerator RAB_RandomSamplerState;
 typedef RAB_RandomSamplerState RTXDI_RandomSamplerState;
+#endif
 
 
 // Initialized the random sampler for a given pixel or tile index.
@@ -247,19 +259,29 @@ typedef RAB_RandomSamplerState RTXDI_RandomSamplerState;
 // A table-based blue noise RNG dose not provide enough entropy, for example.
 RAB_RandomSamplerState RAB_InitRandomSampler(uint2 index, uint pass)
 {
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+    return RTXDI_InitRandomSampler(index, g_RtxdiBridgeConst.runtimeParams.frameIndex, pass);
+#else
     return SampleGenerator::make(SampleGeneratorVertexBase::make(index, pass, Bridge::getSampleIndex()));
+#endif
 }
 
 // Draws a random number X from the sampler, so that (0 <= X < 1).
 float RAB_GetNextRandom(inout RAB_RandomSamplerState rng)
 {
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+    return RTXDI_GetNextRandom(rng);
+#else
     return sampleNext1D(rng);
+#endif
 }
 
+#if !defined(RTXPT_RESTIR_PT_BRIDGE)
 float RTXDI_GetNextRandom(inout RTXDI_RandomSamplerState rng)
 {
     return sampleNext1D(rng);
 }
+#endif
 
 
 //Empty type constructors
@@ -297,9 +319,15 @@ bool RAB_IsSurfaceValid(RAB_Surface surface)
 // Returns the world position of the given surface
 float3 RAB_GetSurfaceWorldPos(RAB_Surface surface)
 {
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+    // Reconnection geometry/Jacobians use the barycentric position. Ray origins
+    // are offset separately through ComputeNewRayOrigin.
+    return surface.GetPosW();
+#else
     // Should we use posW instead?
     //return surface.shadingData.posW;
     return surface.ComputeNewRayOrigin();
+#endif
     //return surface.position;
 }
 
@@ -496,10 +524,25 @@ float RAB_GetLightTargetPdfForVolume(RAB_LightInfo light, float3 volumeCenter, f
 bool RAB_GetSurfaceBrdfSample(RAB_Surface surface, inout RAB_RandomSamplerState rng, out float3 dir)
 {
     BSDFSample result;
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+    FalcorBSDF bsdf = FalcorBSDF::make(surface._mtl, surface._N, surface._V, surface._data, surface._eta);
+    float3 woLocal;
+#if RecycleSelectSamples
+    bool valid = bsdf.sample(surface._ToLocal(surface._V), woLocal, result.pdf, result.weight, result.lobe, result.lobeP,
+        float3(RTXDI_GetNextRandom(rng), RTXDI_GetNextRandom(rng), RTXDI_GetNextRandom(rng)));
+#else
+    bool valid = bsdf.sample(surface._ToLocal(surface._V), woLocal, result.pdf, result.weight, result.lobe, result.lobeP,
+        float4(RTXDI_GetNextRandom(rng), RTXDI_GetNextRandom(rng), RTXDI_GetNextRandom(rng), RTXDI_GetNextRandom(rng)));
+#endif
+    result.wo = surface._FromLocal(woLocal);
+    dir = result.wo;
+    return valid;
+#else
     surface.Sample(rng, result, true);
 
     dir = result.wo;
     return dot(RAB_GetSurfaceNormal(surface), dir) > 0.f;
+#endif
 }
 
 // Computes the PDF of a particular direction being sampled by RAB_GetSurfaceBrdfSample.
@@ -690,11 +733,19 @@ bool RAB_TraceRayForLocalLight(float3 origin, float3 direction, float tMin, floa
 // between the surface and the light sample. Conservative means if unsure, assume the light is visible.
 // Significant differences between this conservative visibility and the final one will result in more noise.
 // This function is used in the spatial resampling functions for ray traced bias correction.
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+float3 RTXPT_PTShadowTransport(RAB_Surface surface, float3 samplePosition);
+#endif
+
 bool RAB_GetConservativeVisibility(RAB_Surface surface, RAB_LightSample lightSample)
 {
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+    return any(RTXPT_PTShadowTransport(surface, lightSample.position) > 0.0f);
+#else
     const RayDesc ray = setupVisibilityRay(surface, lightSample, g_RtxdiBridgeConst.rayEpsilon);
 
     return GetConservativeVisibility(SceneBVH, ray);
+#endif
 }
 
 // Same as RAB_GetConservativeVisibility but for temporal resampling.
@@ -702,12 +753,16 @@ bool RAB_GetConservativeVisibility(RAB_Surface surface, RAB_LightSample lightSam
 // When they are not available, use the current AS. That will result in transient bias.
 bool RAB_GetTemporalConservativeVisibility(RAB_Surface currentSurface, RAB_Surface previousSurface, RAB_LightSample lightSample)
 {
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+    return any(RTXPT_PTShadowTransport(currentSurface, lightSample.position) > 0.0f);
+#else
     const RayDesc ray = setupVisibilityRay(currentSurface, lightSample, g_RtxdiBridgeConst.rayEpsilon);
 
     /*if (g_ResamplingConst.enablePreviousTLAS)
         return GetConservativeVisibility(PrevSceneBVH, previousSurface, lightSample);
     else*/
     return GetConservativeVisibility(SceneBVH, ray);
+#endif
 }
 
 // Forward declare the SDK function that's used in RAB_AreMaterialsSimilar
@@ -806,16 +861,24 @@ float RAB_GetGISampleTargetPdfForSurface(float3 samplePosition, float3 sampleRad
 
 bool RAB_GetConservativeVisibility(RAB_Surface surface, float3 samplePosition)
 {
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+    return any(RTXPT_PTShadowTransport(surface, samplePosition) > 0.0f);
+#else
     const RayDesc ray = setupVisibilityRay(surface, samplePosition, g_RtxdiBridgeConst.rayEpsilon);
 
     return GetConservativeVisibility(SceneBVH, ray);
+#endif
 }
 
 bool RAB_GetTemporalConservativeVisibility(RAB_Surface currentSurface, RAB_Surface previousSurface, float3 samplePosition)
 {
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+    return any(RTXPT_PTShadowTransport(currentSurface, samplePosition) > 0.0f);
+#else
     const RayDesc ray = setupVisibilityRay(currentSurface, samplePosition, g_RtxdiBridgeConst.rayEpsilon);
 
     return GetConservativeVisibility(SceneBVH, ray);
+#endif
 }
 
 RAB_Surface RAB_GetMaterial(RAB_Surface currentSurface)

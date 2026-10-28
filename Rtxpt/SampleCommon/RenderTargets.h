@@ -30,6 +30,7 @@ class RenderTargets// : public donut::render::GBufferRenderTargets
     bool m_UseReverseProjection = false;
     int m_BackbufferCount = -1;
     nvrhi::IDevice* m_device;
+    bool m_PTPrimaryDataFullResolution = false;
 public:
     struct OptionalBuffers
     {
@@ -70,6 +71,7 @@ public:
     nvrhi::BufferHandle  DenoisingLayersBuffer;
 
     nvrhi::BufferHandle  SurfaceDataBuffer;
+    nvrhi::BufferHandle  PTPrimaryDataBuffer; // Native material/medium/cone state, GenericTS current+history
 
     nvrhi::BufferHandle  SubSamplingPixelList;              // stream-compacted pixels for the stochastic sub-sampling pattern - layout in Shaders/Misc/SubSampling.h
 
@@ -112,6 +114,8 @@ public:
     void Init(nvrhi::IDevice* device, donut::math::uint2 renderSize, donut::math::uint2 displaySize, int backbufferCount, OptionalBuffers optionalBuffers);// override;
     [[nodiscard]] bool IsUpdateRequired(donut::math::uint2 renderSize, donut::math::uint2 displaySize, donut::math::uint sampleCount = 1) const;
     void Clear(nvrhi::ICommandList* commandList);
+    // Returns true when the allocation changed and global bindings must be recreated.
+    bool EnsurePTPrimaryData(bool enabled);
 
     // TAA history is display-size, so it is only allocated while TAA is active
     void EnsureTemporalFeedback();

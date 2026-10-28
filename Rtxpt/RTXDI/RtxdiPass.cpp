@@ -9,6 +9,10 @@
 */
 
 #include "RtxdiPass.h"
+#include <cstddef>
+#include <fstream>
+#include <cstdio>
+#include <stdexcept>
 #include <rtxdi/ImportanceSamplingContext.h>
 
 #include "RtxdiResources.h"
@@ -28,6 +32,22 @@
 using namespace donut::math;
 using namespace donut::engine;
 using namespace donut::render;
+
+static_assert(sizeof(RtxdiBridgeConstants) % 16 == 0, "RTXDI bridge constant buffer must use complete 16-byte rows");
+static_assert(offsetof(RtxdiBridgeConstants, restirPT) % 16 == 0, "PT constants must start at a constant-buffer row boundary");
+static_assert(sizeof(RTXDI_PTParameters) % 16 == 0, "Runtime PT parameter layout must preserve 16-byte rows");
+
+RtxdiPTUserSettings::RtxdiPTUserSettings()
+{
+    reconnectionParams.reconnectionMode = RTXDI_PTReconnectionMode::FixedThreshold;
+    temporalResamplingParams.duplicationBasedHistoryReduction = 0;
+    spatialResamplingParams.duplicationBasedHistoryReduction = 0;
+    spatialResamplingParams.enableSpatialHeuristicMode = 0;
+    decorrelationParams.decorrelationMode = RTXDI_PTDecorrelationMode::None;
+    decorrelationParams.decorrelationFactor = 0.0f;
+    decorrelationParams.fireflyReplacementFilterEnable = 0;
+    boilingFilterParams.enableBoilingFilter = 0;
+}
 
 RtxdiPass::RtxdiPass(
 	nvrhi::IDevice* device,
@@ -53,7 +73,9 @@ RtxdiPass::RtxdiPass(
 		nvrhi::BindingLayoutItem::StructuredBuffer_UAV(13),		//u_LightReservoirs
 		nvrhi::BindingLayoutItem::StructuredBuffer_UAV(14),		//u_GIReservoirs
 		nvrhi::BindingLayoutItem::TypedBuffer_UAV(15),			//u_RisBuffer
-		nvrhi::BindingLayoutItem::TypedBuffer_UAV(16),			//u_RisLightDataBuffer
+        nvrhi::BindingLayoutItem::TypedBuffer_UAV(16),            //u_RisLightDataBuffer
+        nvrhi::BindingLayoutItem::StructuredBuffer_UAV(17),       //u_PTReservoirs
+        nvrhi::BindingLayoutItem::RawBuffer_UAV(18),              //u_PTSpatialNeighborSelection
 
 		nvrhi::BindingLayoutItem::VolatileConstantBuffer(5),	//g_RtxdiBridgeConst
 
@@ -73,7 +95,10 @@ void RtxdiPass::CheckContextStaticParameters()
 	{
 		auto& reGIRContext = m_ImportanceSamplingContext->GetReGIRContext();
 
-		bool needsReset = false;
+        const auto& diStatic = m_ImportanceSamplingContext->GetReSTIRDIContext().GetStaticParameters();
+        bool needsReset = diStatic.RenderWidth != m_BridgeParameters.frameDims.x ||
+            diStatic.RenderHeight != m_BridgeParameters.frameDims.y ||
+            (m_rtxdiResources && m_rtxdiResources->HasPTResources() != m_BridgeParameters.usingReSTIRPT);
 		if (reGIRContext.GetReGIRStaticParameters().mode != m_BridgeParameters.userSettings.regir.regirStaticParams.mode)
 			needsReset = true;
 		if (reGIRContext.GetReGIRStaticParameters().lightsPerCell != m_BridgeParameters.userSettings.regir.regirStaticParams.lightsPerCell)
@@ -103,8 +128,31 @@ void RtxdiPass::UpdateContextDynamicParameters()
 	m_ImportanceSamplingContext->GetReSTIRGIContext().SetSpatialResamplingParameters(m_BridgeParameters.userSettings.restirGI.spatialResamplingParams);
 	m_ImportanceSamplingContext->GetReSTIRGIContext().SetFinalShadingParameters(m_BridgeParameters.userSettings.restirGI.finalShadingParams);
 
-	// ReGIR
-	auto regirParams = m_BridgeParameters.userSettings.regir.regirDynamicParameters;
+    // ReSTIR PT is an explicitly selected alternative to the GI reuse path.
+    auto& pt = m_ImportanceSamplingContext->GetReSTIRPTContext();
+    const auto& ptSettings = m_BridgeParameters.userSettings.restirPT;
+    pt.SetFrameIndex(m_BridgeParameters.frameIndex);
+    pt.SetResamplingMode(ptSettings.resamplingMode);
+    pt.SetInitialSamplingParameters(ptSettings.initialSamplingParams);
+    pt.SetTemporalResamplingParameters(ptSettings.temporalResamplingParams);
+    pt.SetSpatialResamplingParameters(ptSettings.spatialResamplingParams);
+    pt.SetReconnectionParameters(ptSettings.reconnectionParams);
+    pt.SetHybridShiftParameters(ptSettings.hybridShiftParams);
+    pt.SetDecorrelationParameters(ptSettings.decorrelationParams);
+    pt.SetBoilingFilterParameters(ptSettings.boilingFilterParams);
+
+    // B2 intentionally has no CGNS/duplication/decorrelation passes. Refuse a
+    // settings mismatch instead of consuming unwritten side buffers.
+    if (m_BridgeParameters.usingReSTIRPT &&
+        (ptSettings.spatialResamplingParams.enableSpatialHeuristicMode != 0 ||
+         ptSettings.temporalResamplingParams.duplicationBasedHistoryReduction != 0 ||
+         ptSettings.spatialResamplingParams.duplicationBasedHistoryReduction != 0 ||
+         ptSettings.decorrelationParams.decorrelationMode != RTXDI_PTDecorrelationMode::None ||
+         ptSettings.decorrelationParams.fireflyReplacementFilterEnable != 0))
+        throw std::runtime_error("B2 ReSTIR PT does not activate B3 CGNS/duplication/decorrelation passes.");
+
+    // ReGIR
+    auto regirParams = m_BridgeParameters.userSettings.regir.regirDynamicParameters;
 	regirParams.center = { m_BridgeParameters.cameraPosition.x, m_BridgeParameters.cameraPosition.y,m_BridgeParameters.cameraPosition.z };
 	m_ImportanceSamplingContext->GetReGIRContext().SetDynamicParameters(regirParams);
 }
@@ -145,6 +193,20 @@ void RtxdiPass::CreatePipelines(nvrhi::BindingLayoutHandle extraBindingLayout /*
         {}, useRayQuery, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout);
 }
 
+void RtxdiPass::CreatePTPipelines(nvrhi::BindingLayoutHandle extraBindingLayout)
+{
+    if (!m_BridgeParameters.usingReSTIRPT || m_PTPipelinesCreated)
+        return;
+    const bool initialized =
+        m_PTGenerateInitialSamplesPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/GenerateInitialSamples.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout) &&
+        m_PTTemporalResamplingPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/TemporalResampling.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout) &&
+        m_PTSpatialResamplingPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/SpatialResampling.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout) &&
+        m_PTFinalShadingPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/FinalShading.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout);
+    if (!initialized)
+        throw std::runtime_error("Failed to compile/create the selected ReSTIR PT passes.");
+    m_PTPipelinesCreated = true;
+}
+
 void RtxdiPass::CreateBindingSet(const RenderTargets& renderTargets)
 {
 	for (int currentFrame = 0; currentFrame <= 1; currentFrame++)
@@ -162,7 +224,9 @@ void RtxdiPass::CreateBindingSet(const RenderTargets& renderTargets)
 			nvrhi::BindingSetItem::StructuredBuffer_UAV(13, m_rtxdiResources->LightReservoirBuffer),
 			nvrhi::BindingSetItem::StructuredBuffer_UAV(14, m_rtxdiResources->GIReservoirBuffer),
 			nvrhi::BindingSetItem::TypedBuffer_UAV(15, m_rtxdiResources->RisBuffer),
-			nvrhi::BindingSetItem::TypedBuffer_UAV(16, m_rtxdiResources->RisLightDataBuffer),
+            nvrhi::BindingSetItem::TypedBuffer_UAV(16, m_rtxdiResources->RisLightDataBuffer),
+            nvrhi::BindingSetItem::StructuredBuffer_UAV(17, m_rtxdiResources->PTReservoirBuffer),
+            nvrhi::BindingSetItem::RawBuffer_UAV(18, m_rtxdiResources->PTSpatialNeighborSelectionBuffer),
 			
 			nvrhi::BindingSetItem::ConstantBuffer(5, m_rtxdiConstantBuffer),
 
@@ -183,6 +247,10 @@ void RtxdiPass::Reset()
     m_rtxdiResources = nullptr;
     m_LocalLightPdfMipmapPass = nullptr;
     m_bindingSet = nullptr;
+    m_PrevBindingSet = nullptr;
+    m_PTPipelinesCreated = false;
+    m_PTNeedsClear = false;
+    m_PTCameraHistoryValid = false;
     // Both hold the scene (the pass also its sub-instance buffer and bakers); PrepareResources sets them again
     m_Scene = nullptr;
     m_PrepareLightsPass = nullptr;
@@ -201,6 +269,23 @@ void RtxdiPass::PrepareResources(
     const nvrhi::BindingLayoutHandle extraBindingLayout,
     std::shared_ptr<ShaderDebug> shaderDebug)
 {
+    // Frame gaps and changes to the path construction/scheduling contract cannot
+    // inherit packed path histories from a different invocation schedule.
+    const auto& oldPT = m_BridgeParameters.userSettings.restirPT;
+    const auto& newPT = bridgeParams.userSettings.restirPT;
+    const bool ptHistoryContractChanged = m_BridgeParameters.usingReSTIRPT && bridgeParams.usingReSTIRPT &&
+        (bridgeParams.frameIndex != m_BridgeParameters.frameIndex + 1u ||
+         oldPT.resamplingMode != newPT.resamplingMode ||
+         oldPT.initialSamplingParams.numInitialSamples != newPT.initialSamplingParams.numInitialSamples ||
+         oldPT.initialSamplingParams.maxBounceDepth != newPT.initialSamplingParams.maxBounceDepth ||
+         oldPT.initialSamplingParams.maxRcVertexLength != newPT.initialSamplingParams.maxRcVertexLength ||
+         oldPT.reconnectionParams.reconnectionMode != newPT.reconnectionParams.reconnectionMode ||
+         oldPT.reconnectionParams.roughnessThreshold != newPT.reconnectionParams.roughnessThreshold ||
+         oldPT.reconnectionParams.distanceThreshold != newPT.reconnectionParams.distanceThreshold);
+    if (bridgeParams.capturePTDiagnostics && bridgeParams.usingReSTIRPT)
+        std::printf("PT_HISTORY frame=%u previous=%u requestedReset=%d contractChanged=%d priorHistory=%d\n",
+            bridgeParams.frameIndex, m_BridgeParameters.frameIndex, int(bridgeParams.resetReSTIRPT),
+            int(ptHistoryContractChanged), int(m_PTCameraHistoryValid));
     m_BridgeParameters = bridgeParams;
 
     CheckContextStaticParameters();
@@ -221,6 +306,12 @@ void RtxdiPass::PrepareResources(
     }
 
     UpdateContextDynamicParameters();
+    CreatePTPipelines(extraBindingLayout);
+    if (m_BridgeParameters.usingReSTIRPT && (m_BridgeParameters.resetReSTIRPT || ptHistoryContractChanged))
+    {
+        m_PTNeedsClear = true;
+        m_PTCameraHistoryValid = false;
+    }
 
     if (!m_PrepareLightsPass)
     {
@@ -261,9 +352,12 @@ void RtxdiPass::PrepareResources(
             (numEmissiveMeshes + meshAllocationQuantum - 1) & ~(meshAllocationQuantum - 1),
             (numEmissiveTriangles + triangleAllocationQuantum - 1) & ~(triangleAllocationQuantum - 1),
             (numPrimitiveLights + primitiveAllocationQuantum - 1) & ~(primitiveAllocationQuantum - 1),
-            numGeometryInstances);
+            numGeometryInstances,
+            m_BridgeParameters.usingReSTIRPT ? &m_ImportanceSamplingContext->GetReSTIRPTContext() : nullptr);
 
         rtxdiResourceCreated = true;
+        m_PTNeedsClear = m_BridgeParameters.usingReSTIRPT;
+        m_PTCameraHistoryValid = false;
     }
 
     if (rtxdiResourceCreated)
@@ -285,7 +379,17 @@ void RtxdiPass::BeginFrame(
     const nvrhi::BindingLayoutHandle extraBindingLayout,
     nvrhi::BindingSetHandle extraBindingSet )
 {
-	// Light preparation is only needed for ReStirDI and ReGIR
+    if (m_BridgeParameters.usingReSTIRPT && m_PTNeedsClear)
+    {
+        commandList->clearBufferUInt(m_rtxdiResources->PTReservoirBuffer, 0);
+        commandList->clearBufferUInt(m_rtxdiResources->PTSpatialNeighborSelectionBuffer, 0xffffffffu);
+        nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
+        nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTSpatialNeighborSelectionBuffer);
+        commandList->commitBarriers();
+        m_PTNeedsClear = false;
+    }
+
+    // Light preparation is needed for DI/ReGIR and PT next-event estimation.
 	if (m_BridgeParameters.usingLightSampling)
 	{
 		//This pass needs to happen before we fill the constant buffers 
@@ -421,7 +525,8 @@ void RtxdiPass::FillConstants(nvrhi::CommandListHandle commandList)
 
 	FillSharedConstants(bridgeConstants);
 	FillDIConstants(bridgeConstants.restirDI);
-	FillGIConstants(bridgeConstants.restirGI);
+    FillGIConstants(bridgeConstants.restirGI);
+    FillPTConstants(bridgeConstants.restirPT);
 	FillReGIRConstant(bridgeConstants.regir);
 	FillReGirIndirectConstants(bridgeConstants.regirIndirect);
 
@@ -430,7 +535,11 @@ void RtxdiPass::FillConstants(nvrhi::CommandListHandle commandList)
 
 void RtxdiPass::FillSharedConstants(struct RtxdiBridgeConstants& bridgeConstants) const
 {
-	bridgeConstants.frameIndex = m_BridgeParameters.frameIndex;
+    bridgeConstants.frameIndex = m_BridgeParameters.frameIndex;
+    bridgeConstants.ptCameraPosition = m_BridgeParameters.cameraPosition;
+    bridgeConstants.ptPreviousCameraPosition = m_PTCameraHistoryValid ? m_PreviousPTCameraPosition : m_BridgeParameters.cameraPosition;
+    bridgeConstants.ptPreviousPreviousCameraPosition = m_PTCameraHistoryValid ? m_PreviousPreviousPTCameraPosition : m_BridgeParameters.cameraPosition;
+    bridgeConstants.ptHistoryValid = m_PTCameraHistoryValid ? 1 : 0;
 	bridgeConstants.frameDim = m_BridgeParameters.frameDims;
 	bridgeConstants.rayEpsilon = m_BridgeParameters.userSettings.rayEpsilon;
 	bridgeConstants.localLightPdfTextureSize = uint2(m_rtxdiResources->LocalLightPdfTexture->getDesc().width, m_rtxdiResources->LocalLightPdfTexture->getDesc().height);
@@ -471,6 +580,20 @@ void RtxdiPass::FillGIConstants(RTXDI_GIParameters& giParams)
 	giParams.finalShadingParams = reSTIRGI.GetFinalShadingParameters();
 }
 
+
+void RtxdiPass::FillPTConstants(RTXDI_PTParameters& ptParams)
+{
+    const auto& pt = m_ImportanceSamplingContext->GetReSTIRPTContext();
+    ptParams.reservoirBuffer = pt.GetReservoirBufferParameters();
+    ptParams.bufferIndices = pt.GetBufferIndices();
+    ptParams.initialSampling = pt.GetInitialSamplingParameters();
+    ptParams.temporalResampling = pt.GetTemporalResamplingParameters();
+    ptParams.spatialResampling = pt.GetSpatialResamplingParameters();
+    ptParams.reconnection = pt.GetReconnectionParameters();
+    ptParams.hybridShift = pt.GetHybridShiftParameters();
+    ptParams.decorrelation = pt.GetDecorrelationParameters();
+    ptParams.boilingFilter = pt.GetBoilingFilterParameters();
+}
 
 void RtxdiPass::FillReGIRConstant(ReGIR_Parameters& regirParams)
 {
@@ -556,7 +679,41 @@ void RtxdiPass::ExecuteFusedDIGIFinal(nvrhi::CommandListHandle commandList, nvrh
     ExecuteRayTracingPass(commandList, m_FusedDIGIFinalShadingPass, "Fused DI GI Final Shading", dispatchSize, extraBindingSet);
 }
 
-void RtxdiPass::EndFrame(){}
+void RtxdiPass::ExecutePT(nvrhi::CommandListHandle commandList, nvrhi::BindingSetHandle extraBindingSet)
+{
+    if (!m_BridgeParameters.usingReSTIRPT || !m_PTPipelinesCreated || !m_rtxdiResources->HasPTResources())
+        throw std::runtime_error("ReSTIR PT dispatched without its selected resource/pipeline state.");
+    GpuProfiler::Begin(commandList, "ReSTIR PT");
+    const auto& pt = m_ImportanceSamplingContext->GetReSTIRPTContext();
+    const auto mode = pt.GetResamplingMode();
+    const auto params = pt.GetStaticParams();
+    const dm::int2 dispatchSize = { int(params.RenderWidth), int(params.RenderHeight) };
+    nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
+    ExecuteRayTracingPass(commandList, m_PTGenerateInitialSamplesPass, "PT Initial Sampling", dispatchSize, extraBindingSet);
+    if (mode == rtxdi::ReSTIRPT_ResamplingMode::Temporal || mode == rtxdi::ReSTIRPT_ResamplingMode::TemporalAndSpatial)
+    {
+        nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
+        ExecuteRayTracingPass(commandList, m_PTTemporalResamplingPass, "PT Temporal Resampling", dispatchSize, extraBindingSet);
+    }
+    if (mode == rtxdi::ReSTIRPT_ResamplingMode::Spatial || mode == rtxdi::ReSTIRPT_ResamplingMode::TemporalAndSpatial)
+    {
+        nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
+        ExecuteRayTracingPass(commandList, m_PTSpatialResamplingPass, "PT Spatial Resampling", dispatchSize, extraBindingSet);
+    }
+    nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
+    ExecuteRayTracingPass(commandList, m_PTFinalShadingPass, "PT Final Shading", dispatchSize, extraBindingSet);
+    GpuProfiler::End(commandList);
+}
+
+void RtxdiPass::EndFrame()
+{
+    if (m_BridgeParameters.usingReSTIRPT)
+    {
+        m_PreviousPreviousPTCameraPosition = m_PTCameraHistoryValid ? m_PreviousPTCameraPosition : m_BridgeParameters.cameraPosition;
+        m_PreviousPTCameraPosition = m_BridgeParameters.cameraPosition;
+        m_PTCameraHistoryValid = true;
+    }
+}
 
 void RtxdiPass::ExecuteComputePass(
 	nvrhi::CommandListHandle& commandList,
@@ -609,4 +766,43 @@ donut::engine::ShaderMacro RtxdiPass::GetReGirMacro(const rtxdi::ReGIRStaticPara
 	}
 
 	return { "RTXDI_REGIR_MODE", regirMode };
+}
+
+
+void RtxdiPass::CapturePTReservoirs(const std::string& path)
+{
+    if (!m_BridgeParameters.usingReSTIRPT || !m_rtxdiResources->HasPTResources())
+        throw std::runtime_error("PT reservoir capture requires active PT resources");
+    const auto source = m_rtxdiResources->PTReservoirBuffer;
+    nvrhi::BufferDesc desc;
+    desc.byteSize = source->getDesc().byteSize;
+    desc.cpuAccess = nvrhi::CpuAccessMode::Read;
+    desc.debugName = "PTReservoirDiagnosticReadback";
+    auto staging = m_device->createBuffer(desc);
+    if (!staging) throw std::runtime_error("PT reservoir staging allocation failed");
+    auto copy = m_device->createCommandList();
+    copy->open();
+    copy->copyBuffer(staging, 0, source, 0, desc.byteSize);
+    copy->close();
+    m_device->executeCommandList(copy);
+    m_device->waitForIdle();
+    const void* mapped = m_device->mapBuffer(staging, nvrhi::CpuAccessMode::Read);
+    if (!mapped) throw std::runtime_error("PT reservoir map failed");
+    std::ofstream binary(path, std::ios::binary);
+    binary.write(static_cast<const char*>(mapped), std::streamsize(desc.byteSize));
+    m_device->unmapBuffer(staging);
+    if (!binary) throw std::runtime_error("PT reservoir write failed");
+    const auto& ctx = m_ImportanceSamplingContext->GetReSTIRPTContext();
+    const auto& layout = ctx.GetReservoirBufferParameters();
+    const auto& indices = ctx.GetBufferIndices();
+    std::ofstream meta(path + ".json");
+    meta << "{\n  \"schema_version\": 1,\n  \"packed_stride_bytes\": 64,\n  \"block_size\": " << RTXDI_RESERVOIR_BLOCK_SIZE
+         << ",\n  \"width\": " << m_BridgeParameters.frameDims.x << ",\n  \"height\": " << m_BridgeParameters.frameDims.y
+         << ",\n  \"frame_index\": " << m_BridgeParameters.frameIndex << ",\n  \"history_valid\": " << (m_PTCameraHistoryValid ? "true" : "false")
+         << ",\n  \"array_pitch\": " << layout.reservoirArrayPitch << ",\n  \"block_row_pitch\": " << layout.reservoirBlockRowPitch
+         << ",\n  \"initial_preserved_index\": " << indices.initialPathTracerPreservedBufferIndex
+         << ",\n  \"temporal_input_index\": " << indices.temporalResamplingInputBufferIndex
+         << ",\n  \"temporal_output_index\": " << indices.temporalResamplingOutputBufferIndex
+         << ",\n  \"final_index\": " << indices.finalShadingInputBufferIndex << "\n}\n";
+    if (!meta) throw std::runtime_error("PT reservoir metadata write failed");
 }

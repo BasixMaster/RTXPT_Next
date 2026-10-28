@@ -158,11 +158,12 @@ enum class IntroDirectLightingMode : int
 
 struct SampleUIData
 {
-    bool                                ActualUseRTXDIPasses() const { return (RealtimeMode) && (ActualUseReSTIRDI() || ActualUseReSTIRGI()); }
+    bool                                ActualUseRTXDIPasses() const { return (RealtimeMode) && (ActualUseReSTIRDI() || ActualUseReSTIRGI() || ActualUseReSTIRPT()); }
     bool                                ActualUseReSTIRDI() const { return UseNEE && (RealtimeMode) && (UseReSTIRDI) && (RealtimeAA < 3 || !DisableReSTIRsWithDLSSRR); }
-    bool                                ActualUseReSTIRGI() const { return (RealtimeMode) && (UseReSTIRGI) && (RealtimeAA < 3 || !DisableReSTIRsWithDLSSRR); }
-    uint                                ActualSamplesPerPixel() const { return (RealtimeMode && !(ActualUseReSTIRDI() || ActualUseReSTIRGI())) ? RealtimeSamplesPerPixel : 1u; }
-    uint                                ActualSubSamplingMode() const { return (RealtimeMode && !(ActualUseReSTIRDI() || ActualUseReSTIRGI())) ? RealtimeSubSamplingMode : 0; }
+    bool                                ActualUseReSTIRPT() const { return RealtimeMode && UseReSTIRPT; }
+    bool                                ActualUseReSTIRGI() const { return !ActualUseReSTIRPT() && (RealtimeMode) && (UseReSTIRGI) && (RealtimeAA < 3 || !DisableReSTIRsWithDLSSRR); }
+    uint                                ActualSamplesPerPixel() const { return (RealtimeMode && !(ActualUseReSTIRDI() || ActualUseReSTIRGI() || ActualUseReSTIRPT())) ? RealtimeSamplesPerPixel : 1u; }
+    uint                                ActualSubSamplingMode() const { return (RealtimeMode && !(ActualUseReSTIRDI() || ActualUseReSTIRGI() || ActualUseReSTIRPT())) ? RealtimeSubSamplingMode : 0; }
     uint                                SubSamplingScaleX() const { return ActualSubSamplingMode() > 0 ? 2 : 1; }
     uint                                SubSamplingScaleY() const { return (ActualSubSamplingMode() == 1 || ActualSubSamplingMode() == 3) ? 2 : 1; }
     uint                                SubSamplingRateNum() const { return ActualSubSamplingMode() == 1 ? 3 : 1; }   // traced pixels per ScaleX x ScaleY block
@@ -171,26 +172,27 @@ struct SampleUIData
     bool                                ActualUseStandaloneDenoiser() const { return (RealtimeMode && RealtimeAA < 3) ? StandaloneDenoiser : false; }
     float                               ActualNEEAT_LocalToGlobalSampleRatio() const { return (NEEType == 2) ? (NEEAT_LocalToGlobalSampleRatio) : (0); }    // make sure we use no local samples when NEE-AT disabled!
     bool                                ActualFireflyFilterEnabled() const { return (RealtimeMode)?RealtimeFireflyFilterEnabled:ReferenceFireflyFilterEnabled; }
-    int                                 ActualRadianceCacheMode() const { return (RealtimeMode)?RadianceCacheMode:0; }
+    int                                 ActualRadianceCacheMode() const { return (RealtimeMode && !ActualUseReSTIRPT())?RadianceCacheMode:0; }
 
 #if DONUT_WITH_STREAMLINE
-    int                                 ActualReflexMode() const { return (RealtimeMode && IsReflexSupported) ? ((ReflexMode == SI::ReflexMode::eOff && ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (SI::ReflexMode::eLowLatency) : (ReflexMode)) : (SI::ReflexMode::eOff); }
-    SI::DLSSGMode                       ActualDLSSFGMode() const { return (RealtimeMode && IsDLSSFGSupported) ? (DLSSFGMode) : (SI::DLSSGMode::eOff); }
+    int                                 ActualReflexMode() const { return (!BenchmarkUncapped && RealtimeMode && IsReflexSupported) ? ((ReflexMode == SI::ReflexMode::eOff && ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (SI::ReflexMode::eLowLatency) : (ReflexMode)) : (SI::ReflexMode::eOff); }
+    SI::DLSSGMode                       ActualDLSSFGMode() const { return (!BenchmarkUncapped && RealtimeMode && IsDLSSFGSupported) ? (DLSSFGMode) : (SI::DLSSGMode::eOff); }
 
-    bool                                ActualEnableVsync() const { return (ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (false) : (EnableVsync); }
-    int                                 ActualFPSLimiter() const { return (ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (0) : (FPSLimiter); }
+    bool                                ActualEnableVsync() const { return (ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (false) : (!BenchmarkUncapped && EnableVsync); }
+    int                                 ActualFPSLimiter() const { return (ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (0) : (BenchmarkUncapped ? 0 : FPSLimiter); }
 #else
-    bool                                ActualEnableVsync() const { return EnableVsync; }
-    int                                 ActualFPSLimiter() const { return FPSLimiter; }
+    bool                                ActualEnableVsync() const { return !BenchmarkUncapped && EnableVsync; }
+    int                                 ActualFPSLimiter() const { return BenchmarkUncapped ? 0 : FPSLimiter; }
 #endif
 
     bool                                ActualUseApproximateMIS() const { return (RealtimeMode)?(NEEMISType!=0):(NEEMISType==2); }
 
     // In the future we'll likely drop support for multi-layer NRD 
     //int                                 ActualDenoisingLayersActiveCount() const { return ActualUseStandaloneDenoiser()?1:DenoisingLayersActiveCount; }
-    int                                 ActualDenoisingLayersActiveCount() const { return DenoisingLayersActiveCount; }
+    int                                 ActualDenoisingLayersActiveCount() const { return ActualUseReSTIRPT() ? 1 : DenoisingLayersActiveCount; }
 
 
+    bool                                BenchmarkUncapped                       = false;
     bool                                ShowUI                                  = true;
     int                                 FPSLimiter                              = 0; // 0 - no limit, otherwise limit fps to FPSLimiter and fix scene update deltaTime to 1./FPSLimiter
     bool                                RenderWhenOutOfFocus                    = false; // if window is out of focus window render loop is paused
@@ -217,6 +219,7 @@ struct SampleUIData
     //int                                 NEEBoostSamplingOnDominantPlane = 0;    // Boost light sampling only on the dominant denoising surface
     bool                                UseReSTIRDI /*Defaults in CommandLine >*/;
     bool                                UseReSTIRGI /*Defaults in CommandLine >*/;
+    bool                                UseReSTIRPT = false;
     bool                                RealtimeMode = true;
     int                                 RealtimeSamplesPerPixel /*Defaults in CommandLine >*/;        // equivalent to m_ui.AccumulationTarget in reference mode (except looping x times within frame)
     bool                                StandaloneDenoiser /*Defaults in CommandLine >*/;

@@ -10,7 +10,8 @@
       "ref": "rtxpt-1.9-baseline",
       "source_sha": "303b408ab81790a5051abd7573830b7a4112eb8e",
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
-      "rtxdi_sha": "a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6"
+      "rtxdi_sha": "a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6",
+      "cap_coverage": "historical_unverified"
     },
     {
       "id": "B1",
@@ -18,14 +19,22 @@
       "ref": "B1",
       "source_sha": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
       "scope": "RTXDI3.1 runtime/API migration only; existing DI/GI, no ReSTIR PT/CGNS activation",
-      "rtxdi_target_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b"
+      "rtxdi_target_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "cap_coverage": "historical_unverified"
     },
     {
       "id": "B2",
+      "status": "in_progress",
+      "ref": null,
+      "source_sha": null,
+      "scope": "Integrate the RTXDI3.1 ReSTIR PT path into RTXPT with selectable DI/GI modes and explicit non-overlapping contribution ownership; not a pure2022 algorithm replica"
+    },
+    {
+      "id": "B3",
       "status": "planned",
       "ref": null,
       "source_sha": null,
-      "scope": "One isolated measured optimization selected after profiling B1"
+      "scope": "PT++ feature activation and missing mechanism implementations, individually ablated against B2; inherited3.1 PT++ mechanisms must not be counted as new"
     }
   ],
   "comparison_pairs": [
@@ -40,6 +49,18 @@
     [
       "RTXPT-1.9",
       "B2"
+    ],
+    [
+      "B2",
+      "B3"
+    ],
+    [
+      "RTXPT-1.9",
+      "B3"
+    ],
+    [
+      "B1",
+      "B3"
     ]
   ],
   "required_metrics": [
@@ -67,7 +88,9 @@
       ],
       "timing_scope": "PresentMon process GPUBusy; not exclusive DI/GI",
       "quality_scope": "Display PNG against finite4096spp reference; no independent-seed guarantee",
-      "conclusion": "Initial migration comparison; no general speedup or equal-quality performance claim."
+      "conclusion": "Initial migration comparison; no general speedup or equal-quality performance claim.",
+      "cap_coverage": "historical_unverified",
+      "cap_audit_note": "Later RTSS audit found current232FPS global cap; original run-time RTSS state unrecorded. Historical observations remain exploratory, not verified uncapped throughput."
     }
   ]
 }

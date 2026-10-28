@@ -28,7 +28,7 @@
 
 
 #if PATH_TRACER_MODE==PT_DENOISING_LAYERS_BUILD // build
-#if PT_USE_RESTIR_GI || PT_USE_RESTIR_DI
+#if PT_USE_RESTIR_GI || PT_USE_RESTIR_DI || PT_USE_RESTIR_PT
 #define EXPORT_GBUFFER 1
 #endif
 #endif
@@ -298,7 +298,7 @@ void Bridge::ExportNonSurface(const PathState path, float3 virtualWorldPos, floa
     //DebugPixel( pixelPos.xy, float4( 0, 0, 0.2, 1 ) );
 
 #if EXPORT_GBUFFER
-    if (g_Const.ptConsts.useReSTIRDI || g_Const.ptConsts.useReSTIRGI)
+    if (g_Const.ptConsts.useReSTIRDI || g_Const.ptConsts.useReSTIRGI || g_Const.ptConsts.useReSTIRPT)
     {
         // compute address for current output - it ping pongs based on frameIndex!
         const uint idxPingPong = (g_Const.ptConsts.frameIndex % 2) == (uint)0;
@@ -308,6 +308,8 @@ void Bridge::ExportNonSurface(const PathState path, float3 virtualWorldPos, floa
         emptyData._viewDepth_planeHash_isEmpty_frontFacing = 0; // <- we actually only need to initialize this (because of isEmpty) but let's write everything to 0 for consistency
 #if !RTXPT_SKIP_STANDARD_OUTPUTS
         u_SurfaceData[idx] = emptyData;
+        if (g_Const.ptConsts.useReSTIRPT)
+            u_PTPrimaryData[idx] = (RTXPTPTPrimaryData)0;
 #endif
     }
 #endif

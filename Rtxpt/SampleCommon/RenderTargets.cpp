@@ -23,6 +23,7 @@ using namespace donut::math;
 
 #include "../RTXDI/ShaderParameters.h"
 #include "../Shaders/Misc/SubSampling.h"
+#include "../Shaders/Bindings/PTPrimaryData.h"
 #include <donut/core/log.h>
 
 #include <cmath>
@@ -340,6 +341,8 @@ void RenderTargets::Init(
         SurfaceDataBuffer = device->createBuffer(surfaceBufferDesc);
     }
 
+    EnsurePTPrimaryData(false); // Valid 48-byte placeholder for legacy DI/GI bindings.
+
     {
         nvrhi::BufferDesc pixelListDesc;
         pixelListDesc.byteSize = RTXPT_SUB_SAMPLING_LIST_HEADER_BYTES + sizeof(uint32_t) * renderSize.x * renderSize.y;    // worst case: every pixel selected
@@ -356,6 +359,23 @@ void RenderTargets::Init(
 {
     if (any(RenderSize != renderSize) || any(DisplaySize != displaySize) || m_SampleCount != sampleCount) return true;
     return false;
+}
+
+bool RenderTargets::EnsurePTPrimaryData(bool enabled)
+{
+    if (PTPrimaryDataBuffer && m_PTPrimaryDataFullResolution == enabled)
+        return false;
+    nvrhi::BufferDesc desc;
+    const uint64_t elementCount = enabled ? GenericTSComputeStorageElementCount(RenderSize.x, RenderSize.y, 2) : 1;
+    desc.byteSize = sizeof(RTXPTPTPrimaryData) * elementCount;
+    desc.structStride = sizeof(RTXPTPTPrimaryData);
+    desc.initialState = nvrhi::ResourceStates::UnorderedAccess;
+    desc.keepInitialState = true;
+    desc.canHaveUAVs = true;
+    desc.debugName = enabled ? "PTPrimaryData(CurrentHistory)" : "PTPrimaryData(Placeholder)";
+    PTPrimaryDataBuffer = m_device->createBuffer(desc);
+    m_PTPrimaryDataFullResolution = enabled;
+    return true;
 }
 
 void RenderTargets::EnsureTemporalFeedback()

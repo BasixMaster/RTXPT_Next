@@ -229,6 +229,8 @@ void AdvancedPathTracer::PathTrace(nvrhi::IFramebuffer* framebuffer, const Sampl
             m_commandList->setRayTracingState(state);
             m_commandList->setPushConstants(&miniConstants, sizeof(miniConstants));
             m_commandList->dispatchRays(args);
+            if (m_ui.ActualUseReSTIRPT())
+                m_commandList->setBufferState(m_renderTargets->PTPrimaryDataBuffer, nvrhi::ResourceStates::UnorderedAccess);
             m_commandList->setBufferState(m_renderTargets->DenoisingLayersBuffer, nvrhi::ResourceStates::UnorderedAccess);
             m_commandList->setTextureState(m_renderTargets->Depth, nvrhi::AllSubresources, nvrhi::ResourceStates::UnorderedAccess);
             m_commandList->setTextureState(m_renderTargets->ScreenMotionVectors, nvrhi::AllSubresources, nvrhi::ResourceStates::UnorderedAccess);
@@ -304,6 +306,16 @@ void AdvancedPathTracer::PathTrace(nvrhi::IFramebuffer* framebuffer, const Sampl
         m_commandList->setBufferState(m_renderTargets->DenoisingLayersBuffer, nvrhi::ResourceStates::UnorderedAccess);
     }
 
+    // B2 raw output: initialize native radiance before DI/PT add their terms.
+    // The later AA copy must observe the completed sum, and no later layer
+    // merge may overwrite contributions written directly to OutputColor.
+    if (m_ui.ActualUseReSTIRPT() && !m_ui.ActualUseStandaloneDenoiser() && m_ui.RealtimeAA == 0)
+    {
+        SampleMiniConstants mergeConstants = { uint4(0, 0, 0, 0) };
+        m_postProcess->Apply(m_commandList, PostProcess::ComputePassType::NoDenoiserFinalMerge,
+            m_constantBuffer, mergeConstants, m_bindingSet, m_bindingLayout, width, height);
+    }
+
     // this is a performance optimization where final 2 passes from ReSTIR DI and ReSTIR GI are combined to avoid loading GBuffer twice
     static bool enableFusedDIGIFinal = true;
     bool useFusedDIGIFinal = m_ui.ActualUseReSTIRDI() && m_ui.ActualUseReSTIRGI() && enableFusedDIGIFinal;
@@ -321,6 +333,9 @@ void AdvancedPathTracer::PathTrace(nvrhi::IFramebuffer* framebuffer, const Sampl
 
         if (useFusedDIGIFinal)
             m_rtxdiPass->ExecuteFusedDIGIFinal(m_commandList, m_bindingSet);
+
+        if (m_ui.ActualUseReSTIRPT())
+            m_rtxdiPass->ExecutePT(m_commandList, m_bindingSet);
     }
 
     {

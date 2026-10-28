@@ -1,3 +1,4 @@
+#include "SampleCommon/HdrCapture.h"
 /*
 * Copyright (c) 2025, NVIDIA CORPORATION.  All rights reserved.
 *
@@ -41,6 +42,8 @@
 
 #include "Lighting/Distant/EnvMapImportanceSamplingBaker.h"
 #include "Materials/MaterialsBaker.h"
+#include <stdexcept>
+#include <cstdio>
 
 #include "OpacityMicroMap/OmmBaker.h"
 
@@ -207,6 +210,15 @@ void Sample::DebugDrawLine( float3 start, float3 stop, float4 col1, float4 col2 
 // but we log it - a silent fallback to an unrelated scene is exactly what makes a mistyped --scene hard to diagnose.
 static std::string FindPreferredSceneCaseInsensitive(const std::vector<std::string>& available, const std::string& preferred)
 {
+    // Owned validation scenes can live outside the immutable upstream Assets checkout.
+    // An explicit absolute scene path must resolve exactly; never substitute another scene.
+    const std::filesystem::path explicitScene(preferred);
+    if (explicitScene.is_absolute())
+    {
+        if (!std::filesystem::is_regular_file(explicitScene) || explicitScene.extension() != ".json")
+            throw std::runtime_error("Explicit scene file does not exist: " + preferred);
+        return explicitScene.lexically_normal().string();
+    }
     if (available.empty())
         return "";
 
@@ -348,6 +360,7 @@ void Sample::Init(const std::string& preferredScene,
     globalBindingLayoutDesc.bindings.push_back(nvrhi::BindingLayoutItem::StructuredBuffer_UAV(42));
     globalBindingLayoutDesc.bindings.push_back(nvrhi::BindingLayoutItem::Texture_UAV(44));
     globalBindingLayoutDesc.bindings.push_back(nvrhi::BindingLayoutItem::StructuredBuffer_UAV(45));
+    globalBindingLayoutDesc.bindings.push_back(nvrhi::BindingLayoutItem::StructuredBuffer_UAV(46)); // u_PTPrimaryData
 
     // GBuffer
     globalBindingLayoutDesc.bindings.push_back(nvrhi::BindingLayoutItem::Texture_UAV(100));
@@ -918,6 +931,12 @@ void Sample::SceneLoaded( )
 
     ApplyPerformancePreset(m_ui, 2, (GetOMMBaker()!=nullptr)?(GetOMMBaker().get()):(nullptr) ); // 2 is the "Balanced"
 
+    if (m_cmdLine.OverrideMaxBounces >= 0)
+        m_ui.BounceCount = dm::clamp(m_cmdLine.OverrideMaxBounces, 1, 32);
+    if (m_cmdLine.OverrideMaxDiffuseBounces >= 0)
+        m_ui.DiffuseBounceCount = dm::clamp(m_cmdLine.OverrideMaxDiffuseBounces, 0, 32);
+    m_ui.RTXDI.restirPT.resamplingMode = static_cast<rtxdi::ReSTIRPT_ResamplingMode>(dm::clamp(m_cmdLine.ReSTIRPTMode, 0, 3));
+
     // after the preset, which sets it too
     if (m_cmdLine.OverrideSubSamplingMode >= 0)
         m_ui.RealtimeSubSamplingMode = dm::clamp(m_cmdLine.OverrideSubSamplingMode, 0, 3);
@@ -1313,6 +1332,7 @@ void Sample::GetPTPipelineGlobalMacros(std::vector<donut::engine::ShaderMacro> &
     macros.push_back({ "PT_NEE_ENABLED", (m_ui.UseNEE)?("1"):("0") });
 
     macros.push_back({ "PT_USE_RESTIR_DI", (m_ui.ActualUseReSTIRDI()) ? ("1") : ("0") });   // these will match constants.useReSTIRDI but constants are used in other passes too
+    macros.push_back({ "PT_USE_RESTIR_PT", m_ui.ActualUseReSTIRPT() ? "1" : "0" });
     macros.push_back({ "PT_USE_RESTIR_GI", (m_ui.ActualUseReSTIRGI()) ? ("1") : ("0") });   // these will match constants.useReSTIRGI but constants are used in other passes too
 
     macros.push_back({ "RTXPT_USE_APPROXIMATE_MIS", (m_ui.ActualUseApproximateMIS()) ? ("1") : ("0") });
@@ -2273,6 +2293,7 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
         constants.fireflyFilterThreshold = (m_ui.ReferenceFireflyFilterEnabled)?(FireflyFilterThreshold(m_ui.ReferenceFireflyFilterThreshold, constants.preExposedGrayLuminance)):(disabledFF); // making it exposure-adaptive breaks determinism with accumulation (because there's a feedback loop), so that's disabled
     constants.useReSTIRDI = m_ui.ActualUseReSTIRDI();
     constants.useReSTIRGI = m_ui.ActualUseReSTIRGI();
+    constants.useReSTIRPT = m_ui.ActualUseReSTIRPT();
     constants.denoiserRadianceClampK = m_ui.DenoiserRadianceClampK;
     constants.DLSSRRBrightnessClampK = (m_ui.DLSSRRBrightnessClampK>0)?(m_ui.DLSSRRBrightnessClampK * constants.preExposedGrayLuminance):(FLT_MAX);   // <= 0: no clamp (0 would scale everything to black)
 
@@ -2281,7 +2302,7 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
 
     constants._activeDenoisingLayerCount           = m_ui.ActualDenoisingLayersActiveCount();
     constants.maxDenoisingLayerVertexDepth         = std::min( std::min( (uint)m_ui.DenoisingLayersMaxVertexDepth, cDenoisingLayerMaxVertexIndex ), (uint)m_ui.BounceCount );
-    constants.allowPrimarySurfaceReplacement    = m_ui.AllowPrimarySurfaceReplacement;
+    constants.allowPrimarySurfaceReplacement    = !m_ui.ActualUseReSTIRPT() && m_ui.AllowPrimarySurfaceReplacement;
     constants.denoisingLayersSplitStopThreshold    = m_ui.DenoisingLayersSplitStopThreshold;
     constants._padding3                         = 0;
     constants.denoisingLayersSuppressPrimaryIndirectSpecularK  = m_ui.DenoisingLayersSuppressPrimaryIndirectSpecular?m_ui.DenoisingLayersSuppressPrimaryIndirectSpecularK:0.0f;
@@ -2311,12 +2332,47 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
 {
     const bool envMapPresent = m_ui.EnvironmentMapParams.Enabled;
 
+    if (m_ui.ActualUseReSTIRPT())
+    {
+        // Until replay carries medium state and suffix diffuse counts, refuse
+        // unsupported contracts rather than producing an apparently valid image.
+        if (!m_ui.UseNEE || m_ui.RealtimeAA != 0 || m_ui.ActualUseStandaloneDenoiser() || m_ui.CameraAperture != 0.0f)
+            throw std::runtime_error("B2 prototype requires NEE on, realtimeAA=0, standaloneDenoiser=0 and pinhole camera.");
+        if (m_ui.BounceCount < 1 || m_ui.BounceCount > 32 || m_ui.DiffuseBounceCount < m_ui.BounceCount)
+            throw std::runtime_error("B2 prototype requires maxBounces in1..32 and a nonbinding diffuse cap (maxDiffuseBounces >= maxBounces).");
+        for (const auto& material : m_scene->GetSceneGraph()->GetMaterials())
+        {
+            const auto* pt = PTMaterial::SafeCast(material);
+            if ((pt && (pt->EnableTransmission || pt->DiffuseTransmissionFactor > 0.0f)) ||
+                (material->domain != donut::engine::MaterialDomain::Opaque && material->domain != donut::engine::MaterialDomain::AlphaTested))
+                throw std::runtime_error("B2 prototype requires opaque/alpha-tested scenes; transmission/medium replay is not implemented: " + material->name);
+        }
+    }
+    if (m_ui.BenchmarkUncapped && m_frameIndex == 0)
+    {
+        int reflexMode = 0, frameGeneration = 0;
+#if DONUT_WITH_STREAMLINE
+        reflexMode = m_ui.ActualReflexMode();
+        frameGeneration = int(m_ui.ActualDLSSFGMode());
+#endif
+        std::printf("BENCHMARK_UNCAPPED vsync=%d fpsLimiter=%d reflexCap=0 reflexMode=%d frameGeneration=%d renderUnfocused=1\n",
+            int(m_ui.ActualEnableVsync()), m_ui.ActualFPSLimiter(), reflexMode, frameGeneration);
+        std::fflush(stdout);
+    }
+
     RtxdiBridgeParameters bridgeParameters;
 	bridgeParameters.frameIndex = m_frameIndex & 0xFFFFFFFF;
 	bridgeParameters.frameDims = renderDims;
 	bridgeParameters.cameraPosition = m_camera.GetPosition();
 	bridgeParameters.userSettings = m_ui.RTXDI;
-    bridgeParameters.usingLightSampling = m_ui.ActualUseReSTIRDI();
+    bridgeParameters.userSettings.restirPT.initialSamplingParams.maxBounceDepth = uint32_t(m_ui.BounceCount);
+    bridgeParameters.userSettings.restirPT.initialSamplingParams.maxRcVertexLength = uint32_t(m_ui.BounceCount + 1);
+    bridgeParameters.userSettings.restirPT.hybridShiftParams.maxBounceDepth = uint32_t(m_ui.BounceCount);
+    bridgeParameters.userSettings.restirPT.hybridShiftParams.maxRcVertexLength = uint32_t(m_ui.BounceCount + 1);
+    bridgeParameters.usingReSTIRPT = m_ui.ActualUseReSTIRPT();
+    bridgeParameters.resetReSTIRPT = m_ui.ResetRealtimeCaches || m_ui.ResetAccumulation;
+    bridgeParameters.capturePTDiagnostics = m_cmdLine.CaptureLinearHDR;
+    bridgeParameters.usingLightSampling = m_ui.ActualUseReSTIRDI() || m_ui.ActualUseReSTIRPT();
     bridgeParameters.usingReGIR = m_ui.ActualUseReSTIRDI();
 
     bridgeParameters.userSettings.restirDI.initialSamplingParams.environmentMapImportanceSampling = envMapPresent;
@@ -2336,7 +2392,7 @@ bool Sample::ShouldRenderUnfocused()
         return true;
     }
 
-    if (m_ui.RenderWhenOutOfFocus)
+    if (m_ui.BenchmarkUncapped || m_ui.RenderWhenOutOfFocus)
     {
         return true;
     }
@@ -2352,7 +2408,7 @@ void Sample::StreamlinePreRender()
     {
         auto reflexConsts = donut::app::StreamlineInterface::ReflexOptions{};
         reflexConsts.mode = (donut::app::StreamlineInterface::ReflexMode) m_ui.ActualReflexMode();
-        reflexConsts.frameLimitUs = m_ui.ReflexCappedFps == 0 ? 0 : int(1000000. / m_ui.ReflexCappedFps);
+        reflexConsts.frameLimitUs = (m_ui.BenchmarkUncapped || m_ui.ReflexCappedFps == 0) ? 0 : int(1000000. / m_ui.ReflexCappedFps);
         reflexConsts.useMarkersToOptimize = true;
         reflexConsts.virtualKey = VK_F13;
         reflexConsts.idThread = 0; // std::hash<std::thread::id>()(std::this_thread::get_id())
@@ -2889,6 +2945,7 @@ void Sample::Render(nvrhi::IFramebuffer* framebuffer)
     GpuProfiler::BeginFrameZone(m_commandList);    // Tracy-only; its "CPU frame" annotation matches Tracy's frame bar and MainRender's value
 
     bool needNewBindings = false;
+    needNewBindings |= m_renderTargets->EnsurePTPrimaryData(m_ui.ActualUseReSTIRPT());
     PathTracerCameraData cameraData;
     {
         ZoneScopedN("EarlyUpdate");
@@ -3269,6 +3326,20 @@ void Sample::Render(nvrhi::IFramebuffer* framebuffer)
 
     auto DumpScreenshot = [this, framebufferTexture](const char* fileName)
     {
+        if (m_cmdLine.CaptureLinearHDR)
+        {
+            if (m_ui.RealtimeAA != 0 || m_ui.ActualUseStandaloneDenoiser())
+                throw std::runtime_error("Linear HDR capture requires AA0 and standalone denoiser off");
+            std::filesystem::path hdrPath(fileName);
+            hdrPath.replace_extension(".pfm");
+            std::string error;
+            nvrhi::ITexture* source = m_ui.RealtimeMode
+                ? m_renderTargets->OutputColor.Get() : m_renderTargets->AccumulatedRadiance.Get();
+            if (!rtxpt::SaveLinearHdrPFM(GetDevice(), source, hdrPath, error))
+                throw std::runtime_error("Linear HDR capture failed: " + error);
+            if (m_ui.ActualUseReSTIRPT())
+                m_rtxdiPass->CapturePTReservoirs(hdrPath.string() + ".pt.bin");
+        }
         // Present, the swapchain's kept state - Common is the same on D3D12 but means UNDEFINED (discard) on Vulkan.
         return SaveTextureToFile(GetDevice(), m_CommonPasses.get(), framebufferTexture, nvrhi::ResourceStates::Present, fileName);
     };
@@ -3469,6 +3540,7 @@ void Sample::RecreateBindingSet()
         bindingSetDesc.bindings.push_back(nvrhi::BindingSetItem::StructuredBuffer_UAV(42, m_renderTargets->DenoisingLayersBuffer));
         bindingSetDesc.bindings.push_back(nvrhi::BindingSetItem::Texture_UAV(44, m_renderTargets->StableRadiance));
         bindingSetDesc.bindings.push_back(nvrhi::BindingSetItem::StructuredBuffer_UAV(45, m_renderTargets->SurfaceDataBuffer));
+        bindingSetDesc.bindings.push_back(nvrhi::BindingSetItem::StructuredBuffer_UAV(46, m_renderTargets->PTPrimaryDataBuffer));
 
         // Environment IBL / reflection system bindings (t80-t83)
         // Derived classes can override AddCustomBindings to provide actual textures
@@ -3776,7 +3848,7 @@ void Sample::PostProcessAA(nvrhi::IFramebuffer* framebuffer, bool reset)
             GetDeviceManager()->GetStreamline().EvaluateDLSSRR(m_commandList);
             m_commandList->clearState();
         }
-        else if ( !m_ui.ActualUseStandaloneDenoiser() )
+        else if ( !m_ui.ActualUseStandaloneDenoiser() && !m_ui.ActualUseReSTIRPT() )
         {
             // If all denoisers disabled, this is a pass-through that just merges and outputs noisy data
             SampleMiniConstants miniConstants = { uint4(0, 0, 0, 0) };

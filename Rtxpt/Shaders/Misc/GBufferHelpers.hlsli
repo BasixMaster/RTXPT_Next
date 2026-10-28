@@ -16,6 +16,10 @@
 
 struct PathTracerCollectedSurfaceData
 {
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+    // Per-invocation native transport context. Packed legacy GBuffer ABI stays unchanged.
+    RTXPTPTPrimaryData _ptNativeState;
+#endif
 	// Only store these (plus more, potentially)
 	ShadingFlags _mtl; // (2x uint)
 
@@ -224,7 +228,10 @@ struct PathTracerCollectedSurfaceData
 		const StandardBSDFData data
 	)
 	{
-		PathTracerCollectedSurfaceData surface;
+        PathTracerCollectedSurfaceData surface;
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+        surface._ptNativeState = (RTXPTPTPrimaryData)0;
+#endif
 
 		surface._mtl = mtl;
 
@@ -372,7 +379,10 @@ PathTracerCollectedSurfaceData RunDecompress(PackedPathTracerSurfaceData c)
 
     d._data = StandardBSDFData::make( bsdfDataDiffuse, bsdfDataSpecular, bsdfDataRoughness, bsdfDataMetallic, bsdfDataTransmission, bsdfDataDiffuseTransmission, bsdfDataSpecularTransmission );
 
-	return d;
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+    d._ptNativeState = (RTXPTPTPrimaryData)0;
+#endif
+    return d;
 }
 
 PathTracerCollectedSurfaceData CollectGBufferSurface(PathState path, PathTracer::Surface surface, const Ray cameraRay)

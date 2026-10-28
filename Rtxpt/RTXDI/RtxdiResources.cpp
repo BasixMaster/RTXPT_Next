@@ -12,6 +12,7 @@
 
 #include "RtxdiResources.h"
 #include <rtxdi/DI/ReSTIRDI.h>
+#include <rtxdi/PT/ReSTIRPT.h>
 #include <rtxdi/LightSampling/RISBufferSegmentAllocator.h>
 
 #include <donut/core/math/math.h>
@@ -39,7 +40,8 @@ RtxdiResources::RtxdiResources(
     uint32_t maxEmissiveMeshes,
     uint32_t maxEmissiveTriangles,
     uint32_t maxPrimitiveLights,
-    uint32_t maxGeometryInstances) : m_MaxEmissiveMeshes(maxEmissiveMeshes)
+    uint32_t maxGeometryInstances,
+    const rtxdi::ReSTIRPTContext* ptContext) : m_MaxEmissiveMeshes(maxEmissiveMeshes)
     , m_MaxEmissiveTriangles(maxEmissiveTriangles)
     , m_MaxPrimitiveLights(maxPrimitiveLights)
     , m_MaxGeometryInstances(maxGeometryInstances)
@@ -141,6 +143,31 @@ RtxdiResources::RtxdiResources(
     giReservoirBufferDesc.debugName = "GIReservoirBuffer";
     giReservoirBufferDesc.canHaveUAVs = true;
     GIReservoirBuffer = device->createBuffer(giReservoirBufferDesc);
+
+    // Bind valid minimum-size resources in the legacy path without allocating a
+    // screen-sized PT history. Toggling PT recreates this resource set explicitly.
+    m_HasPTResources = ptContext != nullptr;
+    const uint64_t ptPitch = ptContext ? ptContext->GetReservoirBufferParameters().reservoirArrayPitch : 1;
+    static_assert(sizeof(RTXDI_PackedPTReservoir) == 64, "PT reservoir ABI must match runtime packing");
+    nvrhi::BufferDesc ptReservoirDesc;
+    ptReservoirDesc.byteSize = sizeof(RTXDI_PackedPTReservoir) * ptPitch * (ptContext ? rtxdi::c_NumReSTIRPTReservoirBuffers : 1);
+    ptReservoirDesc.structStride = sizeof(RTXDI_PackedPTReservoir);
+    ptReservoirDesc.initialState = nvrhi::ResourceStates::UnorderedAccess;
+    ptReservoirDesc.keepInitialState = true;
+    ptReservoirDesc.canHaveUAVs = true;
+    ptReservoirDesc.debugName = "PTReservoirBuffer";
+    PTReservoirBuffer = device->createBuffer(ptReservoirDesc);
+
+    // Runtime CGNS stores four packed pixel coordinates per reservoir. B2 keeps
+    // that algorithm disabled; reserve its real ABI so later B3 activation is explicit.
+    nvrhi::BufferDesc ptNeighborDesc;
+    ptNeighborDesc.byteSize = sizeof(uint32_t) * ptPitch * 4;
+    ptNeighborDesc.initialState = nvrhi::ResourceStates::UnorderedAccess;
+    ptNeighborDesc.keepInitialState = true;
+    ptNeighborDesc.canHaveUAVs = true;
+    ptNeighborDesc.canHaveRawViews = true;
+    ptNeighborDesc.debugName = "PTSpatialNeighborSelectionBuffer";
+    PTSpatialNeighborSelectionBuffer = device->createBuffer(ptNeighborDesc);
 
     nvrhi::TextureDesc localLightPdfDesc;
     rtxdi::ComputePdfTextureSize(maxLocalLights, localLightPdfDesc.width, localLightPdfDesc.height, localLightPdfDesc.mipLevels);

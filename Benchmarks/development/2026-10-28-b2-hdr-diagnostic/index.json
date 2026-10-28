@@ -1,0 +1,85 @@
+{
+  "kind": "B2 raw HDR correctness diagnostic; not a performance comparison",
+  "source_identity": "Development working tree; no B2 release tag",
+  "source_capture": "Artifact snapshot collected after captures; no pre/post frozen-cache claim",
+  "scene": "Testing/B2/Scenes/opaque-room.scene.json",
+  "settings": {
+    "width": 640,
+    "height": 360,
+    "max_bounces": 3,
+    "max_diffuse_bounces": 3,
+    "aa": 0,
+    "denoiser": 0,
+    "nee": 1,
+    "cache": 0,
+    "psr": false,
+    "spp": 1,
+    "reference_spp": 4096,
+    "exposure_offset": 0
+  },
+  "configurations": [
+    {
+      "mode": "initial",
+      "exit_code": 0,
+      "executable_sha256": "db7ac3982ecd0697ad6ef8ad150de76488f8fcbf1b32a6aab40d0423cdc6ed6e",
+      "nonfinite_pixels": 0,
+      "source_format": "RGBA16_FLOAT"
+    },
+    {
+      "mode": "temporal",
+      "exit_code": 0,
+      "executable_sha256": "db7ac3982ecd0697ad6ef8ad150de76488f8fcbf1b32a6aab40d0423cdc6ed6e",
+      "nonfinite_pixels": 0,
+      "source_format": "RGBA16_FLOAT"
+    },
+    {
+      "mode": "spatial",
+      "exit_code": 0,
+      "executable_sha256": "db7ac3982ecd0697ad6ef8ad150de76488f8fcbf1b32a6aab40d0423cdc6ed6e",
+      "nonfinite_pixels": 0,
+      "source_format": "RGBA16_FLOAT"
+    },
+    {
+      "mode": "reuse",
+      "exit_code": 0,
+      "executable_sha256": "db7ac3982ecd0697ad6ef8ad150de76488f8fcbf1b32a6aab40d0423cdc6ed6e",
+      "nonfinite_pixels": 0,
+      "source_format": "RGBA16_FLOAT"
+    },
+    {
+      "mode": "reference",
+      "exit_code": 0,
+      "executable_sha256": "db7ac3982ecd0697ad6ef8ad150de76488f8fcbf1b32a6aab40d0423cdc6ed6e",
+      "nonfinite_pixels": 0,
+      "source_format": "RGBA32_FLOAT"
+    }
+  ],
+  "limitations": [
+    "One image per mode; no independent-seed confidence intervals or bias proof.",
+    "Reference is finite sample and uncertainty is not yet measured in HDR.",
+    "Strict prototype opaque-scene capability gate remains active.",
+    "No HDR-FLIP, dynamic history or medium validation established."
+  ],
+  "files": {
+    "source-artifacts-after-capture.json": "8e9cd3d5efe5a5856b95ad864f5308ef600bdcca455e3afc6668d0efd45b32c0",
+    "initial/frame_B2-owner-hdr-initial.pfm": "4c0cc86051466e85603f74ca27dd775b2918a5ac6b253a798d32c0564d25c963",
+    "initial/frame_B2-owner-hdr-initial.pfm.json": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+    "initial/frame_B2-owner-hdr-initial.png": "5e36f6a875916bfcb239847cfdebb4f0427c7bcba592a8f0915ecaa3bcf6c8e6",
+    "initial/linear-quality.json": "a013c35c6db6f716f640c492672b2d37e5b8d12a48b74248bcf154fd5145c657",
+    "reference/frame_B2-owner-hdr-reference.pfm": "93726f4b88720d808fa16de3b084bb52f80ee88f725d51fb1d2c44c94b4aedf9",
+    "reference/frame_B2-owner-hdr-reference.pfm.json": "9e3b147ada587a1500700d0e771886e8b355354ae673a29bcc2abc047cc1e84c",
+    "reference/frame_B2-owner-hdr-reference.png": "79d504d1e5c0c5639ffff821b8760638270790494a813c96c54cbe3ae6a14f01",
+    "reuse/frame_B2-owner-hdr-reuse.pfm": "57c0ee72c639de25ec682ca273784b2d5b23cc0179562eeb686b197787f0d211",
+    "reuse/frame_B2-owner-hdr-reuse.pfm.json": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+    "reuse/frame_B2-owner-hdr-reuse.png": "287ba110eabd973618e2ce7587997d800b38511cfea24d4d507581accfe64a63",
+    "reuse/linear-quality.json": "2942655a1623379f897e6b9dde46da19634f15a42c718aa450ba85dc356b1c28",
+    "spatial/frame_B2-owner-hdr-spatial.pfm": "90a1ac6efb303058e49694ceb6f9aa96b0ed1b35e1d4820807fc123df09d646f",
+    "spatial/frame_B2-owner-hdr-spatial.pfm.json": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+    "spatial/frame_B2-owner-hdr-spatial.png": "a69459f1753c1cc69dfd899ffb6eb14ff76c32184815f255d68895b1ab629bf4",
+    "spatial/linear-quality.json": "47dc844e26833c2cad952f873dfa4e05e0f7172559f26146b9dfa2c612ecec35",
+    "temporal/frame_B2-owner-hdr-temporal.pfm": "4ad0411af9f3414dfeb354e8eb52b5b9fe1d3345694ef94db60ff04b8cf246f4",
+    "temporal/frame_B2-owner-hdr-temporal.pfm.json": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+    "temporal/frame_B2-owner-hdr-temporal.png": "4c07d2630bd3abc3e7bceb7b8aad58027158405c8a08cda2a11f333314c89187",
+    "temporal/linear-quality.json": "571ec39182e5198eda63da53129c5a4f39f780b4ba3e0e67eeecfe5e4e248516"
+  }
+}

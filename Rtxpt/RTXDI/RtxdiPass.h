@@ -42,8 +42,24 @@ namespace donut::engine
 
 class ExtendedScene;
 
+// B2 uses the RTXDI runtime with the pre-PT++ reconnectibility policy. B3 controls
+// are explicit settings rather than silently inherited DLSS-specific defaults.
+struct RtxdiPTUserSettings
+{
+    rtxdi::ReSTIRPT_ResamplingMode resamplingMode = rtxdi::ReSTIRPT_ResamplingMode::TemporalAndSpatial;
+    RTXDI_PTInitialSamplingParameters initialSamplingParams = rtxdi::GetDefaultReSTIRPTInitialSamplingParams();
+    RTXDI_PTTemporalResamplingParameters temporalResamplingParams = rtxdi::GetDefaultReSTIRPTTemporalResamplingParams(false);
+    RTXDI_PTSpatialResamplingParameters spatialResamplingParams = rtxdi::GetDefaultReSTIRPTSpatialResamplingParams(false);
+    RTXDI_PTReconnectionParameters reconnectionParams = rtxdi::GetDefaultReSTIRPTReconnectionParameters();
+    RTXDI_PTHybridShiftPerFrameParameters hybridShiftParams = rtxdi::GetDefaultReSTIRPTHybridShiftParams();
+    RTXDI_PTDecorrelationParameters decorrelationParams = rtxdi::GetDefaultReSTIRPTDecorrelationParams(false);
+    RTXDI_BoilingFilterParameters boilingFilterParams = rtxdi::GetDefaultReSTIRPTBoilingFilterParams(false);
+    RtxdiPTUserSettings();
+};
+
 struct RtxdiUserSettings
 {
+    RtxdiPTUserSettings restirPT;
 	struct
 	{
 		rtxdi::ReSTIRDI_ResamplingMode resamplingMode = GetReSTIRDI_ResamplingMode();
@@ -89,6 +105,10 @@ struct RtxdiBridgeParameters
 
     bool usingLightSampling;
     bool usingReGIR;
+    bool usingReSTIRPT = false;
+    // Assert on camera cuts, scene/material changes and history-invalidating mode changes.
+    bool resetReSTIRPT = false;
+    bool capturePTDiagnostics = false;
 };
 
 class RtxdiPass
@@ -126,7 +146,11 @@ public:
 		nvrhi::BindingSetHandle extraBindingSet, bool skipFinal);
     void ExecuteFusedDIGIFinal(nvrhi::CommandListHandle commandList,
         nvrhi::BindingSetHandle extraBindingSet);
-	void EndFrame();
+    void ExecutePT(nvrhi::CommandListHandle commandList,
+        nvrhi::BindingSetHandle extraBindingSet);
+    void EndFrame();
+    // Submitted/idle-safe diagnostic only; never call inside a timed frame.
+    void CapturePTReservoirs(const std::string& path);
 	
 	std::shared_ptr<RtxdiResources> GetRTXDIResources() { return m_rtxdiResources; }
 	nvrhi::BufferHandle GetRTXDIConstants() { return m_rtxdiConstantBuffer; }
@@ -135,7 +159,8 @@ private:
 	void CheckContextStaticParameters();
 	void UpdateContextDynamicParameters();
 	void CreatePipelines(nvrhi::BindingLayoutHandle extraBindingLayout = nullptr, bool useRayQuery = true);
-	void CreateBindingSet(const RenderTargets& renderTargets);
+    void CreateBindingSet(const RenderTargets& renderTargets);
+    void CreatePTPipelines(nvrhi::BindingLayoutHandle extraBindingLayout);
 
 	std::unique_ptr<rtxdi::ImportanceSamplingContext> m_ImportanceSamplingContext;
 	std::shared_ptr<RtxdiResources> m_rtxdiResources;
@@ -162,7 +187,16 @@ private:
 
 	RayTracingPass m_GITemporalResamplingPass;
 	RayTracingPass m_GISpatialResamplingPass;
-	RayTracingPass m_GIFinalShadingPass;
+    RayTracingPass m_GIFinalShadingPass;
+    RayTracingPass m_PTGenerateInitialSamplesPass;
+    RayTracingPass m_PTTemporalResamplingPass;
+    RayTracingPass m_PTSpatialResamplingPass;
+    RayTracingPass m_PTFinalShadingPass;
+    bool m_PTPipelinesCreated = false;
+    bool m_PTNeedsClear = false;
+    bool m_PTCameraHistoryValid = false;
+    donut::math::float3 m_PreviousPTCameraPosition = {};
+    donut::math::float3 m_PreviousPreviousPTCameraPosition = {};
 
     RayTracingPass m_FusedDIGIFinalShadingPass;
 
@@ -186,11 +220,12 @@ private:
 	void FillConstants(nvrhi::CommandListHandle commandList);
 	void FillSharedConstants(struct RtxdiBridgeConstants& bridgeConstants) const;
 	void FillDIConstants(RTXDI_Parameters& diParams);
-	void FillGIConstants(RTXDI_GIParameters& giParams);
+    void FillGIConstants(RTXDI_GIParameters& giParams);
+    void FillPTConstants(RTXDI_PTParameters& ptParams);
 	void FillReGIRConstant(ReGIR_Parameters& regirParams);
 	void FillReGirIndirectConstants(ReGirIndirectConstants& regirIndirectConstants);
 
-	RtxdiBridgeParameters m_BridgeParameters;
+	RtxdiBridgeParameters m_BridgeParameters{};
 	uint32_t m_CurrentReservoirIndex;
 	uint32_t m_PreviousReservoirIndex;
 };

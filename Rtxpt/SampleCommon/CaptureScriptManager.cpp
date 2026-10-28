@@ -225,7 +225,11 @@ void CaptureScriptManager::PreRender()
             m_resetAndWarmupCounter = m_resetAndWarmupFrames;
             m_ui.ResetRealtimeCaches = true;
         }
-        if (m_resetAndWarmupCounter)
+        // PT needs temporal history to converge during realtime warm-up.
+        // ResetRealtimeCaches above already invalidates it once at capture start;
+        // the per-frame accumulation reset would otherwise clear PT every frame,
+        // including the last warm-up frame selected by captureSimple.
+        if (m_resetAndWarmupCounter && !m_ui.ActualUseReSTIRPT())
             m_ui.ResetAccumulation = true;
 
         m_resetAndWarmupCounter = std::max(0, m_resetAndWarmupCounter-1);

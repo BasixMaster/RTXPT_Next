@@ -21,6 +21,7 @@
 #include <Rtxdi/DI/ReSTIRDIParameters.h>
 #include <Rtxdi/ReGIR/ReGIRParameters.h>
 #include <Rtxdi/GI/ReSTIRGIParameters.h>
+#include <Rtxdi/PT/ReSTIRPTParameters.h>
 #include "../Shaders/PathTracer/PathTracerShared.h"
 #include "../Shaders/PathTracer/Lighting/PolymorphicLight.h"
 #include "../Shaders/Bindings/BindingDataTypes.hlsli"
@@ -248,6 +249,14 @@ struct RtxdiBridgeConstants
     uint reStirGIVaryAgeThreshold;
     uint _padding1;
     uint _padding2;
+
+    RTXDI_PTParameters restirPT;
+    float3 ptCameraPosition;
+    uint ptHistoryValid;
+    float3 ptPreviousCameraPosition;
+    uint _ptPadding0;
+    float3 ptPreviousPreviousCameraPosition;
+    uint _ptPadding1;
 };
 
 struct SecondarySurface

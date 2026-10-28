@@ -1,6 +1,6 @@
 # Image quality and temporal stability measurement plan
 
-Checked 2026-10-28. This chapter retains the paper-backed metric specification and broader proposed protocol. Implemented initial tools measure tonemapped display RGB MSE/PSNR, display-luma SMAPE and official LDR-FLIP; see [B1 results](B1_RESULTS.md). HDR-FLIP, linear-HDR error, independent-seed statistics and temporal metrics remain future instrumentation. B0 is exact RTXPT1.9; B1 is the runtime3.1 DI/GI API migration; B2+ are future research changes.
+Checked 2026-10-28. This chapter retains the paper-backed metric specification and broader proposed protocol. Implemented initial tools measure tonemapped display RGB MSE/PSNR, display-luma SMAPE and official LDR-FLIP; see [B1 results](B1_RESULTS.md). The B2 development prototype now captures stored linear RGB PFM and measures linear MSE, CGNS-style luminance SMAPE, the explicit MAPE channel convention and project RelMSE. HDR-FLIP, independent-seed statistics and temporal metrics remain future instrumentation. B0 is exact RTXPT1.9; B1 is the runtime3.1 DI/GI API migration; B2 is an active development integration; B3 is reserved for further PT++ changes.
 
 ## What the selected papers actually report
 

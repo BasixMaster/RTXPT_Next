@@ -20,3 +20,6 @@ compile-shaders.bat
 /Testing/RegressionTesting/
 /Testing/Sequence*/*
 !/Testing/Sequence*/empty
+# Python benchmark tooling caches
+__pycache__/
+*.pyc

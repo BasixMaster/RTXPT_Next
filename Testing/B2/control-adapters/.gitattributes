@@ -1,0 +1,3 @@
+# Preserve the byte-hashed adapter as patch data, including context whitespace.
+benchmark-controls.patch -text -whitespace
+manifest.json -text whitespace=cr-at-eol

@@ -65,7 +65,16 @@ PathTracerCollectedSurfaceData getGBufferSurface(int2 pixelPosition, bool previo
     const uint idx = GenericTSPixelToAddress(pixelPosition, idxPingPong, g_Const.ptConsts.genericTSLineStride, g_Const.ptConsts.genericTSPlaneStride);
 
 	PackedPathTracerSurfaceData packed = u_SurfaceData[idx];
-	return RunDecompress(packed);
+    PathTracerCollectedSurfaceData result = RunDecompress(packed);
+#if defined(RTXPT_RESTIR_PT_BRIDGE)
+    // Use the requested candidate pixel/frame, not the center pixel stored in
+    // path-tracer user data: inverse shifts may start at a different neighbor.
+    result._ptNativeState = u_PTPrimaryData[idx];
+    const uint expectedFrame = g_Const.ptConsts.frameIndex - uint(previousFrame);
+    if (!RTXPT_PTOwnsPrimary(result._ptNativeState, expectedFrame))
+        result._isEmpty = true;
+#endif
+    return result;
 
 #if 0 // for testing the above, but only if previousFrame == false, use this
 		PathTracerCollectedSurfaceData surface = getGBufferSurfaceImpl(pixelPosition);

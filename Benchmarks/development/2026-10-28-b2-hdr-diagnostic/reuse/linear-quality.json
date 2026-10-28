@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "metric_convention": "QUALITY_METRICS.md linear RGB v1; Rec.709 luminance; full frame",
+  "scope": "single image versus finite-sample reference; not bias or independent-trial evidence",
+  "hdr_flip": "not measured",
+  "value_transform": "none",
+  "inputs": {
+    "reference": {
+      "file": "frame_B2-owner-hdr-reference.pfm",
+      "sha256": "93726f4b88720d808fa16de3b084bb52f80ee88f725d51fb1d2c44c94b4aedf9"
+    },
+    "test": {
+      "file": "frame_B2-owner-hdr-reuse.pfm",
+      "sha256": "57c0ee72c639de25ec682ca273784b2d5b23cc0179562eeb686b197787f0d211"
+    }
+  },
+  "metrics": {
+    "linear_rgb_mse": 0.17984284559742977,
+    "smape_cgns_y100": 15.272659941976272,
+    "full_frame_reference_mean_luminance": 0.34873370728122316,
+    "mape_rgb_ydenom": 0.3413922698406206,
+    "relmse_project": 2.747112768746999,
+    "relative_metrics_available": true
+  }
+}

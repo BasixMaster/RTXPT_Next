@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "source_format": "RGBA32_FLOAT",
+  "width": 640,
+  "height": 360,
+  "source_row_pitch_bytes": 10240,
+  "source_component_bits": 32,
+  "stored_channels": "RGB",
+  "alpha": "omitted",
+  "value_transform": "none: raw stored texture values; no tonemap or exposure correction",
+  "pfm_encoding": "IEEE754 binary32 little endian, scale -1, bottom row first",
+  "nonfinite_policy": "preserved",
+  "nonfinite_pixels": 0,
+  "finite_rgb": [230400, 230400, 230400],
+  "nan_rgb": [0, 0, 0],
+  "positive_infinity_rgb": [0, 0, 0],
+  "negative_infinity_rgb": [0, 0, 0]
+}

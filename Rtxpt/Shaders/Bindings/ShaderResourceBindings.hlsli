@@ -35,6 +35,7 @@ RWTexture2DArray<uint>                  u_DenoisingLayersHeader            : reg
 RWStructuredBuffer<DenoisingLayer>         u_DenoisingLayersBuffer            : register(u42);
 RWTexture2D<float4>                     u_StableRadiance                : register(u44);
 RWStructuredBuffer<PackedPathTracerSurfaceData> u_SurfaceData           : register(u45);
+RWStructuredBuffer<RTXPTPTPrimaryData>    u_PTPrimaryData                 : register(u46);
 
 // this is for debugging viz
 RWStructuredBuffer<DebugFeedbackStruct> u_FeedbackBuffer                : register(u51);

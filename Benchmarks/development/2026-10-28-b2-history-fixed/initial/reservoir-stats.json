@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "binary_sha256": "ee2400ca3dcd88c951dfff304cb77295e3cfeed343c341080f69c6c81f0911e2",
+  "phase": "post-frame snapshot; aliases may share a slot, not an intermediate-pass trace",
+  "limitation": "Age/M show stored history participation; do not establish unbiased weighting or quality benefit.",
+  "metadata": {
+    "schema_version": 1,
+    "packed_stride_bytes": 64,
+    "block_size": 16,
+    "width": 640,
+    "height": 360,
+    "frame_index": 65,
+    "history_valid": true,
+    "array_pitch": 235520,
+    "block_row_pitch": 10240,
+    "initial_preserved_index": 2,
+    "temporal_input_index": 0,
+    "temporal_output_index": 0,
+    "final_index": 0
+  },
+  "statistics": {
+    "initial_preserved_index": {
+      "slot": 2,
+      "pixels": 230400,
+      "valid": 134640,
+      "m_greater_than_one": 0,
+      "positive_age_valid": 0,
+      "max_age_valid": 0,
+      "mean_m_valid": 1.0,
+      "valid_with_positive_weight": 73196,
+      "nonfinite_m": 0,
+      "nonfinite_weight_valid": 0,
+      "nonfinite_target_valid": 0
+    },
+    "temporal_output_index": {
+      "slot": 0,
+      "pixels": 230400,
+      "valid": 134640,
+      "m_greater_than_one": 0,
+      "positive_age_valid": 0,
+      "max_age_valid": 0,
+      "mean_m_valid": 1.0,
+      "valid_with_positive_weight": 73196,
+      "nonfinite_m": 0,
+      "nonfinite_weight_valid": 0,
+      "nonfinite_target_valid": 0
+    },
+    "final_index": {
+      "slot": 0,
+      "pixels": 230400,
+      "valid": 134640,
+      "m_greater_than_one": 0,
+      "positive_age_valid": 0,
+      "max_age_valid": 0,
+      "mean_m_valid": 1.0,
+      "valid_with_positive_weight": 73196,
+      "nonfinite_m": 0,
+      "nonfinite_weight_valid": 0,
+      "nonfinite_target_valid": 0
+    }
+  }
+}

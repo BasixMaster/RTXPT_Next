@@ -1,0 +1,68 @@
+{
+  "kind": "Exploratory one-process-per-version timing; not a B2 release acceptance",
+  "settings": {
+    "scene": "Testing/B2/Scenes/opaque-room.scene.json",
+    "width": 640,
+    "height": 360,
+    "max_bounces": 3,
+    "max_diffuse_bounces": 3,
+    "spp": 1,
+    "aa": 0,
+    "denoiser": 0,
+    "cache": 0,
+    "warmup_wall_s": 45,
+    "measurement_wall_s": 15,
+    "last_rows": 600,
+    "drop_tail": 16
+  },
+  "configurations": {
+    "B0-controls": "RTXPT1.9+benchmark-controls-v1; DI+GI",
+    "B1-controls": "B1+benchmark-controls-v1; DI+GI",
+    "B2-prototype": "Development working tree; DI+PT, GI disabled; raw merge correction"
+  },
+  "results": [
+    {
+      "label": "B0-controls",
+      "cpu_frame_ms": 1.48865,
+      "gpu_busy_ms": 1.43195
+    },
+    {
+      "label": "B1-controls",
+      "cpu_frame_ms": 1.5588,
+      "gpu_busy_ms": 1.46115
+    },
+    {
+      "label": "B2-prototype",
+      "cpu_frame_ms": 1.7920500000000001,
+      "gpu_busy_ms": 1.7579500000000001
+    }
+  ],
+  "cap_coverage": "Verified app caps0, driver foreground/background caps0 and forced-off VSync; RTSS installed Rtxpt.exe profile0 overriding global232 at three boundaries. Other external limiters unknown.",
+  "limits": [
+    "One process per configuration, fixed run order; no independent-run confidence interval.",
+    "Original B0/B1 untouched binaries are preserved; these are separately identified host-control builds.",
+    "CPU frame cadence and process GPU engine busy are distinct from display FPS.",
+    "B2 correctness and quality acceptance remain incomplete.",
+    "Earlier rejected control-receipt run is excluded; fresh v2 runs used."
+  ],
+  "files": {
+    "B0-controls/frozen-artifacts.json": "e28801199d96b2de83a98aea0aa7fbe6b18e5a6c00f6804d769f9373fcb2c0d6",
+    "B0-controls/manifest-provenance.json": "b1316b6d2dfe5c7268d1a899b4681a163d91d2b921100b812c5232800028376f",
+    "B0-controls/manifest.json": "d8ece9b576b362af8ade4d29c8834f2252df668518989dd84ec04c7b42e2b21c",
+    "B0-controls/presentmon.csv": "0acbe2674c135a116efa2c258ca2cd86569ac96ec6ae44b81bb1f76df51a1f2d",
+    "B0-controls/restoration-receipt.json": "1a6afc9f81299ad3bd3b52d2c46046f3bfaa09d8a83e6b0be5bfe4cad64122eb",
+    "B0-controls/summary.json": "9631edede1ca9aedbe43b3b3f3df1eda3788fe2c31d5c329835f2f993fe918fb",
+    "B1-controls/frozen-artifacts.json": "9fdf43cca7a73440ff668933d811e4ed895b97e40e0d7df135ea4bbf67e40b3d",
+    "B1-controls/manifest-provenance.json": "e8f455723f8b0cd6705f36197051255324d9d6fd844f25eefb779d399e2a3b0a",
+    "B1-controls/manifest.json": "e1b915020beadce11f43699f1fe8bd955a3a9206a22605ceb9328ffbf6c6336f",
+    "B1-controls/presentmon.csv": "d653e8b272eed707d7bcb6adecc8a3fcc4a8e1ae73ada527819c542e0b4dea6f",
+    "B1-controls/restoration-receipt.json": "ee3daf1fe79bf655026f2c50169b9c437e24cecc8462c1acc7e0ad448c7a110b",
+    "B1-controls/summary.json": "5df406833ce05fd46548a743130b6d11602107d797b30b17b3fd9cd1c30b9a16",
+    "B2-prototype/frozen-artifacts.json": "8e9cd3d5efe5a5856b95ad864f5308ef600bdcca455e3afc6668d0efd45b32c0",
+    "B2-prototype/manifest-provenance.json": "e36682f4b2ed9455f7b6dbfc8516dafa0373d18f076030879014d9ed2e2c41ba",
+    "B2-prototype/manifest.json": "63ac4ab726139cab831853c6225c354876ccf8386ca7f2a86e0ca8b66817dc38",
+    "B2-prototype/presentmon.csv": "c2deeabeafe5f5f880b1c382fd324992f8ab81694683614098278e6f2746a4ed",
+    "B2-prototype/restoration-receipt.json": "45ace8c2f2e0f5d37290bcc208223e872f64fc430b10da6d523e19575d31e97e",
+    "B2-prototype/summary.json": "09c14864038e599d1316226e9cc24edcbd951f3ed159851b5da513a727794864"
+  }
+}

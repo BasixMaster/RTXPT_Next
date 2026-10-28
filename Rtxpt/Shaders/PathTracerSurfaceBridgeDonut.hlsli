@@ -37,7 +37,7 @@
 #include "Libraries\MicroRng.hlsli"
 
 #if PATH_TRACER_MODE==PT_DENOISING_LAYERS_BUILD // build
-#if PT_USE_RESTIR_GI || PT_USE_RESTIR_DI
+#if PT_USE_RESTIR_GI || PT_USE_RESTIR_DI || PT_USE_RESTIR_PT
 #define EXPORT_GBUFFER 1
 #endif
 #endif
@@ -528,14 +528,39 @@ void Bridge::ExportSurface(const PathState path, PathTracer::Surface surface, fl
 #endif
     
 #if EXPORT_GBUFFER
-    if (g_Const.ptConsts.useReSTIRDI || g_Const.ptConsts.useReSTIRGI)
+    if (g_Const.ptConsts.useReSTIRDI || g_Const.ptConsts.useReSTIRGI || g_Const.ptConsts.useReSTIRPT)
     {
         // compute address for current output - it ping pongs based on frameIndex!
         const uint idxPingPong = (g_Const.ptConsts.frameIndex % 2) == (uint)0;
         const uint idx = GenericTSPixelToAddress(pixelPos, idxPingPong, g_Const.ptConsts.genericTSLineStride, g_Const.ptConsts.genericTSPlaneStride);
 
 #if !RTXPT_SKIP_STANDARD_OUTPUTS
-        u_SurfaceData[idx] = RunCompress( CollectGBufferSurface(path, surface, cameraRay) ); //ExtractPackedGbufferSurfaceData(pixelPos, sp, dominantDenoisingLayerIndex, stableBranchID);
+        u_SurfaceData[idx] = RunCompress( CollectGBufferSurface(path, surface, cameraRay) );
+        if (g_Const.ptConsts.useReSTIRPT)
+        {
+            RTXPTPTPrimaryData native = (RTXPTPTPrimaryData)0;
+            native.materialID = surface.shadingData.MaterialID();
+#if RTXPT_NESTED_DIELECTRICS_QUALITY > 0
+            native.interiorSlots[0] = path.interiorList.slots[0];
+            native.interiorSlots[1] = path.interiorList.slots[1];
+#endif
+            native.packedCounters = path.packedCounters;
+            native.rayConeWidth = path.rayCone.getWidth();
+            native.rayConeSpread = path.rayCone.getSpreadAngle();
+            native.nativeVertexIndex = path.getVertexIndex();
+            native.flags = path.flagsAndVertexIndex;
+            native.prefixThroughput = path.GetThp();
+            native.frameIndex = g_Const.ptConsts.frameIndex;
+            const uint nativeLobes = surface.bsdf.getLobes(surface.shadingData);
+            bool ownsPrimary = path.getVertexIndex() == 1 && all(native.prefixThroughput == float3(1, 1, 1))
+                && (nativeLobes & (uint)LobeType::NonDeltaReflection) != 0
+                && (nativeLobes & (uint)LobeType::Transmission) == 0;
+#if RTXPT_NESTED_DIELECTRICS_QUALITY > 0
+            ownsPrimary = ownsPrimary && path.interiorList.isEmpty();
+#endif
+            if (ownsPrimary) native.nativeVertexIndex |= RTXPT_PT_PRIMARY_ELIGIBLE;
+            u_PTPrimaryData[idx] = native;
+        }
 #endif
     }
 #endif

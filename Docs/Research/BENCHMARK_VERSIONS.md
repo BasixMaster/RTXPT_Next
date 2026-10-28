@@ -8,8 +8,8 @@ This chapter defines the general comparison contract. The initial B1 migration a
 | --- | --- | --- |
 | B0 | NVIDIA RTXPT 1.9 source commit `303b408ab81790a5051abd7573830b7a4112eb8e`, retained as tag `rtxpt-1.9-baseline` and branch `baseline/rtxpt-1.9`; existing `External/Rtxdi` gitlink `a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6`; Assets gitlink `a56be4ed65029d2733fd02f00f4027ffd541eda8` | Preserve original rendering behavior, feature defaults and binaries. |
 | B1 | `7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee`: RTXDI3.1 runtime/API update and necessary compatibility fixes; runtime `f12037fa8e97ebc08e9e3edfd2de528ed1772a4b` | B1 vs B0 isolates the version update. Merely adding `External/RTXDI-SDK` is insufficient. |
-| B2 | Future single immutable commit: audited PT++ baseline and required ReSTIR PT host integration, if absent after B1 | B2 vs B1; document already-shipped PT++ components to avoid counting them twice. |
-| B3+ | One named technique/ablation per immutable commit, then separately named combinations: compatible neighbors, stochastic MIS, single/multi-layer splatting, guiding, geometry LoD and BDPT | Each vs its immediate parent and B0/B1; combination vs each constituent. Do not pool builds with different estimator settings. |
+| B2 | ReSTIR PT renderer integration in progress; select an immutable commit only after compilation/runtime validation | B2 vs B1; document already-shipped PT++ components to avoid counting them twice. |
+| B3 | PT++ activation and missing-mechanism implementations, individually ablated before a combined preset | Each vs its immediate parent and B0/B1; combination vs each constituent. Do not pool builds with different estimator settings. |
 
 The fork setup merge `c5b1569cf6eff2eb7fb85f1a47fc48722c254345` preserves prior remote history while switching the root to RTXPT; it is not NVIDIA's B0 source revision. Assign no invented SHA to a future version. Before each run, resolve full root/submodule SHAs, save clean/dirty status, compiler/CMake/DXC/SDK versions and configuration, and hash the executable, shader files and relevant DLLs. A version name or mutable branch is not an experiment identity. Preserve B0 and B1 executable bundles separately; this sample normally emits to `bin`, so sequential rebuilds can overwrite the comparison binary. Build configuration is Release for all performance comparisons; validation/debug runs are a separate result class.
 
@@ -103,3 +103,7 @@ Initial hardware: RTX4090/24GiB, driver617.42, Ryzen7 5800X3D, Windows10. Full f
 ## Summary and lessons learned
 
 RTXPT already supplies repeatable screenshot/sequence controls and limited GPU-pass CSV logging. Those are sufficient to preserve visual regression inputs, but do not establish full-frame performance, independent-seed statistics or linear HDR estimator correctness. Keep B0 immutable, isolate the B1 runtime/API update, then add one research change per B2+ identity. Publish gains only after complete-frame, paired-configuration experiments; paper-reported speedups and generated FPS do not substitute for these measurements.
+
+## B2/B3 version clarification —2026-10-28
+
+B2 now denotes the ReSTIR PT renderer integration; B3 denotes PT++ activation and missing-mechanism work. Both retain DI/GI as selectable controls with explicit contribution ownership. See [implementation status](B2_IMPLEMENTATION.md). B1 results remain historical measurements of ordinary PT with DI+GI, without ReSTIR PT. The B1 run settings were not a comprehensive driver/external frame-cap audit; do not retroactively claim they were. Future performance runs must record the uncapped renderer override, driver profile state and unknown external limiters, separately from simulated capture timestep.
