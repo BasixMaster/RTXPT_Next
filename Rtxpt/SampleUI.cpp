@@ -174,7 +174,7 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     m_ui.ToneMappingParams.toneMapOperator = ToneMapperOperator::HableUc2;
 
     // enable by default for now
-    m_ui.RTXDI.regir.regirStaticParams.Mode = rtxdi::ReGIRMode::Grid;
+    m_ui.RTXDI.regir.regirStaticParams.mode = rtxdi::ReGIRMode::Grid;
 
     // load core settings
     m_ui.UseNEE                     = cmdLine.UseNEE != 0;

@@ -64,7 +64,7 @@ RtxdiResources::RtxdiResources(
 
 
     nvrhi::BufferDesc risBufferDesc;
-    risBufferDesc.byteSize = sizeof(uint32_t) * 2 * std::max(risBufferSegmentAllocator.getTotalSizeInElements(), 1u); // RG32_UINT per element
+    risBufferDesc.byteSize = sizeof(uint32_t) * 2 * std::max(risBufferSegmentAllocator.GetTotalSizeInElements(), 1u); // RG32_UINT per element
     risBufferDesc.format = nvrhi::Format::RG32_UINT;
     risBufferDesc.canHaveTypedViews = true;
     risBufferDesc.initialState = nvrhi::ResourceStates::ShaderResource;
@@ -74,7 +74,7 @@ RtxdiResources::RtxdiResources(
     RisBuffer = device->createBuffer(risBufferDesc);
 
 
-    risBufferDesc.byteSize = sizeof(uint32_t) * 8 * std::max(risBufferSegmentAllocator.getTotalSizeInElements(), 1u); // RGBA32_UINT x 2 per element
+    risBufferDesc.byteSize = sizeof(uint32_t) * 8 * std::max(risBufferSegmentAllocator.GetTotalSizeInElements(), 1u); // RGBA32_UINT x 2 per element
     risBufferDesc.format = nvrhi::Format::RGBA32_UINT;
     risBufferDesc.debugName = "RisLightDataBuffer";
     RisLightDataBuffer = device->createBuffer(risBufferDesc);

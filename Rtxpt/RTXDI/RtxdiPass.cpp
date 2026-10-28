@@ -74,9 +74,9 @@ void RtxdiPass::CheckContextStaticParameters()
 		auto& reGIRContext = m_ImportanceSamplingContext->GetReGIRContext();
 
 		bool needsReset = false;
-		if (reGIRContext.GetReGIRStaticParameters().Mode != m_BridgeParameters.userSettings.regir.regirStaticParams.Mode)
+		if (reGIRContext.GetReGIRStaticParameters().mode != m_BridgeParameters.userSettings.regir.regirStaticParams.mode)
 			needsReset = true;
-		if (reGIRContext.GetReGIRStaticParameters().LightsPerCell != m_BridgeParameters.userSettings.regir.regirStaticParams.LightsPerCell)
+		if (reGIRContext.GetReGIRStaticParameters().lightsPerCell != m_BridgeParameters.userSettings.regir.regirStaticParams.lightsPerCell)
 			needsReset = true;
 
 		if (needsReset)
@@ -117,7 +117,7 @@ void RtxdiPass::CreatePipelines(nvrhi::BindingLayoutHandle extraBindingLayout /*
 
 	m_PresampleLightsPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PresampleLights.hlsl", "main", {}, m_bindingLayout, extraBindingLayout, m_bindlessLayout);
 	m_PresampleEnvMapPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PresampleEnvironmentMap.hlsl", "main", {}, m_bindingLayout, extraBindingLayout, m_bindlessLayout);
-	if (reGIRParams.Mode != rtxdi::ReGIRMode::Disabled)
+	if (reGIRParams.mode != rtxdi::ReGIRMode::Disabled)
 	{
 		m_PresampleReGIRPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PresampleReGIR.hlsl", "main", regirMacros, m_bindingLayout, extraBindingLayout, m_bindlessLayout);
 	}
@@ -349,7 +349,7 @@ void RtxdiPass::BeginFrame(
 	const auto& reGIRContext = m_ImportanceSamplingContext->GetReGIRContext();
 	if (m_ImportanceSamplingContext->IsReGIREnabled()
 		&& m_BridgeParameters.usingReGIR
-		&& reGIRContext.GetReGIRStaticParameters().Mode != rtxdi::ReGIRMode::Disabled)
+		&& reGIRContext.GetReGIRStaticParameters().mode != rtxdi::ReGIRMode::Disabled)
 	{
 		dm::int3 worldGridDispatchSize = { dm::div_ceil(reGIRContext.GetReGIRLightSlotCount(), RTXDI_GRID_BUILD_GROUP_SIZE), 1, 1 };
 		ExecuteComputePass(commandList, m_PresampleReGIRPass, "Pre-sample ReGir", worldGridDispatchSize, extraBindingSet);
@@ -480,17 +480,17 @@ void RtxdiPass::FillReGIRConstant(ReGIR_Parameters& regirParams)
 	auto gridParams = regir.GetReGIRGridCalculatedParameters();
 	auto onionParams = regir.GetReGIROnionCalculatedParameters();
 
-	regirParams.gridParams.cellsX = staticParams.gridParameters.GridSize.x;
-	regirParams.gridParams.cellsY = staticParams.gridParameters.GridSize.y;
-	regirParams.gridParams.cellsZ = staticParams.gridParameters.GridSize.z;
+	regirParams.gridParams.cellsX = staticParams.gridParameters.gridSize.x;
+	regirParams.gridParams.cellsY = staticParams.gridParameters.gridSize.y;
+	regirParams.gridParams.cellsZ = staticParams.gridParameters.gridSize.z;
 
 	regirParams.commonParams.numRegirBuildSamples = dynamicParams.regirNumBuildSamples;
 	regirParams.commonParams.risBufferOffset = regir.GetReGIRCellOffset();
-	regirParams.commonParams.lightsPerCell = staticParams.LightsPerCell;
+	regirParams.commonParams.lightsPerCell = staticParams.lightsPerCell;
 	regirParams.commonParams.centerX = dynamicParams.center.x;
 	regirParams.commonParams.centerY = dynamicParams.center.y;
 	regirParams.commonParams.centerZ = dynamicParams.center.z;
-	regirParams.commonParams.cellSize = (staticParams.Mode == rtxdi::ReGIRMode::Onion)
+	regirParams.commonParams.cellSize = (staticParams.mode == rtxdi::ReGIRMode::Onion)
 		? dynamicParams.regirCellSize * 0.5f // Onion operates with radii, while "size" feels more like diameter
 		: dynamicParams.regirCellSize;
 	regirParams.commonParams.localLightSamplingFallbackMode = static_cast<uint32_t>(dynamicParams.fallbackSamplingMode);
@@ -595,7 +595,7 @@ donut::engine::ShaderMacro RtxdiPass::GetReGirMacro(const rtxdi::ReGIRStaticPara
 {
 	std::string regirMode;
 
-	switch (regirParameters.Mode)
+	switch (regirParameters.mode)
 	{
 	case rtxdi::ReGIRMode::Disabled :
 		regirMode = "RTXDI_REGIR_DISABLED";

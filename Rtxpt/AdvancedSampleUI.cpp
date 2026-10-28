@@ -620,7 +620,7 @@ void AdvancedSampleUI::DrawSampleUI(float indent, float defItemWidth, const ImVe
 
                 if (m_ui.RTXDI.restirDI.initialSamplingParams.localLightSamplingMode == ReSTIRDI_LocalLightSamplingMode::ReGIR_RIS)
                 {
-                    RESET_ON_CHANGE(ImGui::Combo("ReGIR Mode", (int*)&m_ui.RTXDI.regir.regirStaticParams.Mode,
+                    RESET_ON_CHANGE(ImGui::Combo("ReGIR Mode", (int*)&m_ui.RTXDI.regir.regirStaticParams.mode,
                         "Disabled\0Grid\0Onion\0\0"));
                 }
 
