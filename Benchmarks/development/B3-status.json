@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "workstream_status": "in_progress",
+  "base_checkpoint": "de9fe651903f203327830e7361ac4237e00d508c",
+  "development_branch": "b3/ptpp-activation",
+  "milestones": [
+    {
+      "id": "B3-base",
+      "status": "completed",
+      "evidence": "B2 branch/checkpoint and all evidence preserved; no release tag changed"
+    },
+    {
+      "id": "B3-footprint",
+      "status": "partial",
+      "evidence": "Existing runtime policy activated, host/shader build and first opaque GPU smoke passed; multi-seed/history checks running"
+    },
+    {
+      "id": "B3-roulette",
+      "status": "partial",
+      "evidence": "Initial-only bridge wiring and GPU counters verified; zero replay tests in smoke. Supported probability range hardened before final sweep"
+    },
+    {
+      "id": "B3-quality",
+      "status": "completed",
+      "evidence": "Scoped60-capture/three-seed staticopaque pilot passed rawHDR and packed-state checks; officialHDR/displayFLIP and historycurves retained. Broader scene coverage remains separate."
+    },
+    {
+      "id": "B3-timing",
+      "status": "completed",
+      "evidence": "12accepted processes,3/configuration,cap/source/cacheverified anddriverrestored; one missingCSVattempt excluded/replaced. No observed optimization win."
+    },
+    {
+      "id": "B3-original-scenes",
+      "status": "partial",
+      "evidence": "Mandatory Convergence/Kitchen rows now explicit; original14/2 and transmission/BLEND transport remain unsupported"
+    },
+    {
+      "id": "B3-missing-paper-mechanisms",
+      "status": "deferred",
+      "evidence": "User assigned all remaining PT++ mechanisms to B4 after B3 checkpoint.",
+      "transferred_to": "B4"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "B3-start",
+      "date": "2026-10-28",
+      "from": "planned",
+      "to": "in_progress",
+      "reason": "User requested B3; explicit activations on preserved B2 basis; broad B2 validation remains open"
+    },
+    {
+      "id": "B3-static-pilot",
+      "date": "2026-10-29",
+      "from": "in_progress",
+      "to": "partial",
+      "reason": "Scoped activation/quality/timing checkpoint finished; originalscene validation notpromoted; B4 owns remainingpaperwork"
+    }
+  ],
+  "limits": [
+    "No B3 promotion or complete PT++ claim",
+    "Same-executable B2-policy control is not relabelled as immutable B2 binary",
+    "Original scenes and equal-quality time/temporal/reconstruction/memory coverage still required"
+  ],
+  "checkpoint_status": "measured_static_opaque",
+  "measured_executable_sha256": "983fa394077d5cf6ca10cc6a60aa783eed1f6b07c9a0f5159b20dedd5b8f233f"
+}

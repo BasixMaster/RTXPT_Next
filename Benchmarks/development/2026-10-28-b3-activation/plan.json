@@ -1,0 +1,48 @@
+{
+  "base_source": "de9fe651903f203327830e7361ac4237e00d508c",
+  "control": "B3 executable with B2 fixed-threshold/no-roulette policy; not relabelled as immutable B2 binary",
+  "scene": "Testing/B2/Scenes/opaque-room.scene.json",
+  "width": 640,
+  "height": 360,
+  "total_bounces": 3,
+  "diffuse_bounces": 3,
+  "seeds": [
+    0,
+    11,
+    47
+  ],
+  "variants": {
+    "control": [
+      0,
+      0
+    ],
+    "footprint": [
+      1,
+      0
+    ],
+    "roulette": [
+      0,
+      0.8
+    ],
+    "combined": [
+      1,
+      0.8
+    ]
+  },
+  "history_frames": [
+    1,
+    8,
+    32,
+    64
+  ],
+  "reuse_modes": [
+    0,
+    3
+  ],
+  "limits": "Three-seed exploratory static opaque ablation. No complete PT++/B3 promotion or general speedup claim.",
+  "original_scene_coverage": {
+    "convergence-test.scene.json": "unsupported transmission and binding diffuse14/2",
+    "kitchen-with-test-stuff.scene.json": "unsupported transmission/BLEND materials and binding diffuse14/2"
+  },
+  "reference": "B2-seeded-validation/reference-8192-a; unchanged native reference, seed101, pixelcenter"
+}

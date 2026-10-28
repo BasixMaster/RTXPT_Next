@@ -2,7 +2,7 @@
 
 
 
-Updated2026-10-28. **B2 is in progress with scoped static opaque GPU quality/timing results; B3 is planned. Neither has a promoted B2/B3 source tag.** See the [current B2 report](B2_RESULTS.md); older sections retain superseded diagnostic checkpoints. The [B1 report](B1_RESULTS.md) remains available locally and on GitHub; its frozen evidence is unchanged.
+Updated2026-10-28. **B2 is in progress with scoped static opaque GPU quality/timing results; B3 footprint/initial-only roulette activation is in progress on a separate development branch. Neither has a promoted B2/B3 source tag.** See the [current B2 report](B2_RESULTS.md); older sections retain superseded diagnostic checkpoints. The [B1 report](B1_RESULTS.md) remains available locally and on GitHub; its frozen evidence is unchanged.
 
 
 
@@ -20,7 +20,7 @@ Updated2026-10-28. **B2 is in progress with scoped static opaque GPU quality/tim
 
 | B2 | Integrate ReSTIR PT generation, path replay, temporal/spatial reservoirs and shading into RTXPT | In progress; runtime/source presence is not activation |
 
-| B3 | Activate applicable PT++ controls and implement missing paper mechanisms | Planned; independently switchable ablations required |
+| B3 | Activate applicable PT++ controls and implement missing paper mechanisms | In progress; see [B3 implementation and ablations](B3_IMPLEMENTATION.md) |
 
 
 

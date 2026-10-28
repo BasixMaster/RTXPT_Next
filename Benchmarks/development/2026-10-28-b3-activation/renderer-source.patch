@@ -1,0 +1,325 @@
+diff --git a/Rtxpt/AdvancedSampleUI.cpp b/Rtxpt/AdvancedSampleUI.cpp
+index 6a75296..56c5b29 100644
+--- a/Rtxpt/AdvancedSampleUI.cpp
++++ b/Rtxpt/AdvancedSampleUI.cpp
+@@ -411,7 +411,18 @@ void AdvancedSampleUI::DrawSampleUI(float indent, float defItemWidth, const ImVe
+             {
+                 RESET_ON_CHANGE(ImGui::Checkbox("ReSTIR PT (B2 experimental)", &m_ui.UseReSTIRPT));
+                 if (ImGui::IsItemHovered()) ImGui::SetTooltip("PT replaces the GI indirect estimator. Initial integration: one plane, no PSR, SHaRC or subsampling. Opaque-transport validation pending.");
+-                if (m_ui.ActualUseReSTIRPT()) ImGui::TextWrapped("Indirect estimator: ReSTIR PT; GI inactive to avoid double counting.");
++                if (m_ui.ActualUseReSTIRPT())
++                {
++                    ImGui::TextWrapped("Indirect estimator: ReSTIR PT; GI inactive to avoid double counting.");
++                    int reconnectionMode = m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode == RTXDI_PTReconnectionMode::Footprint ? 1 : 0;
++                    if (ImGui::Combo("PT reconnection", &reconnectionMode, "B2 fixed threshold\0B3 footprint\0"))
++                        m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode = reconnectionMode == 0 ?
++                            RTXDI_PTReconnectionMode::FixedThreshold : RTXDI_PTReconnectionMode::Footprint;
++                    if (ImGui::SliderFloat("PT initial roulette survival (0 off)", &m_ui.RTXDI.restirPT.russianRouletteProbability, 0.0f, 1.0f) &&
++                        m_ui.RTXDI.restirPT.russianRouletteProbability > 0.0f)
++                        m_ui.RTXDI.restirPT.russianRouletteProbability = std::max(0.1f, m_ui.RTXDI.restirPT.russianRouletteProbability);
++                    if (ImGui::IsItemHovered()) ImGui::SetTooltip("B3 PT++ ablation. Roulette only during initial path generation, never replay. Experimental; keep separate from B2 controls.");
++                }
+             }
+ 
+             RESET_ON_CHANGE(ImGui::Checkbox("Use Next Event Estimation", &m_ui.UseNEE));
+diff --git a/Rtxpt/RTXDI/PT/Bridge.hlsli b/Rtxpt/RTXDI/PT/Bridge.hlsli
+index 52579b0..0575966 100644
+--- a/Rtxpt/RTXDI/PT/Bridge.hlsli
++++ b/Rtxpt/RTXDI/PT/Bridge.hlsli
+@@ -292,6 +292,26 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
+         ctx.SetBrdfRaySample(brs);
+         if (!ctx.ValidContinuationRayBrdfOverPdf()) break;
+         ctx.MultiplyPathThroughput(ctx.GetContinuationRayBrdfOverPdf());
++        // PT++ section 6.2.4: initial RNG owns roulette. The hybrid-shift
++        // context returns false, preserving the complete deterministic replay.
++        const float rr = g_RtxdiBridgeConst.ptRouletteProbability;
++        if (rr > 0.0f && rr < 1.0f && ctx.ShouldRunRussianRoulette())
++        {
++            if (g_RtxdiBridgeConst.ptDiagnostics != 0)
++            {
++                InterlockedAdd(u_PTDiagnosticCounters[0], 1);
++                if (user.pathType != RTXDI_PTPathTraceInvocationType_Initial)
++                    InterlockedAdd(u_PTDiagnosticCounters[3], 1);
++            }
++            if (RTXDI_GetNextRandom(randomContext.initialRandomSamplerState) >= rr)
++            {
++                if (g_RtxdiBridgeConst.ptDiagnostics != 0) InterlockedAdd(u_PTDiagnosticCounters[1], 1);
++                break;
++            }
++            if (g_RtxdiBridgeConst.ptDiagnostics != 0) InterlockedAdd(u_PTDiagnosticCounters[2], 1);
++            ctx.MultiplyPathThroughput(1.0f / rr);
++            ctx.RecordRussianRouletteProbability(rr);
++        }
+         user.nativeState.clearScatterEventFlags();
+         if (brs.properties.IsTransmission())
+         {
+diff --git a/Rtxpt/RTXDI/RtxdiApplicationBridge.hlsli b/Rtxpt/RTXDI/RtxdiApplicationBridge.hlsli
+index 9e5453c..de1e46d 100644
+--- a/Rtxpt/RTXDI/RtxdiApplicationBridge.hlsli
++++ b/Rtxpt/RTXDI/RtxdiApplicationBridge.hlsli
+@@ -62,6 +62,7 @@ RWStructuredBuffer<RTXDI_PackedGIReservoir> u_GIReservoirs  : register(u14 VK_DE
+ #if defined(RTXPT_RESTIR_PT_BRIDGE)
+ RWStructuredBuffer<RTXDI_PackedPTReservoir> u_PTReservoirs : register(u17 VK_DESCRIPTOR_SET(2));
+ RWByteAddressBuffer u_PTSpatialNeighbors : register(u18 VK_DESCRIPTOR_SET(2));
++RWStructuredBuffer<uint> u_PTDiagnosticCounters : register(u19 VK_DESCRIPTOR_SET(2));
+ #define RTXDI_PT_RESERVOIR_BUFFER u_PTReservoirs
+ #endif
+ 
+diff --git a/Rtxpt/RTXDI/RtxdiPass.cpp b/Rtxpt/RTXDI/RtxdiPass.cpp
+index bcd291d..6bc3de6 100644
+--- a/Rtxpt/RTXDI/RtxdiPass.cpp
++++ b/Rtxpt/RTXDI/RtxdiPass.cpp
+@@ -77,6 +77,7 @@ RtxdiPass::RtxdiPass(
+         nvrhi::BindingLayoutItem::TypedBuffer_UAV(16),            //u_RisLightDataBuffer
+         nvrhi::BindingLayoutItem::StructuredBuffer_UAV(17),       //u_PTReservoirs
+         nvrhi::BindingLayoutItem::RawBuffer_UAV(18),              //u_PTSpatialNeighborSelection
++        nvrhi::BindingLayoutItem::StructuredBuffer_UAV(19),       //u_PTDiagnosticCounters
+ 
+ 		nvrhi::BindingLayoutItem::VolatileConstantBuffer(5),	//g_RtxdiBridgeConst
+ 
+@@ -228,6 +229,7 @@ void RtxdiPass::CreateBindingSet(const RenderTargets& renderTargets)
+             nvrhi::BindingSetItem::TypedBuffer_UAV(16, m_rtxdiResources->RisLightDataBuffer),
+             nvrhi::BindingSetItem::StructuredBuffer_UAV(17, m_rtxdiResources->PTReservoirBuffer),
+             nvrhi::BindingSetItem::RawBuffer_UAV(18, m_rtxdiResources->PTSpatialNeighborSelectionBuffer),
++            nvrhi::BindingSetItem::StructuredBuffer_UAV(19, m_rtxdiResources->PTDiagnosticCounters),
+ 			
+ 			nvrhi::BindingSetItem::ConstantBuffer(5, m_rtxdiConstantBuffer),
+ 
+@@ -283,7 +285,12 @@ void RtxdiPass::PrepareResources(
+          oldPT.initialSamplingParams.maxRcVertexLength != newPT.initialSamplingParams.maxRcVertexLength ||
+          oldPT.reconnectionParams.reconnectionMode != newPT.reconnectionParams.reconnectionMode ||
+          oldPT.reconnectionParams.roughnessThreshold != newPT.reconnectionParams.roughnessThreshold ||
+-         oldPT.reconnectionParams.distanceThreshold != newPT.reconnectionParams.distanceThreshold);
++          oldPT.reconnectionParams.distanceThreshold != newPT.reconnectionParams.distanceThreshold ||
++          oldPT.reconnectionParams.minConnectionFootprint != newPT.reconnectionParams.minConnectionFootprint ||
++          oldPT.reconnectionParams.minConnectionFootprintSigma != newPT.reconnectionParams.minConnectionFootprintSigma ||
++          oldPT.reconnectionParams.minPdfRoughness != newPT.reconnectionParams.minPdfRoughness ||
++          oldPT.reconnectionParams.minPdfRoughnessSigma != newPT.reconnectionParams.minPdfRoughnessSigma ||
++          oldPT.russianRouletteProbability != newPT.russianRouletteProbability);
+     if (bridgeParams.capturePTDiagnostics && bridgeParams.usingReSTIRPT)
+         std::printf("PT_HISTORY frame=%u previous=%u requestedReset=%d contractChanged=%d priorHistory=%d\n",
+             bridgeParams.frameIndex, m_BridgeParameters.frameIndex, int(bridgeParams.resetReSTIRPT),
+@@ -392,6 +399,11 @@ void RtxdiPass::BeginFrame(
+         m_PTNeedsClear = false;
+     }
+ 
++    if (m_BridgeParameters.usingReSTIRPT && m_BridgeParameters.capturePTDiagnostics)
++    {
++        commandList->clearBufferUInt(m_rtxdiResources->PTDiagnosticCounters, 0);
++        nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTDiagnosticCounters);
++    }
+     // Light preparation is needed for DI/ReGIR and PT next-event estimation.
+ 	if (m_BridgeParameters.usingLightSampling)
+ 	{
+@@ -553,6 +565,8 @@ void RtxdiPass::FillSharedConstants(struct RtxdiBridgeConstants& bridgeConstants
+     bridgeConstants.ptPreviousCameraPosition = m_PTCameraHistoryValid ? m_PreviousPTCameraPosition : m_BridgeParameters.cameraPosition;
+     bridgeConstants.ptPreviousPreviousCameraPosition = m_PTCameraHistoryValid ? m_PreviousPreviousPTCameraPosition : m_BridgeParameters.cameraPosition;
+     bridgeConstants.ptHistoryValid = m_PTCameraHistoryValid ? 1 : 0;
++    bridgeConstants.ptRouletteProbability = m_BridgeParameters.userSettings.restirPT.russianRouletteProbability;
++    bridgeConstants.ptDiagnostics = m_BridgeParameters.capturePTDiagnostics ? 1u : 0u;
+ 	bridgeConstants.frameDim = m_BridgeParameters.frameDims;
+ 	bridgeConstants.rayEpsilon = m_BridgeParameters.userSettings.rayEpsilon;
+ 	bridgeConstants.localLightPdfTextureSize = uint2(m_rtxdiResources->LocalLightPdfTexture->getDesc().width, m_rtxdiResources->LocalLightPdfTexture->getDesc().height);
+@@ -820,4 +834,24 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
+          << ",\n  \"temporal_output_index\": " << indices.temporalResamplingOutputBufferIndex
+          << ",\n  \"final_index\": " << indices.finalShadingInputBufferIndex << "\n}\n";
+     if (!meta) throw std::runtime_error("PT reservoir metadata write failed");
++    nvrhi::BufferDesc statsDesc;
++    statsDesc.byteSize = 4 * sizeof(uint32_t);
++    statsDesc.cpuAccess = nvrhi::CpuAccessMode::Read;
++    statsDesc.debugName = "PTCounterReadback";
++    auto stats = m_device->createBuffer(statsDesc);
++    if (!stats) throw std::runtime_error("PT counter staging allocation failed");
++    auto statsCopy = m_device->createCommandList();
++    statsCopy->open();
++    statsCopy->copyBuffer(stats, 0, m_rtxdiResources->PTDiagnosticCounters, 0, statsDesc.byteSize);
++    statsCopy->close();
++    m_device->executeCommandList(statsCopy);
++    m_device->waitForIdle();
++    const auto* counters = static_cast<const uint32_t*>(m_device->mapBuffer(stats, nvrhi::CpuAccessMode::Read));
++    if (!counters) throw std::runtime_error("PT counter map failed");
++    std::ofstream statFile(path + ".stats.json");
++    statFile << "{\n  \"scope\": \"last captured frame, diagnostics only\",\n  \"roulette_tests\": " << counters[0]
++        << ",\n  \"roulette_terminated\": " << counters[1] << ",\n  \"roulette_survived\": " << counters[2]
++        << ",\n  \"replay_roulette_tests\": " << counters[3] << "\n}\n";
++    m_device->unmapBuffer(stats);
++    if (!statFile) throw std::runtime_error("PT counter metadata write failed");
+ }
+diff --git a/Rtxpt/RTXDI/RtxdiPass.h b/Rtxpt/RTXDI/RtxdiPass.h
+index 66821ee..a5d4f62 100644
+--- a/Rtxpt/RTXDI/RtxdiPass.h
++++ b/Rtxpt/RTXDI/RtxdiPass.h
+@@ -54,6 +54,7 @@ struct RtxdiPTUserSettings
+     RTXDI_PTHybridShiftPerFrameParameters hybridShiftParams = rtxdi::GetDefaultReSTIRPTHybridShiftParams();
+     RTXDI_PTDecorrelationParameters decorrelationParams = rtxdi::GetDefaultReSTIRPTDecorrelationParams(false);
+     RTXDI_BoilingFilterParameters boilingFilterParams = rtxdi::GetDefaultReSTIRPTBoilingFilterParams(false);
++    float russianRouletteProbability = 0.0f; // 0 disables; initial generation only.
+     RtxdiPTUserSettings();
+ };
+ 
+diff --git a/Rtxpt/RTXDI/RtxdiResources.cpp b/Rtxpt/RTXDI/RtxdiResources.cpp
+index 1e07d66..9b9b949 100644
+--- a/Rtxpt/RTXDI/RtxdiResources.cpp
++++ b/Rtxpt/RTXDI/RtxdiResources.cpp
+@@ -169,6 +169,15 @@ RtxdiResources::RtxdiResources(
+     ptNeighborDesc.debugName = "PTSpatialNeighborSelectionBuffer";
+     PTSpatialNeighborSelectionBuffer = device->createBuffer(ptNeighborDesc);
+ 
++    nvrhi::BufferDesc ptDiagnosticDesc;
++    ptDiagnosticDesc.byteSize = 4 * sizeof(uint32_t);
++    ptDiagnosticDesc.structStride = sizeof(uint32_t);
++    ptDiagnosticDesc.initialState = nvrhi::ResourceStates::UnorderedAccess;
++    ptDiagnosticDesc.keepInitialState = true;
++    ptDiagnosticDesc.canHaveUAVs = true;
++    ptDiagnosticDesc.debugName = "PTDiagnosticCounters";
++    PTDiagnosticCounters = device->createBuffer(ptDiagnosticDesc);
++
+     nvrhi::TextureDesc localLightPdfDesc;
+     rtxdi::ComputePdfTextureSize(maxLocalLights, localLightPdfDesc.width, localLightPdfDesc.height, localLightPdfDesc.mipLevels);
+     assert(localLightPdfDesc.width * localLightPdfDesc.height >= maxLocalLights);
+diff --git a/Rtxpt/RTXDI/RtxdiResources.h b/Rtxpt/RTXDI/RtxdiResources.h
+index 0561278..cd8b4f0 100644
+--- a/Rtxpt/RTXDI/RtxdiResources.h
++++ b/Rtxpt/RTXDI/RtxdiResources.h
+@@ -42,6 +42,7 @@ public:
+     nvrhi::BufferHandle GIReservoirBuffer;
+     nvrhi::BufferHandle PTReservoirBuffer;
+     nvrhi::BufferHandle PTSpatialNeighborSelectionBuffer;
++    nvrhi::BufferHandle PTDiagnosticCounters;
+     nvrhi::TextureHandle LocalLightPdfTexture;
+ 
+     RtxdiResources(
+diff --git a/Rtxpt/RTXDI/ShaderParameters.h b/Rtxpt/RTXDI/ShaderParameters.h
+index 21843f8..1399e72 100644
+--- a/Rtxpt/RTXDI/ShaderParameters.h
++++ b/Rtxpt/RTXDI/ShaderParameters.h
+@@ -254,9 +254,9 @@ struct RtxdiBridgeConstants
+     float3 ptCameraPosition;
+     uint ptHistoryValid;
+     float3 ptPreviousCameraPosition;
+-    uint _ptPadding0;
++    float ptRouletteProbability;
+     float3 ptPreviousPreviousCameraPosition;
+-    uint _ptPadding1;
++    uint ptDiagnostics;
+ };
+ 
+ struct SecondarySurface
+diff --git a/Rtxpt/Sample.cpp b/Rtxpt/Sample.cpp
+index c27482f..9035747 100644
+--- a/Rtxpt/Sample.cpp
++++ b/Rtxpt/Sample.cpp
+@@ -2293,6 +2293,9 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
+             uint32_t(m_ui.RTXDI.restirPT.temporalResamplingParams.enableAgeBasedRejection),
+             uint32_t(m_ui.RTXDI.restirPT.temporalResamplingParams.maxReservoirAge),
+             uint32_t(m_ui.RTXDI.restirPT.temporalResamplingParams.maxHistoryLength));
++        std::printf("PTPP_CONTRACT reconnection=%u rouletteProbability=%.9g diagnostics=%d\n",
++            uint32_t(m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode),
++            double(m_ui.RTXDI.restirPT.russianRouletteProbability), int(m_cmdLine.CapturePTReservoirs));
+         std::printf("PT_SPATIAL_CONTRACT samples=%u boost=%u\n",
+             uint32_t(m_ui.RTXDI.restirPT.spatialResamplingParams.numSpatialSamples),
+             uint32_t(m_ui.RTXDI.restirPT.spatialResamplingParams.numDisocclusionBoostSamples));
+diff --git a/Rtxpt/SampleCommon/CaptureScriptManager.cpp b/Rtxpt/SampleCommon/CaptureScriptManager.cpp
+index f600b8c..b34e9d7 100644
+--- a/Rtxpt/SampleCommon/CaptureScriptManager.cpp
++++ b/Rtxpt/SampleCommon/CaptureScriptManager.cpp
+@@ -11,6 +11,8 @@
+ #include "CaptureScriptManager.h"
+ 
+ #include <string>
++#include <cstdio>
++#include <stdexcept>
+ #include "../SampleUI.h"
+ #include "../Sample.h"
+ #include "SampleCommon.h"
+@@ -26,6 +28,12 @@ using namespace donut::engine;
+ CaptureScriptManager::CaptureScriptManager(Sample & sample, SampleUIData & sampleUI, const CommandLineOptions & cmdLine)
+     : m_app(sample), m_ui(sampleUI), m_cmdLine(cmdLine)
+ {
++    if (m_cmdLine.CaptureWarmupFrames != -1)
++    {
++        if (!m_cmdLine.captureSimple || m_cmdLine.CaptureWarmupFrames < 1 || m_cmdLine.CaptureWarmupFrames > 4096)
++            throw std::runtime_error("captureWarmupFrames requires captureSimple and a value in1..4096");
++        m_resetAndWarmupFrames = m_cmdLine.CaptureWarmupFrames;
++    }
+     if (m_cmdLine.capturePath != "")
+     {
+         m_screenshotFileName = m_cmdLine.capturePath;
+@@ -223,6 +231,8 @@ void CaptureScriptManager::PreRender()
+         if (m_resetAndWarmupCounter == -1) // we just started with delay, set it up
+         {
+             m_resetAndWarmupCounter = m_resetAndWarmupFrames;
++            std::printf("CAPTURE_HISTORY warmupFrames=%d\n", m_resetAndWarmupFrames);
++            std::fflush(stdout);
+             m_ui.ResetRealtimeCaches = true;
+         }
+         // PT needs temporal history to converge during realtime warm-up.
+diff --git a/Rtxpt/SampleCommon/CommandLine.cpp b/Rtxpt/SampleCommon/CommandLine.cpp
+index f095f35..705db0d 100644
+--- a/Rtxpt/SampleCommon/CommandLine.cpp
++++ b/Rtxpt/SampleCommon/CommandLine.cpp
+@@ -41,6 +41,7 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
+             ("stopAnimations", "Always start the scene with animations disabled", value(stopAnimations))
+             ("noSER", "Disable Shader Execution Reordering", value(disableSER))
+             ("adapterIndex", "--adapterIndex must be followed by a number used to identify the preferred adapter index, e.g '--adapterIndex 0' or '--adapterIndex 1'; default is -1 (automatic)", value(adapterIndex))
++            ("captureWarmupFrames", "Simple-capture history warmup frames, 1..4096", value(CaptureWarmupFrames))
+             ("captureSimple", "Trigger simple screenshot capture with default warmup; use capturePath to specify output file.", value(captureSimple))
+             ("captureSequence", "Trigger sequence capture; use capturePath to specify output file, sequenceWarmupTime, sequenceStartTime, sequenceFPS and sequenceFrames to control.", value(captureSequence))
+             ("capturePath", "Specify output file or path for various capture commands.", value(capturePath))
+@@ -57,6 +58,8 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
+             ("useReSTIRPT", "Experimental ReSTIR PT indirect transport; supersedes GI, uses one plane without PSR/cache/subsampling", value(UseReSTIRPT))
+             ("maxBounces", "Override total bounce cap for validation (1..32)", value(OverrideMaxBounces))
+             ("maxDiffuseBounces", "Override diffuse bounce cap for validation (0..32)", value(OverrideMaxDiffuseBounces))
++            ("ptReconnectionMode", "PT reconnectibility: 0 fixed threshold (B2), 1 footprint (B3)", value(PTReconnectionMode))
++            ("ptRouletteProbability", "Initial-only PT roulette survival probability: 0 off, [0.1,1] on; replay never roulettes", value(PTRouletteProbability))
+             ("ptFixedSpatialSamples", "Diagnostic: fixed PT ordinary/boosted neighbor count (1..32)", value(PTFixedSpatialSamples))
+             ("ptDisableAgeRejectionValidation", "Diagnostic: disable PT age-based history rejection, retaining history mass cap", value(PTDisableAgeRejectionValidation))
+             ("ptReplayOnlyValidation", "Diagnostic: suppress mid-path PT reconnection; preserve terminal-light reconnection", value(PTReplayOnlyValidation))
+diff --git a/Rtxpt/SampleCommon/CommandLine.h b/Rtxpt/SampleCommon/CommandLine.h
+index 98eb245..a541575 100644
+--- a/Rtxpt/SampleCommon/CommandLine.h
++++ b/Rtxpt/SampleCommon/CommandLine.h
+@@ -33,6 +33,7 @@ struct CommandLineOptions
+     std::string capturePath = "";
+     std::string captureSuffix = "";
+     bool captureSimple = false;
++    int CaptureWarmupFrames = -1; // -1 keeps the existing 64-frame default.
+     bool CaptureLinearHDR = false;
+     bool CapturePTReservoirs = false;
+     bool ReferencePixelCenter = false;
+@@ -70,6 +71,8 @@ struct CommandLineOptions
+     bool OverrideAutoexposureOff    = false;
+     float OverrideExposureOffset    = FLT_MAX;
+     
++    int PTReconnectionMode = -1; // -1 preserves B2; 0 fixed, 1 footprint.
++    float PTRouletteProbability = 0.0f;
+     int PTFixedSpatialSamples      = -1;
+     bool PTDisableAgeRejectionValidation = false;
+     bool PTReplayOnlyValidation    = false;
+diff --git a/Rtxpt/SampleUI.cpp b/Rtxpt/SampleUI.cpp
+index 793c6fe..44d0afd 100644
+--- a/Rtxpt/SampleUI.cpp
++++ b/Rtxpt/SampleUI.cpp
+@@ -1,4 +1,5 @@
+ #include <stdexcept>
++#include <cmath>
+ /*
+ * Copyright (c) 2025, NVIDIA CORPORATION.  All rights reserved.
+ *
+@@ -195,6 +196,16 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
+         m_ui.RTXDI.restirDI.initialSamplingParams.localLightSamplingMode = static_cast<ReSTIRDI_LocalLightSamplingMode>(cmdLine.OverrideDILightMode);
+     if (cmdLine.OverrideDIBrdfSamples >= 0)
+         m_ui.RTXDI.restirDI.initialSamplingParams.numBrdfSamples = cmdLine.OverrideDIBrdfSamples;
++    if (cmdLine.PTReconnectionMode < -1 || cmdLine.PTReconnectionMode > 1 ||
++        !std::isfinite(cmdLine.PTRouletteProbability) || cmdLine.PTRouletteProbability < 0.0f || cmdLine.PTRouletteProbability > 1.0f ||
++        (cmdLine.PTRouletteProbability > 0.0f && cmdLine.PTRouletteProbability < 0.1f))
++        throw std::runtime_error("PT reconnectibility must be 0 fixed/1 footprint; roulette must be 0 off or finite in [0.1,1]");
++    if (cmdLine.PTReconnectionMode >= 0)
++        m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode = cmdLine.PTReconnectionMode == 0 ?
++            RTXDI_PTReconnectionMode::FixedThreshold : RTXDI_PTReconnectionMode::Footprint;
++    m_ui.RTXDI.restirPT.russianRouletteProbability = cmdLine.PTRouletteProbability;
++    if (cmdLine.PTReplayOnlyValidation && cmdLine.PTReconnectionMode == 1)
++        throw std::runtime_error("Replay-only diagnostic requires fixed-threshold reconnection");
+     if (cmdLine.PTFixedSpatialSamples < -1 || cmdLine.PTFixedSpatialSamples == 0 || cmdLine.PTFixedSpatialSamples > 32)
+         throw std::runtime_error("Fixed PT neighbor count must be 1..32");
+     if (cmdLine.PTFixedSpatialSamples > 0)

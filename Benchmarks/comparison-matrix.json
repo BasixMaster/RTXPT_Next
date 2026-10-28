@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "required_scenes": [
+    "convergence",
+    "kitchen",
+    "opaque-room"
+  ],
+  "variants": [
+    "B0",
+    "B1",
+    "B2",
+    "B3",
+    "B4"
+  ],
+  "rows": [
+    {
+      "variant": "B0",
+      "scene": "convergence",
+      "algorithm": "RTXPT native PT + ReSTIR DI + GI",
+      "status": "historical_unverified_caps",
+      "result": "Benchmarks/results/2026-10-28-b1",
+      "settings": "1280x720,14/2 bounces; original materials/camera; historical external caps unverified"
+    },
+    {
+      "variant": "B0",
+      "scene": "kitchen",
+      "algorithm": "RTXPT native PT + ReSTIR DI + GI",
+      "status": "historical_unverified_caps",
+      "result": "Benchmarks/results/2026-10-28-b1",
+      "settings": "1280x720,14/2 bounces; original materials/camera; historical external caps unverified"
+    },
+    {
+      "variant": "B0",
+      "scene": "opaque-room",
+      "algorithm": "RTXPT native PT; DI/GI off; controls-v1",
+      "status": "measured",
+      "result": "Benchmarks/development/2026-10-28-b2-static-opaque",
+      "settings": "640x360,3/3 bounces, cap-verified timing; display-only quality"
+    },
+    {
+      "variant": "B1",
+      "scene": "convergence",
+      "algorithm": "RTXPT native PT + ReSTIR DI + GI",
+      "status": "historical_unverified_caps",
+      "result": "Benchmarks/results/2026-10-28-b1",
+      "settings": "1280x720,14/2 bounces; original materials/camera; historical external caps unverified"
+    },
+    {
+      "variant": "B1",
+      "scene": "kitchen",
+      "algorithm": "RTXPT native PT + ReSTIR DI + GI",
+      "status": "historical_unverified_caps",
+      "result": "Benchmarks/results/2026-10-28-b1",
+      "settings": "1280x720,14/2 bounces; original materials/camera; historical external caps unverified"
+    },
+    {
+      "variant": "B1",
+      "scene": "opaque-room",
+      "algorithm": "RTXPT native PT; DI/GI off; controls-v1",
+      "status": "measured",
+      "result": "Benchmarks/development/2026-10-28-b2-static-opaque",
+      "settings": "640x360,3/3 bounces, cap-verified timing; display-only quality"
+    },
+    {
+      "variant": "B2",
+      "scene": "convergence",
+      "algorithm": "Planned DI + ReSTIR PT; GI off",
+      "status": "unsupported",
+      "reason": "Original transmission/BLEND material coverage and binding14/2 diffuse cap fail prototype gates; no substituted materials or performance result"
+    },
+    {
+      "variant": "B2",
+      "scene": "kitchen",
+      "algorithm": "Planned DI + ReSTIR PT; GI off",
+      "status": "unsupported",
+      "reason": "Original transmission/BLEND material coverage and binding14/2 diffuse cap fail prototype gates; no substituted materials or performance result"
+    },
+    {
+      "variant": "B2",
+      "scene": "opaque-room",
+      "algorithm": "ReSTIR DI + ReSTIR PT; GI off",
+      "status": "measured",
+      "result": "Benchmarks/development/2026-10-28-b2-static-opaque",
+      "settings": "640x360,3/3 bounces, strict static control"
+    },
+    {
+      "variant": "B3",
+      "scene": "convergence",
+      "algorithm": "Planned DI + ReSTIR PT; GI off",
+      "status": "unsupported",
+      "reason": "Original transmission/BLEND material coverage and binding14/2 diffuse cap fail prototype gates; no substituted materials or performance result"
+    },
+    {
+      "variant": "B3",
+      "scene": "kitchen",
+      "algorithm": "Planned DI + ReSTIR PT; GI off",
+      "status": "unsupported",
+      "reason": "Original transmission/BLEND material coverage and binding14/2 diffuse cap fail prototype gates; no substituted materials or performance result"
+    },
+    {
+      "variant": "B3",
+      "scene": "opaque-room",
+      "algorithm": "DI + ReSTIR PT; GI off; isolated footprint/roulette activations",
+      "status": "measured",
+      "result": "Benchmarks/development/2026-10-28-b3-activation",
+      "settings": "640x360,3/3,DI+PT/GIoff; four isolated settings,3seeds/historycurves and3timedprocesses each"
+    },
+    {
+      "variant": "B4",
+      "scene": "convergence",
+      "algorithm": "Planned remaining PT++ pipeline; actual contribution partition recorded per ablation",
+      "status": "pending",
+      "reason": "Begins after B3 checkpoint; remaining mechanisms and original material/diffuse-budget validation not implemented or measured"
+    },
+    {
+      "variant": "B4",
+      "scene": "kitchen",
+      "algorithm": "Planned remaining PT++ pipeline; actual contribution partition recorded per ablation",
+      "status": "pending",
+      "reason": "Begins after B3 checkpoint; remaining mechanisms and original material/diffuse-budget validation not implemented or measured"
+    },
+    {
+      "variant": "B4",
+      "scene": "opaque-room",
+      "algorithm": "Planned remaining PT++ pipeline; actual contribution partition recorded per ablation",
+      "status": "pending",
+      "reason": "Begins after B3 checkpoint; remaining mechanisms and original material/diffuse-budget validation not implemented or measured"
+    }
+  ]
+}

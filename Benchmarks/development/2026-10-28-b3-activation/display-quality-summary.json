@@ -1,0 +1,29 @@
+{
+  "groups": {
+    "control": {
+      "captures": 3,
+      "unique_image_hashes": 3,
+      "median_mse_srgb": 0.003191044843863471,
+      "median_ldr_flip": 0.06684331595897675
+    },
+    "footprint": {
+      "captures": 3,
+      "unique_image_hashes": 3,
+      "median_mse_srgb": 0.0035927726559941333,
+      "median_ldr_flip": 0.06897751986980438
+    },
+    "roulette": {
+      "captures": 3,
+      "unique_image_hashes": 3,
+      "median_mse_srgb": 0.003242773990950774,
+      "median_ldr_flip": 0.06760445982217789
+    },
+    "combined": {
+      "captures": 3,
+      "unique_image_hashes": 3,
+      "median_mse_srgb": 0.003597800925925926,
+      "median_ldr_flip": 0.06907672435045242
+    }
+  },
+  "scope": "Three explicitly seeded processes per variant;1spp after64historyframes; common encoded-sRGB/LDR-FLIP track, not raw HDR or equal-time quality"
+}

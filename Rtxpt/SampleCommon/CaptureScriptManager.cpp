@@ -11,6 +11,8 @@
 #include "CaptureScriptManager.h"
 
 #include <string>
+#include <cstdio>
+#include <stdexcept>
 #include "../SampleUI.h"
 #include "../Sample.h"
 #include "SampleCommon.h"
@@ -26,6 +28,12 @@ using namespace donut::engine;
 CaptureScriptManager::CaptureScriptManager(Sample & sample, SampleUIData & sampleUI, const CommandLineOptions & cmdLine)
     : m_app(sample), m_ui(sampleUI), m_cmdLine(cmdLine)
 {
+    if (m_cmdLine.CaptureWarmupFrames != -1)
+    {
+        if (!m_cmdLine.captureSimple || m_cmdLine.CaptureWarmupFrames < 1 || m_cmdLine.CaptureWarmupFrames > 4096)
+            throw std::runtime_error("captureWarmupFrames requires captureSimple and a value in1..4096");
+        m_resetAndWarmupFrames = m_cmdLine.CaptureWarmupFrames;
+    }
     if (m_cmdLine.capturePath != "")
     {
         m_screenshotFileName = m_cmdLine.capturePath;
@@ -223,6 +231,8 @@ void CaptureScriptManager::PreRender()
         if (m_resetAndWarmupCounter == -1) // we just started with delay, set it up
         {
             m_resetAndWarmupCounter = m_resetAndWarmupFrames;
+            std::printf("CAPTURE_HISTORY warmupFrames=%d\n", m_resetAndWarmupFrames);
+            std::fflush(stdout);
             m_ui.ResetRealtimeCaches = true;
         }
         // PT needs temporal history to converge during realtime warm-up.

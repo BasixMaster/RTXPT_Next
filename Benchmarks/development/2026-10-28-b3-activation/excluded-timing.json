@@ -1,0 +1,7 @@
+{
+  "status": "excluded_missing_trace; exact replacement passed",
+  "case": "control-trial3",
+  "reason": "PresentMon exited0 but produced no CSV despite renderer frames; observed presentation/cap verification was unavailable. No performance sample accepted.",
+  "restoration_verified": true,
+  "source": "Full failed run retained privately under work/B3-bounded-timing/excluded/control-trial3-missing-csv"
+}

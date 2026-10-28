@@ -62,6 +62,7 @@ RWStructuredBuffer<RTXDI_PackedGIReservoir> u_GIReservoirs  : register(u14 VK_DE
 #if defined(RTXPT_RESTIR_PT_BRIDGE)
 RWStructuredBuffer<RTXDI_PackedPTReservoir> u_PTReservoirs : register(u17 VK_DESCRIPTOR_SET(2));
 RWByteAddressBuffer u_PTSpatialNeighbors : register(u18 VK_DESCRIPTOR_SET(2));
+RWStructuredBuffer<uint> u_PTDiagnosticCounters : register(u19 VK_DESCRIPTOR_SET(2));
 #define RTXDI_PT_RESERVOIR_BUFFER u_PTReservoirs
 #endif
 

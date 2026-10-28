@@ -1,7 +1,17 @@
 <!-- basix-research:start -->
 # Basix Pathtracing · RTXPT Next
 
-**Initial baseline: RTXPT1.9 and its original scenes. B1 implements the RTXDI3.1 runtime/API migration on the existing DI/GI path; B2+ are future isolated optimizations.** [First B1 comparison](Docs/Research/B1_RESULTS.md). [Research and roadmap](Docs/Research/README.md) · [Offline study](Docs/Research/index.html) · [Version comparisons](Benchmarks/README.md) · [Image quality metrics](Docs/Research/QUALITY_METRICS.md).
+**Initial baseline: RTXPT1.9 and its original scenes. B1 migrates existing DI/GI to RTXDI3.1; B2 adds experimental ReSTIR PT; B3 isolates PT++ activations.** [First B1 comparison](Docs/Research/B1_RESULTS.md) · [B2 checkpoint](Docs/Research/B2_RESULTS.md) · [B3 development](Docs/Research/B3_IMPLEMENTATION.md). [Research and roadmap](Docs/Research/README.md) · [Offline study](Docs/Research/index.html) · [Version comparisons](Benchmarks/README.md) · [Image quality metrics](Docs/Research/QUALITY_METRICS.md).
+
+| Variant | Short algorithm overview |
+|---|---|
+| B0 / RTXPT 1.9 | Native PT + optional ReSTIR DI/GI, RTXDI 3.0 |
+| B1 | Same paths, migrated to RTXDI 3.1 |
+| B2 | ReSTIR DI + ReSTIR PT; GI remains an alternative indirect estimator |
+| B3 | B2 partition + footprint and initial-only roulette |
+| B4 | Remaining PT++ integration, planned after B3 |
+
+Every result states its actual active modes. [The full overview and mandatory scene matrix](Docs/Research/ALGORITHM_VARIANTS.md) distinguish native controls from DI/GI/PT captures. Original Convergence and Kitchen currently remain unsupported in B2/B3 because transmission and their binding 14/2 bounce limits have not passed integration gates. No opaque substitute is counted as an original-scene result.
 
 Baseline ref: `rtxpt-1.9-baseline` (`303b408`). B1 source is `7010bb4`; its active `External/Rtxdi` runtime is `f12037f` (3.1). `External/RTXDI-SDK` remains a separate source reference. B1 does not introduce ReSTIR PT integration. Original upstream documentation follows.
 <!-- basix-research:end -->

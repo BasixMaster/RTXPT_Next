@@ -2,15 +2,17 @@
 from pathlib import Path
 import argparse,subprocess,time,json,hashlib,os,datetime,csv
 from capture_identity import transport_settings
-from sampling_contract import seed_value, verify as verify_sampling, verify_di, verify_pt_replay, verify_pt_history, verify_pt_spatial
+from sampling_contract import roulette_value, seed_value, verify as verify_sampling, verify_di, verify_pt_replay, verify_pt_history, verify_pt_spatial, verify_ptpp, verify_capture_history
 from artifact_manifest import validate as validate_artifacts
 
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
-def scene_argument(value):
+def scene_argument(value, assets_dir=None):
     path = Path(value)
     if path.is_file(): return str(path.resolve())
     if path.is_absolute() or '/' in value or '\\' in value:
         raise ValueError('Scene path does not exist; refusing renderer fallback to a different scene')
+    if assets_dir is not None and not (Path(assets_dir)/value).is_file():
+        raise ValueError('Named scene is absent from the pinned Assets directory; refusing fallback')
     return value  # Renderer-owned asset name, resolved by its asset search path.
 
 def main():
@@ -26,8 +28,11 @@ def main():
     ap.add_argument('--pt-mode',type=int,choices=[0,1,2,3],default=3)
     ap.add_argument('--app-uncapped',action='store_true',help='Quality captures: disable app caps only; external cap audit belongs to timed runs.')
     ap.add_argument('--capture-native-radiance',action='store_true')
+    ap.add_argument('--history-frames',type=int,choices=range(1,4097),metavar='1..4096',help='Explicit simple-capture history warmup, not accumulated spp')
     ap.add_argument('--di-light-mode',type=int,choices=[0,1,2])
     ap.add_argument('--di-brdf-samples',type=int,choices=range(33))
+    ap.add_argument('--pt-reconnection-mode',type=int,choices=[0,1])
+    ap.add_argument('--pt-roulette-probability',type=roulette_value)
     ap.add_argument('--pt-fixed-spatial-samples',type=int,choices=range(1,33))
     ap.add_argument('--capture-pt-reservoirs',action='store_true')
     ap.add_argument('--pt-disable-age-rejection-validation',action='store_true')
@@ -42,11 +47,15 @@ def main():
     ap.add_argument('--artifact-manifest',type=Path,help='Optional strict frozen source/executable/shader identity; compile caches before freezing.')
     a=ap.parse_args();exe=a.exe.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
     if any(out.iterdir()):raise SystemExit('Output directory must be new/empty; never append distinct runs.')
-    a.scene=scene_argument(a.scene)
+    a.scene=scene_argument(a.scene,exe.parent.parent/'Assets')
+    if a.history_frames is not None and not a.simple:raise SystemExit('--history-frames requires --simple')
     args=[str(exe),'--scene',a.scene,'--width',str(a.width),'--height',str(a.height),'--overrideRadianceCacheMode','0','--useNEE','1','--NEEType',str(a.nee_type),'--useReSTIRDI',str(int(a.mode in ['digi','dipt','di'])),'--useReSTIRGI',str(int(a.mode=='digi')),'--standaloneDenoiser','0','--overrideAutoexposureOff','--overrideExposureOffset',str(a.exposure),'--disablePostProcessFilters','--realtimeAA','0','--disableFireflyFilters','--overrideSubSamplingMode','0','--nonInteractive','--capturePath',str(out/'frame.png'),'--captureSuffix',a.label,'--perfLog',str(out/'partial-perf.csv')]
     if a.capture_native_radiance:
         if not a.linear_hdr:raise SystemExit('Native radiance diagnostics require --linear-hdr')
         args+=['--captureNativeRadiance','true']
+    if a.pt_reconnection_mode is not None:args+=['--ptReconnectionMode',str(a.pt_reconnection_mode)]
+    if a.history_frames is not None:args+=['--captureWarmupFrames',str(a.history_frames)]
+    if a.pt_roulette_probability is not None:args+=['--ptRouletteProbability',str(a.pt_roulette_probability)]
     if a.pt_fixed_spatial_samples is not None:args+=['--ptFixedSpatialSamples',str(a.pt_fixed_spatial_samples)]
     if a.capture_pt_reservoirs:args+=['--capturePTReservoirs','true']
     if a.pt_disable_age_rejection_validation:args+=['--ptDisableAgeRejectionValidation','true']
@@ -116,6 +125,10 @@ def main():
             except ValueError as exc:manifest['measurement_status']='failed_pt_history_contract';manifest['pt_history_failure']=str(exc)
             try:manifest['effective_pt_spatial']=verify_pt_spatial((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_fixed_spatial_samples)
             except ValueError as exc:manifest['measurement_status']='failed_pt_spatial_contract';manifest['pt_spatial_failure']=str(exc)
+            try:manifest['effective_ptpp']=verify_ptpp((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_reconnection_mode,a.pt_roulette_probability,a.capture_pt_reservoirs)
+            except ValueError as exc:manifest['measurement_status']='failed_ptpp_contract';manifest['ptpp_failure']=str(exc)
+            try:manifest['effective_capture_history']=verify_capture_history((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.history_frames)
+            except ValueError as exc:manifest['measurement_status']='failed_capture_history';manifest['capture_history_failure']=str(exc)
             manifest['resource_scope']='nvidia-smi values cover the whole device including other applications; not renderer-exclusive allocation.'
             manifest['resource_samples']=samples
             if a.artifact_manifest:

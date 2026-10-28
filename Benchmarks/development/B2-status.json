@@ -6,26 +6,26 @@
     "B0": "Exact RTXPT1.9 source and original scenes",
     "B1": "RTXDI3.1 API migration for DI/GI",
     "B2": "ReSTIR PT renderer integration; not promoted",
-    "B3": "PT++ activations and missing paper mechanisms; planned"
+    "B3": "PT++ activations and missing paper mechanisms; in progress"
   },
   "milestones": [
     {
       "id": "B2-host",
       "status": "partial",
       "acceptance": "PT resources, bindings, initial/temporal/spatial/final dispatch, history/reset handling and latest ABI build pass",
-      "evidence": "First host Release build and opaque GPU smoke passed; new native auxiliary-state export requires renewed validation."
+      "evidence": "Corrected static opaque B2 build de9fe651 executes initial/temporal/spatial/final passes; broader material/reset/reconstruction validation remains pending."
     },
     {
       "id": "B2-shaders",
       "status": "partial",
       "acceptance": "Native material/BSDF/lighting/replay contracts compile and pass numerical and GPU checks",
-      "evidence": "Four direct shaders and eight precompiled OMM variants compile; first component-mixture/delta-PDF mismatch corrected. Earlier pilot images excluded from quality conclusions."
+      "evidence": "Corrected opaque bridge and actual-lobe reconnection verified with raw HDR and reservoir census; original transmission and binding diffuse transport remain outside prototype gates."
     },
     {
       "id": "B2-partition",
-      "status": "in_progress",
+      "status": "partial",
       "acceptance": "Direct/indirect, native/PT, delta/non-delta and fallback contributions counted exactly once",
-      "evidence": "Ownership bit and raw merge checks remain; direct-only cap1 probe exposes native-vs-DI brightness discrepancy before PT indirect. Native/PT light-vertex bounce-budget mismatch also identified. Neither is resolved by enabled-pass smoke tests."
+      "evidence": "Static opaque direct cap1 and indirect cap3 mean-lighting checks passed after light-list, MIS ownership and raw-merge repairs. Broader materials, dynamic scenes and interactive approximation controls remain unvalidated."
     },
     {
       "id": "B2-medium",
@@ -98,6 +98,13 @@
       "from": "in_progress",
       "to": "partial",
       "reason": "Corrected ownership, light-list/budget/validity and actual-lobe reconnection contracts; static quality and cap-verified timing now measured. Full B2 promotion gates remain pending."
+    },
+    {
+      "date": "2026-10-28",
+      "id": "B3-start-preserve-B2",
+      "from": "planned",
+      "to": "in_progress",
+      "reason": "User requested B3. B2 checkpoint de9fe651 and its evidence preserved; original Convergence/Kitchen14/2 unsupported coverage now explicit."
     }
   ],
   "limits": [

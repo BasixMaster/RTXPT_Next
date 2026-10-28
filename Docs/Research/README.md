@@ -2,18 +2,23 @@
 
 Final accepted basis, checked2026-10-28: **RTXPT1.9 renderer and its original scene assets.** The repository is named RTXPT_Next. B0 retains its original RTXDI3.0 runtime. B1 adopts runtime3.1 for the existing DI/GI passes. `External/RTXDI-SDK` remains reference-only.
 
-| Version | Meaning | Current status |
+| Version | Short algorithm overview | Current status |
 |---|---|---|
-| RTXPT1.9 baseline (B0 alias) | Exact upstream renderer303b408, runtimea14e079, Assets a56be4e | Built in Release; initial paired GPU and display-quality comparison |
-| B1 | RTXDI3.1 runtime/API migration for existing DI/GI | Implemented at `7010bb4`; initial comparison in [B1 results](B1_RESULTS.md) |
-| B2 | Integrate ReSTIR PT with selectable DI/GI modes and explicit lighting ownership | Static opaque quality and uncapped timing checkpoint; broader validation pending |
-| B3 | PT++ activation and missing mechanisms, measured against B2 | Planned; not implemented |
+| RTXPT1.9 baseline (B0 alias) | RTXPT native PT + RTXDI 3.0 DI/GI | Exact upstream renderer303b408, runtimea14e079 and Assets a56be4e; preserved baseline |
+| B1 | RTXPT native PT + RTXDI 3.1 DI/GI | Migration implemented at `7010bb4`; [B1 results](B1_RESULTS.md) |
+| B2 | RTXPT + ReSTIR DI + ReSTIR PT; GI is an alternative indirect mode | Static opaque checkpoint at `de9fe651`; broader validation pending, not promoted |
+| B3 | B2 DI + ReSTIR PT + footprint/initial-only roulette | Scoped activation checkpoint; wider scene validation remains pending |
+| B4 | Remaining PT++ estimator and scheduling techniques | Starts after B3 is preserved; individual oracles and ablations before a combined preset |
 
-The initial baseline/research stage is retained; the subsequent authorized B1 stage implements a limited runtime/API migration and first local comparisons. PT integration and paper algorithms remain future work. The branch `baseline/rtxpt-1.9` and tag `rtxpt-1.9-baseline` point to the exact upstream baseline, distinct from documentation commits on main. Do not benchmark a moving main branch as an unnamed baseline.
+These labels describe available paths; every result also states the actual active configuration. Historical Convergence/Kitchen B0/B1 tests used DI + GI. The current opaque-room controls use B0/B1 native PT with DI/GI off versus B2 DI + ReSTIR PT, GI off. Read the [algorithm overview and extended scene policy](ALGORITHM_VARIANTS.md) before comparing them. The branch `baseline/rtxpt-1.9` and tag `rtxpt-1.9-baseline` point to the exact upstream baseline, distinct from documentation commits on main. Do not benchmark a moving main branch as an unnamed baseline.
 
 ## Start here
 
+- [B0–B4 algorithm overview and mandatory scene coverage](ALGORITHM_VARIANTS.md)
 - [Corrected B2 comparison and limitations](B2_RESULTS.md)
+- [B3 measured activation results](B3_RESULTS.md)
+- [B3 PT++ activation and ablation status](B3_IMPLEMENTATION.md)
+- [B4 remaining PT++ implementation gates](B4_IMPLEMENTATION.md)
 - [NVIDIA engineering whitepapers and next profiling steps](NVIDIA_WHITEPAPERS.md)
 - [First B1 results and limitations](B1_RESULTS.md)
 - [B2 integration and B3 PT++ implementation status](B2_IMPLEMENTATION.md)
@@ -33,4 +38,5 @@ RTXDI is sampling machinery; RTXPT is a renderer consuming it. RTXPT1.9 uses RTX
 
 ## Documentation changes
 
+- 2026-10-28: Added short algorithm labels for each variant and required original Convergence/Kitchen plus controlled-scene comparisons; B3 development started without a performance claim.
 - 2026-10-28: Shared image preview opens pictures in place, supports keyboard activation, and closes with Escape or Close while restoring focus. The central HTML template and Documenter guidance share the same behavior.

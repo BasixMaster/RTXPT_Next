@@ -54,6 +54,7 @@ struct RtxdiPTUserSettings
     RTXDI_PTHybridShiftPerFrameParameters hybridShiftParams = rtxdi::GetDefaultReSTIRPTHybridShiftParams();
     RTXDI_PTDecorrelationParameters decorrelationParams = rtxdi::GetDefaultReSTIRPTDecorrelationParams(false);
     RTXDI_BoilingFilterParameters boilingFilterParams = rtxdi::GetDefaultReSTIRPTBoilingFilterParams(false);
+    float russianRouletteProbability = 0.0f; // 0 disables; initial generation only.
     RtxdiPTUserSettings();
 };
 

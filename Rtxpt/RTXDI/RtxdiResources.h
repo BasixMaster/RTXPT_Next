@@ -42,6 +42,7 @@ public:
     nvrhi::BufferHandle GIReservoirBuffer;
     nvrhi::BufferHandle PTReservoirBuffer;
     nvrhi::BufferHandle PTSpatialNeighborSelectionBuffer;
+    nvrhi::BufferHandle PTDiagnosticCounters;
     nvrhi::TextureHandle LocalLightPdfTexture;
 
     RtxdiResources(

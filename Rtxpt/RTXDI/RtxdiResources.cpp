@@ -169,6 +169,15 @@ RtxdiResources::RtxdiResources(
     ptNeighborDesc.debugName = "PTSpatialNeighborSelectionBuffer";
     PTSpatialNeighborSelectionBuffer = device->createBuffer(ptNeighborDesc);
 
+    nvrhi::BufferDesc ptDiagnosticDesc;
+    ptDiagnosticDesc.byteSize = 4 * sizeof(uint32_t);
+    ptDiagnosticDesc.structStride = sizeof(uint32_t);
+    ptDiagnosticDesc.initialState = nvrhi::ResourceStates::UnorderedAccess;
+    ptDiagnosticDesc.keepInitialState = true;
+    ptDiagnosticDesc.canHaveUAVs = true;
+    ptDiagnosticDesc.debugName = "PTDiagnosticCounters";
+    PTDiagnosticCounters = device->createBuffer(ptDiagnosticDesc);
+
     nvrhi::TextureDesc localLightPdfDesc;
     rtxdi::ComputePdfTextureSize(maxLocalLights, localLightPdfDesc.width, localLightPdfDesc.height, localLightPdfDesc.mipLevels);
     assert(localLightPdfDesc.width * localLightPdfDesc.height >= maxLocalLights);

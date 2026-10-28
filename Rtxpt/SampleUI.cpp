@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <cmath>
 /*
 * Copyright (c) 2025, NVIDIA CORPORATION.  All rights reserved.
 *
@@ -195,6 +196,16 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
         m_ui.RTXDI.restirDI.initialSamplingParams.localLightSamplingMode = static_cast<ReSTIRDI_LocalLightSamplingMode>(cmdLine.OverrideDILightMode);
     if (cmdLine.OverrideDIBrdfSamples >= 0)
         m_ui.RTXDI.restirDI.initialSamplingParams.numBrdfSamples = cmdLine.OverrideDIBrdfSamples;
+    if (cmdLine.PTReconnectionMode < -1 || cmdLine.PTReconnectionMode > 1 ||
+        !std::isfinite(cmdLine.PTRouletteProbability) || cmdLine.PTRouletteProbability < 0.0f || cmdLine.PTRouletteProbability > 1.0f ||
+        (cmdLine.PTRouletteProbability > 0.0f && cmdLine.PTRouletteProbability < 0.1f))
+        throw std::runtime_error("PT reconnectibility must be 0 fixed/1 footprint; roulette must be 0 off or finite in [0.1,1]");
+    if (cmdLine.PTReconnectionMode >= 0)
+        m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode = cmdLine.PTReconnectionMode == 0 ?
+            RTXDI_PTReconnectionMode::FixedThreshold : RTXDI_PTReconnectionMode::Footprint;
+    m_ui.RTXDI.restirPT.russianRouletteProbability = cmdLine.PTRouletteProbability;
+    if (cmdLine.PTReplayOnlyValidation && cmdLine.PTReconnectionMode == 1)
+        throw std::runtime_error("Replay-only diagnostic requires fixed-threshold reconnection");
     if (cmdLine.PTFixedSpatialSamples < -1 || cmdLine.PTFixedSpatialSamples == 0 || cmdLine.PTFixedSpatialSamples > 32)
         throw std::runtime_error("Fixed PT neighbor count must be 1..32");
     if (cmdLine.PTFixedSpatialSamples > 0)

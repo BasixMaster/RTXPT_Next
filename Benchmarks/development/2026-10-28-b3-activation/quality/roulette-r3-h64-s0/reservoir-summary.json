@@ -1,0 +1,170 @@
+{
+  "counters": {
+    "scope": "last captured frame, diagnostics only",
+    "roulette_tests": 166511,
+    "roulette_terminated": 33381,
+    "roulette_survived": 133130,
+    "replay_roulette_tests": 0
+  },
+  "metadata": {
+    "schema_version": 1,
+    "packed_stride_bytes": 64,
+    "block_size": 16,
+    "width": 640,
+    "height": 360,
+    "frame_index": 65,
+    "history_valid": true,
+    "array_pitch": 235520,
+    "block_row_pitch": 10240,
+    "initial_preserved_index": 2,
+    "temporal_input_index": 1,
+    "temporal_output_index": 0,
+    "final_index": 1
+  },
+  "statistics": {
+    "initial_preserved_index": {
+      "slot": 2,
+      "pixels": 230400,
+      "valid": 134640,
+      "m_greater_than_one": 0,
+      "positive_age_valid": 0,
+      "midpath_reconnection_valid": 88274,
+      "terminal_reconnection_valid": 46366,
+      "age_histogram_valid": {
+        "0": 134640
+      },
+      "rc_length_histogram_valid": {
+        "0": 46366,
+        "2": 88274
+      },
+      "path_length_histogram_valid": {
+        "0": 46366,
+        "3": 61125,
+        "4": 27149
+      },
+      "max_age_valid": 0,
+      "mean_m_valid": 1.0,
+      "valid_with_positive_weight": 88274,
+      "nonfinite_m": 0,
+      "nonfinite_weight_valid": 0,
+      "nonfinite_target_valid": 0
+    },
+    "temporal_output_index": {
+      "slot": 0,
+      "pixels": 230400,
+      "valid": 134640,
+      "m_greater_than_one": 134640,
+      "positive_age_valid": 121194,
+      "midpath_reconnection_valid": 134603,
+      "terminal_reconnection_valid": 37,
+      "age_histogram_valid": {
+        "0": 13446,
+        "1": 12233,
+        "2": 10991,
+        "3": 10354,
+        "4": 8991,
+        "5": 8696,
+        "6": 7668,
+        "7": 7074,
+        "8": 5959,
+        "9": 5291,
+        "10": 4831,
+        "11": 4479,
+        "12": 3921,
+        "13": 3290,
+        "14": 3055,
+        "15": 2719,
+        "16": 2376,
+        "17": 2223,
+        "18": 1821,
+        "19": 1749,
+        "20": 1463,
+        "21": 1447,
+        "22": 1268,
+        "23": 1119,
+        "24": 916,
+        "25": 808,
+        "26": 828,
+        "27": 590,
+        "28": 602,
+        "29": 593,
+        "30": 404,
+        "31": 3435
+      },
+      "rc_length_histogram_valid": {
+        "0": 37,
+        "2": 134603
+      },
+      "path_length_histogram_valid": {
+        "0": 37,
+        "3": 93385,
+        "4": 41218
+      },
+      "max_age_valid": 31,
+      "mean_m_valid": 9.0,
+      "valid_with_positive_weight": 134603,
+      "nonfinite_m": 0,
+      "nonfinite_weight_valid": 0,
+      "nonfinite_target_valid": 0
+    },
+    "final_index": {
+      "slot": 1,
+      "pixels": 230400,
+      "valid": 134640,
+      "m_greater_than_one": 134640,
+      "positive_age_valid": 121013,
+      "midpath_reconnection_valid": 134605,
+      "terminal_reconnection_valid": 35,
+      "age_histogram_valid": {
+        "0": 13627,
+        "1": 12330,
+        "2": 11066,
+        "3": 10510,
+        "4": 8981,
+        "5": 8742,
+        "6": 7734,
+        "7": 6991,
+        "8": 5948,
+        "9": 5234,
+        "10": 4701,
+        "11": 4458,
+        "12": 3883,
+        "13": 3267,
+        "14": 3089,
+        "15": 2707,
+        "16": 2393,
+        "17": 2164,
+        "18": 1795,
+        "19": 1712,
+        "20": 1417,
+        "21": 1445,
+        "22": 1266,
+        "23": 1119,
+        "24": 866,
+        "25": 805,
+        "26": 805,
+        "27": 592,
+        "28": 575,
+        "29": 603,
+        "30": 418,
+        "31": 3397
+      },
+      "rc_length_histogram_valid": {
+        "0": 35,
+        "2": 134605
+      },
+      "path_length_histogram_valid": {
+        "0": 35,
+        "3": 93600,
+        "4": 41005
+      },
+      "max_age_valid": 31,
+      "mean_m_valid": 14.959291443850267,
+      "valid_with_positive_weight": 134605,
+      "nonfinite_m": 0,
+      "nonfinite_weight_valid": 0,
+      "nonfinite_target_valid": 0
+    }
+  },
+  "binary_sha256": "7cffb879d5109171cdf6eddcf972d34aeb888571d86588266d7fa94ccf817c10"
+}

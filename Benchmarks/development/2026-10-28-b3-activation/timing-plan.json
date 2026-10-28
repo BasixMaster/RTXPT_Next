@@ -1,0 +1,44 @@
+{
+  "variants": {
+    "control": [
+      0,
+      0
+    ],
+    "footprint": [
+      1,
+      0
+    ],
+    "roulette": [
+      0,
+      0.8
+    ],
+    "combined": [
+      1,
+      0.8
+    ]
+  },
+  "trial_orders": [
+    [
+      "control",
+      "footprint",
+      "roulette",
+      "combined"
+    ],
+    [
+      "combined",
+      "roulette",
+      "footprint",
+      "control"
+    ],
+    [
+      "footprint",
+      "control",
+      "combined",
+      "roulette"
+    ]
+  ],
+  "warmup_seconds": 45,
+  "measurement_seconds": 15,
+  "selection": "last600 target rows, drop16 tail",
+  "scope": "Same B3 executable, B2 policy control vs isolated activations; exploratory three process repeats"
+}

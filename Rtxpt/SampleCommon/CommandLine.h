@@ -33,6 +33,7 @@ struct CommandLineOptions
     std::string capturePath = "";
     std::string captureSuffix = "";
     bool captureSimple = false;
+    int CaptureWarmupFrames = -1; // -1 keeps the existing 64-frame default.
     bool CaptureLinearHDR = false;
     bool CapturePTReservoirs = false;
     bool ReferencePixelCenter = false;
@@ -70,6 +71,8 @@ struct CommandLineOptions
     bool OverrideAutoexposureOff    = false;
     float OverrideExposureOffset    = FLT_MAX;
     
+    int PTReconnectionMode = -1; // -1 preserves B2; 0 fixed, 1 footprint.
+    float PTRouletteProbability = 0.0f;
     int PTFixedSpatialSamples      = -1;
     bool PTDisableAgeRejectionValidation = false;
     bool PTReplayOnlyValidation    = false;

@@ -78,3 +78,39 @@ def verify_pt_spatial(log, fixed=None):
     if fixed is not None and (ordinary != fixed or boosted != fixed):
         raise ValueError('PT neighbor count differs from requested fixed count')
     return dict(coverage='verified first-frame effective receipt', samples=ordinary, boost=boosted)
+
+
+def roulette_value(value):
+    import math
+    try: probability=float(value)
+    except ValueError as exc: raise argparse.ArgumentTypeError('Roulette probability must be finite in [0,1]') from exc
+    if not math.isfinite(probability) or not (probability == 0 or .1 <= probability <= 1):
+        raise argparse.ArgumentTypeError('Roulette probability must be 0 off or finite in [0.1,1]')
+    return probability
+
+
+def verify_capture_history(log, frames=None):
+    matches=re.findall(r'^CAPTURE_HISTORY warmupFrames=(\d+)\s*$',log,re.MULTILINE)
+    if not matches:
+        if frames is not None:raise ValueError('Requested history sweep lacks an effective capture receipt')
+        return dict(coverage='unavailable; legacy capture receipt absent')
+    if len(set(matches)) != 1:raise ValueError('Ambiguous capture history receipts')
+    actual=int(matches[0])
+    if frames is not None and actual != frames:raise ValueError('Capture history differs from request')
+    return dict(coverage='verified actual capture warmup',warmup_frames=actual,scope='history warmup; not accumulated spp')
+
+
+def verify_ptpp(log, mode=None, probability=None, diagnostics=False):
+    import math
+    matches=re.findall(r'^PTPP_CONTRACT reconnection=([01]) rouletteProbability=([^\s]+) diagnostics=([01])\s*$',log,re.MULTILINE)
+    if not matches:
+        if mode is not None or probability is not None:raise ValueError('Requested PT++ controls lack an effective renderer receipt')
+        return dict(coverage='unavailable; legacy renderer receipt absent')
+    if len(set(matches)) != 1:raise ValueError('Ambiguous PT++ receipts')
+    effective_mode, effective_q, enabled=matches[0];effective_q=float(effective_q)
+    if not math.isfinite(effective_q) or not (effective_q == 0 or .1 <= effective_q <= 1):raise ValueError('Invalid effective roulette probability')
+    if mode is not None and int(effective_mode) != mode:raise ValueError('PT reconnectibility differs from request')
+    if probability is not None and not math.isclose(effective_q,probability,rel_tol=1e-6,abs_tol=1e-8):raise ValueError('PT roulette differs from request')
+    if probability is not None and (probability == 0) != (effective_q == 0):raise ValueError('PT roulette enabled state differs from request')
+    if bool(int(enabled)) != diagnostics:raise ValueError('PT diagnostic mode differs from request')
+    return dict(coverage='verified first-frame effective receipt',reconnection_mode=int(effective_mode),roulette_probability=effective_q,diagnostics=bool(int(enabled)))

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "workstream_status": "planned",
+  "base": "Preserved B3 checkpoint after finalization",
+  "scope": "All remaining PT++ mechanisms with individual oracles/ablations",
+  "milestones": [
+    {
+      "id": "B4-paired-spatial",
+      "status": "pending",
+      "evidence": "Design/oracle preparation; no active renderer feature claimed"
+    },
+    {
+      "id": "B4-replay-compaction",
+      "status": "pending",
+      "evidence": "Design/oracle preparation; no active renderer feature claimed"
+    },
+    {
+      "id": "B4-unified-reservoir",
+      "status": "pending",
+      "evidence": "Design/oracle preparation; no active renderer feature claimed"
+    },
+    {
+      "id": "B4-vector-shading",
+      "status": "pending",
+      "evidence": "Design/oracle preparation; no active renderer feature claimed"
+    },
+    {
+      "id": "B4-duplication-history",
+      "status": "pending",
+      "evidence": "Design/oracle preparation; no active renderer feature claimed"
+    },
+    {
+      "id": "B4-dual-motion",
+      "status": "pending",
+      "evidence": "Design/oracle preparation; no active renderer feature claimed"
+    },
+    {
+      "id": "B4-micro-optimizations",
+      "status": "pending",
+      "evidence": "Design/oracle preparation; no active renderer feature claimed"
+    }
+  ],
+  "original_scene_coverage": "Convergence/Kitchen transmission and binding14/2 foundation gaps stillunsupported",
+  "transitions": [
+    {
+      "id": "B4-user-assignment",
+      "date": "2026-10-29",
+      "from": "unassigned",
+      "to": "planned",
+      "reason": "User requestedremainingPT++ afterB3, namedB4"
+    }
+  ]
+}

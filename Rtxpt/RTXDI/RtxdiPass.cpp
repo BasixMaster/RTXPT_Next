@@ -77,6 +77,7 @@ RtxdiPass::RtxdiPass(
         nvrhi::BindingLayoutItem::TypedBuffer_UAV(16),            //u_RisLightDataBuffer
         nvrhi::BindingLayoutItem::StructuredBuffer_UAV(17),       //u_PTReservoirs
         nvrhi::BindingLayoutItem::RawBuffer_UAV(18),              //u_PTSpatialNeighborSelection
+        nvrhi::BindingLayoutItem::StructuredBuffer_UAV(19),       //u_PTDiagnosticCounters
 
 		nvrhi::BindingLayoutItem::VolatileConstantBuffer(5),	//g_RtxdiBridgeConst
 
@@ -228,6 +229,7 @@ void RtxdiPass::CreateBindingSet(const RenderTargets& renderTargets)
             nvrhi::BindingSetItem::TypedBuffer_UAV(16, m_rtxdiResources->RisLightDataBuffer),
             nvrhi::BindingSetItem::StructuredBuffer_UAV(17, m_rtxdiResources->PTReservoirBuffer),
             nvrhi::BindingSetItem::RawBuffer_UAV(18, m_rtxdiResources->PTSpatialNeighborSelectionBuffer),
+            nvrhi::BindingSetItem::StructuredBuffer_UAV(19, m_rtxdiResources->PTDiagnosticCounters),
 			
 			nvrhi::BindingSetItem::ConstantBuffer(5, m_rtxdiConstantBuffer),
 
@@ -283,7 +285,12 @@ void RtxdiPass::PrepareResources(
          oldPT.initialSamplingParams.maxRcVertexLength != newPT.initialSamplingParams.maxRcVertexLength ||
          oldPT.reconnectionParams.reconnectionMode != newPT.reconnectionParams.reconnectionMode ||
          oldPT.reconnectionParams.roughnessThreshold != newPT.reconnectionParams.roughnessThreshold ||
-         oldPT.reconnectionParams.distanceThreshold != newPT.reconnectionParams.distanceThreshold);
+          oldPT.reconnectionParams.distanceThreshold != newPT.reconnectionParams.distanceThreshold ||
+          oldPT.reconnectionParams.minConnectionFootprint != newPT.reconnectionParams.minConnectionFootprint ||
+          oldPT.reconnectionParams.minConnectionFootprintSigma != newPT.reconnectionParams.minConnectionFootprintSigma ||
+          oldPT.reconnectionParams.minPdfRoughness != newPT.reconnectionParams.minPdfRoughness ||
+          oldPT.reconnectionParams.minPdfRoughnessSigma != newPT.reconnectionParams.minPdfRoughnessSigma ||
+          oldPT.russianRouletteProbability != newPT.russianRouletteProbability);
     if (bridgeParams.capturePTDiagnostics && bridgeParams.usingReSTIRPT)
         std::printf("PT_HISTORY frame=%u previous=%u requestedReset=%d contractChanged=%d priorHistory=%d\n",
             bridgeParams.frameIndex, m_BridgeParameters.frameIndex, int(bridgeParams.resetReSTIRPT),
@@ -392,6 +399,11 @@ void RtxdiPass::BeginFrame(
         m_PTNeedsClear = false;
     }
 
+    if (m_BridgeParameters.usingReSTIRPT && m_BridgeParameters.capturePTDiagnostics)
+    {
+        commandList->clearBufferUInt(m_rtxdiResources->PTDiagnosticCounters, 0);
+        nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTDiagnosticCounters);
+    }
     // Light preparation is needed for DI/ReGIR and PT next-event estimation.
 	if (m_BridgeParameters.usingLightSampling)
 	{
@@ -553,6 +565,8 @@ void RtxdiPass::FillSharedConstants(struct RtxdiBridgeConstants& bridgeConstants
     bridgeConstants.ptPreviousCameraPosition = m_PTCameraHistoryValid ? m_PreviousPTCameraPosition : m_BridgeParameters.cameraPosition;
     bridgeConstants.ptPreviousPreviousCameraPosition = m_PTCameraHistoryValid ? m_PreviousPreviousPTCameraPosition : m_BridgeParameters.cameraPosition;
     bridgeConstants.ptHistoryValid = m_PTCameraHistoryValid ? 1 : 0;
+    bridgeConstants.ptRouletteProbability = m_BridgeParameters.userSettings.restirPT.russianRouletteProbability;
+    bridgeConstants.ptDiagnostics = m_BridgeParameters.capturePTDiagnostics ? 1u : 0u;
 	bridgeConstants.frameDim = m_BridgeParameters.frameDims;
 	bridgeConstants.rayEpsilon = m_BridgeParameters.userSettings.rayEpsilon;
 	bridgeConstants.localLightPdfTextureSize = uint2(m_rtxdiResources->LocalLightPdfTexture->getDesc().width, m_rtxdiResources->LocalLightPdfTexture->getDesc().height);
@@ -820,4 +834,24 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
          << ",\n  \"temporal_output_index\": " << indices.temporalResamplingOutputBufferIndex
          << ",\n  \"final_index\": " << indices.finalShadingInputBufferIndex << "\n}\n";
     if (!meta) throw std::runtime_error("PT reservoir metadata write failed");
+    nvrhi::BufferDesc statsDesc;
+    statsDesc.byteSize = 4 * sizeof(uint32_t);
+    statsDesc.cpuAccess = nvrhi::CpuAccessMode::Read;
+    statsDesc.debugName = "PTCounterReadback";
+    auto stats = m_device->createBuffer(statsDesc);
+    if (!stats) throw std::runtime_error("PT counter staging allocation failed");
+    auto statsCopy = m_device->createCommandList();
+    statsCopy->open();
+    statsCopy->copyBuffer(stats, 0, m_rtxdiResources->PTDiagnosticCounters, 0, statsDesc.byteSize);
+    statsCopy->close();
+    m_device->executeCommandList(statsCopy);
+    m_device->waitForIdle();
+    const auto* counters = static_cast<const uint32_t*>(m_device->mapBuffer(stats, nvrhi::CpuAccessMode::Read));
+    if (!counters) throw std::runtime_error("PT counter map failed");
+    std::ofstream statFile(path + ".stats.json");
+    statFile << "{\n  \"scope\": \"last captured frame, diagnostics only\",\n  \"roulette_tests\": " << counters[0]
+        << ",\n  \"roulette_terminated\": " << counters[1] << ",\n  \"roulette_survived\": " << counters[2]
+        << ",\n  \"replay_roulette_tests\": " << counters[3] << "\n}\n";
+    m_device->unmapBuffer(stats);
+    if (!statFile) throw std::runtime_error("PT counter metadata write failed");
 }

@@ -2,7 +2,7 @@
 
 ## Deliverable and version policy
 
-B0 is preserved as the unchanged source/scene baseline. B1 runtime/API migration is implemented and built; first comparisons are documented in [B1 results](B1_RESULTS.md). B2 integration is in progress; B3 PT++ and the later research features remain planned. Every promoted B-version gets an immutable commit/tag, complete submodule manifest, executable/shader hashes, settings and result record. Keep RTXPT1.9 as a permanent comparator. Assign each later version only after its scoped feature and checks are complete; never relabel a changed build under an old result ID.
+B0 is preserved as the unchanged source/scene baseline. B1 runtime/API migration is implemented and built; first comparisons are documented in [B1 results](B1_RESULTS.md). B2 integration remains in progress and unpromoted. B3 PT++ development has started on `b3/ptpp-activation`; later research features remain planned. Every promoted B-version gets an immutable commit/tag, complete submodule manifest, executable/shader hashes, settings and result record. Keep RTXPT1.9 as a permanent comparator. Assign each later version only after its scoped feature and checks are complete; never relabel a changed build under an old result ID. The [variant overview](ALGORITHM_VARIANTS.md) provides short algorithm labels and distinguishes capabilities from measured configurations.
 
 ## Baseline milestone
 
@@ -29,13 +29,17 @@ The new pipeline reuses RTXPT's scene/material/light semantics and history/reset
 
 Acceptance: real shaders compile; initial, temporal and spatial PT paths execute; camera cuts/resize/mode switches reset history; reference/finite-value checks pass; unsupported reconstruction/cache/material modes fail visibly or use a documented validated fallback. No source-presence or stub is a completed integration. Track current work in [B2/B3 implementation status](B2_IMPLEMENTATION.md). An initial build may take hours; complete integration and validation are a multi-day effort with material/replay complexity uncertain.
 
-## B3: PT++ activation and missing mechanisms
+## B3: footprint and initial-only roulette checkpoint
 
-B3 separately activates validated footprint/history/roulette controls inherited from the runtime and implements the audited missing mechanisms: reciprocal spatial pairing, unified primary direct/indirect reservoirs, explicit replay compaction, all-candidate vector-weight shading and the paper's dual-motion-vector disocclusion handling. Preserve one toggle/ablation per mechanism before a combined preset. Do not assign a paper-equivalence label to unverified micro-optimizations.
+B3 activates and independently measures the inherited footprint/inverse-footprint reconnection policy and initial-generation-only Russian roulette. Preserve B2's fixed-threshold/no-roulette policy as a same-executable control, while retaining the immutable B2 artifacts separately. Keep original-scene coverage gaps explicit. See [B3 implementation](B3_IMPLEMENTATION.md).
 
-CGNS is a separate paper, even though supplied by3.1. Keep CGNS and reciprocal pairing as alternative neighbor policies unless a compatible joint selection/weighting derivation is validated. Duplication-based history reduction is deliberately biased and remains a distinct preset from correctness/reference controls. Measure complete work, quality, temporal behavior and memory against B2, B1 and B0. No2–3× speedup over RTXPT is assumed from the paper.
+## B4: remaining PT++ mechanisms
 
-## B4 and later: research-backed candidates
+After B3 is finished and preserved, continue with reciprocal paired reuse, explicit replay compaction, unified direct/indirect PT reservoirs, vector-weight shading, duplication-based confidence reduction and dual-motion disocclusion recovery. Audit remaining described micro-optimizations without counting inherited packing or forced NEE twice. Each mechanism needs an independent oracle and an isolated GPU ablation before a combined preset. See [B4 implementation gates](B4_IMPLEMENTATION.md).
+
+CGNS remains a separate paper and neighbor policy. Duplication reduction is deliberately biased and stays separate from strict reference settings. Preserve B0–B3 and all mandatory original-scene comparison rows; no paper speedup is assumed.
+
+## B5 and later: research-backed candidates
 
 The order below is proposed and may change after measured results. Each should be isolated before stacking; assign B3/B4/etc only when the actual scope is chosen.
 
@@ -54,6 +58,8 @@ Estimates are engineering planning ranges for one experienced graphics engineer,
 Multi-layer paper excludes DOF/motion blur and off-screen history; leave these modes disabled for that technique until separately derived. Geometry-LoD paper assumes one per-object LoD per frame. CGNS's sample-independent geometric heuristic cannot acquire reservoir/luminance-dependent inputs while retaining its original proof. Stochastic MIS+CGNS needs explicit joint selection probabilities/support. PG's changing proposal models must not invalidate replay. Full BDPT and radiance cache termination need an explicit contribution partition. These are estimator gates, not cosmetic settings.
 
 ## Comparison and promotion
+
+Every new variant requires visible rows for original Convergence, original Kitchen and the owned opaque room. Keep original assets, cameras and materials; show unsupported/missing cases with reasons rather than omitting them or silently changing scene semantics. Include a short actual algorithm label beside each variant result: native PT, DI + GI, or DI + ReSTIR PT with GI off. Include quality-versus-frames/samples/time curves as well as warmed-up quality and timing; absent convergence measurements remain pending. The historical B1 two-scene results have unverified cap coverage and must remain separate from newly cap-verified runs. See the [extended comparison contract](ALGORITHM_VARIANTS.md#extended-comparison-coverage).
 
 For RTXPT1.9/B1/B2+ report raw and reconstructed image-quality metrics, complete-frame GPU median/p95, VRAM, temporal behavior and reference error. Run equal-time and equal-quality sweeps; do not multiply paper speedups from unrelated hardware/baselines. Measure all added preprocessing, replay, fitting, barriers and reconstruction costs. B1 versus RTXPT1.9 establishes update cost/benefit; B2 versus B1 isolates optimization benefit; B2 versus original shows cumulative change. Keep unsuccessful/scene-specific variants and reasons inspectable.
 

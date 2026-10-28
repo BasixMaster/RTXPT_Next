@@ -1,0 +1,7 @@
+{
+  "status": "excluded_invalid_startup; exact replacement passed",
+  "case": "footprint-r3-h1-s11",
+  "renderer_exit_code": 3221226505,
+  "observation": "Coincident NVML failure, nvidia-smi STATUS_COMMITMENT_LIMIT0xc000012D and Windows dwm.exe/dwmcore.dll STATUS_FATAL_MEMORY_EXHAUSTION0xc00001AD. No renderer causation established.",
+  "recovery": "GPU healthy on read-only check; exact case replacement succeeded. Remaining launches spaced3seconds; no global settings or applications changed."
+}

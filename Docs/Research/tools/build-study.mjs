@@ -12,7 +12,7 @@ fs.mkdirSync(path.join(doc,'assets'),{recursive:true});
 for(const name of ['shell.css','shell.js','theme.css','theme.js','visual-math.css','identity.svg'])if(path.resolve(assets)!==path.resolve(doc,'assets'))fs.copyFileSync(path.join(assets,name),path.join(doc,'assets',name));
 const shellVersion=crypto.createHash('sha256').update(fs.readFileSync(path.join(doc,'assets/shell.js'))).update(fs.readFileSync(path.join(doc,'assets/shell.css'))).digest('hex').slice(0,12);
 const esc=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
-const chapters=['README','B1_RESULTS','B2_RESULTS','NVIDIA_WHITEPAPERS','B2_IMPLEMENTATION','ROADMAP','BENCHMARK_VERSIONS','QUALITY_METRICS','PTPP_AUDIT','ARCHITECTURE','RTXDI_VS_RTXPT','SCENE_COMPATIBILITY','FOCUSED_A','FOCUSED_B','PAPER_CATALOG','BREADTH','VALIDATION','SOURCES_AND_RIGHTS','RESEARCH_MAP'];
+const chapters=['README','ALGORITHM_VARIANTS','B1_RESULTS','B2_RESULTS','B3_RESULTS','B3_IMPLEMENTATION','B4_IMPLEMENTATION','NVIDIA_WHITEPAPERS','B2_IMPLEMENTATION','ROADMAP','BENCHMARK_VERSIONS','QUALITY_METRICS','PTPP_AUDIT','ARCHITECTURE','RTXDI_VS_RTXPT','SCENE_COMPATIBILITY','FOCUSED_A','FOCUSED_B','PAPER_CATALOG','BREADTH','VALIDATION','SOURCES_AND_RIGHTS','RESEARCH_MAP'];
 let nav='',body='';
 const mathDoc=fs.existsSync(path.join(doc,'math-markdown.json')) ? JSON.parse(fs.readFileSync(path.join(doc,'math-markdown.json'),'utf8')) : {};
 for(const [i,name] of chapters.entries()){

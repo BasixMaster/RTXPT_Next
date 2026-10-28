@@ -2293,6 +2293,9 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
             uint32_t(m_ui.RTXDI.restirPT.temporalResamplingParams.enableAgeBasedRejection),
             uint32_t(m_ui.RTXDI.restirPT.temporalResamplingParams.maxReservoirAge),
             uint32_t(m_ui.RTXDI.restirPT.temporalResamplingParams.maxHistoryLength));
+        std::printf("PTPP_CONTRACT reconnection=%u rouletteProbability=%.9g diagnostics=%d\n",
+            uint32_t(m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode),
+            double(m_ui.RTXDI.restirPT.russianRouletteProbability), int(m_cmdLine.CapturePTReservoirs));
         std::printf("PT_SPATIAL_CONTRACT samples=%u boost=%u\n",
             uint32_t(m_ui.RTXDI.restirPT.spatialResamplingParams.numSpatialSamples),
             uint32_t(m_ui.RTXDI.restirPT.spatialResamplingParams.numDisocclusionBoostSamples));

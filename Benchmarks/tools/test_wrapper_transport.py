@@ -25,6 +25,7 @@ class WrapperTransportTests(unittest.TestCase):
         scene=self.root/'Assets/static.scene.json'
         self.assertEqual(run_capture.scene_argument(str(scene)),str(scene.resolve()))
         self.assertEqual(run_capture.scene_argument('static.scene.json'),'static.scene.json')
+        with self.assertRaises(ValueError):run_capture.scene_argument('absent.scene.json',self.root/'Assets')
         for missing in [str(self.root/'missing.scene.json'),'missing/path.scene.json']:
             with self.assertRaises(ValueError):run_capture.scene_argument(missing)
 
@@ -43,4 +44,26 @@ class WrapperTransportTests(unittest.TestCase):
                 process=mock.Mock();process.pid=123;process.returncode=0;process.poll.return_value=0;return process
             with mock.patch.object(sys,'argv',self.command(run_capture,mode,out)),mock.patch.object(run_capture.subprocess,'Popen',side_effect=completed),contextlib.redirect_stdout(io.StringIO()):run_capture.main()
             self.assert_parity(out,launched,expected)
+
+    def test_capture_ptpp_and_history_use_effective_receipts(self):
+        out=self.root/'ptpp-capture';launched=[]
+        args=self.command(run_capture,'dipt',out)+['--pt-reconnection-mode','1','--pt-roulette-probability','0.8','--history-frames','8']
+        def completed(command,**kwargs):
+            launched.extend(command);Path(command[command.index('--capturePath')+1]).write_bytes(b'fixture')
+            kwargs['stdout'].write('PTPP_CONTRACT reconnection=1 rouletteProbability=0.800000012 diagnostics=0\nCAPTURE_HISTORY warmupFrames=8\n');kwargs['stdout'].flush()
+            process=mock.Mock();process.pid=123;process.returncode=0;process.poll.return_value=0;return process
+        with mock.patch.object(sys,'argv',args),mock.patch.object(run_capture.subprocess,'Popen',side_effect=completed),contextlib.redirect_stdout(io.StringIO()):run_capture.main()
+        for flag,value in [('--ptReconnectionMode','1'),('--ptRouletteProbability','0.8'),('--captureWarmupFrames','8')]:
+            self.assertEqual(launched[launched.index(flag)+1],value)
+        m=json.loads((out/'manifest.json').read_text());self.assertEqual(m['measurement_status'],'captured')
+        self.assertEqual(m['effective_capture_history']['warmup_frames'],8)
+
+    def test_timed_ptpp_arguments(self):
+        out=self.root/'ptpp-timed';launched=[]
+        def stop(command,**kwargs):launched.extend(command);raise StopBeforeLaunch('No GPU launched')
+        args=self.command(run_timed,'dipt',out)+['--pt-reconnection-mode','1','--pt-roulette-probability','0.8']
+        with mock.patch.object(sys,'argv',args),mock.patch.object(run_timed.subprocess,'Popen',side_effect=stop):
+            with self.assertRaises(StopBeforeLaunch):run_timed.main()
+        self.assertEqual(launched[launched.index('--ptReconnectionMode')+1],'1')
+        self.assertEqual(launched[launched.index('--ptRouletteProbability')+1],'0.8')
 if __name__=='__main__':unittest.main()

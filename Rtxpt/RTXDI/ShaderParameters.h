@@ -254,9 +254,9 @@ struct RtxdiBridgeConstants
     float3 ptCameraPosition;
     uint ptHistoryValid;
     float3 ptPreviousCameraPosition;
-    uint _ptPadding0;
+    float ptRouletteProbability;
     float3 ptPreviousPreviousCameraPosition;
-    uint _ptPadding1;
+    uint ptDiagnostics;
 };
 
 struct SecondarySurface

@@ -117,6 +117,24 @@
       "reason": "Development source is allowed to differ from B1; this checker proves neither B2 compilation nor runtime activation."
     },
     {
+      "name": "Mandatory version/algorithm labels and original-scene coverage rows",
+      "status": "passed",
+      "coverage": {
+        "variants": 5,
+        "scenes": 3,
+        "rows": 15,
+        "status": "coverage labels verified; not validation of renderer results"
+      }
+    },
+    {
+      "name": "B3 scoped pilot retained capture/trace identities",
+      "status": "passed",
+      "captures": 60,
+      "timed_processes": 12,
+      "hashed_files": 478,
+      "limits": "Retained evidence identity/completeness only; not a full PT++ or original-scene validation proof."
+    },
+    {
       "name": "Measured B0/B1 registry,20 accepted process runs and preserved CSV hashes; B2/B3 have no fabricated results",
       "status": "passed",
       "evidence": "Benchmarks/results/2026-10-28-b1"
@@ -149,6 +167,6 @@
     "Two static scenes on one GPU; five process pairs per scene.",
     "PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.",
     "Tonemapped display metrics; HDR/temporal/independent-seed validation remains future.",
-    "B1 migrates existing DI/GI APIs; B2 ReSTIR PT integration is in progress and B3 PT++ remains planned."
+    "B1 migrates existing DI/GI APIs; B2 ReSTIR PT integration is in progress and B3 PT++ activation is in progress; complete-paper and broad scene validation remain pending."
   ]
 }

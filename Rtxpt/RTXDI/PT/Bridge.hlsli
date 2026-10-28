@@ -292,6 +292,26 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
         ctx.SetBrdfRaySample(brs);
         if (!ctx.ValidContinuationRayBrdfOverPdf()) break;
         ctx.MultiplyPathThroughput(ctx.GetContinuationRayBrdfOverPdf());
+        // PT++ section 6.2.4: initial RNG owns roulette. The hybrid-shift
+        // context returns false, preserving the complete deterministic replay.
+        const float rr = g_RtxdiBridgeConst.ptRouletteProbability;
+        if (rr > 0.0f && rr < 1.0f && ctx.ShouldRunRussianRoulette())
+        {
+            if (g_RtxdiBridgeConst.ptDiagnostics != 0)
+            {
+                InterlockedAdd(u_PTDiagnosticCounters[0], 1);
+                if (user.pathType != RTXDI_PTPathTraceInvocationType_Initial)
+                    InterlockedAdd(u_PTDiagnosticCounters[3], 1);
+            }
+            if (RTXDI_GetNextRandom(randomContext.initialRandomSamplerState) >= rr)
+            {
+                if (g_RtxdiBridgeConst.ptDiagnostics != 0) InterlockedAdd(u_PTDiagnosticCounters[1], 1);
+                break;
+            }
+            if (g_RtxdiBridgeConst.ptDiagnostics != 0) InterlockedAdd(u_PTDiagnosticCounters[2], 1);
+            ctx.MultiplyPathThroughput(1.0f / rr);
+            ctx.RecordRussianRouletteProbability(rr);
+        }
         user.nativeState.clearScatterEventFlags();
         if (brs.properties.IsTransmission())
         {

@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,subprocess,time,json,datetime,hashlib,csv
 from cap_preflight import validate_audit,validate_runtime
 from capture_identity import transport_settings
-from sampling_contract import seed_value, verify as verify_sampling, verify_di, verify_pt_history, verify_pt_spatial
+from sampling_contract import roulette_value, seed_value, verify as verify_sampling, verify_di, verify_pt_history, verify_pt_spatial, verify_ptpp
 from run_capture import scene_argument
 from artifact_manifest import validate as validate_artifacts
 from rtss_caps import RTSSBackend
@@ -25,6 +25,8 @@ def main():
     ap.add_argument('--sampling-seed',type=seed_value)
     ap.add_argument('--strict-di-validation',action='store_true')
     ap.add_argument('--pt-disable-age-rejection-validation',action='store_true')
+    ap.add_argument('--pt-reconnection-mode',type=int,choices=[0,1])
+    ap.add_argument('--pt-roulette-probability',type=roulette_value)
     ap.add_argument('--pt-fixed-spatial-samples',type=int,choices=range(1,33))
     ap.add_argument('--artifact-manifest',type=Path,help='Optional strict frozen source/executable/shader identity; warm/compile caches before freezing.')
     ap.add_argument('--rtss-install-dir',type=Path);ap.add_argument('--rtss-helper',type=Path)
@@ -35,7 +37,7 @@ def main():
     if a.rtss_install_dir or a.rtss_helper or a.rtss_user_confirmed_disabled:
         if not (a.rtss_install_dir and a.rtss_helper and a.rtss_user_confirmed_disabled):raise SystemExit('RTSS read-only verification requires install-dir, helper and user-confirmed-disabled together.')
         rtss=RTSSBackend(a.rtss_install_dir,exe,a.rtss_helper)
-    a.scene=scene_argument(a.scene)
+    a.scene=scene_argument(a.scene,exe.parent.parent/'Assets')
     scene_path=exe.parent.parent/'Assets'/a.scene
     scene_data=json.loads(scene_path.read_text(encoding='utf-8-sig'))
     def animates(x):
@@ -48,6 +50,8 @@ def main():
     if a.sampling_seed is not None:args+=['--samplingSeed',str(a.sampling_seed)]
     if a.strict_di_validation:args+=['--strictDIValidation','true']
     if a.pt_disable_age_rejection_validation:args+=['--ptDisableAgeRejectionValidation','true']
+    if a.pt_reconnection_mode is not None:args+=['--ptReconnectionMode',str(a.pt_reconnection_mode)]
+    if a.pt_roulette_probability is not None:args+=['--ptRouletteProbability',str(a.pt_roulette_probability)]
     if a.pt_fixed_spatial_samples is not None:args+=['--ptFixedSpatialSamples',str(a.pt_fixed_spatial_samples)]
     if a.mode=='dipt':args+=['--useReSTIRPT','1','--restirPTMode',str(a.pt_mode)]
     if a.max_bounces is not None:args+=['--maxBounces',str(a.max_bounces)]
@@ -132,6 +136,7 @@ def main():
         manifest['effective_di_validation']=verify_di(receipt_log,a.strict_di_validation)
         manifest['effective_pt_history']=verify_pt_history(receipt_log,a.pt_disable_age_rejection_validation)
         manifest['effective_pt_spatial']=verify_pt_spatial(receipt_log,a.pt_fixed_spatial_samples)
+        manifest['effective_ptpp']=verify_ptpp(receipt_log,a.pt_reconnection_mode,a.pt_roulette_probability,False)
     except ValueError as exc:
         manifest['status']='failed_transport_receipt';manifest['transport_receipt_failure']=str(exc)
     if a.artifact_manifest:

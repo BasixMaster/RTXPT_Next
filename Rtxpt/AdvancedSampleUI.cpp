@@ -411,7 +411,18 @@ void AdvancedSampleUI::DrawSampleUI(float indent, float defItemWidth, const ImVe
             {
                 RESET_ON_CHANGE(ImGui::Checkbox("ReSTIR PT (B2 experimental)", &m_ui.UseReSTIRPT));
                 if (ImGui::IsItemHovered()) ImGui::SetTooltip("PT replaces the GI indirect estimator. Initial integration: one plane, no PSR, SHaRC or subsampling. Opaque-transport validation pending.");
-                if (m_ui.ActualUseReSTIRPT()) ImGui::TextWrapped("Indirect estimator: ReSTIR PT; GI inactive to avoid double counting.");
+                if (m_ui.ActualUseReSTIRPT())
+                {
+                    ImGui::TextWrapped("Indirect estimator: ReSTIR PT; GI inactive to avoid double counting.");
+                    int reconnectionMode = m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode == RTXDI_PTReconnectionMode::Footprint ? 1 : 0;
+                    if (ImGui::Combo("PT reconnection", &reconnectionMode, "B2 fixed threshold\0B3 footprint\0"))
+                        m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode = reconnectionMode == 0 ?
+                            RTXDI_PTReconnectionMode::FixedThreshold : RTXDI_PTReconnectionMode::Footprint;
+                    if (ImGui::SliderFloat("PT initial roulette survival (0 off)", &m_ui.RTXDI.restirPT.russianRouletteProbability, 0.0f, 1.0f) &&
+                        m_ui.RTXDI.restirPT.russianRouletteProbability > 0.0f)
+                        m_ui.RTXDI.restirPT.russianRouletteProbability = std::max(0.1f, m_ui.RTXDI.restirPT.russianRouletteProbability);
+                    if (ImGui::IsItemHovered()) ImGui::SetTooltip("B3 PT++ ablation. Roulette only during initial path generation, never replay. Experimental; keep separate from B2 controls.");
+                }
             }
 
             RESET_ON_CHANGE(ImGui::Checkbox("Use Next Event Estimation", &m_ui.UseNEE));

@@ -1,6 +1,18 @@
 # B2 static opaque validation and first comparison
 
-The corrected B2 development build now executes ReSTIR PT with active mid-path reconnection and passes the scoped static opaque transport checks below. **B2 is not promoted:** original material/medium coverage, motion, reconstruction, binding diffuse limits and wider scene tests remain pending. B3 PT++ extensions remain planned.
+The corrected B2 development build now executes ReSTIR PT with active mid-path reconnection and passes the scoped static opaque transport checks below. **B2 is not promoted:** original material/medium coverage, motion, reconstruction, binding diffuse limits and wider scene tests remain pending. B3 PT++ development has started separately; no B3 result is implied by this B2 checkpoint.
+
+## Algorithm and scene coverage at this checkpoint
+
+**B2 measured algorithm: RTXPT + ReSTIR DI + ReSTIR PT; GI off.** Native RTXPT handles the retained primary/fallback terms, DI owns its direct-light contribution and ReSTIR PT owns the selected indirect contribution. B0/B1 controls in this report use native PT with DI/GI off. See the [short overview for every variant](ALGORITHM_VARIANTS.md) for available modes versus measured configurations.
+
+| Required scene | B0/B1 evidence | B2 evidence in this report | Remaining comparison gate |
+|---|---|---|---|
+| Original Convergence (`convergence-test.scene.json`) | Historical DI + GI, 1280×720, exposure 0, limits 14/2; cap coverage unverified | Missing; original preset unsupported by transmission/material and binding diffuse-cap gates | Correct original transport support, then cap-verified B2 comparison and convergence curves |
+| Original Kitchen (`kitchen-with-test-stuff.scene.json`) | Historical DI + GI, 1280×720, exposure 2, limits 14/2; cap coverage unverified | Missing; original preset unsupported by transmission/material and binding diffuse-cap gates | Correct original transport support, then cap-verified B2 comparison and convergence curves |
+| Owned opaque room | Fresh native-PT controls, DI/GI off | Static opaque raw-HDR/display quality and cap-verified timing below | Quality versus frames/samples/time; wider materials, motion and reconstruction |
+
+Convergence and Kitchen are mandatory rows for subsequent B2/B3 comparisons. This report does not substitute the owned room for those original scenes. Unsupported configurations must retain an explicit reason; their materials or camera may not be silently changed to produce a passing result.
 
 ## First retained timing and quality comparison
 

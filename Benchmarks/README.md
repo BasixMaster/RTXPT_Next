@@ -4,3 +4,6 @@ See [the capture/version protocol](../Docs/Research/BENCHMARK_VERSIONS.md), [qua
 
 
 The [current B2 report](../Docs/Research/B2_RESULTS.md) separates the new native-PT control track from the earlier B1 DI/GI migration experiment. Its raw evidence is in development/2026-10-28-b2-static-opaque; three-process timings and finite-reference image scores are exploratory, not an equal-quality speedup claim.
+
+
+The [algorithm overview](../Docs/Research/ALGORITHM_VARIANTS.md) and `comparison-matrix.json` identify the active algorithm per result and require original Convergence/Kitchen plus the controlled room for every variant. Unsupported rows remain visible. [B3 activation work](../Docs/Research/B3_IMPLEMENTATION.md) is in progress; the first ablations preserve B2's lighting partition and do not imply complete PT++ integration.
