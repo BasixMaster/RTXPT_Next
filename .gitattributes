@@ -1,3 +1,5 @@
 # Frozen benchmark evidence is byte-addressed by SHA-256.
 # Preserve exact profiler CSV and manifest bytes across platforms.
 Benchmarks/results/** -text
+# The offline documentation content manifest also hashes exact source bytes.
+Docs/Research/** -text
