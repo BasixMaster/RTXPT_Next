@@ -31,3 +31,5 @@ Paper reference: [PT++ author PDF](https://cwyman.org/papers/i3d26_ReSTIRPT++.pd
 ## Current local activation boundary
 
 The [staged implementation](B8_STAGED_IMPLEMENTATION.md) now executes disjoint initial-GI/PT-long development and a footprint/initial-only-roulette ablation with GI reuse off. B10 CPU prerequisites remain distinct from the subsequent [adjacent pair/vector GPU pilot](B10_PAIRED_PILOT.md), which dispatches shared shifts and vector shading. Multiple Gaussian textures, replay queues and the remaining full mechanisms are still pending. This does not change the inherited reference-source findings above or establish full canonical B8/B9/B10.
+
+Subsequent [Gaussian GPU pairing](B10_GAUSSIAN_PAIRING.md) executes three resident tables with one transformed table per frame. Native/GPU payload identity and original-resolution diagnostics pass; simultaneous multi-neighbor reuse and replay queues remain pending. The one-neighbor room cohort has mixed MSE/FLIP results and is not promoted.

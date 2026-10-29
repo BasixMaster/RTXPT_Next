@@ -1,0 +1,329 @@
+{
+  "final-gaussian-guard": {
+    "checks": {
+      "pixels": 16016,
+      "eligible_pairs": 1161,
+      "fallback_pixels": 13694,
+      "directed_shifts": 1319,
+      "scope": "GPU ownership and finite-work check; not a transport-mean or timing proof"
+    },
+    "stats": {
+      "scope": "last captured frame, diagnostics only",
+      "roulette_tests": 0,
+      "roulette_terminated": 0,
+      "roulette_survived": 0,
+      "replay_roulette_tests": 0,
+      "transmission_scatter_events": 0,
+      "attenuated_medium_segments": 0,
+      "diffuse_budget_terminations": 0,
+      "identity_shift_tests_legacy_slot": 4685,
+      "identity_shift_tests": 4685,
+      "identity_shift_failures": 14,
+      "identity_shift_max_relative_error": 0.0409633,
+      "identity_nee_tests": 0,
+      "identity_nee_failures": 0,
+      "identity_replay_tests": 0,
+      "identity_replay_failures": 0,
+      "identity_other_tests": 4685,
+      "identity_other_failures": 14,
+      "identity_debug_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "hybrid_shift_calls": 6004,
+      "hybrid_raw_nonfinite_target": 0,
+      "hybrid_raw_nonfinite_jacobian": 0,
+      "hybrid_returned_nonfinite_weight_product": 0,
+      "hybrid_rejected_shift_zeroed": 6,
+      "hybrid_nonfinite_target_zero_jacobian": 0,
+      "hybrid_nonfinite_target_nonzero_jacobian": 0,
+      "hybrid_returned_nonfinite_target": 0,
+      "paired_eligible_pairs": 1161,
+      "paired_directed_shift_calls": 1319,
+      "paired_vector_output_pixels": 16016,
+      "paired_fallback_pixels": 13694,
+      "paired_nonfinite_vectors": 0,
+      "paired_nonreciprocal_links": 0,
+      "paired_in_view_nonlocal_pairs": 6384,
+      "paired_max_link_distance_squared": 4360
+    },
+    "reservoirs": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 16016,
+        "valid": 8554,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 4685,
+        "terminal_reconnection_valid": 3869,
+        "age_histogram_valid": {
+          "0": 8554
+        },
+        "rc_length_histogram_valid": {
+          "0": 3869,
+          "2": 4685
+        },
+        "path_length_histogram_valid": {
+          "0": 3869,
+          "4": 3051,
+          "5": 1634
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 4685,
+        "positive_weight_path_length_histogram": {
+          "4": 3051,
+          "5": 1634
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 16016,
+        "valid": 8554,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 4685,
+        "terminal_reconnection_valid": 3869,
+        "age_histogram_valid": {
+          "0": 8554
+        },
+        "rc_length_histogram_valid": {
+          "0": 3869,
+          "2": 4685
+        },
+        "path_length_histogram_valid": {
+          "0": 3869,
+          "4": 3051,
+          "5": 1634
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 4685,
+        "positive_weight_path_length_histogram": {
+          "4": 3051,
+          "5": 1634
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 16016,
+        "valid": 8554,
+        "m_greater_than_one": 2322,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 5205,
+        "terminal_reconnection_valid": 3349,
+        "age_histogram_valid": {
+          "0": 8554
+        },
+        "rc_length_histogram_valid": {
+          "0": 3349,
+          "2": 5205
+        },
+        "path_length_histogram_valid": {
+          "0": 3349,
+          "4": 3401,
+          "5": 1804
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.271451952303016,
+        "valid_with_positive_weight": 5205,
+        "positive_weight_path_length_histogram": {
+          "4": 3401,
+          "5": 1804
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "frame_index": 2
+  },
+  "final-adjacent-guard": {
+    "checks": {
+      "pixels": 16016,
+      "eligible_pairs": 4111,
+      "fallback_pixels": 7794,
+      "directed_shifts": 4531,
+      "scope": "GPU ownership and finite-work check; not a transport-mean or timing proof"
+    },
+    "stats": {
+      "scope": "last captured frame, diagnostics only",
+      "roulette_tests": 0,
+      "roulette_terminated": 0,
+      "roulette_survived": 0,
+      "replay_roulette_tests": 0,
+      "transmission_scatter_events": 0,
+      "attenuated_medium_segments": 0,
+      "diffuse_budget_terminations": 0,
+      "identity_shift_tests_legacy_slot": 4685,
+      "identity_shift_tests": 4685,
+      "identity_shift_failures": 14,
+      "identity_shift_max_relative_error": 0.0409633,
+      "identity_nee_tests": 0,
+      "identity_nee_failures": 0,
+      "identity_replay_tests": 0,
+      "identity_replay_failures": 0,
+      "identity_other_tests": 4685,
+      "identity_other_failures": 14,
+      "identity_debug_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "hybrid_shift_calls": 9216,
+      "hybrid_raw_nonfinite_target": 0,
+      "hybrid_raw_nonfinite_jacobian": 0,
+      "hybrid_returned_nonfinite_weight_product": 0,
+      "hybrid_rejected_shift_zeroed": 1,
+      "hybrid_nonfinite_target_zero_jacobian": 0,
+      "hybrid_nonfinite_target_nonzero_jacobian": 0,
+      "hybrid_returned_nonfinite_target": 0,
+      "paired_eligible_pairs": 4111,
+      "paired_directed_shift_calls": 4531,
+      "paired_vector_output_pixels": 16016,
+      "paired_fallback_pixels": 7794,
+      "paired_nonfinite_vectors": 0,
+      "paired_nonreciprocal_links": 0,
+      "paired_in_view_nonlocal_pairs": 0,
+      "paired_max_link_distance_squared": 0
+    },
+    "reservoirs": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 16016,
+        "valid": 8554,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 4685,
+        "terminal_reconnection_valid": 3869,
+        "age_histogram_valid": {
+          "0": 8554
+        },
+        "rc_length_histogram_valid": {
+          "0": 3869,
+          "2": 4685
+        },
+        "path_length_histogram_valid": {
+          "0": 3869,
+          "4": 3051,
+          "5": 1634
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 4685,
+        "positive_weight_path_length_histogram": {
+          "4": 3051,
+          "5": 1634
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 16016,
+        "valid": 8554,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 4685,
+        "terminal_reconnection_valid": 3869,
+        "age_histogram_valid": {
+          "0": 8554
+        },
+        "rc_length_histogram_valid": {
+          "0": 3869,
+          "2": 4685
+        },
+        "path_length_histogram_valid": {
+          "0": 3869,
+          "4": 3051,
+          "5": 1634
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 4685,
+        "positive_weight_path_length_histogram": {
+          "4": 3051,
+          "5": 1634
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 16016,
+        "valid": 8554,
+        "m_greater_than_one": 8222,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 6521,
+        "terminal_reconnection_valid": 2033,
+        "age_histogram_valid": {
+          "0": 8554
+        },
+        "rc_length_histogram_valid": {
+          "0": 2033,
+          "2": 6521
+        },
+        "path_length_histogram_valid": {
+          "0": 2033,
+          "4": 4333,
+          "5": 2188
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.961187748421791,
+        "valid_with_positive_weight": 6521,
+        "positive_weight_path_length_histogram": {
+          "4": 4333,
+          "5": 2188
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "frame_index": 2
+  },
+  "comparison": {
+    "same_frame_index": true,
+    "packed_reservoir_bytes_equal": true,
+    "hdr-sum-equal": false,
+    "hdr.native.pfm-equal": true,
+    "hdr.native-di.pfm-equal": false,
+    "hdr.native-di-gi.pfm-equal": false,
+    "hdr.native-di-gi-pt.pfm-equal": false
+  }
+}

@@ -11,6 +11,8 @@
 #define RTXDI_WITH_RESTIR_GI
 
 #include "RtxdiResources.h"
+#include "PT/PairingTables.h"
+#include <cstdio>
 #include <rtxdi/DI/ReSTIRDI.h>
 #include <rtxdi/PT/ReSTIRPT.h>
 #include <rtxdi/LightSampling/RISBufferSegmentAllocator.h>
@@ -41,7 +43,7 @@ RtxdiResources::RtxdiResources(
     uint32_t maxEmissiveTriangles,
     uint32_t maxPrimitiveLights,
     uint32_t maxGeometryInstances,
-    const rtxdi::ReSTIRPTContext* ptContext) : m_MaxEmissiveMeshes(maxEmissiveMeshes)
+    const rtxdi::ReSTIRPTContext* ptContext, bool gaussianPairs) : m_MaxEmissiveMeshes(maxEmissiveMeshes)
     , m_MaxEmissiveTriangles(maxEmissiveTriangles)
     , m_MaxPrimitiveLights(maxPrimitiveLights)
     , m_MaxGeometryInstances(maxGeometryInstances)
@@ -147,6 +149,15 @@ RtxdiResources::RtxdiResources(
     // Bind valid minimum-size resources in the legacy path without allocating a
     // screen-sized PT history. Toggling PT recreates this resource set explicitly.
     m_HasPTResources = ptContext != nullptr;
+    m_HasGaussianPairs = m_HasPTResources && gaussianPairs;
+    nvrhi::BufferDesc pairingDesc;
+    pairingDesc.byteSize = sizeof(rtxpt::pairing::Offset) * (m_HasGaussianPairs ? rtxpt::pairing::EntryCount : 1);
+    pairingDesc.format = nvrhi::Format::RG32_SINT;
+    pairingDesc.canHaveTypedViews = true;
+    pairingDesc.initialState = nvrhi::ResourceStates::ShaderResource;
+    pairingDesc.keepInitialState = true;
+    pairingDesc.debugName = "PTGaussianPairingOffsets";
+    PTPairingOffsets = device->createBuffer(pairingDesc);
     const uint64_t ptPitch = ptContext ? ptContext->GetReservoirBufferParameters().reservoirArrayPitch : 1;
     static_assert(sizeof(RTXDI_PackedPTReservoir) == 64, "PT reservoir ABI must match runtime packing");
     nvrhi::BufferDesc ptReservoirDesc;
@@ -170,7 +181,7 @@ RtxdiResources::RtxdiResources(
     PTSpatialNeighborSelectionBuffer = device->createBuffer(ptNeighborDesc);
 
     nvrhi::BufferDesc ptDiagnosticDesc;
-    ptDiagnosticDesc.byteSize = 45 * sizeof(uint32_t);
+    ptDiagnosticDesc.byteSize = 48 * sizeof(uint32_t);
     ptDiagnosticDesc.structStride = sizeof(uint32_t);
     ptDiagnosticDesc.initialState = nvrhi::ResourceStates::UnorderedAccess;
     ptDiagnosticDesc.keepInitialState = true;
@@ -200,6 +211,14 @@ void RtxdiResources::InitializeNeighborOffsets(nvrhi::ICommandList* commandList,
     rtxdi::FillNeighborOffsetBuffer(offsets.data(), neighborOffsetCount);
 
     commandList->writeBuffer(NeighborOffsetsBuffer, offsets.data(), offsets.size());
+    if (m_HasGaussianPairs)
+    {
+        const auto pairs = rtxpt::pairing::GenerateAll();
+        commandList->writeBuffer(PTPairingOffsets, pairs.data(), pairs.size()*sizeof(pairs[0]));
+        std::printf("PT_PAIR_TABLE_UPLOAD tables=3 entries=%u bytes=%zu sigma=16 format=RG32_SINT\n",
+            uint32_t(pairs.size()), pairs.size()*sizeof(pairs[0]));
+        std::fflush(stdout);
+    }
 
     m_NeighborOffsetsInitialized = true;
 }

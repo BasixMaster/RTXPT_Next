@@ -68,10 +68,12 @@
         "Rtxpt/RTXDI/PT/FinalShading.hlsl",
         "Rtxpt/RTXDI/PT/GenerateInitialSamples.hlsl",
         "Rtxpt/RTXDI/PT/IdentityShiftDiagnostics.hlsl",
+        "Rtxpt/RTXDI/PT/PairingTables.h",
         "Rtxpt/RTXDI/PT/Runtime/DiffuseBudget.hlsli",
         "Rtxpt/RTXDI/PT/Runtime/DiffuseBudget.md",
         "Rtxpt/RTXDI/PT/Runtime/HybridShiftGuard.hlsli",
         "Rtxpt/RTXDI/PT/Runtime/PairedSpatialPilot.hlsli",
+        "Rtxpt/RTXDI/PT/Runtime/PairingLookup.hlsli",
         "Rtxpt/RTXDI/PT/SpatialResampling.hlsl",
         "Rtxpt/RTXDI/PT/TemporalResampling.hlsl",
         "Rtxpt/RTXDI/PrepareLightsPass.cpp",
@@ -181,8 +183,8 @@
       "name": "Structured evidence schema separately validated; SQLite metric search",
       "status": "passed",
       "smape_matches": 2,
-      "sources": 34,
-      "findings": 39
+      "sources": 35,
+      "findings": 40
     },
     {
       "name": "No full-paper PDFs exported",
@@ -230,6 +232,11 @@
       "name": "B10 paired/vector frozen source and bytes, 7GPU ownership/finite receipts and 256official HDR/display FLIP frame evaluations",
       "status": "passed",
       "limits": "Adjacent single-pair policy and GI initial only; full mechanisms, acceptance and total timing pending."
+    },
+    {
+      "name": "Gaussian native/GPU exact bytes, 7reciprocity/coverage gates, original-resolution images, 130official FLIP evaluations and explicit quality tradeoff",
+      "status": "passed",
+      "limits": "One table/neighbor per frame; GI initial only; queues, remaining features and timing pending."
     }
   ],
   "passed": true,
@@ -238,6 +245,6 @@
     "One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.",
     "PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.",
     "Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.",
-    "Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and an adjacent B10 pair/vector pilot execute; full GI reuse, remaining mechanisms and canonical acceptance remain pending."
+    "Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; full GI reuse, simultaneous multi-neighbor reuse, replay queues, remaining mechanisms and canonical acceptance remain pending."
   ]
 }

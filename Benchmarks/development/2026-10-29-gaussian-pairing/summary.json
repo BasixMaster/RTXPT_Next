@@ -1,0 +1,422 @@
+{
+  "scope": "Gaussian pairing development; three resident tables, one transformed table per frame; GI initial only. No canonical acceptance, simultaneous three-neighbor or timing claim.",
+  "source_base": "4a98c55931c2b6264ea80e03f78fe60b9a587a8c",
+  "runs": {
+    "gpu-h1": {
+      "status": "captured",
+      "exe_sha256": "90e6dafa7ed6823cfdb93e4b87e1b5219a897527248f48fee1264e5072d1f5eb",
+      "images": 1,
+      "policy": {
+        "enabled": true,
+        "policy": "Gaussian reciprocal tables; one per frame",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      },
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "component_checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.2134428071928072,
+                0.2134428071928072,
+                0.2134428071928072
+              ],
+              "nonzero_pixels": 172
+            },
+            "di": {
+              "mean_rgb": [
+                0.09158946948124097,
+                0.09096717127374597,
+                0.07207216269203595
+              ],
+              "nonzero_pixels": 6995
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02973045933839086,
+                0.03133822872966796,
+                0.019286483016374943
+              ],
+              "nonzero_pixels": 4573
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.017014693476252264,
+                0.01713530927315935,
+                0.0078154173898292
+              ],
+              "nonzero_pixels": 5164
+            }
+          }
+        }
+      ]
+    },
+    "gaussian-room64": {
+      "status": "captured",
+      "exe_sha256": "90e6dafa7ed6823cfdb93e4b87e1b5219a897527248f48fee1264e5072d1f5eb",
+      "images": 64,
+      "policy": {
+        "enabled": true,
+        "policy": "Gaussian reciprocal tables; one per frame",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      },
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "component_checks": null
+    },
+    "adjacent-room64": {
+      "status": "captured",
+      "exe_sha256": "90e6dafa7ed6823cfdb93e4b87e1b5219a897527248f48fee1264e5072d1f5eb",
+      "images": 64,
+      "policy": {
+        "enabled": true,
+        "policy": "adjacent reciprocal pairs",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      },
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "component_checks": null
+    },
+    "reference-room2048": {
+      "status": "captured",
+      "exe_sha256": "90e6dafa7ed6823cfdb93e4b87e1b5219a897527248f48fee1264e5072d1f5eb",
+      "images": 1,
+      "policy": {
+        "enabled": false,
+        "policy": "adjacent reciprocal pairs",
+        "pair_owned_shifts": false,
+        "vector_shading": false,
+        "canonical_accepted": false
+      },
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "component_checks": null
+    },
+    "gaussian-convergence": {
+      "status": "captured",
+      "exe_sha256": "90e6dafa7ed6823cfdb93e4b87e1b5219a897527248f48fee1264e5072d1f5eb",
+      "images": 1,
+      "policy": {
+        "enabled": true,
+        "policy": "Gaussian reciprocal tables; one per frame",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      },
+      "actual_scene_sha256": "c3afaa933c5084ba04f8e5100b64bb8b488ab312f4042849705a15e5bf5af549",
+      "component_checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 14,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.22788951909040203,
+                0.20771160407651526,
+                0.18591227929340676
+              ],
+              "nonzero_pixels": 163917
+            },
+            "di": {
+              "mean_rgb": [
+                0.14877010712270727,
+                0.10827384157850045,
+                0.07750028618805421
+              ],
+              "nonzero_pixels": 470002
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.05765666350793456,
+                0.039417530192359766,
+                0.021939795562260164
+              ],
+              "nonzero_pixels": 353462
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.04856955582457077,
+                0.032665789490759684,
+                0.016455671032890678
+              ],
+              "nonzero_pixels": 385053
+            }
+          }
+        }
+      ]
+    },
+    "gaussian-kitchen": {
+      "status": "captured",
+      "exe_sha256": "90e6dafa7ed6823cfdb93e4b87e1b5219a897527248f48fee1264e5072d1f5eb",
+      "images": 1,
+      "policy": {
+        "enabled": true,
+        "policy": "Gaussian reciprocal tables; one per frame",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      },
+      "actual_scene_sha256": "2af5735fb02fc01badd83671641d54b7f1c69859c8c9bcdf335ca95d9daae552",
+      "component_checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 14,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.08146289236688366,
+                0.07571069098174728,
+                0.0678498453222629
+              ],
+              "nonzero_pixels": 92443
+            },
+            "di": {
+              "mean_rgb": [
+                0.020439136404311286,
+                0.016595133079034794,
+                0.013316486925404105
+              ],
+              "nonzero_pixels": 124280
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.012226544513703428,
+                0.009021317296751982,
+                0.006800816757798506
+              ],
+              "nonzero_pixels": 215988
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.008078748232413394,
+                0.0055495406061850695,
+                0.004093937653362648
+              ],
+              "nonzero_pixels": 80451
+            }
+          }
+        }
+      ]
+    },
+    "gaussian-room-h8": {
+      "status": "captured",
+      "exe_sha256": "90e6dafa7ed6823cfdb93e4b87e1b5219a897527248f48fee1264e5072d1f5eb",
+      "images": 1,
+      "policy": {
+        "enabled": true,
+        "policy": "Gaussian reciprocal tables; one per frame",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      },
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "component_checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.20194173177083333,
+                0.20194173177083333,
+                0.20194173177083333
+              ],
+              "nonzero_pixels": 2341
+            },
+            "di": {
+              "mean_rgb": [
+                0.10047454002054615,
+                0.09962093050488167,
+                0.07913877997133467
+              ],
+              "nonzero_pixels": 109881
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03386833690210349,
+                0.03465450172079727,
+                0.02155757392032279
+              ],
+              "nonzero_pixels": 72731
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01903922632517707,
+                0.019497506099804822,
+                0.00916445497992552
+              ],
+              "nonzero_pixels": 93153
+            }
+          }
+        }
+      ]
+    },
+    "gaussian-cap1": {
+      "status": "captured",
+      "exe_sha256": "90e6dafa7ed6823cfdb93e4b87e1b5219a897527248f48fee1264e5072d1f5eb",
+      "images": 1,
+      "policy": {
+        "enabled": true,
+        "policy": "Gaussian reciprocal tables; one per frame",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      },
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "component_checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 1,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.20194173177083333,
+                0.20194173177083333,
+                0.20194173177083333
+              ],
+              "nonzero_pixels": 2341
+            },
+            "di": {
+              "mean_rgb": [
+                0.10020694813380639,
+                0.09943046993006849,
+                0.07893976702691159
+              ],
+              "nonzero_pixels": 109813
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "nonzero_pixels": 0
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "nonzero_pixels": 0
+            }
+          }
+        }
+      ]
+    },
+    "gaussian-cap2": {
+      "status": "captured",
+      "exe_sha256": "90e6dafa7ed6823cfdb93e4b87e1b5219a897527248f48fee1264e5072d1f5eb",
+      "images": 1,
+      "policy": {
+        "enabled": true,
+        "policy": "Gaussian reciprocal tables; one per frame",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      },
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "component_checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 2,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.20194173177083333,
+                0.20194173177083333,
+                0.20194173177083333
+              ],
+              "nonzero_pixels": 2341
+            },
+            "di": {
+              "mean_rgb": [
+                0.10046342006470595,
+                0.09968300937079928,
+                0.07915500150760636
+              ],
+              "nonzero_pixels": 109735
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.033919625576947714,
+                0.03455185757173846,
+                0.0215457240326537
+              ],
+              "nonzero_pixels": 65289
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "nonzero_pixels": 0
+            }
+          }
+        }
+      ]
+    },
+    "gaussian-limited-temporal-h8": {
+      "status": "captured",
+      "exe_sha256": "90e6dafa7ed6823cfdb93e4b87e1b5219a897527248f48fee1264e5072d1f5eb",
+      "images": 1,
+      "policy": {
+        "enabled": true,
+        "policy": "Gaussian reciprocal tables; one per frame",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      },
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "component_checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.20194173177083333,
+                0.20194173177083333,
+                0.20194173177083333
+              ],
+              "nonzero_pixels": 2341
+            },
+            "di": {
+              "mean_rgb": [
+                0.1004008192763043,
+                0.09970839224755763,
+                0.07915705773668985
+              ],
+              "nonzero_pixels": 113252
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.0338683121982548,
+                0.03465371144625048,
+                0.02155779254105356
+              ],
+              "nonzero_pixels": 72721
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.019218160341907705,
+                0.01981009223808845,
+                0.009373566282964828
+              ],
+              "nonzero_pixels": 133729
+            }
+          }
+        }
+      ]
+    }
+  },
+  "native_payload_sha256": "661e8fddc377bef59f419be9377492473b27aef082af943e630b9cc2652f00dc",
+  "identity_scope": "Cohort post-snapshot/source patch archived separately from the final disabled-policy branch guard. Same executable; final guards exercise both policies. No pre-frozen timing identity.",
+  "raw_large_reservoir_scope": "Large original-resolution/room reservoirs and per-frame raw sequences are retained locally with hashes in manifests; only the small odd-height reservoir is bundled."
+}

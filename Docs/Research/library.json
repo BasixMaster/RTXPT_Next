@@ -7,7 +7,7 @@
   "summary": [
     "B0 preserves unchanged RTXPT1.9 defaults, original assets and runtime3.0. Canonical B1/B2 are native PT+DI/DI+GI3.0; B3/B4/B5 are native PT, +DI, +DI+GI on runtime3.1. VERSION_MAPPING.md preserves all legacy refs/data labels.",
     "B1–B5 native cohorts remain preserved. B6/B7 now have corrected original-resolution five-seed guarded quality evidence after finite rejected-shift targets prevented invalid MIS propagation; native startup stability and new throughput remain pending.",
-    "B8 disjoint initial-GI/PT-long development and limited PT++ execute. B10 now has a scoped adjacent reciprocal-pair/vector GPU pilot with three-scene ownership/finite checks and official FLIP. Full GI reuse, remaining PT++ and canonical acceptance are pending."
+    "B8 initial-GI/PT-long and limited PT++ execute. B10 Gaussian reciprocal tables now pass GPU payload/transform and original-resolution diagnostic gates. One-neighbor room quality is a mixed MSE/FLIP tradeoff; full GI reuse, simultaneous multi-neighbor reuse, replay queues and canonical acceptance remain pending."
   ],
   "questions": [
     {
@@ -612,6 +612,19 @@
       "limitations": "Adjacent single-pair policy and GI initial only; no Gaussian multi-pair path, explicit replay queue, full PT++ or accepted total timing; one low-resolution sequence per quality configuration.",
       "notes": "Scalar history selection and vector output are separate; no brightness correction. Full feature and replicated extended validation remain pending.",
       "rights": "Project-owned code, tests and measured evidence; no copied paper artwork."
+    },
+    {
+      "id": "LOCAL-B10-GAUSSIAN",
+      "title": "Gaussian reciprocal GPU tables and extended-resolution development checks",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/B10_GAUSSIAN_PAIRING.md",
+      "kind": "experiment",
+      "published_on": "2026-10-29",
+      "checked_on": "2026-10-29",
+      "access": "full",
+      "quality": "Actual C++ producer fixture, independent table/transform validator, exact GPU payload readback, seven dispatch/finite diagnostics and official HDR/display FLIP.",
+      "limitations": "One transformed table/neighbor per frame, GI initial only; one room sequence per policy and one image per original scene. No full PT++ or total timing claim.",
+      "notes": "Gaussian room MSE increases about4.7% while FLIP decreases slightly; candidate remains experimental. Brightness untouched.",
+      "rights": "Project-owned code/tests/evidence; no copied paper artwork."
     }
   ],
   "findings": [
@@ -1715,6 +1728,36 @@
           "locator": "B10_PAIRED_PILOT.md; Benchmarks/development/2026-10-29-b10-paired-vector-pilot/gpu-checks.json",
           "relation": "supports",
           "note": "GPU activation/support evidence; scoped preliminary quality values."
+        }
+      ]
+    },
+    {
+      "id": "B10-GAUSSIAN-TRADEOFF",
+      "title": "GPU reciprocal tables pass structural gates but do not uniformly improve quality",
+      "question_ids": [
+        "Q3"
+      ],
+      "topic": "Quality and implementation",
+      "claim": "Three resident tables are byte-identical between native producer and GPU readback. Seven diagnostics preserve reciprocity/coverage/finite outputs. The one-neighbor640x360 room cohort raises MSE while slightly lowering HDR/display FLIP.",
+      "evidence_type": "measured",
+      "confidence": "high",
+      "context": "Scoped development; no independent-trial general quality or performance acceptance.",
+      "strengths": "Independent native/payload/matrix oracles, actual GPU reverse-link/work counters and two metrics families.",
+      "limitations": "Three simultaneous neighbors, queues, full GI reuse, motion/reset stress tests and accepted total timing remain pending.",
+      "implications": "Retain adjacent control and isolate scheduling before attributing gains to the full paper.",
+      "tags": [
+        "ReSTIR",
+        "PT++",
+        "Gaussian-pairing",
+        "validation",
+        "quality-tradeoff"
+      ],
+      "evidence": [
+        {
+          "source_id": "LOCAL-B10-GAUSSIAN",
+          "locator": "B10_GAUSSIAN_PAIRING.md; Benchmarks/development/2026-10-29-gaussian-pairing/gpu-checks.json",
+          "relation": "supports",
+          "note": "Structural GPU evidence and single-cohort tradeoff, not full algorithm acceptance."
         }
       ]
     }

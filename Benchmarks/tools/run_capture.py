@@ -31,6 +31,7 @@ def main():
     ap.add_argument('--b8-component',type=int,choices=range(5),default=0,help='Development output:0sum,1native,2DI,3GI-short,4PT-long')
     ap.add_argument('--b8-validation-stage',type=int,choices=range(3),default=0,help='GI-short development:0 initial,1 DI/PT reuse,2 limited PT++ ablation; not canonical B9')
     ap.add_argument('--pt-paired-spatial-validation',action='store_true',help='Development only: adjacent reciprocal-pair shifts and vector shading; not full B10')
+    ap.add_argument('--pt-gaussian-pairing-validation',action='store_true',help='Paired development: three resident Gaussian tables, one transformed table per frame')
     ap.add_argument('--variant-preset',choices=['matched-raw','raw-native-control','limited-ptpp-ablation'],default='matched-raw')
     ap.add_argument('--label',required=True);ap.add_argument('--scene',required=True)
     ap.add_argument('--exposure',type=float,required=True);ap.add_argument('--width',type=int,default=1280);ap.add_argument('--height',type=int,default=720)
@@ -84,6 +85,9 @@ def main():
         if not a.b8_initial_gi_validation or a.b8_validation_stage==0 or a.pt_mode not in (2,3) or a.pt_fixed_spatial_samples!=1:
             raise SystemExit('Paired pilot requires B8 stage1/2, spatial PT and one fixed neighbor')
         args+=['--ptPairedSpatialValidation','true']
+    if a.pt_gaussian_pairing_validation:
+        if not a.pt_paired_spatial_validation:raise SystemExit('Gaussian policy requires the paired spatial development path')
+        args+=['--ptGaussianPairingValidation','true']
     if a.capture_native_radiance:
         if not a.linear_hdr:raise SystemExit('Native radiance diagnostics require --linear-hdr')
         args+=['--captureNativeRadiance','true']
@@ -124,6 +128,7 @@ def main():
     manifest['scene_sha256']=sha(exe.parent.parent/'Assets'/a.scene)
     manifest['canonical_experiment']=canonical
     manifest['paired_spatial_pilot_requested']=a.pt_paired_spatial_validation
+    manifest['gaussian_pairing_requested']=a.pt_gaussian_pairing_validation
     if a.b8_initial_gi_validation:
         manifest['development_partition']=dict(contract_version=1,canonical_accepted=False,gi_reuse=False,component=a.b8_component,stage=a.b8_validation_stage,pt_min_light_inclusive_length=4)
     if a.pt_extended_scene_validation:manifest['development_extended_scene_transport']=dict(full_prefix_replay=True,canonical_accepted=False,diffuse_budget='Native sampled-lobe accounting with terminal-emission truncation')
@@ -166,7 +171,7 @@ def main():
                 manifest['measurement_status']='failed_missing_hdr_capture'
             try:
                 manifest['effective_b8_partition']=verify_b8((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.b8_initial_gi_validation,a.b8_component,a.b8_validation_stage)
-                manifest['effective_paired_spatial_pilot']=verify_paired((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_paired_spatial_validation)
+                manifest['effective_paired_spatial_pilot']=verify_paired((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_paired_spatial_validation,a.pt_gaussian_pairing_validation)
                 if a.b8_initial_gi_validation and a.capture_native_radiance and a.b8_component==0:
                     from analyze_hdr import read_pfm
                     manifest['b8_same_frame_checks']=[check_b8_stages(

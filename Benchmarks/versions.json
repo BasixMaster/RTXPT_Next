@@ -231,7 +231,7 @@
     },
     {
       "id": "B10",
-      "status": "development_paired_vector_pilot",
+      "status": "development_gaussian_pairing_pilot",
       "ref": null,
       "source_sha": null,
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -246,9 +246,9 @@
       "depends_on": [
         "B8"
       ],
-      "runtime_status": "Adjacent reciprocal pair-owned GPU shifts and vector shading execute with GI initial only; full remaining PT++ and canonical acceptance pending",
+      "runtime_status": "Three resident Gaussian reciprocal tables, one transformed table per frame, with shared shifts/vector shading execute. GI initial only; simultaneous multi-neighbor reuse, replay compaction and full acceptance pending.",
       "ptpp_scope": "Full remaining PT++ including replaycompaction,pairedreuse,unifieddirect/indirectreservoirs,vectorweights,duplicationreduction,dualmotion and auditablemicrooptimizations",
-      "development_evidence": "Benchmarks/development/2026-10-29-b10-paired-vector-pilot"
+      "development_evidence": "Benchmarks/development/2026-10-29-gaussian-pairing"
     }
   ],
   "legacy_registry": "Benchmarks/legacy/versions-before-2026-10-29.json",

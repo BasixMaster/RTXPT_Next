@@ -8,8 +8,8 @@
     "hdr_flip": "Official HDR-FLIP1.7; scene-reference-only exposure parameters"
   },
   "source_hashes": {
-    "Benchmarks/versions.json": "b69e2d0224b54462b0d3a59d06b525d95f369799ed65ff03097535e9a19dfdfb",
-    "Benchmarks/comparison-matrix.json": "5dbcbfd1c603f76a6565539dec523fc3b5923ed489fbd4b5900ecc81afb636cb",
+    "Benchmarks/versions.json": "d346c8c89cd8961eee22d9917515594f5bd64e17062df3627411a664d08f1e21",
+    "Benchmarks/comparison-matrix.json": "0a583f367e1b80aa09ea3f554a48cce5f7191ad936ecf09fd73aeb0ac357a6a4",
     "Benchmarks/development/2026-10-29-canonical-native-di/display-quality-summary.json": "b45c3ff27c71d0669a3df7b02e2392473c5405826962650f992e93072affdb2c",
     "Benchmarks/development/2026-10-29-canonical-native-di-timing/comparison.json": "2b2171e2abafb5c2e1aa7398da1880a475db858831a7549ab79b310fd0090dc1",
     "Benchmarks/development/2026-10-29-registered-room/quality-summary.json": "112d35ad78562ab184dd79bf5a1d9f242aa128726529b9edcfea351ab60c0f01",
@@ -19,7 +19,9 @@
     "Benchmarks/development/2026-10-29-finite-shift-guard/overview-input.json": "42a23ca36745daddeac0d9246ecec0187bcca558a5cb976f2de3beb38b6397e1",
     "Benchmarks/development/2026-10-29-gbuffer-precision/quality-summary.json": "2b3dba9695cce8856c30999a9998a99549a296aa4814db063305a356f2b7f6bf",
     "Benchmarks/development/2026-10-29-di-reuse-isolation/quality-summary.json": "3193550ff16801a4e6fa73d39cbb581e08703dea89c91db53a7307a2e363d443",
-    "Benchmarks/development/2026-10-29-prefix-throughput-probe/physical-summary.json": "d93e8c9c6f236676a1f5726a27fc36f18b15851ef517fa6c7548b988fd678eea"
+    "Benchmarks/development/2026-10-29-prefix-throughput-probe/physical-summary.json": "d93e8c9c6f236676a1f5726a27fc36f18b15851ef517fa6c7548b988fd678eea",
+    "Benchmarks/development/2026-10-29-gaussian-pairing/quality.json": "3cbfee56d0ca43c4a9e089075528a35771ead6d4a7ee6308527e004bf574bf23",
+    "Benchmarks/development/2026-10-29-gaussian-pairing/flip-quality.json": "f568e03ad58ae51bcc40311796ebeae0cf786ecddf2f2633b7c4340c6fa98624"
   },
   "rows": [
     {
@@ -199,7 +201,7 @@
     {
       "variant": "B8",
       "scene": "convergence",
-      "algorithm": "ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1",
+      "algorithm": "B8 development: DI + GI-short initial + PT-long",
       "status": "low_resolution_development_not_accepted",
       "note": "Disjoint initial-GI development executes; DI/PT reuse exercised in room. GI reuse, extended quality/convergence and new timing remain pending. Image is a176x90 development illustration, not a matched comparison.",
       "gpu_busy_ms": null,
@@ -217,7 +219,7 @@
     {
       "variant": "B9",
       "scene": "convergence",
-      "algorithm": "B8 + limited PT++",
+      "algorithm": "B9 development: initial-GI split + footprint/roulette",
       "status": "pending",
       "note": "Limited footprint/initial-only-roulette ablation executes in room with GI initial only; complete B8/B9 and extended comparisons pending.",
       "gpu_busy_ms": null,
@@ -235,17 +237,17 @@
     {
       "variant": "B10",
       "scene": "convergence",
-      "algorithm": "B8 + full PT++",
-      "status": "low_resolution_development_not_accepted",
-      "note": "Adjacent reciprocal-pair/vector GPU pilot executes at176x90 with GI initial only. Full GI reuse, Gaussian multi-pair policy, replay compaction and remaining PT++/extended comparisons pending. Image is a176x90 development illustration, not a matched comparison.",
+      "algorithm": "B10 development: initial-GI split + Gaussian pair/vector pilot",
+      "status": "development_not_accepted",
+      "note": "Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending. Image is 1280x720 development coverage, not an accepted matched benchmark.",
       "gpu_busy_ms": null,
       "cpu_cadence_ms": null,
       "ldr_flip": null,
       "hdr_flip": null,
       "display_mse": null,
       "linear_mse": null,
-      "image": "assets/b10-paired/convergence.png",
-      "report": "B10_PAIRED_PILOT.md",
+      "image": "assets/b10-gaussian/convergence.png",
+      "report": "B10_GAUSSIAN_PAIRING.md",
       "cohort": null,
       "history_frames": null,
       "quality_replication": null
@@ -427,7 +429,7 @@
     {
       "variant": "B8",
       "scene": "kitchen",
-      "algorithm": "ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1",
+      "algorithm": "B8 development: DI + GI-short initial + PT-long",
       "status": "low_resolution_development_not_accepted",
       "note": "Disjoint initial-GI development executes; DI/PT reuse exercised in room. GI reuse, extended quality/convergence and new timing remain pending. Image is a176x90 development illustration, not a matched comparison.",
       "gpu_busy_ms": null,
@@ -445,7 +447,7 @@
     {
       "variant": "B9",
       "scene": "kitchen",
-      "algorithm": "B8 + limited PT++",
+      "algorithm": "B9 development: initial-GI split + footprint/roulette",
       "status": "pending",
       "note": "Limited footprint/initial-only-roulette ablation executes in room with GI initial only; complete B8/B9 and extended comparisons pending.",
       "gpu_busy_ms": null,
@@ -463,17 +465,17 @@
     {
       "variant": "B10",
       "scene": "kitchen",
-      "algorithm": "B8 + full PT++",
-      "status": "low_resolution_development_not_accepted",
-      "note": "Adjacent reciprocal-pair/vector GPU pilot executes at176x90 with GI initial only. Full GI reuse, Gaussian multi-pair policy, replay compaction and remaining PT++/extended comparisons pending. Image is a176x90 development illustration, not a matched comparison.",
+      "algorithm": "B10 development: initial-GI split + Gaussian pair/vector pilot",
+      "status": "development_not_accepted",
+      "note": "Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending. Image is 1280x720 development coverage, not an accepted matched benchmark.",
       "gpu_busy_ms": null,
       "cpu_cadence_ms": null,
       "ldr_flip": null,
       "hdr_flip": null,
       "display_mse": null,
       "linear_mse": null,
-      "image": "assets/b10-paired/kitchen.png",
-      "report": "B10_PAIRED_PILOT.md",
+      "image": "assets/b10-gaussian/kitchen.png",
+      "report": "B10_GAUSSIAN_PAIRING.md",
       "cohort": null,
       "history_frames": null,
       "quality_replication": null
@@ -643,7 +645,7 @@
     {
       "variant": "B8",
       "scene": "opaque-room",
-      "algorithm": "ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1",
+      "algorithm": "B8 development: DI + GI-short initial + PT-long",
       "status": "low_resolution_development_not_accepted",
       "note": "Disjoint initial-GI development executes; DI/PT reuse exercised in room. GI reuse, extended quality/convergence and new timing remain pending. Image is a176x90 development illustration, not a matched comparison.",
       "gpu_busy_ms": null,
@@ -661,7 +663,7 @@
     {
       "variant": "B9",
       "scene": "opaque-room",
-      "algorithm": "B8 + limited PT++",
+      "algorithm": "B9 development: initial-GI split + footprint/roulette",
       "status": "development_not_accepted",
       "note": "Limited footprint/initial-only-roulette ablation executes in room with GI initial only; complete B8/B9 and extended comparisons pending. Image is a176x90 development illustration, not a matched comparison.",
       "gpu_busy_ms": null,
@@ -679,17 +681,17 @@
     {
       "variant": "B10",
       "scene": "opaque-room",
-      "algorithm": "B8 + full PT++",
-      "status": "low_resolution_development_not_accepted",
-      "note": "Adjacent reciprocal-pair/vector GPU pilot executes at176x90 with GI initial only. Full GI reuse, Gaussian multi-pair policy, replay compaction and remaining PT++/extended comparisons pending. Image is a176x90 development illustration, not a matched comparison.",
+      "algorithm": "B10 development: initial-GI split + Gaussian pair/vector pilot",
+      "status": "development_not_accepted",
+      "note": "Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending. Image is 640x360 development coverage, not an accepted matched benchmark.",
       "gpu_busy_ms": null,
       "cpu_cadence_ms": null,
       "ldr_flip": null,
       "hdr_flip": null,
       "display_mse": null,
       "linear_mse": null,
-      "image": "assets/b10-paired/room.png",
-      "report": "B10_PAIRED_PILOT.md",
+      "image": "assets/b10-gaussian/room.png",
+      "report": "B10_GAUSSIAN_PAIRING.md",
       "cohort": null,
       "history_frames": null,
       "quality_replication": null
@@ -5596,5 +5598,47 @@
       }
     ],
     "any_preserved_values_above_one": false
+  },
+  "gaussian_pairing_development": {
+    "report": "B10_GAUSSIAN_PAIRING.md",
+    "scope": "Separate development cohorts; not canonical acceptance or timing",
+    "rows": [
+      {
+        "label": "adjacent-room64",
+        "scene": "opaque-room",
+        "resolution": "640x360",
+        "frames": 64,
+        "linear_mse": 0.0393615623068449,
+        "hdr_flip": 0.1602659998461604,
+        "ldr_flip": 0.09826738433912396
+      },
+      {
+        "label": "gaussian-room64",
+        "scene": "opaque-room",
+        "resolution": "640x360",
+        "frames": 64,
+        "linear_mse": 0.041200661471002334,
+        "hdr_flip": 0.1593731001485139,
+        "ldr_flip": 0.09625744412187487
+      },
+      {
+        "label": "gaussian-convergence",
+        "scene": "convergence",
+        "resolution": "1280x720",
+        "frames": 1,
+        "linear_mse": 2.953594240142324,
+        "hdr_flip": 0.5365081429481506,
+        "ldr_flip": 0.35103508830070496
+      },
+      {
+        "label": "gaussian-kitchen",
+        "scene": "kitchen",
+        "resolution": "1280x720",
+        "frames": 1,
+        "linear_mse": 0.8999188044305915,
+        "hdr_flip": 0.7523965835571289,
+        "ldr_flip": 0.4063081443309784
+      }
+    ]
   }
 }

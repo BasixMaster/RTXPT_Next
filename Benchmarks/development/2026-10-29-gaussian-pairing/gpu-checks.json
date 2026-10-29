@@ -1,0 +1,1301 @@
+{
+  "gpu-h1": {
+    "checks": {
+      "pixels": 16016,
+      "eligible_pairs": 1161,
+      "fallback_pixels": 13694,
+      "directed_shifts": 1319,
+      "scope": "GPU ownership and finite-work check; not a transport-mean or timing proof"
+    },
+    "stats": {
+      "scope": "last captured frame, diagnostics only",
+      "roulette_tests": 0,
+      "roulette_terminated": 0,
+      "roulette_survived": 0,
+      "replay_roulette_tests": 0,
+      "transmission_scatter_events": 0,
+      "attenuated_medium_segments": 0,
+      "diffuse_budget_terminations": 0,
+      "identity_shift_tests_legacy_slot": 4685,
+      "identity_shift_tests": 4685,
+      "identity_shift_failures": 14,
+      "identity_shift_max_relative_error": 0.0409633,
+      "identity_nee_tests": 0,
+      "identity_nee_failures": 0,
+      "identity_replay_tests": 0,
+      "identity_replay_failures": 0,
+      "identity_other_tests": 4685,
+      "identity_other_failures": 14,
+      "identity_debug_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "hybrid_shift_calls": 6004,
+      "hybrid_raw_nonfinite_target": 0,
+      "hybrid_raw_nonfinite_jacobian": 0,
+      "hybrid_returned_nonfinite_weight_product": 0,
+      "hybrid_rejected_shift_zeroed": 6,
+      "hybrid_nonfinite_target_zero_jacobian": 0,
+      "hybrid_nonfinite_target_nonzero_jacobian": 0,
+      "hybrid_returned_nonfinite_target": 0,
+      "paired_eligible_pairs": 1161,
+      "paired_directed_shift_calls": 1319,
+      "paired_vector_output_pixels": 16016,
+      "paired_fallback_pixels": 13694,
+      "paired_nonfinite_vectors": 0,
+      "paired_nonreciprocal_links": 0,
+      "paired_in_view_nonlocal_pairs": 6384,
+      "paired_max_link_distance_squared": 4360
+    },
+    "reservoirs": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 16016,
+        "valid": 8554,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 4685,
+        "terminal_reconnection_valid": 3869,
+        "age_histogram_valid": {
+          "0": 8554
+        },
+        "rc_length_histogram_valid": {
+          "0": 3869,
+          "2": 4685
+        },
+        "path_length_histogram_valid": {
+          "0": 3869,
+          "4": 3051,
+          "5": 1634
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 4685,
+        "positive_weight_path_length_histogram": {
+          "4": 3051,
+          "5": 1634
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 16016,
+        "valid": 8554,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 4685,
+        "terminal_reconnection_valid": 3869,
+        "age_histogram_valid": {
+          "0": 8554
+        },
+        "rc_length_histogram_valid": {
+          "0": 3869,
+          "2": 4685
+        },
+        "path_length_histogram_valid": {
+          "0": 3869,
+          "4": 3051,
+          "5": 1634
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 4685,
+        "positive_weight_path_length_histogram": {
+          "4": 3051,
+          "5": 1634
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 16016,
+        "valid": 8554,
+        "m_greater_than_one": 2322,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 5205,
+        "terminal_reconnection_valid": 3349,
+        "age_histogram_valid": {
+          "0": 8554
+        },
+        "rc_length_histogram_valid": {
+          "0": 3349,
+          "2": 5205
+        },
+        "path_length_histogram_valid": {
+          "0": 3349,
+          "4": 3401,
+          "5": 1804
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.271451952303016,
+        "valid_with_positive_weight": 5205,
+        "positive_weight_path_length_histogram": {
+          "4": 3401,
+          "5": 1804
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "gpu_tables_sha256": "661e8fddc377bef59f419be9377492473b27aef082af943e630b9cc2652f00dc",
+    "packed_reservoir_sha256": "30f48a1b4feff68932cc9f0eecec3e497e472f37f08cbca651eae6134fe0d913"
+  },
+  "gaussian-convergence": {
+    "checks": {
+      "pixels": 921600,
+      "eligible_pairs": 310275,
+      "fallback_pixels": 301050,
+      "directed_shifts": 244410,
+      "scope": "GPU ownership and finite-work check; not a transport-mean or timing proof"
+    },
+    "stats": {
+      "scope": "last captured frame, diagnostics only",
+      "roulette_tests": 0,
+      "roulette_terminated": 0,
+      "roulette_survived": 0,
+      "replay_roulette_tests": 0,
+      "transmission_scatter_events": 232959,
+      "attenuated_medium_segments": 0,
+      "diffuse_budget_terminations": 461163,
+      "identity_shift_tests_legacy_slot": 296887,
+      "identity_shift_tests": 296887,
+      "identity_shift_failures": 41,
+      "identity_shift_max_relative_error": 5.62486,
+      "identity_nee_tests": 286826,
+      "identity_nee_failures": 41,
+      "identity_replay_tests": 10061,
+      "identity_replay_failures": 0,
+      "identity_other_tests": 0,
+      "identity_other_failures": 0,
+      "identity_debug_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "hybrid_shift_calls": 541297,
+      "hybrid_raw_nonfinite_target": 8256,
+      "hybrid_raw_nonfinite_jacobian": 0,
+      "hybrid_returned_nonfinite_weight_product": 0,
+      "hybrid_rejected_shift_zeroed": 8256,
+      "hybrid_nonfinite_target_zero_jacobian": 8256,
+      "hybrid_nonfinite_target_nonzero_jacobian": 0,
+      "hybrid_returned_nonfinite_target": 0,
+      "paired_eligible_pairs": 310275,
+      "paired_directed_shift_calls": 244410,
+      "paired_vector_output_pixels": 921600,
+      "paired_fallback_pixels": 301050,
+      "paired_nonfinite_vectors": 0,
+      "paired_nonreciprocal_links": 0,
+      "paired_in_view_nonlocal_pairs": 446915,
+      "paired_max_link_distance_squared": 4573
+    },
+    "reservoirs": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 921600,
+        "valid": 752110,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 742049,
+        "age_histogram_valid": {
+          "0": 752110
+        },
+        "rc_length_histogram_valid": {
+          "0": 455223,
+          "4": 228454,
+          "5": 42238,
+          "6": 11076,
+          "7": 3068,
+          "8": 859,
+          "9": 617,
+          "10": 163,
+          "11": 103,
+          "12": 66,
+          "13": 67,
+          "14": 52,
+          "15": 63,
+          "16": 10061
+        },
+        "path_length_histogram_valid": {
+          "0": 455223,
+          "4": 235044,
+          "5": 45015,
+          "6": 11564,
+          "7": 3208,
+          "8": 899,
+          "9": 628,
+          "10": 169,
+          "11": 104,
+          "12": 68,
+          "13": 68,
+          "14": 55,
+          "15": 65
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 296887,
+        "positive_weight_path_length_histogram": {
+          "4": 235044,
+          "5": 45015,
+          "6": 11564,
+          "7": 3208,
+          "8": 899,
+          "9": 628,
+          "10": 169,
+          "11": 104,
+          "12": 68,
+          "13": 68,
+          "14": 55,
+          "15": 65
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 921600,
+        "valid": 752110,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 742049,
+        "age_histogram_valid": {
+          "0": 752110
+        },
+        "rc_length_histogram_valid": {
+          "0": 455223,
+          "4": 228454,
+          "5": 42238,
+          "6": 11076,
+          "7": 3068,
+          "8": 859,
+          "9": 617,
+          "10": 163,
+          "11": 103,
+          "12": 66,
+          "13": 67,
+          "14": 52,
+          "15": 63,
+          "16": 10061
+        },
+        "path_length_histogram_valid": {
+          "0": 455223,
+          "4": 235044,
+          "5": 45015,
+          "6": 11564,
+          "7": 3208,
+          "8": 899,
+          "9": 628,
+          "10": 169,
+          "11": 104,
+          "12": 68,
+          "13": 68,
+          "14": 55,
+          "15": 65
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 296887,
+        "positive_weight_path_length_histogram": {
+          "4": 235044,
+          "5": 45015,
+          "6": 11564,
+          "7": 3208,
+          "8": 899,
+          "9": 628,
+          "10": 169,
+          "11": 104,
+          "12": 68,
+          "13": 68,
+          "14": 55,
+          "15": 65
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 921600,
+        "valid": 752110,
+        "m_greater_than_one": 620550,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 740192,
+        "age_histogram_valid": {
+          "0": 752110
+        },
+        "rc_length_histogram_valid": {
+          "0": 361952,
+          "4": 310536,
+          "5": 50152,
+          "6": 12336,
+          "7": 3220,
+          "8": 868,
+          "9": 631,
+          "10": 160,
+          "11": 96,
+          "12": 63,
+          "13": 63,
+          "14": 52,
+          "15": 63,
+          "16": 11918
+        },
+        "path_length_histogram_valid": {
+          "0": 361952,
+          "4": 318522,
+          "5": 53373,
+          "6": 12845,
+          "7": 3357,
+          "8": 908,
+          "9": 642,
+          "10": 166,
+          "11": 97,
+          "12": 65,
+          "13": 63,
+          "14": 55,
+          "15": 65
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.8250787783701852,
+        "valid_with_positive_weight": 390158,
+        "positive_weight_path_length_histogram": {
+          "4": 318522,
+          "5": 53373,
+          "6": 12845,
+          "7": 3357,
+          "8": 908,
+          "9": 642,
+          "10": 166,
+          "11": 97,
+          "12": 65,
+          "13": 63,
+          "14": 55,
+          "15": 65
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "gpu_tables_sha256": "661e8fddc377bef59f419be9377492473b27aef082af943e630b9cc2652f00dc",
+    "packed_reservoir_sha256": "c9b7b253b6316b2036d718d14511769108e675e8141896763f6906ebb71f0e8f"
+  },
+  "gaussian-kitchen": {
+    "checks": {
+      "pixels": 921600,
+      "eligible_pairs": 280570,
+      "fallback_pixels": 360460,
+      "directed_shifts": 41042,
+      "scope": "GPU ownership and finite-work check; not a transport-mean or timing proof"
+    },
+    "stats": {
+      "scope": "last captured frame, diagnostics only",
+      "roulette_tests": 0,
+      "roulette_terminated": 0,
+      "roulette_survived": 0,
+      "replay_roulette_tests": 0,
+      "transmission_scatter_events": 38387,
+      "attenuated_medium_segments": 0,
+      "diffuse_budget_terminations": 780614,
+      "identity_shift_tests_legacy_slot": 61493,
+      "identity_shift_tests": 61493,
+      "identity_shift_failures": 20,
+      "identity_shift_max_relative_error": 0.353351,
+      "identity_nee_tests": 60483,
+      "identity_nee_failures": 20,
+      "identity_replay_tests": 1010,
+      "identity_replay_failures": 0,
+      "identity_other_tests": 0,
+      "identity_other_failures": 0,
+      "identity_debug_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "hybrid_shift_calls": 102535,
+      "hybrid_raw_nonfinite_target": 3882,
+      "hybrid_raw_nonfinite_jacobian": 0,
+      "hybrid_returned_nonfinite_weight_product": 0,
+      "hybrid_rejected_shift_zeroed": 3882,
+      "hybrid_nonfinite_target_zero_jacobian": 3882,
+      "hybrid_nonfinite_target_nonzero_jacobian": 0,
+      "hybrid_returned_nonfinite_target": 0,
+      "paired_eligible_pairs": 280570,
+      "paired_directed_shift_calls": 41042,
+      "paired_vector_output_pixels": 921600,
+      "paired_fallback_pixels": 360460,
+      "paired_nonfinite_vectors": 0,
+      "paired_nonreciprocal_links": 0,
+      "paired_in_view_nonlocal_pairs": 447156,
+      "paired_max_link_distance_squared": 4573
+    },
+    "reservoirs": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 921600,
+        "valid": 808152,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 807142,
+        "age_histogram_valid": {
+          "0": 808152
+        },
+        "rc_length_histogram_valid": {
+          "0": 746659,
+          "4": 47067,
+          "5": 8808,
+          "6": 2367,
+          "7": 887,
+          "8": 462,
+          "9": 287,
+          "10": 177,
+          "11": 140,
+          "12": 106,
+          "13": 77,
+          "14": 64,
+          "15": 41,
+          "16": 1010
+        },
+        "path_length_histogram_valid": {
+          "0": 746659,
+          "4": 47474,
+          "5": 9009,
+          "6": 2556,
+          "7": 963,
+          "8": 520,
+          "9": 309,
+          "10": 194,
+          "11": 152,
+          "12": 116,
+          "13": 81,
+          "14": 71,
+          "15": 48
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 61493,
+        "positive_weight_path_length_histogram": {
+          "4": 47474,
+          "5": 9009,
+          "6": 2556,
+          "7": 963,
+          "8": 520,
+          "9": 309,
+          "10": 194,
+          "11": 152,
+          "12": 116,
+          "13": 81,
+          "14": 71,
+          "15": 48
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 921600,
+        "valid": 808152,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 807142,
+        "age_histogram_valid": {
+          "0": 808152
+        },
+        "rc_length_histogram_valid": {
+          "0": 746659,
+          "4": 47067,
+          "5": 8808,
+          "6": 2367,
+          "7": 887,
+          "8": 462,
+          "9": 287,
+          "10": 177,
+          "11": 140,
+          "12": 106,
+          "13": 77,
+          "14": 64,
+          "15": 41,
+          "16": 1010
+        },
+        "path_length_histogram_valid": {
+          "0": 746659,
+          "4": 47474,
+          "5": 9009,
+          "6": 2556,
+          "7": 963,
+          "8": 520,
+          "9": 309,
+          "10": 194,
+          "11": 152,
+          "12": 116,
+          "13": 81,
+          "14": 71,
+          "15": 48
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 61493,
+        "positive_weight_path_length_histogram": {
+          "4": 47474,
+          "5": 9009,
+          "6": 2556,
+          "7": 963,
+          "8": 520,
+          "9": 309,
+          "10": 194,
+          "11": 152,
+          "12": 116,
+          "13": 81,
+          "14": 71,
+          "15": 48
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 921600,
+        "valid": 808152,
+        "m_greater_than_one": 561140,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 807076,
+        "age_histogram_valid": {
+          "0": 808152
+        },
+        "rc_length_histogram_valid": {
+          "0": 725416,
+          "4": 65997,
+          "5": 10782,
+          "6": 2574,
+          "7": 921,
+          "8": 479,
+          "9": 295,
+          "10": 178,
+          "11": 145,
+          "12": 105,
+          "13": 78,
+          "14": 64,
+          "15": 42,
+          "16": 1076
+        },
+        "path_length_histogram_valid": {
+          "0": 725416,
+          "4": 66457,
+          "5": 10991,
+          "6": 2766,
+          "7": 1000,
+          "8": 537,
+          "9": 317,
+          "10": 195,
+          "11": 157,
+          "12": 115,
+          "13": 82,
+          "14": 70,
+          "15": 49
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.6943495778021955,
+        "valid_with_positive_weight": 82736,
+        "positive_weight_path_length_histogram": {
+          "4": 66457,
+          "5": 10991,
+          "6": 2766,
+          "7": 1000,
+          "8": 537,
+          "9": 317,
+          "10": 195,
+          "11": 157,
+          "12": 115,
+          "13": 82,
+          "14": 70,
+          "15": 49
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "gpu_tables_sha256": "661e8fddc377bef59f419be9377492473b27aef082af943e630b9cc2652f00dc",
+    "packed_reservoir_sha256": "5da03491db368423f96095bb70824890cad9ada8a2b9a7c32b9801d30377e490"
+  },
+  "gaussian-room-h8": {
+    "checks": {
+      "pixels": 230400,
+      "eligible_pairs": 44837,
+      "fallback_pixels": 140726,
+      "directed_shifts": 49123,
+      "scope": "GPU ownership and finite-work check; not a transport-mean or timing proof"
+    },
+    "stats": {
+      "scope": "last captured frame, diagnostics only",
+      "roulette_tests": 0,
+      "roulette_terminated": 0,
+      "roulette_survived": 0,
+      "replay_roulette_tests": 0,
+      "transmission_scatter_events": 0,
+      "attenuated_medium_segments": 0,
+      "diffuse_budget_terminations": 0,
+      "identity_shift_tests_legacy_slot": 74415,
+      "identity_shift_tests": 74415,
+      "identity_shift_failures": 244,
+      "identity_shift_max_relative_error": 1,
+      "identity_nee_tests": 0,
+      "identity_nee_failures": 0,
+      "identity_replay_tests": 0,
+      "identity_replay_failures": 0,
+      "identity_other_tests": 74415,
+      "identity_other_failures": 244,
+      "identity_debug_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "hybrid_shift_calls": 123538,
+      "hybrid_raw_nonfinite_target": 0,
+      "hybrid_raw_nonfinite_jacobian": 0,
+      "hybrid_returned_nonfinite_weight_product": 0,
+      "hybrid_rejected_shift_zeroed": 82,
+      "hybrid_nonfinite_target_zero_jacobian": 0,
+      "hybrid_nonfinite_target_nonzero_jacobian": 0,
+      "hybrid_returned_nonfinite_target": 0,
+      "paired_eligible_pairs": 44837,
+      "paired_directed_shift_calls": 49123,
+      "paired_vector_output_pixels": 230400,
+      "paired_fallback_pixels": 140726,
+      "paired_nonfinite_vectors": 0,
+      "paired_nonreciprocal_links": 0,
+      "paired_in_view_nonlocal_pairs": 108630,
+      "paired_max_link_distance_squared": 4573
+    },
+    "reservoirs": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 74415,
+        "terminal_reconnection_valid": 60225,
+        "age_histogram_valid": {
+          "0": 134640
+        },
+        "rc_length_histogram_valid": {
+          "0": 60225,
+          "2": 74415
+        },
+        "path_length_histogram_valid": {
+          "0": 60225,
+          "4": 48581,
+          "5": 25834
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 74415,
+        "positive_weight_path_length_histogram": {
+          "4": 48581,
+          "5": 25834
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 74415,
+        "terminal_reconnection_valid": 60225,
+        "age_histogram_valid": {
+          "0": 134640
+        },
+        "rc_length_histogram_valid": {
+          "0": 60225,
+          "2": 74415
+        },
+        "path_length_histogram_valid": {
+          "0": 60225,
+          "4": 48581,
+          "5": 25834
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 74415,
+        "positive_weight_path_length_histogram": {
+          "4": 48581,
+          "5": 25834
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 89674,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 93932,
+        "terminal_reconnection_valid": 40708,
+        "age_histogram_valid": {
+          "0": 134640
+        },
+        "rc_length_histogram_valid": {
+          "0": 40708,
+          "2": 93932
+        },
+        "path_length_histogram_valid": {
+          "0": 40708,
+          "4": 62514,
+          "5": 31418
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.6660279263220439,
+        "valid_with_positive_weight": 93932,
+        "positive_weight_path_length_histogram": {
+          "4": 62514,
+          "5": 31418
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "gpu_tables_sha256": "661e8fddc377bef59f419be9377492473b27aef082af943e630b9cc2652f00dc",
+    "packed_reservoir_sha256": "0f709e3eb158df90bf7821a79afd709b9f1ad2d028f6ee154f9f6826c3544b49"
+  },
+  "gaussian-cap1": {
+    "checks": {
+      "pixels": 230400,
+      "eligible_pairs": 44530,
+      "fallback_pixels": 141340,
+      "directed_shifts": 0,
+      "scope": "GPU ownership and finite-work check; not a transport-mean or timing proof"
+    },
+    "stats": {
+      "scope": "last captured frame, diagnostics only",
+      "roulette_tests": 0,
+      "roulette_terminated": 0,
+      "roulette_survived": 0,
+      "replay_roulette_tests": 0,
+      "transmission_scatter_events": 0,
+      "attenuated_medium_segments": 0,
+      "diffuse_budget_terminations": 0,
+      "identity_shift_tests_legacy_slot": 0,
+      "identity_shift_tests": 0,
+      "identity_shift_failures": 0,
+      "identity_shift_max_relative_error": 0,
+      "identity_nee_tests": 0,
+      "identity_nee_failures": 0,
+      "identity_replay_tests": 0,
+      "identity_replay_failures": 0,
+      "identity_other_tests": 0,
+      "identity_other_failures": 0,
+      "identity_debug_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "hybrid_shift_calls": 0,
+      "hybrid_raw_nonfinite_target": 0,
+      "hybrid_raw_nonfinite_jacobian": 0,
+      "hybrid_returned_nonfinite_weight_product": 0,
+      "hybrid_rejected_shift_zeroed": 0,
+      "hybrid_nonfinite_target_zero_jacobian": 0,
+      "hybrid_nonfinite_target_nonzero_jacobian": 0,
+      "hybrid_returned_nonfinite_target": 0,
+      "paired_eligible_pairs": 44530,
+      "paired_directed_shift_calls": 0,
+      "paired_vector_output_pixels": 230400,
+      "paired_fallback_pixels": 141340,
+      "paired_nonfinite_vectors": 0,
+      "paired_nonreciprocal_links": 0,
+      "paired_in_view_nonlocal_pairs": 108540,
+      "paired_max_link_distance_squared": 6005
+    },
+    "reservoirs": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 134640,
+        "age_histogram_valid": {
+          "0": 134640
+        },
+        "rc_length_histogram_valid": {
+          "0": 134640
+        },
+        "path_length_histogram_valid": {
+          "0": 134640
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 0,
+        "positive_weight_path_length_histogram": {},
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 134640,
+        "age_histogram_valid": {
+          "0": 134640
+        },
+        "rc_length_histogram_valid": {
+          "0": 134640
+        },
+        "path_length_histogram_valid": {
+          "0": 134640
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 0,
+        "positive_weight_path_length_histogram": {},
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 89060,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 134640,
+        "age_histogram_valid": {
+          "0": 134640
+        },
+        "rc_length_histogram_valid": {
+          "0": 134640
+        },
+        "path_length_histogram_valid": {
+          "0": 134640
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.6614676173499703,
+        "valid_with_positive_weight": 0,
+        "positive_weight_path_length_histogram": {},
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "gpu_tables_sha256": "661e8fddc377bef59f419be9377492473b27aef082af943e630b9cc2652f00dc",
+    "packed_reservoir_sha256": "7dffe89d9dd2f2349629992003795f995543439fe15b45d5b0f2849777805b83"
+  },
+  "gaussian-cap2": {
+    "checks": {
+      "pixels": 230400,
+      "eligible_pairs": 44530,
+      "fallback_pixels": 141340,
+      "directed_shifts": 0,
+      "scope": "GPU ownership and finite-work check; not a transport-mean or timing proof"
+    },
+    "stats": {
+      "scope": "last captured frame, diagnostics only",
+      "roulette_tests": 0,
+      "roulette_terminated": 0,
+      "roulette_survived": 0,
+      "replay_roulette_tests": 0,
+      "transmission_scatter_events": 0,
+      "attenuated_medium_segments": 0,
+      "diffuse_budget_terminations": 0,
+      "identity_shift_tests_legacy_slot": 0,
+      "identity_shift_tests": 0,
+      "identity_shift_failures": 0,
+      "identity_shift_max_relative_error": 0,
+      "identity_nee_tests": 0,
+      "identity_nee_failures": 0,
+      "identity_replay_tests": 0,
+      "identity_replay_failures": 0,
+      "identity_other_tests": 0,
+      "identity_other_failures": 0,
+      "identity_debug_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "hybrid_shift_calls": 0,
+      "hybrid_raw_nonfinite_target": 0,
+      "hybrid_raw_nonfinite_jacobian": 0,
+      "hybrid_returned_nonfinite_weight_product": 0,
+      "hybrid_rejected_shift_zeroed": 0,
+      "hybrid_nonfinite_target_zero_jacobian": 0,
+      "hybrid_nonfinite_target_nonzero_jacobian": 0,
+      "hybrid_returned_nonfinite_target": 0,
+      "paired_eligible_pairs": 44530,
+      "paired_directed_shift_calls": 0,
+      "paired_vector_output_pixels": 230400,
+      "paired_fallback_pixels": 141340,
+      "paired_nonfinite_vectors": 0,
+      "paired_nonreciprocal_links": 0,
+      "paired_in_view_nonlocal_pairs": 108540,
+      "paired_max_link_distance_squared": 6005
+    },
+    "reservoirs": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 134640,
+        "age_histogram_valid": {
+          "0": 134640
+        },
+        "rc_length_histogram_valid": {
+          "0": 134640
+        },
+        "path_length_histogram_valid": {
+          "0": 134640
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 0,
+        "positive_weight_path_length_histogram": {},
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 134640,
+        "age_histogram_valid": {
+          "0": 134640
+        },
+        "rc_length_histogram_valid": {
+          "0": 134640
+        },
+        "path_length_histogram_valid": {
+          "0": 134640
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 0,
+        "positive_weight_path_length_histogram": {},
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 89060,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 134640,
+        "age_histogram_valid": {
+          "0": 134640
+        },
+        "rc_length_histogram_valid": {
+          "0": 134640
+        },
+        "path_length_histogram_valid": {
+          "0": 134640
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.6614676173499703,
+        "valid_with_positive_weight": 0,
+        "positive_weight_path_length_histogram": {},
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "gpu_tables_sha256": "661e8fddc377bef59f419be9377492473b27aef082af943e630b9cc2652f00dc",
+    "packed_reservoir_sha256": "7dffe89d9dd2f2349629992003795f995543439fe15b45d5b0f2849777805b83"
+  },
+  "gaussian-limited-temporal-h8": {
+    "checks": {
+      "pixels": 230400,
+      "eligible_pairs": 44837,
+      "fallback_pixels": 140726,
+      "directed_shifts": 88829,
+      "scope": "GPU ownership and finite-work check; not a transport-mean or timing proof"
+    },
+    "stats": {
+      "scope": "last captured frame, diagnostics only",
+      "roulette_tests": 210046,
+      "roulette_terminated": 42319,
+      "roulette_survived": 167727,
+      "replay_roulette_tests": 0,
+      "transmission_scatter_events": 0,
+      "attenuated_medium_segments": 0,
+      "diffuse_budget_terminations": 0,
+      "identity_shift_tests_legacy_slot": 57070,
+      "identity_shift_tests": 57070,
+      "identity_shift_failures": 33,
+      "identity_shift_max_relative_error": 1,
+      "identity_nee_tests": 2794,
+      "identity_nee_failures": 0,
+      "identity_replay_tests": 0,
+      "identity_replay_failures": 0,
+      "identity_other_tests": 54276,
+      "identity_other_failures": 33,
+      "identity_debug_words": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "hybrid_shift_calls": 415179,
+      "hybrid_raw_nonfinite_target": 47,
+      "hybrid_raw_nonfinite_jacobian": 0,
+      "hybrid_returned_nonfinite_weight_product": 0,
+      "hybrid_rejected_shift_zeroed": 5427,
+      "hybrid_nonfinite_target_zero_jacobian": 47,
+      "hybrid_nonfinite_target_nonzero_jacobian": 0,
+      "hybrid_returned_nonfinite_target": 0,
+      "paired_eligible_pairs": 44837,
+      "paired_directed_shift_calls": 88829,
+      "paired_vector_output_pixels": 230400,
+      "paired_fallback_pixels": 140726,
+      "paired_nonfinite_vectors": 0,
+      "paired_nonreciprocal_links": 0,
+      "paired_in_view_nonlocal_pairs": 108630,
+      "paired_max_link_distance_squared": 4573
+    },
+    "reservoirs": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 54276,
+        "terminal_reconnection_valid": 80364,
+        "age_histogram_valid": {
+          "0": 134640
+        },
+        "rc_length_histogram_valid": {
+          "0": 77570,
+          "2": 49850,
+          "3": 3630,
+          "4": 3160,
+          "5": 430
+        },
+        "path_length_histogram_valid": {
+          "0": 77570,
+          "4": 39700,
+          "5": 17370
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 57070,
+        "positive_weight_path_length_histogram": {
+          "4": 39700,
+          "5": 17370
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 134640,
+        "positive_age_valid": 121274,
+        "midpath_reconnection_valid": 128200,
+        "terminal_reconnection_valid": 6440,
+        "age_histogram_valid": {
+          "0": 13366,
+          "1": 11765,
+          "2": 11418,
+          "3": 11341,
+          "4": 11278,
+          "5": 14816,
+          "6": 22829,
+          "7": 37827
+        },
+        "rc_length_histogram_valid": {
+          "0": 1420,
+          "2": 120183,
+          "3": 6282,
+          "4": 6181,
+          "5": 574
+        },
+        "path_length_histogram_valid": {
+          "0": 1420,
+          "4": 96181,
+          "5": 37039
+        },
+        "max_age_valid": 7,
+        "mean_m_valid": 8.988049613784908,
+        "valid_with_positive_weight": 133220,
+        "positive_weight_path_length_histogram": {
+          "4": 96181,
+          "5": 37039
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 134640,
+        "positive_age_valid": 121247,
+        "midpath_reconnection_valid": 128985,
+        "terminal_reconnection_valid": 5655,
+        "age_histogram_valid": {
+          "0": 13393,
+          "1": 12068,
+          "2": 11590,
+          "3": 11307,
+          "4": 11129,
+          "5": 14723,
+          "6": 22718,
+          "7": 37712
+        },
+        "rc_length_histogram_valid": {
+          "0": 821,
+          "2": 121302,
+          "3": 6044,
+          "4": 5927,
+          "5": 546
+        },
+        "path_length_histogram_valid": {
+          "0": 821,
+          "4": 96734,
+          "5": 37085
+        },
+        "max_age_valid": 7,
+        "mean_m_valid": 14.978683897801545,
+        "valid_with_positive_weight": 133819,
+        "positive_weight_path_length_histogram": {
+          "4": 96734,
+          "5": 37085
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "gpu_tables_sha256": "661e8fddc377bef59f419be9377492473b27aef082af943e630b9cc2652f00dc",
+    "packed_reservoir_sha256": "1f63740dcd3556aed4166147a856691654ac63c4bc45270855ab29da6188cc0c"
+  }
+}

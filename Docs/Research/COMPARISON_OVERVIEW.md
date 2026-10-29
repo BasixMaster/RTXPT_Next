@@ -20,9 +20,9 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 | **B5** | Native PT + ReSTIR DI3.1 + ReSTIR GI3.1 | 1.461 | 0.093961 | Unavailable | [![B5 opaque-room representative capture](assets/native-matrix/opaque-room-B5.png)](assets/native-matrix/opaque-room-B5.png) | [measured known caps verified](NATIVE_MATRIX_RESULTS.md) |
 | **B6** | ReSTIR PT; DI/GI off | 1.419 | 0.073817 | 0.114122 | [![B6 opaque-room representative capture](assets/registered-room/B6.png)](assets/registered-room/B6.png) | [measured](REGISTERED_ROOM_RESULTS.md) |
 | **B7** | ReSTIR PT + ReSTIR DI3.1; GI off | 1.539 | 0.066837 | 0.103801 | [![B7 opaque-room representative capture](assets/registered-room/B7.png)](assets/registered-room/B7.png) | [measured](REGISTERED_ROOM_RESULTS.md) |
-| **B8** | ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1 | Unavailable | Unavailable | Unavailable | [![B8 opaque-room representative capture](assets/b8-staged/sum.png)](assets/b8-staged/sum.png) | [low resolution development not accepted](B8_STAGED_IMPLEMENTATION.md) |
-| **B9** | B8 + limited PT++ | Unavailable | Unavailable | Unavailable | [![B9 opaque-room representative capture](assets/b8-staged/limited-ptpp.png)](assets/b8-staged/limited-ptpp.png) | [development not accepted](B8_STAGED_IMPLEMENTATION.md) |
-| **B10** | B8 + full PT++ | Unavailable | Unavailable | Unavailable | [![B10 opaque-room representative capture](assets/b10-paired/room.png)](assets/b10-paired/room.png) | [low resolution development not accepted](B10_PAIRED_PILOT.md) |
+| **B8** | B8 development: DI + GI-short initial + PT-long | Unavailable | Unavailable | Unavailable | [![B8 opaque-room representative capture](assets/b8-staged/sum.png)](assets/b8-staged/sum.png) | [low resolution development not accepted](B8_STAGED_IMPLEMENTATION.md) |
+| **B9** | B9 development: initial-GI split + footprint/roulette | Unavailable | Unavailable | Unavailable | [![B9 opaque-room representative capture](assets/b8-staged/limited-ptpp.png)](assets/b8-staged/limited-ptpp.png) | [development not accepted](B8_STAGED_IMPLEMENTATION.md) |
+| **B10** | B10 development: initial-GI split + Gaussian pair/vector pilot | Unavailable | Unavailable | Unavailable | [![B10 opaque-room representative capture](assets/b10-gaussian/room.png)](assets/b10-gaussian/room.png) | [development not accepted](B10_GAUSSIAN_PAIRING.md) |
 
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -36,7 +36,7 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 - **B7:** Explicit separate zero-intensity registered environment fixture, same owned model/materials/camera; preserve prior no-env data separately. Three timing repeats; native3quality processes or modern3seed history sweep.
 - **B8:** Disjoint initial-GI development executes; DI/PT reuse exercised in room. GI reuse, extended quality/convergence and new timing remain pending. Image is a176x90 development illustration, not a matched comparison.
 - **B9:** Limited footprint/initial-only-roulette ablation executes in room with GI initial only; complete B8/B9 and extended comparisons pending. Image is a176x90 development illustration, not a matched comparison.
-- **B10:** Adjacent reciprocal-pair/vector GPU pilot executes at176x90 with GI initial only. Full GI reuse, Gaussian multi-pair policy, replay compaction and remaining PT++/extended comparisons pending. Image is a176x90 development illustration, not a matched comparison.
+- **B10:** Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending. Image is 640x360 development coverage, not an accepted matched benchmark.
 
 </details>
 
@@ -54,9 +54,9 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 | **B5** | Native PT + ReSTIR DI3.1 + ReSTIR GI3.1 | 4.545 | 0.243522 | Unavailable | [![B5 convergence representative capture](assets/native-matrix/convergence-B5.png)](assets/native-matrix/convergence-B5.png) | [measured known caps verified](NATIVE_MATRIX_RESULTS.md) |
 | **B6** | ReSTIR PT; DI/GI off | Unavailable | 0.300663 | 0.453476 | [![B6 convergence representative capture](assets/finite-shift-guard/convergence-B6.png)](assets/finite-shift-guard/convergence-B6.png) | [Guarded quality measured; timing pending †](FINITE_SHIFT_GUARD.md) |
 | **B7** | ReSTIR PT + ReSTIR DI3.1; GI off | Unavailable | 0.222129 | 0.333817 | [![B7 convergence representative capture](assets/finite-shift-guard/convergence-B7.png)](assets/finite-shift-guard/convergence-B7.png) | [Guarded quality measured; timing pending †](FINITE_SHIFT_GUARD.md) |
-| **B8** | ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1 | Unavailable | Unavailable | Unavailable | [![B8 convergence representative capture](assets/b8-staged/convergence.png)](assets/b8-staged/convergence.png) | [low resolution development not accepted](B8_STAGED_IMPLEMENTATION.md) |
-| **B9** | B8 + limited PT++ | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](B8_STAGED_IMPLEMENTATION.md) |
-| **B10** | B8 + full PT++ | Unavailable | Unavailable | Unavailable | [![B10 convergence representative capture](assets/b10-paired/convergence.png)](assets/b10-paired/convergence.png) | [low resolution development not accepted](B10_PAIRED_PILOT.md) |
+| **B8** | B8 development: DI + GI-short initial + PT-long | Unavailable | Unavailable | Unavailable | [![B8 convergence representative capture](assets/b8-staged/convergence.png)](assets/b8-staged/convergence.png) | [low resolution development not accepted](B8_STAGED_IMPLEMENTATION.md) |
+| **B9** | B9 development: initial-GI split + footprint/roulette | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](B8_STAGED_IMPLEMENTATION.md) |
+| **B10** | B10 development: initial-GI split + Gaussian pair/vector pilot | Unavailable | Unavailable | Unavailable | [![B10 convergence representative capture](assets/b10-gaussian/convergence.png)](assets/b10-gaussian/convergence.png) | [development not accepted](B10_GAUSSIAN_PAIRING.md) |
 
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -70,7 +70,7 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 - **B7:** Five-seed1280x720 matched MIP0 quality; finite zero-Jacobian targets prevent invalid MIS propagation. Guarded replay-first transport; original scene/material/camera14/2. Throughput and general stability acceptance pending.
 - **B8:** Disjoint initial-GI development executes; DI/PT reuse exercised in room. GI reuse, extended quality/convergence and new timing remain pending. Image is a176x90 development illustration, not a matched comparison.
 - **B9:** Limited footprint/initial-only-roulette ablation executes in room with GI initial only; complete B8/B9 and extended comparisons pending.
-- **B10:** Adjacent reciprocal-pair/vector GPU pilot executes at176x90 with GI initial only. Full GI reuse, Gaussian multi-pair policy, replay compaction and remaining PT++/extended comparisons pending. Image is a176x90 development illustration, not a matched comparison.
+- **B10:** Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending. Image is 1280x720 development coverage, not an accepted matched benchmark.
 
 </details>
 
@@ -88,9 +88,9 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 | **B5** | Native PT + ReSTIR DI3.1 + ReSTIR GI3.1 | 5.421 | 0.351458 | Unavailable | [![B5 kitchen representative capture](assets/native-matrix/kitchen-B5.png)](assets/native-matrix/kitchen-B5.png) | [measured known caps verified](NATIVE_MATRIX_RESULTS.md) |
 | **B6** | ReSTIR PT; DI/GI off | Unavailable | 0.302520 | 0.546629 | [![B6 kitchen representative capture](assets/finite-shift-guard/kitchen-B6.png)](assets/finite-shift-guard/kitchen-B6.png) | [Guarded quality measured; timing pending †](FINITE_SHIFT_GUARD.md) |
 | **B7** | ReSTIR PT + ReSTIR DI3.1; GI off | Unavailable | 0.249775 | 0.440491 | [![B7 kitchen representative capture](assets/finite-shift-guard/kitchen-B7.png)](assets/finite-shift-guard/kitchen-B7.png) | [Guarded quality measured; timing pending †](FINITE_SHIFT_GUARD.md) |
-| **B8** | ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1 | Unavailable | Unavailable | Unavailable | [![B8 kitchen representative capture](assets/b8-staged/kitchen.png)](assets/b8-staged/kitchen.png) | [low resolution development not accepted](B8_STAGED_IMPLEMENTATION.md) |
-| **B9** | B8 + limited PT++ | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](B8_STAGED_IMPLEMENTATION.md) |
-| **B10** | B8 + full PT++ | Unavailable | Unavailable | Unavailable | [![B10 kitchen representative capture](assets/b10-paired/kitchen.png)](assets/b10-paired/kitchen.png) | [low resolution development not accepted](B10_PAIRED_PILOT.md) |
+| **B8** | B8 development: DI + GI-short initial + PT-long | Unavailable | Unavailable | Unavailable | [![B8 kitchen representative capture](assets/b8-staged/kitchen.png)](assets/b8-staged/kitchen.png) | [low resolution development not accepted](B8_STAGED_IMPLEMENTATION.md) |
+| **B9** | B9 development: initial-GI split + footprint/roulette | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](B8_STAGED_IMPLEMENTATION.md) |
+| **B10** | B10 development: initial-GI split + Gaussian pair/vector pilot | Unavailable | Unavailable | Unavailable | [![B10 kitchen representative capture](assets/b10-gaussian/kitchen.png)](assets/b10-gaussian/kitchen.png) | [development not accepted](B10_GAUSSIAN_PAIRING.md) |
 
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -104,7 +104,7 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 - **B7:** Five-seed1280x720 matched MIP0 quality; finite zero-Jacobian targets prevent invalid MIS propagation. Guarded replay-first transport; original scene/material/camera14/2. Throughput and general stability acceptance pending.
 - **B8:** Disjoint initial-GI development executes; DI/PT reuse exercised in room. GI reuse, extended quality/convergence and new timing remain pending. Image is a176x90 development illustration, not a matched comparison.
 - **B9:** Limited footprint/initial-only-roulette ablation executes in room with GI initial only; complete B8/B9 and extended comparisons pending.
-- **B10:** Adjacent reciprocal-pair/vector GPU pilot executes at176x90 with GI initial only. Full GI reuse, Gaussian multi-pair policy, replay compaction and remaining PT++/extended comparisons pending. Image is a176x90 development illustration, not a matched comparison.
+- **B10:** Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending. Image is 1280x720 development coverage, not an accepted matched benchmark.
 
 </details>
 
@@ -128,9 +128,22 @@ These retained measurements remain useful context, but are excluded from the cur
 
 The JSON includes display MSE, available linear MSE and CPU cadence alongside each current result. [Registered-room history curves and finite-reference checks](REGISTERED_ROOM_RESULTS.md) cover B6/B7 at1,8,32,64 warm-up frames and three explicit seeds. These are separate1spp history-settling snapshots, not accumulated-spp convergence or time-to-equal-quality. Native captures use three process restarts without verified independent seeds. Original-scene native quality uses finite4096spp references; the room uses a separate finite8192spp native reference with discrepancy checks. HDR-FLIP is unavailable for native original-shader controls.
 
+## B10 Gaussian development — separate quality cohorts
+
+The room comparison uses one64-frame sequence per policy at640x360, cap4/4, one spatial neighbor and GI initial only. Original-scene rows are one1280x720 image each, original14/2 budgets, eight warm-up frames and spatial-only PT. These values do not replace or rank against the main accepted cohorts. [Full report and actual algorithm scope](B10_GAUSSIAN_PAIRING.md).
+
+|Case|Resolution / frames|Linear RGB MSE ↓|HDR-FLIP ↓|Display-FLIP ↓|
+|---|---|---:|---:|---:|
+|adjacent-room64|640x360 / 64|0.0393616|0.160266|0.098267|
+|gaussian-room64|640x360 / 64|0.0412007|0.159373|0.096257|
+|gaussian-convergence|1280x720 / 1|2.95359|0.536508|0.351035|
+|gaussian-kitchen|1280x720 / 1|0.899919|0.752397|0.406308|
+
+Gaussian room MSE increases about4.7% while FLIP decreases slightly. This mixed result is not promoted. Full GI reuse, simultaneous multi-neighbor reuse, replay compaction and total timing remain pending.
+
 ## Summary and lessons learned
 
-The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 now has a disjoint initial-GI GPU foundation, and a limited PT++ ablation executes. Their176x90 illustrations are explicitly development-only; B10 now has an adjacent reciprocal-pair/vector GPU pilot; full GI reuse, remaining PT++ mechanisms and accepted extended measurements remain pending.
+The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 now has a disjoint initial-GI GPU foundation, and a limited PT++ ablation executes. Their176x90 illustrations are explicitly development-only; B10 now has Gaussian table GPU development with extended-resolution pictures; full GI reuse, remaining PT++ mechanisms and accepted extended measurements remain pending.
 
 ## Changes
 

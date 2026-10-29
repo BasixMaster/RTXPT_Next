@@ -1,0 +1,1182 @@
+{
+  "label": "gaussian-room64",
+  "scene": "WORKSPACE\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+  "mode": "dipt",
+  "output_track": "unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata",
+  "exe_sha256": "90e6dafa7ed6823cfdb93e4b87e1b5219a897527248f48fee1264e5072d1f5eb",
+  "started_utc": "2026-10-29T19:33:03.650708+00:00",
+  "command": [
+    "WORKSPACE\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+    "--scene",
+    "WORKSPACE\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+    "--width",
+    "640",
+    "--height",
+    "360",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "1",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "WORKSPACE\\work\\2026-10-29-gaussian-pairs\\gaussian-room64\\frame.png",
+    "--captureSuffix",
+    "gaussian-room64",
+    "--perfLog",
+    "WORKSPACE\\work\\2026-10-29-gaussian-pairs\\gaussian-room64\\partial-perf.csv",
+    "--b8InitialGIValidation",
+    "true",
+    "--b8Component",
+    "0",
+    "--b8ValidationStage",
+    "1",
+    "--ptPairedSpatialValidation",
+    "true",
+    "--ptGaussianPairingValidation",
+    "true",
+    "--ptFixedSpatialSamples",
+    "1",
+    "--strictDIValidation",
+    "true",
+    "--restirDIMode",
+    "0",
+    "--neeMIS",
+    "0",
+    "--environmentDiffuseMip",
+    "0",
+    "--benchmarkUncapped",
+    "true",
+    "--samplingSeed",
+    "47",
+    "--captureLinearHDR",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--useReSTIRPT",
+    "1",
+    "--restirPTMode",
+    "2",
+    "--maxBounces",
+    "4",
+    "--maxDiffuseBounces",
+    "4",
+    "--captureSequence",
+    "--sequenceFPS",
+    "60",
+    "--sequenceWarmupStart",
+    "0",
+    "--sequenceRecordStart",
+    "0.1",
+    "--sequenceFrameCount",
+    "64"
+  ],
+  "cwd": "WORKSPACE\\outputs\\RTXDI_Next\\bin",
+  "settings": {
+    "width": 640,
+    "height": 360,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 1,
+    "restir_gi": 1,
+    "simple": false,
+    "record_start": 0.1,
+    "frames": 64,
+    "reference_spp": null,
+    "linear_hdr_requested": true,
+    "sampling_seed_requested": 47,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": 0,
+    "nee_mis_requested": 0,
+    "nee_type": 2,
+    "restir_pt": 1,
+    "max_bounces_override": 4,
+    "max_diffuse_bounces_override": 4,
+    "pt_mode": 2
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+  "canonical_experiment": null,
+  "paired_spatial_pilot_requested": true,
+  "gaussian_pairing_requested": true,
+  "development_partition": {
+    "contract_version": 1,
+    "canonical_accepted": false,
+    "gi_reuse": false,
+    "component": 0,
+    "stage": 1,
+    "pt_min_light_inclusive_length": 4
+  },
+  "process_id": 22728,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 23.655999999988126,
+  "images": [
+    {
+      "name": "frame_000_gaussian-room64.png",
+      "sha256": "4a852d8e575681fc702c6b34926118d4398b3f7efc6764084b51910a9f3b5ac7",
+      "bytes": 506638
+    },
+    {
+      "name": "frame_001_gaussian-room64.png",
+      "sha256": "188c26b4a0857792f451d5170903bec780184f64b497a2951ae0490cc5cf3d24",
+      "bytes": 506189
+    },
+    {
+      "name": "frame_002_gaussian-room64.png",
+      "sha256": "c588cb5e491f8c0832cf0a9d9e5d7940b44b18281d6d5d73cfcf634477e6931c",
+      "bytes": 507478
+    },
+    {
+      "name": "frame_003_gaussian-room64.png",
+      "sha256": "eee684bc20a01679b0886e47c884fe263893918a6cc9b1b202eb284448eec159",
+      "bytes": 507229
+    },
+    {
+      "name": "frame_004_gaussian-room64.png",
+      "sha256": "269c213544d56c9bca930848f3da04b7e5d11060347acdff6e6cabcd51b84ff3",
+      "bytes": 507171
+    },
+    {
+      "name": "frame_005_gaussian-room64.png",
+      "sha256": "f39d1dd53e99602e204a0152ab8ef7c9df250c2897e04058e7a3e921f13a8c94",
+      "bytes": 507775
+    },
+    {
+      "name": "frame_006_gaussian-room64.png",
+      "sha256": "061af117fbe7a2f5f72f2b27b319e24bd7b5c58b1c2fa209779a8b9880f52350",
+      "bytes": 506908
+    },
+    {
+      "name": "frame_007_gaussian-room64.png",
+      "sha256": "9d482dea6fb60073cce84233247e9782615492503bf0d0a9280138d551c064e7",
+      "bytes": 506429
+    },
+    {
+      "name": "frame_008_gaussian-room64.png",
+      "sha256": "249ac199f96d7bcdbcf28a2881755ff39e5ec9cbb51532cb852f0268ef656425",
+      "bytes": 507135
+    },
+    {
+      "name": "frame_009_gaussian-room64.png",
+      "sha256": "40e0420f22270fb230f87294605694ce6997f3e2fb0bbf526e743c9a7c916f3c",
+      "bytes": 506399
+    },
+    {
+      "name": "frame_010_gaussian-room64.png",
+      "sha256": "d75a2bfc30a98833e163f342133ec253d7ab2287da596304bf4c43fb5f0257cd",
+      "bytes": 507118
+    },
+    {
+      "name": "frame_011_gaussian-room64.png",
+      "sha256": "df7d40a762c314b4fccc080a05e8d825193c85211f8cfdfe05a068b4e72afa43",
+      "bytes": 506855
+    },
+    {
+      "name": "frame_012_gaussian-room64.png",
+      "sha256": "03eaeb5e3c22e1594fb93bce16d7f9767b9b0b9143f101af802ebed3878f63c5",
+      "bytes": 506653
+    },
+    {
+      "name": "frame_013_gaussian-room64.png",
+      "sha256": "a21fbf29ca1f339f5c7915484cb449fe742e5ff53392a761c3138b4675b7becf",
+      "bytes": 507600
+    },
+    {
+      "name": "frame_014_gaussian-room64.png",
+      "sha256": "e830a90f8664ce8c41220582387693c8ae729793d27089c35075e0ab9f96c0a2",
+      "bytes": 507281
+    },
+    {
+      "name": "frame_015_gaussian-room64.png",
+      "sha256": "644562d42e754c32327d37c23fdc3a83aae232a8e1dbeb0ec58db55bd8d4d2e7",
+      "bytes": 506869
+    },
+    {
+      "name": "frame_016_gaussian-room64.png",
+      "sha256": "185742e57296c2e368c413516278b8ac39a17cfc67246f9a59a44adf000c72a3",
+      "bytes": 507237
+    },
+    {
+      "name": "frame_017_gaussian-room64.png",
+      "sha256": "5feed58ab39afa240b44aef94175d968bb55abd580fc231165123781ee93ccc3",
+      "bytes": 506412
+    },
+    {
+      "name": "frame_018_gaussian-room64.png",
+      "sha256": "0ed6d72a2378ab47ad2d08458d0784826bab1b8202a057091abb222ceb0aac7b",
+      "bytes": 507355
+    },
+    {
+      "name": "frame_019_gaussian-room64.png",
+      "sha256": "c0cf189dd51bcc4de45195e3c9c8fa7de45f10941b9b6f6cc4c9a5a71fc1b770",
+      "bytes": 507330
+    },
+    {
+      "name": "frame_020_gaussian-room64.png",
+      "sha256": "3371aa2e6f628d57205a055a922e81c144945574e0a282465d20364cc6c01ca7",
+      "bytes": 507329
+    },
+    {
+      "name": "frame_021_gaussian-room64.png",
+      "sha256": "89f24310f7d174ed1e173493fbedc6447b93f8414b7a6ffc5ebb74585ea58a54",
+      "bytes": 507429
+    },
+    {
+      "name": "frame_022_gaussian-room64.png",
+      "sha256": "5b950cf4643aa42e78295dba261878d764cbd513b24ce65ebfcdcea129ce257a",
+      "bytes": 507029
+    },
+    {
+      "name": "frame_023_gaussian-room64.png",
+      "sha256": "d77bfb2860dfe9aa4e57fae3768750f44b32b85b72e596455cb7130c2a6d5c02",
+      "bytes": 507318
+    },
+    {
+      "name": "frame_024_gaussian-room64.png",
+      "sha256": "9d819a61cce143833621cefc882db7276bef0c885b1ce01d4679cadcda391508",
+      "bytes": 507596
+    },
+    {
+      "name": "frame_025_gaussian-room64.png",
+      "sha256": "a424a4359411f18d72dc414ad178500e6a81117ba08e7c7e342eb7fb487e7332",
+      "bytes": 506999
+    },
+    {
+      "name": "frame_026_gaussian-room64.png",
+      "sha256": "cb4029911917372ceaf6c738bee9d7279a03be33fa39cf755d566ea0835e6561",
+      "bytes": 506731
+    },
+    {
+      "name": "frame_027_gaussian-room64.png",
+      "sha256": "8141a2752226ed48fc6b09ddcbe3aec8706d02088f00ec25ea11267f015f4aad",
+      "bytes": 507153
+    },
+    {
+      "name": "frame_028_gaussian-room64.png",
+      "sha256": "e32290f9c9454af8d28ffdf58709b30e63be8ecd512e7e742d2eedca626cdc65",
+      "bytes": 506929
+    },
+    {
+      "name": "frame_029_gaussian-room64.png",
+      "sha256": "d66c786f6395702c4bc7a3cb82355a703050c90d5ccc22451e9f0c319ec5abd3",
+      "bytes": 507553
+    },
+    {
+      "name": "frame_030_gaussian-room64.png",
+      "sha256": "797c1450b1a3950e3cb259aedb0a2f9bc5033af7bfd51ee2dac614479e6bdc0a",
+      "bytes": 507366
+    },
+    {
+      "name": "frame_031_gaussian-room64.png",
+      "sha256": "1b11e5bd0ff19ddaa106295dde0d86538b80d6bae30592ef6d16270dcb13ccd7",
+      "bytes": 507265
+    },
+    {
+      "name": "frame_032_gaussian-room64.png",
+      "sha256": "c65bda52009e0518ad70cd7c99433079ea9e45ebed1df0e81e3750e47faaf964",
+      "bytes": 506456
+    },
+    {
+      "name": "frame_033_gaussian-room64.png",
+      "sha256": "e651a7f18874e80b324398a67e38e7987571568c8caf7b34779221890e4d8786",
+      "bytes": 507254
+    },
+    {
+      "name": "frame_034_gaussian-room64.png",
+      "sha256": "8c90d1888fc5ccc214bad629b20bcf18b337f37a5d2e838847367d4eadb2da77",
+      "bytes": 506838
+    },
+    {
+      "name": "frame_035_gaussian-room64.png",
+      "sha256": "68a7f0f46683c59fcc2ab2aefa7b392aaa6ee10ed0b4dd1fbde487698795c9fd",
+      "bytes": 507562
+    },
+    {
+      "name": "frame_036_gaussian-room64.png",
+      "sha256": "d5149b4ebf61010a951b7cde95654b1d27cb7e6b3083e322d807d126864f8740",
+      "bytes": 506786
+    },
+    {
+      "name": "frame_037_gaussian-room64.png",
+      "sha256": "b2247aaf8ccde2dd26a6c67cc17b91741c193d33d1954127988efbd553bc9a25",
+      "bytes": 507289
+    },
+    {
+      "name": "frame_038_gaussian-room64.png",
+      "sha256": "639b24ecaf3b95757c31012469bc95df529698afbb78ab0a6975a5d980da85a1",
+      "bytes": 506539
+    },
+    {
+      "name": "frame_039_gaussian-room64.png",
+      "sha256": "caceb6c5ef02786558516b3380ea5dbbcf69d81610e710c6190f81b074d5bab6",
+      "bytes": 507071
+    },
+    {
+      "name": "frame_040_gaussian-room64.png",
+      "sha256": "380ad0677501e957b648c28360f3a3e2560cccc899ec2c021ed4f2a4dfc0f030",
+      "bytes": 506784
+    },
+    {
+      "name": "frame_041_gaussian-room64.png",
+      "sha256": "49760c83d9aa7fc2bdba4edfaf04ba8e824f5ae5fddeed9b2b61d884078e1f44",
+      "bytes": 507007
+    },
+    {
+      "name": "frame_042_gaussian-room64.png",
+      "sha256": "294fff19779bf4387c733627831f45d677b46299f3bc6e9c57f73db26e848a0e",
+      "bytes": 507224
+    },
+    {
+      "name": "frame_043_gaussian-room64.png",
+      "sha256": "e49d3a385d7eeef3247c61f2221685bc208b109bfe936e05fe110f8a006c98de",
+      "bytes": 506630
+    },
+    {
+      "name": "frame_044_gaussian-room64.png",
+      "sha256": "ffce7557ec812cd98eba236cc716538fc29325fe2cf5e2f05716b883de338097",
+      "bytes": 507208
+    },
+    {
+      "name": "frame_045_gaussian-room64.png",
+      "sha256": "72bd024b9ae3c3957e071319b508defd3023f9062e521dcdc612e95f328ae824",
+      "bytes": 507243
+    },
+    {
+      "name": "frame_046_gaussian-room64.png",
+      "sha256": "0ea5b46f1f7abb0b493507cfad6666780ff4148bf9b23bd28c849acdd38136b0",
+      "bytes": 507065
+    },
+    {
+      "name": "frame_047_gaussian-room64.png",
+      "sha256": "82a0c3eaf9da6cf7b1bd83afa535eb38cb4dae19c6846fd0f3e61ce140f29d7e",
+      "bytes": 507344
+    },
+    {
+      "name": "frame_048_gaussian-room64.png",
+      "sha256": "552982d2916af1ff9d444017ef0b16e2cd4c01e3ea89249159ad0fffa9b17291",
+      "bytes": 507013
+    },
+    {
+      "name": "frame_049_gaussian-room64.png",
+      "sha256": "c475325a7a54849734f4fc4ffbc7c2b2f56559650cd739de29251c462d3002aa",
+      "bytes": 506497
+    },
+    {
+      "name": "frame_050_gaussian-room64.png",
+      "sha256": "f991a19e26c11884f88702c340c7efa9f2f5798a2557a39605d6b4bd554b1ea1",
+      "bytes": 507244
+    },
+    {
+      "name": "frame_051_gaussian-room64.png",
+      "sha256": "28b933578d207f9ccca18c5c44bd23aff5cf75f0cf72b0b5ad14ca261a7a36be",
+      "bytes": 506752
+    },
+    {
+      "name": "frame_052_gaussian-room64.png",
+      "sha256": "dd04a78d5fc9b5e0ba7a5e9be1895be9ad880f686e32601dbdb831b8d867182f",
+      "bytes": 506699
+    },
+    {
+      "name": "frame_053_gaussian-room64.png",
+      "sha256": "23ba7cad871548f51d1c15226962fe7391a373e72796d3620a4aaf9e9fea9b9c",
+      "bytes": 507063
+    },
+    {
+      "name": "frame_054_gaussian-room64.png",
+      "sha256": "037be6110ae5043667371b4c63157409e9757a087aa03b8019066ae11dcdbe47",
+      "bytes": 507570
+    },
+    {
+      "name": "frame_055_gaussian-room64.png",
+      "sha256": "0310c57575d3d0dffe824c6cd397eeec9385b1dfc2d88f03c91671a30a578b9e",
+      "bytes": 506838
+    },
+    {
+      "name": "frame_056_gaussian-room64.png",
+      "sha256": "69d5b05ea60470dc4f9771ad847fd9768acdd77b32d773ed4570d4415f0fbc11",
+      "bytes": 507309
+    },
+    {
+      "name": "frame_057_gaussian-room64.png",
+      "sha256": "ae86a7ef95cc327b04f870c5ed76b5c2a75fc621a7569010b25ad310c2e9cfce",
+      "bytes": 507341
+    },
+    {
+      "name": "frame_058_gaussian-room64.png",
+      "sha256": "b9de3b77bfcd7c701277aad7b7c0e775f381f24470e25e13b3216e385395ae0c",
+      "bytes": 507175
+    },
+    {
+      "name": "frame_059_gaussian-room64.png",
+      "sha256": "0755349699e5e87e83f0ca560d690e0804652b25a5a6cefc23bc2ef027506cca",
+      "bytes": 507676
+    },
+    {
+      "name": "frame_060_gaussian-room64.png",
+      "sha256": "881fc31370e2118bda9af0839e4849dd8359f6c0703f4cd15a88f7a7a0320b52",
+      "bytes": 506954
+    },
+    {
+      "name": "frame_061_gaussian-room64.png",
+      "sha256": "99bb10398428f6f44abc26909cf839542cf32bb823966dae08938a1859756aea",
+      "bytes": 506838
+    },
+    {
+      "name": "frame_062_gaussian-room64.png",
+      "sha256": "93beae650a1e14aab93ab92ed47e6b9a47d4107606b0f27eb43cb5e67186c776",
+      "bytes": 506919
+    },
+    {
+      "name": "frame_063_gaussian-room64.png",
+      "sha256": "090da79f4ad666b84e8c789e8b50f6dd7842d10cd32f5bcf0b2ce8fba14b5acc",
+      "bytes": 507068
+    }
+  ],
+  "linear_hdr_files": [
+    {
+      "name": "frame_000_gaussian-room64.pfm",
+      "sha256": "91984df60d7e13fd8315722b491aff714fd26c4bca2c7c1bdf70d864f10c659a",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_000_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_001_gaussian-room64.pfm",
+      "sha256": "2f46ab9aa035bfeb175674770fa4a274e3dd34ed22bac3726baced46b314c6f9",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_001_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_002_gaussian-room64.pfm",
+      "sha256": "23a0072103e77e7cb75f1140ea0e00ed51ada84ba052f565f261905c2e9cf431",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_002_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_003_gaussian-room64.pfm",
+      "sha256": "7f0b65e4a0b02e6b44223baefc7ac71ec6a10fe27f6a3ea21ba68c0374ce2852",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_003_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_004_gaussian-room64.pfm",
+      "sha256": "f6754557b6562df849fb1c2f9343e0c09e80f1390762cd1362b10b720a912c3a",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_004_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_005_gaussian-room64.pfm",
+      "sha256": "57ca0f2a861758c0a2ac57a5dab259239a2c45f395e5eb3d6e4856b3981dda1b",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_005_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_006_gaussian-room64.pfm",
+      "sha256": "5e9e282730ebbd6f7b2c1d90c2f2a4e85d24c7cee1338e0e1b2d9c8344c78c4a",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_006_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_007_gaussian-room64.pfm",
+      "sha256": "4624361518d76904fcb28044cc2359729383af2ffb27bedee122070b8d332e03",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_007_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_008_gaussian-room64.pfm",
+      "sha256": "3bf8b508231fbbb617c6e7fc6dc05b30ead46adbcee0bad1a4f230cadea3ca3b",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_008_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_009_gaussian-room64.pfm",
+      "sha256": "0f7f0fced0a4d5e90410c4bde230f2fef90dd8c773241c8448175e14fb4f2635",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_009_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_010_gaussian-room64.pfm",
+      "sha256": "02669682a263ec1b05cf2d891110d32a5700cb66ab958f7b85b4849d8769f014",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_010_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_011_gaussian-room64.pfm",
+      "sha256": "fc7648dde1e2cb7918cea08f546556b1c9aa257d126aea97fb4e218657eac842",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_011_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_012_gaussian-room64.pfm",
+      "sha256": "072528ca74557618a3498411c10d58e6f56f91347c9b74a287919c21c355722e",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_012_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_013_gaussian-room64.pfm",
+      "sha256": "9f9ce723eac4ea4d998f839dccf392c796873369bf8782edce12982cf94281db",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_013_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_014_gaussian-room64.pfm",
+      "sha256": "40664a843094a172704c97fde1546668d8d149a4e95b5c19b3e56682378e9eb6",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_014_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_015_gaussian-room64.pfm",
+      "sha256": "c97af372d6e28f7ccf88c094bbd35e5327bc44fbbbc927716dc0790245da5f32",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_015_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_016_gaussian-room64.pfm",
+      "sha256": "07676b4ecc035d428b68a63f4ff902f970582c7891382aafdc3a784acaa5b454",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_016_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_017_gaussian-room64.pfm",
+      "sha256": "8110bdcbd6b577fe4a777c8b839af21608772524fadc144108ce952715092570",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_017_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_018_gaussian-room64.pfm",
+      "sha256": "f5b962b1d752aadbcfb8e9db6fde8400d132a7ae6edf3845d3c0dec4d545b537",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_018_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_019_gaussian-room64.pfm",
+      "sha256": "629c6e296e592b1e9bfbf78fe9f98185eb7257eda14ce4f4e0513e7b70b2f518",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_019_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_020_gaussian-room64.pfm",
+      "sha256": "f011fd7ab0fa7d24c381f9f761177447f86cbf7d0b6a70dcb2597bcd5b6ed192",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_020_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_021_gaussian-room64.pfm",
+      "sha256": "dd8307ea5787029adbf0e85e471d95fdf58b4947df10f8c44132f69ae907d587",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_021_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_022_gaussian-room64.pfm",
+      "sha256": "11aa885b6d6e3f41a4ba94314a3612b58d2ef68dbaa9a4548ac78e9337ff737d",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_022_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_023_gaussian-room64.pfm",
+      "sha256": "48314193f346f7deac26e8cfd7ab249704efc43bedc70213d9ed5a877f753b15",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_023_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_024_gaussian-room64.pfm",
+      "sha256": "9bbbccffa445b9d28637a361b47d1fb9f6625a79cf7503e60b5bc0ba040ac4d8",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_024_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_025_gaussian-room64.pfm",
+      "sha256": "a9dd7f95f18a72646fd18e0ed1649e5442fb1a861f61706726f35a2b373c615b",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_025_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_026_gaussian-room64.pfm",
+      "sha256": "9549da76aaf3fcfc1992cf4e3b587cebdeecf4ca1384eed6f4acb93ac4fd2aa4",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_026_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_027_gaussian-room64.pfm",
+      "sha256": "cf97f5d7a96158fc486c930e618724565d69d062e105e821885985944ad43d3f",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_027_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_028_gaussian-room64.pfm",
+      "sha256": "1c50f476c0edcd26c67b7cf8996457dadbcaefcd29324793cf433a987d5a6dc2",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_028_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_029_gaussian-room64.pfm",
+      "sha256": "02526b2da44dfc89bb4d782864240f8218a84a0f4e76025f29125127143d9755",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_029_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_030_gaussian-room64.pfm",
+      "sha256": "fc58aa167cb00d0b696b067dbd163397e37a3b91eb224cc4d150ca7af6b22db5",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_030_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_031_gaussian-room64.pfm",
+      "sha256": "6adb5ae5fbc5d735853566e29773b27b77a9104cb9267207a2e525aedbb67678",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_031_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_032_gaussian-room64.pfm",
+      "sha256": "5b046dcc3a6cb076d5f442b8493756b813b812490213105fe2cd0ad99536dbdb",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_032_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_033_gaussian-room64.pfm",
+      "sha256": "bb425611942967e2140301e1bbf0d73ba0adc8414e285dfdac4c9ea094a52922",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_033_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_034_gaussian-room64.pfm",
+      "sha256": "40ef79204be49ea82d8b932e32519ec2016e46df385360d7e53598880def119f",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_034_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_035_gaussian-room64.pfm",
+      "sha256": "44f63091b4ce162cf3809bce710f4f4bc15da05e6e0e58cecd40d4dfdbfc6f1a",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_035_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_036_gaussian-room64.pfm",
+      "sha256": "aa1b3233beb16208a17a112408bb6afca74aad2a1cb04d6c1a07a19306f58f43",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_036_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_037_gaussian-room64.pfm",
+      "sha256": "071a073a83228027b66f0c09d65901d221148d4ff853158c0ae42811126c1146",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_037_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_038_gaussian-room64.pfm",
+      "sha256": "e0cb15d2efae4efc0f25020fbb1f284dc58b5f2eac56919f9c8a4fc65a70a27f",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_038_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_039_gaussian-room64.pfm",
+      "sha256": "b64bef186abee8e2229b514f8934c1ecfa9ad7214943f5bb98e826b93f5cc30b",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_039_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_040_gaussian-room64.pfm",
+      "sha256": "9f1c7f8eea0d474860647db3c28d9df79ac940bdd6c652ca30eca5d4ac370324",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_040_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_041_gaussian-room64.pfm",
+      "sha256": "bca0afb7607e58b85bb03b34aaf46be4d9120bba6a6612eba53cf94b60cfb68d",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_041_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_042_gaussian-room64.pfm",
+      "sha256": "ac9aab50114848c5ad2375504b033f866089bdf861043f1140ac9d5aa3e057bb",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_042_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_043_gaussian-room64.pfm",
+      "sha256": "42a29ffbb7b77b0a6762632e92bb742f2c47e927195ad5319bcdd304ed8a8cbb",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_043_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_044_gaussian-room64.pfm",
+      "sha256": "823aff3b0148e38467018b808aa539dff4233f8c239a5fabf48e48a0ca6e567f",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_044_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_045_gaussian-room64.pfm",
+      "sha256": "515c2bfef038e814bce87fc5bda9a7451312ab7f86d7213d9d6ece84872615bd",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_045_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_046_gaussian-room64.pfm",
+      "sha256": "956ef1ee28a137e9a35cc0885a42b0faa1200e95f090e237cec69254c0607c7d",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_046_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_047_gaussian-room64.pfm",
+      "sha256": "6c7d292744d2321ff5d6f1bd9af3e87897182776c79dcc49613321c55558974f",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_047_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_048_gaussian-room64.pfm",
+      "sha256": "d6c5d24c3384087a89c86e0586bc4a65bf4b7523b54ed706da9ecb499f09f076",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_048_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_049_gaussian-room64.pfm",
+      "sha256": "51180a2c30fdb5886475f1f56804069c85ea63e283b00a22ec8e7c800eb2f254",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_049_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_050_gaussian-room64.pfm",
+      "sha256": "615a6976c9e7dcd7047e299a5bc8fc29ff7ed6e7ad23e7608d8b537ad25b06f6",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_050_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_051_gaussian-room64.pfm",
+      "sha256": "34f39ea76d5144b0ea8433fdbe27a733e7b8980cdec63574cdd017f0d3b0e4c2",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_051_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_052_gaussian-room64.pfm",
+      "sha256": "109598fe81f8fbe3c5412593b92164a7a8bea4e14e89b365df8e2fa4eddece3b",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_052_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_053_gaussian-room64.pfm",
+      "sha256": "c3cf04794016663a36105523da25e48314fe0d116dcbf6a41a36912e4028f9c1",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_053_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_054_gaussian-room64.pfm",
+      "sha256": "f896dddaca3c0a444d1abe008fb7b57653244e84f2acac7278495a440d032bb9",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_054_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_055_gaussian-room64.pfm",
+      "sha256": "606ea89fc1be635aaa5282a0d9b698097356d813838fd0a65caead120254a8f2",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_055_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_056_gaussian-room64.pfm",
+      "sha256": "9955008a1fa7e4c6e47c5e9cca44b608b6c93790764e483900619701758fde60",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_056_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_057_gaussian-room64.pfm",
+      "sha256": "58c3cafe1cb23ef76b616d779719da2da8a44e7a143d9da6cd4587364c30213f",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_057_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_058_gaussian-room64.pfm",
+      "sha256": "84c9e52ae3b7c36a938aea59ad7671694846c0aebc2725f38b957ba2cfece5e2",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_058_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_059_gaussian-room64.pfm",
+      "sha256": "38f43197b73fef5cde62d68ebe2edb693910370a7a4b7dc7200e8b643c77fafb",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_059_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_060_gaussian-room64.pfm",
+      "sha256": "ad82e73e1e934554426a108f0d384e17d0edcedc3ccfdcd074bed7f452bb4f79",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_060_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_061_gaussian-room64.pfm",
+      "sha256": "eb1908ff1e8494943e70c52aa0f847376e0241d6793dd407a1a2a959b40e8caf",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_061_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_062_gaussian-room64.pfm",
+      "sha256": "79354f7b491c90062273e73619902aa42accb390692c94e385f5da5a14e88ed8",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_062_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_063_gaussian-room64.pfm",
+      "sha256": "7a33e496d4e35a979936694cb6ed93114e3827ceac2876309130188fb6b80594",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_063_gaussian-room64.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    }
+  ],
+  "effective_b8_partition": {
+    "development": true,
+    "contract_version": 1,
+    "gi_reuse": false,
+    "component": 0,
+    "stage": 1,
+    "pt_min_light_inclusive_length": 4,
+    "canonical_accepted": false
+  },
+  "effective_paired_spatial_pilot": {
+    "enabled": true,
+    "policy": "Gaussian reciprocal tables; one per frame",
+    "pair_owned_shifts": true,
+    "vector_shading": true,
+    "canonical_accepted": false
+  },
+  "effective_environment_filter": {
+    "diffuse_mip": 0.0,
+    "explicit_override": true,
+    "scope": "Filtering identity only; no renderer correctness or acceptance claim"
+  },
+  "effective_sampling": {
+    "coverage": "verified first-frame effective receipt",
+    "seed": 47,
+    "realtime": true,
+    "reference_pixel_center": false,
+    "pixel_jitter_scale": 0.0
+  },
+  "effective_di_validation": {
+    "coverage": "verified first-frame effective receipt",
+    "strict": true,
+    "boiling": false,
+    "discount_naive": false,
+    "temporal_permutation": false
+  },
+  "effective_extended_scene_contract": null,
+  "effective_pt_replay": {
+    "coverage": "verified first-frame effective receipt",
+    "replay_only": false,
+    "roughness_threshold": 0.100000001
+  },
+  "effective_pt_history": {
+    "coverage": "verified first-frame effective receipt",
+    "age_rejection": true,
+    "max_age": 30,
+    "max_history": 8
+  },
+  "effective_pt_spatial": {
+    "coverage": "verified first-frame effective receipt",
+    "samples": 1,
+    "boost": 1
+  },
+  "effective_ptpp": {
+    "coverage": "verified first-frame effective receipt",
+    "reconnection_mode": 0,
+    "roulette_probability": 0.0,
+    "diagnostics": false
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 6,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "not requested; legacy labels retain their original numbering"
+  },
+  "effective_gbuffer_precision": {
+    "rounded_materials": 0,
+    "explicit_override": false,
+    "scope": "Half-up after fp16 conversion; not exact/unbiased BSDF reconstruction"
+  },
+  "effective_di_reuse": {
+    "active": true,
+    "mode": 0,
+    "temporal": false,
+    "spatial": false,
+    "gi": true,
+    "pt": true,
+    "scope": "Effective first-frame settings; not estimator correctness or timing proof"
+  },
+  "effective_prefix_throughput": {
+    "preserve_above_one": false,
+    "capture_packed": false,
+    "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+  }
+}

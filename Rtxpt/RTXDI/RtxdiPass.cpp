@@ -69,6 +69,7 @@ RtxdiPass::RtxdiPass(
 		nvrhi::BindingLayoutItem::StructuredBuffer_SRV(21),		//t_LightDataBuffer
 		nvrhi::BindingLayoutItem::TypedBuffer_SRV(22),			//t_NeighborOffsets
 		nvrhi::BindingLayoutItem::TypedBuffer_SRV(23),			//t_LightIndexMappingBuffer
+        nvrhi::BindingLayoutItem::TypedBuffer_SRV(24),            //t_PTPairingOffsets
 		nvrhi::BindingLayoutItem::Texture_SRV(25),				//t_LocalLightPdfTexture
 		nvrhi::BindingLayoutItem::StructuredBuffer_SRV(26),		//t_GeometryInstanceToLight
 		
@@ -221,6 +222,7 @@ void RtxdiPass::CreateBindingSet(const RenderTargets& renderTargets)
 			nvrhi::BindingSetItem::StructuredBuffer_SRV(21, m_rtxdiResources->LightDataBuffer),
 			nvrhi::BindingSetItem::TypedBuffer_SRV(22, m_rtxdiResources->NeighborOffsetsBuffer),
 			nvrhi::BindingSetItem::TypedBuffer_SRV(23, m_rtxdiResources->LightIndexMappingBuffer),
+            nvrhi::BindingSetItem::TypedBuffer_SRV(24, m_rtxdiResources->PTPairingOffsets),
 			nvrhi::BindingSetItem::Texture_SRV(25, m_rtxdiResources->LocalLightPdfTexture),
 			nvrhi::BindingSetItem::StructuredBuffer_SRV(26, m_rtxdiResources->GeometryInstanceToLightBuffer),
 			
@@ -347,7 +349,8 @@ void RtxdiPass::PrepareResources(
         numEmissiveMeshes > m_rtxdiResources->GetMaxEmissiveMeshes() ||
         numEmissiveTriangles > m_rtxdiResources->GetMaxEmissiveTriangles() ||
         numPrimitiveLights > m_rtxdiResources->GetMaxPrimitiveLights() ||
-        numGeometryInstances > m_rtxdiResources->GetMaxGeometryInstances()))
+        numGeometryInstances > m_rtxdiResources->GetMaxGeometryInstances() ||
+        m_rtxdiResources->HasGaussianPairs() != ((m_BridgeParameters.giPTPartition & 4u) != 0)))
     {
         m_rtxdiResources = nullptr;
     }
@@ -368,7 +371,8 @@ void RtxdiPass::PrepareResources(
             (numEmissiveTriangles + triangleAllocationQuantum - 1) & ~(triangleAllocationQuantum - 1),
             (numPrimitiveLights + primitiveAllocationQuantum - 1) & ~(primitiveAllocationQuantum - 1),
             numGeometryInstances,
-            m_BridgeParameters.usingReSTIRPT ? &m_ImportanceSamplingContext->GetReSTIRPTContext() : nullptr);
+            m_BridgeParameters.usingReSTIRPT ? &m_ImportanceSamplingContext->GetReSTIRPTContext() : nullptr,
+            (m_BridgeParameters.giPTPartition & 4u) != 0);
 
         rtxdiResourceCreated = true;
         m_PTNeedsClear = m_BridgeParameters.usingReSTIRPT;
@@ -862,7 +866,7 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
          << ",\n  \"final_index\": " << indices.finalShadingInputBufferIndex << "\n}\n";
     if (!meta) throw std::runtime_error("PT reservoir metadata write failed");
     nvrhi::BufferDesc statsDesc;
-    statsDesc.byteSize = 45 * sizeof(uint32_t);
+    statsDesc.byteSize = 48 * sizeof(uint32_t);
     statsDesc.cpuAccess = nvrhi::CpuAccessMode::Read;
     statsDesc.debugName = "PTCounterReadback";
     auto stats = m_device->createBuffer(statsDesc);
@@ -906,7 +910,29 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
         << ",\n  \"paired_directed_shift_calls\": " << counters[41]
         << ",\n  \"paired_vector_output_pixels\": " << counters[42]
         << ",\n  \"paired_fallback_pixels\": " << counters[43]
-        << ",\n  \"paired_nonfinite_vectors\": " << counters[44] << "\n}\n";
+        << ",\n  \"paired_nonfinite_vectors\": " << counters[44]
+        << ",\n  \"paired_nonreciprocal_links\": " << counters[45]
+        << ",\n  \"paired_in_view_nonlocal_pairs\": " << counters[46]
+        << ",\n  \"paired_max_link_distance_squared\": " << counters[47] << "\n}\n";
     m_device->unmapBuffer(stats);
     if (!statFile) throw std::runtime_error("PT counter metadata write failed");
+    if ((m_BridgeParameters.giPTPartition & 4u) != 0)
+    {
+        const auto table = m_rtxdiResources->PTPairingOffsets;
+        nvrhi::BufferDesc readDesc;
+        readDesc.byteSize = table->getDesc().byteSize;
+        readDesc.cpuAccess = nvrhi::CpuAccessMode::Read;
+        readDesc.debugName = "PairTableDiagnosticReadback";
+        auto readback = m_device->createBuffer(readDesc);
+        if (!readback) throw std::runtime_error("Pair table staging allocation failed");
+        auto copyTables = m_device->createCommandList();
+        copyTables->open(); copyTables->copyBuffer(readback,0,table,0,readDesc.byteSize); copyTables->close();
+        m_device->executeCommandList(copyTables); m_device->waitForIdle();
+        const void* data = m_device->mapBuffer(readback,nvrhi::CpuAccessMode::Read);
+        if (!data) throw std::runtime_error("Pair table staging map failed");
+        std::ofstream output(path+".pairs.bin",std::ios::binary);
+        output.write(static_cast<const char*>(data),std::streamsize(readDesc.byteSize));
+        m_device->unmapBuffer(readback);
+        if (!output) throw std::runtime_error("Pair table readback write failed");
+    }
 }

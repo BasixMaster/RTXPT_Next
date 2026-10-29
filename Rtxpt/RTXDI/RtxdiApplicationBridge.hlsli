@@ -60,6 +60,7 @@ StructuredBuffer<uint> t_GeometryInstanceToLight            : register(t26 VK_DE
 RWStructuredBuffer<RTXDI_PackedDIReservoir> u_LightReservoirs : register(u13 VK_DESCRIPTOR_SET(2));
 RWStructuredBuffer<RTXDI_PackedGIReservoir> u_GIReservoirs  : register(u14 VK_DESCRIPTOR_SET(2));
 #if defined(RTXPT_RESTIR_PT_BRIDGE)
+Buffer<int2> t_PTPairingOffsets : register(t24 VK_DESCRIPTOR_SET(2));
 RWStructuredBuffer<RTXDI_PackedPTReservoir> u_PTReservoirs : register(u17 VK_DESCRIPTOR_SET(2));
 RWByteAddressBuffer u_PTSpatialNeighbors : register(u18 VK_DESCRIPTOR_SET(2));
 RWStructuredBuffer<uint> u_PTDiagnosticCounters : register(u19 VK_DESCRIPTOR_SET(2));

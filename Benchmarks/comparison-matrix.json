@@ -320,25 +320,25 @@
       "variant": "B10",
       "scene": "convergence",
       "algorithm": "B8 + full PT++",
-      "status": "low_resolution_development_not_accepted",
-      "reason": "Adjacent reciprocal-pair/vector GPU pilot executes at176x90 with GI initial only. Full GI reuse, Gaussian multi-pair policy, replay compaction and remaining PT++/extended comparisons pending.",
-      "development_evidence": "Benchmarks/development/2026-10-29-b10-paired-vector-pilot/summary.json"
+      "status": "development_not_accepted",
+      "reason": "Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending.",
+      "development_evidence": "Benchmarks/development/2026-10-29-gaussian-pairing/summary.json"
     },
     {
       "variant": "B10",
       "scene": "kitchen",
       "algorithm": "B8 + full PT++",
-      "status": "low_resolution_development_not_accepted",
-      "reason": "Adjacent reciprocal-pair/vector GPU pilot executes at176x90 with GI initial only. Full GI reuse, Gaussian multi-pair policy, replay compaction and remaining PT++/extended comparisons pending.",
-      "development_evidence": "Benchmarks/development/2026-10-29-b10-paired-vector-pilot/summary.json"
+      "status": "development_not_accepted",
+      "reason": "Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending.",
+      "development_evidence": "Benchmarks/development/2026-10-29-gaussian-pairing/summary.json"
     },
     {
       "variant": "B10",
       "scene": "opaque-room",
       "algorithm": "B8 + full PT++",
-      "status": "low_resolution_development_not_accepted",
-      "reason": "Adjacent reciprocal-pair/vector GPU pilot executes at176x90 with GI initial only. Full GI reuse, Gaussian multi-pair policy, replay compaction and remaining PT++/extended comparisons pending.",
-      "development_evidence": "Benchmarks/development/2026-10-29-b10-paired-vector-pilot/summary.json"
+      "status": "development_not_accepted",
+      "reason": "Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending.",
+      "development_evidence": "Benchmarks/development/2026-10-29-gaussian-pairing/summary.json"
     }
   ]
 }

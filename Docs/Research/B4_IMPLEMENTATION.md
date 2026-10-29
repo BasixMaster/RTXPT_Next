@@ -51,3 +51,5 @@ B4 owns the substantial remaining PT++ estimator and scheduling work. Design/ora
 ## Changes
 
 - 2026-10-28: Assigned the remaining PT++ work to B4 at the user's request; preserved B3's two-activation scope.
+
+Current scheduling prerequisite: [Gaussian table GPU development](B10_GAUSSIAN_PAIRING.md) supplies an actual transformed one-neighbor control. Explicit replay compaction must preserve that fixed neighborhood/estimator and compare complete output/history under identical inputs; simultaneous multi-neighbor reuse is still a separate step.

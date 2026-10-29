@@ -34,13 +34,14 @@ def build(repo):
                      history_frames=None,quality_replication=None)
             if v in ['B8','B9','B10']:
                 row['report']='B8_STAGED_IMPLEMENTATION.md'
+                row['algorithm']={'B8':'B8 development: DI + GI-short initial + PT-long','B9':'B9 development: initial-GI split + footprint/roulette','B10':'B10 development: initial-GI split + Gaussian pair/vector pilot'}[v]
                 if v=='B8':
                     row['image']='assets/b8-staged/'+({'convergence':'convergence','kitchen':'kitchen','opaque-room':'sum'}[scene])+'.png'
                     row['note']+=' Image is a176x90 development illustration, not a matched comparison.'
                 elif v=='B10':
-                    row['report']='B10_PAIRED_PILOT.md'
-                    row['image']='assets/b10-paired/'+({'convergence':'convergence','kitchen':'kitchen','opaque-room':'room'}[scene])+'.png'
-                    row['note']+=' Image is a176x90 development illustration, not a matched comparison.'
+                    row['report']='B10_GAUSSIAN_PAIRING.md'
+                    row['image']='assets/b10-gaussian/'+({'convergence':'convergence','kitchen':'kitchen','opaque-room':'room'}[scene])+'.png'
+                    row['note']+=' Image is '+('640x360' if scene=='opaque-room' else '1280x720')+' development coverage, not an accepted matched benchmark.'
                 elif v=='B9' and scene=='opaque-room':
                     row['image']='assets/b8-staged/limited-ptpp.png'
                     row['note']+=' Image is a176x90 development illustration, not a matched comparison.'
@@ -102,6 +103,21 @@ def build(repo):
     prefix_path=dev/'2026-10-29-prefix-throughput-probe/physical-summary.json'
     prefix=load(prefix_path) if prefix_path.exists() else None
     if prefix:inputs.append(prefix_path)
+    gaussian=None
+    gaussian_path=dev/'2026-10-29-gaussian-pairing'
+    if gaussian_path.exists():
+        paths=[gaussian_path/'quality.json',gaussian_path/'flip-quality.json']
+        inputs+=paths
+        gq,gf=map(load,paths)
+        gaussian=dict(report='B10_GAUSSIAN_PAIRING.md',scope='Separate development cohorts; not canonical acceptance or timing',rows=[])
+        for label in ['adjacent-room64','gaussian-room64']:
+            f=gf['room']['groups'][label]
+            gaussian['rows'].append(dict(label=label,scene='opaque-room',resolution='640x360',frames=64,
+                linear_mse=gq[label]['single_frame_mse_mean'],hdr_flip=f['mean_frame_hdr_flip'],ldr_flip=f['mean_frame_ldr_flip']))
+        for scene in ['convergence','kitchen']:
+            label='gaussian-'+scene;f=gf[scene]['groups'][label]
+            gaussian['rows'].append(dict(label=label,scene=scene,resolution='1280x720',frames=1,
+                linear_mse=gq[label]['metrics']['linear_rgb_mse'],hdr_flip=f['mean_frame_hdr_flip'],ldr_flip=f['mean_frame_ldr_flip']))
     data=dict(schema_version=1,numbering_scheme=registry['numbering_scheme'],updated_on='2026-10-29',
               metrics=dict(gpu_busy_ms='Median of per-process GPUBusy medians; not complete critical-path frame time/FPS',
                            ldr_flip='Official LDR-FLIP1.7, PPD67; lower is better',hdr_flip='Official HDR-FLIP1.7; scene-reference-only exposure parameters'),
@@ -109,6 +125,7 @@ def build(repo):
     if precision:data['material_precision_ablation']=precision
     if di_reuse:data['di_reuse_ablation']=di_reuse
     if prefix:data['prefix_throughput_diagnostic']=prefix
+    if gaussian:data['gaussian_pairing_development']=gaussian
     (doc/'comparison-overview.json').write_text(json.dumps(data,indent=2,allow_nan=False)+'\n',encoding='utf-8')
     md=['# B0–B10 comparison overview','',
         'All eleven canonical versions appear below for each required scene. Performance, quality and representative pictures share the same row. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; a raw native-control preset does not replace its original defaults.','',
@@ -143,8 +160,16 @@ def build(repo):
       '## Quality detail and convergence coverage','',
       'The JSON includes display MSE, available linear MSE and CPU cadence alongside each current result. [Registered-room history curves and finite-reference checks](REGISTERED_ROOM_RESULTS.md) cover B6/B7 at1,8,32,64 warm-up frames and three explicit seeds. These are separate1spp history-settling snapshots, not accumulated-spp convergence or time-to-equal-quality. Native captures use three process restarts without verified independent seeds. Original-scene native quality uses finite4096spp references; the room uses a separate finite8192spp native reference with discrepancy checks. HDR-FLIP is unavailable for native original-shader controls.','',
       '## Summary and lessons learned','',
-      'The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 now has a disjoint initial-GI GPU foundation, and a limited PT++ ablation executes. Their176x90 illustrations are explicitly development-only; B10 now has an adjacent reciprocal-pair/vector GPU pilot; full GI reuse, remaining PT++ mechanisms and accepted extended measurements remain pending.','',
+      'The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 now has a disjoint initial-GI GPU foundation, and a limited PT++ ablation executes. Their176x90 illustrations are explicitly development-only; B10 now has Gaussian table GPU development with extended-resolution pictures; full GI reuse, remaining PT++ mechanisms and accepted extended measurements remain pending.','',
       '## Changes','', '- 2026-10-29: Added one generated overview with all33 version/scene rows, explicit missing coverage, representative images and retained historical cohort links.','']
+    if gaussian:
+        block=['## B10 Gaussian development — separate quality cohorts','',
+            'The room comparison uses one64-frame sequence per policy at640x360, cap4/4, one spatial neighbor and GI initial only. Original-scene rows are one1280x720 image each, original14/2 budgets, eight warm-up frames and spatial-only PT. These values do not replace or rank against the main accepted cohorts. [Full report and actual algorithm scope](B10_GAUSSIAN_PAIRING.md).','',
+            '|Case|Resolution / frames|Linear RGB MSE ↓|HDR-FLIP ↓|Display-FLIP ↓|','|---|---|---:|---:|---:|']
+        for r in gaussian['rows']:
+            block.append(f"|{r['label']}|{r['resolution']} / {r['frames']}|{r['linear_mse']:.6g}|{r['hdr_flip']:.6f}|{r['ldr_flip']:.6f}|")
+        block+=['','Gaussian room MSE increases about4.7% while FLIP decreases slightly. This mixed result is not promoted. Full GI reuse, simultaneous multi-neighbor reuse, replay compaction and total timing remain pending.','']
+        where=md.index('## Summary and lessons learned');md[where:where]=block
     if precision:
         md += ['## Material precision ablation — defaults unchanged','',
                'A separate matched five-seed experiment compares legacy material truncation with opt-in half-up rounding for B4/B7. These quality-only rows do not replace canonical results or supply throughput. Full settings, uncertainty and limitations: [precision follow-up](GBUFFER_PRECISION.md).','',

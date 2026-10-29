@@ -16,7 +16,7 @@ User-confirmed numbering, 2026-10-29. **B0 is the unchanged RTXPT 1.9 reference 
 | **B7** | **ReSTIR PT + DI 3.1** | DI direct plus PT indirect; GI off. Corrected static opaque checkpoint `de9fe651`; original-scene gates remain unresolved. |
 | **B8** | **ReSTIR PT + DI 3.1 + GI 3.1** | Opt-in disjoint initial-GI/PT-long development executes with DI/PT reuse. General GI reuse and complete canonical validation remain pending. |
 | **B9** | **B8 + limited PT++** | A GI-initial-only footprint/initial-roulette development ablation executes; complete B8/B9 validation remains pending. The historical GI-off pilot is not B9. |
-| **B10** | **B8 + full remaining PT++** | Adjacent reciprocal-pair/vector GPU pilot executes. Gaussian multi-pair reuse, replay queues, remaining mechanisms and full validation remain pending. No complete-paper implementation claim. |
+| **B10** | **B8 + full remaining PT++** | Gaussian reciprocal-pair/vector GPU development executes. Simultaneous multi-neighbor reuse, replay queues, remaining mechanisms and full validation remain pending. No complete-paper implementation claim. |
 
 ## Legacy crosswalk: preserve evidence identities
 

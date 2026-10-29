@@ -1,0 +1,587 @@
+[
+  {
+    "path": "adjacent-room64-mean.pfm.gz",
+    "sha256": "1166fd4f023b39d0ad5038126c4ec0375d6add71a4f260bd0b4473554342199f",
+    "bytes": 1313483
+  },
+  {
+    "path": "cohort-renderer-artifacts.json",
+    "sha256": "7b11790176ca7d41c44801f822dec65e2e113f90f098f4a6771f3d7cb4c0e8ba",
+    "bytes": 101380
+  },
+  {
+    "path": "cohort-renderer-source.patch.gz",
+    "sha256": "82f7af801fca7d1f4dd726c2e589eeb0c287a2a1ce3e41f16717ae7261df7f61",
+    "bytes": 6780
+  },
+  {
+    "path": "final-branch-validation.json",
+    "sha256": "89d80e5fb160b9fa4f0c99ed86bdb1cc6d25dcd205bac20934408974b4e94de3",
+    "bytes": 9475
+  },
+  {
+    "path": "final-guards/final-adjacent-guard/frame_final-adjacent-guard.pfm.gz",
+    "sha256": "9e4da701f7c17a1c7bbd0be23e77869e7061b204fea097e3e52705ee31203563",
+    "bytes": 56710
+  },
+  {
+    "path": "final-guards/final-adjacent-guard/frame_final-adjacent-guard.pfm.native-di-gi-pt.pfm.gz",
+    "sha256": "9e4da701f7c17a1c7bbd0be23e77869e7061b204fea097e3e52705ee31203563",
+    "bytes": 56710
+  },
+  {
+    "path": "final-guards/final-adjacent-guard/frame_final-adjacent-guard.pfm.native-di-gi.pfm.gz",
+    "sha256": "dc817fd18b2814492e99f27fdc969dee9c512f44ff08801edd7ce5d5fc94fffa",
+    "bytes": 51878
+  },
+  {
+    "path": "final-guards/final-adjacent-guard/frame_final-adjacent-guard.pfm.native-di.pfm.gz",
+    "sha256": "a50401b49c50611fc5d09fcd1a265b0643c52ec46e5564cd3c86bfb94e2b2731",
+    "bytes": 41226
+  },
+  {
+    "path": "final-guards/final-adjacent-guard/frame_final-adjacent-guard.pfm.native.pfm.gz",
+    "sha256": "479f7a26a53f94cb3b31cc2f30ca12ce78a644584dfa09ecd8ef75cd721b41c8",
+    "bytes": 266
+  },
+  {
+    "path": "final-guards/final-adjacent-guard/frame_final-adjacent-guard.pfm.pt.bin.gz",
+    "sha256": "62b362f7f73079a468bb7be96946232f6911ed9746c7acf5c04232c5b3b013fe",
+    "bytes": 735413
+  },
+  {
+    "path": "final-guards/final-adjacent-guard/frame_final-adjacent-guard.pfm.pt.bin.json",
+    "sha256": "1866a5b769e4996cdad75d09d5049cf82f4b083c251176b390aa05b7ea1106a9",
+    "bytes": 330
+  },
+  {
+    "path": "final-guards/final-adjacent-guard/frame_final-adjacent-guard.pfm.pt.bin.stats.json",
+    "sha256": "2c23a57e34fe7ea65726a810f6f52ca4687f8f7426fe38ebf993d4045034736b",
+    "bytes": 1330
+  },
+  {
+    "path": "final-guards/final-adjacent-guard/manifest.json",
+    "sha256": "8d531ec9a830bbe4798ad311aa784ff3a9f400d6c0e8aad0f1a05ff90eda27aa",
+    "bytes": 9815
+  },
+  {
+    "path": "final-guards/final-gaussian-guard/frame_final-gaussian-guard.pfm.gz",
+    "sha256": "c0a38c3856d8b8ed25af432d618ae04179eeca6652db07f9e98e67a654814cd9",
+    "bytes": 55851
+  },
+  {
+    "path": "final-guards/final-gaussian-guard/frame_final-gaussian-guard.pfm.native-di-gi-pt.pfm.gz",
+    "sha256": "c0a38c3856d8b8ed25af432d618ae04179eeca6652db07f9e98e67a654814cd9",
+    "bytes": 55851
+  },
+  {
+    "path": "final-guards/final-gaussian-guard/frame_final-gaussian-guard.pfm.native-di-gi.pfm.gz",
+    "sha256": "282b5c412916207309882913c1aab78e56435b2cd067d6d19da5291fe5d7a395",
+    "bytes": 51954
+  },
+  {
+    "path": "final-guards/final-gaussian-guard/frame_final-gaussian-guard.pfm.native-di.pfm.gz",
+    "sha256": "1212074f5e103012f7dd1d626bf288ca87f93e71c6952835b645426d8da6dea9",
+    "bytes": 41282
+  },
+  {
+    "path": "final-guards/final-gaussian-guard/frame_final-gaussian-guard.pfm.native.pfm.gz",
+    "sha256": "479f7a26a53f94cb3b31cc2f30ca12ce78a644584dfa09ecd8ef75cd721b41c8",
+    "bytes": 266
+  },
+  {
+    "path": "final-guards/final-gaussian-guard/frame_final-gaussian-guard.pfm.pt.bin.gz",
+    "sha256": "a9a4da0e347257dff1b52ee29c770bd2eddcb4861c03768fd2b8d672f0b8cde4",
+    "bytes": 736613
+  },
+  {
+    "path": "final-guards/final-gaussian-guard/frame_final-gaussian-guard.pfm.pt.bin.json",
+    "sha256": "1866a5b769e4996cdad75d09d5049cf82f4b083c251176b390aa05b7ea1106a9",
+    "bytes": 330
+  },
+  {
+    "path": "final-guards/final-gaussian-guard/frame_final-gaussian-guard.pfm.pt.bin.stats.json",
+    "sha256": "2d9efd14026682d129d16480db1098bd4b2add9de85c0233460e496a8cc0e4f3",
+    "bytes": 1337
+  },
+  {
+    "path": "final-guards/final-gaussian-guard/manifest.json",
+    "sha256": "5459d8edceea109c42bb91865b5ead5b1338e5f74688c8e851f4b775e9c6afd8",
+    "bytes": 10053
+  },
+  {
+    "path": "final-renderer-artifacts.json",
+    "sha256": "7b95c70195a3fc0aaf1e27faa2376ccb60c161db09ee95a66361af6146afd1c4",
+    "bytes": 101380
+  },
+  {
+    "path": "flip-quality.json",
+    "sha256": "f568e03ad58ae51bcc40311796ebeae0cf786ecddf2f2633b7c4340c6fa98624",
+    "bytes": 52771
+  },
+  {
+    "path": "gaussian-room64-mean.pfm.gz",
+    "sha256": "b266493311e4eb83664376a73daac686bf2e9ded932f32eaa4a04fde62e59903",
+    "bytes": 1315236
+  },
+  {
+    "path": "gpu-checks.json",
+    "sha256": "52a51db589ef0988d523ea85057f373d75e89cc0b59c1ddac75cb6c3ca57118c",
+    "bytes": 37610
+  },
+  {
+    "path": "native-pairing.bin.gz",
+    "sha256": "c6f2e9effc9f732837094b30fdd47d4564df574b13dfcc2824df46191ce4dc5f",
+    "bytes": 354108
+  },
+  {
+    "path": "native-pairing.json",
+    "sha256": "ce75e61b3e2e933d660263c33e71fd89ade163b31e98c2086c9ab73dbc34ed3e",
+    "bytes": 413
+  },
+  {
+    "path": "portable-inspection.json",
+    "sha256": "39066864efe038f5c567ff2479b367776961f10c6455b5b4f73ad04fb9e95ccf",
+    "bytes": 722
+  },
+  {
+    "path": "python-tests.log",
+    "sha256": "8170c1abf63bc0391124549958521ab2785653b15560f5639f46656b08904d74",
+    "bytes": 312
+  },
+  {
+    "path": "quality.json",
+    "sha256": "3cbfee56d0ca43c4a9e089075528a35771ead6d4a7ee6308527e004bf574bf23",
+    "bytes": 2085
+  },
+  {
+    "path": "README.md",
+    "sha256": "3db2ef5666543f53a9f67b3c4a6e13b0f3d77bd41fa722d1fff2ec282f593ba3",
+    "bytes": 3261
+  },
+  {
+    "path": "renderer-source.patch.gz",
+    "sha256": "659f75f8b93dc2b9deab31da10f23aa803f43afd0ddc2e3d256a70591b38335c",
+    "bytes": 6880
+  },
+  {
+    "path": "runs/adjacent-room64/manifest.json",
+    "sha256": "607a8ac71e079275ed39bea3c2be1ec28b72dcac18d4e213f73776353f9c08e2",
+    "bytes": 39227
+  },
+  {
+    "path": "runs/adjacent-room64/renderer.log",
+    "sha256": "e3e7d76ff5f32babedc27eb233496901a6027be7010d600da31b79efc5b9cd1e",
+    "bytes": 1247
+  },
+  {
+    "path": "runs/gaussian-cap1/frame_gaussian-cap1.pfm.gz",
+    "sha256": "fc8350030c647a33cf41d21ac5ea69f483ca0f6be76e901e1a6bd738ebdd6266",
+    "bytes": 587810
+  },
+  {
+    "path": "runs/gaussian-cap1/frame_gaussian-cap1.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-cap1/frame_gaussian-cap1.pfm.native-di-gi-pt.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-cap1/frame_gaussian-cap1.pfm.native-di-gi.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-cap1/frame_gaussian-cap1.pfm.native-di.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-cap1/frame_gaussian-cap1.pfm.native.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-cap1/frame_gaussian-cap1.pfm.pt.bin.json",
+    "sha256": "1194aebb8a26650ef842be359c07df48bd47de281c9188c522696ef47e307610",
+    "bytes": 333
+  },
+  {
+    "path": "runs/gaussian-cap1/frame_gaussian-cap1.pfm.pt.bin.stats.json",
+    "sha256": "238d61dd5c87aa42521af1961c558a28405fbde8937355aa277bd7920ed0cfda",
+    "bytes": 1417
+  },
+  {
+    "path": "runs/gaussian-cap1/manifest.json",
+    "sha256": "e46adc013576190db97e6d2cdcfd7a8a7a2fbe4a1643275a43af5d717febadcc",
+    "bytes": 9845
+  },
+  {
+    "path": "runs/gaussian-cap1/renderer.log",
+    "sha256": "ec42c1165a21135a158d1fffe18747723b72b1c4ab853451f1ea9b76dd8f523d",
+    "bytes": 1662
+  },
+  {
+    "path": "runs/gaussian-cap2/frame_gaussian-cap2.pfm.gz",
+    "sha256": "6f209085f065a78ff38d15230390ddea8b58ba2ec6249c1a867ab7ed83cc3a33",
+    "bytes": 759899
+  },
+  {
+    "path": "runs/gaussian-cap2/frame_gaussian-cap2.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-cap2/frame_gaussian-cap2.pfm.native-di-gi-pt.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-cap2/frame_gaussian-cap2.pfm.native-di-gi.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-cap2/frame_gaussian-cap2.pfm.native-di.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-cap2/frame_gaussian-cap2.pfm.native.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-cap2/frame_gaussian-cap2.pfm.pt.bin.json",
+    "sha256": "1194aebb8a26650ef842be359c07df48bd47de281c9188c522696ef47e307610",
+    "bytes": 333
+  },
+  {
+    "path": "runs/gaussian-cap2/frame_gaussian-cap2.pfm.pt.bin.stats.json",
+    "sha256": "238d61dd5c87aa42521af1961c558a28405fbde8937355aa277bd7920ed0cfda",
+    "bytes": 1417
+  },
+  {
+    "path": "runs/gaussian-cap2/manifest.json",
+    "sha256": "88b9db075c9b80c2ff1f0edd4762a9109341b85b350036d9da0a5d4601123a8c",
+    "bytes": 9898
+  },
+  {
+    "path": "runs/gaussian-cap2/renderer.log",
+    "sha256": "7a1a2056596b8a8670141d3d50af460677bb7b52b24699cd8ccc2f8b08bb9b8b",
+    "bytes": 1662
+  },
+  {
+    "path": "runs/gaussian-convergence/frame_gaussian-convergence.pfm.gz",
+    "sha256": "8dbd25b2cc16db9151ce533b083644be8fb0dd8c0bb2d35094e76cf52b71b6c4",
+    "bytes": 5882175
+  },
+  {
+    "path": "runs/gaussian-convergence/frame_gaussian-convergence.pfm.json",
+    "sha256": "0bb592e7d99f4fbb0ac4d89ac85f437150aafb270c60bbd6647d7a53b1dc7a8e",
+    "bytes": 682
+  },
+  {
+    "path": "runs/gaussian-convergence/frame_gaussian-convergence.pfm.native-di-gi-pt.pfm.json",
+    "sha256": "0bb592e7d99f4fbb0ac4d89ac85f437150aafb270c60bbd6647d7a53b1dc7a8e",
+    "bytes": 682
+  },
+  {
+    "path": "runs/gaussian-convergence/frame_gaussian-convergence.pfm.native-di-gi.pfm.json",
+    "sha256": "0bb592e7d99f4fbb0ac4d89ac85f437150aafb270c60bbd6647d7a53b1dc7a8e",
+    "bytes": 682
+  },
+  {
+    "path": "runs/gaussian-convergence/frame_gaussian-convergence.pfm.native-di.pfm.json",
+    "sha256": "0bb592e7d99f4fbb0ac4d89ac85f437150aafb270c60bbd6647d7a53b1dc7a8e",
+    "bytes": 682
+  },
+  {
+    "path": "runs/gaussian-convergence/frame_gaussian-convergence.pfm.native.pfm.json",
+    "sha256": "0bb592e7d99f4fbb0ac4d89ac85f437150aafb270c60bbd6647d7a53b1dc7a8e",
+    "bytes": 682
+  },
+  {
+    "path": "runs/gaussian-convergence/frame_gaussian-convergence.pfm.pt.bin.json",
+    "sha256": "ac031427b28de4c6670798061beaf84a5ae76c0227b2f5144a81dbea81b3f52f",
+    "bytes": 333
+  },
+  {
+    "path": "runs/gaussian-convergence/frame_gaussian-convergence.pfm.pt.bin.stats.json",
+    "sha256": "c49244a3cee924efd0ac6d15521acb133eda9ad76204ce8d206b71a56daf7e53",
+    "bytes": 1474
+  },
+  {
+    "path": "runs/gaussian-convergence/manifest.json",
+    "sha256": "87c8c86d9e100a7a6aa452b744d750bed9760d970858a9b58e0f3bfbccdfe5c2",
+    "bytes": 10526
+  },
+  {
+    "path": "runs/gaussian-convergence/renderer.log",
+    "sha256": "4fa2509da9b492ab5ba119105cc7d5f931a3837574f7a4b3645861394a7a01e9",
+    "bytes": 2220
+  },
+  {
+    "path": "runs/gaussian-kitchen/frame_gaussian-kitchen.pfm.gz",
+    "sha256": "bf812ba901c981c2e6eba3b0b4972cabc975edd46fe685e704e1a8bb17fa6e0a",
+    "bytes": 3612993
+  },
+  {
+    "path": "runs/gaussian-kitchen/frame_gaussian-kitchen.pfm.json",
+    "sha256": "0bb592e7d99f4fbb0ac4d89ac85f437150aafb270c60bbd6647d7a53b1dc7a8e",
+    "bytes": 682
+  },
+  {
+    "path": "runs/gaussian-kitchen/frame_gaussian-kitchen.pfm.native-di-gi-pt.pfm.json",
+    "sha256": "0bb592e7d99f4fbb0ac4d89ac85f437150aafb270c60bbd6647d7a53b1dc7a8e",
+    "bytes": 682
+  },
+  {
+    "path": "runs/gaussian-kitchen/frame_gaussian-kitchen.pfm.native-di-gi.pfm.json",
+    "sha256": "0bb592e7d99f4fbb0ac4d89ac85f437150aafb270c60bbd6647d7a53b1dc7a8e",
+    "bytes": 682
+  },
+  {
+    "path": "runs/gaussian-kitchen/frame_gaussian-kitchen.pfm.native-di.pfm.json",
+    "sha256": "0bb592e7d99f4fbb0ac4d89ac85f437150aafb270c60bbd6647d7a53b1dc7a8e",
+    "bytes": 682
+  },
+  {
+    "path": "runs/gaussian-kitchen/frame_gaussian-kitchen.pfm.native.pfm.json",
+    "sha256": "0bb592e7d99f4fbb0ac4d89ac85f437150aafb270c60bbd6647d7a53b1dc7a8e",
+    "bytes": 682
+  },
+  {
+    "path": "runs/gaussian-kitchen/frame_gaussian-kitchen.pfm.pt.bin.json",
+    "sha256": "cfee1ec6fcd25e1bf5223c5ee15b3ab29199bd0421f851d0f327b436266f1930",
+    "bytes": 334
+  },
+  {
+    "path": "runs/gaussian-kitchen/frame_gaussian-kitchen.pfm.pt.bin.stats.json",
+    "sha256": "e6f52068647f8c82145fabb5d82d05ca357deba1b5ec468482f4b46778aa3268",
+    "bytes": 1469
+  },
+  {
+    "path": "runs/gaussian-kitchen/manifest.json",
+    "sha256": "5286239767f63767d7366e5c539f9576cd4a598c69e35dbc7b3c2e3651b723d9",
+    "bytes": 10455
+  },
+  {
+    "path": "runs/gaussian-kitchen/renderer.log",
+    "sha256": "5bf2be15b006ba9915d038613de405d6336a4217a7adcfe06359428e2b4ecc29",
+    "bytes": 2551
+  },
+  {
+    "path": "runs/gaussian-limited-temporal-h8/frame_gaussian-limited-temporal-h8.pfm.gz",
+    "sha256": "180590491f50c217aaf5a0f777fd1ba41a7265240ee923339159b0f06c97c100",
+    "bytes": 877725
+  },
+  {
+    "path": "runs/gaussian-limited-temporal-h8/frame_gaussian-limited-temporal-h8.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-limited-temporal-h8/frame_gaussian-limited-temporal-h8.pfm.native-di-gi-pt.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-limited-temporal-h8/frame_gaussian-limited-temporal-h8.pfm.native-di-gi.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-limited-temporal-h8/frame_gaussian-limited-temporal-h8.pfm.native-di.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-limited-temporal-h8/frame_gaussian-limited-temporal-h8.pfm.native.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-limited-temporal-h8/frame_gaussian-limited-temporal-h8.pfm.pt.bin.json",
+    "sha256": "eea75c2a7aa1bf903939a30072fa26215a96f1b11f747551e33fc542e8270ed9",
+    "bytes": 332
+  },
+  {
+    "path": "runs/gaussian-limited-temporal-h8/frame_gaussian-limited-temporal-h8.pfm.pt.bin.stats.json",
+    "sha256": "324abd5fffd443437398f0e02e45e819e926358d2e64f134aa1034c1d1ed4b84",
+    "bytes": 1462
+  },
+  {
+    "path": "runs/gaussian-limited-temporal-h8/manifest.json",
+    "sha256": "395c70397716de10bad2085bb54d9ea58285bbc16e89f9f525e4f13f5cf566c7",
+    "bytes": 10324
+  },
+  {
+    "path": "runs/gaussian-limited-temporal-h8/renderer.log",
+    "sha256": "38b15f86b8bfb609a847896e7aa5d56f4ce55242fbb66d04a1153f4fd77d6936",
+    "bytes": 2239
+  },
+  {
+    "path": "runs/gaussian-room-h8/frame_gaussian-room-h8.pfm.gz",
+    "sha256": "7a704168031abf1b2103fe9b27f6947f8ea00607cf22e5e59e99f5bfb62e8ad1",
+    "bytes": 848504
+  },
+  {
+    "path": "runs/gaussian-room-h8/frame_gaussian-room-h8.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-room-h8/frame_gaussian-room-h8.pfm.native-di-gi-pt.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-room-h8/frame_gaussian-room-h8.pfm.native-di-gi.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-room-h8/frame_gaussian-room-h8.pfm.native-di.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-room-h8/frame_gaussian-room-h8.pfm.native.pfm.json",
+    "sha256": "23bbb846f581063ccb45173299047345bc4f26485a661b70c1e07889108e9b2e",
+    "bytes": 680
+  },
+  {
+    "path": "runs/gaussian-room-h8/frame_gaussian-room-h8.pfm.pt.bin.json",
+    "sha256": "a3237fd3af5f57c6bb9c1400bad495a73a9132021b3c80d08c417ed42591cc53",
+    "bytes": 332
+  },
+  {
+    "path": "runs/gaussian-room-h8/frame_gaussian-room-h8.pfm.pt.bin.stats.json",
+    "sha256": "a35c86c13c43932bc6b25a9e282714514b339073534d035d48aaa8640028621b",
+    "bytes": 1443
+  },
+  {
+    "path": "runs/gaussian-room-h8/manifest.json",
+    "sha256": "6f8eb7f3812d8a23098da7090b62efdd41e51beb5d75aa02acca98726bd93a6e",
+    "bytes": 10007
+  },
+  {
+    "path": "runs/gaussian-room-h8/renderer.log",
+    "sha256": "c65d4c73f517f0eed5dea47ac78e6ef3cc6f8b31ee042b58eeb3227a13f1a36d",
+    "bytes": 2229
+  },
+  {
+    "path": "runs/gaussian-room64/manifest.json",
+    "sha256": "e693940fc6c036d4bf37c7d6703193bdbfed94e1e9ffe6721d336631c0ad4f69",
+    "bytes": 39294
+  },
+  {
+    "path": "runs/gaussian-room64/renderer.log",
+    "sha256": "6eda98a180de0dfba8d55e1328304d232f4ae9f9aaf39dba632693df179a5f68",
+    "bytes": 1419
+  },
+  {
+    "path": "runs/gpu-h1/frame_gaussian-h1.pfm.gz",
+    "sha256": "6a123c823977b2a5e5ec1275403e64c79a06c4c7cfb7bd0b122c604aff5feb06",
+    "bytes": 55833
+  },
+  {
+    "path": "runs/gpu-h1/frame_gaussian-h1.pfm.json",
+    "sha256": "5d14b359ebceeb614886b73817d42f571c56d837b6dee2683c1c9ae22e197972",
+    "bytes": 676
+  },
+  {
+    "path": "runs/gpu-h1/frame_gaussian-h1.pfm.native-di-gi-pt.pfm.gz",
+    "sha256": "6a123c823977b2a5e5ec1275403e64c79a06c4c7cfb7bd0b122c604aff5feb06",
+    "bytes": 55833
+  },
+  {
+    "path": "runs/gpu-h1/frame_gaussian-h1.pfm.native-di-gi-pt.pfm.json",
+    "sha256": "5d14b359ebceeb614886b73817d42f571c56d837b6dee2683c1c9ae22e197972",
+    "bytes": 676
+  },
+  {
+    "path": "runs/gpu-h1/frame_gaussian-h1.pfm.native-di-gi.pfm.gz",
+    "sha256": "bef70c0785a0d948400627118ee564c6f05a6580eea8b38554ef37e992dbb88f",
+    "bytes": 51904
+  },
+  {
+    "path": "runs/gpu-h1/frame_gaussian-h1.pfm.native-di-gi.pfm.json",
+    "sha256": "5d14b359ebceeb614886b73817d42f571c56d837b6dee2683c1c9ae22e197972",
+    "bytes": 676
+  },
+  {
+    "path": "runs/gpu-h1/frame_gaussian-h1.pfm.native-di.pfm.gz",
+    "sha256": "b4f4eff383e1ce0d7634a038c3c8112f370a9e473ccfc8a83b1f900c6988bb25",
+    "bytes": 41234
+  },
+  {
+    "path": "runs/gpu-h1/frame_gaussian-h1.pfm.native-di.pfm.json",
+    "sha256": "5d14b359ebceeb614886b73817d42f571c56d837b6dee2683c1c9ae22e197972",
+    "bytes": 676
+  },
+  {
+    "path": "runs/gpu-h1/frame_gaussian-h1.pfm.native.pfm.gz",
+    "sha256": "479f7a26a53f94cb3b31cc2f30ca12ce78a644584dfa09ecd8ef75cd721b41c8",
+    "bytes": 266
+  },
+  {
+    "path": "runs/gpu-h1/frame_gaussian-h1.pfm.native.pfm.json",
+    "sha256": "5d14b359ebceeb614886b73817d42f571c56d837b6dee2683c1c9ae22e197972",
+    "bytes": 676
+  },
+  {
+    "path": "runs/gpu-h1/frame_gaussian-h1.pfm.pt.bin.gz",
+    "sha256": "a9a4da0e347257dff1b52ee29c770bd2eddcb4861c03768fd2b8d672f0b8cde4",
+    "bytes": 736613
+  },
+  {
+    "path": "runs/gpu-h1/frame_gaussian-h1.pfm.pt.bin.json",
+    "sha256": "1866a5b769e4996cdad75d09d5049cf82f4b083c251176b390aa05b7ea1106a9",
+    "bytes": 330
+  },
+  {
+    "path": "runs/gpu-h1/frame_gaussian-h1.pfm.pt.bin.stats.json",
+    "sha256": "7e5efa251a04f5e825540144e3835d2f185d6bc622fd93d951c2a01efa7313d9",
+    "bytes": 1437
+  },
+  {
+    "path": "runs/gpu-h1/manifest.json",
+    "sha256": "218b67d269890b2b3ed0ffa4792f3c82df7ba0683b12877b81e9532e6a3eecb7",
+    "bytes": 9886
+  },
+  {
+    "path": "runs/gpu-h1/renderer.log",
+    "sha256": "e742a997fdf4c6695ffa8aefac85a8a0069f9cc0e3a8b8e023f57ccc8a00411f",
+    "bytes": 1662
+  },
+  {
+    "path": "runs/reference-room2048/frame_reference-room2048.pfm.gz",
+    "sha256": "94df561288f90689725e5a64aeee5d8f74ee93313a0e8b3cf39f5a9637e435b8",
+    "bytes": 1445011
+  },
+  {
+    "path": "runs/reference-room2048/frame_reference-room2048.pfm.json",
+    "sha256": "0928b691e689b51fb6cec32c2970a69ff04c9e14c247776d6c84bdbe612d9a5e",
+    "bytes": 681
+  },
+  {
+    "path": "runs/reference-room2048/manifest.json",
+    "sha256": "b2d8015869208ad93e89da784d873e4b9f8d989bd226bf2d5644720be0f8ec72",
+    "bytes": 6117
+  },
+  {
+    "path": "runs/reference-room2048/renderer.log",
+    "sha256": "98ff3f82219b64257a5bc1e739ec0f467a1dfc447da17c46d3a263ee439233de",
+    "bytes": 1146
+  },
+  {
+    "path": "summary.json",
+    "sha256": "f5948b3fdb0b9c1e4bdd0320e4768d91f90a3dc5a7e062d3a2fb6018dbdc6581",
+    "bytes": 13947
+  }
+]

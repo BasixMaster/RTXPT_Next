@@ -4,6 +4,7 @@
  * pairing textures and replay compaction are separate remaining B10 work. */
 #ifndef RTXPT_PAIRED_SPATIAL_PILOT_HLSLI
 #define RTXPT_PAIRED_SPATIAL_PILOT_HLSLI
+#include "PairingLookup.hlsli"
 
 struct RTXPT_PairShift
 {
@@ -70,11 +71,30 @@ void RTXPT_PairResample(uint2 pixel, RTXDI_PTReservoir own, RTXPT_PairShift inco
 void RTXPT_RunPairedSpatialPilot(uint2 pixel)
 {
     const uint2 dims = uint2(g_Const.ptConsts.imageWidth, g_Const.ptConsts.imageHeight);
+    const bool gaussian=(g_RtxdiBridgeConst.giPTPartition & 4u)!=0;
     uint2 partner = uint2(pixel.x ^ 1u, pixel.y);
+    // Keep the disabled policy from evaluating a large lookup against the
+    // one-element dummy resource, including on backends without robust reads.
+    [branch] if (gaussian) partner=uint2(RTXPT_GaussianPartner(pixel));
     // An incomplete edge pair retains its original estimate. Never clamp an
     // out-of-view neighbor: that would destroy the reciprocal relation.
-    const bool single = partner.x >= dims.x;
-    if (!single && pixel.x > partner.x) return; // Exactly one owner per pair.
+    bool single = any(partner >= dims);
+    [branch] if (gaussian)
+    {
+        if (!single && any(RTXPT_GaussianPartner(partner)!=int2(pixel)))
+        {
+            if (g_RtxdiBridgeConst.ptDiagnostics != 0) InterlockedAdd(u_PTDiagnosticCounters[45],1);
+            single=true;
+        }
+    }
+    if (!single && pixel.y*dims.x+pixel.x > partner.y*dims.x+partner.x) return;
+    if (!single && gaussian && g_RtxdiBridgeConst.ptDiagnostics != 0)
+    {
+        int2 delta=int2(partner)-int2(pixel);
+        uint distanceSquared=uint(delta.x*delta.x+delta.y*delta.y);
+        if (distanceSquared>1) InterlockedAdd(u_PTDiagnosticCounters[46],1);
+        InterlockedMax(u_PTDiagnosticCounters[47],distanceSquared);
+    }
     const RTXDI_ReservoirBufferParameters buffers = g_RtxdiBridgeConst.restirPT.reservoirBuffer;
     const RTXDI_PTBufferIndices indices = g_RtxdiBridgeConst.restirPT.bufferIndices;
     RAB_Surface a = RAB_GetGBufferSurface(pixel, false);

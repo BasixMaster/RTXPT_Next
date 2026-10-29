@@ -68,6 +68,7 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
             ("b8Component", "Development component:0 sum,1 native,2 DI,3 GI-short,4 PT-long", value(B8Component))
             ("b8ValidationStage", "GI-short development:0 initial,1 DI/PT reuse,2 limited PT++ ablation", value(B8ValidationStage))
             ("ptPairedSpatialValidation", "Development: pair-owned adjacent reciprocal shifts and vector shading", value(PTPairedSpatialValidation))
+            ("ptGaussianPairingValidation", "Development: resident Gaussian reciprocal tables and frame transforms", value(PTGaussianPairingValidation))
             ("strictDIValidation", "DI validation: disable boiling rejection and naive-neighbor discount; retain raytraced bias correction", value(StrictDIValidation))
             ("diLightMode", "DI local light proposals: 0 uniform, 1 power RIS, 2 ReGIR RIS", value(OverrideDILightMode))
             ("diBrdfSamples", "DI initial BRDF candidate count (0..32)", value(OverrideDIBrdfSamples))

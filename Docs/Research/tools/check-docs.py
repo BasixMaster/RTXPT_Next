@@ -60,7 +60,7 @@ for name in ['B3','B4','B5']:assert by_id[name]['source_sha']==b1 and by_id[name
 for name in ['B6','B7']:assert by_id[name]['source_sha']=='de9fe651903f203327830e7361ac4237e00d508c'
 for name in ['B8','B9','B10']:
     assert by_id[name]['source_sha'] is None and by_id[name]['ref'] is None
-    assert by_id[name]['status'] in ['development_partition_gi_initial_only','development_limited_ptpp_gi_initial_only','development_paired_vector_pilot']
+    assert by_id[name]['status'] in ['development_partition_gi_initial_only','development_limited_ptpp_gi_initial_only','development_gaussian_pairing_pilot']
     assert (P/by_id[name]['development_evidence']/'summary.json').is_file()
 flags={'B1':(1,0,0),'B2':(1,1,0),'B3':(0,0,0),'B4':(1,0,0),'B5':(1,1,0),'B6':(0,0,1),'B7':(1,0,1),'B8':(1,1,1),'B9':(1,1,1),'B10':(1,1,1)}
 for name,expected_flags in flags.items():assert tuple(by_id[name]['configuration'][k] for k in ['restir_di','restir_gi','restir_pt'])==expected_flags
@@ -178,9 +178,11 @@ for row in overview['rows']:
     if row['image']:assert (D/row['image']).is_file()
     if row['variant'] in ['B8','B9','B10']:
         assert row['gpu_busy_ms'] is None and row['hdr_flip'] is None and row['ldr_flip'] is None
-        assert row['report']==('B10_PAIRED_PILOT.md' if row['variant']=='B10' else 'B8_STAGED_IMPLEMENTATION.md')
+        assert row['report']==('B10_GAUSSIAN_PAIRING.md' if row['variant']=='B10' else 'B8_STAGED_IMPLEMENTATION.md')
         if row['image'] is not None:
-            assert 'development' in row['status'] and '176x90' in row['note']
+            assert 'development' in row['status']
+            expected_size=('640x360' if row['scene']=='opaque-room' else '1280x720') if row['variant']=='B10' else '176x90'
+            assert expected_size in row['note']
 for relative,digest in overview['source_hashes'].items():
     assert hashlib.sha256((P/relative).read_bytes()).hexdigest()==digest
 assert 'id="comparison-overview"' in page and 'comparison-overview.json' in page
@@ -357,7 +359,55 @@ if paired.exists():
     assert json.loads((paired/'vector-output-activation.json').read_text())['different_pixels']>0
     checks.append(dict(name='B10 paired/vector frozen source and bytes, 7GPU ownership/finite receipts and 256official HDR/display FLIP frame evaluations',status='passed',limits='Adjacent single-pair policy and GI initial only; full mechanisms, acceptance and total timing pending.'))
 
-receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and an adjacent B10 pair/vector pilot execute; full GI reuse, remaining mechanisms and canonical acceptance remain pending.'])
+gaussian=P/'Benchmarks/development/2026-10-29-gaussian-pairing'
+if gaussian.exists():
+    import gzip,struct
+    for item in json.loads((gaussian/'files.json').read_text()):
+        blob=(gaussian/item['path']).read_bytes()
+        assert len(blob)==item['bytes'] and hashlib.sha256(blob).hexdigest()==item['sha256']
+    identity=json.loads((gaussian/'final-renderer-artifacts.json').read_text())
+    assert hashlib.sha256(gzip.decompress((gaussian/'renderer-source.patch.gz').read_bytes())).hexdigest()==identity['working_diff_sha256']
+    cohort_identity=json.loads((gaussian/'cohort-renderer-artifacts.json').read_text())
+    assert hashlib.sha256(gzip.decompress((gaussian/'cohort-renderer-source.patch.gz').read_bytes())).hexdigest()==cohort_identity['working_diff_sha256']
+    guards=json.loads((gaussian/'final-branch-validation.json').read_text())
+    assert guards['comparison']['same_frame_index'] and guards['comparison']['packed_reservoir_bytes_equal']
+    for label in ['final-gaussian-guard','final-adjacent-guard']:
+        g=guards[label]
+        assert g['stats']['paired_nonfinite_vectors']==g['stats']['paired_nonreciprocal_links']==0
+        assert all(v['nonfinite_target_valid']==v['nonfinite_weight_valid']==v['nonfinite_m']==0 for v in g['reservoirs'].values())
+    native=gzip.decompress((gaussian/'native-pairing.bin.gz').read_bytes())
+    native_hash=hashlib.sha256(native).hexdigest()
+    assert len(native)==1292128
+    summary=json.loads((gaussian/'summary.json').read_text())
+    assert summary['native_payload_sha256']==native_hash and len(summary['runs'])==10
+    assert all(r['status']=='captured' and r['exe_sha256']==identity['executable_sha256'] for r in summary['runs'].values())
+    gpu=json.loads((gaussian/'gpu-checks.json').read_text());assert len(gpu)==7
+    for run in gpu.values():
+        s=run['stats'];r=run['checks']
+        assert run['gpu_tables_sha256']==native_hash
+        assert s['paired_nonreciprocal_links']==s['paired_nonfinite_vectors']==s['replay_roulette_tests']==0
+        assert s['paired_in_view_nonlocal_pairs']>0 and s['paired_max_link_distance_squared']>1
+        assert 2*s['paired_eligible_pairs']+s['paired_fallback_pixels']==s['paired_vector_output_pixels']==r['pixels']
+        assert s['paired_directed_shift_calls']<=2*s['paired_eligible_pairs']
+        assert all(v['nonfinite_target_valid']==v['nonfinite_weight_valid']==v['nonfinite_m']==0 for v in run['reservoirs'].values())
+    for cap in (1,2):
+        c=summary['runs']['gaussian-cap'+str(cap)]['component_checks'][0]['components']
+        assert c['pt_long']['nonzero_pixels']==0
+        if cap==1:assert c['gi_short']['nonzero_pixels']==0
+    flip=json.loads((gaussian/'flip-quality.json').read_text())
+    for scene in ['room','convergence','kitchen']:
+        for g in flip[scene]['groups'].values():
+            assert len(g['frames'])==(64 if scene=='room' else 1)
+            assert g['mean_image_hdr_flip']['evaluator_version']=='1.7'
+            assert g['mean_image_hdr_flip']['parameters']==flip[scene]['hdr_parameters']
+    q=json.loads((gaussian/'quality.json').read_text())
+    assert q['gaussian-room64']['single_frame_mse_mean']>q['adjacent-room64']['single_frame_mse_mean']
+    assert 'gaussian_pairing_development' in overview and len(overview['gaussian_pairing_development']['rows'])==4
+    for name,size in [('room',(640,360)),('convergence',(1280,720)),('kitchen',(1280,720))]:
+        assert struct.unpack('>II',(D/'assets/b10-gaussian'/f'{name}.png').read_bytes()[16:24])==size
+    checks.append(dict(name='Gaussian native/GPU exact bytes, 7reciprocity/coverage gates, original-resolution images, 130official FLIP evaluations and explicit quality tradeoff',status='passed',limits='One table/neighbor per frame; GI initial only; queues, remaining features and timing pending.'))
+
+receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; full GI reuse, simultaneous multi-neighbor reuse, replay queues, remaining mechanisms and canonical acceptance remain pending.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))
 print(json.dumps(dict(passed=True,checks=len(checks),scenes=len(scenes),math_expressions=page.count('<math '))))

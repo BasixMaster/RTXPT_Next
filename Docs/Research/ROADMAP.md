@@ -4,6 +4,8 @@
 
 The user deferred brightness fixes and prioritized B8–B10. See [staged implementation](B8_STAGED_IMPLEMENTATION.md) for the executed initial-GI contribution split, DI/PT reuse and limited PT++ ablation, with explicit remaining gates.
 
+[Gaussian GPU pairing](B10_GAUSSIAN_PAIRING.md) now passes table-upload/transform and original-resolution diagnostic gates. Preserve the adjacent control and the measured MSE/FLIP tradeoff; explicit replay compaction is the next scheduling increment.
+
 ## Current execution order and acceptance gates
 
 1. Preserve B0 defaults/source/assets. Define B1 native PT + DI3.0 and B2 native PT + DI/GI3.0 as explicit configurations, distinct from the B0 native-only raw control.

@@ -28,6 +28,7 @@ private:
     uint32_t m_MaxPrimitiveLights = 0;
     uint32_t m_MaxGeometryInstances = 0;
     bool m_HasPTResources = false;
+    bool m_HasGaussianPairs = false;
 
 public:
     nvrhi::BufferHandle TaskBuffer;
@@ -43,6 +44,7 @@ public:
     nvrhi::BufferHandle PTReservoirBuffer;
     nvrhi::BufferHandle PTSpatialNeighborSelectionBuffer;
     nvrhi::BufferHandle PTDiagnosticCounters;
+    nvrhi::BufferHandle PTPairingOffsets;
     nvrhi::TextureHandle LocalLightPdfTexture;
 
     RtxdiResources(
@@ -53,7 +55,7 @@ public:
         uint32_t maxEmissiveTriangles,
         uint32_t maxPrimitiveLights,
         uint32_t maxGeometryInstances,
-        const rtxdi::ReSTIRPTContext* ptContext = nullptr);
+        const rtxdi::ReSTIRPTContext* ptContext = nullptr, bool gaussianPairs = false);
 
     void InitializeNeighborOffsets(nvrhi::ICommandList* commandList, uint32_t neighborOffsetCount);
 
@@ -62,6 +64,7 @@ public:
     uint32_t GetMaxPrimitiveLights() const { return m_MaxPrimitiveLights; }
     uint32_t GetMaxGeometryInstances() const { return m_MaxGeometryInstances; }
     bool HasPTResources() const { return m_HasPTResources; }
+    bool HasGaussianPairs() const { return m_HasGaussianPairs; }
 
     nvrhi::BufferHandle GetRisLightDataBuffer() const { return RisLightDataBuffer; }
     nvrhi::BufferHandle GetLightDataBuffer() const { return LightDataBuffer; }

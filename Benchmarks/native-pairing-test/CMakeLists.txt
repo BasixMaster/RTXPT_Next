@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.20)
+project(RtxptPairingFixture LANGUAGES CXX)
+add_executable(pairing_fixture pairing_fixture.cpp)
+target_compile_features(pairing_fixture PRIVATE cxx_std_20)
+target_include_directories(pairing_fixture PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../../Rtxpt/RTXDI/PT")
+enable_testing()
+add_test(NAME pairing_native_involution_and_distribution COMMAND pairing_fixture "${CMAKE_CURRENT_BINARY_DIR}/native-pairing.bin")

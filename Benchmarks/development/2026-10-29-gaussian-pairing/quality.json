@@ -1,0 +1,58 @@
+{
+  "gaussian-room64": {
+    "frames": 64,
+    "actual_resolution": [
+      640,
+      360
+    ],
+    "single_frame_mse_mean": 0.041200661471002334,
+    "mean_of_frames": {
+      "linear_rgb_mse": 0.0005219178347604047,
+      "smape_cgns_y100": 2.3909932183035343,
+      "full_frame_reference_mean_luminance": 0.35394583432136145,
+      "mape_rgb_ydenom": 0.042749374030192515,
+      "relmse_project": 0.018053728125316706,
+      "relative_metrics_available": true
+    }
+  },
+  "adjacent-room64": {
+    "frames": 64,
+    "actual_resolution": [
+      640,
+      360
+    ],
+    "single_frame_mse_mean": 0.0393615623068449,
+    "mean_of_frames": {
+      "linear_rgb_mse": 0.0004947308019075451,
+      "smape_cgns_y100": 2.3182398379333713,
+      "full_frame_reference_mean_luminance": 0.35394583432136145,
+      "mape_rgb_ydenom": 0.041296327954745776,
+      "relmse_project": 0.016301025513054054,
+      "relative_metrics_available": true
+    }
+  },
+  "gaussian-convergence": {
+    "scope": "One original-resolution guarded image; not a replicated scene acceptance or convergence result",
+    "reference_sha256": "9189238be4e1ca4e482acce79b841628e6d56a2bae3fd7a14b57dafae3dff5af",
+    "metrics": {
+      "linear_rgb_mse": 2.953594240142324,
+      "smape_cgns_y100": 44.58744149116266,
+      "full_frame_reference_mean_luminance": 0.4028925357846507,
+      "mape_rgb_ydenom": 0.835211791546396,
+      "relmse_project": 27.012024603848726,
+      "relative_metrics_available": true
+    }
+  },
+  "gaussian-kitchen": {
+    "scope": "One original-resolution guarded image; not a replicated scene acceptance or convergence result",
+    "reference_sha256": "5c5d7929c37d1ac371a28050879c554e5e0e0b7fedfce93f829d8a846bc96185",
+    "metrics": {
+      "linear_rgb_mse": 0.8999188044305915,
+      "smape_cgns_y100": 73.53011969308751,
+      "full_frame_reference_mean_luminance": 0.11080162979992278,
+      "mape_rgb_ydenom": 1.2336889344157072,
+      "relmse_project": 390.7337057672422,
+      "relative_metrics_available": true
+    }
+  }
+}

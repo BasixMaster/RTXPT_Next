@@ -1,5 +1,7 @@
 # B10 development: GPU reciprocal pairs and vector shading
 
+**Retained adjacent-pair checkpoint.** The subsequent [Gaussian GPU implementation](B10_GAUSSIAN_PAIRING.md) adds resident tables, frame transforms and larger-resolution diagnostics. The measurements and remaining-work list here describe this earlier checkpoint.
+
 The first B10 GPU pilot now executes **pair-owned reciprocal spatial shifts and separate vector-weight shading**. It builds on the disjoint initial-GI/PT-long foundation. It is a partial development implementation, not full PT++ or canonical B10 acceptance. Brightness work remains deferred.
 
 ## Implemented scope
