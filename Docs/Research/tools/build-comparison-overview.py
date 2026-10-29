@@ -87,12 +87,16 @@ def build(repo):
     di_reuse_path=dev/'2026-10-29-di-reuse-isolation/quality-summary.json'
     di_reuse=load(di_reuse_path) if di_reuse_path.exists() else None
     if di_reuse:inputs.append(di_reuse_path)
+    prefix_path=dev/'2026-10-29-prefix-throughput-probe/physical-summary.json'
+    prefix=load(prefix_path) if prefix_path.exists() else None
+    if prefix:inputs.append(prefix_path)
     data=dict(schema_version=1,numbering_scheme=registry['numbering_scheme'],updated_on='2026-10-29',
               metrics=dict(gpu_busy_ms='Median of per-process GPUBusy medians; not complete critical-path frame time/FPS',
                            ldr_flip='Official LDR-FLIP1.7, PPD67; lower is better',hdr_flip='Official HDR-FLIP1.7; scene-reference-only exposure parameters'),
               source_hashes={p.relative_to(repo).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},rows=rows)
     if precision:data['material_precision_ablation']=precision
     if di_reuse:data['di_reuse_ablation']=di_reuse
+    if prefix:data['prefix_throughput_diagnostic']=prefix
     (doc/'comparison-overview.json').write_text(json.dumps(data,indent=2,allow_nan=False)+'\n',encoding='utf-8')
     md=['# B0–B10 comparison overview','',
         'All eleven canonical versions appear below for each required scene. Performance, quality and representative pictures share the same row. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; a raw native-control preset does not replace its original defaults.','',
@@ -161,6 +165,21 @@ def build(repo):
                     pictures.append(f'<a href="{name}"><img src="{name}" width="120" alt="{scene} {variant} DI mode{mode}"></a>')
                 md.append(f"|{scene.title()} / {variant}|{'|'.join(values)}|{' '.join(pictures)}|")
         md += ['', 'All four modes keep DI active. Mode0 disables temporal/spatial reuse, not initial RIS or final DI shading. Signed Y uses the same raw-HDR finite references; it is not brightness-normalized. Full HDR/LDR-FLIP results and sample standard errors are in the linked report.','']
+    if prefix:
+        md += ['## Prefix-throughput diagnostic — no quality gain claimed','',
+               'A calibrated diagnostic found zero packed prefix pixels above one in eight physical snapshots. Omitted legacy default and preserve-above-one arrays were identical in the four observed pairs. This does not explain the sampled brightness discrepancy. The synthetic positive control is excluded from physical images and quality/performance claims. [Scope, calibration and pictures](PREFIX_THROUGHPUT.md).','',
+               '|Scene / variant|Default max / above-one pixels|Preserve max / above-one pixels|Default / preserve pictures|',
+               '|---|---:|---:|---|']
+        by_key={(x['scene'],x['variant'],x['preserve']):x for x in prefix['rows']}
+        for scene in ['convergence','kitchen']:
+            for variant in ['B4','B7']:
+                a=by_key[scene,variant,False]['statistics'];c=by_key[scene,variant,True]['statistics'];pictures=[]
+                for kind in ['omitted-default','preserve1']:
+                    name=f'assets/prefix-throughput/{scene}-{variant}-{kind}-s0.png'
+                    if not (doc/name).is_file():raise ValueError('Missing prefix diagnostic picture')
+                    pictures.append(f'<a href="{name}"><img src="{name}" width="120" alt="{scene} {variant} {kind}"></a>')
+                md.append(f"|{scene.title()} / {variant}|{a['max_component']:.1f} / {a['pixels_above_one']}|{c['max_component']:.1f} / {c['pixels_above_one']}|{' '.join(pictures)}|")
+        md += ['', 'One seed and final-frame packed weights only; not a raw-float range proof, unbiasedness result or throughput benchmark. The legacy clamp remains default.','']
     (doc/'COMPARISON_OVERVIEW.md').write_text('\n'.join(md),encoding='utf-8')
     print(json.dumps(dict(rows=len(rows),measured_rows=sum(x['gpu_busy_ms'] is not None for x in rows),images=sum(x['image'] is not None for x in rows))))
 

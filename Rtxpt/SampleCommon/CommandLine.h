@@ -58,6 +58,8 @@ struct CommandLineOptions
     int OverrideReSTIRDIMode       = -1;
     int OverrideNEEMIS            = -1;
     int OverrideEnvironmentDiffuseMip = -1;
+    int PreserveGBufferThroughput = 0; // Opt-in upper-clamp ablation; legacy default0.
+    bool CaptureGBufferThroughput = false; // Packed texture diagnostic, with HDR only.
     int RoundedGBufferMaterials = 0; // Opt-in precision ablation; legacy packing remains default.
     int OverrideDILightMode       = -1;
     int OverrideDIBrdfSamples     = -1;

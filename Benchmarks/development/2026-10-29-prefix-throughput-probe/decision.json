@@ -1,0 +1,9 @@
+{
+  "status": "clamp_hypothesis_not_supported_in_observed_frames",
+  "physical_captures": 8,
+  "synthetic_calibration_passed": true,
+  "large_quality_study_launched": false,
+  "default_changed": false,
+  "limits": "One seed, two static scenes/two variants, final frames only. Packed values not raw prepack float32; no general range or unbiasedness proof.",
+  "next": "Investigate DI sampling/PDF support consistency separately; current callback audit is not a measured root cause."
+}

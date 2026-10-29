@@ -1,0 +1,34 @@
+[
+  {
+    "scene": "convergence",
+    "variant": "B4",
+    "packed_weight_arrays_equal": true,
+    "radiance_arrays_equal": false,
+    "max_abs_radiance_difference": 1399.672607421875,
+    "scope": "Separate-process snapshots. Equal prefix arrays do not imply equal native/light/RIS paths. No quality gain inferred."
+  },
+  {
+    "scene": "convergence",
+    "variant": "B7",
+    "packed_weight_arrays_equal": true,
+    "radiance_arrays_equal": false,
+    "max_abs_radiance_difference": 363.4296875,
+    "scope": "Separate-process snapshots. Equal prefix arrays do not imply equal native/light/RIS paths. No quality gain inferred."
+  },
+  {
+    "scene": "kitchen",
+    "variant": "B4",
+    "packed_weight_arrays_equal": true,
+    "radiance_arrays_equal": false,
+    "max_abs_radiance_difference": 97.625,
+    "scope": "Separate-process snapshots. Equal prefix arrays do not imply equal native/light/RIS paths. No quality gain inferred."
+  },
+  {
+    "scene": "kitchen",
+    "variant": "B7",
+    "packed_weight_arrays_equal": true,
+    "radiance_arrays_equal": false,
+    "max_abs_radiance_difference": 345.75,
+    "scope": "Separate-process snapshots. Equal prefix arrays do not imply equal native/light/RIS paths. No quality gain inferred."
+  }
+]

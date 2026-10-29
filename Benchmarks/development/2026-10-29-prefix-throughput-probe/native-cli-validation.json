@@ -1,0 +1,14 @@
+[
+  {
+    "case": "out-of-range",
+    "exit_code": 1,
+    "expected_diagnostic_present": true,
+    "prompt_exit": true
+  },
+  {
+    "case": "missing-hdr",
+    "exit_code": 1,
+    "expected_diagnostic_present": true,
+    "prompt_exit": true
+  }
+]

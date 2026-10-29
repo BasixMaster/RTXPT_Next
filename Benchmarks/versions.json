@@ -96,6 +96,11 @@
           3
         ],
         "default": "Existing renderer and material packing preserved"
+      },
+      "prefix_throughput_probe": {
+        "status": "diagnostic_complete_no_clamp_observed",
+        "evidence": "Benchmarks/development/2026-10-29-prefix-throughput-probe",
+        "default": "Legacy upper clamp retained; no quality improvement promoted"
       }
     },
     {
@@ -175,6 +180,11 @@
           3
         ],
         "default": "Existing renderer and material packing preserved"
+      },
+      "prefix_throughput_probe": {
+        "status": "diagnostic_complete_no_clamp_observed",
+        "evidence": "Benchmarks/development/2026-10-29-prefix-throughput-probe",
+        "default": "Legacy upper clamp retained; no quality improvement promoted"
       }
     },
     {

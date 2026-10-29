@@ -14,6 +14,14 @@ namespace rtxpt
     bool SaveLinearHdrPFM(nvrhi::IDevice* device, nvrhi::ITexture* texture,
         const std::filesystem::path& path, std::string& error);
 
+    // Packed R32_UINT Throughput diagnostic. Header: RTXPTTHP, then little-endian
+    // uint32 version1,width,height,pixelBytes4; tightly packed top-to-bottom rows.
+    // Stored prefix weights, not radiance; no conversion, tone map or exposure.
+    bool SavePackedThroughput(nvrhi::IDevice* device, nvrhi::ITexture* texture,
+        const std::filesystem::path& path, std::string& error);
+    bool WriteMappedPackedThroughput(const void* data, size_t rowPitch,
+        unsigned int width, unsigned int height, const std::filesystem::path& path, std::string& error);
+
     // Same encoding for already mapped, top-to-bottom texture rows. Exposed so
     // CPU fixture tests can check the actual writer independently of a GPU.
     bool WriteMappedLinearHdrPFM(const void* data, size_t rowPitch,

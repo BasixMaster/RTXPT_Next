@@ -1,5 +1,7 @@
 # Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap
 
+[Calibrated prefix-throughput investigation](PREFIX_THROUGHPUT.md): no clamp activation observed in the sampled packed weights; defaults unchanged.
+
 [DI-stage isolation: initial sampling versus temporal/spatial reuse](DI_REUSE_ISOLATION.md).
 
 [DI brightness follow-up: matched material-precision ablation](GBUFFER_PRECISION.md). Canonical defaults remain unchanged.

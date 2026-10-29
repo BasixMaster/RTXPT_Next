@@ -8,8 +8,8 @@
     "hdr_flip": "Official HDR-FLIP1.7; scene-reference-only exposure parameters"
   },
   "source_hashes": {
-    "Benchmarks/versions.json": "5c533d43f081ad87220478c8eefeafa074485aea3fa3615e74eabd915c63d390",
-    "Benchmarks/comparison-matrix.json": "9603dce45bc6c99aabc187aa13f441ec8436a76f04350d5b1970be3005e6301e",
+    "Benchmarks/versions.json": "ab9c56fa1d79d0be955ee006a5e0aeb60945d19349247feb74e17c4160e4e768",
+    "Benchmarks/comparison-matrix.json": "0933359da76ab4b4f527cec14de0d3f596f6dabb3076239e772ff8c118b5afa7",
     "Benchmarks/development/2026-10-29-canonical-native-di/display-quality-summary.json": "b45c3ff27c71d0669a3df7b02e2392473c5405826962650f992e93072affdb2c",
     "Benchmarks/development/2026-10-29-canonical-native-di-timing/comparison.json": "2b2171e2abafb5c2e1aa7398da1880a475db858831a7549ab79b310fd0090dc1",
     "Benchmarks/development/2026-10-29-registered-room/quality-summary.json": "112d35ad78562ab184dd79bf5a1d9f242aa128726529b9edcfea351ab60c0f01",
@@ -18,7 +18,8 @@
     "Benchmarks/development/2026-10-29-original-scene-pt-development/overview-input.json": "18e5e72d2d47b7ba4a6cce6bb152ce8cec3481dbb9d1f66e7c7fe30ce2e15029",
     "Benchmarks/development/2026-10-29-finite-shift-guard/overview-input.json": "42a23ca36745daddeac0d9246ecec0187bcca558a5cb976f2de3beb38b6397e1",
     "Benchmarks/development/2026-10-29-gbuffer-precision/quality-summary.json": "2b3dba9695cce8856c30999a9998a99549a296aa4814db063305a356f2b7f6bf",
-    "Benchmarks/development/2026-10-29-di-reuse-isolation/quality-summary.json": "3193550ff16801a4e6fa73d39cbb581e08703dea89c91db53a7307a2e363d443"
+    "Benchmarks/development/2026-10-29-di-reuse-isolation/quality-summary.json": "3193550ff16801a4e6fa73d39cbb581e08703dea89c91db53a7307a2e363d443",
+    "Benchmarks/development/2026-10-29-prefix-throughput-probe/physical-summary.json": "d93e8c9c6f236676a1f5726a27fc36f18b15851ef517fa6c7548b988fd678eea"
   },
   "rows": [
     {
@@ -5405,5 +5406,195 @@
       }
     },
     "reference_source": "2026-10-29-finite-guard-original-resolution"
+  },
+  "prefix_throughput_diagnostic": {
+    "scope": "Eight final-frame prefix observations after byte-exact physical restoration, including omitted legacy default; no broad unbiasedness or quality-gain proof",
+    "rows": [
+      {
+        "scene": "convergence",
+        "variant": "B4",
+        "preserve": false,
+        "statistics": {
+          "dimensions": [
+            1280,
+            720
+          ],
+          "pixels": 921600,
+          "nonfinite_components": 0,
+          "pixels_above_one": 0,
+          "positive_pixels": 890083,
+          "max_component": 1.0,
+          "excess_component_sum": 0.0,
+          "scope": "Decoded packed dominant-prefix weights at captured frame; not prepack float32 values or radiance loss"
+        },
+        "effective": {
+          "preserve_above_one": false,
+          "capture_packed": true,
+          "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+        }
+      },
+      {
+        "scene": "convergence",
+        "variant": "B4",
+        "preserve": true,
+        "statistics": {
+          "dimensions": [
+            1280,
+            720
+          ],
+          "pixels": 921600,
+          "nonfinite_components": 0,
+          "pixels_above_one": 0,
+          "positive_pixels": 890083,
+          "max_component": 1.0,
+          "excess_component_sum": 0.0,
+          "scope": "Decoded packed dominant-prefix weights at captured frame; not prepack float32 values or radiance loss"
+        },
+        "effective": {
+          "preserve_above_one": true,
+          "capture_packed": true,
+          "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+        }
+      },
+      {
+        "scene": "convergence",
+        "variant": "B7",
+        "preserve": false,
+        "statistics": {
+          "dimensions": [
+            1280,
+            720
+          ],
+          "pixels": 921600,
+          "nonfinite_components": 0,
+          "pixels_above_one": 0,
+          "positive_pixels": 896000,
+          "max_component": 1.0,
+          "excess_component_sum": 0.0,
+          "scope": "Decoded packed dominant-prefix weights at captured frame; not prepack float32 values or radiance loss"
+        },
+        "effective": {
+          "preserve_above_one": false,
+          "capture_packed": true,
+          "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+        }
+      },
+      {
+        "scene": "convergence",
+        "variant": "B7",
+        "preserve": true,
+        "statistics": {
+          "dimensions": [
+            1280,
+            720
+          ],
+          "pixels": 921600,
+          "nonfinite_components": 0,
+          "pixels_above_one": 0,
+          "positive_pixels": 896000,
+          "max_component": 1.0,
+          "excess_component_sum": 0.0,
+          "scope": "Decoded packed dominant-prefix weights at captured frame; not prepack float32 values or radiance loss"
+        },
+        "effective": {
+          "preserve_above_one": true,
+          "capture_packed": true,
+          "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+        }
+      },
+      {
+        "scene": "kitchen",
+        "variant": "B4",
+        "preserve": false,
+        "statistics": {
+          "dimensions": [
+            1280,
+            720
+          ],
+          "pixels": 921600,
+          "nonfinite_components": 0,
+          "pixels_above_one": 0,
+          "positive_pixels": 862336,
+          "max_component": 1.0,
+          "excess_component_sum": 0.0,
+          "scope": "Decoded packed dominant-prefix weights at captured frame; not prepack float32 values or radiance loss"
+        },
+        "effective": {
+          "preserve_above_one": false,
+          "capture_packed": true,
+          "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+        }
+      },
+      {
+        "scene": "kitchen",
+        "variant": "B4",
+        "preserve": true,
+        "statistics": {
+          "dimensions": [
+            1280,
+            720
+          ],
+          "pixels": 921600,
+          "nonfinite_components": 0,
+          "pixels_above_one": 0,
+          "positive_pixels": 862336,
+          "max_component": 1.0,
+          "excess_component_sum": 0.0,
+          "scope": "Decoded packed dominant-prefix weights at captured frame; not prepack float32 values or radiance loss"
+        },
+        "effective": {
+          "preserve_above_one": true,
+          "capture_packed": true,
+          "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+        }
+      },
+      {
+        "scene": "kitchen",
+        "variant": "B7",
+        "preserve": false,
+        "statistics": {
+          "dimensions": [
+            1280,
+            720
+          ],
+          "pixels": 921600,
+          "nonfinite_components": 0,
+          "pixels_above_one": 0,
+          "positive_pixels": 870573,
+          "max_component": 1.0,
+          "excess_component_sum": 0.0,
+          "scope": "Decoded packed dominant-prefix weights at captured frame; not prepack float32 values or radiance loss"
+        },
+        "effective": {
+          "preserve_above_one": false,
+          "capture_packed": true,
+          "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+        }
+      },
+      {
+        "scene": "kitchen",
+        "variant": "B7",
+        "preserve": true,
+        "statistics": {
+          "dimensions": [
+            1280,
+            720
+          ],
+          "pixels": 921600,
+          "nonfinite_components": 0,
+          "pixels_above_one": 0,
+          "positive_pixels": 870573,
+          "max_component": 1.0,
+          "excess_component_sum": 0.0,
+          "scope": "Decoded packed dominant-prefix weights at captured frame; not prepack float32 values or radiance loss"
+        },
+        "effective": {
+          "preserve_above_one": true,
+          "capture_packed": true,
+          "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+        }
+      }
+    ],
+    "any_preserved_values_above_one": false
   }
 }

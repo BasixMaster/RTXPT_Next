@@ -70,6 +70,8 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
             ("captureNativeRadiance", "HDR diagnostic: save native radiance before DI/GI/PT additions", value(CaptureNativeRadiance))
             ("restirDIMode", "DI reuse override: 0 initial only, 1 temporal, 2 spatial, 3 both", value(OverrideReSTIRDIMode))
             ("neeMIS", "Native NEE MIS: 0 exact, 1 auto, 2 approximate", value(OverrideNEEMIS))
+            ("preserveGBufferThroughput", "Diagnostic: preserve prefix throughput above1; 0 legacy clamp, 1 no upper clamp", value(PreserveGBufferThroughput))
+            ("captureGBufferThroughput", "With HDR, save packed dominant-prefix throughput texture", value(CaptureGBufferThroughput))
             ("roundedGBufferMaterials", "Diagnostic: rounded material GBuffer packing; default retains legacy truncation", value(RoundedGBufferMaterials))
             ("environmentDiffuseMip", "Explicit native environment diffuse MIP (0..16); 0 for matched unfiltered validation, omitted preserves defaults", value(OverrideEnvironmentDiffuseMip))
             ("restirPTMode", "PT resampling: 0 initial only, 1 temporal, 2 spatial, 3 both", value(ReSTIRPTMode))
@@ -103,6 +105,17 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
 		int argc = _argc;
 		char const* const* argv = _argv;
 		options.parse(argc, argv);
+        if (PreserveGBufferThroughput < 0 || PreserveGBufferThroughput > 1 ||
+            (CaptureGBufferThroughput && !CaptureLinearHDR))
+        {
+            if (nonInteractive)
+            {
+                donut::log::EnableOutputToMessageBox(false);
+                donut::log::EnableOutputToConsole(true);
+            }
+            donut::log::error("preserveGBufferThroughput must be0/1; captureGBufferThroughput requires captureLinearHDR");
+            return false;
+        }
         if (RoundedGBufferMaterials < 0 || RoundedGBufferMaterials > 1)
         {
             // Validation occurs before SampleBaseApp applies noninteractive logging.

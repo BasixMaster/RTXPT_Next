@@ -573,6 +573,19 @@
       "limitations": "Finite reference and five-seed static quality only; no accumulated convergence, unbiasedness proof, general scene acceptance or throughput result.",
       "notes": "Unchanged renderer; legacy material rounding. Separate-process native outputs need not be bit-identical. Initial-only mode keeps DI active.",
       "rights": "Project renderer and original experimental evidence; no copied paper artwork."
+    },
+    {
+      "id": "LOCAL-PREFIX-THROUGHPUT",
+      "title": "Calibrated dominant-prefix clamp investigation",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/PREFIX_THROUGHPUT.md",
+      "kind": "experiment",
+      "published_on": "2026-10-29",
+      "checked_on": "2026-10-29",
+      "access": "full",
+      "quality": "Synthetic GPU positive control, actual C++ byte/row/boundary fixture, independent numeric decoder tests and eight frozen original-scene physical captures.",
+      "limitations": "One seed and selected packed final frames; no prepack float32/general range proof, quality gain, unbiasedness or throughput result.",
+      "notes": "All physical packed maxima1, zero above-one pixels; four control/preserve arrays match. Synthetic radiance excluded and physical source restored byte-for-byte. Legacy default unchanged.",
+      "rights": "Project-owned diagnostic code and original measured evidence; no copied paper artwork."
     }
   ],
   "findings": [
@@ -1589,6 +1602,35 @@
           "note": "Frozen local GPU mode ablation, not a new algorithm or paper speedup reproduction."
         }
       ]
+    },
+    {
+      "id": "PREFIX-CLAMP-NOT-OBSERVED",
+      "title": "No observed above-one packed prefixes in the sampled frames",
+      "question_ids": [
+        "Q3"
+      ],
+      "topic": "Implementation correctness",
+      "claim": "After a GPU [2,0.5,4] positive control validated the capture path, eight physical Convergence/Kitchen B4/B7 snapshots showed no packed prefix weights above one. Default/preserve arrays matched in all four pairs; this clamp candidate does not explain these sampled brightness discrepancies.",
+      "evidence_type": "measured",
+      "confidence": "high",
+      "context": "Original1280x720 scenes,14/2 bounces,1spp,h64,seed0,MIP0,strictDI,legacy material packing. Hypothesis observation scope only; current larger DI residual remains unresolved.",
+      "strengths": "Positive-control triangulation across actual writer, decoder, producer/readback and source restoration; frozen artifacts and explicit default checks.",
+      "limitations": "Packed values and selected final frames only; no universal range or unbiasedness proof. Separate-process radiance varies and is not used to claim a gain.",
+      "implications": "Check observed inputs before attributing energy loss to a source clamp. Keep the legacy default; investigate DI proposal/PDF support separately.",
+      "tags": [
+        "ReSTIR",
+        "DI",
+        "validation",
+        "HDR"
+      ],
+      "evidence": [
+        {
+          "source_id": "LOCAL-PREFIX-THROUGHPUT",
+          "locator": "PREFIX_THROUGHPUT.md; Benchmarks/development/2026-10-29-prefix-throughput-probe/index.json",
+          "relation": "supports",
+          "note": "Calibrated negative diagnostic, not a new algorithm or quality improvement."
+        }
+      ]
     }
   ],
   "actions": [
@@ -1677,7 +1719,8 @@
     "2026-10-29: Original-scene guarded rendering and path-local fixes verified; quality discrepancy retained, exact-primary experiment rejected.",
     "2026-10-29: Finite rejected-shift targets verified with original-resolution5seed quality, matched environment filtering and native-DI controls; startup failures and remaining limits retained.",
     "2026-10-29: Added a separate40capture material-packing precision ablation; legacy defaults, canonical cohorts and timing values remain preserved.",
-    "2026-10-29: Added80capture initial/temporal/spatial/combined DI isolation; unchanged runtime/defaults and separate quality-only comparisons."
+    "2026-10-29: Added80capture initial/temporal/spatial/combined DI isolation; unchanged runtime/defaults and separate quality-only comparisons.",
+    "2026-10-29: Added calibrated packed-prefix diagnostics; no clamp activation observed in eight physical final frames and no larger clamp-quality study or default promotion."
   ],
   "evidence_page": "evidence/index.html",
   "guide_pages": [

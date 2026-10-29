@@ -2334,6 +2334,7 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
     constants.maxDenoisingLayerVertexDepth         = std::min( std::min( (uint)m_ui.DenoisingLayersMaxVertexDepth, cDenoisingLayerMaxVertexIndex ), (uint)m_ui.BounceCount );
     constants.allowPrimarySurfaceReplacement    = !m_ui.ActualUseReSTIRPT() && m_ui.AllowPrimarySurfaceReplacement;
     constants.denoisingLayersSplitStopThreshold    = m_ui.DenoisingLayersSplitStopThreshold;
+    constants.preserveGBufferThroughput          = m_cmdLine.PreserveGBufferThroughput ? 1u : 0u;
     constants.roundedGBufferMaterials           = m_cmdLine.RoundedGBufferMaterials ? 1u : 0u;
     constants.denoisingLayersSuppressPrimaryIndirectSpecularK  = m_ui.DenoisingLayersSuppressPrimaryIndirectSpecular?m_ui.DenoisingLayersSuppressPrimaryIndirectSpecularK:0.0f;
     constants.denoisingLayersAntiAliasingFallthrough = m_ui.DenoisingLayersAntiAliasingFallthrough;
@@ -2353,6 +2354,7 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
     {
         std::printf("ENVIRONMENT_FILTER_CONTRACT diffuseMip=%g\n", constants.EnvironmentMapDiffuseSampleMIPLevel);
         std::printf("GBUFFER_PRECISION_CONTRACT roundedMaterials=%u\n", constants.roundedGBufferMaterials);
+        std::printf("PREFIX_THROUGHPUT_CONTRACT preserveAboveOne=%u capturePacked=%d\n", constants.preserveGBufferThroughput, int(m_cmdLine.CaptureGBufferThroughput));
         std::fflush(stdout);
     }
 
@@ -3397,6 +3399,12 @@ void Sample::Render(nvrhi::IFramebuffer* framebuffer)
                 throw std::runtime_error("Linear HDR capture failed: " + error);
             if (m_ui.ActualUseReSTIRPT() && m_cmdLine.CapturePTReservoirs)
                 m_rtxdiPass->CapturePTReservoirs(hdrPath.string() + ".pt.bin");
+            if (m_cmdLine.CaptureGBufferThroughput)
+            {
+                if (!m_ui.RealtimeMode || !rtxpt::SavePackedThroughput(GetDevice(),
+                    m_renderTargets->Throughput, hdrPath.string() + ".throughput.bin", error))
+                    throw std::runtime_error("Packed throughput diagnostic requires realtime HDR capture: " + error);
+            }
             if (m_ui.CaptureNativeRadiance && m_ui.RealtimeMode)
             {
                 if (!m_renderTargets->NativeRadianceCapture || !rtxpt::SaveLinearHdrPFM(GetDevice(),

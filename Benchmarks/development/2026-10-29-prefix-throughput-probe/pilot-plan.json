@@ -1,0 +1,19 @@
+{
+  "scope": "Initial packed prefix probe, not a quality/performance improvement claim",
+  "source_parent": "53335b9557ed24422449796bc1f3823840724f86",
+  "dimensions": [
+    1280,
+    720
+  ],
+  "bounces": [
+    14,
+    2
+  ],
+  "history": 64,
+  "seed": 0,
+  "preserve_above_one": 1,
+  "round_materials": 0,
+  "di_mode": 3,
+  "decision": "If no packed values exceed1 in the four captured final frames, do not launch a larger clamp-quality study. If observed, proceed with a matched control/candidate study; no automatic default promotion.",
+  "limits": "Packed final-frame weights, not prepack float32 or all-frame prefix coverage; no timing claim"
+}

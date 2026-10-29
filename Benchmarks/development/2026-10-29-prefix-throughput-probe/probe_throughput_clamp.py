@@ -1,0 +1,11 @@
+from pathlib import Path
+import subprocess,sys,json
+r=Path(__file__).resolve().parents[1];repo=r/'outputs/RTXDI_Next';tools=repo/'Benchmarks/tools';base=r/'work/2026-10-29-throughput-clamp';plan=dict(scope='Initial packed prefix probe, not a quality/performance improvement claim',source_parent='53335b9557ed24422449796bc1f3823840724f86',dimensions=[1280,720],bounces=[14,2],history=64,seed=0,preserve_above_one=1,round_materials=0,di_mode=3,decision='If no packed values exceed1 in the four captured final frames, do not launch a larger clamp-quality study. If observed, proceed with a matched control/candidate study; no automatic default promotion.',limits='Packed final-frame weights, not prepack float32 or all-frame prefix coverage; no timing claim')
+(base/'pilot-plan.json').write_text(json.dumps(plan,indent=2)+'\n',encoding='utf-8')
+for scene,filename,exposure in [('convergence','convergence-test.scene.json',0),('kitchen','kitchen-with-test-stuff.scene.json',2)]:
+ for variant,mode in [('B4','di'),('B7','dipt')]:
+  label=f'{scene}-{variant}-preserve1-s0';args=[sys.executable,str(tools/'run_capture.py'),'--exe',str(repo/'bin/Rtxpt.exe'),'--output',str(base/'pilot'/label),'--label',label,'--scene',filename,'--mode',mode,'--exposure',str(exposure),'--width','1280','--height','720','--max-bounces','14','--max-diffuse-bounces','2','--simple','--app-uncapped','--linear-hdr','--nee-mis','0','--environment-diffuse-mip','0','--rounded-gbuffer-materials','0','--preserve-gbuffer-throughput','1','--capture-gbuffer-throughput','--sampling-seed','0','--history-frames','64','--di-mode','3','--strict-di-validation','--timeout','180']
+  if variant=='B7':args+=['--pt-mode','3','--pt-replay-only-validation','--pt-extended-scene-validation','--pt-disable-age-rejection-validation','--pt-fixed-spatial-samples','1']
+  subprocess.run(args,check=True);m=json.loads((base/'pilot'/label/'manifest.json').read_text());print('Packed prefix observation',scene,variant,json.dumps(m['packed_throughput'][0]['statistics']),flush=True)
+subprocess.run([sys.executable,str(tools/'artifact_manifest.py'),'--repo',str(repo),'--exe',str(repo/'bin/Rtxpt.exe'),'--output',str(base/'candidate-artifacts.json')],check=True)
+print('Pilot complete; shader permutations warmed and candidate identity frozen',flush=True)

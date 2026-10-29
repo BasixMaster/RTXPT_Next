@@ -524,7 +524,10 @@ void Bridge::ExportSurface(const PathState path, PathTracer::Surface surface, fl
     float3 virtualWorldPos = cameraRay.origin + cameraRay.dir * sceneLength;
     float4 clipPos = mul(float4(/*bridgedData.shadingData.posW*/virtualWorldPos, 1), g_Const.view.matWorldToClip);
     u_Depth[pixelPos] = clipPos.z / clipPos.w;
-    u_Throughput[pixelPos] = Pack_R11G11B10_FLOAT(saturate(path.GetThp()));
+    // Keep legacy clipping unless explicitly testing supported stochastic prefixes >1.
+    float3 exportedThroughput = g_Const.ptConsts.preserveGBufferThroughput != 0
+        ? max(path.GetThp(), 0.0f) : saturate(path.GetThp());
+    u_Throughput[pixelPos] = Pack_R11G11B10_FLOAT(exportedThroughput);
 #endif
     
 #if EXPORT_GBUFFER

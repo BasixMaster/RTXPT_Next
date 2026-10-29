@@ -166,3 +166,62 @@ bool rtxpt::SaveLinearHdrPFM(nvrhi::IDevice* device, nvrhi::ITexture* texture,
     } unmap{ device, staging.Get() };
     return WriteMappedLinearHdrPFM(mapped, rowPitch, desc.width, desc.height, desc.format, path, error);
 }
+
+// A separate format keeps prefix weights distinct from raw radiance PFMs.
+bool rtxpt::WriteMappedPackedThroughput(const void* data, size_t rowPitch,
+    unsigned int width, unsigned int height, const std::filesystem::path& path, std::string& error)
+{
+    error.clear();
+    if (!data || !width || !height || width > std::numeric_limits<size_t>::max() / 4 ||
+        rowPitch < size_t(width) * 4 || height > std::numeric_limits<size_t>::max() / rowPitch)
+    { error = "Invalid packed throughput dimensions or row pitch"; return false; }
+    std::ofstream image(path, std::ios::binary | std::ios::trunc);
+    if (!image) { error = "Cannot open packed throughput output"; return false; }
+    const auto writeUint = [&image](uint32_t bits)
+    {
+        const std::array<char,4> bytes = {char(bits),char(bits >> 8),char(bits >> 16),char(bits >> 24)};
+        image.write(bytes.data(),bytes.size());
+    };
+    image.write("RTXPTTHP",8);
+    writeUint(1); writeUint(width); writeUint(height); writeUint(4);
+    for (unsigned int y = 0; y < height; ++y)
+    {
+        const auto* row = static_cast<const unsigned char*>(data) + size_t(y) * rowPitch;
+        for (unsigned int x = 0; x < width; ++x)
+        {
+            uint32_t bits;
+            std::memcpy(&bits,row + size_t(x) * 4,4);
+            writeUint(bits);
+        }
+    }
+    image.close();
+    if (!image) { error = "Packed throughput write failed (output may be partial)"; return false; }
+    return true;
+}
+
+bool rtxpt::SavePackedThroughput(nvrhi::IDevice* device, nvrhi::ITexture* texture,
+    const std::filesystem::path& path, std::string& error)
+{
+    error.clear();
+    if (!device || !texture) { error = "Missing throughput capture device or texture"; return false; }
+    const auto& desc = texture->getDesc();
+    if (desc.format != nvrhi::Format::R32_UINT || desc.dimension != nvrhi::TextureDimension::Texture2D ||
+        desc.arraySize != 1 || desc.sampleCount != 1 || desc.depth != 1)
+    { error = "Packed throughput capture requires a single-sample R32_UINT 2D texture"; return false; }
+    auto staging = device->createStagingTexture(desc,nvrhi::CpuAccessMode::Read);
+    auto commandList = device->createCommandList();
+    if (!staging || !commandList) { error = "Throughput staging allocation failed"; return false; }
+    commandList->open();
+    commandList->copyTexture(staging,nvrhi::TextureSlice(),texture,nvrhi::TextureSlice());
+    commandList->close(); device->executeCommandList(commandList);
+    if (!device->waitForIdle()) { error = "Device idle wait failed during throughput capture"; return false; }
+    size_t rowPitch = 0;
+    const void* mapped = device->mapStagingTexture(staging,nvrhi::TextureSlice(),nvrhi::CpuAccessMode::Read,&rowPitch);
+    if (!mapped) { error = "Throughput staging map failed"; return false; }
+    struct UnmapGuard
+    {
+        nvrhi::IDevice* device; nvrhi::IStagingTexture* texture;
+        ~UnmapGuard() { device->unmapStagingTexture(texture); }
+    } unmap{device,staging.Get()};
+    return WriteMappedPackedThroughput(mapped,rowPitch,desc.width,desc.height,path,error);
+}

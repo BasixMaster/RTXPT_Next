@@ -88,7 +88,7 @@ struct PathTracerConstants
     uint    NEECandidateSamples;
     uint    NEEFullSamples;
   
-    uint    _padding6;
+    uint    preserveGBufferThroughput;     // Reuses padding; legacy upper clamp remains default0.
     uint    STFMagnificationMethod;
     uint    STFFilterMode;
     float   STFGaussianSigma;

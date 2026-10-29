@@ -46,6 +46,11 @@
           3
         ],
         "default": "Existing renderer and material packing preserved"
+      },
+      "prefix_throughput_probe": {
+        "status": "diagnostic_complete_no_clamp_observed",
+        "evidence": "Benchmarks/development/2026-10-29-prefix-throughput-probe",
+        "default": "Legacy upper clamp retained; no quality improvement promoted"
       }
     },
     {
@@ -90,6 +95,11 @@
           3
         ],
         "default": "Existing renderer and material packing preserved"
+      },
+      "prefix_throughput_probe": {
+        "status": "diagnostic_complete_no_clamp_observed",
+        "evidence": "Benchmarks/development/2026-10-29-prefix-throughput-probe",
+        "default": "Legacy upper clamp retained; no quality improvement promoted"
       }
     },
     {
@@ -226,6 +236,16 @@
       ],
       "reason": "First new matched timing attempt produced no PresentMon trace; zero new samples accepted. App/NVIDIA cap checks passed and temporary profile restoration verified. Presentation availability requires confirmation; quality study remains complete.",
       "evidence": "Benchmarks/development/2026-10-29-di-reuse-isolation/excluded-timing"
+    },
+    {
+      "id": "prefix-throughput-clamp-negative-probe",
+      "date": "2026-10-29",
+      "variants": [
+        "B4",
+        "B7"
+      ],
+      "reason": "Synthetic GPU [2,0.5,4] positive control passed; eight restored physical captures contain no above-one packed weights. Four default/preserve arrays match. Larger clamp-quality study stopped; no gain/default promotion.",
+      "evidence": "Benchmarks/development/2026-10-29-prefix-throughput-probe"
     }
   ]
 }

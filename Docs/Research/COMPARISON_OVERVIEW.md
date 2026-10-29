@@ -161,3 +161,16 @@ A separate fixed-1spp five-seed study compares initial-only, temporal-only, spat
 |Kitchen / B7|-1.004%|-1.249%|-1.370%|-1.220%|<a href="assets/di-reuse-isolation/kitchen-B7-di0-s0.png"><img src="assets/di-reuse-isolation/kitchen-B7-di0-s0.png" width="120" alt="kitchen B7 DI mode0"></a> <a href="assets/di-reuse-isolation/kitchen-B7-di3-s0.png"><img src="assets/di-reuse-isolation/kitchen-B7-di3-s0.png" width="120" alt="kitchen B7 DI mode3"></a>|
 
 All four modes keep DI active. Mode0 disables temporal/spatial reuse, not initial RIS or final DI shading. Signed Y uses the same raw-HDR finite references; it is not brightness-normalized. Full HDR/LDR-FLIP results and sample standard errors are in the linked report.
+
+## Prefix-throughput diagnostic — no quality gain claimed
+
+A calibrated diagnostic found zero packed prefix pixels above one in eight physical snapshots. Omitted legacy default and preserve-above-one arrays were identical in the four observed pairs. This does not explain the sampled brightness discrepancy. The synthetic positive control is excluded from physical images and quality/performance claims. [Scope, calibration and pictures](PREFIX_THROUGHPUT.md).
+
+|Scene / variant|Default max / above-one pixels|Preserve max / above-one pixels|Default / preserve pictures|
+|---|---:|---:|---|
+|Convergence / B4|1.0 / 0|1.0 / 0|<a href="assets/prefix-throughput/convergence-B4-omitted-default-s0.png"><img src="assets/prefix-throughput/convergence-B4-omitted-default-s0.png" width="120" alt="convergence B4 omitted-default"></a> <a href="assets/prefix-throughput/convergence-B4-preserve1-s0.png"><img src="assets/prefix-throughput/convergence-B4-preserve1-s0.png" width="120" alt="convergence B4 preserve1"></a>|
+|Convergence / B7|1.0 / 0|1.0 / 0|<a href="assets/prefix-throughput/convergence-B7-omitted-default-s0.png"><img src="assets/prefix-throughput/convergence-B7-omitted-default-s0.png" width="120" alt="convergence B7 omitted-default"></a> <a href="assets/prefix-throughput/convergence-B7-preserve1-s0.png"><img src="assets/prefix-throughput/convergence-B7-preserve1-s0.png" width="120" alt="convergence B7 preserve1"></a>|
+|Kitchen / B4|1.0 / 0|1.0 / 0|<a href="assets/prefix-throughput/kitchen-B4-omitted-default-s0.png"><img src="assets/prefix-throughput/kitchen-B4-omitted-default-s0.png" width="120" alt="kitchen B4 omitted-default"></a> <a href="assets/prefix-throughput/kitchen-B4-preserve1-s0.png"><img src="assets/prefix-throughput/kitchen-B4-preserve1-s0.png" width="120" alt="kitchen B4 preserve1"></a>|
+|Kitchen / B7|1.0 / 0|1.0 / 0|<a href="assets/prefix-throughput/kitchen-B7-omitted-default-s0.png"><img src="assets/prefix-throughput/kitchen-B7-omitted-default-s0.png" width="120" alt="kitchen B7 omitted-default"></a> <a href="assets/prefix-throughput/kitchen-B7-preserve1-s0.png"><img src="assets/prefix-throughput/kitchen-B7-preserve1-s0.png" width="120" alt="kitchen B7 preserve1"></a>|
+
+One seed and final-frame packed weights only; not a raw-float range proof, unbiasedness result or throughput benchmark. The legacy clamp remains default.

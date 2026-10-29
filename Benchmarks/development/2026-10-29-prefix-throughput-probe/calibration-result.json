@@ -1,0 +1,22 @@
+{
+  "scope": "Synthetic GPU positive control, not a physical renderer/quality sample",
+  "expected_positive_rgb": [
+    2,
+    0.5,
+    4
+  ],
+  "statistics": {
+    "dimensions": [
+      1280,
+      720
+    ],
+    "pixels": 921600,
+    "nonfinite_components": 0,
+    "pixels_above_one": 890083,
+    "positive_pixels": 890083,
+    "max_component": 4.0,
+    "excess_component_sum": 3560332.0,
+    "scope": "Decoded packed dominant-prefix weights at captured frame; not prepack float32 values or radiance loss"
+  },
+  "physical_producer_sha256": "2881150638f0886193ae9d5de9c24172c13eabfb55d1be50d3c28a9c9b1ffa07"
+}

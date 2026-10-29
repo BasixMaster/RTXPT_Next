@@ -265,6 +265,35 @@ if di_reuse.exists():
     assert '[RESULT_INTERPRETATION]' not in (D/'DI_REUSE_ISOLATION.md').read_text()
     checks.append(dict(name='DI reuse isolation:80original-scene captures,16groups,12contrasts,actual activation/flags,exact artifacts,reference agreement and independent aggregate checks',status='passed'))
 
+prefix=P/'Benchmarks/development/2026-10-29-prefix-throughput-probe'
+if prefix.exists():
+    import struct,array,sys
+    index=json.loads((prefix/'index.json').read_text());assert index['counts']==dict(physical_captures=8,synthetic_verified_captures=1,packed_textures=9,selected_raw_pfms=2)
+    for name,digest in index['files'].items():assert hashlib.sha256((prefix/name).read_bytes()).hexdigest()==digest
+    physical=json.loads((prefix/'physical-summary.json').read_text());assert len(physical['rows'])==8 and not physical['any_preserved_values_above_one']
+    observed=set();buffers={}
+    for path in (prefix/'physical').glob('*/capture.json'):
+        m=json.loads(path.read_text());assert m['measurement_status']=='captured' and m['artifact_identity']['validated'] and m['artifact_identity_after_capture']['validated'] and m['artifact_identity']==m['artifact_identity_after_capture']
+        actual=m['effective_prefix_throughput'];assert actual['capture_packed'];packed=next(path.parent.glob('*.throughput.bin'));blob=packed.read_bytes();assert blob[:8]==b'RTXPTTHP' and struct.unpack_from('<4I',blob,8)==(1,1280,720,4) and len(blob)==24+1280*720*4
+        words=array.array('I');assert words.itemsize==4;words.frombytes(blob[24:])
+        if sys.byteorder!='little':words.byteswap()
+        assert all((w&0x7ff)<=0x3c0 and ((w>>11)&0x7ff)<=0x3c0 and ((w>>22)&0x3ff)<=0x1e0 for w in words)
+        scene='convergence' if path.parent.name.startswith('convergence') else 'kitchen';variant='B4' if '-B4-' in path.parent.name else 'B7';mode=actual['preserve_above_one'];observed.add((scene,variant,mode));buffers[scene,variant,mode]=blob
+        assert m['packed_throughput'][0]['statistics']['pixels_above_one']==0 and m['packed_throughput'][0]['statistics']['nonfinite_components']==0
+    assert observed=={(scene,variant,mode) for scene in ['convergence','kitchen'] for variant in ['B4','B7'] for mode in [False,True]}
+    for scene in ['convergence','kitchen']:
+        for variant in ['B4','B7']:assert buffers[scene,variant,False]==buffers[scene,variant,True]
+    cal=prefix/'synthetic-calibration';m=json.loads((cal/'capture.json').read_text());assert m['artifact_identity_after_capture']['validated'];blob=next(cal.glob('*.throughput.bin')).read_bytes();words=array.array('I');words.frombytes(blob[24:])
+    if sys.byteorder!='little':words.byteswap()
+    expected=0x400 | (0x380<<11) | (0x220<<22);assert any(words) and all(w in [0,expected] for w in words)
+    restore=json.loads((prefix/'physical-producer-restoration.json').read_text());assert restore['restored'] and restore['runtime_source_copy_restored']
+    artifact=json.loads((prefix/'physical-artifacts.json').read_text());assert artifact['shader_file_hashes']['ShaderDynamic/Source/Rtxpt/PathTracerSurfaceBridgeDonut.hlsli']==restore['sha256']
+    assert len(list(prefix.rglob('*.pfm')))==2 and len(json.loads((prefix/'radiance-finite-checks.json').read_text()))==8
+    for row in json.loads((prefix/'radiance-finite-checks.json').read_text()):assert row['nonfinite_components']==0
+    for row in json.loads((prefix/'native-cli-validation.json').read_text()):assert row['exit_code']!=0 and row['expected_diagnostic_present']
+    assert 'prefix_throughput_diagnostic' in overview and len(overview['rows'])==33
+    checks.append(dict(name='Calibrated prefix:8frozen physical snapshots,exact default/preserve buffers,known synthetic packed words,restoration,finite radiance and CLI rejection',status='passed'))
+
 receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 GPU sharing and B9/B10 remain planned.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))

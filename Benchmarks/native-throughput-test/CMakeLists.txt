@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.20)
+project(RtxptThroughputWriterFixture LANGUAGES CXX)
+get_filename_component(RTXPT_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
+add_executable(throughput_writer_fixture throughput_writer_fixture.cpp "${RTXPT_ROOT}/Rtxpt/SampleCommon/HdrCapture.cpp")
+target_compile_features(throughput_writer_fixture PRIVATE cxx_std_20)
+target_include_directories(throughput_writer_fixture PRIVATE "${RTXPT_ROOT}/Rtxpt/SampleCommon" "${RTXPT_ROOT}/External/Donut/nvrhi/include")
+enable_testing()
+add_test(NAME throughput_writer_bytes_and_bounds COMMAND throughput_writer_fixture "${CMAKE_CURRENT_BINARY_DIR}/throughput-writer-golden.bin")

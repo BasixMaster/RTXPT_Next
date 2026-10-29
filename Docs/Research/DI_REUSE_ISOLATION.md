@@ -87,6 +87,8 @@ The failed collector log used a UTF-16 BOM. The harness previously decoded it as
 
 ## Summary and lessons learned
 
+Follow-up: [Calibrated prefix-throughput probe](PREFIX_THROUGHPUT.md) found no above-one packed weights in eight sampled physical frames; the clamp hypothesis is not supported there. The synthetic positive control is kept separate.
+
 The Kitchen deficit already exists without DI reuse: native PT+DI (B4) is −1.159% ±0.120% SE and guarded PT+DI (B7) is −1.004% ±0.316% SE in initial-only mode. Temporal+spatial DI gives −0.745% ±0.156% and −1.220% ±0.325%, respectively. This rules out temporal/spatial reuse as the sole explanation of the observed discrepancy; it does not identify a unique cause or prove either estimator unbiased.
 
 Relative to initial-only DI, combined reuse moves Kitchen B4 by +0.414 percentage points ±0.121 SE and Kitchen B7 by −0.216 points ±0.231 SE. The latter change is comparable to its observed sampling uncertainty. Avoid describing every negative difference as a new PT++ effect.
