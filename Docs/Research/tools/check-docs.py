@@ -60,7 +60,7 @@ for name in ['B3','B4','B5']:assert by_id[name]['source_sha']==b1 and by_id[name
 for name in ['B6','B7']:assert by_id[name]['source_sha']=='de9fe651903f203327830e7361ac4237e00d508c'
 for name in ['B8','B9','B10']:
     assert by_id[name]['source_sha'] is None and by_id[name]['ref'] is None
-    assert by_id[name]['status'] in ['development_partition_gi_initial_only','development_limited_ptpp_gi_initial_only','cpu_prerequisites_only']
+    assert by_id[name]['status'] in ['development_partition_gi_initial_only','development_limited_ptpp_gi_initial_only','development_paired_vector_pilot']
     assert (P/by_id[name]['development_evidence']/'summary.json').is_file()
 flags={'B1':(1,0,0),'B2':(1,1,0),'B3':(0,0,0),'B4':(1,0,0),'B5':(1,1,0),'B6':(0,0,1),'B7':(1,0,1),'B8':(1,1,1),'B9':(1,1,1),'B10':(1,1,1)}
 for name,expected_flags in flags.items():assert tuple(by_id[name]['configuration'][k] for k in ['restir_di','restir_gi','restir_pt'])==expected_flags
@@ -178,10 +178,9 @@ for row in overview['rows']:
     if row['image']:assert (D/row['image']).is_file()
     if row['variant'] in ['B8','B9','B10']:
         assert row['gpu_busy_ms'] is None and row['hdr_flip'] is None and row['ldr_flip'] is None
-        assert row['report']=='B8_STAGED_IMPLEMENTATION.md'
+        assert row['report']==('B10_PAIRED_PILOT.md' if row['variant']=='B10' else 'B8_STAGED_IMPLEMENTATION.md')
         if row['image'] is not None:
             assert 'development' in row['status'] and '176x90' in row['note']
-        if row['variant']=='B10':assert row['image'] is None
 for relative,digest in overview['source_hashes'].items():
     assert hashlib.sha256((P/relative).read_bytes()).hexdigest()==digest
 assert 'id="comparison-overview"' in page and 'comparison-overview.json' in page
@@ -328,7 +327,37 @@ if staged.exists():
     assert packed['stage2-pt3-di3']['diagnostic_counters']['roulette_tests']>0
     checks.append(dict(name='B8 staged frozen bytes, same-frame cap support, completed sequences, scoped original scenes and initial-only roulette',status='passed',limits='GI reuse off; no canonical acceptance or new timing.'))
 
-receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development and limited PT++ ablation execute; full GI reuse, B10 GPU mechanisms and canonical acceptance remain pending.'])
+paired=P/'Benchmarks/development/2026-10-29-b10-paired-vector-pilot'
+if paired.exists():
+    import gzip
+    for item in json.loads((paired/'files.json').read_text()):
+        blob=(paired/item['path']).read_bytes()
+        assert len(blob)==item['bytes'] and hashlib.sha256(blob).hexdigest()==item['sha256']
+    identity=json.loads((paired/'final-renderer-artifacts.json').read_text())
+    assert hashlib.sha256(gzip.decompress((paired/'renderer-source.patch.gz').read_bytes())).hexdigest()==identity['working_diff_sha256']
+    summary=json.loads((paired/'summary.json').read_text())
+    assert summary['runs']['final-guard-check']['exe_sha256']==identity['executable_sha256']
+    gpu=json.loads((paired/'gpu-checks.json').read_text())
+    assert len(gpu)==7
+    for run in gpu.values():
+        s=run['raw_counters'];meta=run['counters']
+        assert 2*s['paired_eligible_pairs']+s['paired_fallback_pixels']==s['paired_vector_output_pixels']==meta['pixels']
+        assert s['paired_directed_shift_calls']<=2*s['paired_eligible_pairs']
+        assert s['paired_nonfinite_vectors']==s['replay_roulette_tests']==0
+        for slot in run['reservoirs'].values():
+            assert slot['nonfinite_target_valid']==slot['nonfinite_weight_valid']==slot['nonfinite_m']==0
+            assert all(int(k)>=4 for k in slot['positive_weight_path_length_histogram'])
+    for filename in ['flip-quality.json','b8-supplemental-flip-quality.json']:
+        quality=json.loads((paired/filename).read_text())
+        for group in quality['groups'].values():
+            assert len(group['frames'])==64
+            assert group['mean_image_hdr_flip']['evaluator_version']=='1.7'
+            assert group['mean_image_hdr_flip']['parameters']==quality['hdr_parameters']
+            assert all(0<=f['hdr_flip_mean']<=1 and 0<=f['ldr_flip_mean']<=1 for f in group['frames'])
+    assert json.loads((paired/'vector-output-activation.json').read_text())['different_pixels']>0
+    checks.append(dict(name='B10 paired/vector frozen source and bytes, 7GPU ownership/finite receipts and 256official HDR/display FLIP frame evaluations',status='passed',limits='Adjacent single-pair policy and GI initial only; full mechanisms, acceptance and total timing pending.'))
+
+receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and an adjacent B10 pair/vector pilot execute; full GI reuse, remaining mechanisms and canonical acceptance remain pending.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))
 print(json.dumps(dict(passed=True,checks=len(checks),scenes=len(scenes),math_expressions=page.count('<math '))))

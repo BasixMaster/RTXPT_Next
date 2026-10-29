@@ -16,7 +16,7 @@ User-confirmed numbering, 2026-10-29. **B0 is the unchanged RTXPT 1.9 reference 
 | **B7** | **ReSTIR PT + DI 3.1** | DI direct plus PT indirect; GI off. Corrected static opaque checkpoint `de9fe651`; original-scene gates remain unresolved. |
 | **B8** | **ReSTIR PT + DI 3.1 + GI 3.1** | Opt-in disjoint initial-GI/PT-long development executes with DI/PT reuse. General GI reuse and complete canonical validation remain pending. |
 | **B9** | **B8 + limited PT++** | A GI-initial-only footprint/initial-roulette development ablation executes; complete B8/B9 validation remains pending. The historical GI-off pilot is not B9. |
-| **B10** | **B8 + full remaining PT++** | Exact paired-MIS/vector-weight, reciprocal texture and replay-queue CPU prerequisites pass. Full GPU implementation and independent validation remain pending. No complete-paper implementation claim. |
+| **B10** | **B8 + full remaining PT++** | Adjacent reciprocal-pair/vector GPU pilot executes. Gaussian multi-pair reuse, replay queues, remaining mechanisms and full validation remain pending. No complete-paper implementation claim. |
 
 ## Legacy crosswalk: preserve evidence identities
 
@@ -60,4 +60,4 @@ Current scoped measurements: [registered-room B1/B4/B6/B7 comparison](REGISTERED
 
 Current native coverage: [fresh B2/B3/B5 original-scene and room results](NATIVE_MATRIX_RESULTS.md) adds27quality captures and27cap-verified timing processes. [The unified B0–B10 overview](COMPARISON_OVERVIEW.md) includes all versions, current metrics and representative pictures; historical cohorts remain separate.
 
-Current development: [B8–B10 staged implementation](B8_STAGED_IMPLEMENTATION.md) records the disjoint initial-GI GPU foundation and limited PT++ ablation. GI reuse and B10 GPU mechanisms remain pending; brightness work is deferred.
+Current development: [B8–B10 staged implementation](B8_STAGED_IMPLEMENTATION.md) records the disjoint initial-GI GPU foundation and limited PT++ ablation. GI reuse and remaining B10 GPU mechanisms remain pending; brightness work is deferred.

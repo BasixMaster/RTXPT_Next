@@ -187,6 +187,9 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     m_ui.UseReSTIRPT                = cmdLine.UseReSTIRPT != 0;
     m_ui.B8InitialGIValidation = cmdLine.B8InitialGIValidation;
     m_ui.B8ValidationStage = cmdLine.B8ValidationStage;
+    if (cmdLine.PTPairedSpatialValidation && (!cmdLine.B8InitialGIValidation || cmdLine.B8ValidationStage == 0 ||
+        (cmdLine.ReSTIRPTMode != 2 && cmdLine.ReSTIRPTMode != 3) || cmdLine.PTFixedSpatialSamples != 1))
+        throw std::runtime_error("Paired spatial pilot requires B8 development stage1/2, PT spatial reuse and exactly one neighbor");
     if (cmdLine.B8ValidationStage < 0 || cmdLine.B8ValidationStage > 2 ||
         (cmdLine.B8ValidationStage != 0 && !cmdLine.B8InitialGIValidation))
         throw std::runtime_error("B8 validation stage requires the development partition and stage0..2");

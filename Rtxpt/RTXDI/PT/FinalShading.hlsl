@@ -17,6 +17,13 @@ void main(uint2 thread : SV_DispatchThreadID)
     // targetFunction already includes the primary BSDF. Multiplying it again
     // would double-apply the primary surface's response.
     float3 radiance = r.targetFunction * r.weightSum;
+    if ((g_RtxdiBridgeConst.giPTPartition & 2u) != 0)
+    {
+        // Dedicated pilot alias of the inactive CGNS scratch buffer. Scalar
+        // reservoir history stays separate from this conditional RGB mean.
+        uint address = (pixel.y * g_Const.ptConsts.imageWidth + pixel.x) * 16;
+        radiance = asfloat(u_PTSpatialNeighbors.Load3(address));
+    }
     if (any(isnan(radiance)) || any(isinf(radiance))) return;
     float3 direction = normalize(r.translatedWorldPosition - surface.GetPosW());
     if (r.rcVertexLength > 2)

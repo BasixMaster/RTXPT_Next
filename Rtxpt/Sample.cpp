@@ -2292,6 +2292,9 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
             int(m_cmdLine.PTExtendedSceneValidation), m_ui.DiffuseBounceCount, int(m_cmdLine.PTReplayOnlyValidation));
         std::printf("B8_PARTITION_CONTRACT development=%d version=1 giReuse=0 component=%d minPTLength=4 stage=%d\n",
             int(m_ui.B8InitialGIValidation), m_ui.B8Component, m_ui.B8ValidationStage);
+        std::printf("PT_PAIRED_CONTRACT enabled=%d adjacentReciprocal=%d pairOwnedShifts=%d vectorShading=%d\n",
+            int(m_cmdLine.PTPairedSpatialValidation), int(m_cmdLine.PTPairedSpatialValidation),
+            int(m_cmdLine.PTPairedSpatialValidation), int(m_cmdLine.PTPairedSpatialValidation));
         std::printf("PT_REPLAY_CONTRACT replayOnly=%d roughnessThreshold=%.9g\n", int(m_cmdLine.PTReplayOnlyValidation),
             double(m_ui.RTXDI.restirPT.reconnectionParams.roughnessThreshold));
         std::printf("PT_HISTORY_CONTRACT ageRejection=%u maxAge=%u maxHistory=%u\n",
@@ -2381,7 +2384,7 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
          (m_ui.B8ValidationStage < 2 && m_ui.RTXDI.restirPT.russianRouletteProbability != 0.0f) ||
          (m_ui.B8ValidationStage == 2 && (uint32_t(m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode) != 1 ||
           !(m_ui.RTXDI.restirPT.russianRouletteProbability > 0.0f && m_ui.RTXDI.restirPT.russianRouletteProbability < 1.0f)))))
-        throw std::runtime_error("B8 initial development requires explicit initial-only modes");
+        throw std::runtime_error("B8 staged partition settings changed or are incompatible");
 
     if (m_cmdLine.PTExtendedSceneValidation &&
         (!m_cmdLine.PTReplayOnlyValidation || !m_ui.ActualUseReSTIRPT() ||
@@ -2437,7 +2440,14 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
         bridgeParameters.userSettings.restirPT.hybridShiftParams.maxRcVertexLength = ptMaxPathLength + 1;
     }
     bridgeParameters.usingReSTIRPT = m_ui.ActualUseReSTIRPT();
-    bridgeParameters.giPTPartition = m_ui.B8InitialGIValidation ? 1u : 0u;
+    // Bit0 owns the path-length split; bit1 selects the independent paired pilot.
+    bridgeParameters.giPTPartition = m_ui.B8InitialGIValidation ? (m_cmdLine.PTPairedSpatialValidation ? 3u : 1u) : 0u;
+    if (m_cmdLine.PTPairedSpatialValidation &&
+        (m_ui.RTXDI.restirPT.spatialResamplingParams.enableSpatialHeuristicMode ||
+         (uint32_t(m_ui.RTXDI.restirPT.resamplingMode) != 2 && uint32_t(m_ui.RTXDI.restirPT.resamplingMode) != 3) ||
+         m_ui.RTXDI.restirPT.spatialResamplingParams.numSpatialSamples != 1 ||
+         m_ui.RTXDI.restirPT.spatialResamplingParams.numDisocclusionBoostSamples != 1))
+        throw std::runtime_error("Paired pilot requires spatial PT, exactly one neighbor and exclusive CGNS scratch storage");
     bridgeParameters.extendedSceneValidation = m_cmdLine.PTExtendedSceneValidation;
     bridgeParameters.maxDiffuseBounces = uint32_t(m_ui.DiffuseBounceCount);
     bridgeParameters.resetReSTIRPT = m_ui.ResetRealtimeCaches || m_ui.ResetAccumulation;

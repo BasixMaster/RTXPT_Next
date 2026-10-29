@@ -1,6 +1,8 @@
 # Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap
 
-[B8–B10 staged implementation and current GPU evidence](B8_STAGED_IMPLEMENTATION.md): disjoint initial-GI/PT-long foundation and limited PT++ ablation; full GI reuse and B10 GPU mechanisms remain pending. Brightness work is deferred.
+[B10 GPU paired/vector pilot](B10_PAIRED_PILOT.md): reciprocal shared shifts, separate vector shading and three-scene development evidence. Full PT++ remains pending.
+
+[B8–B10 staged implementation and current GPU evidence](B8_STAGED_IMPLEMENTATION.md): disjoint initial-GI/PT-long foundation and limited PT++ ablation; full GI reuse and remaining B10 GPU mechanisms remain pending. Brightness work is deferred.
 
 [Calibrated prefix-throughput investigation](PREFIX_THROUGHPUT.md): no clamp activation observed in the sampled packed weights; defaults unchanged.
 
@@ -26,7 +28,7 @@ User-confirmed numbering, 2026-10-29: **B0 is unchanged RTXPT 1.9 with its origi
 | B7 | ReSTIR PT + DI 3.1; GI off | Scoped opaque checkpoint `de9fe651`; wider material/scene validation pending |
 | B8 | ReSTIR PT + DI 3.1 + GI 3.1 | Disjoint initial-GI development executes; full GI reuse/acceptance pending |
 | B9 | B8 + limited PT++ | GI-initial-only footprint/roulette development ablation executes; full B8/B9 pending |
-| B10 | B8 + full remaining PT++ | Exact CPU prerequisites pass; remaining GPU mechanisms pending |
+| B10 | B8 + full remaining PT++ | Adjacent reciprocal-pair/vector GPU pilot executes; full PT++ pending |
 
 Every result states its actual algorithm, settings and source identity. Historical old-B0/old-B1 Convergence/Kitchen DI+GI rows map to B2/B5. The old opaque-room comparison maps to a separately labelled B0 native-control raw preset, B3 native control and B7 DI+PT. Its DI-off0.806ms row is not a B4 native-DI comparator. New B1/B4 and room B4/B7 measurements now supply DI-on controls; equal-time sample sweeps remain pending. The branch `baseline/rtxpt-1.9` and tag `rtxpt-1.9-baseline` retain exact upstream source; a moving main branch is not an unnamed baseline.
 

@@ -1,0 +1,17 @@
+File 'WORKSPACE\outputs\RTXDI_Next\bin\sl.interposer.dll' is signed by NVIDIA and the signature was verified.
+BENCHMARK_UNCAPPED vsync=0 fpsLimiter=0 reflexCap=0 reflexMode=0 frameGeneration=0 renderUnfocused=1
+SAMPLING_CONTRACT seed=47 realtime=1 referencePixelCenter=0 pixelJitterScale=0
+TRANSPORT_CONTRACT di=1 gi=1 pt=1 diMode=0 neeMIS=0 maxBounces=4 maxDiffuseBounces=4
+DI_VALIDATION_CONTRACT strict=1 boiling=0 discountNaive=0
+PT_EXTENDED_SCENE_CONTRACT development=0 diffuseBudget=4 fullPrefixReplay=0
+B8_PARTITION_CONTRACT development=1 version=1 giReuse=0 component=0 minPTLength=4 stage=1
+PT_PAIRED_CONTRACT enabled=0 adjacentReciprocal=0 pairOwnedShifts=0 vectorShading=0
+PT_REPLAY_CONTRACT replayOnly=0 roughnessThreshold=0.100000001
+PT_HISTORY_CONTRACT ageRejection=1 maxAge=30 maxHistory=8
+PTPP_CONTRACT reconnection=0 rouletteProbability=0 diagnostics=0
+PT_SPATIAL_CONTRACT samples=1 boost=1
+DI_TEMPORAL_CONTRACT permutation=0 maxHistory=20
+ENVIRONMENT_FILTER_CONTRACT diffuseMip=0
+GBUFFER_PRECISION_CONTRACT roundedMaterials=0
+PREFIX_THROUGHPUT_CONTRACT preserveAboveOne=0 capturePacked=0
+CAPTURE_HISTORY warmupFrames=6

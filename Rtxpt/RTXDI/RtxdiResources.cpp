@@ -170,7 +170,7 @@ RtxdiResources::RtxdiResources(
     PTSpatialNeighborSelectionBuffer = device->createBuffer(ptNeighborDesc);
 
     nvrhi::BufferDesc ptDiagnosticDesc;
-    ptDiagnosticDesc.byteSize = 40 * sizeof(uint32_t);
+    ptDiagnosticDesc.byteSize = 45 * sizeof(uint32_t);
     ptDiagnosticDesc.structStride = sizeof(uint32_t);
     ptDiagnosticDesc.initialState = nvrhi::ResourceStates::UnorderedAccess;
     ptDiagnosticDesc.keepInitialState = true;

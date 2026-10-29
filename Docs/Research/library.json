@@ -7,7 +7,7 @@
   "summary": [
     "B0 preserves unchanged RTXPT1.9 defaults, original assets and runtime3.0. Canonical B1/B2 are native PT+DI/DI+GI3.0; B3/B4/B5 are native PT, +DI, +DI+GI on runtime3.1. VERSION_MAPPING.md preserves all legacy refs/data labels.",
     "B1–B5 native cohorts remain preserved. B6/B7 now have corrected original-resolution five-seed guarded quality evidence after finite rejected-shift targets prevented invalid MIS propagation; native startup stability and new throughput remain pending.",
-    "B8 development now executes a disjoint initial-GI/PT-long split with GPU support checks and DI/PT reuse. A GI-initial-only limited PT++ ablation executes; full B8/B9 acceptance and B10 GPU mechanisms remain pending."
+    "B8 disjoint initial-GI/PT-long development and limited PT++ execute. B10 now has a scoped adjacent reciprocal-pair/vector GPU pilot with three-scene ownership/finite checks and official FLIP. Full GI reuse, remaining PT++ and canonical acceptance are pending."
   ],
   "questions": [
     {
@@ -599,6 +599,19 @@
       "limitations": "GI reuse off;176x90 development captures, no new timing or canonical B8/B9/B10 acceptance; B10 models are CPU only.",
       "notes": "Brightness work deferred by user. Static-scene capture-clock stall repaired; excluded attempt retained.",
       "rights": "Project-owned implementation, tests and evidence; no copied paper artwork."
+    },
+    {
+      "id": "LOCAL-B10-PAIRED",
+      "title": "GPU adjacent reciprocal-pair shifts and vector shading pilot",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/B10_PAIRED_PILOT.md",
+      "kind": "experiment",
+      "published_on": "2026-10-29",
+      "checked_on": "2026-10-29",
+      "access": "full",
+      "quality": "Exact finite pair-MIS oracle, GPU ownership/shift/finite counters, stored reservoirs, three-scene development captures and official HDR/display FLIP.",
+      "limitations": "Adjacent single-pair policy and GI initial only; no Gaussian multi-pair path, explicit replay queue, full PT++ or accepted total timing; one low-resolution sequence per quality configuration.",
+      "notes": "Scalar history selection and vector output are separate; no brightness correction. Full feature and replicated extended validation remain pending.",
+      "rights": "Project-owned code, tests and measured evidence; no copied paper artwork."
     }
   ],
   "findings": [
@@ -1672,6 +1685,36 @@
           "locator": "B8_STAGED_IMPLEMENTATION.md; Benchmarks/development/2026-10-29-b8-staged-partition/summary.json",
           "relation": "supports",
           "note": "Activation and support evidence, not a performance or full PT++ claim."
+        }
+      ]
+    },
+    {
+      "id": "B10-PAIRED-VECTOR-GPU",
+      "title": "Pair-owned GPU shifts and independent vector shading execute in the scoped pilot",
+      "question_ids": [
+        "Q3"
+      ],
+      "topic": "Implementation correctness",
+      "claim": "The adjacent-pair pilot covers every output pixel once, issues at most two directed shifts per eligible pair, and produces finite vector outputs. Guarded Convergence/Kitchen and temporal/limited combinations also pass these checks.",
+      "evidence_type": "measured",
+      "confidence": "high",
+      "context": "176x90 integration evidence; not complete PT++ or canonical acceptance.",
+      "strengths": "Immutable inputs, separate RGB/history state, exact CPU oracle, per-frame counters and official FLIP.",
+      "limitations": "No general unbiasedness/speedup claim, replicated original-resolution quality or full GI reuse. Gaussian textures, replay compaction and remaining mechanisms pending.",
+      "implications": "Continue full B10 scheduling, ownership and motion mechanisms behind separate controls.",
+      "tags": [
+        "ReSTIR",
+        "PT++",
+        "paired-reuse",
+        "vector-shading",
+        "validation"
+      ],
+      "evidence": [
+        {
+          "source_id": "LOCAL-B10-PAIRED",
+          "locator": "B10_PAIRED_PILOT.md; Benchmarks/development/2026-10-29-b10-paired-vector-pilot/gpu-checks.json",
+          "relation": "supports",
+          "note": "GPU activation/support evidence; scoped preliminary quality values."
         }
       ]
     }

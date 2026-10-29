@@ -5,12 +5,18 @@
 #include "Bridge.hlsli"
 #include "Runtime/HybridShiftGuard.hlsli"
 #include <Rtxdi/PT/SpatialResampling.hlsli>
+#include "Runtime/PairedSpatialPilot.hlsli"
 
 [numthreads(RTXDI_SCREEN_SPACE_GROUP_SIZE, RTXDI_SCREEN_SPACE_GROUP_SIZE, 1)]
 void main(uint2 thread : SV_DispatchThreadID)
 {
     uint2 pixel = RTXDI_ReservoirPosToPixelPos(thread, g_RtxdiBridgeConst.runtimeParams.activeCheckerboardField);
     if (any(pixel >= uint2(g_Const.ptConsts.imageWidth, g_Const.ptConsts.imageHeight))) return;
+    if ((g_RtxdiBridgeConst.giPTPartition & 2u) != 0)
+    {
+        RTXPT_RunPairedSpatialPilot(pixel);
+        return;
+    }
     RTXDI_PTSpatialResamplingRuntimeParameters params = RTXDI_EmptyPTSpatialResamplingRuntimeParameters();
     params.pixelPosition = pixel;
     params.reservoirPosition = thread;

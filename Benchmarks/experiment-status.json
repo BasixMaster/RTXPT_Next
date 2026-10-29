@@ -257,6 +257,15 @@
       ],
       "reason": "User deferred brightness work. Opt-in disjoint GI-short initial/PT-long foundation, same-frame GPU components, DI/PT reuse and limited PT++ ablation exercised; full GI reuse and B10 GPU work remain pending. No new timing or canonical acceptance.",
       "evidence": "Benchmarks/development/2026-10-29-b8-staged-partition"
+    },
+    {
+      "id": "b10-adjacent-paired-vector-gpu-pilot",
+      "date": "2026-10-29",
+      "variants": [
+        "B10"
+      ],
+      "reason": "Pair-owned reciprocal directed shifts and independent vector shading execute in room and guarded low-resolution originals, including temporal/limited PT++ combination. GPU ownership/finite checks and official HDR/display FLIP completed. Full PT++/GI reuse, replicated extended comparisons and new timing remain pending.",
+      "evidence": "Benchmarks/development/2026-10-29-b10-paired-vector-pilot"
     }
   ]
 }

@@ -9,7 +9,7 @@ The user deferred the brightness investigation and requested B8 through B10 next
 | B8 development, stage0 | DI initial sampling + GI-short initial sampling + ReSTIR PT-long initial sampling + native fallback | GPU cap1/2/3/4 checks and 64-frame room sequence completed. GI reuse is off. |
 | B8 development, stage1 | Same split, with DI/PT temporal and spatial reuse | Separate temporal, spatial and combined eight-frame room checks; positive-weight PT paths have light-inclusive length≥4. GI reuse is off. |
 | B9 limited development ablation, stage2 | Stage1 + footprint reconnection + initial-only roulette, survival0.8 | Executed with DI/PT combined reuse. 13,243 initial roulette tests, **zero replay roulette tests** in the captured frame. GI reuse is off, so this does not establish complete canonical B9. |
-| B10 preparation | Exact paired-MIS/vector-weight oracle, reciprocal pairing-texture construction and replay-queue model | Four new CPU tests pass. These mechanisms are **not yet dispatched by the renderer**. |
+| B10 development | Exact CPU prerequisites plus an adjacent reciprocal-pair/vector GPU pilot | See [the subsequent GPU pilot](B10_PAIRED_PILOT.md). Gaussian multi-pair reuse, replay queues and full PT++ remain pending. |
 
 This is a working combined contribution foundation, not acceptance of complete B8/B9/B10. General secondary-material GI reuse, independent component-mean references, motion/reset stress tests, extended quality/convergence comparisons and accepted uncapped timing remain required. The original material/camera identities are retained.
 
@@ -57,12 +57,12 @@ Component illustrations use one fixed Reinhard/sRGB transform; raw PFM captures 
 
 The static room's initial-only runs each captured64 frames against a native2048-spp reference, with matched cap3/3 and raw output. This single low-resolution sequence is a preliminary check, without independent process/seed replication:
 
-| Initial-only configuration | Mean individual-frame linear RGB MSE | MSE of64-frame mean |
-|---|---:|---:|
-| B7-style DI + full indirect ReSTIR PT | 0.0417633 | 0.000645112 |
-| B8 development DI + GI-short + PT-long | 0.0374452 | 0.000508865 |
+| Initial-only configuration | Mean frame linear RGB MSE | Mean frame HDR-FLIP | Mean frame display-FLIP | MSE of64-frame mean |
+|---|---:|---:|---:|---:|
+| B7-style DI + full indirect ReSTIR PT | 0.0417633 | 0.165987 | 0.092710 | 0.000645112 |
+| B8 development DI + GI-short + PT-long | 0.0374452 | 0.161742 | 0.090879 | 0.000508865 |
 
-Do not infer a general quality gain, unbiasedness, full convergence or speedup from this cohort. HDR/display FLIP, larger reference/replicate studies, equal-time comparisons and moving-scene tests remain pending. No new GPU-busy/FPS comparison is accepted here. App receipts show vsync/limiter/reflex cap/frame generation off; driver/RTSS auditing remains part of actual timed cohorts.
+Do not infer a general quality gain, unbiasedness, full convergence or speedup from this cohort. Official HDR/display FLIP was subsequently computed under fixed reference-derived settings; its per-frame hashes and evaluator identity are retained in the [B10 evidence supplement](../../Benchmarks/development/2026-10-29-b10-paired-vector-pilot/b8-supplemental-flip-quality.json). Larger reference/replicate studies, equal-time comparisons and moving-scene tests remain pending. The split also adds GI-short initial-sampling work, so this is not a matched-time or isolated sample-budget comparison. No new GPU-busy/FPS comparison is accepted here. App receipts show vsync/limiter/reflex cap/frame generation off; driver/RTSS auditing remains part of actual timed cohorts.
 
 ## Capture-clock repair
 
@@ -72,9 +72,9 @@ The first sequence stalled because the static scene's animation clock stayed at 
 
 The new exact finite-domain oracle checks pair-MIS at both destinations with nonuniform measures/proposals, unequal source counts and nontrivial bijections. Its vector RGB sum equals the conditional mean of scalar reservoir selection. The two directed Jacobians belong to different sampled paths and are not assumed to be reciprocals.
 
-The pairing-texture constructor independently follows the [PT++ paper's section3](https://cwyman.org/papers/i3d26_ReSTIRPT++.pdf): duplicated link IDs, alternating offset2×2 shuffles and race-free link resolution on the CPU. Tests verify deterministic reciprocal non-self links. The replay-queue model preserves both cheap and replay work and rejects overflow rather than dropping estimator terms. These models do not demonstrate GPU dispatch, barriers, memory use or runtime gains.
+The pairing-texture constructor independently follows the [PT++ paper's section3](https://cwyman.org/papers/i3d26_ReSTIRPT++.pdf): duplicated link IDs, alternating offset2×2 shuffles and race-free link resolution on the CPU. Tests verify deterministic reciprocal non-self links. The replay-queue model preserves both cheap and replay work and rejects overflow rather than dropping estimator terms. These models alone demonstrate no GPU behavior. A subsequent [adjacent pair/vector GPU pilot](B10_PAIRED_PILOT.md) now supplies separately scoped dispatch/barrier evidence; the Gaussian texture path and replay queue remain unimplemented.
 
-Next: implement and validate secondary-radiance reevaluation for GI reuse, then GPU pair-owned shared shifts and vector shading, explicit replay queues, unified primary direct/indirect ownership, duplication-map production and dual-motion recovery. Each remains a separate controlled feature under the [B10 plan](B4_IMPLEMENTATION.md). Merely selecting more flags does not complete full PT++.
+Next: implement and validate secondary-radiance reevaluation for GI reuse, broader Gaussian multi-pair GPU reuse beyond the current adjacent pair/vector pilot, explicit replay queues, unified primary direct/indirect ownership, duplication-map production and dual-motion recovery. Each remains a separate controlled feature under the [B10 plan](B4_IMPLEMENTATION.md). Merely selecting more flags does not complete full PT++.
 
 ## Evidence and reproduction
 

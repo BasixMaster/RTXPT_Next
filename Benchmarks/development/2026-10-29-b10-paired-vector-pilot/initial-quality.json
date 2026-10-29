@@ -1,0 +1,27 @@
+{
+  "paired-sequence": {
+    "frames": 64,
+    "single_frame_rgb_mse_mean": 0.035707098371194144,
+    "mean_of_frames": {
+      "linear_rgb_mse": 0.0004823566611982414,
+      "smape_cgns_y100": 2.0467366055370846,
+      "full_frame_reference_mean_luminance": 0.32449771053564225,
+      "mape_rgb_ydenom": 0.03713298672675898,
+      "relmse_project": 0.013241563308749071,
+      "relative_metrics_available": true
+    }
+  },
+  "random-sequence": {
+    "frames": 64,
+    "single_frame_rgb_mse_mean": 0.03820352759279628,
+    "mean_of_frames": {
+      "linear_rgb_mse": 0.000520690237535387,
+      "smape_cgns_y100": 2.1433210395821916,
+      "full_frame_reference_mean_luminance": 0.32449771053564225,
+      "mape_rgb_ydenom": 0.039228374797820334,
+      "relmse_project": 0.014844939633733671,
+      "relative_metrics_available": true
+    }
+  },
+  "scope": "Single64-frame low-resolution sequence, pair/vector pilot versus random spatial neighbor; both use GI initial only, no temporal reuse, cap4/4. No isolated pairing-only speed or canonical B10 claim."
+}

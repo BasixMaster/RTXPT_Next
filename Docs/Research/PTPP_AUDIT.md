@@ -30,4 +30,4 @@ Paper reference: [PT++ author PDF](https://cwyman.org/papers/i3d26_ReSTIRPT++.pd
 
 ## Current local activation boundary
 
-The [staged implementation](B8_STAGED_IMPLEMENTATION.md) now executes disjoint initial-GI/PT-long development and a footprint/initial-only-roulette ablation with GI reuse off. B10 CPU prerequisites are new local models; reciprocal shared shifts, replay queues and vector shading are not yet dispatched. This does not change the inherited reference-source findings above or establish full canonical B8/B9/B10.
+The [staged implementation](B8_STAGED_IMPLEMENTATION.md) now executes disjoint initial-GI/PT-long development and a footprint/initial-only-roulette ablation with GI reuse off. B10 CPU prerequisites remain distinct from the subsequent [adjacent pair/vector GPU pilot](B10_PAIRED_PILOT.md), which dispatches shared shifts and vector shading. Multiple Gaussian textures, replay queues and the remaining full mechanisms are still pending. This does not change the inherited reference-source findings above or establish full canonical B8/B9/B10.

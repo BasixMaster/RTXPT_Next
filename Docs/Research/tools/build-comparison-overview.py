@@ -37,6 +37,10 @@ def build(repo):
                 if v=='B8':
                     row['image']='assets/b8-staged/'+({'convergence':'convergence','kitchen':'kitchen','opaque-room':'sum'}[scene])+'.png'
                     row['note']+=' Image is a176x90 development illustration, not a matched comparison.'
+                elif v=='B10':
+                    row['report']='B10_PAIRED_PILOT.md'
+                    row['image']='assets/b10-paired/'+({'convergence':'convergence','kitchen':'kitchen','opaque-room':'room'}[scene])+'.png'
+                    row['note']+=' Image is a176x90 development illustration, not a matched comparison.'
                 elif v=='B9' and scene=='opaque-room':
                     row['image']='assets/b8-staged/limited-ptpp.png'
                     row['note']+=' Image is a176x90 development illustration, not a matched comparison.'
@@ -139,7 +143,7 @@ def build(repo):
       '## Quality detail and convergence coverage','',
       'The JSON includes display MSE, available linear MSE and CPU cadence alongside each current result. [Registered-room history curves and finite-reference checks](REGISTERED_ROOM_RESULTS.md) cover B6/B7 at1,8,32,64 warm-up frames and three explicit seeds. These are separate1spp history-settling snapshots, not accumulated-spp convergence or time-to-equal-quality. Native captures use three process restarts without verified independent seeds. Original-scene native quality uses finite4096spp references; the room uses a separate finite8192spp native reference with discrepancy checks. HDR-FLIP is unavailable for native original-shader controls.','',
       '## Summary and lessons learned','',
-      'The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 now has a disjoint initial-GI GPU foundation, and a limited PT++ ablation executes. Their176x90 illustrations are explicitly development-only; full GI reuse, B10 GPU mechanisms and accepted extended measurements remain pending.','',
+      'The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 now has a disjoint initial-GI GPU foundation, and a limited PT++ ablation executes. Their176x90 illustrations are explicitly development-only; B10 now has an adjacent reciprocal-pair/vector GPU pilot; full GI reuse, remaining PT++ mechanisms and accepted extended measurements remain pending.','',
       '## Changes','', '- 2026-10-29: Added one generated overview with all33 version/scene rows, explicit missing coverage, representative images and retained historical cohort links.','']
     if precision:
         md += ['## Material precision ablation — defaults unchanged','',

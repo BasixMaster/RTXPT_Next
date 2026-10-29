@@ -320,22 +320,25 @@
       "variant": "B10",
       "scene": "convergence",
       "algorithm": "B8 + full PT++",
-      "status": "pending",
-      "reason": "Exact paired-MIS/vector-weight, pairing-texture and replay-queue CPU prerequisites pass; full GPU mechanisms and comparisons pending."
+      "status": "low_resolution_development_not_accepted",
+      "reason": "Adjacent reciprocal-pair/vector GPU pilot executes at176x90 with GI initial only. Full GI reuse, Gaussian multi-pair policy, replay compaction and remaining PT++/extended comparisons pending.",
+      "development_evidence": "Benchmarks/development/2026-10-29-b10-paired-vector-pilot/summary.json"
     },
     {
       "variant": "B10",
       "scene": "kitchen",
       "algorithm": "B8 + full PT++",
-      "status": "pending",
-      "reason": "Exact paired-MIS/vector-weight, pairing-texture and replay-queue CPU prerequisites pass; full GPU mechanisms and comparisons pending."
+      "status": "low_resolution_development_not_accepted",
+      "reason": "Adjacent reciprocal-pair/vector GPU pilot executes at176x90 with GI initial only. Full GI reuse, Gaussian multi-pair policy, replay compaction and remaining PT++/extended comparisons pending.",
+      "development_evidence": "Benchmarks/development/2026-10-29-b10-paired-vector-pilot/summary.json"
     },
     {
       "variant": "B10",
       "scene": "opaque-room",
       "algorithm": "B8 + full PT++",
-      "status": "pending",
-      "reason": "Exact paired-MIS/vector-weight, pairing-texture and replay-queue CPU prerequisites pass; full GPU mechanisms and comparisons pending."
+      "status": "low_resolution_development_not_accepted",
+      "reason": "Adjacent reciprocal-pair/vector GPU pilot executes at176x90 with GI initial only. Full GI reuse, Gaussian multi-pair policy, replay compaction and remaining PT++/extended comparisons pending.",
+      "development_evidence": "Benchmarks/development/2026-10-29-b10-paired-vector-pilot/summary.json"
     }
   ]
 }

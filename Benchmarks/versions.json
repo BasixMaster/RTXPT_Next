@@ -231,7 +231,7 @@
     },
     {
       "id": "B10",
-      "status": "cpu_prerequisites_only",
+      "status": "development_paired_vector_pilot",
       "ref": null,
       "source_sha": null,
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -246,9 +246,9 @@
       "depends_on": [
         "B8"
       ],
-      "runtime_status": "Exact pair-MIS/vector-weight tests, reciprocal texture construction and queue model pass; remaining mechanisms not dispatched by renderer",
+      "runtime_status": "Adjacent reciprocal pair-owned GPU shifts and vector shading execute with GI initial only; full remaining PT++ and canonical acceptance pending",
       "ptpp_scope": "Full remaining PT++ including replaycompaction,pairedreuse,unifieddirect/indirectreservoirs,vectorweights,duplicationreduction,dualmotion and auditablemicrooptimizations",
-      "development_evidence": "Benchmarks/development/2026-10-29-b8-staged-partition"
+      "development_evidence": "Benchmarks/development/2026-10-29-b10-paired-vector-pilot"
     }
   ],
   "legacy_registry": "Benchmarks/legacy/versions-before-2026-10-29.json",

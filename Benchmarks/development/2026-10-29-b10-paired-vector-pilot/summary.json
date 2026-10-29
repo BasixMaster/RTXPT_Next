@@ -1,0 +1,211 @@
+{
+  "scope": "Adjacent reciprocal-pair/vector GPU development pilot, GI reuse off; no full B10/canonical acceptance or timing.",
+  "runs": {
+    "paired-sequence": {
+      "status": "captured",
+      "exe_sha256": "dec24ea3ced7fd18d51958734515c4e7a3880aca672d2e28210cfe9b4ec618aa",
+      "images": 64,
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 1,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "paired": {
+        "enabled": true,
+        "policy": "adjacent reciprocal pairs",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      }
+    },
+    "random-sequence": {
+      "status": "captured",
+      "exe_sha256": "dec24ea3ced7fd18d51958734515c4e7a3880aca672d2e28210cfe9b4ec618aa",
+      "images": 64,
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 1,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "paired": null
+    },
+    "paired-cap1": {
+      "status": "captured",
+      "exe_sha256": "dec24ea3ced7fd18d51958734515c4e7a3880aca672d2e28210cfe9b4ec618aa",
+      "images": 1,
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 1,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "paired": {
+        "enabled": true,
+        "policy": "adjacent reciprocal pairs",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      }
+    },
+    "paired-cap2": {
+      "status": "captured",
+      "exe_sha256": "dec24ea3ced7fd18d51958734515c4e7a3880aca672d2e28210cfe9b4ec618aa",
+      "images": 1,
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 1,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "paired": {
+        "enabled": true,
+        "policy": "adjacent reciprocal pairs",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      }
+    },
+    "paired-cap4": {
+      "status": "captured",
+      "exe_sha256": "dec24ea3ced7fd18d51958734515c4e7a3880aca672d2e28210cfe9b4ec618aa",
+      "images": 1,
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 1,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "paired": {
+        "enabled": true,
+        "policy": "adjacent reciprocal pairs",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      }
+    },
+    "reference-cap4": {
+      "status": "captured",
+      "exe_sha256": "dec24ea3ced7fd18d51958734515c4e7a3880aca672d2e28210cfe9b4ec618aa",
+      "images": 1,
+      "partition": {
+        "development": false,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 0,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "paired": {
+        "enabled": false,
+        "policy": "adjacent reciprocal pairs",
+        "pair_owned_shifts": false,
+        "vector_shading": false,
+        "canonical_accepted": false
+      }
+    },
+    "paired-limited-temporal-h8": {
+      "status": "captured",
+      "exe_sha256": "dec24ea3ced7fd18d51958734515c4e7a3880aca672d2e28210cfe9b4ec618aa",
+      "images": 1,
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 2,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "paired": {
+        "enabled": true,
+        "policy": "adjacent reciprocal pairs",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      }
+    },
+    "paired-convergence-test": {
+      "status": "captured",
+      "exe_sha256": "dec24ea3ced7fd18d51958734515c4e7a3880aca672d2e28210cfe9b4ec618aa",
+      "images": 1,
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 1,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "paired": {
+        "enabled": true,
+        "policy": "adjacent reciprocal pairs",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      }
+    },
+    "paired-kitchen-with-test-stuff": {
+      "status": "captured",
+      "exe_sha256": "dec24ea3ced7fd18d51958734515c4e7a3880aca672d2e28210cfe9b4ec618aa",
+      "images": 1,
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 1,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "paired": {
+        "enabled": true,
+        "policy": "adjacent reciprocal pairs",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      }
+    },
+    "final-guard-check": {
+      "status": "captured",
+      "exe_sha256": "45ae92c0cbff5f9e97780c2cdaa2e586cd1926a3d40b478160cb9e99a71e12f3",
+      "images": 1,
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 1,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "paired": {
+        "enabled": true,
+        "policy": "adjacent reciprocal pairs",
+        "pair_owned_shifts": true,
+        "vector_shading": true,
+        "canonical_accepted": false
+      }
+    }
+  },
+  "source_base": "db72fe0070fb7be788bf8b75e92057792cfd1026",
+  "identity_scope": "Post-cohort snapshot; final guard capture uses final executable, earlier cohorts retain their own executable hashes."
+}

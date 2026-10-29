@@ -82,6 +82,7 @@ struct CommandLineOptions
     bool PTReplayOnlyValidation    = false;
     bool B8InitialGIValidation = false;
     int B8ValidationStage = 0; // 0 initial-only, 1 DI/PT reuse, 2 limited PT++ ablation; GI reuse remains off.
+    bool PTPairedSpatialValidation = false; // Adjacent reciprocal-pair/vector pilot, not full B10.
     int B8Component = 0; // 0 sum, 1 native, 2 DI, 3 GI-short, 4 PT-long.
     bool PTExtendedSceneValidation = false; // Replay-first diagnostic; requires explicit opt-in.
     bool StrictDIValidation        = false;

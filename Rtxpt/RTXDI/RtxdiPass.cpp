@@ -731,6 +731,9 @@ void RtxdiPass::ExecutePT(nvrhi::CommandListHandle commandList, nvrhi::BindingSe
     GpuProfiler::Begin(commandList, "ReSTIR PT");
     const auto& pt = m_ImportanceSamplingContext->GetReSTIRPTContext();
     const auto mode = pt.GetResamplingMode();
+    if ((m_BridgeParameters.giPTPartition & 2u) != 0 &&
+        pt.GetBufferIndices().spatialResamplingInputBufferIndex == pt.GetBufferIndices().spatialResamplingOutputBufferIndex)
+        throw std::runtime_error("Paired spatial pilot requires immutable source and separate output reservoirs");
     const auto params = pt.GetStaticParams();
     const dm::int2 dispatchSize = { int(params.RenderWidth), int(params.RenderHeight) };
     nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
@@ -749,6 +752,8 @@ void RtxdiPass::ExecutePT(nvrhi::CommandListHandle commandList, nvrhi::BindingSe
     {
         nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
         ExecuteRayTracingPass(commandList, m_PTSpatialResamplingPass, "PT Spatial Resampling", dispatchSize, extraBindingSet);
+        if ((m_BridgeParameters.giPTPartition & 2u) != 0)
+            nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTSpatialNeighborSelectionBuffer);
     }
     nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
     if (!skipFinal)
@@ -857,7 +862,7 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
          << ",\n  \"final_index\": " << indices.finalShadingInputBufferIndex << "\n}\n";
     if (!meta) throw std::runtime_error("PT reservoir metadata write failed");
     nvrhi::BufferDesc statsDesc;
-    statsDesc.byteSize = 40 * sizeof(uint32_t);
+    statsDesc.byteSize = 45 * sizeof(uint32_t);
     statsDesc.cpuAccess = nvrhi::CpuAccessMode::Read;
     statsDesc.debugName = "PTCounterReadback";
     auto stats = m_device->createBuffer(statsDesc);
@@ -896,7 +901,12 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
         << ",\n  \"hybrid_rejected_shift_zeroed\": " << counters[36]
         << ",\n  \"hybrid_nonfinite_target_zero_jacobian\": " << counters[37]
         << ",\n  \"hybrid_nonfinite_target_nonzero_jacobian\": " << counters[38]
-        << ",\n  \"hybrid_returned_nonfinite_target\": " << counters[39] << "\n}\n";
+        << ",\n  \"hybrid_returned_nonfinite_target\": " << counters[39]
+        << ",\n  \"paired_eligible_pairs\": " << counters[40]
+        << ",\n  \"paired_directed_shift_calls\": " << counters[41]
+        << ",\n  \"paired_vector_output_pixels\": " << counters[42]
+        << ",\n  \"paired_fallback_pixels\": " << counters[43]
+        << ",\n  \"paired_nonfinite_vectors\": " << counters[44] << "\n}\n";
     m_device->unmapBuffer(stats);
     if (!statFile) throw std::runtime_error("PT counter metadata write failed");
 }

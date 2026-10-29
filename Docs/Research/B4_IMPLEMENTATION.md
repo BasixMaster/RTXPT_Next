@@ -2,7 +2,7 @@
 
 > **LEGACY FILENAME AND NUMBERING.** This file keeps its path to preserve existing links. The old-B4 remaining-PT++ plan below now belongs to **canonical B10** under the user-confirmed [B0–B10 mapping](VERSION_MAPPING.md). Old-B3 refers to a **GI-off B7 limited-feature pilot**, not canonical B9. Existing source refs, raw evidence and numeric results are not renamed.
 
-The [staged implementation](B8_STAGED_IMPLEMENTATION.md) now contains exact CPU paired-MIS/vector-weight tests, reciprocal pairing-texture construction and a replay-queue model. They are prerequisites, not dispatched B10 GPU features.
+The [staged implementation](B8_STAGED_IMPLEMENTATION.md) now contains exact CPU paired-MIS/vector-weight tests, reciprocal pairing-texture construction and a replay-queue model. Those models alone are prerequisites. The subsequent [adjacent pair/vector GPU pilot](B10_PAIRED_PILOT.md) now dispatches two shared directed shifts per pair and separate vector shading; it does not implement the remaining full B10 mechanisms.
 
 ## Current B10 scope and dependency
 
