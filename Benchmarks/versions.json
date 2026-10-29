@@ -18,7 +18,7 @@
     },
     {
       "id": "B1",
-      "status": "quality_measured_timing_pending",
+      "status": "measured_original_scenes_and_registered_room",
       "ref": "303b408ab81790a5051abd7573830b7a4112eb8e",
       "source_sha": "303b408ab81790a5051abd7573830b7a4112eb8e",
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -66,7 +66,7 @@
     },
     {
       "id": "B4",
-      "status": "quality_measured_timing_pending",
+      "status": "measured_original_scenes_and_registered_room",
       "ref": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
       "source_sha": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -98,7 +98,7 @@
     },
     {
       "id": "B6",
-      "status": "quality_diagnostic_only",
+      "status": "measured_static_opaque_with_history_sweep",
       "ref": "de9fe651903f203327830e7361ac4237e00d508c",
       "source_sha": "de9fe651903f203327830e7361ac4237e00d508c",
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -110,11 +110,13 @@
         "restir_gi": 0,
         "restir_pt": 1
       },
-      "inherited_features": "RTXDI3.1 packed64-byte reservoirs and forcedNEE reconnection already present; no pure2022 replica claim"
+      "inherited_features": "RTXDI3.1 packed64-byte reservoirs and forcedNEE reconnection already present; no pure2022 replica claim",
+      "current_measured_source_sha": "80eac1bcf0ce9ae2c03535b8061c133d9f19a36c",
+      "current_measurement_scope": "Registered-env room only; original Convergence/Kitchen unsupported"
     },
     {
       "id": "B7",
-      "status": "measured_static_opaque",
+      "status": "measured_static_opaque_with_history_sweep",
       "ref": "de9fe651903f203327830e7361ac4237e00d508c",
       "source_sha": "de9fe651903f203327830e7361ac4237e00d508c",
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -126,7 +128,9 @@
         "restir_gi": 0,
         "restir_pt": 1
       },
-      "inherited_features": "RTXDI3.1 packed64-byte reservoirs and forcedNEE reconnection already present; no pure2022 replica claim"
+      "inherited_features": "RTXDI3.1 packed64-byte reservoirs and forcedNEE reconnection already present; no pure2022 replica claim",
+      "current_measured_source_sha": "80eac1bcf0ce9ae2c03535b8061c133d9f19a36c",
+      "current_measurement_scope": "Registered-env room only; original Convergence/Kitchen unsupported"
     },
     {
       "id": "B8",
@@ -145,7 +149,8 @@
       "depends_on": [
         "validated PT/GI contribution partition"
       ],
-      "runtime_status": "Current application selects GI OR PT; requested combined flags do not prove this variant executes"
+      "runtime_status": "Current application selects GI OR PT; requested combined flags do not prove this variant executes",
+      "preparation": "17 exact CPU prerequisite tests passed; no combined GPU implementation"
     },
     {
       "id": "B9",
@@ -325,7 +330,7 @@
     {
       "id": "2026-10-29-canonical-native-di",
       "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
-      "status": "quality_measured_timing_pending",
+      "status": "quality_measured_with_separate_timing_evidence",
       "variants": [
         "B1",
         "B4"
@@ -339,7 +344,48 @@
       "quality_scope": "3 process restarts per variant/scene, LDR-FLIP1.7 against finite4096spp references; no independent-seed/HDR claim",
       "timing_scope": "No accepted timing samples; two missing-CSV attempts excluded and temporary profiles restored",
       "cap_coverage": "App/NVIDIA/RTSS settings checked on excluded attempts; observed presentation unavailable",
-      "conclusion": "DI activation and native source/build identity verified. Observed display quality is similar; no throughput or significance claim."
+      "conclusion": "DI activation and native source/build identity verified. Observed display quality is similar; no throughput or significance claim.",
+      "timing_result_id": "2026-10-29-canonical-native-di-timing"
+    },
+    {
+      "id": "2026-10-29-canonical-native-di-timing",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "status": "measured_scoped",
+      "report": "Docs/Research/CANONICAL_NATIVE_DI_RESULTS.md",
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di-timing",
+      "variants": [
+        "B1",
+        "B4"
+      ],
+      "scenes": [
+        "convergence",
+        "kitchen"
+      ],
+      "timing_scope": "3 fresh processes/configuration/scene;45s/15s PresentMon; last600/drop16",
+      "quality_evidence": "2026-10-29-canonical-native-di",
+      "cap_coverage": "Known app/NVIDIA/RTSS boundaries verified; other external limiters unknown",
+      "conclusion": "Under1% descriptive native runtime differences; no general speedup established."
+    },
+    {
+      "id": "2026-10-29-registered-room",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "status": "measured_development_not_promoted",
+      "report": "Docs/Research/REGISTERED_ROOM_RESULTS.md",
+      "path": "Benchmarks/development/2026-10-29-registered-room",
+      "variants": [
+        "B1",
+        "B4",
+        "B6",
+        "B7"
+      ],
+      "scenes": [
+        "opaque-room-registered-env"
+      ],
+      "source_checkpoint": "80eac1bcf0ce9ae2c03535b8061c133d9f19a36c",
+      "timing_scope": "12 cap-verified processes; process GPUBusy, not complete-frame critical-path latency",
+      "quality_scope": "30captured images,3finite native references; commonLDR, modernHDR and history settling",
+      "cap_coverage": "Known app/NVIDIA/RTSS boundaries verified; other external limiters unknown",
+      "conclusion": "B7 versus B4 costs19.41%more processGPUbusy with45.09%lower steady LDR-FLIP; no equal-quality speedup. Original Convergence/Kitchen PT gates remain."
     }
   ],
   "comparison_policy": {

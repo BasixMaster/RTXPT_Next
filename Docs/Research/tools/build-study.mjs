@@ -12,12 +12,13 @@ fs.mkdirSync(path.join(doc,'assets'),{recursive:true});
 for(const name of ['shell.css','shell.js','theme.css','theme.js','visual-math.css','identity.svg'])if(path.resolve(assets)!==path.resolve(doc,'assets'))fs.copyFileSync(path.join(assets,name),path.join(doc,'assets',name));
 const shellVersion=crypto.createHash('sha256').update(fs.readFileSync(path.join(doc,'assets/shell.js'))).update(fs.readFileSync(path.join(doc,'assets/shell.css'))).digest('hex').slice(0,12);
 const esc=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
-const chapters=['README','ALGORITHM_VARIANTS','VERSION_MAPPING','CANONICAL_NATIVE_DI_RESULTS','B8_PARTITION_DESIGN','B1_RESULTS','B2_RESULTS','B3_RESULTS','B3_IMPLEMENTATION','B4_IMPLEMENTATION','NVIDIA_WHITEPAPERS','B2_IMPLEMENTATION','ROADMAP','BENCHMARK_VERSIONS','QUALITY_METRICS','PTPP_AUDIT','ARCHITECTURE','RTXDI_VS_RTXPT','SCENE_COMPATIBILITY','FOCUSED_A','FOCUSED_B','PAPER_CATALOG','BREADTH','VALIDATION','SOURCES_AND_RIGHTS','RESEARCH_MAP'];
+const chapters=['README','ALGORITHM_VARIANTS','VERSION_MAPPING','CANONICAL_NATIVE_DI_RESULTS','REGISTERED_ROOM_RESULTS','B8_PARTITION_DESIGN','B1_RESULTS','B2_RESULTS','B3_RESULTS','B3_IMPLEMENTATION','B4_IMPLEMENTATION','NVIDIA_WHITEPAPERS','B2_IMPLEMENTATION','ROADMAP','BENCHMARK_VERSIONS','QUALITY_METRICS','PTPP_AUDIT','ARCHITECTURE','RTXDI_VS_RTXPT','SCENE_COMPATIBILITY','FOCUSED_A','FOCUSED_B','PAPER_CATALOG','BREADTH','VALIDATION','SOURCES_AND_RIGHTS','RESEARCH_MAP'];
 let nav='',body='';
 const mathDoc=fs.existsSync(path.join(doc,'math-markdown.json')) ? JSON.parse(fs.readFileSync(path.join(doc,'math-markdown.json'),'utf8')) : {};
 for(const [i,name] of chapters.entries()){
   const md=fs.readFileSync(path.join(doc,name+'.md'),'utf8');
-  const title=md.match(/^# (.+)/m)[1];
+  const legacyTitles={B1_RESULTS:'Legacy migration report · canonical B2/B5',B2_RESULTS:'Legacy PT checkpoint · canonical B7',B3_RESULTS:'Legacy PT++ pilot · B7 ablations',B2_IMPLEMENTATION:'Legacy PT foundation · B6/B7',B3_IMPLEMENTATION:'Legacy limited PT++ activation history',B4_IMPLEMENTATION:'B10 remaining PT++ gates · legacy filename'};
+  const title=legacyTitles[name]||md.match(/^# (.+)/m)[1];
   const id=name.toLowerCase().replaceAll('_','-');
   nav+=`<a href="#${id}">${String(i+1).padStart(2,'0')} · ${esc(title)}</a>`;
   let html=marked.parse(mathDoc[name]||md);

@@ -5,18 +5,18 @@ User-confirmed numbering, 2026-10-29: **B0 is unchanged RTXPT 1.9 with its origi
 | Version | Short algorithm overview | Current status |
 |---|---|---|
 | B0 | Unchanged RTXPT 1.9 reference | Original defaults and source303b408/runtimea14e079/Assets a56be4e preserved |
-| B1 | Native PT + DI 3.0; GI off | New matched native-DI benchmark needed |
+| B1 | Native PT + DI 3.0; GI off | Original-scene and registered-room quality/timing measured |
 | B2 | Native PT + DI 3.0 + GI 3.0 | Historical original-scene observations; cap coverage unverified |
 | B3 | Native PT / runtime 3.1; DI/GI off | Raw native-control observation exists |
-| B4 | Native PT + DI 3.1; GI off | New matched native-DI benchmark needed |
+| B4 | Native PT + DI 3.1; GI off | Original-scene and registered-room quality/timing measured |
 | B5 | Native PT + DI 3.1 + GI 3.1 | Historical original-scene observations; cap coverage unverified |
-| B6 | ReSTIR PT; DI/GI off | Mode available; extended validation pending |
+| B6 | ReSTIR PT; DI/GI off | Registered-room quality/timing/history measured; original scenes unsupported |
 | B7 | ReSTIR PT + DI 3.1; GI off | Scoped opaque checkpoint `de9fe651`; wider material/scene validation pending |
 | B8 | ReSTIR PT + DI 3.1 + GI 3.1 | Planned valid sharing partition/MIS; overlapping estimates cannot simply be added |
 | B9 | B8 + limited PT++ | Planned after B8; existing GI-off pilot is a B7 ablation, not B9 |
 | B10 | B8 + full remaining PT++ | Authorized future work; independent oracles and feature ablations before combination |
 
-Every result states its actual algorithm, settings and source identity. Historical old-B0/old-B1 Convergence/Kitchen DI+GI rows map to B2/B5. The old opaque-room comparison maps to a separately labelled B0 native-control raw preset, B3 native control and B7 DI+PT. Its DI-off 0.806 ms row is not the missing B4 native-DI comparator. Prioritize B1/B4 matched benchmarks and measured equal-time sample sweeps. The branch `baseline/rtxpt-1.9` and tag `rtxpt-1.9-baseline` retain exact upstream source; a moving main branch is not an unnamed baseline.
+Every result states its actual algorithm, settings and source identity. Historical old-B0/old-B1 Convergence/Kitchen DI+GI rows map to B2/B5. The old opaque-room comparison maps to a separately labelled B0 native-control raw preset, B3 native control and B7 DI+PT. Its DI-off0.806ms row is not a B4 native-DI comparator. New B1/B4 and room B4/B7 measurements now supply DI-on controls; equal-time sample sweeps remain pending. The branch `baseline/rtxpt-1.9` and tag `rtxpt-1.9-baseline` retain exact upstream source; a moving main branch is not an unnamed baseline.
 
 ## Start here
 
@@ -49,4 +49,6 @@ RTXDI is sampling machinery; RTXPT is the renderer. Canonical IDs now distinguis
 - 2026-10-28: Added short algorithm labels for each variant and required original Convergence/Kitchen plus controlled-scene comparisons; B3 development started without a performance claim.
 - 2026-10-28: Shared image preview opens pictures in place, supports keyboard activation, and closes with Escape or Close while restoring focus. The central HTML template and Documenter guidance share the same behavior.
 
-Canonical update2026-10-29: [B1/B4 native-DI quality and timing exclusions](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures. No new throughput result is accepted.
+Canonical update2026-10-29: [B1/B4 native-DI quality and cap-verified timing](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures and links12 accepted cap-verified timing runs; initial missing-trace attempts remain excluded.
+
+Current scoped measurements: [registered-room B1/B4/B6/B7 comparison](REGISTERED_ROOM_RESULTS.md) includes30quality captures,12timing processes and explicit history settling; [native original-scene report](CANONICAL_NATIVE_DI_RESULTS.md) now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.

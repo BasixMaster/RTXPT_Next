@@ -10,9 +10,9 @@
     },
     {
       "id": "B1",
-      "status": "quality_measured_timing_pending",
+      "status": "measured_original_scenes_and_registered_room",
       "algorithm": "v1.9 native PT + ReSTIR DI3.0; GI off",
-      "evidence": "Benchmarks/development/2026-10-29-canonical-native-di"
+      "evidence": "Benchmarks/development/2026-10-29-registered-room"
     },
     {
       "id": "B2",
@@ -26,9 +26,9 @@
     },
     {
       "id": "B4",
-      "status": "quality_measured_timing_pending",
+      "status": "measured_original_scenes_and_registered_room",
       "algorithm": "Native PT + ReSTIR DI3.1; GI off",
-      "evidence": "Benchmarks/development/2026-10-29-canonical-native-di"
+      "evidence": "Benchmarks/development/2026-10-29-registered-room"
     },
     {
       "id": "B5",
@@ -37,18 +37,21 @@
     },
     {
       "id": "B6",
-      "status": "quality_diagnostic_only",
-      "algorithm": "ReSTIR PT; DI/GI off"
+      "status": "measured_static_opaque_with_history_sweep",
+      "algorithm": "ReSTIR PT; DI/GI off",
+      "evidence": "Benchmarks/development/2026-10-29-registered-room"
     },
     {
       "id": "B7",
-      "status": "measured_static_opaque",
-      "algorithm": "ReSTIR PT + ReSTIR DI3.1; GI off"
+      "status": "measured_static_opaque_with_history_sweep",
+      "algorithm": "ReSTIR PT + ReSTIR DI3.1; GI off",
+      "evidence": "Benchmarks/development/2026-10-29-registered-room"
     },
     {
       "id": "B8",
       "status": "planned_partition_not_implemented",
-      "algorithm": "ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1"
+      "algorithm": "ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1",
+      "cpu_prerequisite": "17exact tests passed; GPU integration pending"
     },
     {
       "id": "B9",
@@ -76,6 +79,37 @@
       ],
       "reason": "12 original Convergence/Kitchen captures passed effective-mode and artifact checks; no PresentMon trace in two attempts; restored profiles, timing waits for interactive display availability",
       "evidence": "Benchmarks/development/2026-10-29-canonical-native-di"
+    },
+    {
+      "id": "native-di-timing-completed-after-display-recovery",
+      "date": "2026-10-29",
+      "variants": [
+        "B1",
+        "B4"
+      ],
+      "reason": "12accepted original-scene timing runs, known cap checks and driver restoration; old missing traces excluded",
+      "evidence": "Benchmarks/development/2026-10-29-canonical-native-di-timing"
+    },
+    {
+      "id": "registered-room-comparison-completed",
+      "date": "2026-10-29",
+      "variants": [
+        "B1",
+        "B4",
+        "B6",
+        "B7"
+      ],
+      "reason": "30quality captures,3finite references,12timing processes and2separate PT activation diagnostics",
+      "evidence": "Benchmarks/development/2026-10-29-registered-room"
+    },
+    {
+      "id": "b8-exact-initial-partition-oracles-passed",
+      "date": "2026-10-29",
+      "variants": [
+        "B8"
+      ],
+      "reason": "17exact CPU tests validate declared prerequisite models; no combined GPU mode enabled",
+      "evidence": "Benchmarks/development/2026-10-29-b8-partition-oracles"
     }
   ]
 }

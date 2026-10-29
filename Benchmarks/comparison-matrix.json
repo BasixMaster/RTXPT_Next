@@ -45,28 +45,32 @@
       "variant": "B1",
       "scene": "convergence",
       "algorithm": "v1.9 native PT + ReSTIR DI3.0; GI off",
-      "status": "in_progress",
-      "reason": "3 quality captures accepted; no throughput trace accepted. Interactive display/presentation availability needed before repeated timing.",
-      "result": "Benchmarks/development/2026-10-29-canonical-native-di",
+      "status": "measured",
+      "reason": "Original scene/material/camera retained;3quality and3timing process repetitions/configuration",
+      "result": "Benchmarks/development/2026-10-29-canonical-native-di-timing",
       "quality_status": "measured_display_only",
-      "timing_status": "pending_missing_presentation_trace"
+      "timing_status": "measured_known_caps_verified",
+      "quality_result": "Benchmarks/development/2026-10-29-canonical-native-di"
     },
     {
       "variant": "B1",
       "scene": "kitchen",
       "algorithm": "v1.9 native PT + ReSTIR DI3.0; GI off",
-      "status": "in_progress",
-      "reason": "3 quality captures accepted; no throughput trace accepted. Interactive display/presentation availability needed before repeated timing.",
-      "result": "Benchmarks/development/2026-10-29-canonical-native-di",
+      "status": "measured",
+      "reason": "Original scene/material/camera retained;3quality and3timing process repetitions/configuration",
+      "result": "Benchmarks/development/2026-10-29-canonical-native-di-timing",
       "quality_status": "measured_display_only",
-      "timing_status": "pending_missing_presentation_trace"
+      "timing_status": "measured_known_caps_verified",
+      "quality_result": "Benchmarks/development/2026-10-29-canonical-native-di"
     },
     {
       "variant": "B1",
       "scene": "opaque-room",
       "algorithm": "v1.9 native PT + ReSTIR DI3.0; GI off",
-      "status": "pending",
-      "reason": "Fresh matched configuration benchmark pending; legacy labels are not canonical results"
+      "status": "measured",
+      "reason": "Explicit separate zero-intensity registered environment fixture, same owned model/materials/camera; preserve prior no-env data separately. Three timing repeats; native3quality processes or modern3seed history sweep.",
+      "result": "Benchmarks/development/2026-10-29-registered-room",
+      "fixture": "opaque-room-registered-env.scene.json"
     },
     {
       "variant": "B2",
@@ -117,28 +121,32 @@
       "variant": "B4",
       "scene": "convergence",
       "algorithm": "Native PT + ReSTIR DI3.1; GI off",
-      "status": "in_progress",
-      "reason": "3 quality captures accepted; no throughput trace accepted. Interactive display/presentation availability needed before repeated timing.",
-      "result": "Benchmarks/development/2026-10-29-canonical-native-di",
+      "status": "measured",
+      "reason": "Original scene/material/camera retained;3quality and3timing process repetitions/configuration",
+      "result": "Benchmarks/development/2026-10-29-canonical-native-di-timing",
       "quality_status": "measured_display_only",
-      "timing_status": "pending_missing_presentation_trace"
+      "timing_status": "measured_known_caps_verified",
+      "quality_result": "Benchmarks/development/2026-10-29-canonical-native-di"
     },
     {
       "variant": "B4",
       "scene": "kitchen",
       "algorithm": "Native PT + ReSTIR DI3.1; GI off",
-      "status": "in_progress",
-      "reason": "3 quality captures accepted; no throughput trace accepted. Interactive display/presentation availability needed before repeated timing.",
-      "result": "Benchmarks/development/2026-10-29-canonical-native-di",
+      "status": "measured",
+      "reason": "Original scene/material/camera retained;3quality and3timing process repetitions/configuration",
+      "result": "Benchmarks/development/2026-10-29-canonical-native-di-timing",
       "quality_status": "measured_display_only",
-      "timing_status": "pending_missing_presentation_trace"
+      "timing_status": "measured_known_caps_verified",
+      "quality_result": "Benchmarks/development/2026-10-29-canonical-native-di"
     },
     {
       "variant": "B4",
       "scene": "opaque-room",
       "algorithm": "Native PT + ReSTIR DI3.1; GI off",
-      "status": "pending",
-      "reason": "Fresh matched configuration benchmark pending; legacy labels are not canonical results"
+      "status": "measured",
+      "reason": "Explicit separate zero-intensity registered environment fixture, same owned model/materials/camera; preserve prior no-env data separately. Three timing repeats; native3quality processes or modern3seed history sweep.",
+      "result": "Benchmarks/development/2026-10-29-registered-room",
+      "fixture": "opaque-room-registered-env.scene.json"
     },
     {
       "variant": "B5",
@@ -182,8 +190,9 @@
       "scene": "opaque-room",
       "algorithm": "ReSTIR PT; DI/GI off",
       "status": "measured",
-      "reason": "B6 quality diagnostics only; timing pending",
-      "result": "Benchmarks/development/2026-10-28-b2-static-opaque"
+      "reason": "Explicit separate zero-intensity registered environment fixture, same owned model/materials/camera; preserve prior no-env data separately. Three timing repeats; native3quality processes or modern3seed history sweep.",
+      "result": "Benchmarks/development/2026-10-29-registered-room",
+      "fixture": "opaque-room-registered-env.scene.json"
     },
     {
       "variant": "B7",
@@ -204,8 +213,9 @@
       "scene": "opaque-room",
       "algorithm": "ReSTIR PT + ReSTIR DI3.1; GI off",
       "status": "measured",
-      "reason": "Core DI+PT checkpoint; limited GI-off ablations retained separately, not B9",
-      "result": "Benchmarks/development/2026-10-28-b2-static-opaque"
+      "reason": "Explicit separate zero-intensity registered environment fixture, same owned model/materials/camera; preserve prior no-env data separately. Three timing repeats; native3quality processes or modern3seed history sweep.",
+      "result": "Benchmarks/development/2026-10-29-registered-room",
+      "fixture": "opaque-room-registered-env.scene.json"
     },
     {
       "variant": "B8",

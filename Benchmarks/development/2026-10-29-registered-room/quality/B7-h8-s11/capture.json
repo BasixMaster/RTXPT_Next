@@ -1,0 +1,210 @@
+{
+  "label": "B7-h8-s11",
+  "scene": "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+  "mode": "dipt",
+  "output_track": "unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata",
+  "exe_sha256": "8b8a65ca2ef174fac49e2eddecfb11b21ef86f7e03170677650f2ea938e8b28f",
+  "started_utc": "2026-10-29T00:48:51.026971+00:00",
+  "command": [
+    "[WORKSPACE]\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+    "--scene",
+    "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+    "--width",
+    "640",
+    "--height",
+    "360",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "0",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "[WORKSPACE]\\work\\2026-10-29-registered-room\\quality\\B7-h8-s11\\frame.png",
+    "--captureSuffix",
+    "B7-h8-s11",
+    "--perfLog",
+    "[WORKSPACE]\\work\\2026-10-29-registered-room\\quality\\B7-h8-s11\\partial-perf.csv",
+    "--captureWarmupFrames",
+    "8",
+    "--ptFixedSpatialSamples",
+    "1",
+    "--ptDisableAgeRejectionValidation",
+    "true",
+    "--strictDIValidation",
+    "true",
+    "--neeMIS",
+    "0",
+    "--benchmarkUncapped",
+    "true",
+    "--samplingSeed",
+    "11",
+    "--captureLinearHDR",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--useReSTIRPT",
+    "1",
+    "--restirPTMode",
+    "3",
+    "--maxBounces",
+    "3",
+    "--maxDiffuseBounces",
+    "3",
+    "--stopAnimations",
+    "--captureSimple"
+  ],
+  "cwd": "[WORKSPACE]\\outputs\\RTXDI_Next\\bin",
+  "settings": {
+    "width": 640,
+    "height": 360,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 1,
+    "restir_gi": 0,
+    "simple": true,
+    "record_start": null,
+    "frames": 1,
+    "reference_spp": null,
+    "linear_hdr_requested": true,
+    "sampling_seed_requested": 11,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": null,
+    "nee_mis_requested": 0,
+    "nee_type": 2,
+    "restir_pt": 1,
+    "max_bounces_override": 3,
+    "max_diffuse_bounces_override": 3,
+    "pt_mode": 3
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+  "canonical_experiment": {
+    "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+    "variant": "B7",
+    "preset": "matched-raw",
+    "algorithm": "ReSTIR PT + ReSTIR DI3.1; GI off",
+    "expected_flags": {
+      "di": 1,
+      "gi": 0,
+      "pt": 1
+    },
+    "expected_runtime_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+    "expected_base_sha": "de9fe651903f203327830e7361ac4237e00d508c",
+    "expected_assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+    "display_label": "B7 · matched-raw · ReSTIR PT + ReSTIR DI3.1; GI off",
+    "limitation": "Actual settings must match the effective renderer receipt"
+  },
+  "artifact_identity": {
+    "manifest_sha256": "19d7e9815d72e7d802f41cbd19e9d646b36f4aed6a6e62c9e3cf7b5e7f8c85f2",
+    "root_source_sha": "80eac1bcf0ce9ae2c03535b8061c133d9f19a36c",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "executable_sha256": "8b8a65ca2ef174fac49e2eddecfb11b21ef86f7e03170677650f2ea938e8b28f",
+    "shader_files": 577,
+    "validated": true
+  },
+  "process_id": 50764,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 5.782000000006519,
+  "images": [
+    {
+      "name": "frame_B7-h8-s11.png",
+      "sha256": "e2c5923074425a9cbdf2b3c679c8ba62e1193599d668f40dcf023f38eeba696f",
+      "bytes": 490916
+    }
+  ],
+  "linear_hdr_files": [
+    {
+      "name": "frame_B7-h8-s11.pfm",
+      "sha256": "59bad316218dc4781eb20b8918019e7a5447f7e82e5859172411a3884ce0d36e",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_B7-h8-s11.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    }
+  ],
+  "effective_sampling": {
+    "coverage": "verified first-frame effective receipt",
+    "seed": 11,
+    "realtime": true,
+    "reference_pixel_center": false,
+    "pixel_jitter_scale": 0.0
+  },
+  "effective_di_validation": {
+    "coverage": "verified first-frame effective receipt",
+    "strict": true,
+    "boiling": false,
+    "discount_naive": false,
+    "temporal_permutation": false
+  },
+  "effective_pt_replay": {
+    "coverage": "verified first-frame effective receipt",
+    "replay_only": false,
+    "roughness_threshold": 0.100000001
+  },
+  "effective_pt_history": {
+    "coverage": "verified first-frame effective receipt",
+    "age_rejection": false,
+    "max_age": 30,
+    "max_history": 8
+  },
+  "effective_pt_spatial": {
+    "coverage": "verified first-frame effective receipt",
+    "samples": 1,
+    "boost": 1
+  },
+  "effective_ptpp": {
+    "coverage": "verified first-frame effective receipt",
+    "reconnection_mode": 0,
+    "roulette_probability": 0.0,
+    "diagnostics": false
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 8,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "verified effective first-frame transport receipt",
+    "flags": {
+      "di": 1,
+      "gi": 0,
+      "pt": 1
+    },
+    "di_mode": 3,
+    "nee_mis": 0,
+    "max_bounces": 3,
+    "max_diffuse_bounces": 3,
+    "runtime_scope": "Runtime identity requires frozen source/build evidence in addition to this transport receipt"
+  },
+  "artifact_identity_after_capture": {
+    "manifest_sha256": "19d7e9815d72e7d802f41cbd19e9d646b36f4aed6a6e62c9e3cf7b5e7f8c85f2",
+    "root_source_sha": "80eac1bcf0ce9ae2c03535b8061c133d9f19a36c",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "executable_sha256": "8b8a65ca2ef174fac49e2eddecfb11b21ef86f7e03170677650f2ea938e8b28f",
+    "shader_files": 577,
+    "validated": true
+  }
+}

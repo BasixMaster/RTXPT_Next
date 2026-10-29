@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Basix Pathtracing · RTXPT Next</title><link rel="icon" href="assets/identity.svg?v=b28b9a033d"><link rel="stylesheet" href="assets/shell.css?v=a1788f2ec0e9"><link rel="stylesheet" href="assets/theme.css"><script src="assets/theme.js"></script><script defer src="assets/shell.js?v=a1788f2ec0e9"></script><style>.doc-main{min-width:0}.doc-panel p,.doc-panel li{overflow-wrap:anywhere}.doc-panel h2{scroll-margin-top:var(--doc-header-height,100px)}.doc-table table{min-width:680px}#b1-results .doc-table{margin:18px 0}#b1-results td:first-child,#b1-results th:first-child{white-space:nowrap}.doc-panel pre{overflow:auto}.integration-map{width:100%;height:auto;background:#f3f6fa;border-radius:12px}.doc-sidebar nav a{line-height:1.4}.doc-panel details{padding:.6rem 0}@media print{section{content-visibility:visible}}</style><link rel="stylesheet" href="assets/visual-math.css"><style data-rtxpt-brand>.doc-overview.doc-banner{display:block;position:relative;background:linear-gradient(90deg,#0b2037f5 0%,#0b2037dd 42%,#0b203722 82%),url('assets/banner.svg') center/cover no-repeat;padding:38px 34px;min-height:250px}.doc-banner h1{font-size:clamp(36px,4.8vw,60px);letter-spacing:-.045em}.doc-banner>p{max-width:620px;font-size:17px}.doc-banner .doc-caption{font-size:12px;letter-spacing:.14em;text-transform:uppercase}.doc-brand img{border-radius:10px}.doc-main>figure{margin:24px 0;overflow-x:auto}.doc-main>figure .integration-map{min-width:720px}.doc-banner+figure figcaption{font-size:13px;color:var(--doc-muted)}@media(max-width:700px){.doc-overview.doc-banner{min-height:210px;padding:24px;background-position:60% center}.doc-banner>p{max-width:90%;font-size:15px}.doc-banner h1{font-size:38px}}</style></head><body><a class="doc-skip" href="#main">Skip to content</a><header class="doc-header"><a class="doc-brand" href="index.html"><img src="assets/identity.svg?v=b28b9a033d" alt=""><span><strong>Basix Pathtracing</strong><small>B0–B10 · Algorithms, evidence and roadmap</small></span></a><nav class="doc-actions" aria-label="Page actions"><a href="evidence/index.html">Evidence</a><button data-doc-back type="button">← Back</button><a href="#main">↑ Top</a></nav><label class="doc-search">Search all study docs<input data-doc-search type="search" placeholder="Papers, roadmap, audit, scene compatibility…"></label></header><div class="doc-layout"><aside class="doc-sidebar" aria-label="Study navigation"><h2 class="doc-nav-title">Research and implementation plan</h2><div class="doc-nav-scroll" tabindex="0"><nav aria-label="On this page"><a href="#readme">01 · Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap</a><a href="#algorithm-variants">02 · Algorithm overview: canonical B0–B10</a><a href="#version-mapping">03 · Canonical B0–B10 variants and legacy result mapping</a><a href="#canonical-native-di-results">04 · Canonical B1/B4: native PT with DI on</a><a href="#b8-partition-design">05 · B8: disjoint DI, GI and ReSTIR PT contribution ownership</a><a href="#b1-results">06 · Legacy B1 report: RTXPT1.9 and RTXDI3.1 migration</a><a href="#b2-results">07 · B7 static opaque checkpoint: retained legacy B2 report</a><a href="#b3-results">08 · B7 limited-feature ablation: retained legacy B3 results</a><a href="#b3-implementation">09 · B7 limited PT++ ablations: retained legacy B3 implementation</a><a href="#b4-implementation">10 · B10 remaining PT++ gates: retained legacy B4 plan</a><a href="#nvidia-whitepapers">11 · NVIDIA engineering whitepapers: implications for RTXPT Next</a><a href="#b2-implementation">12 · ReSTIR PT foundation: retained legacy B2/B3 implementation history</a><a href="#roadmap">13 · Roadmap: canonical B0–B10</a><a href="#benchmark-versions">14 · Version comparison protocol for Basix Pathtracing / RTXPT_Next</a><a href="#quality-metrics">15 · Image quality and temporal stability measurement plan</a><a href="#ptpp-audit">16 · PT++ implementation audit of the RTXDI 3.1 reference</a><a href="#architecture">17 · Architecture and exact baseline pins</a><a href="#rtxdi-vs-rtxpt">18 · RTXDI versus RTXPT: dependency and renderer comparison</a><a href="#scene-compatibility">19 · Scene compatibility: RTXDI3.1 and RTXPT1.9</a><a href="#focused-a">20 · Focused paper notes: RTXPT 1.9 baseline and staged RTXDI 3.1 adoption</a><a href="#focused-b">21 · Geometry, disocclusion and bidirectional research notes</a><a href="#paper-catalog">22 · Recent20-paper catalog</a><a href="#breadth">23 · Wyman recent-paper breadth review</a><a href="#validation">24 · Validation and benchmark plan</a><a href="#sources-and-rights">25 · Source provenance and reuse terms</a><a href="#research-map">26 · Research map and scope</a><a href="#source-records">27 · Source records</a></nav></div></aside><main id="main" class="doc-main"><div class="doc-overview doc-banner"><p class="doc-caption">Canonical B0–B10 configurations · checked2026-10-29</p><h1>RTXPT Next</h1><p>B0 preserves RTXPT v1.9. B1–B5 compare native PT with DI/GI3.0 and3.1; B6–B8 add ReSTIR PT; B9–B10 target limited and full PT++. Implementation status and legacy result mappings are explicit.</p><figure tabindex="0" role="region" aria-label="Integration dependency map; scroll horizontally on narrow screens"><img class="integration-map" src="assets/integration-map.svg" alt="Canonical experiment groups B0 through B10; see the table for activation and validation status."><figcaption>Canonical groups: original reference; native PT with DI/GI; ReSTIR PT; then PT++. B8–B10 require validated PT/GI contribution sharing.</figcaption></figure></div><div class="doc-results" hidden role="status"></div><section class="doc-panel" id="readme"><h2 id="readme-heading-1">Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap</h2>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Basix Pathtracing · RTXPT Next</title><link rel="icon" href="assets/identity.svg?v=b28b9a033d"><link rel="stylesheet" href="assets/shell.css?v=a1788f2ec0e9"><link rel="stylesheet" href="assets/theme.css"><script src="assets/theme.js"></script><script defer src="assets/shell.js?v=a1788f2ec0e9"></script><style>.doc-main{min-width:0}.doc-panel p,.doc-panel li{overflow-wrap:anywhere}.doc-panel h2{scroll-margin-top:var(--doc-header-height,100px)}.doc-table table{min-width:680px}#b1-results .doc-table{margin:18px 0}#b1-results td:first-child,#b1-results th:first-child{white-space:nowrap}.doc-panel pre{overflow:auto}.integration-map{width:100%;height:auto;background:#f3f6fa;border-radius:12px}.doc-sidebar nav a{line-height:1.4}.doc-panel details{padding:.6rem 0}@media print{section{content-visibility:visible}}</style><link rel="stylesheet" href="assets/visual-math.css"><style data-rtxpt-brand>.doc-overview.doc-banner{display:block;position:relative;background:linear-gradient(90deg,#0b2037f5 0%,#0b2037dd 42%,#0b203722 82%),url('assets/banner.svg') center/cover no-repeat;padding:38px 34px;min-height:250px}.doc-banner h1{font-size:clamp(36px,4.8vw,60px);letter-spacing:-.045em}.doc-banner>p{max-width:620px;font-size:17px}.doc-banner .doc-caption{font-size:12px;letter-spacing:.14em;text-transform:uppercase}.doc-brand img{border-radius:10px}.doc-main>figure{margin:24px 0;overflow-x:auto}.doc-main>figure .integration-map{min-width:720px}.doc-banner+figure figcaption{font-size:13px;color:var(--doc-muted)}@media(max-width:700px){.doc-overview.doc-banner{min-height:210px;padding:24px;background-position:60% center}.doc-banner>p{max-width:90%;font-size:15px}.doc-banner h1{font-size:38px}}</style></head><body><a class="doc-skip" href="#main">Skip to content</a><header class="doc-header"><a class="doc-brand" href="index.html"><img src="assets/identity.svg?v=b28b9a033d" alt=""><span><strong>Basix Pathtracing</strong><small>B0–B10 · Algorithms, evidence and roadmap</small></span></a><nav class="doc-actions" aria-label="Page actions"><a href="evidence/index.html">Evidence</a><button data-doc-back type="button">← Back</button><a href="#main">↑ Top</a></nav><label class="doc-search">Search all study docs<input data-doc-search type="search" placeholder="Papers, roadmap, audit, scene compatibility…"></label></header><div class="doc-layout"><aside class="doc-sidebar" aria-label="Study navigation"><h2 class="doc-nav-title">Research and implementation plan</h2><div class="doc-nav-scroll" tabindex="0"><nav aria-label="On this page"><a href="#readme">01 · Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap</a><a href="#algorithm-variants">02 · Algorithm overview: canonical B0–B10</a><a href="#version-mapping">03 · Canonical B0–B10 variants and legacy result mapping</a><a href="#canonical-native-di-results">04 · Canonical B1/B4: native PT with DI on</a><a href="#registered-room-results">05 · Registered-room comparison: B1, B4, B6 and B7</a><a href="#b8-partition-design">06 · B8: disjoint DI, GI and ReSTIR PT contribution ownership</a><a href="#b1-results">07 · Legacy migration report · canonical B2/B5</a><a href="#b2-results">08 · Legacy PT checkpoint · canonical B7</a><a href="#b3-results">09 · Legacy PT++ pilot · B7 ablations</a><a href="#b3-implementation">10 · Legacy limited PT++ activation history</a><a href="#b4-implementation">11 · B10 remaining PT++ gates · legacy filename</a><a href="#nvidia-whitepapers">12 · NVIDIA engineering whitepapers: implications for RTXPT Next</a><a href="#b2-implementation">13 · Legacy PT foundation · B6/B7</a><a href="#roadmap">14 · Roadmap: canonical B0–B10</a><a href="#benchmark-versions">15 · Version comparison protocol for Basix Pathtracing / RTXPT_Next</a><a href="#quality-metrics">16 · Image quality and temporal stability measurement plan</a><a href="#ptpp-audit">17 · PT++ implementation audit of the RTXDI 3.1 reference</a><a href="#architecture">18 · Architecture and exact baseline pins</a><a href="#rtxdi-vs-rtxpt">19 · RTXDI versus RTXPT: dependency and renderer comparison</a><a href="#scene-compatibility">20 · Scene compatibility: RTXDI3.1 and RTXPT1.9</a><a href="#focused-a">21 · Focused paper notes: RTXPT 1.9 baseline and staged RTXDI 3.1 adoption</a><a href="#focused-b">22 · Geometry, disocclusion and bidirectional research notes</a><a href="#paper-catalog">23 · Recent20-paper catalog</a><a href="#breadth">24 · Wyman recent-paper breadth review</a><a href="#validation">25 · Validation and benchmark plan</a><a href="#sources-and-rights">26 · Source provenance and reuse terms</a><a href="#research-map">27 · Research map and scope</a><a href="#source-records">28 · Source records</a></nav></div></aside><main id="main" class="doc-main"><div class="doc-overview doc-banner"><p class="doc-caption">Canonical B0–B10 configurations · checked2026-10-29</p><h1>RTXPT Next</h1><p>B0 preserves RTXPT v1.9. B1–B5 compare native PT with DI/GI3.0 and3.1; B6–B8 add ReSTIR PT; B9–B10 target limited and full PT++. Implementation status and legacy result mappings are explicit.</p><figure tabindex="0" role="region" aria-label="Integration dependency map; scroll horizontally on narrow screens"><img class="integration-map" src="assets/integration-map.svg" alt="Canonical experiment groups B0 through B10; see the table for activation and validation status."><figcaption>Canonical groups: original reference; native PT with DI/GI; ReSTIR PT; then PT++. B8–B10 require validated PT/GI contribution sharing.</figcaption></figure></div><div class="doc-results" hidden role="status"></div><section class="doc-panel" id="readme"><h2 id="readme-heading-1">Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap</h2>
 <p>User-confirmed numbering, 2026-10-29: <strong>B0 is unchanged RTXPT 1.9 with its original defaults, renderer/dependency pins and scene assets.</strong> The repository is RTXPT_Next. Read the <a href="#version-mapping">canonical B0–B10 mapping</a>; legacy files/tags/data IDs keep their earlier names and numeric results. <code>External/RTXDI-SDK</code> remains reference-only.</p>
 <div class="doc-table" tabindex="0" role="region" aria-label="Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap table"><table>
 <thead>
@@ -16,7 +16,7 @@
 <tr>
 <td>B1</td>
 <td>Native PT + DI 3.0; GI off</td>
-<td>New matched native-DI benchmark needed</td>
+<td>Original-scene and registered-room quality/timing measured</td>
 </tr>
 <tr>
 <td>B2</td>
@@ -31,7 +31,7 @@
 <tr>
 <td>B4</td>
 <td>Native PT + DI 3.1; GI off</td>
-<td>New matched native-DI benchmark needed</td>
+<td>Original-scene and registered-room quality/timing measured</td>
 </tr>
 <tr>
 <td>B5</td>
@@ -41,7 +41,7 @@
 <tr>
 <td>B6</td>
 <td>ReSTIR PT; DI/GI off</td>
-<td>Mode available; extended validation pending</td>
+<td>Registered-room quality/timing/history measured; original scenes unsupported</td>
 </tr>
 <tr>
 <td>B7</td>
@@ -64,7 +64,7 @@
 <td>Authorized future work; independent oracles and feature ablations before combination</td>
 </tr>
 </tbody></table></div>
-<p>Every result states its actual algorithm, settings and source identity. Historical old-B0/old-B1 Convergence/Kitchen DI+GI rows map to B2/B5. The old opaque-room comparison maps to a separately labelled B0 native-control raw preset, B3 native control and B7 DI+PT. Its DI-off 0.806 ms row is not the missing B4 native-DI comparator. Prioritize B1/B4 matched benchmarks and measured equal-time sample sweeps. The branch <code>baseline/rtxpt-1.9</code> and tag <code>rtxpt-1.9-baseline</code> retain exact upstream source; a moving main branch is not an unnamed baseline.</p>
+<p>Every result states its actual algorithm, settings and source identity. Historical old-B0/old-B1 Convergence/Kitchen DI+GI rows map to B2/B5. The old opaque-room comparison maps to a separately labelled B0 native-control raw preset, B3 native control and B7 DI+PT. Its DI-off0.806ms row is not a B4 native-DI comparator. New B1/B4 and room B4/B7 measurements now supply DI-on controls; equal-time sample sweeps remain pending. The branch <code>baseline/rtxpt-1.9</code> and tag <code>rtxpt-1.9-baseline</code> retain exact upstream source; a moving main branch is not an unnamed baseline.</p>
 <h3 id="readme-heading-2">Start here</h3>
 <ul>
 <li><a href="#version-mapping">Canonical B0–B10 mapping and preserved legacy crosswalk</a></li>
@@ -93,7 +93,8 @@
 <li>2026-10-28: Added short algorithm labels for each variant and required original Convergence/Kitchen plus controlled-scene comparisons; B3 development started without a performance claim.</li>
 <li>2026-10-28: Shared image preview opens pictures in place, supports keyboard activation, and closes with Escape or Close while restoring focus. The central HTML template and Documenter guidance share the same behavior.</li>
 </ul>
-<p>Canonical update2026-10-29: <a href="#canonical-native-di-results">B1/B4 native-DI quality and timing exclusions</a> retains12 original-scene captures. No new throughput result is accepted.</p>
+<p>Canonical update2026-10-29: <a href="#canonical-native-di-results">B1/B4 native-DI quality and cap-verified timing</a> retains12 original-scene captures and links12 accepted cap-verified timing runs; initial missing-trace attempts remain excluded.</p>
+<p>Current scoped measurements: <a href="#registered-room-results">registered-room B1/B4/B6/B7 comparison</a> includes30quality captures,12timing processes and explicit history settling; <a href="#canonical-native-di-results">native original-scene report</a> now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.</p>
 </section><section class="doc-panel" id="algorithm-variants"><h2 id="algorithm-variants-heading-1">Algorithm overview: canonical B0–B10</h2>
 <p><strong>Current numbering:</strong> use <a href="#version-mapping">the canonical mapping and legacy crosswalk</a>. B0 retains unchanged RTXPT 1.9 defaults and pins; it is not defined by the raw native-only control.</p>
 <div class="doc-table" tabindex="0" role="region" aria-label="Algorithm overview: canonical B0–B10 table"><table>
@@ -112,7 +113,7 @@
 <tr>
 <td>B1</td>
 <td>Native PT + DI 3.0</td>
-<td>GI/ReSTIR PT off; quality captured; matched throughput pending.</td>
+<td>GI/ReSTIR PT off; original-scene quality/timing measured.</td>
 </tr>
 <tr>
 <td>B2</td>
@@ -127,7 +128,7 @@
 <tr>
 <td>B4</td>
 <td>Native PT + DI 3.1</td>
-<td>GI/ReSTIR PT off; quality captured; matched throughput pending.</td>
+<td>GI/ReSTIR PT off; original-scene quality/timing measured.</td>
 </tr>
 <tr>
 <td>B5</td>
@@ -160,7 +161,7 @@
 <td>Authorized future work, independently validated.</td>
 </tr>
 </tbody></table></div>
-<p>Prioritize fresh B1/B4 native-DI comparisons. The 0.803 ms control is a B0 native-control raw preset, separate from original defaults; the 0.806 ms migrated native control is B3 with DI/GI off. The old-B2 checkpoint <code>de9fe651</code> maps to B7. The old-B3 pilot <code>a7428c8</code> maps to B7 plus limited ablations, <strong>not B9</strong>. Stored refs/data IDs and numbers are preserved.</p>
+<p>B1/B4 native-DI comparisons are measured on original scenes and the registered room; B6/B7 room timing and history sweeps are also measured. The 0.803 ms control is a B0 native-control raw preset, separate from original defaults; the 0.806 ms migrated native control is B3 with DI/GI off. The old-B2 checkpoint <code>de9fe651</code> maps to B7. The old-B3 pilot <code>a7428c8</code> maps to B7 plus limited ablations, <strong>not B9</strong>. Stored refs/data IDs and numbers are preserved.</p>
 <p>The original ReSTIR PT paper&#39;s §9.3 adjusted sample counts for approximately equal time; the current fixed-1spp room pilot is not that comparison. Keep equal-time/quality sweeps pending until measured. Existing runtime PT++ mechanisms are inherited, not newly counted as B9 gains.</p>
 <h3 id="algorithm-variants-heading-2">Legacy numbering appendix</h3>
 <p>The following retained overview and scene requirements were written under the previous IDs. Interpret every B1–B4 occurrence in this appendix through <a href="#version-mapping">VERSION_MAPPING.md</a>; it is not a second current version definition. Required original-scene identities and missing-coverage statements remain applicable to their mapped algorithms.</p>
@@ -227,7 +228,8 @@
 <ul>
 <li>2026-10-28: Added per-variant algorithm labels and mandatory Convergence/Kitchen/opaque-room coverage for new comparisons.</li>
 </ul>
-<p>Canonical update2026-10-29: <a href="#canonical-native-di-results">B1/B4 native-DI quality and timing exclusions</a> retains12 original-scene captures. No new throughput result is accepted.</p>
+<p>Canonical update2026-10-29: <a href="#canonical-native-di-results">B1/B4 native-DI quality and cap-verified timing</a> retains12 original-scene captures and links12 accepted cap-verified timing runs; initial missing-trace attempts remain excluded.</p>
+<p>Current scoped measurements: <a href="#registered-room-results">registered-room B1/B4/B6/B7 comparison</a> includes30quality captures,12timing processes and explicit history settling; <a href="#canonical-native-di-results">native original-scene report</a> now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.</p>
 </section><section class="doc-panel" id="version-mapping"><h2 id="version-mapping-heading-1">Canonical B0–B10 variants and legacy result mapping</h2>
 <p>User-confirmed numbering, 2026-10-29. <strong>B0 is the unchanged RTXPT 1.9 reference with its original defaults and dependency/scene pins.</strong> It is not redefined as a native-only raw preset. Every result shows a canonical variant, actual active modes and immutable source/settings identity.</p>
 <h3 id="version-mapping-heading-2">Canonical algorithm table</h3>
@@ -247,7 +249,7 @@
 <tr>
 <td><strong>B1</strong></td>
 <td><strong>RTXPT native PT + DI 3.0</strong></td>
-<td>DI on; GI and ReSTIR PT off. Original-scene DI quality captured; matched throughput pending.</td>
+<td>DI on; GI and ReSTIR PT off. Original-scene DI quality and cap-verified timing measured.</td>
 </tr>
 <tr>
 <td><strong>B2</strong></td>
@@ -262,7 +264,7 @@
 <tr>
 <td><strong>B4</strong></td>
 <td><strong>RTXPT native PT + DI 3.1</strong></td>
-<td>DI on; GI and ReSTIR PT off. Original-scene DI quality captured; throughput pending; priority comparator to B1 and B7.</td>
+<td>DI on; GI and ReSTIR PT off. Original-scene DI quality and cap-verified timing measured; priority comparator to B1 and B7.</td>
 </tr>
 <tr>
 <td><strong>B5</strong></td>
@@ -354,7 +356,7 @@
 <h3 id="version-mapping-heading-4">Inherited PT++ is not a new B9 gain</h3>
 <p>Runtime 3.1 already supplies 64-byte PT reservoirs, forced terminal NEE reconnection and optional footprint/history/roulette machinery. Source presence is not execution. The historical GI-off pilot wired footprint and initial-only roulette and measured isolated effects; it did not implement reciprocal pairing, explicit replay compaction, unified primary direct/indirect reservoirs, all-candidate vector shading or dual-motion disocclusion recovery. Duplication reduction needs its actual producer/lifecycle and remains deliberately biased. Record inherited mechanisms rather than counting them again. CGNS is a separate paper and is not reciprocal pairing.</p>
 <h3 id="version-mapping-heading-5">Fair comparisons and paper context</h3>
-<p>Prioritize matched <strong>B1 versus B4</strong> native-PT-plus-DI captures, then compare B4 with B7 while direct-light sampling is available on both sides. The legacy 0.806 ms native control had DI off and cannot establish the missing native PT + DI 3.1 baseline&#39;s cost or quality.</p>
+<p>Matched <strong>B1 versus B4</strong> native-PT-plus-DI captures and the registered-room B4/B7 comparison are now measured. The legacy 0.806 ms native control had DI off and cannot establish the native PT+DI3.1 baseline&#39;s cost or quality; use the new measured DI-on controls.</p>
 <p>The referenced original ReSTIR PT paper&#39;s §9.3 uses approximately equal-time comparisons with adjusted sample counts. Our fixed-1spp opaque-room pilot is a different experiment. Add measured sample/candidate sweeps and quality-versus-cost curves before comparable equal-time/equal-quality conclusions; do not transplant paper speedups.</p>
 <p>Every canonical variant retains visible original Convergence, original Kitchen and owned opaque-room rows. Preserve scene/material/camera identities and show missing, unsupported and historical-unverified-cap cases. The PT foundation&#39;s transmission/medium and original 14/2 binding diffuse-budget gates are not removed by renumbering or planned B8 sharing.</p>
 <h3 id="version-mapping-heading-6">Summary and lessons learned</h3>
@@ -363,9 +365,10 @@
 <ul>
 <li>2026-10-29: Applied user-confirmed B0–B10 numbering without changing historical references or numeric results.</li>
 </ul>
-<p>Canonical update2026-10-29: <a href="#canonical-native-di-results">B1/B4 native-DI quality and timing exclusions</a> retains12 original-scene captures. No new throughput result is accepted.</p>
+<p>Canonical update2026-10-29: <a href="#canonical-native-di-results">B1/B4 native-DI quality and cap-verified timing</a> retains12 original-scene captures and links12 accepted cap-verified timing runs; initial missing-trace attempts remain excluded.</p>
+<p>Current scoped measurements: <a href="#registered-room-results">registered-room B1/B4/B6/B7 comparison</a> includes30quality captures,12timing processes and explicit history settling; <a href="#canonical-native-di-results">native original-scene report</a> now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.</p>
 </section><section class="doc-panel" id="canonical-native-di-results"><h2 id="canonical-native-di-results-heading-1">Canonical B1/B4: native PT with DI on</h2>
-<p><strong>Measured 2026-10-29.</strong> Both native controls activate ReSTIR DI with GI and ReSTIR PT off. Twelve quality captures cover the original Convergence and Kitchen scenes. No new throughput result is accepted: two PresentMon attempts produced no CSV and were excluded. Temporary NVIDIA profiles were restored and verified.</p>
+<p><strong>Measured 2026-10-29.</strong> B1/B4 both activate ReSTIR DI with GI and ReSTIR PT off. Twelve quality captures and twelve accepted, known-cap-verified timing runs cover original Convergence and Kitchen. Two earlier missing-trace attempts remain excluded; recording resumed after the user restored the interactive desktop. All temporary driver profiles were restored and verified.</p>
 <div class="doc-table" tabindex="0" role="region" aria-label="Canonical B1/B4: native PT with DI on table"><table>
 <thead>
 <tr>
@@ -401,7 +404,54 @@
 </tr>
 </tbody></table></div>
 <p>The observed display-error differences are small across these process repeats. Three restarts are not independent Monte Carlo seeds and establish no statistical equivalence or speedup. The runtime migration retains the native rendering shaders; these results do not compare ReSTIR PT against native PT.</p>
-<h3 id="canonical-native-di-results-heading-2">Matched settings and provenance</h3>
+<h3 id="canonical-native-di-results-heading-2">Accepted original-scene timing</h3>
+<div class="doc-table" tabindex="0" role="region" aria-label="Canonical B1/B4: native PT with DI on table"><table>
+<thead>
+<tr>
+<th>Scene</th>
+<th align="right">B1: PT + DI3.0 GPU busy, ms</th>
+<th align="right">B4: PT + DI3.1 GPU busy, ms</th>
+<th align="right">B4 change</th>
+<th>B1/B4 run-median ranges, ms</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Convergence</td>
+<td align="right">3.7962</td>
+<td align="right">3.7723</td>
+<td align="right">-0.631%</td>
+<td>3.7944–3.7988 / 3.7317–3.8352</td>
+</tr>
+<tr>
+<td>Kitchen</td>
+<td align="right">4.4546</td>
+<td align="right">4.4455</td>
+<td align="right">-0.204%</td>
+<td>4.4381–4.5128 / 4.4268–4.4528</td>
+</tr>
+</tbody></table></div>
+<p>Each value is the median of three process medians. The observed differences are under1% and are descriptive; the run ranges do not establish a general improvement. Clocks were observed, not locked, and background applications remained present. GPU busy is target-process engine active duration, not complete-frame critical-path GPU latency or display FPS.</p>
+<div class="doc-table" tabindex="0" role="region" aria-label="Canonical B1/B4: native PT with DI on table"><table>
+<thead>
+<tr>
+<th>Scene</th>
+<th align="right">B1/B4 CPU cadence, ms</th>
+<th align="right">B1/B4 GPUTime, ms</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Convergence</td>
+<td align="right">3.8075 / 3.7680</td>
+<td align="right">3.8001 / 3.7764</td>
+</tr>
+<tr>
+<td>Kitchen</td>
+<td align="right">4.4798 / 4.4638</td>
+<td align="right">4.4589 / 4.4495</td>
+</tr>
+</tbody></table></div>
+<p>The separate timing dataset is <code>Benchmarks/development/2026-10-29-canonical-native-di-timing</code>. It retains the raw process-filtered CSVs, actual DI/GI/PT/build receipts, source/executable/shader identities, fresh driver audits and verified restoration records. The earlier quality dataset and its initial exclusions remain frozen.</p>
+<h3 id="canonical-native-di-results-heading-3">Matched settings and provenance</h3>
 <p>Original scene files, materials and cameras are unchanged: Convergence <code>convergence-test.scene.json</code>, exposure0; Kitchen <code>kitchen-with-test-stuff.scene.json</code>, exposure2. Both use1280×720,1spp, total/diffuse limits14/2, AA/denoiser/cache/subsampling off, NEE on/type2 and original realtime approximate MIS. Quality snapshots use the original simple-capture history behavior. No per-candidate exposure/brightness normalization is applied.</p>
 <div class="doc-table" tabindex="0" role="region" aria-label="Canonical B1/B4: native PT with DI on table"><table>
 <thead>
@@ -426,10 +476,10 @@
 </tr>
 </tbody></table></div>
 <p>The controls-v2 adapters add benchmark controls and effective transport/build receipts. All164 original renderer shader-source hashes and dependency pins are preserved; protected original/legacy binaries remain unchanged. Frozen manifests validate source, executable and compiled-cache identity before and after accepted captures. Actual receipts show <code>di=1 gi=0 pt=0</code>,1280×720,1spp and14/2 limits. These adapters are separately identified from unchanged B0.</p>
-<h3 id="canonical-native-di-results-heading-3">Quality reference and limits</h3>
+<h3 id="canonical-native-di-results-heading-4">Quality reference and limits</h3>
 <p>Official FLIP1.7 runs in LDR mode at67pixels/degree on encoded sRGB PNGs. The finite4096spp references and their hashes are reused from the retained original-scene reference dataset. Its2048-versus4096 reference discrepancies remain attached; they are approximately0.02761 Convergence and0.04723 Kitchen. Display RGB MSE/PSNR and display-luma SMAPE are retained in the metric JSON. These are display-space diagnostics, not linear-HDR error, HDR-FLIP or an unbiasedness proof. Original-shader native controls currently lack linear-HDR/explicit independent-seed export.</p>
-<h3 id="canonical-native-di-results-heading-4">Timing exclusions and coverage</h3>
-<p>The planned protocol uses three process repetitions/configuration/scene,45s warm-up and15s PresentMon, selecting the last600 target rows after dropping16. Two unchanged Convergence/B1 attempts exited PresentMon0 but produced no CSV, so no presentation timing or observed SyncInterval could be accepted. Known app/NVIDIA/RTSS settings were checked; this does not turn absent trace data into a verified timing result. Both temporary exact-executable driver profiles were restored; the user-owned RTSS profile was read only. Desktop screenshots were unavailable and LogonUI was observed, suggesting a locked display session; its causal role is unproven. Timing awaits an available interactive desktop.</p>
+<h3 id="canonical-native-di-results-heading-5">Timing protocol, recovery and coverage</h3>
+<p>The accepted protocol uses three process repetitions/configuration/scene,45s warm-up and15s PresentMon, selecting the last600 target rows after dropping16. Two unchanged Convergence/B1 attempts exited PresentMon0 but produced no CSV, so no presentation timing or observed SyncInterval could be accepted from those attempts. Known app/NVIDIA/RTSS settings were checked; this does not turn absent trace data into a verified timing result. Both temporary exact-executable driver profiles were restored; the user-owned RTSS profile was read only. Desktop screenshots were unavailable and LogonUI was observed, suggesting a locked display session; its causal role is unproven. After the user unlocked/reconnected the desktop, a separate5s diagnostic confirmed presentation availability. That diagnostic is excluded from comparisons. The subsequent twelve45s/15s runs passed known app/NVIDIA/RTSS boundary checks, observed SyncInterval0, zero PNG writes, no reported ETW loss and pre/post frozen artifact checks. Other possible external limiters remain outside this known coverage.</p>
 <div class="doc-table" tabindex="0" role="region" aria-label="Canonical B1/B4: native PT with DI on table"><table>
 <thead>
 <tr>
@@ -441,12 +491,12 @@
 <tbody><tr>
 <td>Original Convergence</td>
 <td>B1/B4,3process captures each</td>
-<td>No accepted new trace; retry with available display session</td>
+<td>Three accepted45s/15s processes/configuration; known cap checks passed</td>
 </tr>
 <tr>
 <td>Original Kitchen</td>
 <td>B1/B4,3process captures each</td>
-<td>Pending same repeated timing protocol</td>
+<td>Three accepted45s/15s processes/configuration; known cap checks passed</td>
 </tr>
 <tr>
 <td>Owned opaque room</td>
@@ -455,7 +505,7 @@
 </tr>
 </tbody></table></div>
 <p>Equal-time/error convergence sweeps, temporal behavior, reconstructed output and renderer-exclusive memory remain pending. Historical DI+GI timings retain their unverified-cap scope and are not pooled with this DI-only quality experiment.</p>
-<h3 id="canonical-native-di-results-heading-5">Inspect captures</h3>
+<h3 id="canonical-native-di-results-heading-6">Inspect captures</h3>
 <p>Click a capture to enlarge it; Escape closes the shared preview.</p>
 <div class="doc-table" tabindex="0" role="region" aria-label="Canonical B1/B4: native PT with DI on table"><table>
 <thead>
@@ -477,9 +527,200 @@
 </tr>
 </tbody></table></div>
 <p>Public-safe source/build/capture/metric identities are retained in <code>Benchmarks/development/2026-10-29-canonical-native-di</code>. <a href="#version-mapping">Canonical numbering and legacy mapping</a> defines all B0–B10 variants.</p>
-<h3 id="canonical-native-di-results-heading-6">Summary and lessons learned</h3>
-<p>Actual first-frame receipts now distinguish the missing DI-on native controls from older DI-off measurements. Preserve quality evidence independently of missing throughput evidence; an internal partial PT log cannot replace a complete presentation trace.</p>
+<h3 id="canonical-native-di-results-heading-7">Summary and lessons learned</h3>
+<p>Actual first-frame receipts now distinguish the missing DI-on native controls from older DI-off measurements. Quality and throughput now have separate accepted evidence. An internal partial PT log did not replace a missing presentation trace; incomplete attempts remain excluded.</p>
 <p>GUI input hardening and version-neutral labels were rebuilt and passed a separate finite-HDR/counter smoke on the existing B7 limited-ablation path. That smoke is not a new B9/B10 implementation or performance result; its retained receipt is <code>Benchmarks/development/2026-10-29-canonical-gui-smoke</code>.</p>
+</section><section class="doc-panel" id="registered-room-results"><h2 id="registered-room-results-heading-1">Registered-room comparison: B1, B4, B6 and B7</h2>
+<p><strong>Measured 2026-10-29, RTX4090.</strong> The missing native-PT-plus-DI control is now measured beside ReSTIR PT. In this scene, B7 costs19.41% more process GPU-busy time than B4 and has45.09% lower steady-state LDR-FLIP error. This is a configured-renderer cost/quality tradeoff, not a time-to-equal-quality speedup.</p>
+<div class="doc-table" tabindex="0" role="region" aria-label="Registered-room comparison: B1, B4, B6 and B7 table"><table>
+<thead>
+<tr>
+<th>Variant and actual algorithm; GI off throughout</th>
+<th align="right">GPU busy/frame, ms ↓</th>
+<th align="right">CPU cadence, ms</th>
+<th align="right">Median LDR-FLIP ↓</th>
+<th align="right">Encoded-sRGB MSE ↓</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>B1: Native PT + ReSTIR DI3.0</td>
+<td align="right">1.28265</td>
+<td align="right">1.34105</td>
+<td align="right">0.121484</td>
+<td align="right">0.012337</td>
+</tr>
+<tr>
+<td>B4: Native PT + ReSTIR DI3.1</td>
+<td align="right">1.28865</td>
+<td align="right">1.34975</td>
+<td align="right">0.121719</td>
+<td align="right">0.012350</td>
+</tr>
+<tr>
+<td>B6: ReSTIR PT + native direct; DI off</td>
+<td align="right">1.41950</td>
+<td align="right">1.49825</td>
+<td align="right">0.073817</td>
+<td align="right">0.004057</td>
+</tr>
+<tr>
+<td>B7: ReSTIR PT + ReSTIR DI3.1</td>
+<td align="right">1.53875</td>
+<td align="right">1.61595</td>
+<td align="right">0.066837</td>
+<td align="right">0.003196</td>
+</tr>
+</tbody></table></div>
+<p>Timing uses three fresh processes/configuration,45s wall warm-up and15s PresentMon, with rotated orders. Each process selects the last600 eligible target-process/swapchain rows after dropping16 tail frames. Quality uses three native process restarts or modern explicit seeds0,11,47 after64 requested warm-up frames. Native restarts are not claimed to be independent Monte Carlo seeds. These small samples remain exploratory.</p>
+<p><img src="assets/registered-room/cost-quality.png" alt="Configured-renderer cost and quality"></p>
+<p>Point ranges are min–max across the separate quality/timing repetitions, not confidence intervals. GPU busy is target-process engine active duration, not complete-frame critical-path GPU latency, exclusive DI/PT pass time or display FPS. The native partial perfLog excludes RTXDI passes and cannot attribute this difference.</p>
+<h3 id="registered-room-results-heading-2">What the corrected control changes</h3>
+<p>The earlier0.806ms migrated native control had DI off. It was not a native PT+DI comparator. The new B4 control has DI on and costs1.289ms in this separately identified registered-environment fixture; B7 costs1.539ms. Do not pool these values with the old no-environment room dataset or infer that B7 itself became faster.</p>
+<p>Both controls now include DI, but they are configured renderers with explicit policy differences. B1/B4 retain original native DI heuristics and approximate realtime NEE MIS. B6/B7 use the validated PT transport partition, full primary NEE where applicable, age rejection disabled with history mass cap8 and spatial/boost counts1/1. B7 additionally uses strict DI validation: boiling rejection, naive-neighbor discount and permutation sampling off, with raytraced bias correction. The comparison therefore does not isolate only the cost of adding path reservoirs. All actual settings and source identities are retained.</p>
+<p>The original ReSTIR PT paper adjusted sample counts for approximately equal time. This experiment fixes1spp and records warmed-up history snapshots. Measured sample/candidate sweeps and accumulated-frame/error-versus-time curves are still required for an equal-time or equal-quality speedup claim.</p>
+<h3 id="registered-room-results-heading-3">Fixture and immutable identities</h3>
+<p>Scene: <code>Testing/B2/Scenes/opaque-room-registered-env.scene.json</code>,640×360, total/diffuse limits3/3, static pinhole camera, exposure0, AA/denoiser/cache/subsampling off and post/firefly filters off. Models, original materials and camera are unchanged from the owned room. A registered environment light has actual runtime intensity0 and references a finite nonblack pinned texture for its unscaled importance PDF. Native first-frame receipts verify <code>envEnabled=1 envIntensity=0</code>.</p>
+<p>The original room file is preserved. The added registration avoids the native control’s absent-environment-record underflow without patching its rendering shaders. This is a separate fixture identity; <code>fixture-identity.json</code> retains scene/model/environment hashes and the structural comparison. Original Convergence and Kitchen are never replaced by this room.</p>
+<div class="doc-table" tabindex="0" role="region" aria-label="Registered-room comparison: B1, B4, B6 and B7 table"><table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th>Base/adapter source</th>
+<th>Executable SHA256</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>B1: Native PT + ReSTIR DI3.0</td>
+<td><code>4e380f9f85dba35b86b6a3bbd97e7acdfb324dec</code></td>
+<td><code>6db074d35ed7050142ecfa42101e9ba79152e6155caa9b5d5954c093d3f5d362</code></td>
+</tr>
+<tr>
+<td>B4: Native PT + ReSTIR DI3.1</td>
+<td><code>13d023fc6b8a7ff4ea6b6f5d5d7937bea4a86077</code></td>
+<td><code>68cab907caa70c917e35ca6942745d5f45c6d03dd600128ff24ecf4c626d6810</code></td>
+</tr>
+<tr>
+<td>B6: ReSTIR PT + native direct; DI off</td>
+<td><code>80eac1bcf0ce9ae2c03535b8061c133d9f19a36c</code></td>
+<td><code>8b8a65ca2ef174fac49e2eddecfb11b21ef86f7e03170677650f2ea938e8b28f</code></td>
+</tr>
+<tr>
+<td>B7: ReSTIR PT + ReSTIR DI3.1</td>
+<td><code>80eac1bcf0ce9ae2c03535b8061c133d9f19a36c</code></td>
+<td><code>8b8a65ca2ef174fac49e2eddecfb11b21ef86f7e03170677650f2ea938e8b28f</code></td>
+</tr>
+</tbody></table></div>
+<p>Modern B6/B7 use the current80eac1b renderer build with fixed-threshold reconnection and roulette off; they are not relabelled as the immutable de9fe651 executable. Runtime3.1’s64-byte packing and forced NEE were inherited. These runs do not activate the limited or full additional PT++ presets. All native renderer shader hashes, original dependency pins and protected baseline binaries remain preserved. Exact executable/DLL/cache bundles after timing are retained locally.</p>
+<p>Separate post-timing diagnostics show134608 valid mid-path reconnections and nontrivial reused reservoir mass in each seed0 B6/B7 snapshot. Raw HDR and packed valid reservoir state are finite. These diagnostics establish activation in this case, not general unbiasedness. Large packed buffers remain local; hashes and statistics are exported.</p>
+<h3 id="registered-room-results-heading-4">Raw HDR and finite reference</h3>
+<p>The reference is the current renderer’s native reference path at8192spp, seed101, pixel-center integration, with DI/GI/PT reuse off. It is separately identified from the unchanged B0 binary. A4096spp same-seed check and a second8192spp seed103 reference retain finite-reference discrepancy. No candidate brightness normalization is applied. Native original-shader B1/B4 controls do not export linear HDR, so the common four-way metric is LDR-FLIP; raw HDR metrics apply to B6/B7 only.</p>
+<div class="doc-table" tabindex="0" role="region" aria-label="Registered-room comparison: B1, B4, B6 and B7 table"><table>
+<thead>
+<tr>
+<th>Modern algorithm</th>
+<th align="right">Median linear RGB MSE ↓</th>
+<th align="right">Median HDR-FLIP ↓</th>
+<th align="right">Median signed mean luminance difference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>B6: ReSTIR PT + native direct; DI off</td>
+<td align="right">0.005781</td>
+<td align="right">0.114122</td>
+<td align="right">-0.083%</td>
+</tr>
+<tr>
+<td>B7: ReSTIR PT + ReSTIR DI3.1</td>
+<td align="right">0.004269</td>
+<td align="right">0.103801</td>
+<td align="right">-0.369%</td>
+</tr>
+</tbody></table></div>
+<p>Official FLIP1.7 uses PPD67, ACES and the reference-only exposure interval[-3.2584481,4.6571803] with8exposures. Signed differences are reported rather than normalized away or interpreted as an unbiasedness test.</p>
+<div class="doc-table" tabindex="0" role="region" aria-label="Registered-room comparison: B1, B4, B6 and B7 table"><table>
+<thead>
+<tr>
+<th>Reference discrepancy versus primary8192spp</th>
+<th align="right">Linear RGB MSE</th>
+<th align="right">HDR-FLIP</th>
+<th align="right">Signed mean luminance difference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>reference4096</td>
+<td align="right">0.00000370</td>
+<td align="right">0.006293</td>
+<td align="right">+0.0005%</td>
+</tr>
+<tr>
+<td>reference8192-independent</td>
+<td align="right">0.00000710</td>
+<td align="right">0.008059</td>
+<td align="right">+0.0003%</td>
+</tr>
+</tbody></table></div>
+<h3 id="registered-room-results-heading-5">History settling</h3>
+<p>Twenty-four B6/B7 captures cover three explicit seeds at1,8,32,64 requested history warm-up frames. Each point is a separate1spp snapshot, with no averaging of captured frames. The curves show how reuse history settles in this static scene. They are not accumulated-spp convergence or time-to-equal-quality curves; native variable-history curves remain unavailable.</p>
+<p><img src="assets/registered-room/history-settling.png" alt="ReSTIR PT history settling"></p>
+<h3 id="registered-room-results-heading-6">Frame caps and required scene coverage</h3>
+<p>All twelve accepted room timing runs passed effective app cap controls, fresh matching NVIDIA foreground/background cap0 and forced-off VSync, observed SyncInterval0, read-only RTSS audits at launch/start/end, zero PNG writes, no reported ETW loss and frozen source/executable/shader checks before/after capture. Every temporary exact-executable driver profile was restored and verified. The installed user Rtxpt.exe RTSS profile remains0 while global232 is unchanged. Other external limiters, background GPU work and unlocked clocks remain outside exclusive control.</p>
+<div class="doc-table" tabindex="0" role="region" aria-label="Registered-room comparison: B1, B4, B6 and B7 table"><table>
+<thead>
+<tr>
+<th>Mandatory scene</th>
+<th>Native B1/B4</th>
+<th>ReSTIR PT B6/B7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Original Convergence,1280×720,14/2</td>
+<td>Fresh DI-on quality and cap-verified timing in the native report</td>
+<td>Unsupported by current transmission/material and binding diffuse-budget gates</td>
+</tr>
+<tr>
+<td>Original Kitchen,1280×720,14/2</td>
+<td>Fresh DI-on quality and cap-verified timing in the native report</td>
+<td>Unsupported by current transmission/BLEND/material and binding diffuse-budget gates</td>
+</tr>
+<tr>
+<td>Owned room, explicit registered-env fixture,640×360,3/3</td>
+<td>Three quality processes and three timing processes/configuration</td>
+<td>Three-seed history sweep and three timing processes/configuration</td>
+</tr>
+</tbody></table></div>
+<p>Moving scenes, disocclusion recovery, reconstructed output, renderer-exclusive VRAM and equal-time/error sweeps remain pending. Whole-device allocation samples include background applications and are not claimed as renderer-exclusive memory.</p>
+<h3 id="registered-room-results-heading-7">Inspect representative captures</h3>
+<p>Process1 or seed0 after64 warm-up frames is shown without selecting a favorable result. Click an image to enlarge; Escape closes the shared preview.</p>
+<div class="doc-table" tabindex="0" role="region" aria-label="Registered-room comparison: B1, B4, B6 and B7 table"><table>
+<thead>
+<tr>
+<th>B1: native PT + DI3.0</th>
+<th>B4: native PT + DI3.1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="assets/registered-room/B1.png"><img src="assets/registered-room/B1.png" alt="B1 room"></a></td>
+<td><a href="assets/registered-room/B4.png"><img src="assets/registered-room/B4.png" alt="B4 room"></a></td>
+</tr>
+</tbody></table></div>
+<div class="doc-table" tabindex="0" role="region" aria-label="Registered-room comparison: B1, B4, B6 and B7 table"><table>
+<thead>
+<tr>
+<th>B6: ReSTIR PT; DI off</th>
+<th>B7: ReSTIR PT + DI3.1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="assets/registered-room/B6.png"><img src="assets/registered-room/B6.png" alt="B6 room"></a></td>
+<td><a href="assets/registered-room/B7.png"><img src="assets/registered-room/B7.png" alt="B7 room"></a></td>
+</tr>
+</tbody></table></div>
+<p><img src="assets/registered-room/reference.png" alt="Finite native8192spp reference"></p>
+<h3 id="registered-room-results-heading-8">Evidence and next integration gate</h3>
+<p>Public-safe raw PFM/PNG, metrics, timing CSVs, effective settings, frozen hashes, reference checks and restoration receipts are retained in <code>Benchmarks/development/2026-10-29-registered-room</code>. <a href="#canonical-native-di-results">Native original-scene measurements</a>, <a href="#version-mapping">canonical numbering</a> and <a href="#b8-partition-design">B8 contribution design</a> define the adjacent evidence and pending work.</p>
+<p>B8–B10 are not activated. The seventeen exact CPU B8 tests validate prerequisite finite models; GI-short GPU production, PT-long ownership, fallback/reset behavior and GI reuse still need implementation and component validation. No renderer implementation follows merely from passing the CPU algebra.</p>
+<h3 id="registered-room-results-heading-9">Summary and lessons learned</h3>
+<p>The DI-on native control reduces the apparent incremental cost of the tested ReSTIR PT configuration to about19% in this scene, with lower observed warmed-up image error. This corrects the comparison design; it is not a new PT optimization or a paper speedup reproduction. Preserve actual modes, reference uncertainty and missing original-scene coverage beside every result.</p>
 </section><section class="doc-panel" id="b8-partition-design"><h2 id="b8-partition-design-heading-1">B8: disjoint DI, GI and ReSTIR PT contribution ownership</h2>
 <p>Design/source audit only, 2026-10-29 Europe/Zurich. No B8 renderer implementation, build, GPU execution or unbiasedness result is asserted. Use <a href="#version-mapping">the canonical B0–B10 ledger</a>; this note proposes a transport contract for the requested combined mode.</p>
 <h3 id="b8-partition-design-heading-2">Main conclusion</h3>
@@ -491,7 +732,7 @@
 <li>GI owns a restricted, provably valid two-scattering domain.</li>
 <li>ReSTIR PT owns three-or-more-scattering paths.</li>
 </ul>
-<p>For the first strict GI implementation, restrict its secondary endpoint to a <strong>verified outgoing-direction-independent Lambertian response</strong>. Native traces the remaining two-scattering paths. The current GI reservoir cannot correctly reevaluate glossy secondary outgoing radiance after reconnection, and the default diffuse model is Frostbite, not Lambertian. A later general GI implementation needs extended payload/reevaluation; it must not silently claim exact glossy reuse.</p>
+<p>For the first strict GI implementation that reuses unchanged secondary RGB, restrict its secondary endpoint to a <strong>verified outgoing-direction-independent Lambertian response</strong>. Native traces the remaining two-scattering paths. The current GI reservoir cannot correctly reevaluate glossy secondary outgoing radiance after reconnection, and the default diffuse model is Frostbite, not Lambertian. A later general GI implementation needs extended payload/reevaluation; it must not silently claim exact glossy reuse.</p>
 <h3 id="b8-partition-design-heading-3">What the current code actually does</h3>
 <p>Paths below are repository-relative. Shader inspection applies to the retained development source <code>a7428c8</code>; subsequent GUI label/input changes do not alter these shader paths.</p>
 <ol>
@@ -601,7 +842,14 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>Therefore an explicit registered EnvironmentLight with <strong>intensity0</strong> and a nonempty valid path remains in the scene graph and contributes a proper zero-radiance environment record to RTXDI light preparation. The source&#39;s subtraction then has one actual environment record to remove from ordinary-infinite count, preventing the no-record underflow. <code>radianceScale:[0,0,0]</code> is ignored by the original <code>EnvironmentLight::Load</code> and is not a substitute.</p>
 <p>The raw source cubemap and its importance hierarchy are baked independently of runtime intensity. Intensity0 is applied later through <code>EnvMapSceneParams.ColorMultiplier</code>; use a finite nonblack pinned source so its unscaled importance integral is positive. An all-black source has an unguarded0/0 PDF risk. This proof establishes container lifetime/registration and intended PDF/radiance data flow by source; a finite GPU payload/index preflight on the new fixture remains necessary before measurement. Do not misrepresent this code audit as that run.</p>
 <h3 id="b8-partition-design-heading-14">Summary and lessons learned</h3>
-<p>A correct combined label needs separate path-domain integrals, usable secondary-radiance reevaluation and verified fallback. Current GI payload/approximation constraints are active correctness gates; this design does not remove them or establish a speedup. The zero-intensity environment fixture has a separate source-level registration proof and still needs GPU preflight.</p>
+<p>A correct combined label needs separate path-domain integrals, usable secondary-radiance reevaluation and verified fallback. Current GI payload/approximation constraints are active correctness gates; this design does not remove them or establish a speedup. The zero-intensity environment fixture passed its registered-room GPU preflight and measurement checks; this establishes fixture usability, not combined B8 correctness.</p>
+<h3 id="b8-partition-design-heading-15">Exact CPU prerequisite gate —2026-10-29</h3>
+<p>Seventeen new tests in <code>Benchmarks/tools/test_transport_partition_oracle.py</code> pass using exact rational arithmetic. The implementation lives in <code>transport_partition_oracle.py</code>; its frozen source hashes, test output and counterexample values are retained in <code>Benchmarks/development/2026-10-29-b8-partition-oracles</code>.</p>
+<p>The tests independently check all56 combinations of scattering count and eligibility, a labelled RGB physical-path catalog, nonuniform measures/proposals, unequal NEE/BSDF technique counts, secondary-emission ownership, alpha/null interfaces, empty draws, primary BSDF/PDF factors and support. Negative controls detect full-suffix GI overlap, classifying raw hits as scattering events, conditioning on successful GI candidates and removing a BSDF counterpart while retaining its old NEE MIS weight.</p>
+<p>A second finite geometric example uses source/target solid-angle derivatives with Jacobians1/4 and4. Both lie inside the native validator&#39;s1/10–10 acceptance interval. Replacing their transfer Jacobians by the1/3–3 clamp changes the declared estimator&#39;s result. With view-dependent secondary outgoing radiance, unchanged stored RGB also misses the target integral; reevaluation restores this finite example. These are counterexamples for the explicitly declared finite transfer model, not a measured bias magnitude or a complete diagnosis of every native GI estimator.</p>
+<h4 id="b8-partition-design-heading-16">Initial-only GPU stage before GI reuse</h4>
+<p>A fixed-outgoing-direction GI-short initial sampler can evaluate a general non-delta secondary BSDF correctly. Its outgoing direction has not changed, so the unchanged-RGB reuse objection does not apply. An additional exact test includes the otherwise ineligible secondary endpoint at its original outgoing direction and recovers the full short-path integral.</p>
+<p>This permits a bounded first GPU stage: DI for primary direct lighting, GI-short <strong>initial sampling only</strong>, PT-long for longer paths and native fallback, with separate component exports. It does not grant glossy GI temporal/spatial reuse or establish the complete canonical B8 configuration. Delta-light support, native fallback, PDF measures, resets, buffer ownership and all required GPU component checks remain implementation gates. No new combined GPU mode is enabled by these CPU tests.</p>
 </section><section class="doc-panel" id="b1-results"><h2 id="b1-results-heading-1">Legacy B1 report: RTXPT1.9 and RTXDI3.1 migration</h2>
 <blockquote>
 <p><strong>LEGACY NUMBERING — preserved evidence.</strong> This report and its raw B0/B1 labels predate the user-confirmed <a href="#version-mapping">canonical B0–B10 mapping</a>. Its old-B0 native PT + DI/GI3.0 rows map to <strong>canonical B2</strong>; old-B1 native PT + DI/GI3.1 rows map to <strong>canonical B5</strong>. The retained tag/source <code>B1</code> / <code>7010bb4</code> is the migration identity, <strong>not canonical B1</strong>, whose runtime is3.0 and GI is off. All numeric results, refs and data IDs below are unchanged. These original-scene historical runs have <strong>unverified external-cap coverage</strong> and are not pooled with cap-verified throughput.</p>
@@ -612,7 +860,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>B1 updates RTXPT&#39;s existing DI/GI integration to the RTXDI3.1 runtime. The active DI/GI algorithms remain equivalent under the scoped source audit; new PT++/CGNS capabilities in the reference SDK are not activated. Convergence&#39;s five matched process pairs show effectively unchanged GPU active time, with the observed difference well inside across-run variation. Kitchen and display-quality results are measured below. Across-run variation and display-sampling variation remain material; no general quality/performance improvement is established by this migration.</p>
 <p>The important measurement lesson was to verify that the renderer continues drawing when unfocused. Upstream static scenes keep scene time at zero, and an active bounded capture can keep rendering without writing PNGs. A completed launch or a partial <code>perfLog</code> alone was insufficient. Separately, B0 repeat-image variation was larger than the first B0/B1 image difference; direct image inequality alone cannot identify an integration regression.</p>
 <h3 id="b1-results-heading-3">Immutable source and implementation scope</h3>
-<div class="doc-table" tabindex="0" role="region" aria-label="Legacy B1 report: RTXPT1.9 and RTXDI3.1 migration table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy migration report · canonical B2/B5 table"><table>
 <thead>
 <tr>
 <th>Version</th>
@@ -644,7 +892,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>The guard uses existing active <code>captureSequence</code> to keep <code>ShouldRenderUnfocused</code> true. The original static scene keeps time at0, so the requested20s capture never writes; the wrapper deliberately terminates its owned renderer after measurement. Do not use this protocol unchanged with animated scenes. <code>partial-perf.csv</code> validates state/coverage and is not the headline complete-frame timing.</p>
 <p>PresentMon <code>GPUBusy</code> is target-process GPU engine active duration, not exclusive DI/GI time, display latency or a complete GPU critical-path profiler trace. CPU frame cadence and <code>GPUTime</code> are separate metrics. Observed presentation was DXGI, composed flip, SyncInterval0. The source CSV has no FrameType column; its absence is recorded rather than inferred from it. The representative table reports the median of five run medians. The paired-index bootstrap95% interval uses10000 seeded resamples of five process pairs; correlated per-frame observations are not treated as independent repetitions. The interval is exploratory with only five pairs.</p>
 <h3 id="b1-results-heading-5">Initial timing results</h3>
-<div class="doc-table" tabindex="0" role="region" aria-label="Legacy B1 report: RTXPT1.9 and RTXDI3.1 migration table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy migration report · canonical B2/B5 table"><table>
 <thead>
 <tr>
 <th>Scene</th>
@@ -673,7 +921,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 </tr>
 </tbody></table></div>
 <p>Secondary timings and whole-device allocation:</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="Legacy B1 report: RTXPT1.9 and RTXDI3.1 migration table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy migration report · canonical B2/B5 table"><table>
 <thead>
 <tr>
 <th>Scene</th>
@@ -722,7 +970,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <h3 id="b1-results-heading-6">Display image quality</h3>
 <p>The capture path exports tonemapped encoded sRGB PNGs. Initial tools evaluate display RGB MSE/PSNR, display-luma SMAPE100 and official LDR-FLIP1.7 at67pixels/degree. These are display-space diagnostics, not HDR-FLIP, linear radiometric RelMSE or an unbiasedness test. High-spp B0 reference captures retain their exact source/settings/hashes; reference mode can differ from real-time mode, and a finite reference is not assumed noise-free.</p>
 <p>Five process captures per version/scene were scored against a B0 4096spp reference.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="Legacy B1 report: RTXPT1.9 and RTXDI3.1 migration table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy migration report · canonical B2/B5 table"><table>
 <thead>
 <tr>
 <th>Scene</th>
@@ -775,7 +1023,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p><a href="https://github.com/BasixMaster/RTXPT_Next/tree/main/Benchmarks/results/2026-10-28-b1">Raw timing traces, per-run manifests, quality scores and checksums</a> are retained alongside the frozen protocol and portable capture/analysis tools. Images below show repeat1 without selecting for a favorable score. Generated scene captures retain the upstream assets’ applicable terms; see the pinned Assets repository.</p>
 <p>Click a capture to open the image preview. Press <strong>Escape</strong> or choose <strong>Close</strong> to return to the report.</p>
 <h4 id="b1-results-heading-9">Convergence captures</h4>
-<div class="doc-table" tabindex="0" role="region" aria-label="Legacy B1 report: RTXPT1.9 and RTXDI3.1 migration table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy migration report · canonical B2/B5 table"><table>
 <thead>
 <tr>
 <th>RTXPT1.9 / B0</th>
@@ -790,7 +1038,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 </tr>
 </tbody></table></div>
 <h4 id="b1-results-heading-10">Kitchen captures</h4>
-<div class="doc-table" tabindex="0" role="region" aria-label="Legacy B1 report: RTXPT1.9 and RTXDI3.1 migration table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy migration report · canonical B2/B5 table"><table>
 <thead>
 <tr>
 <th>RTXPT1.9 / B0</th>
@@ -815,7 +1063,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>The corrected B2 development build now executes ReSTIR PT with active mid-path reconnection and passes the scoped static opaque transport checks below. <strong>B2 is not promoted:</strong> original material/medium coverage, motion, reconstruction, binding diffuse limits and wider scene tests remain pending. B3 PT++ development has started separately; no B3 result is implied by this B2 checkpoint.</p>
 <h3 id="b2-results-heading-2">Algorithm and scene coverage at this checkpoint</h3>
 <p><strong>B2 measured algorithm: RTXPT + ReSTIR DI + ReSTIR PT; GI off.</strong> Native RTXPT handles the retained primary/fallback terms, DI owns its direct-light contribution and ReSTIR PT owns the selected indirect contribution. B0/B1 controls in this report use native PT with DI/GI off. See the <a href="#algorithm-variants">short overview for every variant</a> for available modes versus measured configurations.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B7 static opaque checkpoint: retained legacy B2 report table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT checkpoint · canonical B7 table"><table>
 <thead>
 <tr>
 <th>Required scene</th>
@@ -846,7 +1094,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>Convergence and Kitchen are mandatory rows for subsequent B2/B3 comparisons. This report does not substitute the owned room for those original scenes. Unsupported configurations must retain an explicit reason; their materials or camera may not be silently changed to produce a passing result.</p>
 <h3 id="b2-results-heading-3">First retained timing and quality comparison</h3>
 <p>RTX4090,640×360, owned opaque room,1spp, total/diffuse limits3/3, cache0, AA0, denoiser0, exposure0 and post/firefly filters off. Each timing configuration has three fresh processes,45s warm-up and15s PresentMon capture. Selection is the last600 target-process/swapchain frames after dropping16 tail frames. The table reports the median of process medians.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B7 static opaque checkpoint: retained legacy B2 report table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT checkpoint · canonical B7 table"><table>
 <thead>
 <tr>
 <th>Configuration</th>
@@ -887,7 +1135,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>Common display metrics use three legacy process captures per control and eight explicitly seeded B2 captures, official flip-evaluator1.7, LDR mode and PPD67. Legacy captures have no explicit independent-seed control, so no paired-seed or statistical quality-significance claim is made. Original B0/B1 and controls-v1 do not export linear HDR; the raw-HDR results below apply to B2 only.</p>
 <h3 id="b2-results-heading-4">B2 raw-HDR checks</h3>
 <p>The reference is8192spp, seed101, pixel-center integration. Separate4096spp and8192spp/seed103 checks retain finite-reference discrepancy. Realtime captures use seeds0,1,2,3,5,11,23,47 and64-frame history warm-up. HDR-FLIP uses PPD67, ACES and the frozen reference-only exposure interval[-3.2584834,+4.6571465] with8exposures. Inputs are stored linear RGB PFM, with no per-candidate brightness normalization.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B7 static opaque checkpoint: retained legacy B2 report table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT checkpoint · canonical B7 table"><table>
 <thead>
 <tr>
 <th>B2 strict static preset</th>
@@ -923,7 +1171,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>All three modes remain separately selectable: DI, GI and PT. GI and PT own alternative indirect estimates here; adding both together without a valid partition remains unsupported.</p>
 <h3 id="b2-results-heading-6">Inspect the captures</h3>
 <p>Representative native trial1 and B2 seed0, fixed exposure0. The reference uses8192spp; realtime images use1spp. Metrics use the full retained capture sets. Click an image to enlarge it; Escape closes the preview.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B7 static opaque checkpoint: retained legacy B2 report table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT checkpoint · canonical B7 table"><table>
 <thead>
 <tr>
 <th>Native reference</th>
@@ -954,7 +1202,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>B3 contains footprint/inverse-footprint reconnection and initial-generation-only roulette. The user assigned the remaining PT++ mechanisms to <strong>B4</strong>. Packed 64-byte reservoirs and forced NEE reconnection were inherited by B2; replay compaction, paired spatial reuse and unified direct/indirect reservoirs are not part of these B3 measurements. See <a href="#b3-implementation">the implementation map</a> and <a href="#b4-implementation">B4 gates</a>.</p>
 <h3 id="b3-results-heading-2">Isolated activation comparison</h3>
 <p>All rows use <strong>RTXPT + ReSTIR DI + ReSTIR PT; GI off</strong>, at 640×360, 1spp, 3 total / 3 diffuse bounces, AA/denoiser/cache/subsampling off, pinhole, exposure 0 and post/firefly filters off. Strict DI validation, PT age rejection off with history mass cap 8, and fixed spatial/boost counts 1/1 match the B2 static contract.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B7 limited-feature ablation: retained legacy B3 results table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT++ pilot · B7 ablations table"><table>
 <thead>
 <tr>
 <th>Configuration and active algorithm</th>
@@ -1001,7 +1249,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p><img src="assets/b3/history-settling.png" alt="B3 history-settling curves"></p>
 <p>The curves show three-seed medians, not a confidence interval or a reference-convergence proof. DI and PT history evolve together. Original scenes, moving disocclusions, reconstructed output, and equal-time/quality convergence remain pending.</p>
 <p>Initial-only DI/PT sampling (both reuse modes 0):</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B7 limited-feature ablation: retained legacy B3 results table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT++ pilot · B7 ablations table"><table>
 <thead>
 <tr>
 <th>Configuration and active algorithm</th>
@@ -1037,7 +1285,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 </tbody></table></div>
 <h3 id="b3-results-heading-4">B0 through B3: common display track</h3>
 <p>These rows share the finite 8192spp native reference PNG, fixed exposure 0 and LDR-FLIP at PPD 67. They compare configured renderers with different estimators. B0/B1 controls retain upstream approximate native NEE MIS; B2/B3 use their explicit DI/PT partition.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B7 limited-feature ablation: retained legacy B3 results table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT++ pilot · B7 ablations table"><table>
 <thead>
 <tr>
 <th>Version / preset</th>
@@ -1091,7 +1339,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 </tbody></table></div>
 <p>B0/B1 use three legacy processes without explicit independent seed control; B2 uses eight explicit seeds; B3 uses three. B0/B1 do not export HDR. Earlier B0/B1/B2 timings were collected in a separate episode; the four B3 ablations are the contemporaneous comparison. The B3 B2-policy control includes the new executable&#39;s bindings and inactive diagnostic branch, so it is not relabelled as the immutable B2 binary. No version-wide significance or equal-quality speedup is claimed.</p>
 <h3 id="b3-results-heading-5">Mandatory original-scene coverage</h3>
-<div class="doc-table" tabindex="0" role="region" aria-label="B7 limited-feature ablation: retained legacy B3 results table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT++ pilot · B7 ablations table"><table>
 <thead>
 <tr>
 <th>Scene and matched contract</th>
@@ -1126,7 +1374,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>No opaque edits count as either original-scene result. Exact scene hashes and active algorithm labels are in <a href="#algorithm-variants">the variant overview</a> and <code>Benchmarks/comparison-matrix.json</code>. The <a href="#b1-results">historical B1 report</a> remains separate; it cannot be pooled with cap-verified throughput.</p>
 <h3 id="b3-results-heading-6">Timing and activation receipts</h3>
 <p>Each accepted timing process has 45s warm-up and 15s PresentMon capture; the predeclared selection is the last 600 target-process/swapchain rows after dropping 16 tail frames. Order rotates across three blocks. All 12 accepted runs passed app/NVIDIA/RTSS cap checks, observed SyncInterval 0, no reported ETW loss, no PNG writes and pre/post source/executable/shader-cache identity. Every temporary NVIDIA profile was restored and verified, including the excluded trace attempt. RTSS was read-only: the user&#39;s Rtxpt.exe profile 0 remains unchanged over global 232. Other external limiters remain unknown.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B7 limited-feature ablation: retained legacy B3 results table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT++ pilot · B7 ablations table"><table>
 <thead>
 <tr>
 <th>Configuration and active algorithm</th>
@@ -1164,7 +1412,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>One quality startup coincided with NVML failure, a commitment-limit error and Windows compositor fatal memory exhaustion. Its exact replacement passed; no renderer causation was established. One timing attempt produced no PresentMon CSV despite renderer activity and was rejected; its exact replacement passed. Both failures remain retained separately. Added inter-process spacing is outside the selected timing windows. No applications, RTSS settings or global driver settings were changed to recover.</p>
 <h3 id="b3-results-heading-7">Inspect the captures</h3>
 <p>Seed 0 is shown consistently, without selecting a favorable image. Full metrics use all declared trials. Click a picture to enlarge; Escape closes the shared preview.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B7 limited-feature ablation: retained legacy B3 results table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT++ pilot · B7 ablations table"><table>
 <thead>
 <tr>
 <th>B2-policy control · DI + PT</th>
@@ -1198,7 +1446,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>B8 sharing requires a valid contribution partition/MIS before B9/B10 can claim it. Packed reservoirs and forced NEE were inherited from runtime3.1; enabling supplied machinery does not establish a full PT++ implementation. Keep original scene coverage visible and prioritize the missing matched canonical B1/B4 native-DI benchmarks.</p>
 <p>B3 development starts from the preserved B2 checkpoint <code>de9fe651903f203327830e7361ac4237e00d508c</code> on <code>b3/ptpp-activation</code>. It retains <strong>RTXPT + ReSTIR DI + ReSTIR PT, with GI off</strong> in the tested configuration. B3 is in progress; it does not mean every PT++ mechanism is implemented or that B2&#39;s broader material gates have passed.</p>
 <h3 id="b3-implementation-heading-2">First implementation</h3>
-<div class="doc-table" tabindex="0" role="region" aria-label="B7 limited PT++ ablations: retained legacy B3 implementation table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy limited PT++ activation history table"><table>
 <thead>
 <tr>
 <th>Mechanism</th>
@@ -1238,7 +1486,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>The first controlled-scene pilot uses seeds 0, 11 and 47, initial-only and temporal-plus-spatial reuse, and history warm-up lengths 1, 8, 32 and 64. Native finite 8192spp reference, pixel-center convention and fixed HDR-FLIP exposure parameters remain those of the B2 checkpoint. No candidate brightness normalization or favorable-seed selection is allowed. Three seeds/process repetitions are exploratory.</p>
 <p>Quality is measured outside throughput runs. Timing runs use application uncapped controls, scoped NVIDIA cap/VSync settings with restoration, and read-only RTSS boundary audits. Include the added dispatch/binding cost and retain artifact/cache failures rather than relaxing the oracle. A history-settling curve is not a time-to-equal-quality result.</p>
 <h3 id="b3-implementation-heading-4">Mandatory extended scene coverage</h3>
-<div class="doc-table" tabindex="0" role="region" aria-label="B7 limited PT++ ablations: retained legacy B3 implementation table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy limited PT++ activation history table"><table>
 <thead>
 <tr>
 <th>Original case</th>
@@ -1264,7 +1512,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 </tbody></table></div>
 <p>See <a href="#algorithm-variants">algorithm variants and comparison policy</a>. Every later comparison keeps all three rows visible, including unsupported cases. The historical B0/B1 DI+GI scene results have unverified external cap coverage and cannot be pooled with cap-verified throughput runs.</p>
 <h3 id="b3-implementation-heading-5">Remaining PT++ work assigned to B4</h3>
-<div class="doc-table" tabindex="0" role="region" aria-label="B7 limited PT++ ablations: retained legacy B3 implementation table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy limited PT++ activation history table"><table>
 <thead>
 <tr>
 <th>Technique</th>
@@ -1326,7 +1574,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <h3 id="b4-implementation-heading-3">Legacy plan, retained for provenance</h3>
 <p>The user assigned the remaining PT++ mechanisms to <strong>B4</strong>, starting after the B3 footprint/initial-only-roulette checkpoint is finished and preserved. B4 is currently a design stage; no B4 renderer or performance result is claimed here. Preserve B0, B1, B2 and B3 as separate controls.</p>
 <h3 id="b4-implementation-heading-4">Scope and implementation gates</h3>
-<div class="doc-table" tabindex="0" role="region" aria-label="B10 remaining PT++ gates: retained legacy B4 plan table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="B10 remaining PT++ gates · legacy filename table"><table>
 <thead>
 <tr>
 <th>Mechanism</th>
@@ -1514,7 +1762,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>Release compilation passed after these changes. The benchmark tool suite passes 68 tests, including independent PFM endian/orientation/scale and analytically known metric fixtures. B2 remains a development prototype.</p>
 <h4 id="b2-implementation-heading-10">First cap-verified timing pilot, 2026-10-28</h4>
 <p>One fresh process per configuration, in B0→B1→B2 order, completed 45 seconds wall-clock warm-up and 15 seconds PresentMon capture. The preregistered selection is the last 600 process/swapchain frames after dropping the final 16. Same owned opaque scene, 640×360, 1 spp, total/diffuse bounce caps 3/3, AA0, denoiser0, cache0. B0/B1 use DI+GI; B2 uses DI+PT with GI disabled. These are different indirect estimators and B2 includes the documented raw merge correction.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="ReSTIR PT foundation: retained legacy B2/B3 implementation history table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT foundation · B6/B7 table"><table>
 <thead>
 <tr>
 <th>Configuration</th>
@@ -1544,7 +1792,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <h4 id="b2-implementation-heading-11">Temporal history diagnosis and corrected captures</h4>
 <p>Packed 64-byte reservoir readback confirmed that the earlier screenshot warm-up cleared PT history on every warm-up frame, including the captured frame: the temporal-only output had M=1 and age=0 throughout. The cause was CaptureScriptManager&#39;s per-frame ResetAccumulation flag, which is also a PT history invalidation signal. For active ReSTIR PT, capture warm-up now resets realtime caches once at the start and then allows history to converge; reference and legacy DI/GI capture behavior is preserved. General scene/material/mode invalidation remains active.</p>
 <p>New initial, temporal, spatial and combined captures passed with finite HDR output. Temporal-only now has 117591 valid reservoirs with positive age and mean M=8.845; combined output has 118872 with positive age and mean M=14.900. These post-frame snapshots demonstrate stored history participation, not unbiased weighting or a quality guarantee.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="ReSTIR PT foundation: retained legacy B2/B3 implementation history table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT foundation · B6/B7 table"><table>
 <thead>
 <tr>
 <th>PT mode after correction</th>
@@ -1590,7 +1838,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>The earlier raw-HDR tables used a reference with default <code>AccumulationAA=true</code>, while realtime AA0 used pixel-center camera rays. They remain methodology diagnostics, not matched camera-domain estimator-accuracy evidence. A new explicit <code>--referencePixelCenter true</code> switch disables reference subpixel integration. First-frame <code>SAMPLING_CONTRACT</code> logs verify actual seed, mode and pixel-jitter scale. General frame/history indices are unchanged by the new scramble seed.</p>
 <p>The validation build adds default-zero <code>--samplingSeed</code>, scrambling native camera/BSDF/STF/RTXDI sampling and PT runtime RNG inputs. Seed0 retains the source&#39;s original stream construction; whole-renderer bit-exact replay is not established: same-seed separate processes differ. The controlled trials therefore record both distinct seeds and repeated-seed process variation. Packed PT reservoir export is now a separate opt-in <code>--capturePTReservoirs true</code> diagnostic, rather than a cost hidden in every HDR capture.</p>
 <p>Eight seed trials (0,1,2,3,5,11,23,47), each initial-only and combined reuse, completed against a matched pixel-center native reference. The reference uses8192spp/seed101; separate4096spp/seed101 and8192spp/seed103 checks quantify finite-reference discrepancy. All captures use640×360,1spp realtime, total/diffuse caps3/3, AA0, denoiser0, cache0, fixed exposure0 and no firefly/post filters.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="ReSTIR PT foundation: retained legacy B2/B3 implementation history table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT foundation · B6/B7 table"><table>
 <thead>
 <tr>
 <th>Diagnostic</th>
@@ -1628,7 +1876,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>Successful pass dispatch and lower per-image error did not establish transport correctness. Matching pixel integration exposed a real mean-lighting error; component captures and deterministic quadrature then isolated its source. Keep environment records, absolute/local light-index domains, light-vertex budgets and deliberate rejection filters explicit in each result identity. Original B0/B1 evidence remains preserved; the corrected B2 renderer needs fresh quality and timing evidence.</p>
 <h4 id="b2-implementation-heading-15">Corrected 30-capture sweep and strict-DI ablation</h4>
 <p>Thirty captures completed on the retained corrected checkpoint. The fixed bounce sweep covers native limits1–4, PT-only and DI+PT, initial-only and combined reuse. At limit1, PT adds no indirect term. At limits2–4, initial PT-only whole-frame luminance differs from its matched native reference by approximately−0.48% to−0.51%; DI+PT initial differences are approximately−0.25% to−0.36%. This removes the earlier large brightness error and aligns the path-length domain; it is not proof of an unbiased estimator.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="ReSTIR PT foundation: retained legacy B2/B3 implementation history table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT foundation · B6/B7 table"><table>
 <thead>
 <tr>
 <th>Eight-seed cap3 diagnostic</th>
@@ -1680,7 +1928,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>The earlier uncapped timing pilot on the no-environment room predates this light-list repair. Retain its raw timings and cap receipts as historical execution evidence, but do not interpret it as a comparison of corrected lighting or substitute a new executable under those hashes. Fresh accepted B2 timing remains pending transport validation.</p>
 <h4 id="b2-implementation-heading-16">Inspectable images and evidence</h4>
 <p>Fixed exposure0, same camera and640×360 output. The realtime images use1spp; the reference uses8192spp. These PNGs are display previews; the metrics above use stored linear PFM radiance. Click a picture to inspect it and press Escape to close.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="ReSTIR PT foundation: retained legacy B2/B3 implementation history table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Legacy PT foundation · B6/B7 table"><table>
 <thead>
 <tr>
 <th>Native reference</th>
@@ -1704,9 +1952,9 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <h3 id="roadmap-heading-2">Current execution order and acceptance gates</h3>
 <ol>
 <li>Preserve B0 defaults/source/assets. Define B1 native PT + DI3.0 and B2 native PT + DI/GI3.0 as explicit configurations, distinct from the B0 native-only raw control.</li>
-<li>Define B3 native PT on runtime3.1, B4 native PT + DI3.1, and B5 native PT + DI/GI3.1. Prioritize fresh matched B1/B4 native-DI timing and quality; the legacy 0.806 ms native-only control is B3, not B4.</li>
-<li>Preserve the ReSTIR PT foundation: B6 has separate DI/GI off; B7 adds DI3.1 and keeps GI off. Old-B2 checkpoint <code>de9fe651</code> is scoped B7 evidence. Original Convergence/Kitchen material and 14/2 diffuse-budget restrictions remain acceptance gaps.</li>
-<li><a href="#b8-partition-design">B8 contribution-partition design</a> now identifies the exact GI suffix overlap, direct-emission ownership and secondary-material reevaluation gates. Derive and implement B8&#39;s PT + DI3.1 + GI3.1 sharing. Specify disjoint transport contributions or valid MIS, replay/PDF/history contracts and finite-domain correctness oracles. Adding overlapping GI/PT outputs or bypassing the alternative-mode guard is not a valid B8.</li>
+<li>Define B3 native PT on runtime3.1, B4 native PT + DI3.1, and B5 native PT + DI/GI3.1. Fresh matched B1/B4 native-DI timing/quality is measured on original scenes and the registered room; the legacy 0.806 ms native-only control is B3, not B4.</li>
+<li>Preserve the ReSTIR PT foundation: B6 has separate DI/GI off; B7 adds DI3.1 and keeps GI off. Old-B2 checkpoint <code>de9fe651</code> is scoped B7 evidence. Registered-room B6/B7 quality/timing/history are measured at current source80eac1b. Original Convergence/Kitchen material and14/2 diffuse-budget restrictions remain acceptance gaps.</li>
+<li><a href="#b8-partition-design">B8 contribution-partition design</a> now identifies the exact GI suffix overlap, direct-emission ownership and secondary-material reevaluation gates. Seventeen exact CPU prerequisite tests pass. Implement B8&#39;s PT+DI3.1+GI3.1 sharing with separately validated GPU components. Specify disjoint transport contributions or valid MIS, replay/PDF/history contracts and finite-domain correctness oracles. Adding overlapping GI/PT outputs or bypassing the alternative-mode guard is not a valid B8.</li>
 <li>B9 is B8 plus limited footprint/initial-only-roulette PT++. The old-B3 pilot <code>a7428c8</code> had GI off and is a B7 limited-feature ablation, not evidence that B9 exists. Preserve its measured tradeoff and default decision.</li>
 <li>Continue the authorized full remaining PT++ work as B10, while completing the B8 sharing foundation. Implement reciprocal spatial pairing, replay compaction, unified primary direct/indirect reservoirs, vector-weight shading, duplication reduction and dual-motion disocclusion handling behind independent controls/oracles. Audit inherited runtime features and remaining named micro-optimizations. See <a href="#b4-implementation">remaining PT++ gates</a>, whose legacy filename stays intact.</li>
 </ol>
@@ -1809,7 +2057,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <tr>
 <td>B1</td>
 <td>RTXPT1.9 native PT + DI3.0; GI/ReSTIR PT off</td>
-<td>New matched native-DI comparator to B4.</td>
+<td>Measured original-scene and registered-room DI-on comparator to B4.</td>
 </tr>
 <tr>
 <td>B2</td>
@@ -1824,7 +2072,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <tr>
 <td>B4</td>
 <td>Native PT + DI3.1; GI/ReSTIR PT off</td>
-<td>New matched native-DI benchmark required; compare with B1 and B7.</td>
+<td>Measured with B1 on original scenes and with B7 in the registered room.</td>
 </tr>
 <tr>
 <td>B5</td>
@@ -1995,7 +2243,8 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <h3 id="benchmark-versions-heading-10">Legacy B2/B3 clarification —2026-10-28</h3>
 <p><strong>Archived numbering below:</strong> old B1 migration results map by actual mode to B3/B4/B5; old B2 DI+PT maps to B7; old B3 limited GI-off pilot is a B7 ablation. The <a href="#version-mapping">canonical crosswalk</a> supersedes the old numbering without rewriting evidence.</p>
 <p>B2 now denotes the ReSTIR PT renderer integration; B3 denotes PT++ activation and missing-mechanism work. Both retain DI/GI as selectable controls with explicit contribution ownership. See <a href="#b2-implementation">implementation status</a>. B1 results remain historical measurements of ordinary PT with DI+GI, without ReSTIR PT. The B1 run settings were not a comprehensive driver/external frame-cap audit; do not retroactively claim they were. Future performance runs must record the uncapped renderer override, driver profile state and unknown external limiters, separately from simulated capture timestep.</p>
-<p>Canonical update2026-10-29: <a href="#canonical-native-di-results">B1/B4 native-DI quality and timing exclusions</a> retains12 original-scene captures. No new throughput result is accepted.</p>
+<p>Canonical update2026-10-29: <a href="#canonical-native-di-results">B1/B4 native-DI quality and cap-verified timing</a> retains12 original-scene captures and links12 accepted cap-verified timing runs; initial missing-trace attempts remain excluded.</p>
+<p>Current scoped measurements: <a href="#registered-room-results">registered-room B1/B4/B6/B7 comparison</a> includes30quality captures,12timing processes and explicit history settling; <a href="#canonical-native-di-results">native original-scene report</a> now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.</p>
 </section><section class="doc-panel" id="quality-metrics"><h2 id="quality-metrics-heading-1">Image quality and temporal stability measurement plan</h2>
 <p>Metric/source settings checked 2026-10-28; project naming updated to <a href="#version-mapping">canonical B0–B10</a>. Initial tools measure display RGB MSE/PSNR, display-luma SMAPE and official LDR-FLIP; the <a href="#b1-results">legacy migration report</a> maps its historical DI+GI observations to B2/B5. The PT foundation (B7 DI+PT checkpoint; retained legacy B2 datasets) exports linear RGB PFM and measures linear MSE, CGNS-style luminance SMAPE, explicit MAPE and project RelMSE. Official HDR-FLIP1.7 and seeded summaries are instrumented; same-seed whole-renderer replay is not bit-exact. The GI-off limited pilot is a B7 ablation, not B9. B0 original defaults/pins remain unchanged, and wider temporal/reconstruction/scene gates remain pending.</p>
 <h3 id="quality-metrics-heading-2">What the selected papers actually report</h3>
@@ -2886,4 +3135,4 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>B0 preserves unchanged RTXPT1.9 defaults, renderer/dependency pins and original scenes. The legacy runtime3.1 migration source7010bb4 underlies canonical B3/B4/B5 mode configurations, not canonical B1. App-owned PT integration supplies the B6/B7 foundation; the broader SDK stays a source reference. B8 sharing requires a valid partition/MIS, and full remaining PT++ is B10 work. Keep methods opt-in, preserve legacy evidence identities and compare actual configurations through the canonical matrix rather than old labels alone.</p>
 <h3 id="research-map-heading-6">Canonical numbering and evidence boundary —2026-10-29</h3>
 <p>Legacy source/report labels remain intact: old B1 migration source7010bb4 maps by active mode to B3/B4/B5; old B2 DI+PT maps to B7; old B3 limited GI-off pilot is a B7 ablation, not B9. The <a href="#version-mapping">canonical crosswalk</a> supersedes earlier planning labels. B8 sharing needs a valid partition/MIS before B9/B10 can claim it. Historical original-scene old-B0/old-B1 DI+GI rows map to B2/B5 with unverified cap coverage; do not pool them with cap-verified throughput. Current comparisons require actual modes, cap receipts, original-scene coverage and separate simulated-time/throughput labels.</p>
-</section><section id="source-records" class="doc-panel"><h2>Source record search appendix</h2><p>Full structured notes are searchable here and in the evidence explorer.</p><details id="source-PTPP"><summary>ReSTIR PT Enhanced: Algorithmic Advances for Faster and More Robust ReSTIR Path Tracing</summary><p>See matching section in papers_a.md for source claims, page locators and separate engineering proposals. Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Reported prototype results; no local GPU replication; source baselines/hardware differ from RTXPT 1.9.</p><p>CC BY 4.0 paper. NVIDIA publication page has no official code link as checked. Third-party implementations are separate artifacts.</p><a href="https://cwyman.org/papers/i3d26_ReSTIRPT++.pdf">Primary source</a></details><details id="source-CGNS"><summary>Compatibility-Guided Neighbor Selection for ReSTIR</summary><p>See matching section in papers_a.md for source claims, page locators and separate engineering proposals. Original analysis is in FOCUSED_A.md / FOCUSED_B.md. Metric locators: SMAPE factor 100 with epsilon 1e-4, footnote 3 page 8; relative spatial covariance and temporal autocovariance Appendix A page 16; lag 3 protocol in section 7 page 9.</p><p>Reported prototype results; no local GPU replication; source baselines/hardware differ from RTXPT 1.9.</p><p>CC BY 4.0 paper. Official code orion-junkins/ReSTIR-CGNS @ f28d553f3b2552b1be829feffea6d1abb1945e1d has BSD-3-Clause-style LICENSE.md; linked SDKs separately licensed.</p><a href="https://cwyman.org/papers/hpg26_compatibleNeighborSelection.pdf">Primary source</a></details><details id="source-SPMIS"><summary>Stochastic Pairwise MIS for Unbiased Large-Kernel Reuse in Real-Time</summary><p>See matching section in papers_a.md for source claims, page locators and separate engineering proposals. Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Reported prototype results; no local GPU replication; source baselines/hardware differ from RTXPT 1.9.</p><p>Paper Creative Commons Attribution; official minimal code archive has no license notices. Do not copy source until code reuse terms resolved.</p><a href="https://cwyman.org/papers/eg26_StochasticPairwiseMIS.pdf">Primary source</a></details><details id="source-PG"><summary>ReSTIR PG: Path Guiding with Spatiotemporally Resampled Paths</summary><p>See matching section in papers_a.md for source claims, page locators and separate engineering proposals. Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Reported prototype results; no local GPU replication; source baselines/hardware differ from RTXPT 1.9.</p><p>Author PDF explicitly personal use, not for redistribution. Keep cached PDF/text in work, not exports; author page has no official code link as checked.</p><a href="https://cwyman.org/papers/siga25_ReSTIR_PG.pdf">Primary source</a></details><details id="source-B1"><summary>Real-Time Level-of-Detail Rendering with ReSTIR</summary><p>See papers_b.md B1; §§4–6 pp4–6; Fig1,5,6 Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Transfer to unchanged RTXPT1.9 B0, planned RTXDI3.1 integration B1 and later B2+ combinations is unmeasured.</p><p>Paper CC-BY-4.0; reference code separately assessed.</p><a href="https://cwyman.org/papers/sig26_ReSTIR_LoD.pdf">Primary source</a></details><details id="source-B2"><summary>Multi-Layer Reservoir Splatting for Temporal Reuse under Disocclusion</summary><p>See papers_b.md B2; §§4–7 pp3–7 Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Transfer to unchanged RTXPT1.9 B0, planned RTXDI3.1 integration B1 and later B2+ combinations is unmeasured.</p><p>Paper CC-BY-4.0; no official reusable code license verified.</p><a href="https://graphics.cs.utah.edu/research/projects/multi-layer-restir/MultiLayerReservoirSplatting.pdf">Primary source</a></details><details id="source-B3"><summary>ReSTIR BDPT: Bidirectional ReSTIR Path Tracing with Caustics</summary><p>See papers_b.md B3; §§4–9 pp5–12 Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Transfer to unchanged RTXPT1.9 B0, planned RTXDI3.1 integration B1 and later B2+ combinations is unmeasured.</p><p>Author PDF carries ACM personal/classroom/abstracting permissions; do not redistribute full PDF. Placeholder DOI in inspected version.</p><a href="https://cwyman.org/papers/tog25_ReSTIR_BDPT.pdf">Primary source</a></details><details id="source-B1-code"><summary>ReSTIR-LoD reference implementation</summary><p>See papers_b.md B1 reference code Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Transfer to unchanged RTXPT1.9 B0, planned RTXDI3.1 integration B1 and later B2+ combinations is unmeasured.</p><p>BSD-3-Clause-style LICENSE.md verified2026-10-28, revision37d13d9b1f3e76be88aa79109d24b0fe6e4ef6a9. Retain copyright/conditions/disclaimer; nonendorsement. DLSS/RTXGI/RTXDI/NRD linked terms and assets separate.</p><a href="https://github.com/elite-sheep/ReSTIR-LoD/tree/37d13d9b1f3e76be88aa79109d24b0fe6e4ef6a9">Primary source</a></details><details id="source-B3-code"><summary>ReSTIR-BDPT reference implementation</summary><p>See papers_b.md B3 reference code; README Rough glass bug Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Transfer to unchanged RTXPT1.9 B0, planned RTXDI3.1 integration B1 and later B2+ combinations is unmeasured.</p><p>BSD-3-Clause-style LICENSE.md verified2026-10-28, revisionb4fc2c7f16a6af6791e1139b930adce5e19117c9. Retain copyright/conditions/disclaimer; nonendorsement. Linked SDKs/assets separate.</p><a href="https://github.com/Shmaug/ReSTIR-BDPT/tree/b4fc2c7f16a6af6791e1139b930adce5e19117c9">Primary source</a></details><details id="source-P06"><summary>Gradient-Domain ReSTIR Path Tracing</summary><p>Resample paired-pixel paths directly in gradient space, with adaptive edge-aligned spatial reuse and positive/negative reservoirs to reduce sign noise; reconstruct using a separate primal Area ReSTIR image. Locator: Sections 4.1–4.4, 5 Results, 6 Discussion and Conclusion; Figures 9–12 Falcor, RTX 5090, Ryzen 5900X, 1920×1080 moving camera. L2 Poisson reconstruction costs 11 ms; L1 costs 300 ms. L2 cost is included in equal-time comparisons.</p><p>Assumes affine object transforms. High-frequency temporal turbulence remains without temporal gradients; reconstruction is an additional cost. Neural reconstruction efficiency is prospective, not demonstrated as a DLSS integration. Publisher full-text HTML: Sections 4–6; direct PDF exceeded web size limit.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://onlinelibrary.wiley.com/doi/10.1111/cgf.70328">Primary source</a></details><details id="source-P08"><summary>Reservoir Splatting for Temporal Path Resampling and Motion Blur</summary><p>Forward-project exact prior-frame primary hits rather than only backprojecting current pixels. Combine splats and backup gather samples using MIS. Multiple time splats extend reuse to motion blur; depth of field is also supported. Locator: Abstract; supplemental Sections 1–3; repository Temporal Resampling Options Author abstract reports better resampling quality than Area ReSTIR at up to 10% lower cost; this is not a measured RTXDI_Next result.</p><p>Forward scatter requires deterministic handling of collisions and uncovered pixels; multi-splat partitions raise storage. Repository describes a Falcor 8 prototype, not an RTXDI API port. Author abstract, official repository README and indexed supplemental Section 1–3 excerpt; large main PDF could not be opened.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://research.nvidia.com/labs/rtr/publication/liu2025splatting/">Primary source</a></details><details id="source-P09"><summary>Unbiased Differential Visibility Using Fixed-Step Walk-on-Spherical-Caps And Closest Silhouettes</summary><p>Construct a velocity field for warped-area differential visibility using fixed-step walks on spherical caps and cone queries for closest silhouettes. Locator: Abstract and Figure 1 A differentiable-rendering visibility derivative estimator, not a primal-lighting or temporal-reuse result.</p><p>The fixed-step field is continuous but need not be harmonic. Requires silhouette-oriented geometric queries; existing primal ray tracing alone is insufficient. Author abstract and indexed first-page PDF abstract/Figure 1; full PDF size blocked web extraction.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://research.nvidia.com/labs/rtr/publication/wu2025unbiased/">Primary source</a></details><details id="source-P11"><summary>Many-Light Rendering Using ReSTIR-Sampled Shadow Maps</summary><p>Use a ranking reservoir process to select a budgeted subset of full-resolution light shadow maps, with imperfect shadow maps elsewhere; a separate shading reservoir process evaluates lighting. Variance-based hysteresis stabilizes upgrades and downgrades. Locator: Sections 3.1 Selecting Lights, 3.2 Practical Algorithm, 3.3 Maintaining Temporal Stability Targets rasterized many-light shadow-map computation/storage.</p><p>Two reservoirs prevent ranking/shading feedback flicker; combining them degrades stability or noise. Imperfect maps approximate visibility, so this is not exact ray-traced visibility. Publisher full-text Section 3, plus author abstract; direct PDF too large.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://doi.org/10.1111/cgf.70059">Primary source</a></details><details id="source-P12"><summary>Area ReSTIR: Resampling for Real-time Defocus and Antialiasing</summary><p>Include film and lens coordinates in the reservoir domain. Fractional-pixel temporal tracking and camera-aware shifts improve reuse of subpixel detail and defocus. The robust option can borrow shifted samples from four overlapping prior reservoirs. Locator: Sections 4.1 Area Reservoirs, 4.3 Temporal Reuse, 4.4 General Pixel Filters, 4.6 Depth of Field Supports antialiasing and depth of field; basis for later splatting and gradient-domain work.</p><p>Aperture support and shift Jacobians matter; primary-hit reconnection can leave the aperture. General filters alter overlap/MIS weights. The author repository publishes only the DI implementation, modifies scene-history storage outside its module, and warns module-only copying produces bias/errors; noisy camera-domain G-buffers challenge denoisers. Author project abstract and indexed paper Sections 4.1–4.6 excerpts; complete large PDF unavailable in web extraction.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://graphics.cs.utah.edu/research/projects/area-restir/">Primary source</a></details><details id="source-P13"><summary>Decorrelating ReSTIR Samplers via MCMC Mutations</summary><p>Mutate selected reservoir samples using Metropolis–Hastings, usually after temporal reuse; update the contribution weight by the old/new target-function ratio before further resampling. Locator: Section 3 Method, Equation 16, Algorithm 3, Section 7 Limitations; Figures 12–13 Demonstrated in DI and PT; mutations address correlation and duplicate-sample impoverishment.</p><p>Non-negligible runtime; can improve perceptual correlation without lowering MSE. It is not a discovery mechanism for missing important transport, and even unlimited mutations need not remove all correlations. Publisher full-text method Section 3 and limitations Section 7; indexed paper excerpts.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://doi.org/10.1145/3629166">Primary source</a></details><details id="source-P14"><summary>Conditional Resampled Importance Sampling and ReSTIR</summary><p>Extend GRIS to conditional domains with correct joint contribution weights; a final gather reuses path suffixes after one or more unreused prefix bounces. Locator: Abstract and Figure 1; official prototype Introduction A proof-of-concept with reduced blotchy correlation and improved denoiser behavior; prototype is explicitly unoptimized.</p><p>Conditional independence and contribution-weight requirements must be preserved. Suffix reuse cannot silently inherit full-path reservoir weights. Author-affiliated archival abstract, indexed first-page paper excerpt, official prototype README.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://wrap.warwick.ac.uk/id/eprint/180947/">Primary source</a></details><details id="source-P15"><summary>Amortizing Samples in Physics-Based Inverse Rendering Using ReSTIR</summary><p>Reuse sampling work across inverse-rendering optimization iterations/views, including gradient estimates and preserved occluded reservoirs. Locator: Project results; paper multi-view estimator and Computational overhead discussion Project reports up to 100× lower gradient relative error and up to 20× lower reconstruction error in its inverse-rendering comparisons, not forward rendering FPS.</p><p>A practical geometry-optimization variant checks visibility only in current geometry and introduces bias; learning rate limits its effect. Author project results and indexed paper multi-view Algorithm 8/computational-overhead excerpt.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://projects.shuangz.com/psdr-restir-sa23/">Primary source</a></details><details id="source-P16"><summary>Generalized Resampled Importance Sampling: Foundations of ReSTIR</summary><p>Formalize resampling of correlated samples with tractable unbiased contribution weights and domain-changing shift maps/Jacobians; under conditions derive convergence and variance guarantees. Locator: Sections 3.2 and 4, Equation 4 partition of unity and Equation 8 unbiased contribution weights; supplement S.1–S.5 Establishes the ReSTIR PT framework and its distinction from classical independent-sample RIS.</p><p>Correlation alone does not grant convergence. Correct support, resampling MIS partition and mapping weights are obligations; an arbitrary heuristic can converge to a wrong answer. Indexed primary PDF abstract/introduction and Sections 3.2, 4.1–4.2; supplement contents, not complete proof review.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://graphics.cs.utah.edu/research/projects/gris/sig22_GRIS.pdf">Primary source</a></details><details id="source-P17"><summary>Fast Volume Rendering with Spatiotemporal Reservoir Resampling</summary><p>Extend reuse to volumetric path space, using cheap approximate scattering/transmittance during candidate selection and unbiased final evaluation. Locator: Abstract and Figure 1 Handles dynamic illumination, volumetric emission and multiple scattering; the approximation in selection need not bias final shading if weighting is correct.</p><p>Medium path domains and transmittance estimators differ from surface PT. Figure examples are interactive volumetric results, not a 60 Hz guarantee. Publisher abstract and indexed author-paper first page; PDF open timed out.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://doi.org/10.1145/3478513.3480499">Primary source</a></details><details id="source-P18"><summary>Rearchitecting Spatiotemporal Resampling for Production</summary><p>Rework candidate presampling and memory coherence, ray budgets, synchronization, spatial-neighbor choices and separation of shading from reuse for production. Locator: Abstract; Figure 2; Sections 5, 6.1–6.3 and 7 Author abstract reports up to 7× lower lighting cost over the earlier research implementation.</p><p>These are historical changes underlying productization, not fresh gains to add on top of current RTXDI. GPU timing must include all new passes and synchronization. Publisher abstract and indexed primary paper Figure 2 / Sections 5–7 overview.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://diglib.eg.org/items/97358bf2-da67-4df4-8355-b0495f873208">Primary source</a></details><details id="source-P19"><summary>Glossy Probe Reprojection for Interactive Global Illumination</summary><p>Precompute directional glossy light probes with adaptive parameterization; gather using path perturbation and split roughness convolution between precomputation and runtime filtering. Locator: Abstract and Figure 1 Interactive walkthroughs for static scenes with opaque objects; diffuse light maps complement glossy probes.</p><p>Baked scene assumptions and probe storage/reprojection limits do not match general dynamic path tracing. Author project abstract and indexed primary first-page method overview.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://www-sop.inria.fr/reves/Basilic/2020/RLPWSD20/">Primary source</a></details><details id="source-P20"><summary>Spatiotemporal Reservoir Resampling for Real-time Ray Tracing with Dynamic Direct Lighting</summary><p>Select weighted reservoir light samples and reuse across pixels/frames to spend visibility/shading on high-contribution candidates. Locator: Abstract; Sections 5–6 reservoir storage, temporal weighting and results The paper distinguishes unbiased and lower-noise biased versions; original results used RTX 2080 Ti/Titan RTX and omit shared G-buffer rasterization costs.</p><p>Energy loss in the biased form and temporal sample dominance are explicit tradeoffs. Old speedup ratios are not expected incremental gains over RTXDI 3.1. Author abstract and indexed primary paper Sections 5–6 evaluation/temporal weighting excerpt.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://research.nvidia.com/publication/2020-07_spatiotemporal-reservoir-resampling-real-time-ray-tracing-dynamic-direct">Primary source</a></details><details id="source-SDK31"><summary>RTXDI3.1 pinned source and integration guide</summary><p>Root/runtime/FullSample inspected. Runtimef12037f. See architecture and PT++ audit.</p><p>Not built or benchmarked.</p><p>NVIDIA RTX SDKs LICENSE; retain upstream notices; dependencies separate.</p><a href="https://github.com/NVIDIA-RTX/RTXDI/tree/a6efab966b7c3b272da0461578eb56ac61c7cbff">Primary source</a></details><details id="source-RTXPT19"><summary>RTXPT1.9 pinned source and design</summary><p>Nested RTXDI3.0 pina14e079 remains distinct; NEE-AT/SHaRC/PSR/reconstruction architecture reviewed.</p><p>Linked submodule only; no combined build.</p><p>NVIDIA RTX SDKs LICENSE; dependency/assets terms separate.</p><a href="https://github.com/NVIDIA-RTX/RTXPT/tree/303b408ab81790a5051abd7573830b7a4112eb8e">Primary source</a></details><details id="source-FLIP"><summary>Official HDR/LDR FLIP evaluator</summary><p>HDR-FLIP maximizes over exposure comparisons; LDR-FLIP and HDR-FLIP are distinct. Quality plan records exposure/tone mapper/PPD and scope.</p><p>Not installed or run against renderer captures in this pass; pin exact revision/settings before benchmarks.</p><p>BSD-3-Clause main evaluator; linked dependencies have their own terms. No evaluator code copied.</p><a href="https://github.com/NVlabs/flip">Primary source</a></details><details id="source-NV-PT-PERF"><summary>Real-Time Path Tracing in Games: Best Practices for Performance and Scalability</summary><p>Reviewed required metrics/ray budgets, feature tiers/SER/OMM, precision, tracing-model tradeoffs, debugging/shipping gates and case-study context. See NVIDIA_WHITEPAPERS.md for original project mapping.</p><p>Vendor recommendations and source-reported case studies; no local reproduction of these optimization claims. Figures and linked implementations/specifications not independently audited.</p><p>Folder-specific CC BY4.0, copyright NVIDIA2026, license https://github.com/NVIDIA-RTX/Whitepapers/blob/20463fd355c817a50381343d9d12b7ac811d2e39/pt_performance_whitepaper/LICENSE. Geometry folder excludes specified third-party game images. Original summaries only; no images/code copied; not an SDK/driver/asset license.</p><a href="https://github.com/NVIDIA-RTX/Whitepapers/blob/20463fd355c817a50381343d9d12b7ac811d2e39/pt_performance_whitepaper/README.md">Primary source</a></details><details id="source-NV-CLAS-PTLAS"><summary>Clustered Geometry and Partitioned TLAS Launch in DirectX12, Standardizing RTX Mega Geometry</summary><p>Reviewed geometry-guide text: CLAS, template topology reuse, partition updates and documented Agility1.722.0-preview/HLSL6.10/driver621.01 launch stack; benchmark driver617.42 not that stack. See NVIDIA_WHITEPAPERS.md for original project mapping.</p><p>Vendor recommendations and source-reported case studies; no local reproduction of these optimization claims. Figures and linked implementations/specifications not independently audited.</p><p>Folder-specific CC BY4.0, copyright NVIDIA2026, license https://github.com/NVIDIA-RTX/Whitepapers/blob/20463fd355c817a50381343d9d12b7ac811d2e39/dx_clusters_and_ptlas/LICENSE. Geometry folder excludes specified third-party game images. Original summaries only; no images/code copied; not an SDK/driver/asset license.</p><a href="https://github.com/NVIDIA-RTX/Whitepapers/blob/20463fd355c817a50381343d9d12b7ac811d2e39/dx_clusters_and_ptlas/README.md">Primary source</a></details></section><footer class="doc-footer"><p>Original analysis and implementation proposals; paper numbers are reported evidence. Full PDFs and private host data are excluded. <a href="library.json">Structured evidence JSON</a> · <a href="verification.json">Verification receipt</a></p></footer></main></div></body></html>
+</section><section id="source-records" class="doc-panel"><h2>Source record search appendix</h2><p>Full structured notes are searchable here and in the evidence explorer.</p><details id="source-PTPP"><summary>ReSTIR PT Enhanced: Algorithmic Advances for Faster and More Robust ReSTIR Path Tracing</summary><p>See matching section in papers_a.md for source claims, page locators and separate engineering proposals. Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Reported prototype results; no local GPU replication; source baselines/hardware differ from RTXPT 1.9.</p><p>CC BY 4.0 paper. NVIDIA publication page has no official code link as checked. Third-party implementations are separate artifacts.</p><a href="https://cwyman.org/papers/i3d26_ReSTIRPT++.pdf">Primary source</a></details><details id="source-CGNS"><summary>Compatibility-Guided Neighbor Selection for ReSTIR</summary><p>See matching section in papers_a.md for source claims, page locators and separate engineering proposals. Original analysis is in FOCUSED_A.md / FOCUSED_B.md. Metric locators: SMAPE factor 100 with epsilon 1e-4, footnote 3 page 8; relative spatial covariance and temporal autocovariance Appendix A page 16; lag 3 protocol in section 7 page 9.</p><p>Reported prototype results; no local GPU replication; source baselines/hardware differ from RTXPT 1.9.</p><p>CC BY 4.0 paper. Official code orion-junkins/ReSTIR-CGNS @ f28d553f3b2552b1be829feffea6d1abb1945e1d has BSD-3-Clause-style LICENSE.md; linked SDKs separately licensed.</p><a href="https://cwyman.org/papers/hpg26_compatibleNeighborSelection.pdf">Primary source</a></details><details id="source-SPMIS"><summary>Stochastic Pairwise MIS for Unbiased Large-Kernel Reuse in Real-Time</summary><p>See matching section in papers_a.md for source claims, page locators and separate engineering proposals. Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Reported prototype results; no local GPU replication; source baselines/hardware differ from RTXPT 1.9.</p><p>Paper Creative Commons Attribution; official minimal code archive has no license notices. Do not copy source until code reuse terms resolved.</p><a href="https://cwyman.org/papers/eg26_StochasticPairwiseMIS.pdf">Primary source</a></details><details id="source-PG"><summary>ReSTIR PG: Path Guiding with Spatiotemporally Resampled Paths</summary><p>See matching section in papers_a.md for source claims, page locators and separate engineering proposals. Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Reported prototype results; no local GPU replication; source baselines/hardware differ from RTXPT 1.9.</p><p>Author PDF explicitly personal use, not for redistribution. Keep cached PDF/text in work, not exports; author page has no official code link as checked.</p><a href="https://cwyman.org/papers/siga25_ReSTIR_PG.pdf">Primary source</a></details><details id="source-B1"><summary>Real-Time Level-of-Detail Rendering with ReSTIR</summary><p>See papers_b.md B1; §§4–6 pp4–6; Fig1,5,6 Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1–B5, scoped PT configurations B6/B7, and combined/PT++ work B8–B10. These source notes are not local paper reproduction evidence.</p><p>Paper CC-BY-4.0; reference code separately assessed.</p><a href="https://cwyman.org/papers/sig26_ReSTIR_LoD.pdf">Primary source</a></details><details id="source-B2"><summary>Multi-Layer Reservoir Splatting for Temporal Reuse under Disocclusion</summary><p>See papers_b.md B2; §§4–7 pp3–7 Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1–B5, scoped PT configurations B6/B7, and combined/PT++ work B8–B10. These source notes are not local paper reproduction evidence.</p><p>Paper CC-BY-4.0; no official reusable code license verified.</p><a href="https://graphics.cs.utah.edu/research/projects/multi-layer-restir/MultiLayerReservoirSplatting.pdf">Primary source</a></details><details id="source-B3"><summary>ReSTIR BDPT: Bidirectional ReSTIR Path Tracing with Caustics</summary><p>See papers_b.md B3; §§4–9 pp5–12 Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1–B5, scoped PT configurations B6/B7, and combined/PT++ work B8–B10. These source notes are not local paper reproduction evidence.</p><p>Author PDF carries ACM personal/classroom/abstracting permissions; do not redistribute full PDF. Placeholder DOI in inspected version.</p><a href="https://cwyman.org/papers/tog25_ReSTIR_BDPT.pdf">Primary source</a></details><details id="source-B1-code"><summary>ReSTIR-LoD reference implementation</summary><p>See papers_b.md B1 reference code Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1–B5, scoped PT configurations B6/B7, and combined/PT++ work B8–B10. These source notes are not local paper reproduction evidence.</p><p>BSD-3-Clause-style LICENSE.md verified2026-10-28, revision37d13d9b1f3e76be88aa79109d24b0fe6e4ef6a9. Retain copyright/conditions/disclaimer; nonendorsement. DLSS/RTXGI/RTXDI/NRD linked terms and assets separate.</p><a href="https://github.com/elite-sheep/ReSTIR-LoD/tree/37d13d9b1f3e76be88aa79109d24b0fe6e4ef6a9">Primary source</a></details><details id="source-B3-code"><summary>ReSTIR-BDPT reference implementation</summary><p>See papers_b.md B3 reference code; README Rough glass bug Original analysis is in FOCUSED_A.md / FOCUSED_B.md.</p><p>Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1–B5, scoped PT configurations B6/B7, and combined/PT++ work B8–B10. These source notes are not local paper reproduction evidence.</p><p>BSD-3-Clause-style LICENSE.md verified2026-10-28, revisionb4fc2c7f16a6af6791e1139b930adce5e19117c9. Retain copyright/conditions/disclaimer; nonendorsement. Linked SDKs/assets separate.</p><a href="https://github.com/Shmaug/ReSTIR-BDPT/tree/b4fc2c7f16a6af6791e1139b930adce5e19117c9">Primary source</a></details><details id="source-P06"><summary>Gradient-Domain ReSTIR Path Tracing</summary><p>Resample paired-pixel paths directly in gradient space, with adaptive edge-aligned spatial reuse and positive/negative reservoirs to reduce sign noise; reconstruct using a separate primal Area ReSTIR image. Locator: Sections 4.1–4.4, 5 Results, 6 Discussion and Conclusion; Figures 9–12 Falcor, RTX 5090, Ryzen 5900X, 1920×1080 moving camera. L2 Poisson reconstruction costs 11 ms; L1 costs 300 ms. L2 cost is included in equal-time comparisons.</p><p>Assumes affine object transforms. High-frequency temporal turbulence remains without temporal gradients; reconstruction is an additional cost. Neural reconstruction efficiency is prospective, not demonstrated as a DLSS integration. Publisher full-text HTML: Sections 4–6; direct PDF exceeded web size limit.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://onlinelibrary.wiley.com/doi/10.1111/cgf.70328">Primary source</a></details><details id="source-P08"><summary>Reservoir Splatting for Temporal Path Resampling and Motion Blur</summary><p>Forward-project exact prior-frame primary hits rather than only backprojecting current pixels. Combine splats and backup gather samples using MIS. Multiple time splats extend reuse to motion blur; depth of field is also supported. Locator: Abstract; supplemental Sections 1–3; repository Temporal Resampling Options Author abstract reports better resampling quality than Area ReSTIR at up to 10% lower cost; this is not a measured RTXDI_Next result.</p><p>Forward scatter requires deterministic handling of collisions and uncovered pixels; multi-splat partitions raise storage. Repository describes a Falcor 8 prototype, not an RTXDI API port. Author abstract, official repository README and indexed supplemental Section 1–3 excerpt; large main PDF could not be opened.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://research.nvidia.com/labs/rtr/publication/liu2025splatting/">Primary source</a></details><details id="source-P09"><summary>Unbiased Differential Visibility Using Fixed-Step Walk-on-Spherical-Caps And Closest Silhouettes</summary><p>Construct a velocity field for warped-area differential visibility using fixed-step walks on spherical caps and cone queries for closest silhouettes. Locator: Abstract and Figure 1 A differentiable-rendering visibility derivative estimator, not a primal-lighting or temporal-reuse result.</p><p>The fixed-step field is continuous but need not be harmonic. Requires silhouette-oriented geometric queries; existing primal ray tracing alone is insufficient. Author abstract and indexed first-page PDF abstract/Figure 1; full PDF size blocked web extraction.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://research.nvidia.com/labs/rtr/publication/wu2025unbiased/">Primary source</a></details><details id="source-P11"><summary>Many-Light Rendering Using ReSTIR-Sampled Shadow Maps</summary><p>Use a ranking reservoir process to select a budgeted subset of full-resolution light shadow maps, with imperfect shadow maps elsewhere; a separate shading reservoir process evaluates lighting. Variance-based hysteresis stabilizes upgrades and downgrades. Locator: Sections 3.1 Selecting Lights, 3.2 Practical Algorithm, 3.3 Maintaining Temporal Stability Targets rasterized many-light shadow-map computation/storage.</p><p>Two reservoirs prevent ranking/shading feedback flicker; combining them degrades stability or noise. Imperfect maps approximate visibility, so this is not exact ray-traced visibility. Publisher full-text Section 3, plus author abstract; direct PDF too large.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://doi.org/10.1111/cgf.70059">Primary source</a></details><details id="source-P12"><summary>Area ReSTIR: Resampling for Real-time Defocus and Antialiasing</summary><p>Include film and lens coordinates in the reservoir domain. Fractional-pixel temporal tracking and camera-aware shifts improve reuse of subpixel detail and defocus. The robust option can borrow shifted samples from four overlapping prior reservoirs. Locator: Sections 4.1 Area Reservoirs, 4.3 Temporal Reuse, 4.4 General Pixel Filters, 4.6 Depth of Field Supports antialiasing and depth of field; basis for later splatting and gradient-domain work.</p><p>Aperture support and shift Jacobians matter; primary-hit reconnection can leave the aperture. General filters alter overlap/MIS weights. The author repository publishes only the DI implementation, modifies scene-history storage outside its module, and warns module-only copying produces bias/errors; noisy camera-domain G-buffers challenge denoisers. Author project abstract and indexed paper Sections 4.1–4.6 excerpts; complete large PDF unavailable in web extraction.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://graphics.cs.utah.edu/research/projects/area-restir/">Primary source</a></details><details id="source-P13"><summary>Decorrelating ReSTIR Samplers via MCMC Mutations</summary><p>Mutate selected reservoir samples using Metropolis–Hastings, usually after temporal reuse; update the contribution weight by the old/new target-function ratio before further resampling. Locator: Section 3 Method, Equation 16, Algorithm 3, Section 7 Limitations; Figures 12–13 Demonstrated in DI and PT; mutations address correlation and duplicate-sample impoverishment.</p><p>Non-negligible runtime; can improve perceptual correlation without lowering MSE. It is not a discovery mechanism for missing important transport, and even unlimited mutations need not remove all correlations. Publisher full-text method Section 3 and limitations Section 7; indexed paper excerpts.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://doi.org/10.1145/3629166">Primary source</a></details><details id="source-P14"><summary>Conditional Resampled Importance Sampling and ReSTIR</summary><p>Extend GRIS to conditional domains with correct joint contribution weights; a final gather reuses path suffixes after one or more unreused prefix bounces. Locator: Abstract and Figure 1; official prototype Introduction A proof-of-concept with reduced blotchy correlation and improved denoiser behavior; prototype is explicitly unoptimized.</p><p>Conditional independence and contribution-weight requirements must be preserved. Suffix reuse cannot silently inherit full-path reservoir weights. Author-affiliated archival abstract, indexed first-page paper excerpt, official prototype README.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://wrap.warwick.ac.uk/id/eprint/180947/">Primary source</a></details><details id="source-P15"><summary>Amortizing Samples in Physics-Based Inverse Rendering Using ReSTIR</summary><p>Reuse sampling work across inverse-rendering optimization iterations/views, including gradient estimates and preserved occluded reservoirs. Locator: Project results; paper multi-view estimator and Computational overhead discussion Project reports up to 100× lower gradient relative error and up to 20× lower reconstruction error in its inverse-rendering comparisons, not forward rendering FPS.</p><p>A practical geometry-optimization variant checks visibility only in current geometry and introduces bias; learning rate limits its effect. Author project results and indexed paper multi-view Algorithm 8/computational-overhead excerpt.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://projects.shuangz.com/psdr-restir-sa23/">Primary source</a></details><details id="source-P16"><summary>Generalized Resampled Importance Sampling: Foundations of ReSTIR</summary><p>Formalize resampling of correlated samples with tractable unbiased contribution weights and domain-changing shift maps/Jacobians; under conditions derive convergence and variance guarantees. Locator: Sections 3.2 and 4, Equation 4 partition of unity and Equation 8 unbiased contribution weights; supplement S.1–S.5 Establishes the ReSTIR PT framework and its distinction from classical independent-sample RIS.</p><p>Correlation alone does not grant convergence. Correct support, resampling MIS partition and mapping weights are obligations; an arbitrary heuristic can converge to a wrong answer. Indexed primary PDF abstract/introduction and Sections 3.2, 4.1–4.2; supplement contents, not complete proof review.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://graphics.cs.utah.edu/research/projects/gris/sig22_GRIS.pdf">Primary source</a></details><details id="source-P17"><summary>Fast Volume Rendering with Spatiotemporal Reservoir Resampling</summary><p>Extend reuse to volumetric path space, using cheap approximate scattering/transmittance during candidate selection and unbiased final evaluation. Locator: Abstract and Figure 1 Handles dynamic illumination, volumetric emission and multiple scattering; the approximation in selection need not bias final shading if weighting is correct.</p><p>Medium path domains and transmittance estimators differ from surface PT. Figure examples are interactive volumetric results, not a 60 Hz guarantee. Publisher abstract and indexed author-paper first page; PDF open timed out.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://doi.org/10.1145/3478513.3480499">Primary source</a></details><details id="source-P18"><summary>Rearchitecting Spatiotemporal Resampling for Production</summary><p>Rework candidate presampling and memory coherence, ray budgets, synchronization, spatial-neighbor choices and separation of shading from reuse for production. Locator: Abstract; Figure 2; Sections 5, 6.1–6.3 and 7 Author abstract reports up to 7× lower lighting cost over the earlier research implementation.</p><p>These are historical changes underlying productization, not fresh gains to add on top of current RTXDI. GPU timing must include all new passes and synchronization. Publisher abstract and indexed primary paper Figure 2 / Sections 5–7 overview.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://diglib.eg.org/items/97358bf2-da67-4df4-8355-b0495f873208">Primary source</a></details><details id="source-P19"><summary>Glossy Probe Reprojection for Interactive Global Illumination</summary><p>Precompute directional glossy light probes with adaptive parameterization; gather using path perturbation and split roughness convolution between precomputation and runtime filtering. Locator: Abstract and Figure 1 Interactive walkthroughs for static scenes with opaque objects; diffuse light maps complement glossy probes.</p><p>Baked scene assumptions and probe storage/reprojection limits do not match general dynamic path tracing. Author project abstract and indexed primary first-page method overview.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://www-sop.inria.fr/reves/Basilic/2020/RLPWSD20/">Primary source</a></details><details id="source-P20"><summary>Spatiotemporal Reservoir Resampling for Real-time Ray Tracing with Dynamic Direct Lighting</summary><p>Select weighted reservoir light samples and reuse across pixels/frames to spend visibility/shading on high-contribution candidates. Locator: Abstract; Sections 5–6 reservoir storage, temporal weighting and results The paper distinguishes unbiased and lower-noise biased versions; original results used RTX 2080 Ti/Titan RTX and omit shared G-buffer rasterization costs.</p><p>Energy loss in the biased form and temporal sample dominance are explicit tradeoffs. Old speedup ratios are not expected incremental gains over RTXDI 3.1. Author abstract and indexed primary paper Sections 5–6 evaluation/temporal weighting excerpt.</p><p>Paper/code rights separate; do not infer permission from availability.</p><a href="https://research.nvidia.com/publication/2020-07_spatiotemporal-reservoir-resampling-real-time-ray-tracing-dynamic-direct">Primary source</a></details><details id="source-SDK31"><summary>RTXDI3.1 pinned source and integration guide</summary><p>Root/runtime/FullSample inspected. Runtimef12037f. See architecture and PT++ audit.</p><p>Not built or benchmarked.</p><p>NVIDIA RTX SDKs LICENSE; retain upstream notices; dependencies separate.</p><a href="https://github.com/NVIDIA-RTX/RTXDI/tree/a6efab966b7c3b272da0461578eb56ac61c7cbff">Primary source</a></details><details id="source-RTXPT19"><summary>RTXPT1.9 pinned source and design</summary><p>Nested RTXDI3.0 pina14e079 remains distinct; NEE-AT/SHaRC/PSR/reconstruction architecture reviewed.</p><p>Linked submodule only; no combined build.</p><p>NVIDIA RTX SDKs LICENSE; dependency/assets terms separate.</p><a href="https://github.com/NVIDIA-RTX/RTXPT/tree/303b408ab81790a5051abd7573830b7a4112eb8e">Primary source</a></details><details id="source-FLIP"><summary>Official HDR/LDR FLIP evaluator</summary><p>HDR-FLIP maximizes over exposure comparisons; LDR-FLIP and HDR-FLIP are distinct. Quality plan records exposure/tone mapper/PPD and scope.</p><p>Not installed or run against renderer captures in this pass; pin exact revision/settings before benchmarks.</p><p>BSD-3-Clause main evaluator; linked dependencies have their own terms. No evaluator code copied.</p><a href="https://github.com/NVlabs/flip">Primary source</a></details><details id="source-NV-PT-PERF"><summary>Real-Time Path Tracing in Games: Best Practices for Performance and Scalability</summary><p>Reviewed required metrics/ray budgets, feature tiers/SER/OMM, precision, tracing-model tradeoffs, debugging/shipping gates and case-study context. See NVIDIA_WHITEPAPERS.md for original project mapping.</p><p>Vendor recommendations and source-reported case studies; no local reproduction of these optimization claims. Figures and linked implementations/specifications not independently audited.</p><p>Folder-specific CC BY4.0, copyright NVIDIA2026, license https://github.com/NVIDIA-RTX/Whitepapers/blob/20463fd355c817a50381343d9d12b7ac811d2e39/pt_performance_whitepaper/LICENSE. Geometry folder excludes specified third-party game images. Original summaries only; no images/code copied; not an SDK/driver/asset license.</p><a href="https://github.com/NVIDIA-RTX/Whitepapers/blob/20463fd355c817a50381343d9d12b7ac811d2e39/pt_performance_whitepaper/README.md">Primary source</a></details><details id="source-NV-CLAS-PTLAS"><summary>Clustered Geometry and Partitioned TLAS Launch in DirectX12, Standardizing RTX Mega Geometry</summary><p>Reviewed geometry-guide text: CLAS, template topology reuse, partition updates and documented Agility1.722.0-preview/HLSL6.10/driver621.01 launch stack; benchmark driver617.42 not that stack. See NVIDIA_WHITEPAPERS.md for original project mapping.</p><p>Vendor recommendations and source-reported case studies; no local reproduction of these optimization claims. Figures and linked implementations/specifications not independently audited.</p><p>Folder-specific CC BY4.0, copyright NVIDIA2026, license https://github.com/NVIDIA-RTX/Whitepapers/blob/20463fd355c817a50381343d9d12b7ac811d2e39/dx_clusters_and_ptlas/LICENSE. Geometry folder excludes specified third-party game images. Original summaries only; no images/code copied; not an SDK/driver/asset license.</p><a href="https://github.com/NVIDIA-RTX/Whitepapers/blob/20463fd355c817a50381343d9d12b7ac811d2e39/dx_clusters_and_ptlas/README.md">Primary source</a></details></section><footer class="doc-footer"><p>Original analysis and implementation proposals; paper numbers are reported evidence. Full PDFs and private host data are excluded. <a href="library.json">Structured evidence JSON</a> · <a href="verification.json">Verification receipt</a></p></footer></main></div></body></html>

@@ -5,10 +5,10 @@
 | ID | Short algorithm overview | Active modes / gate |
 |---|---|---|
 | B0 | Unchanged RTXPT 1.9 reference | Original defaults and pins. |
-| B1 | Native PT + DI 3.0 | GI/ReSTIR PT off; quality captured; matched throughput pending. |
+| B1 | Native PT + DI 3.0 | GI/ReSTIR PT off; original-scene quality/timing measured. |
 | B2 | Native PT + DI 3.0 + GI 3.0 | ReSTIR PT off; historical cap-unverified observations. |
 | B3 | Native PT / runtime 3.1 | DI/GI/ReSTIR PT off. |
-| B4 | Native PT + DI 3.1 | GI/ReSTIR PT off; quality captured; matched throughput pending. |
+| B4 | Native PT + DI 3.1 | GI/ReSTIR PT off; original-scene quality/timing measured. |
 | B5 | Native PT + DI 3.1 + GI 3.1 | ReSTIR PT off; historical cap-unverified observations. |
 | B6 | ReSTIR PT | DI/GI off; native direct/fallback ownership remains explicit. |
 | B7 | ReSTIR PT + DI 3.1 | GI off; measured static opaque checkpoint. |
@@ -16,7 +16,7 @@
 | B9 | B8 + limited PT++ | Planned footprint/initial-only roulette after B8 sharing. |
 | B10 | B8 + full remaining PT++ | Authorized future work, independently validated. |
 
-Prioritize fresh B1/B4 native-DI comparisons. The 0.803 ms control is a B0 native-control raw preset, separate from original defaults; the 0.806 ms migrated native control is B3 with DI/GI off. The old-B2 checkpoint `de9fe651` maps to B7. The old-B3 pilot `a7428c8` maps to B7 plus limited ablations, **not B9**. Stored refs/data IDs and numbers are preserved.
+B1/B4 native-DI comparisons are measured on original scenes and the registered room; B6/B7 room timing and history sweeps are also measured. The 0.803 ms control is a B0 native-control raw preset, separate from original defaults; the 0.806 ms migrated native control is B3 with DI/GI off. The old-B2 checkpoint `de9fe651` maps to B7. The old-B3 pilot `a7428c8` maps to B7 plus limited ablations, **not B9**. Stored refs/data IDs and numbers are preserved.
 
 The original ReSTIR PT paper's §9.3 adjusted sample counts for approximately equal time; the current fixed-1spp room pilot is not that comparison. Keep equal-time/quality sweeps pending until measured. Existing runtime PT++ mechanisms are inherited, not newly counted as B9 gains.
 
@@ -67,4 +67,6 @@ The version name alone did not explain which estimator ran. The algorithm label 
 
 - 2026-10-28: Added per-variant algorithm labels and mandatory Convergence/Kitchen/opaque-room coverage for new comparisons.
 
-Canonical update2026-10-29: [B1/B4 native-DI quality and timing exclusions](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures. No new throughput result is accepted.
+Canonical update2026-10-29: [B1/B4 native-DI quality and cap-verified timing](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures and links12 accepted cap-verified timing runs; initial missing-trace attempts remain excluded.
+
+Current scoped measurements: [registered-room B1/B4/B6/B7 comparison](REGISTERED_ROOM_RESULTS.md) includes30quality captures,12timing processes and explicit history settling; [native original-scene report](CANONICAL_NATIVE_DI_RESULTS.md) now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.

@@ -1,0 +1,8 @@
+BENCHMARK_UNCAPPED vsync=0 fpsLimiter=0 reflexCap=0 reflexMode=0 frameGeneration=0 renderUnfocused=1
+SAMPLING_CONTRACT seed=11 realtime=1 referencePixelCenter=0 pixelJitterScale=0
+TRANSPORT_CONTRACT di=0 gi=0 pt=1 diMode=3 neeMIS=0 maxBounces=3 maxDiffuseBounces=3
+DI_VALIDATION_CONTRACT strict=0 boiling=1 discountNaive=0
+PT_HISTORY_CONTRACT ageRejection=0 maxAge=30 maxHistory=8
+PTPP_CONTRACT reconnection=0 rouletteProbability=0 diagnostics=0
+PT_SPATIAL_CONTRACT samples=1 boost=1
+CAPTURE_HISTORY warmupFrames=8

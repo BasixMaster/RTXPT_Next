@@ -1,0 +1,50 @@
+{
+  "status": "17 exact CPU oracle tests passed",
+  "scope": "Proposed physical-path ownership, short-GI initial sampling and finite geometric transfer; no GPU B8 implementation/reservoir-reuse proof",
+  "partition_cases": 56,
+  "witnesses": {
+    "lambert_target": [
+      "11/18",
+      "14/9",
+      "11/9"
+    ],
+    "unclamped_transfer": [
+      "11/18",
+      "14/9",
+      "11/9"
+    ],
+    "clamped_transfer": [
+      "113/216",
+      "259/216",
+      "113/108"
+    ],
+    "view_dependent_target": [
+      "11/9",
+      "2/3",
+      "23/9"
+    ],
+    "unchanged_rgb_transfer": [
+      "11/18",
+      "14/9",
+      "11/9"
+    ],
+    "reevaluated_rgb_transfer": [
+      "11/9",
+      "2/3",
+      "23/9"
+    ]
+  },
+  "source_hashes": {
+    "transport_partition_oracle.py": "9bc38a9fcf6f654bf6a4af1cb07d296e5504a8fd61261f84570bc1faa21db1ec",
+    "test_transport_partition_oracle.py": "1b04a43663c53d6c01b5678ae57c11b7694a609af175467ec50486581790f9da"
+  },
+  "command": "python -B -m unittest discover -s Benchmarks/tools -p test_transport_partition_oracle.py",
+  "remaining": [
+    "GPU component/domain exports",
+    "GI reservoir reuse normalization/support",
+    "Frame/domain reset ownership",
+    "Material/delta fallback coverage",
+    "Original-scene PT gates",
+    "Matched GPU quality/performance"
+  ]
+}

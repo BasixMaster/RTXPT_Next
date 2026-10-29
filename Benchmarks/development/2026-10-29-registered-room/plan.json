@@ -1,0 +1,55 @@
+{
+  "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+  "variants": [
+    "B1",
+    "B4",
+    "B6",
+    "B7"
+  ],
+  "scene": "Testing/B2/Scenes/opaque-room-registered-env.scene.json",
+  "scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+  "resolution": [
+    640,
+    360
+  ],
+  "bounces": [
+    3,
+    3
+  ],
+  "orders": [
+    [
+      "B1",
+      "B4",
+      "B6",
+      "B7"
+    ],
+    [
+      "B7",
+      "B6",
+      "B4",
+      "B1"
+    ],
+    [
+      "B4",
+      "B1",
+      "B7",
+      "B6"
+    ]
+  ],
+  "warmup_seconds": 45,
+  "measure_seconds": 15,
+  "seeds_modern": [
+    0,
+    11,
+    47
+  ],
+  "history_lengths_modern": [
+    1,
+    8,
+    32,
+    64
+  ],
+  "native_capture": "Original simple-capture behavior;3process restarts are not independent seeds",
+  "reference": "Fresh registered-environment native4096/8192 seed101 +8192 seed103 checks, pixelcenter; no reuse",
+  "limits": "Configured-renderer comparison: native original DI heuristics/approxMIS retained; B6/B7 strict validations differ. No isolation of PT-only overhead or equal-time speedup."
+}

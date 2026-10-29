@@ -135,10 +135,27 @@
       "limits": "Retained evidence identity/completeness only; not a full PT++ or original-scene validation proof."
     },
     {
-      "name": "Canonical B1/B4 quality identities with explicit zero accepted timing samples",
+      "name": "Frozen native-DI quality identities and initial excluded timing attempts",
       "status": "passed",
       "captures": 12,
       "hashed_files": 57
+    },
+    {
+      "name": "2026-10-29-canonical-native-di-timing retained hashes, modes, traces and restoration",
+      "status": "passed",
+      "timed_processes": 12,
+      "hashed_files": 88
+    },
+    {
+      "name": "2026-10-29-registered-room retained hashes, modes, traces and restoration",
+      "status": "passed",
+      "timed_processes": 12,
+      "hashed_files": 307
+    },
+    {
+      "name": "Room quality/reference counts, finite active PT diagnostic and exact CPU prerequisite source identity",
+      "status": "passed",
+      "limits": "No B8 GPU implementation follows from these CPU checks."
     },
     {
       "name": "Legacy original-scene registry:20 accepted process runs and preserved CSV hashes",
@@ -164,15 +181,15 @@
     {
       "name": "Build/GPU and display-quality evidence recorded",
       "status": "evidence_present",
-      "reason": "This checker validates retained identity/completeness; it does not rebuild binaries, rerun GPU measurements or prove estimator correctness. See B1_RESULTS.md and result manifests."
+      "reason": "This checker validates retained identity/completeness; it does not rebuild binaries, rerun GPU measurements or prove estimator correctness. See the native-DI/registered-room reports, legacy reports and result manifests."
     }
   ],
   "passed": true,
   "limits": [
     "Source audit is not algorithm correctness proof.",
-    "Two static scenes on one GPU; five process pairs per scene.",
+    "One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.",
     "PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.",
-    "Tonemapped display metrics; HDR/temporal/independent-seed validation remains future.",
-    "Canonical B1/B4 matched DI controls are pending. Legacy GI-off limited PT++ pilot maps to B7 ablations. B8 sharing and B9/B10 remain planned."
+    "Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.",
+    "Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 GPU sharing and B9/B10 remain planned."
   ]
 }

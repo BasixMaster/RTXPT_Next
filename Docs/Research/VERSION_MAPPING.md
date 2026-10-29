@@ -7,10 +7,10 @@ User-confirmed numbering, 2026-10-29. **B0 is the unchanged RTXPT 1.9 reference 
 | ID | Short algorithm overview | Configuration and evidence boundary |
 |---|---|---|
 | **B0** | **Unchanged RTXPT 1.9 reference** | Original upstream defaults; source `303b408ab81790a5051abd7573830b7a4112eb8e`, RTXDI 3.0 `a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6`, Assets `a56be4ed65029d2733fd02f00f4027ffd541eda8`. A raw control with overrides is separately labelled. |
-| **B1** | **RTXPT native PT + DI 3.0** | DI on; GI and ReSTIR PT off. Original-scene DI quality captured; matched throughput pending. |
+| **B1** | **RTXPT native PT + DI 3.0** | DI on; GI and ReSTIR PT off. Original-scene DI quality and cap-verified timing measured. |
 | **B2** | **RTXPT native PT + DI 3.0 + GI 3.0** | DI/GI on; ReSTIR PT off. Historical original-scene observations exist, with unverified cap coverage. |
 | **B3** | **RTXPT native PT / runtime 3.1** | DI/GI/ReSTIR PT off. Raw native-control observations exist; they are not a ReSTIR direct-light baseline. |
-| **B4** | **RTXPT native PT + DI 3.1** | DI on; GI and ReSTIR PT off. Original-scene DI quality captured; throughput pending; priority comparator to B1 and B7. |
+| **B4** | **RTXPT native PT + DI 3.1** | DI on; GI and ReSTIR PT off. Original-scene DI quality and cap-verified timing measured; priority comparator to B1 and B7. |
 | **B5** | **RTXPT native PT + DI 3.1 + GI 3.1** | DI/GI on; ReSTIR PT off. Historical original-scene observations exist, with unverified cap coverage. |
 | **B6** | **ReSTIR PT / DI and GI off** | Separate DI/GI estimators off; existing native direct/fallback terms remain until explicitly replaced by a unified-lighting partition. No complete extended-scene benchmark is claimed. |
 | **B7** | **ReSTIR PT + DI 3.1** | DI direct plus PT indirect; GI off. Corrected static opaque checkpoint `de9fe651`; original-scene gates remain unresolved. |
@@ -40,7 +40,7 @@ Runtime 3.1 already supplies 64-byte PT reservoirs, forced terminal NEE reconnec
 
 ## Fair comparisons and paper context
 
-Prioritize matched **B1 versus B4** native-PT-plus-DI captures, then compare B4 with B7 while direct-light sampling is available on both sides. The legacy 0.806 ms native control had DI off and cannot establish the missing native PT + DI 3.1 baseline's cost or quality.
+Matched **B1 versus B4** native-PT-plus-DI captures and the registered-room B4/B7 comparison are now measured. The legacy 0.806 ms native control had DI off and cannot establish the native PT+DI3.1 baseline's cost or quality; use the new measured DI-on controls.
 
 The referenced original ReSTIR PT paper's §9.3 uses approximately equal-time comparisons with adjusted sample counts. Our fixed-1spp opaque-room pilot is a different experiment. Add measured sample/candidate sweeps and quality-versus-cost curves before comparable equal-time/equal-quality conclusions; do not transplant paper speedups.
 
@@ -54,4 +54,6 @@ Canonical IDs separate runtime, DI/GI/PT combination and PT++ scope. Legacy evid
 
 - 2026-10-29: Applied user-confirmed B0–B10 numbering without changing historical references or numeric results.
 
-Canonical update2026-10-29: [B1/B4 native-DI quality and timing exclusions](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures. No new throughput result is accepted.
+Canonical update2026-10-29: [B1/B4 native-DI quality and cap-verified timing](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures and links12 accepted cap-verified timing runs; initial missing-trace attempts remain excluded.
+
+Current scoped measurements: [registered-room B1/B4/B6/B7 comparison](REGISTERED_ROOM_RESULTS.md) includes30quality captures,12timing processes and explicit history settling; [native original-scene report](CANONICAL_NATIVE_DI_RESULTS.md) now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.

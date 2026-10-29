@@ -90,7 +90,29 @@ if canonical.exists():
         assert capture['effective_canonical_experiment']['flags']==dict(di=1,gi=0,pt=0) and capture['artifact_identity_after_capture']['validated']
     exclusions=json.loads((canonical/'excluded-timing.json').read_text());assert exclusions['accepted_timing_runs']==0 and len(exclusions['attempts'])==2
     assert all(x['restoration_verified'] for x in exclusions['attempts'])
-    checks.append(dict(name='Canonical B1/B4 quality identities with explicit zero accepted timing samples',status='passed',captures=12,hashed_files=len(index['files'])))
+    checks.append(dict(name='Frozen native-DI quality identities and initial excluded timing attempts',status='passed',captures=12,hashed_files=len(index['files'])))
+for dataset,expected_runs in [('2026-10-29-canonical-native-di-timing',12),('2026-10-29-registered-room',12)]:
+    base=P/'Benchmarks/development'/dataset
+    index=json.loads((base/'index.json').read_text())
+    for name,digest in index['files'].items():assert hashlib.sha256((base/name).read_bytes()).hexdigest()==digest,name
+    runs=list((base/'timing').glob('*/run.json'));assert len(runs)==expected_runs
+    for path in runs:
+        run=json.loads(path.read_text());rest=json.loads((path.parent/'restoration.json').read_text())
+        assert run['status']=='timed_completed' and rest['restoration_verified'] and run['image_write_count']==0 and not run['reported_trace_loss']
+        assert run['artifact_identity_after_capture']['validated'] and run['cap_control']['observed_sync_interval']==0
+        variant=run['canonical_experiment']['variant'];expected_flags=dict(di=int(variant in ['B1','B4','B7']),gi=0,pt=int(variant in ['B6','B7']))
+        assert run['effective_canonical_experiment']['flags']==expected_flags
+    checks.append(dict(name=dataset+' retained hashes, modes, traces and restoration',status='passed',timed_processes=expected_runs,hashed_files=len(index['files'])))
+room=P/'Benchmarks/development/2026-10-29-registered-room'
+assert len(list((room/'quality').glob('*/capture.json')))==30 and len(list((room/'references').glob('*/capture.json')))==3
+for variant in ['B6','B7']:
+    activation=json.loads((room/'activation'/variant/'reservoir-summary.json').read_text())['statistics']
+    assert activation['final_index']['midpath_reconnection_valid']>0 and activation['final_index']['m_greater_than_one']>0
+    assert all(x['nonfinite_m']==x['nonfinite_weight_valid']==x['nonfinite_target_valid']==0 for x in activation.values())
+oracle=json.loads((P/'Benchmarks/development/2026-10-29-b8-partition-oracles/receipt.json').read_text())
+for name,digest in oracle['source_hashes'].items():assert hashlib.sha256((P/'Benchmarks/tools'/name).read_bytes()).hexdigest()==digest
+assert oracle['partition_cases']==56
+checks.append(dict(name='Room quality/reference counts, finite active PT diagnostic and exact CPU prerequisite source identity',status='passed',limits='No B8 GPU implementation follows from these CPU checks.'))
 result=next(x for x in versions['results'] if x['id']=='2026-10-28-b1')
 assert result['status']=='measured' and (P/result['report']).is_file()
 evidence=P/result['path'];assert evidence.is_dir()
@@ -134,8 +156,8 @@ assert n>=2
 checks.append(dict(name='Structured evidence schema separately validated; SQLite metric search',status='passed',smape_matches=n,sources=len(data['sources']),findings=len(data['findings'])))
 assert not list(D.rglob('*.pdf'))
 checks.append(dict(name='No full-paper PDFs exported',status='passed'))
-checks.append(dict(name='Build/GPU and display-quality evidence recorded',status='evidence_present',reason='This checker validates retained identity/completeness; it does not rebuild binaries, rerun GPU measurements or prove estimator correctness. See B1_RESULTS.md and result manifests.'))
-receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','Two static scenes on one GPU; five process pairs per scene.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Tonemapped display metrics; HDR/temporal/independent-seed validation remains future.','Canonical B1/B4 matched DI controls are pending. Legacy GI-off limited PT++ pilot maps to B7 ablations. B8 sharing and B9/B10 remain planned.'])
+checks.append(dict(name='Build/GPU and display-quality evidence recorded',status='evidence_present',reason='This checker validates retained identity/completeness; it does not rebuild binaries, rerun GPU measurements or prove estimator correctness. See the native-DI/registered-room reports, legacy reports and result manifests.'))
+receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 GPU sharing and B9/B10 remain planned.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))
 print(json.dumps(dict(passed=True,checks=len(checks),scenes=len(scenes),math_expressions=page.count('<math '))))

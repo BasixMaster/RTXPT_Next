@@ -1,0 +1,157 @@
+{
+  "label": "reference8192-independent",
+  "scene": "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+  "mode": "reference",
+  "output_track": "unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata",
+  "exe_sha256": "8b8a65ca2ef174fac49e2eddecfb11b21ef86f7e03170677650f2ea938e8b28f",
+  "started_utc": "2026-10-29T00:44:59.462893+00:00",
+  "command": [
+    "[WORKSPACE]\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+    "--scene",
+    "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+    "--width",
+    "640",
+    "--height",
+    "360",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "0",
+    "--useReSTIRGI",
+    "0",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "[WORKSPACE]\\work\\2026-10-29-registered-room\\reference8192-independent\\frame.png",
+    "--captureSuffix",
+    "reference8192-independent",
+    "--perfLog",
+    "[WORKSPACE]\\work\\2026-10-29-registered-room\\reference8192-independent\\partial-perf.csv",
+    "--benchmarkUncapped",
+    "true",
+    "--samplingSeed",
+    "103",
+    "--referencePixelCenter",
+    "true",
+    "--captureLinearHDR",
+    "true",
+    "--overrideToReferenceMode",
+    "--referenceSamplesPerPixel",
+    "8192",
+    "--maxBounces",
+    "3",
+    "--maxDiffuseBounces",
+    "3",
+    "--stopAnimations",
+    "--captureSimple"
+  ],
+  "cwd": "[WORKSPACE]\\outputs\\RTXDI_Next\\bin",
+  "settings": {
+    "width": 640,
+    "height": 360,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 0,
+    "restir_gi": 0,
+    "simple": true,
+    "record_start": null,
+    "frames": 1,
+    "reference_spp": 8192,
+    "linear_hdr_requested": true,
+    "sampling_seed_requested": 103,
+    "reference_pixel_center_requested": true,
+    "di_mode_requested": null,
+    "nee_mis_requested": null,
+    "nee_type": 2,
+    "restir_pt": 0,
+    "max_bounces_override": 3,
+    "max_diffuse_bounces_override": 3,
+    "pt_mode": null
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+  "canonical_experiment": null,
+  "process_id": 59640,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 12.60899999999674,
+  "images": [
+    {
+      "name": "frame_reference8192-independent.png",
+      "sha256": "4e80e75de63b5128f7428f7c953f584b519a01c9480e8e75acfe6886cf50dd1e",
+      "bytes": 211275
+    }
+  ],
+  "linear_hdr_files": [
+    {
+      "name": "frame_reference8192-independent.pfm",
+      "sha256": "a8dca8f8ef975453ea14cb06f1410b124eee8a67843d0449e1d8505d6c4a7802",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_reference8192-independent.pfm.json",
+      "sha256": "9e3b147ada587a1500700d0e771886e8b355354ae673a29bcc2abc047cc1e84c",
+      "bytes": 601
+    }
+  ],
+  "effective_sampling": {
+    "coverage": "verified first-frame effective receipt",
+    "seed": 103,
+    "realtime": false,
+    "reference_pixel_center": true,
+    "pixel_jitter_scale": 0.0
+  },
+  "effective_di_validation": {
+    "coverage": "verified first-frame effective receipt",
+    "strict": false,
+    "boiling": true,
+    "discount_naive": false,
+    "temporal_permutation": true
+  },
+  "effective_pt_replay": {
+    "coverage": "verified first-frame effective receipt",
+    "replay_only": false,
+    "roughness_threshold": 0.100000001
+  },
+  "effective_pt_history": {
+    "coverage": "verified first-frame effective receipt",
+    "age_rejection": true,
+    "max_age": 30,
+    "max_history": 8
+  },
+  "effective_pt_spatial": {
+    "coverage": "verified first-frame effective receipt",
+    "samples": 1,
+    "boost": 8
+  },
+  "effective_ptpp": {
+    "coverage": "verified first-frame effective receipt",
+    "reconnection_mode": 0,
+    "roulette_probability": 0.0,
+    "diagnostics": false
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 64,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "not requested; legacy labels retain their original numbering"
+  }
+}

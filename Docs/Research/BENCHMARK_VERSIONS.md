@@ -7,10 +7,10 @@ This chapter defines the general comparison contract under the user-confirmed ca
 | ID | Exact source basis / planned scope | Comparison |
 | --- | --- | --- |
 | B0 | NVIDIA RTXPT 1.9 source commit `303b408ab81790a5051abd7573830b7a4112eb8e`, retained as tag `rtxpt-1.9-baseline` and branch `baseline/rtxpt-1.9`; existing `External/Rtxdi` gitlink `a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6`; Assets gitlink `a56be4ed65029d2733fd02f00f4027ffd541eda8` | Preserve original rendering behavior, feature defaults and binaries. |
-| B1 | RTXPT1.9 native PT + DI3.0; GI/ReSTIR PT off | New matched native-DI comparator to B4. |
+| B1 | RTXPT1.9 native PT + DI3.0; GI/ReSTIR PT off | Measured original-scene and registered-room DI-on comparator to B4. |
 | B2 | RTXPT1.9 native PT + DI3.0 + GI3.0 | Historical original-scene observations are cap-unverified; compare freshly with B5. |
 | B3 | Runtime3.1 native PT; DI/GI/ReSTIR PT off | Legacy migration source `7010bb4` provides this configuration; legacy tag `B1` is not canonical B1. |
-| B4 | Native PT + DI3.1; GI/ReSTIR PT off | New matched native-DI benchmark required; compare with B1 and B7. |
+| B4 | Native PT + DI3.1; GI/ReSTIR PT off | Measured with B1 on original scenes and with B7 in the registered room. |
 | B5 | Native PT + DI3.1 + GI3.1 | Historical old-B1 DI+GI rows map here; fresh cap-verified comparison to B2 needed. |
 | B6 | ReSTIR PT; separate DI/GI off | Native direct/fallback contribution ownership remains explicit. |
 | B7 | ReSTIR PT + DI3.1; GI off | Old-B2 checkpoint `de9fe651` is scoped static opaque evidence. |
@@ -120,4 +120,6 @@ RTXPT supplies repeatable screenshot/sequence controls and limited GPU-pass CSV 
 
 B2 now denotes the ReSTIR PT renderer integration; B3 denotes PT++ activation and missing-mechanism work. Both retain DI/GI as selectable controls with explicit contribution ownership. See [implementation status](B2_IMPLEMENTATION.md). B1 results remain historical measurements of ordinary PT with DI+GI, without ReSTIR PT. The B1 run settings were not a comprehensive driver/external frame-cap audit; do not retroactively claim they were. Future performance runs must record the uncapped renderer override, driver profile state and unknown external limiters, separately from simulated capture timestep.
 
-Canonical update2026-10-29: [B1/B4 native-DI quality and timing exclusions](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures. No new throughput result is accepted.
+Canonical update2026-10-29: [B1/B4 native-DI quality and cap-verified timing](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures and links12 accepted cap-verified timing runs; initial missing-trace attempts remain excluded.
+
+Current scoped measurements: [registered-room B1/B4/B6/B7 comparison](REGISTERED_ROOM_RESULTS.md) includes30quality captures,12timing processes and explicit history settling; [native original-scene report](CANONICAL_NATIVE_DI_RESULTS.md) now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.

@@ -13,7 +13,7 @@ Use accepted **scattering count**, not UI names or raw ray-hit counts:
 - GI owns a restricted, provably valid two-scattering domain.
 - ReSTIR PT owns three-or-more-scattering paths.
 
-For the first strict GI implementation, restrict its secondary endpoint to a **verified outgoing-direction-independent Lambertian response**. Native traces the remaining two-scattering paths. The current GI reservoir cannot correctly reevaluate glossy secondary outgoing radiance after reconnection, and the default diffuse model is Frostbite, not Lambertian. A later general GI implementation needs extended payload/reevaluation; it must not silently claim exact glossy reuse.
+For the first strict GI implementation that reuses unchanged secondary RGB, restrict its secondary endpoint to a **verified outgoing-direction-independent Lambertian response**. Native traces the remaining two-scattering paths. The current GI reservoir cannot correctly reevaluate glossy secondary outgoing radiance after reconnection, and the default diffuse model is Frostbite, not Lambertian. A later general GI implementation needs extended payload/reevaluation; it must not silently claim exact glossy reuse.
 
 ## What the current code actually does
 
@@ -168,4 +168,18 @@ The raw source cubemap and its importance hierarchy are baked independently of r
 
 ## Summary and lessons learned
 
-A correct combined label needs separate path-domain integrals, usable secondary-radiance reevaluation and verified fallback. Current GI payload/approximation constraints are active correctness gates; this design does not remove them or establish a speedup. The zero-intensity environment fixture has a separate source-level registration proof and still needs GPU preflight.
+A correct combined label needs separate path-domain integrals, usable secondary-radiance reevaluation and verified fallback. Current GI payload/approximation constraints are active correctness gates; this design does not remove them or establish a speedup. The zero-intensity environment fixture passed its registered-room GPU preflight and measurement checks; this establishes fixture usability, not combined B8 correctness.
+
+## Exact CPU prerequisite gate —2026-10-29
+
+Seventeen new tests in `Benchmarks/tools/test_transport_partition_oracle.py` pass using exact rational arithmetic. The implementation lives in `transport_partition_oracle.py`; its frozen source hashes, test output and counterexample values are retained in `Benchmarks/development/2026-10-29-b8-partition-oracles`.
+
+The tests independently check all56 combinations of scattering count and eligibility, a labelled RGB physical-path catalog, nonuniform measures/proposals, unequal NEE/BSDF technique counts, secondary-emission ownership, alpha/null interfaces, empty draws, primary BSDF/PDF factors and support. Negative controls detect full-suffix GI overlap, classifying raw hits as scattering events, conditioning on successful GI candidates and removing a BSDF counterpart while retaining its old NEE MIS weight.
+
+A second finite geometric example uses source/target solid-angle derivatives with Jacobians1/4 and4. Both lie inside the native validator's1/10–10 acceptance interval. Replacing their transfer Jacobians by the1/3–3 clamp changes the declared estimator's result. With view-dependent secondary outgoing radiance, unchanged stored RGB also misses the target integral; reevaluation restores this finite example. These are counterexamples for the explicitly declared finite transfer model, not a measured bias magnitude or a complete diagnosis of every native GI estimator.
+
+### Initial-only GPU stage before GI reuse
+
+A fixed-outgoing-direction GI-short initial sampler can evaluate a general non-delta secondary BSDF correctly. Its outgoing direction has not changed, so the unchanged-RGB reuse objection does not apply. An additional exact test includes the otherwise ineligible secondary endpoint at its original outgoing direction and recovers the full short-path integral.
+
+This permits a bounded first GPU stage: DI for primary direct lighting, GI-short **initial sampling only**, PT-long for longer paths and native fallback, with separate component exports. It does not grant glossy GI temporal/spatial reuse or establish the complete canonical B8 configuration. Delta-light support, native fallback, PDF measures, resets, buffer ownership and all required GPU component checks remain implementation gates. No new combined GPU mode is enabled by these CPU tests.

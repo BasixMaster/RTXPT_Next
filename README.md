@@ -237,4 +237,6 @@ See [LICENSE.txt](LICENSE.txt)
 This project includes NVAPI software. All uses of NVAPI software are governed by the license terms specified here: https://github.com/NVIDIA/nvapi/blob/main/License.txt.
 
 
-Current development checkpoint: [B2 static opaque results](Docs/Research/B2_RESULTS.md) reports corrected ReSTIR PT integration, image-quality metrics and cap-verified native-control comparisons. B2 remains unpromoted; original material/medium and motion coverage are pending.
+Historical checkpoint: [legacy B2 static opaque results](Docs/Research/B2_RESULTS.md) maps to canonical B7. It reports corrected ReSTIR PT integration; original material/medium and motion coverage remain pending. Current numbering is defined in [the variant mapping](Docs/Research/VERSION_MAPPING.md).
+
+Measured updates: [B1/B4 original-scene DI controls](Docs/Research/CANONICAL_NATIVE_DI_RESULTS.md) and [B1/B4/B6/B7 registered-room comparison](Docs/Research/REGISTERED_ROOM_RESULTS.md). The latter measures a19.41%GPU-busy increase and45.09%lower LDR-FLIP for configured B7 versus B4; no equal-quality speedup is claimed. B8 GPU integration remains pending after17exact CPU prerequisite tests.

@@ -1,0 +1,46 @@
+{
+  "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+  "variants": [
+    "B1",
+    "B4"
+  ],
+  "algorithm": "Native PT + ReSTIR DI; GI off",
+  "scenes": {
+    "convergence": [
+      "convergence-test.scene.json",
+      0
+    ],
+    "kitchen": [
+      "kitchen-with-test-stuff.scene.json",
+      2
+    ]
+  },
+  "resolution": [
+    1280,
+    720
+  ],
+  "bounces": [
+    14,
+    2
+  ],
+  "quality_process_repeats": 3,
+  "timing_process_repeats": 3,
+  "warmup_seconds": 45,
+  "measurement_seconds": 15,
+  "orders": [
+    [
+      "B1",
+      "B4"
+    ],
+    [
+      "B4",
+      "B1"
+    ],
+    [
+      "B1",
+      "B4"
+    ]
+  ],
+  "selection": "Last600 process/swapchain rows, drop final16",
+  "scope": "Native runtime3.0 vs3.1 DI-on comparison; independent process restarts are not independent seeds; no HDR export in these original-shader adapters"
+}
