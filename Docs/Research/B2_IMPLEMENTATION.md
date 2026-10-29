@@ -1,4 +1,8 @@
-# B2 ReSTIR PT integration and B3 PT++ status
+# ReSTIR PT foundation: retained legacy B2/B3 implementation history
+
+> **LEGACY NUMBERING.** This file preserves the chronological bridge/integration history and superseded checkpoints under old labels. Under [canonical B0–B10](VERSION_MAPPING.md), the PT-only/DI+PT foundation corresponds to **B6/B7**; old-B1 migration source `7010bb4` is not canonical B1. The old-B3 GI-off pilot is a B7 limited-feature ablation, not B9. All remaining PT++ work now belongs to **B10**, dependent on correct **B8** GI/PT sharing. Existing source/data IDs and diagnostic evidence remain unchanged; old roadmap labels below are historical.
+
+The current mandatory comparison matrix retains original Convergence, original Kitchen and the opaque room. PT transmission/medium and binding original 14/2 diffuse-budget gates remain unresolved. Canonical B1/B4 native-DI benchmarks are priority gaps. Refer to the [current roadmap](ROADMAP.md) for active sequencing, rather than treating the retained historical states below as current canonical status.
 
 
 

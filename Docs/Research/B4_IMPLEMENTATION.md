@@ -1,4 +1,14 @@
-# B4: remaining PT++ integration
+# B10 remaining PT++ gates: retained legacy B4 plan
+
+> **LEGACY FILENAME AND NUMBERING.** This file keeps its path to preserve existing links. The old-B4 remaining-PT++ plan below now belongs to **canonical B10** under the user-confirmed [B0–B10 mapping](VERSION_MAPPING.md). Old-B3 refers to a **GI-off B7 limited-feature pilot**, not canonical B9. Existing source refs, raw evidence and numeric results are not renamed.
+
+## Current B10 scope and dependency
+
+Continue all remaining PT++ mechanisms with independent oracles, isolated feature controls and measured ablations: reciprocal pairing, replay compaction, unified primary direct/indirect reservoirs, vector-weight shading, duplication confidence reduction and dual-motion disocclusion recovery, plus specifically identified remaining micro-optimizations. The B8 PT + DI3.1 + GI3.1 sharing foundation must first define disjoint contributions or valid MIS. Adding overlapping indirect outputs does not implement B8, and a GI-off limited pilot does not implement B9.
+
+Runtime3.1 packing, forced NEE and optional supplied mechanisms are inherited evidence, not newly counted B9/B10 gains. Preserve B0 original defaults, all explicit B1–B7 configurations and the old limited-pilot artifacts. Prioritize fresh B1/B4 native-DI comparisons and retain original Convergence/Kitchen/opaque-room coverage, including current transmission/medium and binding 14/2 diffuse-budget blockers. The following original plan retains legacy labels as historical design provenance; its technical acceptance gates remain relevant to B10.
+
+## Legacy plan, retained for provenance
 
 The user assigned the remaining PT++ mechanisms to **B4**, starting after the B3 footprint/initial-only-roulette checkpoint is finished and preserved. B4 is currently a design stage; no B4 renderer or performance result is claimed here. Preserve B0, B1, B2 and B3 as separate controls.
 

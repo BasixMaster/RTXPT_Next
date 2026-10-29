@@ -1,4 +1,8 @@
-# B3: isolated PT++ activations
+# B7 limited PT++ ablations: retained legacy B3 implementation
+
+> **LEGACY NUMBERING.** The old-B3 footprint/initial-only-roulette implementation described below ran the **B7** partition (DI3.1 + ReSTIR PT, GI off). It is **not canonical B9**, whose B8 foundation includes valid GI sharing. The preserved old-B2 control `de9fe651` maps to B7; old-B4 remaining-work references map to **B10**. [VERSION_MAPPING.md](VERSION_MAPPING.md) is authoritative; source refs, runtime controls, measurements and raw IDs below are unchanged.
+
+B8 sharing requires a valid contribution partition/MIS before B9/B10 can claim it. Packed reservoirs and forced NEE were inherited from runtime3.1; enabling supplied machinery does not establish a full PT++ implementation. Keep original scene coverage visible and prioritize the missing matched canonical B1/B4 native-DI benchmarks.
 
 B3 development starts from the preserved B2 checkpoint `de9fe651903f203327830e7361ac4237e00d508c` on `b3/ptpp-activation`. It retains **RTXPT + ReSTIR DI + ReSTIR PT, with GI off** in the tested configuration. B3 is in progress; it does not mean every PT++ mechanism is implemented or that B2's broader material gates have passed.
 

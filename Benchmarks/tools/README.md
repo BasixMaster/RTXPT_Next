@@ -1,3 +1,15 @@
+# Canonical B0–B10 experiment controls
+
+The current numbering is defined in `../versions.json` and `../../Docs/Research/VERSION_MAPPING.md`. Historical protocols and examples below retain their original IDs.
+
+Use `--variant B1 --mode di` for native PT + DI3.0, `--variant B4 --mode di` for native PT + DI3.1, `--variant B6 --mode pt` for PT-only reuse, and `--variant B7 --mode dipt` for DI3.1 + PT. Canonical runs require a frozen `--artifact-manifest`, matching clean runtime pin and effective first-frame transport receipt. Native runs additionally require the versioned controls-v2 build provenance receipt. Warm shader caches before freezing; a changed cache invalidates a strict run.
+
+B0 remains the unchanged upstream reference. These raw wrappers can label its separate DI/GI-off override only with `--variant B0 --variant-preset raw-native-control --mode default`. Additional footprint/roulette ablations on B6/B7 require `--variant-preset limited-ptpp-ablation`; they are not B9. B8–B10 are rejected until PT/GI contribution sharing exists and is validated.
+
+Timed canonical runs still require the existing `--benchmark-uncapped`, fresh matching driver audit and read-only RTSS boundary checks for the known-cap coverage claim. The variant label alone proves no cap state. Retain incomplete/failed captures separately and never pool them with accepted traces.
+
+## Legacy capture-analysis instructions
+
 # First B0/B1 capture analysis
 
 `analyze_captures.py` reads the existing RTXPT1.9 CSV schema and PNG screenshots. It does not launch the renderer or fabricate missing whole-frame/GPU results. Python3.10+ is required. GPU CSV analysis uses the standard library; PNG analysis/tests need NumPy and Pillow (available in the host's bundled Python). The optional `--flip` adapter calls an already-installed official `flip-evaluator` package. It never installs one silently.

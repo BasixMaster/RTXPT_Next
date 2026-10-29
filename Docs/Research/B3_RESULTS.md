@@ -1,4 +1,8 @@
-# B3 results: footprint and initial-only roulette
+# B7 limited-feature ablation: retained legacy B3 results
+
+> **LEGACY NUMBERING — preserved evidence.** The pilot below (`a7428c8`, retained `b3/ptpp-activation` branch/data labels) ran **DI3.1 + ReSTIR PT, GI off**. Under [canonical B0–B10](VERSION_MAPPING.md), it is **B7 plus limited footprint/initial-only-roulette ablations**, **not B9**, which requires B8's validated GI-sharing foundation. Old-B2 means the B7 control; old-B1 native-only means B3. All row values, images, source refs and raw data IDs remain unchanged. Old-B4 remaining-work references below now point to canonical **B10** scope via the retained [plan filename](B4_IMPLEMENTATION.md).
+
+Canonical B0 remains original-default RTXPT1.9, not the raw native-control override in the common display table. The native PT + DI3.0/3.1 B1/B4 benchmark gap remains explicit; old-B1's 0.806 ms native-only timing did not exercise DI. Original-scene transmission/medium and binding diffuse-budget gates remain unresolved; renumbering does not create B8/B9/B10 measurements.
 
 Measured 28–29 October 2026 (Europe/Zurich). **B3's two activations increased both cost and image error in this controlled opaque-room pilot.** The combined setting costs 12.18% more process GPU-busy time and has 4.15% higher HDR-FLIP than its same-executable B2-policy control. No optimized combined default or general speedup is established. The default remains fixed-threshold reconnection with roulette off.
 

@@ -1,63 +1,200 @@
 {
-  "schema_version": 1,
-  "updated_on": "2026-10-28",
+  "schema_version": 2,
+  "updated_on": "2026-10-29",
   "repository": "BasixMaster/RTXPT_Next",
+  "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
   "versions": [
     {
-      "id": "RTXPT-1.9",
-      "alias": "B0",
-      "status": "measured_initial_two_scene",
+      "id": "B0",
+      "status": "preserved_reference",
       "ref": "rtxpt-1.9-baseline",
       "source_sha": "303b408ab81790a5051abd7573830b7a4112eb8e",
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
       "rtxdi_sha": "a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6",
-      "cap_coverage": "historical_unverified",
-      "algorithm_overview": "RTXPT native PT + RTXDI3.0 DI/GI available"
+      "algorithm_overview": "Unchanged RTXPT v1.9 reference: original defaults and dependencies",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": "preserve upstream original defaults; label does not force a raw benchmark preset",
+      "raw_control": "DI/GI off under isolated raw preset, explicitly separate from original defaults"
     },
     {
       "id": "B1",
-      "status": "implemented_measured_initial_two_scene",
-      "ref": "B1",
-      "source_sha": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
-      "scope": "RTXDI3.1 runtime/API migration only; existing DI/GI, no ReSTIR PT/CGNS activation",
-      "rtxdi_target_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
-      "cap_coverage": "historical_unverified",
-      "algorithm_overview": "RTXPT native PT + RTXDI3.1 DI/GI available"
+      "status": "quality_measured_timing_pending",
+      "ref": "303b408ab81790a5051abd7573830b7a4112eb8e",
+      "source_sha": "303b408ab81790a5051abd7573830b7a4112eb8e",
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6",
+      "algorithm_overview": "v1.9 native PT + ReSTIR DI3.0; GI off",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "restir_di": 1,
+        "restir_gi": 0,
+        "restir_pt": 0
+      },
+      "benchmark_adapter": "Native benchmark controls; preserve original shaders/estimator and record actual first-frame DI/GI activation"
     },
     {
       "id": "B2",
-      "status": "in_progress",
-      "ref": null,
-      "source_sha": null,
-      "scope": "Integrate the RTXDI3.1 ReSTIR PT path into RTXPT with selectable DI/GI modes and explicit non-overlapping contribution ownership; not a pure2022 algorithm replica",
-      "development_branch": "b2/restir-pt-integration",
-      "measured_checkpoint": "2026-10-28-b2-static-opaque",
-      "algorithm_overview": "RTXPT + ReSTIR DI + ReSTIR PT; GI alternative indirect estimator",
-      "development_checkpoint_sha": "de9fe651903f203327830e7361ac4237e00d508c"
+      "status": "pending_matched_benchmark",
+      "ref": "303b408ab81790a5051abd7573830b7a4112eb8e",
+      "source_sha": "303b408ab81790a5051abd7573830b7a4112eb8e",
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6",
+      "algorithm_overview": "v1.9 native PT + ReSTIR DI3.0 + ReSTIR GI3.0",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "restir_di": 1,
+        "restir_gi": 1,
+        "restir_pt": 0
+      },
+      "benchmark_adapter": "Native benchmark controls; preserve original shaders/estimator and record actual first-frame DI/GI activation"
     },
     {
       "id": "B3",
-      "status": "in_progress",
-      "ref": null,
-      "source_sha": null,
-      "scope": "PT++ footprint/inverse-footprint activation and initial-generation-only roulette, individually ablated against preserved B2 policy; remaining mechanisms assigned to B4",
-      "algorithm_overview": "B2 DI + ReSTIR PT + isolated PT++ activations",
-      "development_branch": "b3/ptpp-activation",
-      "first_ablation_scope": "Footprint reconnection and initial-generation-only roulette; replay roulette off. Implementation/validation in progress; no B3 performance claim.",
-      "measured_checkpoint": "2026-10-28-b3-activation",
-      "report": "Docs/Research/B3_RESULTS.md"
+      "status": "measured_native_control",
+      "ref": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
+      "source_sha": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "Native PT with RTXDI3.1 linked; DI/GI off",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "restir_di": 0,
+        "restir_gi": 0,
+        "restir_pt": 0
+      },
+      "benchmark_adapter": "Native benchmark controls; preserve original shaders/estimator and record actual first-frame DI/GI activation"
     },
     {
       "id": "B4",
+      "status": "quality_measured_timing_pending",
+      "ref": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
+      "source_sha": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "Native PT + ReSTIR DI3.1; GI off",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "restir_di": 1,
+        "restir_gi": 0,
+        "restir_pt": 0
+      },
+      "benchmark_adapter": "Native benchmark controls; preserve original shaders/estimator and record actual first-frame DI/GI activation"
+    },
+    {
+      "id": "B5",
+      "status": "pending_matched_benchmark",
+      "ref": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
+      "source_sha": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "Native PT + ReSTIR DI3.1 + ReSTIR GI3.1",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "restir_di": 1,
+        "restir_gi": 1,
+        "restir_pt": 0
+      },
+      "benchmark_adapter": "Native benchmark controls; preserve original shaders/estimator and record actual first-frame DI/GI activation"
+    },
+    {
+      "id": "B6",
+      "status": "quality_diagnostic_only",
+      "ref": "de9fe651903f203327830e7361ac4237e00d508c",
+      "source_sha": "de9fe651903f203327830e7361ac4237e00d508c",
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "ReSTIR PT; DI/GI off",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "restir_di": 0,
+        "restir_gi": 0,
+        "restir_pt": 1
+      },
+      "inherited_features": "RTXDI3.1 packed64-byte reservoirs and forcedNEE reconnection already present; no pure2022 replica claim"
+    },
+    {
+      "id": "B7",
+      "status": "measured_static_opaque",
+      "ref": "de9fe651903f203327830e7361ac4237e00d508c",
+      "source_sha": "de9fe651903f203327830e7361ac4237e00d508c",
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "ReSTIR PT + ReSTIR DI3.1; GI off",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "restir_di": 1,
+        "restir_gi": 0,
+        "restir_pt": 1
+      },
+      "inherited_features": "RTXDI3.1 packed64-byte reservoirs and forcedNEE reconnection already present; no pure2022 replica claim"
+    },
+    {
+      "id": "B8",
+      "status": "planned_partition_not_implemented",
+      "ref": null,
+      "source_sha": null,
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "restir_di": 1,
+        "restir_gi": 1,
+        "restir_pt": 1
+      },
+      "depends_on": [
+        "validated PT/GI contribution partition"
+      ],
+      "runtime_status": "Current application selects GI OR PT; requested combined flags do not prove this variant executes"
+    },
+    {
+      "id": "B9",
       "status": "planned",
       "ref": null,
       "source_sha": null,
-      "scope": "Remaining PT++: explicit replay compaction, reciprocal paired reuse, unified direct/indirect PT reservoirs, duplication/history reduction, vector-weight shading, dual-motion disocclusion recovery and auditable remaining micro-optimizations"
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "B8 + limited PT++",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "restir_di": 1,
+        "restir_gi": 1,
+        "restir_pt": 1
+      },
+      "depends_on": [
+        "B8"
+      ],
+      "runtime_status": "Current application selects GI OR PT; requested combined flags do not prove this variant executes",
+      "ptpp_scope": "Footprint/inverse-footprint and initial-only roulette; legacy GI-off limited pilot is not this configuration"
+    },
+    {
+      "id": "B10",
+      "status": "planned",
+      "ref": null,
+      "source_sha": null,
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "B8 + full PT++",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "restir_di": 1,
+        "restir_gi": 1,
+        "restir_pt": 1
+      },
+      "depends_on": [
+        "B8"
+      ],
+      "runtime_status": "Current application selects GI OR PT; requested combined flags do not prove this variant executes",
+      "ptpp_scope": "Full remaining PT++ including replaycompaction,pairedreuse,unifieddirect/indirectreservoirs,vectorweights,duplicationreduction,dualmotion and auditablemicrooptimizations"
     }
   ],
+  "legacy_registry": "Benchmarks/legacy/versions-before-2026-10-29.json",
+  "legacy_git_refs": {
+    "B1": "Immutable historical migration tag7010bb4; NOT canonical B1"
+  },
   "comparison_pairs": [
     [
-      "RTXPT-1.9",
+      "B0",
       "B1"
     ],
     [
@@ -65,36 +202,40 @@
       "B2"
     ],
     [
-      "RTXPT-1.9",
-      "B2"
-    ],
-    [
-      "B2",
-      "B3"
-    ],
-    [
-      "RTXPT-1.9",
+      "B0",
       "B3"
     ],
     [
       "B1",
-      "B3"
+      "B4"
+    ],
+    [
+      "B2",
+      "B5"
     ],
     [
       "B3",
-      "B4"
+      "B6"
     ],
     [
-      "B2",
-      "B4"
+      "B4",
+      "B7"
     ],
     [
-      "B1",
-      "B4"
+      "B5",
+      "B8"
     ],
     [
-      "RTXPT-1.9",
-      "B4"
+      "B8",
+      "B9"
+    ],
+    [
+      "B8",
+      "B10"
+    ],
+    [
+      "B9",
+      "B10"
     ]
   ],
   "required_metrics": [
@@ -125,7 +266,12 @@
       "quality_scope": "Display PNG against finite4096spp reference; no independent-seed guarantee",
       "conclusion": "Initial migration comparison; no general speedup or equal-quality performance claim.",
       "cap_coverage": "historical_unverified",
-      "cap_audit_note": "Later RTSS audit found current232FPS global cap; original run-time RTSS state unrecorded. Historical observations remain exploratory, not verified uncapped throughput."
+      "cap_audit_note": "Later RTSS audit found current232FPS global cap; original run-time RTSS state unrecorded. Historical observations remain exploratory, not verified uncapped throughput.",
+      "numbering_scheme": "legacy-before-2026-10-29",
+      "canonical_configuration_mapping": {
+        "legacy_B0_DI_GI": "B2 configuration; historical cap coverage unverified",
+        "legacy_B1_DI_GI_runtime31": "B5 configuration; historical cap coverage unverified"
+      }
     },
     {
       "id": "2026-10-28-b2-static-opaque",
@@ -143,7 +289,13 @@
       "timing_scope": "Three processes/configuration; PresentMon target-process GPUBusy; native B0/B1 controls versus B2 strict DI+PT",
       "quality_scope": "Common display LDR-FLIP; B2-only eight-seed raw HDR/HDR-FLIP versus finite8192spp reference",
       "cap_coverage": "verified_app_NVIDIA_RTSS_boundaries; other external limiters unknown",
-      "conclusion": "Higher observed steady-state quality at higher per-frame GPU-busy cost in one static scene; no equal-quality speedup or promotion."
+      "conclusion": "Higher observed steady-state quality at higher per-frame GPU-busy cost in one static scene; no equal-quality speedup or promotion.",
+      "numbering_scheme": "legacy-before-2026-10-29",
+      "canonical_configuration_mapping": {
+        "legacy_B0_native": "B0 raw native control; not original default rendering",
+        "legacy_B1_native_runtime31": "B3",
+        "legacy_B2_DI_PT": "B7"
+      }
     },
     {
       "id": "2026-10-28-b3-activation",
@@ -162,38 +314,32 @@
       "timing_scope": "Four same-executable settings,3processrepeats each,orderrotated; processGPUBusy notfullGPUlatency",
       "quality_scope": "60three-seedrawHDR/historycaptures +12commonLDRscores; finite8192reference",
       "cap_coverage": "Verified app/NVIDIA/RTSS boundaries; other external limiters unknown",
-      "conclusion": "Footprint/roulette increased cost and error in this scene; B2 policy remains default; remaining PT++ assigned to B4"
-    }
-  ],
-  "required_scene_matrix": [
-    {
-      "original_max_bounces": 14,
-      "sha256": "c3afaa933c5084ba04f8e5100b64bb8b488ab312f4042849705a15e5bf5af549",
-      "exposure": 0,
-      "original_max_diffuse_bounces": 2,
-      "id": "convergence",
-      "original_resolution": [
-        1280,
-        720
-      ],
-      "scene": "Assets/convergence-test.scene.json"
+      "conclusion": "Footprint/roulette increased cost and error in this scene; B2 policy remains default; remaining PT++ assigned to B4",
+      "numbering_scheme": "legacy-before-2026-10-29",
+      "canonical_configuration_mapping": {
+        "control": "B7 policy control",
+        "footprint_roulette": "B7 + limited-PT++ ablations withGIoff; NOT B9"
+      },
+      "measured_source_sha": "a7428c8f83be494cc831cc8a60209364c7c53fba"
     },
     {
-      "original_max_bounces": 14,
-      "sha256": "2af5735fb02fc01badd83671641d54b7f1c69859c8c9bcdf335ca95d9daae552",
-      "exposure": 2,
-      "original_max_diffuse_bounces": 2,
-      "id": "kitchen",
-      "original_resolution": [
-        1280,
-        720
+      "id": "2026-10-29-canonical-native-di",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "status": "quality_measured_timing_pending",
+      "variants": [
+        "B1",
+        "B4"
       ],
-      "scene": "Assets/kitchen-with-test-stuff.scene.json"
-    },
-    {
-      "scope": "Controlled static opaque fixture; not a substitute for original Convergence/Kitchen",
-      "id": "owned-opaque-room",
-      "scene": "Testing/B2/Scenes/opaque-room.scene.json"
+      "report": "Docs/Research/CANONICAL_NATIVE_DI_RESULTS.md",
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di",
+      "scenes": [
+        "convergence",
+        "kitchen"
+      ],
+      "quality_scope": "3 process restarts per variant/scene, LDR-FLIP1.7 against finite4096spp references; no independent-seed/HDR claim",
+      "timing_scope": "No accepted timing samples; two missing-CSV attempts excluded and temporary profiles restored",
+      "cap_coverage": "App/NVIDIA/RTSS settings checked on excluded attempts; observed presentation unavailable",
+      "conclusion": "DI activation and native source/build identity verified. Observed display quality is similar; no throughput or significance claim."
     }
   ],
   "comparison_policy": {
@@ -204,11 +350,14 @@
       "opaque-room"
     ],
     "required_labels": [
-      "version and source identity",
-      "actual DI/GI/PT configuration",
-      "scope and missing/unsupported coverage"
+      "canonical variant ID",
+      "actual DI/GI/PT flags",
+      "runtime pin",
+      "source/executable identity",
+      "extra PT++ settings",
+      "coverage and cap provenance"
     ],
-    "history_settling": "Required with actual warmup receipts; distinguish from sample accumulation and equal-time convergence",
-    "original_transport": "1280x720, Convergence exposure0 / Kitchen-with-test-stuff exposure2, Balanced14/2; no material substitution"
+    "raw_track": "Matched AA/cache/denoiser-off benchmark preset; never relabel B0 original defaults",
+    "original_scenes": "OriginalConvergence/Kitchen at1280x720/exposure0/2/Balanced14/2; no material substitution"
   }
 }

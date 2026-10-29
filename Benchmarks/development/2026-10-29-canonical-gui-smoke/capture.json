@@ -1,0 +1,231 @@
+{
+  "label": "canonical-gui-smoke",
+  "scene": "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room.scene.json",
+  "mode": "dipt",
+  "output_track": "unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata",
+  "exe_sha256": "8b8a65ca2ef174fac49e2eddecfb11b21ef86f7e03170677650f2ea938e8b28f",
+  "started_utc": "2026-10-29T00:01:43.516716+00:00",
+  "command": [
+    "[WORKSPACE]\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+    "--scene",
+    "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room.scene.json",
+    "--width",
+    "640",
+    "--height",
+    "360",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "0",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "[WORKSPACE]\\work\\canonical-gui-smoke\\frame.png",
+    "--captureSuffix",
+    "canonical-gui-smoke",
+    "--perfLog",
+    "[WORKSPACE]\\work\\canonical-gui-smoke\\partial-perf.csv",
+    "--ptReconnectionMode",
+    "1",
+    "--captureWarmupFrames",
+    "64",
+    "--ptRouletteProbability",
+    "0.8",
+    "--ptFixedSpatialSamples",
+    "1",
+    "--capturePTReservoirs",
+    "true",
+    "--ptDisableAgeRejectionValidation",
+    "true",
+    "--strictDIValidation",
+    "true",
+    "--neeMIS",
+    "0",
+    "--benchmarkUncapped",
+    "true",
+    "--samplingSeed",
+    "0",
+    "--captureLinearHDR",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--useReSTIRPT",
+    "1",
+    "--restirPTMode",
+    "3",
+    "--maxBounces",
+    "3",
+    "--maxDiffuseBounces",
+    "3",
+    "--stopAnimations",
+    "--captureSimple"
+  ],
+  "cwd": "[WORKSPACE]\\outputs\\RTXDI_Next\\bin",
+  "settings": {
+    "width": 640,
+    "height": 360,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 1,
+    "restir_gi": 0,
+    "simple": true,
+    "record_start": null,
+    "frames": 1,
+    "reference_spp": null,
+    "linear_hdr_requested": true,
+    "sampling_seed_requested": 0,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": null,
+    "nee_mis_requested": 0,
+    "nee_type": 2,
+    "restir_pt": 1,
+    "max_bounces_override": 3,
+    "max_diffuse_bounces_override": 3,
+    "pt_mode": 3
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "scene_sha256": "56625abdeaff143ea4bf8acf9e4201a43cc7d142150d5ce5ff9ab7d8ccd1ec26",
+  "canonical_experiment": {
+    "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+    "variant": "B7",
+    "preset": "limited-ptpp-ablation",
+    "algorithm": "ReSTIR PT + ReSTIR DI3.1; GI off",
+    "expected_flags": {
+      "di": 1,
+      "gi": 0,
+      "pt": 1
+    },
+    "expected_runtime_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+    "expected_base_sha": "de9fe651903f203327830e7361ac4237e00d508c",
+    "expected_assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+    "display_label": "B7 \u00b7 limited-ptpp-ablation \u00b7 ReSTIR PT + ReSTIR DI3.1; GI off",
+    "limitation": "Actual settings must match the effective renderer receipt"
+  },
+  "artifact_identity": {
+    "manifest_sha256": "a917c6fbcc4773ff08b22e6e31feb783796bd8bc3b11883baa6070bbdb90cce2",
+    "root_source_sha": "a7428c8f83be494cc831cc8a60209364c7c53fba",
+    "working_diff_sha256": "a844755e94d16a049b0f6e9d0b601447012cc9d5e4439a2296efffb7a1d52770",
+    "executable_sha256": "8b8a65ca2ef174fac49e2eddecfb11b21ef86f7e03170677650f2ea938e8b28f",
+    "shader_files": 577,
+    "validated": true
+  },
+  "process_id": 74956,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 5.812999999994645,
+  "images": [
+    {
+      "name": "frame_canonical-gui-smoke.png",
+      "sha256": "46e9efed562ee8bba245a2922cdc9463ce969c16ee703768bae4ac2a6a5e30f8",
+      "bytes": 490369
+    }
+  ],
+  "linear_hdr_files": [
+    {
+      "name": "frame_canonical-gui-smoke.pfm",
+      "sha256": "6d6185f3f548c7d8c61024fcd74696ea00e116e48836a8bb0bfba00c0e4d3ef6",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_canonical-gui-smoke.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_canonical-gui-smoke.pfm.pt.bin",
+      "sha256": "966c73d12a9515067c2e264a70ad65cce1e0d0af5c9a8007b5cc6081a19ae581",
+      "bytes": 45219840
+    },
+    {
+      "name": "frame_canonical-gui-smoke.pfm.pt.bin.json",
+      "sha256": "af54098f83ebd4f3b452dee8edb299d66463cade4e69bde3246afbb7893a89d9",
+      "bytes": 333
+    },
+    {
+      "name": "frame_canonical-gui-smoke.pfm.pt.bin.stats.json",
+      "sha256": "177ca9a25618abc67370f438a83b673bdeecaeedeab750bac1e9b47a0c160ac9",
+      "bytes": 183
+    }
+  ],
+  "effective_sampling": {
+    "coverage": "verified first-frame effective receipt",
+    "seed": 0,
+    "realtime": true,
+    "reference_pixel_center": false,
+    "pixel_jitter_scale": 0.0
+  },
+  "effective_di_validation": {
+    "coverage": "verified first-frame effective receipt",
+    "strict": true,
+    "boiling": false,
+    "discount_naive": false,
+    "temporal_permutation": false
+  },
+  "effective_pt_replay": {
+    "coverage": "verified first-frame effective receipt",
+    "replay_only": false,
+    "roughness_threshold": 0.100000001
+  },
+  "effective_pt_history": {
+    "coverage": "verified first-frame effective receipt",
+    "age_rejection": false,
+    "max_age": 30,
+    "max_history": 8
+  },
+  "effective_pt_spatial": {
+    "coverage": "verified first-frame effective receipt",
+    "samples": 1,
+    "boost": 1
+  },
+  "effective_ptpp": {
+    "coverage": "verified first-frame effective receipt",
+    "reconnection_mode": 1,
+    "roulette_probability": 0.800000012,
+    "diagnostics": true
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 64,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "verified effective first-frame transport receipt",
+    "flags": {
+      "di": 1,
+      "gi": 0,
+      "pt": 1
+    },
+    "di_mode": 3,
+    "nee_mis": 0,
+    "max_bounces": 3,
+    "max_diffuse_bounces": 3,
+    "runtime_scope": "Runtime identity requires frozen source/build evidence in addition to this transport receipt"
+  },
+  "artifact_identity_after_capture": {
+    "manifest_sha256": "a917c6fbcc4773ff08b22e6e31feb783796bd8bc3b11883baa6070bbdb90cce2",
+    "root_source_sha": "a7428c8f83be494cc831cc8a60209364c7c53fba",
+    "working_diff_sha256": "a844755e94d16a049b0f6e9d0b601447012cc9d5e4439a2296efffb7a1d52770",
+    "executable_sha256": "8b8a65ca2ef174fac49e2eddecfb11b21ef86f7e03170677650f2ea938e8b28f",
+    "shader_files": 577,
+    "validated": true
+  }
+}

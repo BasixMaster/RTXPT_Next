@@ -1,27 +1,34 @@
 # Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap
 
-Final accepted basis, checked2026-10-28: **RTXPT1.9 renderer and its original scene assets.** The repository is named RTXPT_Next. B0 retains its original RTXDI3.0 runtime. B1 adopts runtime3.1 for the existing DI/GI passes. `External/RTXDI-SDK` remains reference-only.
+User-confirmed numbering, 2026-10-29: **B0 is unchanged RTXPT 1.9 with its original defaults, renderer/dependency pins and scene assets.** The repository is RTXPT_Next. Read the [canonical B0–B10 mapping](VERSION_MAPPING.md); legacy files/tags/data IDs keep their earlier names and numeric results. `External/RTXDI-SDK` remains reference-only.
 
 | Version | Short algorithm overview | Current status |
 |---|---|---|
-| RTXPT1.9 baseline (B0 alias) | RTXPT native PT + RTXDI 3.0 DI/GI | Exact upstream renderer303b408, runtimea14e079 and Assets a56be4e; preserved baseline |
-| B1 | RTXPT native PT + RTXDI 3.1 DI/GI | Migration implemented at `7010bb4`; [B1 results](B1_RESULTS.md) |
-| B2 | RTXPT + ReSTIR DI + ReSTIR PT; GI is an alternative indirect mode | Static opaque checkpoint at `de9fe651`; broader validation pending, not promoted |
-| B3 | B2 DI + ReSTIR PT + footprint/initial-only roulette | Scoped activation checkpoint; wider scene validation remains pending |
-| B4 | Remaining PT++ estimator and scheduling techniques | Starts after B3 is preserved; individual oracles and ablations before a combined preset |
+| B0 | Unchanged RTXPT 1.9 reference | Original defaults and source303b408/runtimea14e079/Assets a56be4e preserved |
+| B1 | Native PT + DI 3.0; GI off | New matched native-DI benchmark needed |
+| B2 | Native PT + DI 3.0 + GI 3.0 | Historical original-scene observations; cap coverage unverified |
+| B3 | Native PT / runtime 3.1; DI/GI off | Raw native-control observation exists |
+| B4 | Native PT + DI 3.1; GI off | New matched native-DI benchmark needed |
+| B5 | Native PT + DI 3.1 + GI 3.1 | Historical original-scene observations; cap coverage unverified |
+| B6 | ReSTIR PT; DI/GI off | Mode available; extended validation pending |
+| B7 | ReSTIR PT + DI 3.1; GI off | Scoped opaque checkpoint `de9fe651`; wider material/scene validation pending |
+| B8 | ReSTIR PT + DI 3.1 + GI 3.1 | Planned valid sharing partition/MIS; overlapping estimates cannot simply be added |
+| B9 | B8 + limited PT++ | Planned after B8; existing GI-off pilot is a B7 ablation, not B9 |
+| B10 | B8 + full remaining PT++ | Authorized future work; independent oracles and feature ablations before combination |
 
-These labels describe available paths; every result also states the actual active configuration. Historical Convergence/Kitchen B0/B1 tests used DI + GI. The current opaque-room controls use B0/B1 native PT with DI/GI off versus B2 DI + ReSTIR PT, GI off. Read the [algorithm overview and extended scene policy](ALGORITHM_VARIANTS.md) before comparing them. The branch `baseline/rtxpt-1.9` and tag `rtxpt-1.9-baseline` point to the exact upstream baseline, distinct from documentation commits on main. Do not benchmark a moving main branch as an unnamed baseline.
+Every result states its actual algorithm, settings and source identity. Historical old-B0/old-B1 Convergence/Kitchen DI+GI rows map to B2/B5. The old opaque-room comparison maps to a separately labelled B0 native-control raw preset, B3 native control and B7 DI+PT. Its DI-off 0.806 ms row is not the missing B4 native-DI comparator. Prioritize B1/B4 matched benchmarks and measured equal-time sample sweeps. The branch `baseline/rtxpt-1.9` and tag `rtxpt-1.9-baseline` retain exact upstream source; a moving main branch is not an unnamed baseline.
 
 ## Start here
 
-- [B0–B4 algorithm overview and mandatory scene coverage](ALGORITHM_VARIANTS.md)
-- [Corrected B2 comparison and limitations](B2_RESULTS.md)
-- [B3 measured activation results](B3_RESULTS.md)
-- [B3 PT++ activation and ablation status](B3_IMPLEMENTATION.md)
-- [B4 remaining PT++ implementation gates](B4_IMPLEMENTATION.md)
+- [Canonical B0–B10 mapping and preserved legacy crosswalk](VERSION_MAPPING.md)
+- [Algorithm overview and mandatory scene coverage](ALGORITHM_VARIANTS.md)
+- [B7 opaque checkpoint: retained legacy B2 report](B2_RESULTS.md)
+- [B7 limited-feature ablation: retained legacy B3 report](B3_RESULTS.md)
+- [Legacy limited PT++ activation implementation](B3_IMPLEMENTATION.md)
+- [B10 remaining PT++ gates: retained legacy B4 filename](B4_IMPLEMENTATION.md)
 - [NVIDIA engineering whitepapers and next profiling steps](NVIDIA_WHITEPAPERS.md)
-- [First B1 results and limitations](B1_RESULTS.md)
-- [B2 integration and B3 PT++ implementation status](B2_IMPLEMENTATION.md)
+- [Historical B2/B5 DI+GI comparison: retained legacy B1 report](B1_RESULTS.md)
+- [Legacy PT bridge implementation history, now B6/B7 foundation](B2_IMPLEMENTATION.md)
 - [Implementation roadmap](ROADMAP.md)
 - [Version comparison and capture protocol](BENCHMARK_VERSIONS.md)
 - [Image quality metrics](QUALITY_METRICS.md)
@@ -33,10 +40,13 @@ These labels describe available paths; every result also states the actual activ
 
 ## Summary and lessons learned
 
-RTXDI is sampling machinery; RTXPT is a renderer consuming it. RTXPT1.9 uses RTXDI3.0, while the linked SDK3.1 reference implements only part of PT++. B1 aligns the existing DI/GI APIs; it does not activate new PT capabilities. B2 integrates the ReSTIR PT path; B3 exposes and extends PT++ one mechanism at a time. The RTXDI3.1 PT baseline already inherits some PT++ machinery, which is recorded rather than counted as a new B3 gain. Preserve source pins, scene/camera identity and reference settings across every comparison. Report quality, complete-frame time and VRAM together. Reported paper gains are not measurements of this project.
+RTXDI is sampling machinery; RTXPT is the renderer. Canonical IDs now distinguish runtime3.0/3.1, actual DI/GI/PT modes and PT++ scope. B8 sharing must be correct before B9/B10 can claim it. Runtime3.1 already contains some PT++ machinery; record it as inherited. Preserve original scenes, source/settings identity and B0 defaults, and report quality, complete-frame timing, convergence and memory together. Paper speedups and historical DI-off controls do not replace matched native-DI/equal-time comparisons.
 
 
 ## Documentation changes
 
+- 2026-10-29: Adopted canonical B0–B10 IDs with a legacy crosswalk; preserved all historical refs and numerical results.
 - 2026-10-28: Added short algorithm labels for each variant and required original Convergence/Kitchen plus controlled-scene comparisons; B3 development started without a performance claim.
 - 2026-10-28: Shared image preview opens pictures in place, supports keyboard activation, and closes with Escape or Close while restoring focus. The central HTML template and Documenter guidance share the same behavior.
+
+Canonical update2026-10-29: [B1/B4 native-DI quality and timing exclusions](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures. No new throughput result is accepted.

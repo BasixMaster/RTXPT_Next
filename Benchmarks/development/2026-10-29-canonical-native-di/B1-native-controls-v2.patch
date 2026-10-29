@@ -1,0 +1,192 @@
+diff --git a/Rtxpt/Sample.cpp b/Rtxpt/Sample.cpp
+index af1e20a..75ad4bd 100644
+--- a/Rtxpt/Sample.cpp
++++ b/Rtxpt/Sample.cpp
+@@ -41,6 +41,18 @@
+ 
+ #include "Lighting/Distant/EnvMapImportanceSamplingBaker.h"
+ #include "Materials/MaterialsBaker.h"
++#include <stdexcept>
++#include <cstdio>
++
++// This additive host receipt is compiled only in separately identified
++// benchmark-controls-v2 builds. The build driver verifies and supplies both
++// Git pins; runtime pin text is provenance, not a runtime Git discovery.
++#if !defined(RTXPT_BENCHMARK_ROOT_PIN) || !defined(RTXPT_BENCHMARK_RUNTIME_PIN)
++#error benchmark-controls-v2 requires verified root and runtime compile-time pins
++#endif
++#define RTXPT_BENCHMARK_STRINGIZE_INNER(value) #value
++#define RTXPT_BENCHMARK_STRINGIZE(value) RTXPT_BENCHMARK_STRINGIZE_INNER(value)
++
+ 
+ #include "OpacityMicroMap/OmmBaker.h"
+ 
+@@ -207,6 +219,14 @@ void Sample::DebugDrawLine( float3 start, float3 stop, float4 col1, float4 col2
+ // but we log it - a silent fallback to an unrelated scene is exactly what makes a mistyped --scene hard to diagnose.
+ static std::string FindPreferredSceneCaseInsensitive(const std::vector<std::string>& available, const std::string& preferred)
+ {
++    // Explicit benchmark scenes live outside the unchanged upstream Assets pin.
++    const std::filesystem::path explicitScene(preferred);
++    if (explicitScene.is_absolute())
++    {
++        if (!std::filesystem::is_regular_file(explicitScene) || explicitScene.extension() != ".json")
++            throw std::runtime_error("Explicit scene file does not exist: " + preferred);
++        return explicitScene.lexically_normal().string();
++    }
+     if (available.empty())
+         return "";
+ 
+@@ -918,6 +938,12 @@ void Sample::SceneLoaded( )
+ 
+     ApplyPerformancePreset(m_ui, 2, (GetOMMBaker()!=nullptr)?(GetOMMBaker().get()):(nullptr) ); // 2 is the "Balanced"
+ 
++    // Apply explicit benchmark controls after the scene and quality preset.
++    if (m_cmdLine.OverrideMaxBounces >= 0)
++        m_ui.BounceCount = dm::clamp(m_cmdLine.OverrideMaxBounces, 1, 32);
++    if (m_cmdLine.OverrideMaxDiffuseBounces >= 0)
++        m_ui.DiffuseBounceCount = dm::clamp(m_cmdLine.OverrideMaxDiffuseBounces, 0, 32);
++
+     // after the preset, which sets it too
+     if (m_cmdLine.OverrideSubSamplingMode >= 0)
+         m_ui.RealtimeSubSamplingMode = dm::clamp(m_cmdLine.OverrideSubSamplingMode, 0, 3);
+@@ -2295,6 +2321,24 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
+     constants.NEECandidateSamples               = m_ui.NEECandidateSamples;
+     constants.NEEFullSamples                    = m_ui.NEEFullSamples;
+ 
++    // Report the actual host predicates and constants used to compile/select
++    // native/DI/GI transport. ReSTIR PT does not exist in these source baselines.
++    if ((m_frameIndex & 0xFFFFFFFF) == 0)
++    {
++        std::printf("TRANSPORT_CONTRACT di=%d gi=%d pt=0 diMode=%u neeMIS=%d maxBounces=%d maxDiffuseBounces=%d\n",
++            int(constants.useReSTIRDI), int(constants.useReSTIRGI),
++            unsigned(m_ui.RTXDI.restirDI.resamplingMode), m_ui.NEEMISType,
++            constants.bounceCount, constants.diffuseBounceCount);
++        std::printf("NATIVE_CONTROLS_CONTRACT revision=2 root=%s runtime=%s nee=%d neeType=%d approximateMIS=%d realtime=%d width=%u height=%u spp=%u envEnabled=%d envIntensity=%.9g\n",
++            RTXPT_BENCHMARK_STRINGIZE(RTXPT_BENCHMARK_ROOT_PIN),
++            RTXPT_BENCHMARK_STRINGIZE(RTXPT_BENCHMARK_RUNTIME_PIN),
++            int(constants.NEEEnabled), int(constants.NEEType), int(m_ui.ActualUseApproximateMIS()),
++            int(m_ui.RealtimeMode), unsigned(constants.imageWidth), unsigned(constants.imageHeight),
++            unsigned(m_ui.ActualSamplesPerPixel()), int(m_ui.EnvironmentMapParams.Enabled),
++            double(m_ui.EnvironmentMapParams.Intensity));
++        std::fflush(stdout);
++    }
++
+     constants.EnvironmentMapDiffuseSampleMIPLevel = m_ui.EnvironmentMapDiffuseSampleMIPLevel;
+ 
+ #if RTXPT_STOCHASTIC_TEXTURE_FILTERING_ENABLE
+@@ -2336,7 +2380,7 @@ bool Sample::ShouldRenderUnfocused()
+         return true;
+     }
+ 
+-    if (m_ui.RenderWhenOutOfFocus)
++    if (m_ui.BenchmarkUncapped || m_ui.RenderWhenOutOfFocus)
+     {
+         return true;
+     }
+@@ -2352,7 +2396,7 @@ void Sample::StreamlinePreRender()
+     {
+         auto reflexConsts = donut::app::StreamlineInterface::ReflexOptions{};
+         reflexConsts.mode = (donut::app::StreamlineInterface::ReflexMode) m_ui.ActualReflexMode();
+-        reflexConsts.frameLimitUs = m_ui.ReflexCappedFps == 0 ? 0 : int(1000000. / m_ui.ReflexCappedFps);
++        reflexConsts.frameLimitUs = (m_ui.BenchmarkUncapped || m_ui.ReflexCappedFps == 0) ? 0 : int(1000000. / m_ui.ReflexCappedFps);
+         reflexConsts.useMarkersToOptimize = true;
+         reflexConsts.virtualKey = VK_F13;
+         reflexConsts.idThread = 0; // std::hash<std::thread::id>()(std::this_thread::get_id())
+@@ -2721,6 +2765,18 @@ void Sample::Render(nvrhi::IFramebuffer* framebuffer)
+     PreRender();
+     RAII_SCOPE( ;, PostRender(); );     // ensure PostRender is called in case of any early out!
+ 
++    if (m_ui.BenchmarkUncapped && m_frameIndex == 0)
++    {
++        int reflexMode = 0, frameGeneration = 0;
++#if DONUT_WITH_STREAMLINE
++        reflexMode = m_ui.ActualReflexMode();
++        frameGeneration = int(m_ui.ActualDLSSFGMode());
++#endif
++        std::printf("BENCHMARK_CONTROL_ADAPTER vsync=%d fpsLimiter=%d reflexCap=0 reflexMode=%d frameGeneration=%d renderUnfocused=1 maxBounces=%d maxDiffuseBounces=%d\n",
++            int(m_ui.ActualEnableVsync()), m_ui.ActualFPSLimiter(), reflexMode, frameGeneration,
++            m_ui.BounceCount, m_ui.DiffuseBounceCount);
++        std::fflush(stdout);
++    }
+     StreamlinePreRender();
+ 
+  
+diff --git a/Rtxpt/SampleCommon/CommandLine.cpp b/Rtxpt/SampleCommon/CommandLine.cpp
+index d5db369..c4333db 100644
+--- a/Rtxpt/SampleCommon/CommandLine.cpp
++++ b/Rtxpt/SampleCommon/CommandLine.cpp
+@@ -54,6 +54,9 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
+             ("NEEType", "Set NEE type: 0 - uniform sampling; 1 - power-based sampling, 2 (default) - NEE-AT", value(NEEType))
+             ("useReSTIRDI", "Enable/disable ReSTIR DI", value(UseReSTIRDI))
+             ("useReSTIRGI", "Enable/disable ReSTIR GI", value(UseReSTIRGI))
++            ("maxBounces", "Benchmark control: override total bounce cap (1..32)", value(OverrideMaxBounces))
++            ("maxDiffuseBounces", "Benchmark control: override diffuse bounce cap (0..32)", value(OverrideMaxDiffuseBounces))
++            ("benchmarkUncapped", "Benchmark control: app VSync/FPS/Reflex caps and frame generation off; render unfocused; external caps need separate audit", value(BenchmarkUncapped))
+             ("realtimeSamplesPerPixel", "Number of spp in realtime mode",     value(RealtimeSamplesPerPixel))
+             ("referenceSamplesPerPixel", "Number of spp in reference mode", value(ReferenceSamplesPerPixel))
+             ("standaloneDenoiser", "Enable/disable standalone denoiser active when DLSS-RR not enabled (on by default)", value(StandaloneDenoiser))
+diff --git a/Rtxpt/SampleCommon/CommandLine.h b/Rtxpt/SampleCommon/CommandLine.h
+index 04a1f82..c5367d1 100644
+--- a/Rtxpt/SampleCommon/CommandLine.h
++++ b/Rtxpt/SampleCommon/CommandLine.h
+@@ -45,6 +45,9 @@ struct CommandLineOptions
+     int  NEEType                    = 2;
+     int  UseReSTIRDI                = false;
+     int  UseReSTIRGI                = true;
++    bool BenchmarkUncapped         = false;
++    int OverrideMaxBounces         = -1;
++    int OverrideMaxDiffuseBounces  = -1;
+     int  RealtimeSamplesPerPixel    = 1;
+     int  ReferenceSamplesPerPixel   = 4096;
+     int  StandaloneDenoiser         = true;
+diff --git a/Rtxpt/SampleUI.cpp b/Rtxpt/SampleUI.cpp
+index a5f5162..16ae119 100644
+--- a/Rtxpt/SampleUI.cpp
++++ b/Rtxpt/SampleUI.cpp
+@@ -181,6 +181,13 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
+     m_ui.NEEType                    = cmdLine.NEEType;
+     m_ui.UseReSTIRDI                = cmdLine.UseReSTIRDI != 0;
+     m_ui.UseReSTIRGI                = cmdLine.UseReSTIRGI != 0;
++    m_ui.BenchmarkUncapped          = cmdLine.BenchmarkUncapped;
++    if (m_ui.BenchmarkUncapped)
++    {
++        m_ui.EnableVsync = false;
++        m_ui.FPSLimiter = 0;
++        m_ui.RenderWhenOutOfFocus = true;
++    }
+     m_ui.RealtimeSamplesPerPixel    = cmdLine.RealtimeSamplesPerPixel;
+     m_ui.AccumulationTarget         = cmdLine.ReferenceSamplesPerPixel;
+     m_ui.StandaloneDenoiser         = cmdLine.StandaloneDenoiser != 0;
+diff --git a/Rtxpt/SampleUI.h b/Rtxpt/SampleUI.h
+index 5c22b95..fe25a64 100644
+--- a/Rtxpt/SampleUI.h
++++ b/Rtxpt/SampleUI.h
+@@ -174,14 +174,14 @@ struct SampleUIData
+     int                                 ActualRadianceCacheMode() const { return (RealtimeMode)?RadianceCacheMode:0; }
+ 
+ #if DONUT_WITH_STREAMLINE
+-    int                                 ActualReflexMode() const { return (RealtimeMode && IsReflexSupported) ? ((ReflexMode == SI::ReflexMode::eOff && ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (SI::ReflexMode::eLowLatency) : (ReflexMode)) : (SI::ReflexMode::eOff); }
+-    SI::DLSSGMode                       ActualDLSSFGMode() const { return (RealtimeMode && IsDLSSFGSupported) ? (DLSSFGMode) : (SI::DLSSGMode::eOff); }
++    int                                 ActualReflexMode() const { return (!BenchmarkUncapped && RealtimeMode && IsReflexSupported) ? ((ReflexMode == SI::ReflexMode::eOff && ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (SI::ReflexMode::eLowLatency) : (ReflexMode)) : (SI::ReflexMode::eOff); }
++    SI::DLSSGMode                       ActualDLSSFGMode() const { return (!BenchmarkUncapped && RealtimeMode && IsDLSSFGSupported) ? (DLSSFGMode) : (SI::DLSSGMode::eOff); }
+ 
+-    bool                                ActualEnableVsync() const { return (ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (false) : (EnableVsync); }
+-    int                                 ActualFPSLimiter() const { return (ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (0) : (FPSLimiter); }
++    bool                                ActualEnableVsync() const { return (ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (false) : (!BenchmarkUncapped && EnableVsync); }
++    int                                 ActualFPSLimiter() const { return (ActualDLSSFGMode() != SI::DLSSGMode::eOff) ? (0) : (BenchmarkUncapped ? 0 : FPSLimiter); }
+ #else
+-    bool                                ActualEnableVsync() const { return EnableVsync; }
+-    int                                 ActualFPSLimiter() const { return FPSLimiter; }
++    bool                                ActualEnableVsync() const { return !BenchmarkUncapped && EnableVsync; }
++    int                                 ActualFPSLimiter() const { return BenchmarkUncapped ? 0 : FPSLimiter; }
+ #endif
+ 
+     bool                                ActualUseApproximateMIS() const { return (RealtimeMode)?(NEEMISType!=0):(NEEMISType==2); }
+@@ -191,6 +191,7 @@ struct SampleUIData
+     int                                 ActualDenoisingLayersActiveCount() const { return DenoisingLayersActiveCount; }
+ 
+ 
++    bool                                BenchmarkUncapped                       = false;
+     bool                                ShowUI                                  = true;
+     int                                 FPSLimiter                              = 0; // 0 - no limit, otherwise limit fps to FPSLimiter and fix scene update deltaTime to 1./FPSLimiter
+     bool                                RenderWhenOutOfFocus                    = false; // if window is out of focus window render loop is paused

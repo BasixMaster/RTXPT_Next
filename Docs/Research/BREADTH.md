@@ -1,6 +1,6 @@
 # Wyman recent-paper breadth review
 
-Ranks 6, 8, 9, 11–20 in Wyman conference/journal list; other seven covered separately. Final integration basis: RTXPT_Next has RTXPT 1.9 at the repository root, with its Assets scenes and existing RTXDI 3.0 integration as B0. B1 is the implemented RTXDI3.1 DI/GI runtime/API migration; see [first results](B1_RESULTS.md); B2+ are future independently pinned optimization versions. Priorities below remain research proposals; the migration-only GPU comparison is documented separately.
+Ranks 6, 8, 9, 11–20 in the Wyman conference/journal list, checked 2026-10-28; seven focus papers are covered separately. Current project labels follow [canonical B0–B10](VERSION_MAPPING.md): B0 is unchanged RTXPT1.9 defaults/pins; legacy migration7010bb4 is not canonical B1. Historical native DI+GI runtime3.0/3.1 observations map to B2/B5, with cap coverage unverified. The app-owned PT foundation is B6/B7; B8 sharing and B9/B10 features require their own validation. Priorities below remain research proposals, separate from the [retained migration measurements](B1_RESULTS.md) and later scoped PT pilots.
 
 Many cwyman PDFs exceed web extraction size limits. Full-text access is marked only for publisher HTML read; indexed excerpts/abstracts are labelled. No paper-algorithm reproduction was run in this breadth review.
 

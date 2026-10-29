@@ -1,4 +1,28 @@
-# Algorithm overview: B0, B1, B2, B3 and B4
+# Algorithm overview: canonical B0–B10
+
+**Current numbering:** use [the canonical mapping and legacy crosswalk](VERSION_MAPPING.md). B0 retains unchanged RTXPT 1.9 defaults and pins; it is not defined by the raw native-only control.
+
+| ID | Short algorithm overview | Active modes / gate |
+|---|---|---|
+| B0 | Unchanged RTXPT 1.9 reference | Original defaults and pins. |
+| B1 | Native PT + DI 3.0 | GI/ReSTIR PT off; quality captured; matched throughput pending. |
+| B2 | Native PT + DI 3.0 + GI 3.0 | ReSTIR PT off; historical cap-unverified observations. |
+| B3 | Native PT / runtime 3.1 | DI/GI/ReSTIR PT off. |
+| B4 | Native PT + DI 3.1 | GI/ReSTIR PT off; quality captured; matched throughput pending. |
+| B5 | Native PT + DI 3.1 + GI 3.1 | ReSTIR PT off; historical cap-unverified observations. |
+| B6 | ReSTIR PT | DI/GI off; native direct/fallback ownership remains explicit. |
+| B7 | ReSTIR PT + DI 3.1 | GI off; measured static opaque checkpoint. |
+| B8 | ReSTIR PT + DI 3.1 + GI 3.1 | Planned; requires valid GI/PT partition or MIS. |
+| B9 | B8 + limited PT++ | Planned footprint/initial-only roulette after B8 sharing. |
+| B10 | B8 + full remaining PT++ | Authorized future work, independently validated. |
+
+Prioritize fresh B1/B4 native-DI comparisons. The 0.803 ms control is a B0 native-control raw preset, separate from original defaults; the 0.806 ms migrated native control is B3 with DI/GI off. The old-B2 checkpoint `de9fe651` maps to B7. The old-B3 pilot `a7428c8` maps to B7 plus limited ablations, **not B9**. Stored refs/data IDs and numbers are preserved.
+
+The original ReSTIR PT paper's §9.3 adjusted sample counts for approximately equal time; the current fixed-1spp room pilot is not that comparison. Keep equal-time/quality sweeps pending until measured. Existing runtime PT++ mechanisms are inherited, not newly counted as B9 gains.
+
+## Legacy numbering appendix
+
+The following retained overview and scene requirements were written under the previous IDs. Interpret every B1–B4 occurrence in this appendix through [VERSION_MAPPING.md](VERSION_MAPPING.md); it is not a second current version definition. Required original-scene identities and missing-coverage statements remain applicable to their mapped algorithms.
 
 Version identifies the code; the algorithm label identifies the rendering configuration used in a particular result. Always show both. RTXPT supplies the renderer, materials and native path tracer; ReSTIR DI, GI and PT are selectable sampling paths within it.
 
@@ -42,3 +66,5 @@ The version name alone did not explain which estimator ran. The algorithm label 
 ## Documentation changes
 
 - 2026-10-28: Added per-variant algorithm labels and mandatory Convergence/Kitchen/opaque-room coverage for new comparisons.
+
+Canonical update2026-10-29: [B1/B4 native-DI quality and timing exclusions](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures. No new throughput result is accepted.

@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+  "updated_on": "2026-10-29",
+  "experiments": [
+    {
+      "id": "B0",
+      "status": "preserved_reference",
+      "algorithm": "Unchanged RTXPT v1.9 reference: original defaults and dependencies"
+    },
+    {
+      "id": "B1",
+      "status": "quality_measured_timing_pending",
+      "algorithm": "v1.9 native PT + ReSTIR DI3.0; GI off",
+      "evidence": "Benchmarks/development/2026-10-29-canonical-native-di"
+    },
+    {
+      "id": "B2",
+      "status": "pending_matched_benchmark",
+      "algorithm": "v1.9 native PT + ReSTIR DI3.0 + ReSTIR GI3.0"
+    },
+    {
+      "id": "B3",
+      "status": "measured_native_control",
+      "algorithm": "Native PT with RTXDI3.1 linked; DI/GI off"
+    },
+    {
+      "id": "B4",
+      "status": "quality_measured_timing_pending",
+      "algorithm": "Native PT + ReSTIR DI3.1; GI off",
+      "evidence": "Benchmarks/development/2026-10-29-canonical-native-di"
+    },
+    {
+      "id": "B5",
+      "status": "pending_matched_benchmark",
+      "algorithm": "Native PT + ReSTIR DI3.1 + ReSTIR GI3.1"
+    },
+    {
+      "id": "B6",
+      "status": "quality_diagnostic_only",
+      "algorithm": "ReSTIR PT; DI/GI off"
+    },
+    {
+      "id": "B7",
+      "status": "measured_static_opaque",
+      "algorithm": "ReSTIR PT + ReSTIR DI3.1; GI off"
+    },
+    {
+      "id": "B8",
+      "status": "planned_partition_not_implemented",
+      "algorithm": "ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1"
+    },
+    {
+      "id": "B9",
+      "status": "planned",
+      "algorithm": "B8 + limited PT++"
+    },
+    {
+      "id": "B10",
+      "status": "planned",
+      "algorithm": "B8 + full PT++"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "canonical-B0-B10-confirmed",
+      "date": "2026-10-29",
+      "reason": "User confirmed source/configuration separation; preserve all legacy refs/data and run new experiments accordingly"
+    },
+    {
+      "id": "native-di-quality-completed",
+      "date": "2026-10-29",
+      "variants": [
+        "B1",
+        "B4"
+      ],
+      "reason": "12 original Convergence/Kitchen captures passed effective-mode and artifact checks; no PresentMon trace in two attempts; restored profiles, timing waits for interactive display availability",
+      "evidence": "Benchmarks/development/2026-10-29-canonical-native-di"
+    }
+  ]
+}

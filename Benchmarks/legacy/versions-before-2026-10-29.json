@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "updated_on": "2026-10-28",
+  "repository": "BasixMaster/RTXPT_Next",
+  "versions": [
+    {
+      "id": "RTXPT-1.9",
+      "alias": "B0",
+      "status": "measured_initial_two_scene",
+      "ref": "rtxpt-1.9-baseline",
+      "source_sha": "303b408ab81790a5051abd7573830b7a4112eb8e",
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6",
+      "cap_coverage": "historical_unverified",
+      "algorithm_overview": "RTXPT native PT + RTXDI3.0 DI/GI available"
+    },
+    {
+      "id": "B1",
+      "status": "implemented_measured_initial_two_scene",
+      "ref": "B1",
+      "source_sha": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
+      "scope": "RTXDI3.1 runtime/API migration only; existing DI/GI, no ReSTIR PT/CGNS activation",
+      "rtxdi_target_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "cap_coverage": "historical_unverified",
+      "algorithm_overview": "RTXPT native PT + RTXDI3.1 DI/GI available"
+    },
+    {
+      "id": "B2",
+      "status": "in_progress",
+      "ref": null,
+      "source_sha": null,
+      "scope": "Integrate the RTXDI3.1 ReSTIR PT path into RTXPT with selectable DI/GI modes and explicit non-overlapping contribution ownership; not a pure2022 algorithm replica",
+      "development_branch": "b2/restir-pt-integration",
+      "measured_checkpoint": "2026-10-28-b2-static-opaque",
+      "algorithm_overview": "RTXPT + ReSTIR DI + ReSTIR PT; GI alternative indirect estimator",
+      "development_checkpoint_sha": "de9fe651903f203327830e7361ac4237e00d508c"
+    },
+    {
+      "id": "B3",
+      "status": "in_progress",
+      "ref": null,
+      "source_sha": null,
+      "scope": "PT++ footprint/inverse-footprint activation and initial-generation-only roulette, individually ablated against preserved B2 policy; remaining mechanisms assigned to B4",
+      "algorithm_overview": "B2 DI + ReSTIR PT + isolated PT++ activations",
+      "development_branch": "b3/ptpp-activation",
+      "first_ablation_scope": "Footprint reconnection and initial-generation-only roulette; replay roulette off. Implementation/validation in progress; no B3 performance claim.",
+      "measured_checkpoint": "2026-10-28-b3-activation",
+      "report": "Docs/Research/B3_RESULTS.md"
+    },
+    {
+      "id": "B4",
+      "status": "planned",
+      "ref": null,
+      "source_sha": null,
+      "scope": "Remaining PT++: explicit replay compaction, reciprocal paired reuse, unified direct/indirect PT reservoirs, duplication/history reduction, vector-weight shading, dual-motion disocclusion recovery and auditable remaining micro-optimizations"
+    }
+  ],
+  "comparison_pairs": [
+    [
+      "RTXPT-1.9",
+      "B1"
+    ],
+    [
+      "B1",
+      "B2"
+    ],
+    [
+      "RTXPT-1.9",
+      "B2"
+    ],
+    [
+      "B2",
+      "B3"
+    ],
+    [
+      "RTXPT-1.9",
+      "B3"
+    ],
+    [
+      "B1",
+      "B3"
+    ],
+    [
+      "B3",
+      "B4"
+    ],
+    [
+      "B2",
+      "B4"
+    ],
+    [
+      "B1",
+      "B4"
+    ],
+    [
+      "RTXPT-1.9",
+      "B4"
+    ]
+  ],
+  "required_metrics": [
+    "raw HDR MAPE/SMAPE/RelMSE conventions",
+    "HDR-FLIP and reconstructed FLIP",
+    "temporal covariance/correlation",
+    "ROI disocclusion error and recovery",
+    "complete GPU frame median/p95",
+    "VRAM resident/peak",
+    "quality versus frames/samples/time convergence curves with startup/history-reset coverage"
+  ],
+  "results": [
+    {
+      "id": "2026-10-28-b1",
+      "status": "measured",
+      "report": "Docs/Research/B1_RESULTS.md",
+      "path": "Benchmarks/results/2026-10-28-b1",
+      "scenes": [
+        "convergence",
+        "kitchen"
+      ],
+      "hardware": "RTX4090",
+      "resolution": [
+        1280,
+        720
+      ],
+      "timing_scope": "PresentMon process GPUBusy; not exclusive DI/GI",
+      "quality_scope": "Display PNG against finite4096spp reference; no independent-seed guarantee",
+      "conclusion": "Initial migration comparison; no general speedup or equal-quality performance claim.",
+      "cap_coverage": "historical_unverified",
+      "cap_audit_note": "Later RTSS audit found current232FPS global cap; original run-time RTSS state unrecorded. Historical observations remain exploratory, not verified uncapped throughput."
+    },
+    {
+      "id": "2026-10-28-b2-static-opaque",
+      "status": "measured_development_not_promoted",
+      "report": "Docs/Research/B2_RESULTS.md",
+      "path": "Benchmarks/development/2026-10-28-b2-static-opaque",
+      "scenes": [
+        "owned-opaque-room"
+      ],
+      "hardware": "RTX4090",
+      "resolution": [
+        640,
+        360
+      ],
+      "timing_scope": "Three processes/configuration; PresentMon target-process GPUBusy; native B0/B1 controls versus B2 strict DI+PT",
+      "quality_scope": "Common display LDR-FLIP; B2-only eight-seed raw HDR/HDR-FLIP versus finite8192spp reference",
+      "cap_coverage": "verified_app_NVIDIA_RTSS_boundaries; other external limiters unknown",
+      "conclusion": "Higher observed steady-state quality at higher per-frame GPU-busy cost in one static scene; no equal-quality speedup or promotion."
+    },
+    {
+      "id": "2026-10-28-b3-activation",
+      "status": "measured_development_not_promoted",
+      "report": "Docs/Research/B3_RESULTS.md",
+      "path": "Benchmarks/development/2026-10-28-b3-activation",
+      "scenes": [
+        "owned-opaque-room"
+      ],
+      "required_scene_coverage": "Original Convergence/Kitchen unsupported; mandatory rows retained",
+      "hardware": "RTX4090",
+      "resolution": [
+        640,
+        360
+      ],
+      "timing_scope": "Four same-executable settings,3processrepeats each,orderrotated; processGPUBusy notfullGPUlatency",
+      "quality_scope": "60three-seedrawHDR/historycaptures +12commonLDRscores; finite8192reference",
+      "cap_coverage": "Verified app/NVIDIA/RTSS boundaries; other external limiters unknown",
+      "conclusion": "Footprint/roulette increased cost and error in this scene; B2 policy remains default; remaining PT++ assigned to B4"
+    }
+  ],
+  "required_scene_matrix": [
+    {
+      "original_max_bounces": 14,
+      "sha256": "c3afaa933c5084ba04f8e5100b64bb8b488ab312f4042849705a15e5bf5af549",
+      "exposure": 0,
+      "original_max_diffuse_bounces": 2,
+      "id": "convergence",
+      "original_resolution": [
+        1280,
+        720
+      ],
+      "scene": "Assets/convergence-test.scene.json"
+    },
+    {
+      "original_max_bounces": 14,
+      "sha256": "2af5735fb02fc01badd83671641d54b7f1c69859c8c9bcdf335ca95d9daae552",
+      "exposure": 2,
+      "original_max_diffuse_bounces": 2,
+      "id": "kitchen",
+      "original_resolution": [
+        1280,
+        720
+      ],
+      "scene": "Assets/kitchen-with-test-stuff.scene.json"
+    },
+    {
+      "scope": "Controlled static opaque fixture; not a substitute for original Convergence/Kitchen",
+      "id": "owned-opaque-room",
+      "scene": "Testing/B2/Scenes/opaque-room.scene.json"
+    }
+  ],
+  "comparison_policy": {
+    "matrix": "Benchmarks/comparison-matrix.json",
+    "required_scenes": [
+      "convergence",
+      "kitchen",
+      "opaque-room"
+    ],
+    "required_labels": [
+      "version and source identity",
+      "actual DI/GI/PT configuration",
+      "scope and missing/unsupported coverage"
+    ],
+    "history_settling": "Required with actual warmup receipts; distinguish from sample accumulation and equal-time convergence",
+    "original_transport": "1280x720, Convergence exposure0 / Kitchen-with-test-stuff exposure2, Balanced14/2; no material substitution"
+  }
+}

@@ -63,5 +63,7 @@
     "Original scenes and equal-quality time/temporal/reconstruction/memory coverage still required"
   ],
   "checkpoint_status": "measured_static_opaque",
-  "measured_executable_sha256": "983fa394077d5cf6ca10cc6a60aa783eed1f6b07c9a0f5159b20dedd5b8f233f"
+  "measured_executable_sha256": "983fa394077d5cf6ca10cc6a60aa783eed1f6b07c9a0f5159b20dedd5b8f233f",
+  "numbering_scheme": "legacy-before-2026-10-29",
+  "canonical_mapping": "See Benchmarks/versions.json and Docs/Research/VERSION_MAPPING.md; historical milestone IDs retained"
 }

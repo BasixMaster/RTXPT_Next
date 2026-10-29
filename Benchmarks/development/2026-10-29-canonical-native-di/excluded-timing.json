@@ -1,0 +1,24 @@
+{
+  "accepted_timing_runs": 0,
+  "attempts": [
+    {
+      "attempt": "first",
+      "status": "excluded_missing_presentation_trace",
+      "presentmon_exit_code": 0,
+      "csv_present": false,
+      "recorded_renderer_frames": true,
+      "restoration_verified": true,
+      "reason": "No CSV despite completed internal frames; presentation/cap observation unavailable. Desktop capture also unavailable and LogonUI observed; locked desktop suspected, not proven."
+    },
+    {
+      "attempt": "exact-retry",
+      "status": "excluded_missing_presentation_trace",
+      "presentmon_exit_code": 0,
+      "csv_present": false,
+      "recorded_renderer_frames": true,
+      "restoration_verified": true,
+      "reason": "No CSV despite completed internal frames; presentation/cap observation unavailable. Desktop capture also unavailable and LogonUI observed; locked desktop suspected, not proven."
+    }
+  ],
+  "next_gate": "User restores an interactive display session; collect fresh unchanged-config traces."
+}

@@ -1,17 +1,24 @@
 # Version comparison protocol for Basix Pathtracing / RTXPT_Next
 
-This chapter defines the general comparison contract. The initial B1 migration and bounded capture/timing tools are now implemented; the first measured subset and its explicit gaps are in [B1 results](B1_RESULTS.md). The final repository basis is **RTXPT 1.9 at the root**, including its Assets scene repository. The current RTXDI 3.0 runtime integration is the baseline. B1 applies runtime3.1 to the existing DI/GI path; the separate optional SDK checkout remains a reference and does not establish PT integration.
+This chapter defines the general comparison contract under the user-confirmed canonical B0–B10 numbering. **B0 preserves unchanged RTXPT 1.9 original defaults and pins**, including Assets. Read [VERSION_MAPPING.md](VERSION_MAPPING.md) before using historical B1/B2/B3 filenames or refs: their legacy names and numerical evidence remain intact. The optional SDK checkout remains a reference and does not establish active features.
 
 ## Immutable experiment versions
 
 | ID | Exact source basis / planned scope | Comparison |
 | --- | --- | --- |
 | B0 | NVIDIA RTXPT 1.9 source commit `303b408ab81790a5051abd7573830b7a4112eb8e`, retained as tag `rtxpt-1.9-baseline` and branch `baseline/rtxpt-1.9`; existing `External/Rtxdi` gitlink `a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6`; Assets gitlink `a56be4ed65029d2733fd02f00f4027ffd541eda8` | Preserve original rendering behavior, feature defaults and binaries. |
-| B1 | `7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee`: RTXDI3.1 runtime/API update and necessary compatibility fixes; runtime `f12037fa8e97ebc08e9e3edfd2de528ed1772a4b` | B1 vs B0 isolates the version update. Merely adding `External/RTXDI-SDK` is insufficient. |
-| B2 | ReSTIR PT renderer integration in progress; select an immutable commit only after compilation/runtime validation | B2 vs B1; document already-shipped PT++ components to avoid counting them twice. |
-| B3 | PT++ activation and missing-mechanism implementations, individually ablated before a combined preset | Each vs its immediate parent and B0/B1; combination vs each constituent. Do not pool builds with different estimator settings. |
+| B1 | RTXPT1.9 native PT + DI3.0; GI/ReSTIR PT off | New matched native-DI comparator to B4. |
+| B2 | RTXPT1.9 native PT + DI3.0 + GI3.0 | Historical original-scene observations are cap-unverified; compare freshly with B5. |
+| B3 | Runtime3.1 native PT; DI/GI/ReSTIR PT off | Legacy migration source `7010bb4` provides this configuration; legacy tag `B1` is not canonical B1. |
+| B4 | Native PT + DI3.1; GI/ReSTIR PT off | New matched native-DI benchmark required; compare with B1 and B7. |
+| B5 | Native PT + DI3.1 + GI3.1 | Historical old-B1 DI+GI rows map here; fresh cap-verified comparison to B2 needed. |
+| B6 | ReSTIR PT; separate DI/GI off | Native direct/fallback contribution ownership remains explicit. |
+| B7 | ReSTIR PT + DI3.1; GI off | Old-B2 checkpoint `de9fe651` is scoped static opaque evidence. |
+| B8 | ReSTIR PT + DI3.1 + GI3.1 | Planned, requires validated disjoint partition or MIS. |
+| B9 | B8 + limited footprint/initial-only roulette | Planned after B8; legacy GI-off pilot is B7 ablation, not B9. |
+| B10 | B8 + full remaining PT++ | Authorized future work; inherited features and missing mechanisms separately evidenced. |
 
-The fork setup merge `c5b1569cf6eff2eb7fb85f1a47fc48722c254345` preserves prior remote history while switching the root to RTXPT; it is not NVIDIA's B0 source revision. Assign no invented SHA to a future version. Before each run, resolve full root/submodule SHAs, save clean/dirty status, compiler/CMake/DXC/SDK versions and configuration, and hash the executable, shader files and relevant DLLs. A version name or mutable branch is not an experiment identity. Preserve B0 and B1 executable bundles separately; this sample normally emits to `bin`, so sequential rebuilds can overwrite the comparison binary. Build configuration is Release for all performance comparisons; validation/debug runs are a separate result class.
+The fork setup merge `c5b1569cf6eff2eb7fb85f1a47fc48722c254345` preserves prior remote history while switching the root to RTXPT; it is not NVIDIA's B0 source revision. Legacy migration source/tag `B1` is `7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee`, runtime `f12037fa8e97ebc08e9e3edfd2de528ed1772a4b`; its actual mode maps to B3/B4/B5. Assign no invented SHA to a future variant. Before each run, resolve full root/submodule SHAs, clean/dirty status, compiler/CMake/DXC/SDK versions and settings, and hash executable, shaders and relevant DLLs. A name or mutable branch is not identity. Preserve every source/binary/settings control separately; builds normally emit to `bin`. Performance configuration is Release; debug validation is a separate class.
 
 ## Fixed scene and rendering contract
 
@@ -82,7 +89,7 @@ Use `perfLog` for attribution only. Add an external GPU timeline/profiler measur
 
 Use the paper-backed definitions and scope in [Quality metrics](QUALITY_METRICS.md) when selecting the final image/temporal metrics. Keep those source-specific metrics distinct from the general experiment controls below.
 
-1. **Equal configuration / equal spp:** B0 vs B1 isolates SDK integration changes; preserve DI/GI/PT mode names accurately. Verify image equivalence and mean before attributing performance. Preserve both default-product and isolated-sampling tracks as separate tables.
+1. **Equal configuration / equal spp:** B1 vs B4 matches native PT + DI across runtimes; B2 vs B5 matches native PT + DI/GI. B4 vs B7 contrasts native versus ReSTIR PT with DI3.1 available on both sides. Verify actual modes, mean and image behavior before attribution. Preserve unchanged B0-default and isolated raw tracks separately.
 2. **Equal time:** Sweep candidate/neighbor/sample counts in each version and compare error at matched complete GPU frame budgets. Do not compare one shader duration to a full reconstructed frame. Keep resolution, camera, reconstruction and bias settings identical.
 3. **Equal quality:** Plot complete frame cost against a preregistered error threshold; report interpolated time-to-threshold only between measured settings, with uncertainty. Declare unattained thresholds instead of extrapolating a speedup.
 4. **Raw / reconstructed:** Keep display PNG MSE/PSNR and FLIP labelled display-space. For estimator accuracy add verified linear-radiance HDR capture later and report RMSE/relative error, energy drift and long-run statistical mean. Reconstructed images get temporal/FLIP tests, not an unbiasedness claim. Save raw inputs and reconstruction configuration separately.
@@ -97,15 +104,20 @@ Required manifest fields: version ID/root SHA; all recursive submodule SHAs; exe
 
 | Version pair | Scene/config | Raw or reconstructed | Frame p50/p95/p99 | Error / temporal metric | VRAM | Equal-time gain | Equal-quality gain |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| B1 vs B0 | Convergence and Kitchen,1280×720 isolated DI/GI | Unreconstructed display captures | [Measured scope](B1_RESULTS.md) | [Display-space metrics](B1_RESULTS.md) | Device-wide only | Not established | Not established |
-| B2+ vs parent and B0/B1 | Pending implementation and manifest | Pending | Not measured | Not measured | Not measured | Not measured | Not measured |
+| B2 vs B5, retained legacy old-B0/old-B1 rows | Convergence and Kitchen,1280×720 isolated DI/GI; historical cap coverage unverified | Unreconstructed display captures | [Historical scope](B1_RESULTS.md) | [Display metrics](B1_RESULTS.md) | Device-wide only | Not established | Not established |
+| B1 vs B4 | Matched native PT + DI, all mandatory scenes | Pending | Not measured | Not measured | Not measured | Not measured | Not measured |
+| B4 vs B7 and B8–B10 stages | Exact active modes and shared contribution gates required | Pending extended coverage | Not established | Scoped old-B7 room evidence only | Not established | Not established | Not established |
 
 Initial hardware: RTX4090/24GiB, driver617.42, Ryzen7 5800X3D, Windows10. Full first-run details and measured configuration are in B1 results; paper hardware does not substitute for this machine.
 
 ## Summary and lessons learned
 
-RTXPT already supplies repeatable screenshot/sequence controls and limited GPU-pass CSV logging. Those are sufficient to preserve visual regression inputs, but do not establish full-frame performance, independent-seed statistics or linear HDR estimator correctness. Keep B0 immutable, isolate the B1 runtime/API update, then add one research change per B2+ identity. Publish gains only after complete-frame, paired-configuration experiments; paper-reported speedups and generated FPS do not substitute for these measurements.
+RTXPT supplies repeatable screenshot/sequence controls and limited GPU-pass CSV logging. These do not by themselves establish full-frame performance, independent-seed statistics or HDR correctness. Preserve B0 defaults, use the canonical mode matrix, and measure missing B1/B4 native-DI baselines. Publish gains after matched complete-frame experiments; generated FPS and paper speedups are not substitutes.
 
-## B2/B3 version clarification —2026-10-28
+## Legacy B2/B3 clarification —2026-10-28
+
+**Archived numbering below:** old B1 migration results map by actual mode to B3/B4/B5; old B2 DI+PT maps to B7; old B3 limited GI-off pilot is a B7 ablation. The [canonical crosswalk](VERSION_MAPPING.md) supersedes the old numbering without rewriting evidence.
 
 B2 now denotes the ReSTIR PT renderer integration; B3 denotes PT++ activation and missing-mechanism work. Both retain DI/GI as selectable controls with explicit contribution ownership. See [implementation status](B2_IMPLEMENTATION.md). B1 results remain historical measurements of ordinary PT with DI+GI, without ReSTIR PT. The B1 run settings were not a comprehensive driver/external frame-cap audit; do not retroactively claim they were. Future performance runs must record the uncapped renderer override, driver profile state and unknown external limiters, separately from simulated capture timestep.
+
+Canonical update2026-10-29: [B1/B4 native-DI quality and timing exclusions](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures. No new throughput result is accepted.

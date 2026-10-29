@@ -1,0 +1,159 @@
+{
+  "label": "convergence-B1-r3",
+  "scene": "convergence-test.scene.json",
+  "mode": "di",
+  "output_track": "unreconstructed tonemapped sRGB PNG; not linear HDR",
+  "exe_sha256": "6db074d35ed7050142ecfa42101e9ba79152e6155caa9b5d5954c093d3f5d362",
+  "started_utc": "2026-10-28T23:56:17.958523+00:00",
+  "command": [
+    "[WORKSPACE]\\work\\native-controls-v2-B0\\bin\\Rtxpt.exe",
+    "--scene",
+    "convergence-test.scene.json",
+    "--width",
+    "1280",
+    "--height",
+    "720",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "0",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "[WORKSPACE]\\work\\2026-10-29-canonical-native-di\\quality\\convergence-B1-r3\\frame.png",
+    "--captureSuffix",
+    "convergence-B1-r3",
+    "--perfLog",
+    "[WORKSPACE]\\work\\2026-10-29-canonical-native-di\\quality\\convergence-B1-r3\\partial-perf.csv",
+    "--benchmarkUncapped",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--maxBounces",
+    "14",
+    "--maxDiffuseBounces",
+    "2",
+    "--stopAnimations",
+    "--captureSimple"
+  ],
+  "cwd": "[WORKSPACE]\\work\\native-controls-v2-B0\\bin",
+  "settings": {
+    "width": 1280,
+    "height": 720,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 1,
+    "restir_gi": 0,
+    "simple": true,
+    "record_start": null,
+    "frames": 1,
+    "reference_spp": null,
+    "linear_hdr_requested": false,
+    "sampling_seed_requested": null,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": null,
+    "nee_mis_requested": null,
+    "nee_type": 2,
+    "restir_pt": 0,
+    "max_bounces_override": 14,
+    "max_diffuse_bounces_override": 2,
+    "pt_mode": null
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "canonical_experiment": {
+    "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+    "variant": "B1",
+    "preset": "matched-raw",
+    "algorithm": "v1.9 native PT + ReSTIR DI3.0; GI off",
+    "expected_flags": {
+      "di": 1,
+      "gi": 0,
+      "pt": 0
+    },
+    "expected_runtime_sha": "a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6",
+    "expected_base_sha": "303b408ab81790a5051abd7573830b7a4112eb8e",
+    "display_label": "B1 · matched-raw · v1.9 native PT + ReSTIR DI3.0; GI off",
+    "limitation": "Actual settings must match the effective renderer receipt"
+  },
+  "artifact_identity": {
+    "manifest_sha256": "dd7fb9943f3851d66feb8f19b7fe2cb98b601d58b472877771609f28a2fc2938",
+    "root_source_sha": "4e380f9f85dba35b86b6a3bbd97e7acdfb324dec",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "executable_sha256": "6db074d35ed7050142ecfa42101e9ba79152e6155caa9b5d5954c093d3f5d362",
+    "shader_files": 465,
+    "validated": true
+  },
+  "process_id": 29916,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 5.922000000005937,
+  "images": [
+    {
+      "name": "frame_convergence-B1-r3.png",
+      "sha256": "2e9117ee2011ddccbba23e6657cd87c081528fd89b0e6cd598acbe3c09856ecb",
+      "bytes": 3575586
+    }
+  ],
+  "linear_hdr_files": [],
+  "effective_sampling": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_di_validation": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_pt_replay": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_pt_history": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_pt_spatial": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_ptpp": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_capture_history": {
+    "coverage": "unavailable; legacy capture receipt absent"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "verified effective first-frame transport receipt",
+    "flags": {
+      "di": 1,
+      "gi": 0,
+      "pt": 0
+    },
+    "di_mode": 3,
+    "nee_mis": 1,
+    "max_bounces": 14,
+    "max_diffuse_bounces": 2,
+    "runtime_scope": "Runtime identity requires frozen source/build evidence in addition to this transport receipt"
+  },
+  "artifact_identity_after_capture": {
+    "manifest_sha256": "dd7fb9943f3851d66feb8f19b7fe2cb98b601d58b472877771609f28a2fc2938",
+    "root_source_sha": "4e380f9f85dba35b86b6a3bbd97e7acdfb324dec",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "executable_sha256": "6db074d35ed7050142ecfa42101e9ba79152e6155caa9b5d5954c093d3f5d362",
+    "shader_files": 465,
+    "validated": true
+  }
+}

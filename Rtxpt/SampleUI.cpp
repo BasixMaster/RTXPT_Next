@@ -229,7 +229,7 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     m_ui.BenchmarkUncapped          = cmdLine.BenchmarkUncapped;
     if (m_ui.UseReSTIRPT)
     {
-        donut::log::warning("Experimental ReSTIR PT selected: indirect GI estimator superseded; one plane, PSR/cache/subsampling disabled. Opaque transport validation is pending.");
+        donut::log::warning("Experimental ReSTIR PT selected: indirect GI estimator superseded; one plane, PSR/cache/subsampling disabled. Scoped static opaque validation only; transmission and binding diffuse caps remain unsupported.");
     }
     if (m_ui.BenchmarkUncapped)
     {

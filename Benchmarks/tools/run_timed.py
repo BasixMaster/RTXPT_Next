@@ -1,5 +1,6 @@
 """Capture no-image-write, process-filtered PresentMon timing of an owned renderer."""
 from pathlib import Path
+from experiment_contract import prepare as prepare_experiment, verify as verify_experiment, verify_snapshot
 import argparse,subprocess,time,json,datetime,hashlib,csv
 from cap_preflight import validate_audit,validate_runtime
 from capture_identity import transport_settings
@@ -13,10 +14,12 @@ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--exe',type=Path,required=True);ap.add_argument('--presentmon',type=Path,required=True);ap.add_argument('--output',type=Path,required=True)
+    ap.add_argument('--variant',choices=['B'+str(i) for i in range(11)])
+    ap.add_argument('--variant-preset',choices=['matched-raw','raw-native-control','limited-ptpp-ablation'],default='matched-raw')
     ap.add_argument('--label',required=True);ap.add_argument('--scene',required=True);ap.add_argument('--exposure',type=float,required=True)
     ap.add_argument('--width',type=int,default=1280);ap.add_argument('--height',type=int,default=720)
     ap.add_argument('--warmup-seconds',type=float,default=45);ap.add_argument('--measure-seconds',type=int,default=15)
-    ap.add_argument('--mode',choices=['digi','dipt','default'],default='digi')
+    ap.add_argument('--mode',choices=['digi','dipt','di','pt','default'],default='digi')
     ap.add_argument('--benchmark-uncapped',action='store_true',help='New builds only: require effective renderer log and matching active driver cap audit.')
     ap.add_argument('--driver-cap-audit',type=Path)
     ap.add_argument('--max-bounces',type=int);ap.add_argument('--max-diffuse-bounces',type=int)
@@ -31,7 +34,8 @@ def main():
     ap.add_argument('--artifact-manifest',type=Path,help='Optional strict frozen source/executable/shader identity; warm/compile caches before freezing.')
     ap.add_argument('--rtss-install-dir',type=Path);ap.add_argument('--rtss-helper',type=Path)
     ap.add_argument('--rtss-user-confirmed-disabled',action='store_true',help='User has disabled RTSS cap; collect only read-only SDK/profile boundary audits.')
-    a=ap.parse_args();exe=a.exe.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
+    a=ap.parse_args();canonical=prepare_experiment(a.variant,a.mode,a.variant_preset,a.pt_reconnection_mode,a.pt_roulette_probability);verify_snapshot(a.artifact_manifest,canonical)
+    exe=a.exe.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
     if any(out.iterdir()):raise SystemExit('Run directory must be new/empty.')
     rtss=None
     if a.rtss_install_dir or a.rtss_helper or a.rtss_user_confirmed_disabled:
@@ -45,7 +49,7 @@ def main():
         if isinstance(x,list):return any(animates(v) for v in x)
         return False
     if animates(scene_data):raise SystemExit('Static-capture guard requires an original scene with animation disabled.')
-    args=[str(exe),'--scene',a.scene,'--width',str(a.width),'--height',str(a.height),'--overrideRadianceCacheMode','0','--useNEE','1','--NEEType','2','--useReSTIRDI',str(int(a.mode in ['digi','dipt'])),'--useReSTIRGI',str(int(a.mode=='digi')),'--standaloneDenoiser','0','--overrideAutoexposureOff','--overrideExposureOffset',str(a.exposure),'--disablePostProcessFilters','--overrideToRealtimeMode','--realtimeSamplesPerPixel','1','--realtimeAA','0','--disableFireflyFilters','--overrideSubSamplingMode','0','--nonInteractive','--captureSequence','--sequenceWarmupStart','0','--sequenceRecordStart','20','--sequenceFPS','60','--sequenceFrameCount','1','--capturePath',str(out/'unused.png'),'--perfLog',str(out/'partial-perf.csv')]
+    args=[str(exe),'--scene',a.scene,'--width',str(a.width),'--height',str(a.height),'--overrideRadianceCacheMode','0','--useNEE','1','--NEEType','2','--useReSTIRDI',str(int(a.mode in ['digi','dipt','di'])),'--useReSTIRGI',str(int(a.mode=='digi')),'--standaloneDenoiser','0','--overrideAutoexposureOff','--overrideExposureOffset',str(a.exposure),'--disablePostProcessFilters','--overrideToRealtimeMode','--realtimeSamplesPerPixel','1','--realtimeAA','0','--disableFireflyFilters','--overrideSubSamplingMode','0','--nonInteractive','--captureSequence','--sequenceWarmupStart','0','--sequenceRecordStart','20','--sequenceFPS','60','--sequenceFrameCount','1','--capturePath',str(out/'unused.png'),'--perfLog',str(out/'partial-perf.csv')]
     if a.nee_mis is not None:args+=['--neeMIS',str(a.nee_mis)]
     if a.sampling_seed is not None:args+=['--samplingSeed',str(a.sampling_seed)]
     if a.strict_di_validation:args+=['--strictDIValidation','true']
@@ -53,7 +57,7 @@ def main():
     if a.pt_reconnection_mode is not None:args+=['--ptReconnectionMode',str(a.pt_reconnection_mode)]
     if a.pt_roulette_probability is not None:args+=['--ptRouletteProbability',str(a.pt_roulette_probability)]
     if a.pt_fixed_spatial_samples is not None:args+=['--ptFixedSpatialSamples',str(a.pt_fixed_spatial_samples)]
-    if a.mode=='dipt':args+=['--useReSTIRPT','1','--restirPTMode',str(a.pt_mode)]
+    if a.mode in ['dipt','pt']:args+=['--useReSTIRPT','1','--restirPTMode',str(a.pt_mode)]
     if a.max_bounces is not None:args+=['--maxBounces',str(a.max_bounces)]
     if a.max_diffuse_bounces is not None:args+=['--maxDiffuseBounces',str(a.max_diffuse_bounces)]
     driver_state=None
@@ -62,11 +66,12 @@ def main():
         driver_state=validate_audit(json.loads(a.driver_cap_audit.read_text(encoding='utf-8')),sha(exe))
         args+=['--benchmarkUncapped=true']
     manifest=dict(label=a.label,scene=a.scene,mode=a.mode,started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),command=args,cwd=str(exe.parent),exe_sha256=sha(exe),presentmon_sha256=sha(a.presentmon),settings=dict(width=a.width,height=a.height,exposure=a.exposure,aa=0,denoiser=0,sharc=0,restir_di=int(a.mode=='digi'),restir_gi=int(a.mode=='digi'),animations=False),warmup_wall_s=a.warmup_seconds,measurement_wall_s=a.measure_seconds,no_image_writes=True,selection='Last600 Original/NotSet process/swapchain rows, dropping final16, preregistered.',timing_scope='PresentMon CPU frame cadence and process GPU engine busy/wait intervals; not exclusive DI/GI feature time or display latency.',resource_scope='nvidia-smi whole-device allocation/utilization includes background applications, not exclusive renderer VRAM.',status='running')
+    manifest['canonical_experiment']=canonical
     manifest['render_unfocused_guard']='Existing active capture keeps ShouldRenderUnfocused true. Original static sceneTime remains0, so20s capture never writes; owned process is bounded and terminated after timing.'
     manifest['scene_sha256']=sha(scene_path)
     if a.artifact_manifest:manifest['artifact_identity']=validate_artifacts(a.artifact_manifest,exe)
     manifest['settings'].update(transport_settings(args))
-    manifest['settings'].update(max_bounces_override=a.max_bounces,max_diffuse_bounces_override=a.max_diffuse_bounces,pt_mode=a.pt_mode if a.mode=='dipt' else None)
+    manifest['settings'].update(max_bounces_override=a.max_bounces,max_diffuse_bounces_override=a.max_diffuse_bounces,pt_mode=a.pt_mode if a.mode in ['dipt','pt'] else None)
     manifest['cap_control']=dict(renderer_override_requested=a.benchmark_uncapped,driver=driver_state,external_limiters='unknown; not covered by renderer/NVAPI',fully_uncapped_verified=False)
     if rtss:
         manifest['cap_control']['rtss_before_launch']=validate_rtss(collect_rtss(rtss),sha(exe))
@@ -132,6 +137,7 @@ def main():
             mis=re.findall(r'^TRANSPORT_CONTRACT .* neeMIS=(\d+) ',receipt_log,re.MULTILINE)
             if len(set(mis))!=1 or int(mis[0])!=a.nee_mis:raise ValueError('Native MIS override lacks matching effective receipt')
             manifest['effective_native_nee_mis']=int(mis[0])
+        manifest['effective_canonical_experiment']=verify_experiment(receipt_log,canonical)
         manifest['effective_sampling']=verify_sampling(receipt_log,a.sampling_seed)
         manifest['effective_di_validation']=verify_di(receipt_log,a.strict_di_validation)
         manifest['effective_pt_history']=verify_pt_history(receipt_log,a.pt_disable_age_rejection_validation)

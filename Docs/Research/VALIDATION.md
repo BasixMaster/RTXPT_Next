@@ -1,10 +1,10 @@
-**Current project context (2026-10-28):** RTXPT1.9 with its original scenes is the immutable B0 baseline. B1 at `7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee` applies the RTXDI3.1 runtime/API migration to the existing DI/GI path. It does not add a ReSTIR PT renderer or activate PT++/CGNS features. `External/RTXDI-SDK` remains reference-only. See [B1 results](B1_RESULTS.md) for measured scope and limitations. B2 integration is in progress; B3 PT++ remains planned. See [implementation status](B2_IMPLEMENTATION.md).
+**Current project context (2026-10-29):** [Canonical B0–B10 and legacy crosswalk](VERSION_MAPPING.md) govern project labels. B0 preserves unchanged RTXPT1.9 original defaults and pins. Legacy migration `7010bb4` is not canonical B1; its native/DI/DI+GI configurations map to B3/B4/B5. The PT-only/DI+PT foundation maps to B6/B7; old-B2 checkpoint `de9fe651` is B7. The GI-off old-B3 pilot is a B7 limited-feature ablation, not B9. B8 requires valid GI/PT sharing; B9/B10 depend on it, and full remaining PT++ work belongs to B10. The SDK stays reference-only. Preserve legacy measurements/IDs; historical original-scene DI+GI rows map to B2/B5 with cap coverage unverified.
 
 # Validation and benchmark plan
 
 ## Current verification boundary
 
-B1 changes the active RTXDI runtime dependency plus four host/UI files for API compatibility. Both baseline and B1 Release builds succeeded. Initial GPU timing and display-image comparisons are recorded in [B1 results](B1_RESULTS.md). Reviewed paper algorithms are not newly integrated, and these measurements do not establish unbiasedness or HDR estimator correctness. The receipt distinguishes structural validation from actual measured evidence.
+The legacy migration source7010bb4 changed the runtime dependency and four host/UI compatibility files; its Release build and the preserved RTXPT1.9 build succeeded. The [retained legacy B1 report](B1_RESULTS.md) contains historical DI+GI observations now mapped to canonical B2/B5. Subsequent [B7 opaque evidence](B2_RESULTS.md) and [GI-off limited-feature ablations](B3_RESULTS.md) are separate scoped GPU checkpoints, not full-paper or original-scene validation. Structural receipts, builds, activation diagnostics and estimator/quality evidence remain distinct.
 
 ## Experiment contract
 
@@ -41,6 +41,6 @@ SPMIS: enumerate discrete domains including zero contributions and duplicate sel
 
 P0 produces scene/config manifests, exact commands, raw captures, a metrics script and a machine-readable results table. Every new experiment must preserve baseline output and reject unsupported combinations explicitly. Run only changed behavior's relevant checks; broaden after failures or new unresolved risks. Record failed, skipped and unavailable checks with reasons. No generated pass flag can substitute for an actual shader build or GPU run.
 
-## B2/B3 version clarification —2026-10-28
+## Canonical numbering and evidence boundary —2026-10-29
 
-B2 now denotes the ReSTIR PT renderer integration; B3 denotes PT++ activation and missing-mechanism work. Both retain DI/GI as selectable controls with explicit contribution ownership. See [implementation status](B2_IMPLEMENTATION.md). B1 results remain historical measurements of ordinary PT with DI+GI, without ReSTIR PT. The B1 run settings were not a comprehensive driver/external frame-cap audit; do not retroactively claim they were. Future performance runs must record the uncapped renderer override, driver profile state and unknown external limiters, separately from simulated capture timestep.
+Legacy source/report labels remain intact: old B1 migration source7010bb4 maps by active mode to B3/B4/B5; old B2 DI+PT maps to B7; old B3 limited GI-off pilot is a B7 ablation, not B9. The [canonical crosswalk](VERSION_MAPPING.md) supersedes earlier planning labels. B8 sharing needs a valid partition/MIS before B9/B10 can claim it. Historical original-scene old-B0/old-B1 DI+GI rows map to B2/B5 with unverified cap coverage; do not pool them with cap-verified throughput. Current comparisons require actual modes, cap receipts, original-scene coverage and separate simulated-time/throughput labels.

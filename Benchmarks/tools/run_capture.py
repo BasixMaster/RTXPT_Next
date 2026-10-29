@@ -1,5 +1,6 @@
 """Run one bounded, manifest-backed RTXPT capture, optionally with process-filtered PresentMon."""
 from pathlib import Path
+from experiment_contract import prepare as prepare_experiment, verify as verify_experiment, verify_snapshot
 import argparse,subprocess,time,json,hashlib,os,datetime,csv
 from capture_identity import transport_settings
 from sampling_contract import roulette_value, seed_value, verify as verify_sampling, verify_di, verify_pt_replay, verify_pt_history, verify_pt_spatial, verify_ptpp, verify_capture_history
@@ -18,6 +19,8 @@ def scene_argument(value, assets_dir=None):
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--exe',type=Path,required=True);ap.add_argument('--output',type=Path,required=True)
+    ap.add_argument('--variant',choices=['B'+str(i) for i in range(11)])
+    ap.add_argument('--variant-preset',choices=['matched-raw','raw-native-control','limited-ptpp-ablation'],default='matched-raw')
     ap.add_argument('--label',required=True);ap.add_argument('--scene',required=True)
     ap.add_argument('--exposure',type=float,required=True);ap.add_argument('--width',type=int,default=1280);ap.add_argument('--height',type=int,default=720)
     ap.add_argument('--mode',choices=['digi','dipt','di','pt','default','reference'],default='digi')
@@ -45,7 +48,8 @@ def main():
     ap.add_argument('--reference-pixel-center',action='store_true')
     ap.add_argument('--linear-hdr',action='store_true',help='Request raw PFM plus metadata; requires a renderer with captureLinearHDR support.')
     ap.add_argument('--artifact-manifest',type=Path,help='Optional strict frozen source/executable/shader identity; compile caches before freezing.')
-    a=ap.parse_args();exe=a.exe.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
+    a=ap.parse_args();canonical=prepare_experiment(a.variant,a.mode,a.variant_preset,a.pt_reconnection_mode,a.pt_roulette_probability);verify_snapshot(a.artifact_manifest,canonical)
+    exe=a.exe.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
     if any(out.iterdir()):raise SystemExit('Output directory must be new/empty; never append distinct runs.')
     a.scene=scene_argument(a.scene,exe.parent.parent/'Assets')
     if a.history_frames is not None and not a.simple:raise SystemExit('--history-frames requires --simple')
@@ -79,12 +83,14 @@ def main():
     if a.simple:args+=['--stopAnimations','--captureSimple']
     else:args+=['--captureSequence','--sequenceFPS','60','--sequenceWarmupStart','0','--sequenceRecordStart',str(a.record_start),'--sequenceFrameCount',str(a.frames)]
     manifest=dict(label=a.label,scene=a.scene,mode=a.mode,output_track='unreconstructed tonemapped sRGB PNG; not linear HDR',exe_sha256=sha(exe),started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),command=args,cwd=str(exe.parent),settings=dict(width=a.width,height=a.height,exposure=a.exposure,aa=0,denoiser=0,radiance_cache=0,restir_di=int(a.mode=='digi'),restir_gi=int(a.mode=='digi'),simple=a.simple,record_start=None if a.simple else a.record_start,frames=1 if a.simple else a.frames,reference_spp=a.reference_spp if a.mode=='reference' else None),timing_scope='External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.',measurement_status='running')
+    manifest['scene_sha256']=sha(exe.parent.parent/'Assets'/a.scene)
+    manifest['canonical_experiment']=canonical
     if a.linear_hdr:manifest['output_track']='unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata'
     manifest['settings']['linear_hdr_requested']=a.linear_hdr
     manifest['settings'].update(sampling_seed_requested=a.sampling_seed,reference_pixel_center_requested=a.reference_pixel_center,di_mode_requested=a.di_mode,nee_mis_requested=a.nee_mis,nee_type=a.nee_type)
     manifest['settings'].update(transport_settings(args))
     if a.artifact_manifest:manifest['artifact_identity']=validate_artifacts(a.artifact_manifest,exe)
-    manifest['settings'].update(max_bounces_override=a.max_bounces,max_diffuse_bounces_override=a.max_diffuse_bounces,pt_mode=a.pt_mode if a.mode=='dipt' else None)
+    manifest['settings'].update(max_bounces_override=a.max_bounces,max_diffuse_bounces_override=a.max_diffuse_bounces,pt_mode=a.pt_mode if a.mode in ['dipt','pt'] else None)
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
     started=time.monotonic();samples=[];pm=None;next_sample=0
     with (out/'renderer.log').open('w',encoding='utf-8') as log,(out/'presentmon.log').open('w',encoding='utf-8') as pm_log:
@@ -129,6 +135,8 @@ def main():
             except ValueError as exc:manifest['measurement_status']='failed_ptpp_contract';manifest['ptpp_failure']=str(exc)
             try:manifest['effective_capture_history']=verify_capture_history((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.history_frames)
             except ValueError as exc:manifest['measurement_status']='failed_capture_history';manifest['capture_history_failure']=str(exc)
+            try:manifest['effective_canonical_experiment']=verify_experiment((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),canonical)
+            except ValueError as exc:manifest['measurement_status']='failed_canonical_experiment';manifest['canonical_failure']=str(exc)
             manifest['resource_scope']='nvidia-smi values cover the whole device including other applications; not renderer-exclusive allocation.'
             manifest['resource_samples']=samples
             if a.artifact_manifest:

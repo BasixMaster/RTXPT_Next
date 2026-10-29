@@ -1,4 +1,8 @@
-# B2 static opaque validation and first comparison
+# B7 static opaque checkpoint: retained legacy B2 report
+
+> **LEGACY NUMBERING — preserved evidence.** All B0/B1/B2 labels in the retained report below use the earlier numbering. Under [the canonical mapping](VERSION_MAPPING.md), old-B2 DI3.1 + ReSTIR PT checkpoint `de9fe651` is **B7, GI off**. The 0.803 ms old-B0 row is a **B0 native-control raw preset**, separate from unchanged B0 original defaults. The migrated native-only 0.806 ms old-B1 row maps to **B3, DI/GI off**, not B4. No measurement, source ref, data ID or numeric value below has changed.
+
+The native PT + DI comparators **B1 and B4 are missing** from this room table and require fresh matched benchmarks. The 0.806 ms DI-off row is not a fair substitute for native PT + DI3.1 when comparing direct-light-enabled methods. The original ReSTIR PT paper's §9.3 approximately equal-time adjusted-sample-count experiment also differs from this fixed-1spp pilot; no corresponding equal-time/quality gain is established here. Original Convergence/Kitchen remain visible unsupported coverage gates for the PT foundation.
 
 The corrected B2 development build now executes ReSTIR PT with active mid-path reconnection and passes the scoped static opaque transport checks below. **B2 is not promoted:** original material/medium coverage, motion, reconstruction, binding diffuse limits and wider scene tests remain pending. B3 PT++ development has started separately; no B3 result is implied by this B2 checkpoint.
 

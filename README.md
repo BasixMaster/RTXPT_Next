@@ -1,19 +1,25 @@
 <!-- basix-research:start -->
 # Basix Pathtracing · RTXPT Next
 
-**Initial baseline: RTXPT1.9 and its original scenes. B1 migrates existing DI/GI to RTXDI3.1; B2 adds experimental ReSTIR PT; B3 isolates PT++ activations.** [First B1 comparison](Docs/Research/B1_RESULTS.md) · [B2 checkpoint](Docs/Research/B2_RESULTS.md) · [B3 development](Docs/Research/B3_IMPLEMENTATION.md). [Research and roadmap](Docs/Research/README.md) · [Offline study](Docs/Research/index.html) · [Version comparisons](Benchmarks/README.md) · [Image quality metrics](Docs/Research/QUALITY_METRICS.md).
+**Canonical B0–B10 numbering:** B0 is unchanged RTXPT 1.9 with original defaults and pins. Explicit DI/GI/PT configurations and PT++ stages are defined in the [version mapping and legacy crosswalk](Docs/Research/VERSION_MAPPING.md). Existing tags, data IDs and numeric results retain their original identities. [Research and roadmap](Docs/Research/README.md) · [Offline study](Docs/Research/index.html) · [Version comparisons](Benchmarks/README.md) · [Image quality metrics](Docs/Research/QUALITY_METRICS.md).
 
 | Variant | Short algorithm overview |
 |---|---|
-| B0 / RTXPT 1.9 | Native PT + optional ReSTIR DI/GI, RTXDI 3.0 |
-| B1 | Same paths, migrated to RTXDI 3.1 |
-| B2 | ReSTIR DI + ReSTIR PT; GI remains an alternative indirect estimator |
-| B3 | B2 partition + footprint and initial-only roulette |
-| B4 | Remaining PT++ integration, planned after B3 |
+| B0 | Unchanged RTXPT 1.9 reference, original defaults/pins |
+| B1 | Native PT + DI 3.0; GI off |
+| B2 | Native PT + DI 3.0 + GI 3.0 |
+| B3 | Native PT / runtime 3.1; DI/GI off |
+| B4 | Native PT + DI 3.1; GI off |
+| B5 | Native PT + DI 3.1 + GI 3.1 |
+| B6 | ReSTIR PT; DI/GI off |
+| B7 | ReSTIR PT + DI 3.1; GI off |
+| B8 | ReSTIR PT + DI 3.1 + GI 3.1; planned valid sharing/MIS |
+| B9 | B8 + limited PT++; planned after B8 sharing |
+| B10 | B8 + full remaining PT++; authorized future work |
 
-Every result states its actual active modes. [The full overview and mandatory scene matrix](Docs/Research/ALGORITHM_VARIANTS.md) distinguish native controls from DI/GI/PT captures. Original Convergence and Kitchen currently remain unsupported in B2/B3 because transmission and their binding 14/2 bounce limits have not passed integration gates. No opaque substitute is counted as an original-scene result.
+Every result states its actual active modes. [The overview and mandatory scene matrix](Docs/Research/ALGORITHM_VARIANTS.md) distinguish native controls from DI/GI/PT captures. Original Convergence and Kitchen remain unsupported by the ReSTIR PT foundation's transmission and binding 14/2 diffuse-budget gates. No opaque substitute counts as an original-scene result. Prioritize new matched B1/B4 native-DI comparisons; the historical migrated native-only 0.806 ms control maps to B3, not B4.
 
-Baseline ref: `rtxpt-1.9-baseline` (`303b408`). B1 source is `7010bb4`; its active `External/Rtxdi` runtime is `f12037f` (3.1). `External/RTXDI-SDK` remains a separate source reference. B1 does not introduce ReSTIR PT integration. Original upstream documentation follows.
+Baseline ref: `rtxpt-1.9-baseline` (`303b408`). Legacy tag `B1` (`7010bb4`) records the runtime3.1 migration; it is not canonical B1. Old-B2 checkpoint `de9fe651` maps to B7; old-B3 limited pilot `a7428c8` is a GI-off B7 ablation, not B9. `External/RTXDI-SDK` remains a separate source reference. Original upstream documentation follows unchanged.
 <!-- basix-research:end -->
 
 # RTX Path Tracing v1.9.0

@@ -1,4 +1,23 @@
-# Roadmap: RTXPT1.9 → B1 → B2 and later
+# Roadmap: canonical B0–B10
+
+**Current numbering, confirmed 2026-10-29:** [VERSION_MAPPING.md](VERSION_MAPPING.md) defines all canonical variants and the retained legacy crosswalk. B0 remains the unchanged RTXPT 1.9 original-defaults reference. Old files, branches, tags and data IDs are not renumbered in place.
+
+## Current execution order and acceptance gates
+
+1. Preserve B0 defaults/source/assets. Define B1 native PT + DI3.0 and B2 native PT + DI/GI3.0 as explicit configurations, distinct from the B0 native-only raw control.
+2. Define B3 native PT on runtime3.1, B4 native PT + DI3.1, and B5 native PT + DI/GI3.1. Prioritize fresh matched B1/B4 native-DI timing and quality; the legacy 0.806 ms native-only control is B3, not B4.
+3. Preserve the ReSTIR PT foundation: B6 has separate DI/GI off; B7 adds DI3.1 and keeps GI off. Old-B2 checkpoint `de9fe651` is scoped B7 evidence. Original Convergence/Kitchen material and 14/2 diffuse-budget restrictions remain acceptance gaps.
+4. [B8 contribution-partition design](B8_PARTITION_DESIGN.md) now identifies the exact GI suffix overlap, direct-emission ownership and secondary-material reevaluation gates. Derive and implement B8's PT + DI3.1 + GI3.1 sharing. Specify disjoint transport contributions or valid MIS, replay/PDF/history contracts and finite-domain correctness oracles. Adding overlapping GI/PT outputs or bypassing the alternative-mode guard is not a valid B8.
+5. B9 is B8 plus limited footprint/initial-only-roulette PT++. The old-B3 pilot `a7428c8` had GI off and is a B7 limited-feature ablation, not evidence that B9 exists. Preserve its measured tradeoff and default decision.
+6. Continue the authorized full remaining PT++ work as B10, while completing the B8 sharing foundation. Implement reciprocal spatial pairing, replay compaction, unified primary direct/indirect reservoirs, vector-weight shading, duplication reduction and dual-motion disocclusion handling behind independent controls/oracles. Audit inherited runtime features and remaining named micro-optimizations. See [remaining PT++ gates](B4_IMPLEMENTATION.md), whose legacy filename stays intact.
+
+Each canonical variant keeps original Convergence, original Kitchen and the owned opaque room visible in the comparison matrix. Record unsupported/missing cases, raw/reconstructed quality, timing, memory and convergence. The original ReSTIR PT paper's §9.3 adjusts samples for approximately equal time; fixed-1spp room results are not equivalent. Equal-time/quality sweeps remain required before corresponding gains are claimed.
+
+Every promoted configuration needs an immutable source/settings/runtime/assets manifest, executable/shader identities and accepted scope. Runtime3.1 packing, forced NEE and optional supplied PT++ machinery are inherited, not newly counted B9/B10 achievements. Later guiding/splatting/LoD/BDPT research retains its technical gates below, but no canonical B1–B10 ID is reassigned to it.
+
+## Legacy roadmap appendix
+
+**The remainder is the retained planning history under the previous numbering.** In this appendix, old B1 is the `7010bb4` migration, old B2 is the B6/B7 PT foundation, old B3 is the GI-off B7 limited pilot, and old B4 remaining work now belongs to B10. Its old section labels and estimates are archival, not competing definitions of the canonical IDs. Source refs, links and measurements are preserved.
 
 ## Deliverable and version policy
 

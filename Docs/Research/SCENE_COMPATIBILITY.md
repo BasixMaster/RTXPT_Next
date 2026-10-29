@@ -1,4 +1,4 @@
-**Current project context (2026-10-28):** RTXPT1.9 with its original scenes is the immutable B0 baseline. B1 at `7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee` applies the RTXDI3.1 runtime/API migration to the existing DI/GI path. It does not add a ReSTIR PT renderer or activate PT++/CGNS features. `External/RTXDI-SDK` remains reference-only. See [B1 results](B1_RESULTS.md) for measured scope and limitations. B2 integration is in progress; B3 PT++ remains planned. See [implementation status](B2_IMPLEMENTATION.md).
+**Current project context (2026-10-29):** [Canonical B0–B10 and legacy crosswalk](VERSION_MAPPING.md) govern project labels. B0 preserves unchanged RTXPT1.9 original defaults and pins. Legacy migration `7010bb4` is not canonical B1; its native/DI/DI+GI configurations map to B3/B4/B5. The PT-only/DI+PT foundation maps to B6/B7; old-B2 checkpoint `de9fe651` is B7. The GI-off old-B3 pilot is a B7 limited-feature ablation, not B9. B8 requires valid GI/PT sharing; B9/B10 depend on it, and full remaining PT++ work belongs to B10. The SDK stays reference-only. Preserve legacy measurements/IDs; historical original-scene DI+GI rows map to B2/B5 with cap coverage unverified.
 
 # Scene compatibility: RTXDI3.1 and RTXPT1.9
 
@@ -20,12 +20,12 @@ RTXDI FullSample selects Arcade.gltf, CornellBox.gltf and Bistro `.scene.json` v
 
 ## Roadmap work package
 
-Add a general scene-path option to the fork's application before claiming arbitrary RTXPT scene loading. Start with a common Cornell-style glTF scene and then a textured/emissive scene, mirror/rough-glass scene and animated scene. Use a scene-feature manifest and explicit unsupported-field diagnostics. Preserve original assets and licenses; record conversions and settings separately. Test geometry/lighting parity in raw outputs before denoising. Reusing RTXPT assets through the original root `Assets` does not automatically mount them in RTXDI's virtual filesystem.
+For a separate FullSample reproduction, generalize that sample's scene-path selection before claiming arbitrary RTXPT scene parity. The primary fork already uses RTXPT's own loader and original Assets; its B6/B7 PT adapter does not imply support for every loaded material or bounce contract. Test a common Cornell-style asset, textured/emissive scene, mirror/rough-glass and animation with explicit feature manifests. Preserve originals/licenses and label conversions separately. RTXPT Assets are not automatically mounted in the separate FullSample virtual filesystem.
 
-A longer-term renderer adapter can reuse RTXPT's own loader/material model while consuming the3.1 PT runtime. That is often a better route to RTXPT scene fidelity than extending FullSample to duplicate all RTXPT scene semantics; choose based on the initial scene-conversion results.
+The implemented app-owned PT foundation follows the RTXPT-loader/material route. Original Convergence/Kitchen still hit transmission/medium and binding diffuse-cap gates, so a successful opaque room is not original-scene support. Keep both original scenes visible in every comparison matrix; no material-edited derivative counts as their result. Cross-renderer FullSample parity remains a separate source/scene validation task.
 
 Sources: [RTXDI FullSample loader](https://github.com/NVIDIA-RTX/RTXDI/blob/a6efab966b7c3b272da0461578eb56ac61c7cbff/Samples/FullSample/Source/App/SceneRenderer.cpp#L167), [RTXPT README](https://github.com/NVIDIA-RTX/RTXPT/blob/303b408ab81790a5051abd7573830b7a4112eb8e/README.md), [RTXPT scene extensions](https://github.com/NVIDIA-RTX/RTXPT/blob/303b408ab81790a5051abd7573830b7a4112eb8e/Rtxpt/SampleCommon/ExtendedScene.cpp).
 
 ## Summary and lessons learned
 
-Share assets first and verify semantics explicitly. File-format overlap is useful evidence for a porting path; only an actual scene and material comparison establishes parity. This deliverable inspected source loaders but did not load or render either scene set.
+Share assets first and verify semantics explicitly. The initial comparison inspected upstream loaders without rendering parity tests. Later scoped B7 opaque rendering does not establish FullSample/RTXPT material parity or remove the original-scene gates. File-format overlap is evidence for a porting path, not proof of equivalent transport.

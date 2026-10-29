@@ -48,16 +48,22 @@ for ref,runtime in [(baseline,'a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6'),(b1,'f
     assert runtime in git('ls-tree',ref,'External/Rtxdi')
 assert subprocess.check_output(['git','-C',str(P/'External/Rtxdi'),'rev-parse','HEAD'],text=True).strip()=='f12037fa8e97ebc08e9e3edfd2de528ed1772a4b'
 assert not subprocess.check_output(['git','-C',str(P/'Assets'),'status','--porcelain'],text=True).strip()
-checks.append(dict(name='Immutable baseline, exact four-file B1 API migration and pinned runtime/assets',status='passed',baseline_sha=baseline,b1_sha=b1,host_diff=actual))
+checks.append(dict(name='Immutable baseline, exact four-file legacy B1 API migration and pinned runtime/assets',status='passed',baseline_sha=baseline,b1_sha=b1,host_diff=actual))
 scenes=sorted(p.name for p in (P/'Assets').glob('*.scene.json'));assert len(scenes)==11
 checks.append(dict(name='Pinned original scene files present',status='passed',scenes=scenes))
 versions=json.loads((P/'Benchmarks/versions.json').read_text(encoding='utf-8'))
 by_id={x['id']:x for x in versions['versions']}
-assert by_id['RTXPT-1.9']['source_sha']==baseline and by_id['B1']['source_sha']==b1
-assert by_id['B1']['status']!='planned' and by_id['B2']['status']=='in_progress' and by_id['B3']['status']=='in_progress'
-assert by_id['B2']['source_sha'] is None and by_id['B3']['source_sha'] is None
-assert (D/'B2_IMPLEMENTATION.md').is_file()
-checks.append(dict(name='B2 integration/B3 PT++ development states remain distinct from immutable B1 evidence',status='in_progress',development_source_changes=development_source_changes,reason='Development source is allowed to differ from B1; this checker proves neither B2 compilation nor runtime activation.'))
+assert list(by_id)==['B'+str(i) for i in range(11)]
+assert versions['numbering_scheme']=='2026-10-29-user-confirmed-B0-B10'
+for name in ['B0','B1','B2']:assert by_id[name]['source_sha']==baseline and by_id[name]['rtxdi_sha']=='a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6'
+for name in ['B3','B4','B5']:assert by_id[name]['source_sha']==b1 and by_id[name]['rtxdi_sha']=='f12037fa8e97ebc08e9e3edfd2de528ed1772a4b'
+for name in ['B6','B7']:assert by_id[name]['source_sha']=='de9fe651903f203327830e7361ac4237e00d508c'
+for name in ['B8','B9','B10']:assert by_id[name]['source_sha'] is None and by_id[name]['ref'] is None and by_id[name]['status'].startswith('planned')
+flags={'B1':(1,0,0),'B2':(1,1,0),'B3':(0,0,0),'B4':(1,0,0),'B5':(1,1,0),'B6':(0,0,1),'B7':(1,0,1),'B8':(1,1,1),'B9':(1,1,1),'B10':(1,1,1)}
+for name,expected_flags in flags.items():assert tuple(by_id[name]['configuration'][k] for k in ['restir_di','restir_gi','restir_pt'])==expected_flags
+assert 'original defaults' in by_id['B0']['configuration']
+assert (D/'VERSION_MAPPING.md').is_file() and (P/'Benchmarks/legacy/versions-before-2026-10-29.json').is_file()
+checks.append(dict(name='Canonical B0–B10 configurations, preserved B0 defaults and legacy mapping',status='passed',development_source_changes=development_source_changes,reason='Registry validation does not prove runtime activation or estimator correctness.'))
 coverage=json.loads(subprocess.check_output([executable,str(P/'Benchmarks/tools/coverage_matrix.py'),str(P/'Benchmarks/comparison-matrix.json'),'--repo',str(P)],text=True))
 matrix=json.loads((P/'Benchmarks/comparison-matrix.json').read_text())
 expected_variants={'B0' if entry['id']=='RTXPT-1.9' else entry['id'] for entry in versions['versions']}
@@ -73,7 +79,18 @@ if pilot.exists():
     assert len(captures)==60 and len(timings)==12
     assert all(json.loads(p.read_text())['measurement_status']=='captured' for p in captures)
     assert all(json.loads(p.read_text())['status']=='timed_completed' for p in timings)
-    checks.append(dict(name='B3 scoped pilot retained capture/trace identities',status='passed',captures=60,timed_processes=12,hashed_files=len(inventory['files']),limits='Retained evidence identity/completeness only; not a full PT++ or original-scene validation proof.'))
+    checks.append(dict(name='Legacy B3 pilot / canonical B7 limited ablation retained capture/trace identities',status='passed',captures=60,timed_processes=12,hashed_files=len(inventory['files']),limits='Retained evidence identity/completeness only; not a full PT++ or original-scene validation proof.'))
+canonical=P/'Benchmarks/development/2026-10-29-canonical-native-di'
+if canonical.exists():
+    index=json.loads((canonical/'index.json').read_text())
+    for name,digest in index['files'].items():assert hashlib.sha256((canonical/name).read_bytes()).hexdigest()==digest,name
+    captures=list((canonical/'quality').glob('*/capture.json'));assert len(captures)==12
+    for path in captures:
+        capture=json.loads(path.read_text());assert capture['measurement_status']=='captured'
+        assert capture['effective_canonical_experiment']['flags']==dict(di=1,gi=0,pt=0) and capture['artifact_identity_after_capture']['validated']
+    exclusions=json.loads((canonical/'excluded-timing.json').read_text());assert exclusions['accepted_timing_runs']==0 and len(exclusions['attempts'])==2
+    assert all(x['restoration_verified'] for x in exclusions['attempts'])
+    checks.append(dict(name='Canonical B1/B4 quality identities with explicit zero accepted timing samples',status='passed',captures=12,hashed_files=len(index['files'])))
 result=next(x for x in versions['results'] if x['id']=='2026-10-28-b1')
 assert result['status']=='measured' and (P/result['report']).is_file()
 evidence=P/result['path'];assert evidence.is_dir()
@@ -104,7 +121,7 @@ for scene in ['convergence','kitchen']:
             ref=evidence/'quality-captures'/f'{scene}-reference-4096'/q['reference']['file']
             assert hashlib.sha256(capture.read_bytes()).hexdigest()==q['test']['sha256']
             assert hashlib.sha256(ref.read_bytes()).hexdigest()==q['reference']['sha256']
-checks.append(dict(name='Measured B0/B1 registry,20 accepted process runs and preserved CSV hashes; B2/B3 have no fabricated results',status='passed',evidence=result['path']))
+checks.append(dict(name='Legacy original-scene registry:20 accepted process runs and preserved CSV hashes',status='passed',evidence=result['path']))
 for p in (D/'assets').glob('*.svg'):ET.parse(p)
 page=(D/'index.html').read_text(encoding='utf-8');assert page.count('<math ')>=40
 assert '<h1>RTXPT Next</h1>' in page and 'Basix Pathtracing' in page
@@ -118,7 +135,7 @@ checks.append(dict(name='Structured evidence schema separately validated; SQLite
 assert not list(D.rglob('*.pdf'))
 checks.append(dict(name='No full-paper PDFs exported',status='passed'))
 checks.append(dict(name='Build/GPU and display-quality evidence recorded',status='evidence_present',reason='This checker validates retained identity/completeness; it does not rebuild binaries, rerun GPU measurements or prove estimator correctness. See B1_RESULTS.md and result manifests.'))
-receipt=dict(updated_on='2026-10-28',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','Two static scenes on one GPU; five process pairs per scene.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Tonemapped display metrics; HDR/temporal/independent-seed validation remains future.','B1 migrates existing DI/GI APIs; B2 ReSTIR PT integration is in progress and B3 PT++ activation is in progress; complete-paper and broad scene validation remain pending.'])
+receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','Two static scenes on one GPU; five process pairs per scene.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Tonemapped display metrics; HDR/temporal/independent-seed validation remains future.','Canonical B1/B4 matched DI controls are pending. Legacy GI-off limited PT++ pilot maps to B7 ablations. B8 sharing and B9/B10 remain planned.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))
 print(json.dumps(dict(passed=True,checks=len(checks),scenes=len(scenes),math_expressions=page.count('<math '))))

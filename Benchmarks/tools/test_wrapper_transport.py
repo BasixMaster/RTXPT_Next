@@ -30,7 +30,7 @@ class WrapperTransportTests(unittest.TestCase):
             with self.assertRaises(ValueError):run_capture.scene_argument(missing)
 
     def test_timed_mode_launch_and_metadata_match(self):
-        for mode,expected in [('dipt',dict(restir_di=1,restir_gi=0,restir_pt=1)),('digi',dict(restir_di=1,restir_gi=1,restir_pt=0)),('default',dict(restir_di=0,restir_gi=0,restir_pt=0))]:
+        for mode,expected in [('dipt',dict(restir_di=1,restir_gi=0,restir_pt=1)),('digi',dict(restir_di=1,restir_gi=1,restir_pt=0)),('default',dict(restir_di=0,restir_gi=0,restir_pt=0)),('di',dict(restir_di=1,restir_gi=0,restir_pt=0)),('pt',dict(restir_di=0,restir_gi=0,restir_pt=1))]:
             out=self.root/('timed-'+mode);launched=[]
             def stop(args,**kwargs):launched.extend(args);raise StopBeforeLaunch('Synthetic test: no process launched')
             with mock.patch.object(sys,'argv',self.command(run_timed,mode,out)),mock.patch.object(run_timed.subprocess,'Popen',side_effect=stop):

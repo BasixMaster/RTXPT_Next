@@ -1,4 +1,8 @@
-# First B1 comparison: RTXPT1.9 and RTXDI3.1 migration
+# Legacy B1 report: RTXPT1.9 and RTXDI3.1 migration
+
+> **LEGACY NUMBERING — preserved evidence.** This report and its raw B0/B1 labels predate the user-confirmed [canonical B0–B10 mapping](VERSION_MAPPING.md). Its old-B0 native PT + DI/GI3.0 rows map to **canonical B2**; old-B1 native PT + DI/GI3.1 rows map to **canonical B5**. The retained tag/source `B1` / `7010bb4` is the migration identity, **not canonical B1**, whose runtime is3.0 and GI is off. All numeric results, refs and data IDs below are unchanged. These original-scene historical runs have **unverified external-cap coverage** and are not pooled with cap-verified throughput.
+
+Current priority: measure canonical B1/B4 native PT + DI with GI off under the matched extended protocol. The unchanged B0 reference still means original upstream defaults and pins, separately from these explicitly configured DI+GI captures.
 
 Measured locally on2026-10-28. This is an initial two-scene comparison of a limited dependency/API migration. It does not reproduce the Wyman papers or demonstrate a new ReSTIR PT pipeline.
 

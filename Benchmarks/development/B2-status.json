@@ -111,5 +111,7 @@
     "Source presence, synthetic tests and successful shader compilation do not establish renderer correctness.",
     "Prototype gates are deliberate and do not imply original transmissive scenes are supported.",
     "Historical B1 results remain measured exploratory evidence, with external cap coverage unverified."
-  ]
+  ],
+  "numbering_scheme": "legacy-before-2026-10-29",
+  "canonical_mapping": "See Benchmarks/versions.json and Docs/Research/VERSION_MAPPING.md; historical milestone IDs retained"
 }

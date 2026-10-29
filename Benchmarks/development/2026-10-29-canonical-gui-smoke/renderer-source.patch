@@ -1,0 +1,57 @@
+diff --git a/Rtxpt/AdvancedSampleUI.cpp b/Rtxpt/AdvancedSampleUI.cpp
+index 56c5b29..1ba8826 100644
+--- a/Rtxpt/AdvancedSampleUI.cpp
++++ b/Rtxpt/AdvancedSampleUI.cpp
+@@ -14,6 +14,8 @@
+ #include "SampleGame/GameScene.h"
+ #include "Sharc/SharcIntegration.h"
+ #include <imgui_internal.h>
++#include <algorithm>
++#include <cmath>
+ 
+ using namespace donut::app;
+ using namespace donut::engine;
+@@ -409,19 +411,23 @@ void AdvancedSampleUI::DrawSampleUI(float indent, float defItemWidth, const ImVe
+ 
+             if (m_ui.RealtimeMode)
+             {
+-                RESET_ON_CHANGE(ImGui::Checkbox("ReSTIR PT (B2 experimental)", &m_ui.UseReSTIRPT));
+-                if (ImGui::IsItemHovered()) ImGui::SetTooltip("PT replaces the GI indirect estimator. Initial integration: one plane, no PSR, SHaRC or subsampling. Opaque-transport validation pending.");
++                RESET_ON_CHANGE(ImGui::Checkbox("ReSTIR PT (experimental)", &m_ui.UseReSTIRPT));
++                if (ImGui::IsItemHovered()) ImGui::SetTooltip("PT replaces the GI indirect estimator. One plane, no PSR, SHaRC or subsampling. Scoped static opaque validation only; transmission and binding diffuse caps remain unsupported.");
+                 if (m_ui.ActualUseReSTIRPT())
+                 {
+                     ImGui::TextWrapped("Indirect estimator: ReSTIR PT; GI inactive to avoid double counting.");
+                     int reconnectionMode = m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode == RTXDI_PTReconnectionMode::Footprint ? 1 : 0;
+-                    if (ImGui::Combo("PT reconnection", &reconnectionMode, "B2 fixed threshold\0B3 footprint\0"))
++                    if (ImGui::Combo("PT reconnection", &reconnectionMode, "Fixed threshold\0Footprint\0"))
+                         m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode = reconnectionMode == 0 ?
+                             RTXDI_PTReconnectionMode::FixedThreshold : RTXDI_PTReconnectionMode::Footprint;
+-                    if (ImGui::SliderFloat("PT initial roulette survival (0 off)", &m_ui.RTXDI.restirPT.russianRouletteProbability, 0.0f, 1.0f) &&
+-                        m_ui.RTXDI.restirPT.russianRouletteProbability > 0.0f)
+-                        m_ui.RTXDI.restirPT.russianRouletteProbability = std::max(0.1f, m_ui.RTXDI.restirPT.russianRouletteProbability);
+-                    if (ImGui::IsItemHovered()) ImGui::SetTooltip("B3 PT++ ablation. Roulette only during initial path generation, never replay. Experimental; keep separate from B2 controls.");
++                    if (ImGui::SliderFloat("PT initial roulette survival (0 off)", &m_ui.RTXDI.restirPT.russianRouletteProbability,
++                        0.0f, 1.0f, "%.3f", ImGuiSliderFlags_AlwaysClamp))
++                    {
++                        float& probability = m_ui.RTXDI.restirPT.russianRouletteProbability;
++                        probability = std::isfinite(probability) ? std::clamp(probability, 0.0f, 1.0f) : 0.0f;
++                        if (probability > 0.0f) probability = std::max(0.1f, probability);
++                    }
++                    if (ImGui::IsItemHovered()) ImGui::SetTooltip("PT++ ablation. Roulette only during initial path generation, never replay. Keep separate from fixed-threshold controls.");
+                 }
+             }
+ 
+diff --git a/Rtxpt/SampleUI.cpp b/Rtxpt/SampleUI.cpp
+index 44d0afd..23a893e 100644
+--- a/Rtxpt/SampleUI.cpp
++++ b/Rtxpt/SampleUI.cpp
+@@ -229,7 +229,7 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
+     m_ui.BenchmarkUncapped          = cmdLine.BenchmarkUncapped;
+     if (m_ui.UseReSTIRPT)
+     {
+-        donut::log::warning("Experimental ReSTIR PT selected: indirect GI estimator superseded; one plane, PSR/cache/subsampling disabled. Opaque transport validation is pending.");
++        donut::log::warning("Experimental ReSTIR PT selected: indirect GI estimator superseded; one plane, PSR/cache/subsampling disabled. Scoped static opaque validation only; transmission and binding diffuse caps remain unsupported.");
+     }
+     if (m_ui.BenchmarkUncapped)
+     {
