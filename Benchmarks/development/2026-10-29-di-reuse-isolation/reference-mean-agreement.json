@@ -1,0 +1,37 @@
+{
+  "scope": "Finite reference agreement only; not truth or an unbiasedness proof",
+  "rows": [
+    {
+      "scene": "convergence",
+      "primary_reference_pfm_sha256": "9189238be4e1ca4e482acce79b841628e6d56a2bae3fd7a14b57dafae3dff5af",
+      "checks": [
+        {
+          "comparison": "reference2048",
+          "signed_mean_y_difference_percent": -0.012076644773417805,
+          "pfm_sha256": "3305dba35a9182f51a02107d3f4f4dda2a720c2b66f3e263dfa28da7bf37c10b"
+        },
+        {
+          "comparison": "reference4096-independent",
+          "signed_mean_y_difference_percent": -0.0068437943023265425,
+          "pfm_sha256": "4005a9671d8a5e1e53a83389b00404b4b46a60abe4d49a11e0e6dd10a187d741"
+        }
+      ]
+    },
+    {
+      "scene": "kitchen",
+      "primary_reference_pfm_sha256": "5c5d7929c37d1ac371a28050879c554e5e0e0b7fedfce93f829d8a846bc96185",
+      "checks": [
+        {
+          "comparison": "reference2048",
+          "signed_mean_y_difference_percent": -0.0180446577900067,
+          "pfm_sha256": "811085ba5df821b367f9cab6297a9a41d68471acea708502dbf7267f20ff2d32"
+        },
+        {
+          "comparison": "reference4096-independent",
+          "signed_mean_y_difference_percent": 0.037922838776812566,
+          "pfm_sha256": "d8f5e1bc2108b153617ceefec732640d00976975e7dedd38e6a750de9005e966"
+        }
+      ]
+    }
+  ]
+}

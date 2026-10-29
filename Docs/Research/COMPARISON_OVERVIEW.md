@@ -148,3 +148,16 @@ A separate matched five-seed experiment compares legacy material truncation with
 |Kitchen / B7|-1.062%|-1.114%|0.44106 → 0.44025|<a href="assets/gbuffer-precision/kitchen-B7-r0-s0.png"><img src="assets/gbuffer-precision/kitchen-B7-r0-s0.png" width="120" alt="kitchen B7 rounded=0"></a> <a href="assets/gbuffer-precision/kitchen-B7-r1-s0.png"><img src="assets/gbuffer-precision/kitchen-B7-r1-s0.png" width="120" alt="kitchen B7 rounded=1"></a>|
 
 Signed Y uses raw linear HDR against the same finite reference, without brightness normalization. The full report includes sample standard errors, LDR-FLIP and all per-seed data. No general energy-preservation or unbiasedness claim.
+
+## DI reuse isolation — renderer unchanged
+
+A separate fixed-1spp five-seed study compares initial-only, temporal-only, spatial-only and combined DI within B4/B7. Material rounding remains off. These are quality-only ablations, not replacements for canonical timings. [Full settings, uncertainty, contrasts and pictures](DI_REUSE_ISOLATION.md).
+
+|Scene / variant|DI initial Y difference|Temporal Y difference|Spatial Y difference|Combined Y difference|Seed0 initial / combined|
+|---|---:|---:|---:|---:|---|
+|Convergence / B4|-0.069%|-0.424%|-0.198%|-0.264%|<a href="assets/di-reuse-isolation/convergence-B4-di0-s0.png"><img src="assets/di-reuse-isolation/convergence-B4-di0-s0.png" width="120" alt="convergence B4 DI mode0"></a> <a href="assets/di-reuse-isolation/convergence-B4-di3-s0.png"><img src="assets/di-reuse-isolation/convergence-B4-di3-s0.png" width="120" alt="convergence B4 DI mode3"></a>|
+|Convergence / B7|-0.006%|-0.169%|-0.074%|-0.251%|<a href="assets/di-reuse-isolation/convergence-B7-di0-s0.png"><img src="assets/di-reuse-isolation/convergence-B7-di0-s0.png" width="120" alt="convergence B7 DI mode0"></a> <a href="assets/di-reuse-isolation/convergence-B7-di3-s0.png"><img src="assets/di-reuse-isolation/convergence-B7-di3-s0.png" width="120" alt="convergence B7 DI mode3"></a>|
+|Kitchen / B4|-1.159%|-0.719%|-0.930%|-0.745%|<a href="assets/di-reuse-isolation/kitchen-B4-di0-s0.png"><img src="assets/di-reuse-isolation/kitchen-B4-di0-s0.png" width="120" alt="kitchen B4 DI mode0"></a> <a href="assets/di-reuse-isolation/kitchen-B4-di3-s0.png"><img src="assets/di-reuse-isolation/kitchen-B4-di3-s0.png" width="120" alt="kitchen B4 DI mode3"></a>|
+|Kitchen / B7|-1.004%|-1.249%|-1.370%|-1.220%|<a href="assets/di-reuse-isolation/kitchen-B7-di0-s0.png"><img src="assets/di-reuse-isolation/kitchen-B7-di0-s0.png" width="120" alt="kitchen B7 DI mode0"></a> <a href="assets/di-reuse-isolation/kitchen-B7-di3-s0.png"><img src="assets/di-reuse-isolation/kitchen-B7-di3-s0.png" width="120" alt="kitchen B7 DI mode3"></a>|
+
+All four modes keep DI active. Mode0 disables temporal/spatial reuse, not initial RIS or final DI shading. Signed Y uses the same raw-HDR finite references; it is not brightness-normalized. Full HDR/LDR-FLIP results and sample standard errors are in the linked report.

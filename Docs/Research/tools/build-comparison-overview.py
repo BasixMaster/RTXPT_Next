@@ -84,11 +84,15 @@ def build(repo):
     precision_path=dev/'2026-10-29-gbuffer-precision/quality-summary.json'
     precision=load(precision_path) if precision_path.exists() else None
     if precision:inputs.append(precision_path)
+    di_reuse_path=dev/'2026-10-29-di-reuse-isolation/quality-summary.json'
+    di_reuse=load(di_reuse_path) if di_reuse_path.exists() else None
+    if di_reuse:inputs.append(di_reuse_path)
     data=dict(schema_version=1,numbering_scheme=registry['numbering_scheme'],updated_on='2026-10-29',
               metrics=dict(gpu_busy_ms='Median of per-process GPUBusy medians; not complete critical-path frame time/FPS',
                            ldr_flip='Official LDR-FLIP1.7, PPD67; lower is better',hdr_flip='Official HDR-FLIP1.7; scene-reference-only exposure parameters'),
               source_hashes={p.relative_to(repo).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},rows=rows)
     if precision:data['material_precision_ablation']=precision
+    if di_reuse:data['di_reuse_ablation']=di_reuse
     (doc/'comparison-overview.json').write_text(json.dumps(data,indent=2,allow_nan=False)+'\n',encoding='utf-8')
     md=['# B0–B10 comparison overview','',
         'All eleven canonical versions appear below for each required scene. Performance, quality and representative pictures share the same row. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; a raw native-control preset does not replace its original defaults.','',
@@ -141,6 +145,22 @@ def build(repo):
                     pictures.append(f'<a href="{name}"><img src="{name}" width="120" alt="{scene} {variant} rounded={mode}"></a>')
                 md.append(f"|{scene.title()} / {variant}|{a['mean_signed_y_percent']:+.3f}%|{c['mean_signed_y_percent']:+.3f}%|{a['median_hdr_flip']:.5f} → {c['median_hdr_flip']:.5f}|{' '.join(pictures)}|")
         md += ['', 'Signed Y uses raw linear HDR against the same finite reference, without brightness normalization. The full report includes sample standard errors, LDR-FLIP and all per-seed data. No general energy-preservation or unbiasedness claim.','']
+    if di_reuse:
+        md += ['## DI reuse isolation — renderer unchanged','',
+               'A separate fixed-1spp five-seed study compares initial-only, temporal-only, spatial-only and combined DI within B4/B7. Material rounding remains off. These are quality-only ablations, not replacements for canonical timings. [Full settings, uncertainty, contrasts and pictures](DI_REUSE_ISOLATION.md).','',
+               '|Scene / variant|DI initial Y difference|Temporal Y difference|Spatial Y difference|Combined Y difference|Seed0 initial / combined|',
+               '|---|---:|---:|---:|---:|---|']
+        by_key={(x['scene'],x['variant'],x['di_mode']):x for x in di_reuse['groups']}
+        for scene in ['convergence','kitchen']:
+            for variant in ['B4','B7']:
+                values=[f"{by_key[scene,variant,mode]['mean_signed_y_percent']:+.3f}%" for mode in range(4)]
+                pictures=[]
+                for mode in [0,3]:
+                    name=f'assets/di-reuse-isolation/{scene}-{variant}-di{mode}-s0.png'
+                    if not (doc/name).is_file():raise ValueError('Missing DI reuse ablation picture')
+                    pictures.append(f'<a href="{name}"><img src="{name}" width="120" alt="{scene} {variant} DI mode{mode}"></a>')
+                md.append(f"|{scene.title()} / {variant}|{'|'.join(values)}|{' '.join(pictures)}|")
+        md += ['', 'All four modes keep DI active. Mode0 disables temporal/spatial reuse, not initial RIS or final DI shading. Signed Y uses the same raw-HDR finite references; it is not brightness-normalized. Full HDR/LDR-FLIP results and sample standard errors are in the linked report.','']
     (doc/'COMPARISON_OVERVIEW.md').write_text('\n'.join(md),encoding='utf-8')
     print(json.dumps(dict(rows=len(rows),measured_rows=sum(x['gpu_busy_ms'] is not None for x in rows),images=sum(x['image'] is not None for x in rows))))
 

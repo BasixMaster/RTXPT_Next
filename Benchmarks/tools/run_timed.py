@@ -1,5 +1,6 @@
 """Capture no-image-write, process-filtered PresentMon timing of an owned renderer."""
 from pathlib import Path
+from presentmon_log import reported_loss
 from experiment_contract import prepare as prepare_experiment, verify as verify_experiment, verify_snapshot
 import argparse,subprocess,time,json,datetime,hashlib,csv
 from cap_preflight import validate_audit,validate_runtime
@@ -127,8 +128,7 @@ def main():
                 if completed and len(selected)>=616 and not list(out.glob('*.png')):manifest['status']='timed_completed'
             manifest['image_write_count']=len(list(out.glob('*.png')))
             (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
-    trace_log=(out/'presentmon.log').read_text(encoding='utf-8',errors='replace')
-    manifest['reported_trace_loss']='ETW events were lost' in trace_log
+    manifest['reported_trace_loss']=reported_loss((out/'presentmon.log').read_bytes())
     if manifest['reported_trace_loss']:manifest['status']='failed_trace_loss'
     if a.benchmark_uncapped:
         try:

@@ -1,0 +1,35 @@
+{
+  "scene": "kitchen",
+  "variant": "B7",
+  "di_mode": 0,
+  "seed": 4093,
+  "metrics": {
+    "linear_rgb_mse": 1.5114663654614808,
+    "smape_cgns_y100": 53.72768572057656,
+    "full_frame_reference_mean_luminance": 0.11080162979992278,
+    "mape_rgb_ydenom": 1.0367180116204862,
+    "relmse_project": 220.69952825284338,
+    "relative_metrics_available": true
+  },
+  "hdr_flip": {
+    "status": "measured",
+    "metric": "HDR-FLIP",
+    "evaluator": "official NVlabs flip-evaluator",
+    "evaluator_version": "1.7",
+    "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+    "mean": 0.5996259450912476,
+    "p95": 0.9330567121505737,
+    "parameters": {
+      "ppd": 67.0,
+      "startExposure": -7.385184288024902,
+      "stopExposure": 6.939349174499512,
+      "numExposures": 15,
+      "tonemapper": "ACES"
+    },
+    "inputs": "Stored nonnegative linear RGB; inputsRGB=False; no external exposure or tonemap transform"
+  },
+  "ldr_flip": 0.33279094099998474,
+  "signed_mean_y_percent": 0.06694146995531686,
+  "pfm_sha256": "3397747c8779102a3253fa3566334d87bc4640728cef6e4aef6e162d48ab4118",
+  "reference_pfm_sha256": "5c5d7929c37d1ac371a28050879c554e5e0e0b7fedfce93f829d8a846bc96185"
+}

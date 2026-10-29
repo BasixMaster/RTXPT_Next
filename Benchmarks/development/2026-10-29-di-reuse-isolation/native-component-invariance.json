@@ -1,0 +1,106 @@
+[
+  {
+    "scene": "convergence",
+    "variant": "B4",
+    "seed": 0,
+    "scope": "Separate-process pre-resampling outputs demonstrate lack of bitwise path pairing; no causal attribution to DI reuse or startup is inferred.",
+    "comparisons": [
+      {
+        "mode": 1,
+        "bitwise_equal": false,
+        "mean_y_change": -0.00013271912766288076,
+        "max_abs_change": 349.625
+      },
+      {
+        "mode": 2,
+        "bitwise_equal": false,
+        "mean_y_change": 0.0004419725790965863,
+        "max_abs_change": 275.03125
+      },
+      {
+        "mode": 3,
+        "bitwise_equal": false,
+        "mean_y_change": 0.00035755227707889083,
+        "max_abs_change": 241.28125
+      }
+    ]
+  },
+  {
+    "scene": "convergence",
+    "variant": "B7",
+    "seed": 0,
+    "scope": "Separate-process pre-resampling outputs demonstrate lack of bitwise path pairing; no causal attribution to DI reuse or startup is inferred.",
+    "comparisons": [
+      {
+        "mode": 1,
+        "bitwise_equal": false,
+        "mean_y_change": -0.00011755122836736133,
+        "max_abs_change": 13.794921875
+      },
+      {
+        "mode": 2,
+        "bitwise_equal": false,
+        "mean_y_change": -7.567065211618317e-05,
+        "max_abs_change": 65.5625
+      },
+      {
+        "mode": 3,
+        "bitwise_equal": false,
+        "mean_y_change": -0.0002044294977709263,
+        "max_abs_change": 30.3515625
+      }
+    ]
+  },
+  {
+    "scene": "kitchen",
+    "variant": "B4",
+    "seed": 0,
+    "scope": "Separate-process pre-resampling outputs demonstrate lack of bitwise path pairing; no causal attribution to DI reuse or startup is inferred.",
+    "comparisons": [
+      {
+        "mode": 1,
+        "bitwise_equal": true,
+        "mean_y_change": 0.0,
+        "max_abs_change": 0.0
+      },
+      {
+        "mode": 2,
+        "bitwise_equal": true,
+        "mean_y_change": 0.0,
+        "max_abs_change": 0.0
+      },
+      {
+        "mode": 3,
+        "bitwise_equal": true,
+        "mean_y_change": 0.0,
+        "max_abs_change": 0.0
+      }
+    ]
+  },
+  {
+    "scene": "kitchen",
+    "variant": "B7",
+    "seed": 0,
+    "scope": "Separate-process pre-resampling outputs demonstrate lack of bitwise path pairing; no causal attribution to DI reuse or startup is inferred.",
+    "comparisons": [
+      {
+        "mode": 1,
+        "bitwise_equal": false,
+        "mean_y_change": -0.00016883331374732203,
+        "max_abs_change": 163.125
+      },
+      {
+        "mode": 2,
+        "bitwise_equal": false,
+        "mean_y_change": 5.254575297817226e-05,
+        "max_abs_change": 41.1328125
+      },
+      {
+        "mode": 3,
+        "bitwise_equal": true,
+        "mean_y_change": 0.0,
+        "max_abs_change": 0.0
+      }
+    ]
+  }
+]

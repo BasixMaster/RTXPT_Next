@@ -1,0 +1,35 @@
+{
+  "hypothesis": "A persistent DI brightness discrepancy may originate before reuse or in temporal/spatial reuse; compare initial-only, temporal-only, spatial-only, combined within native-DI and PT+DI variants.",
+  "decision": "If initial-only shares the deficit, reuse is not a complete explanation. If only a reused mode differs, inspect that mode before changing the estimator. Compare signed HDR means/uncertainty and FLIP; do not promote based on brightness alone.",
+  "renderer_changes": "None; exact cbe38e0 renderer executable and shaders, legacy material packing0",
+  "dimensions": [
+    1280,
+    720
+  ],
+  "bounces": [
+    14,
+    2
+  ],
+  "history": 64,
+  "seeds": [
+    0,
+    11,
+    47,
+    1019,
+    4093
+  ],
+  "di_modes": {
+    "0": "initial only",
+    "1": "temporal only",
+    "2": "spatial only",
+    "3": "temporal+spatial"
+  },
+  "variants": {
+    "B4": "native PT+DI3.1; GI/PT reuse off",
+    "B7": "guarded ReSTIR PT+DI3.1; GI off, PT temporal+spatial fixed"
+  },
+  "reference": "Unchanged native4096spp MIP0 seed101 references from finite-guard-original-resolution; independent2048/4096seed103 checks retained",
+  "scope": "Fixed1spp terminal-frame quality; not accumulated convergence, unbiasedness or throughput proof",
+  "failure_policy": "Stop on first failure, preserve it, diagnose before any explicit continuation",
+  "source_sha": "cbe38e0fc494bdded4b4b6396f634772e65fecfb"
+}

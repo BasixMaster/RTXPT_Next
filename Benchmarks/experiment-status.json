@@ -35,6 +35,17 @@
         "status": "measured_not_promoted",
         "evidence": "Benchmarks/development/2026-10-29-gbuffer-precision",
         "default": "Legacy truncation retained; opt-in numeric0/1 precision switch"
+      },
+      "di_reuse_isolation": {
+        "status": "measured_ablation_no_algorithm_change",
+        "evidence": "Benchmarks/development/2026-10-29-di-reuse-isolation",
+        "modes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "default": "Existing renderer and material packing preserved"
       }
     },
     {
@@ -68,6 +79,17 @@
         "status": "measured_not_promoted",
         "evidence": "Benchmarks/development/2026-10-29-gbuffer-precision",
         "default": "Legacy truncation retained; opt-in numeric0/1 precision switch"
+      },
+      "di_reuse_isolation": {
+        "status": "measured_ablation_no_algorithm_change",
+        "evidence": "Benchmarks/development/2026-10-29-di-reuse-isolation",
+        "modes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "default": "Existing renderer and material packing preserved"
       }
     },
     {
@@ -184,6 +206,26 @@
       ],
       "reason": "Forty matched original-resolution captures compare inherited truncation with opt-in half-up material rounding; canonical defaults and older cohorts unchanged. No throughput.",
       "evidence": "Benchmarks/development/2026-10-29-gbuffer-precision"
+    },
+    {
+      "id": "di-reuse-isolation-measured",
+      "date": "2026-10-29",
+      "variants": [
+        "B4",
+        "B7"
+      ],
+      "reason": "Original-scene initial/temporal/spatial/combined DI quality ablation, five seeds per mode. Effective DI activation/reuse receipts verified; no runtime algorithm or throughput change.",
+      "evidence": "Benchmarks/development/2026-10-29-di-reuse-isolation"
+    },
+    {
+      "id": "corrected-original-timing-no-presentation",
+      "date": "2026-10-29",
+      "variants": [
+        "B4",
+        "B7"
+      ],
+      "reason": "First new matched timing attempt produced no PresentMon trace; zero new samples accepted. App/NVIDIA cap checks passed and temporary profile restoration verified. Presentation availability requires confirmation; quality study remains complete.",
+      "evidence": "Benchmarks/development/2026-10-29-di-reuse-isolation/excluded-timing"
     }
   ]
 }

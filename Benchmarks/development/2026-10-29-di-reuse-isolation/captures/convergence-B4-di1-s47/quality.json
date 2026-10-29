@@ -1,0 +1,35 @@
+{
+  "scene": "convergence",
+  "variant": "B4",
+  "di_mode": 1,
+  "seed": 47,
+  "metrics": {
+    "linear_rgb_mse": 2.087983014662633,
+    "smape_cgns_y100": 28.083594611161566,
+    "full_frame_reference_mean_luminance": 0.4028925357846507,
+    "mape_rgb_ydenom": 0.6203818557599802,
+    "relmse_project": 29.80833969198234,
+    "relative_metrics_available": true
+  },
+  "hdr_flip": {
+    "status": "measured",
+    "metric": "HDR-FLIP",
+    "evaluator": "official NVlabs flip-evaluator",
+    "evaluator_version": "1.7",
+    "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+    "mean": 0.41674941778182983,
+    "p95": 0.705020546913147,
+    "parameters": {
+      "ppd": 67.0,
+      "startExposure": -5.117674350738525,
+      "stopExposure": 3.6030263900756836,
+      "numExposures": 9,
+      "tonemapper": "ACES"
+    },
+    "inputs": "Stored nonnegative linear RGB; inputsRGB=False; no external exposure or tonemap transform"
+  },
+  "ldr_flip": 0.2846526801586151,
+  "signed_mean_y_percent": -0.44096738699864,
+  "pfm_sha256": "ed33bb1b839b19667f76a619862402f010425d65b4794b6b62a927dda9a11eb5",
+  "reference_pfm_sha256": "9189238be4e1ca4e482acce79b841628e6d56a2bae3fd7a14b57dafae3dff5af"
+}

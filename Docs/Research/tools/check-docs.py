@@ -240,6 +240,31 @@ if precision.exists():
     assert 'material_precision_ablation' in overview and len(overview['rows'])==33
     checks.append(dict(name='Material precision:40matched captures,8groups,2rawPFMs,exact artifacts,explicit0/1 plus implicit legacy default and separate overview ablation',status='passed'))
 
+di_reuse=P/'Benchmarks/development/2026-10-29-di-reuse-isolation'
+if di_reuse.exists():
+    import statistics,math
+    index=json.loads((di_reuse/'index.json').read_text());assert index['counts']==dict(quality=80,scenes=2,variants=2,di_modes=4,seeds=5,selected_raw_pfms=2)
+    for name,digest in index['files'].items():assert hashlib.sha256((di_reuse/name).read_bytes()).hexdigest()==digest
+    summary=json.loads((di_reuse/'quality-summary.json').read_text());assert len(summary['rows'])==80 and len(summary['groups'])==16 and len(summary['contrasts_vs_initial'])==12
+    observed=set()
+    for path in (di_reuse/'captures').glob('*/capture.json'):
+        m=json.loads(path.read_text());q=json.loads((path.parent/'quality.json').read_text());assert m['measurement_status']=='captured' and m['artifact_identity']['validated'] and m['artifact_identity_after_capture']['validated'] and m['artifact_identity']==m['artifact_identity_after_capture']
+        actual=m['effective_di_reuse'];assert actual['active'] and actual['mode']==q['di_mode'] and not actual['gi'] and actual['pt']==(q['variant']=='B7')
+        assert actual['temporal']==(q['di_mode'] in [1,3]) and actual['spatial']==(q['di_mode'] in [2,3])
+        assert m['effective_gbuffer_precision']['rounded_materials']==0 and m['effective_environment_filter']['diffuse_mip']==0
+        observed.add((q['scene'],q['variant'],q['di_mode'],q['seed']))
+    assert observed=={(scene,variant,mode,seed) for scene in ['convergence','kitchen'] for variant in ['B4','B7'] for mode in range(4) for seed in [0,11,47,1019,4093]}
+    for group in summary['groups']:
+        sample=[x for x in summary['rows'] if (x['scene'],x['variant'],x['di_mode'])==(group['scene'],group['variant'],group['di_mode'])];assert len(sample)==5 and group['n']==5
+        values=[x['signed_mean_y_percent'] for x in sample]
+        assert abs(statistics.mean(values)-group['mean_signed_y_percent'])<1e-12 and abs(statistics.stdev(values)/math.sqrt(5)-group['signed_y_sample_se'])<1e-12
+        assert statistics.median(x['hdr_flip']['mean'] for x in sample)==group['median_hdr_flip']
+    exclusion=json.loads((di_reuse/'excluded-timing/outcome.json').read_text());assert exclusion['accepted_timing_samples']==0 and exclusion['driver_restoration_verified']
+    audit=json.loads((di_reuse/'retained-trace-log-audit.json').read_text());assert audit['checked']==72 and audit['reported_loss_count']==0
+    assert len(list(di_reuse.rglob('*.pfm')))==2 and len(overview['rows'])==33 and 'di_reuse_ablation' in overview
+    assert '[RESULT_INTERPRETATION]' not in (D/'DI_REUSE_ISOLATION.md').read_text()
+    checks.append(dict(name='DI reuse isolation:80original-scene captures,16groups,12contrasts,actual activation/flags,exact artifacts,reference agreement and independent aggregate checks',status='passed'))
+
 receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 GPU sharing and B9/B10 remain planned.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))

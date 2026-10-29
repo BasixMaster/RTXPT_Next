@@ -7,6 +7,7 @@ from sampling_contract import roulette_value, seed_value, verify as verify_sampl
 from artifact_manifest import validate as validate_artifacts
 from extended_scene_contract import validate_request as validate_extended_request, verify as verify_extended
 from environment_filter_contract import verify as verify_environment_filter
+from di_reuse_contract import verify as verify_di_reuse
 from gbuffer_precision_contract import verify as verify_gbuffer_precision, validate_request as validate_gbuffer_request
 
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
@@ -156,6 +157,8 @@ def main():
             except ValueError as exc:manifest['measurement_status']='failed_canonical_experiment';manifest['canonical_failure']=str(exc)
             try:manifest['effective_gbuffer_precision']=verify_gbuffer_precision((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.rounded_gbuffer_materials)
             except ValueError as exc:manifest['measurement_status']='failed_gbuffer_precision_contract';manifest['gbuffer_precision_failure']=str(exc)
+            try:manifest['effective_di_reuse']=verify_di_reuse((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.di_mode,a.mode in ['di','dipt','digi'])
+            except ValueError as exc:manifest['measurement_status']='failed_di_reuse_contract';manifest['di_reuse_failure']=str(exc)
             manifest['resource_scope']='nvidia-smi values cover the whole device including other applications; not renderer-exclusive allocation.'
             manifest['resource_samples']=samples
             if a.artifact_manifest:

@@ -85,6 +85,17 @@
         "status": "measured_not_promoted",
         "evidence": "Benchmarks/development/2026-10-29-gbuffer-precision",
         "default": "Legacy truncation retained; opt-in numeric0/1 precision switch"
+      },
+      "di_reuse_isolation": {
+        "status": "measured_ablation_no_algorithm_change",
+        "evidence": "Benchmarks/development/2026-10-29-di-reuse-isolation",
+        "modes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "default": "Existing renderer and material packing preserved"
       }
     },
     {
@@ -153,6 +164,17 @@
         "status": "measured_not_promoted",
         "evidence": "Benchmarks/development/2026-10-29-gbuffer-precision",
         "default": "Legacy truncation retained; opt-in numeric0/1 precision switch"
+      },
+      "di_reuse_isolation": {
+        "status": "measured_ablation_no_algorithm_change",
+        "evidence": "Benchmarks/development/2026-10-29-di-reuse-isolation",
+        "modes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "default": "Existing renderer and material packing preserved"
       }
     },
     {

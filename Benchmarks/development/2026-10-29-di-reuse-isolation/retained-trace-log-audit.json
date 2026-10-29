@@ -1,0 +1,439 @@
+{
+  "scope": "All retained exported presentmon.log files under Benchmarks/development, excluding the new failed attempt; no claim about unavailable private/original logs",
+  "checked": 72,
+  "reported_loss_count": 0,
+  "rows": [
+    {
+      "path": "Benchmarks/development/2026-10-28-b2-static-opaque/timing/B0-native-trial1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b2-static-opaque/timing/B0-native-trial2/presentmon.log",
+      "sha256": "2ead3fbd8eb0f11981195eac919a95ae2b35d036ef7c11cc0e46da61c9a29565",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b2-static-opaque/timing/B0-native-trial3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b2-static-opaque/timing/B1-native-trial1/presentmon.log",
+      "sha256": "a70074e8355a7c49a9ffab3cf5bf02ee4cbbc7630e08d16559fc06e3f0189fc9",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b2-static-opaque/timing/B1-native-trial2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b2-static-opaque/timing/B1-native-trial3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b2-static-opaque/timing/B2-partition-static-trial1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b2-static-opaque/timing/B2-partition-static-trial2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b2-static-opaque/timing/B2-partition-static-trial3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b3-activation/timing/combined-trial1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b3-activation/timing/combined-trial2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b3-activation/timing/combined-trial3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b3-activation/timing/control-trial1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b3-activation/timing/control-trial2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b3-activation/timing/control-trial3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b3-activation/timing/footprint-trial1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b3-activation/timing/footprint-trial2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b3-activation/timing/footprint-trial3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b3-activation/timing/roulette-trial1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b3-activation/timing/roulette-trial2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-28-b3-activation/timing/roulette-trial3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di-timing/timing/convergence-B1-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di-timing/timing/convergence-B1-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di-timing/timing/convergence-B1-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di-timing/timing/convergence-B4-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di-timing/timing/convergence-B4-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di-timing/timing/convergence-B4-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di-timing/timing/kitchen-B1-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di-timing/timing/kitchen-B1-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di-timing/timing/kitchen-B1-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di-timing/timing/kitchen-B4-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di-timing/timing/kitchen-B4-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-canonical-native-di-timing/timing/kitchen-B4-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/convergence-B2-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/convergence-B2-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/convergence-B2-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/convergence-B3-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/convergence-B3-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/convergence-B3-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/convergence-B5-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/convergence-B5-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/convergence-B5-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/kitchen-B2-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/kitchen-B2-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/kitchen-B2-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/kitchen-B3-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/kitchen-B3-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/kitchen-B3-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/kitchen-B5-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/kitchen-B5-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/kitchen-B5-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/opaque-room-B2-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/opaque-room-B2-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/opaque-room-B2-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/opaque-room-B3-r1/presentmon.log",
+      "sha256": "fb4dbdc3ae12cf91572a83de77604deb173127baad89befe1a4f2896808063ee",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/opaque-room-B3-r2/presentmon.log",
+      "sha256": "4088d428209a24b28df7d01ee030bfae73c374ed43c14dc67df3f91d2b797f41",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/opaque-room-B3-r3/presentmon.log",
+      "sha256": "c029cc2f2e44ce51a6e6e8f9c8b678f095af708c8d4f15de9f3e5d6b8215ed83",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/opaque-room-B5-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/opaque-room-B5-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion/timing/opaque-room-B5-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-registered-room/timing/B1-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-registered-room/timing/B1-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-registered-room/timing/B1-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-registered-room/timing/B4-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-registered-room/timing/B4-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-registered-room/timing/B4-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-registered-room/timing/B6-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-registered-room/timing/B6-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-registered-room/timing/B6-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-registered-room/timing/B7-r1/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-registered-room/timing/B7-r2/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    },
+    {
+      "path": "Benchmarks/development/2026-10-29-registered-room/timing/B7-r3/presentmon.log",
+      "sha256": "4b0d26f9781d364e56df7b45b2155cd18f66392b00f77ffbc1c9c3d00d6d272f",
+      "utf16_bom": true,
+      "reported_trace_loss": false
+    }
+  ]
+}

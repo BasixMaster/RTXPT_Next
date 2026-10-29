@@ -560,6 +560,19 @@
       "limitations": "One GPU, static guarded scenes and finite references. Half-up after fp16 is not exact material reconstruction or estimator-unbiasedness proof. No throughput or default promotion.",
       "notes": "Original baselines/defaults preserved. Failed Boolean-option warmup rejected before measured numeric0/1 cohort.",
       "rights": "Project renderer and original measured evidence; no paper artwork copied."
+    },
+    {
+      "id": "LOCAL-DI-REUSE-ISOLATION",
+      "title": "Original-scene DI initial and reuse-stage isolation",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/DI_REUSE_ISOLATION.md",
+      "kind": "experiment",
+      "published_on": "2026-10-29",
+      "checked_on": "2026-10-29",
+      "access": "full",
+      "quality": "Eighty raw-HDR quality captures, original scenes, two algorithms, four DI modes and five explicit seeds with frozen artifact and actual mode receipts.",
+      "limitations": "Finite reference and five-seed static quality only; no accumulated convergence, unbiasedness proof, general scene acceptance or throughput result.",
+      "notes": "Unchanged renderer; legacy material rounding. Separate-process native outputs need not be bit-identical. Initial-only mode keeps DI active.",
+      "rights": "Project renderer and original experimental evidence; no copied paper artwork."
     }
   ],
   "findings": [
@@ -1547,6 +1560,35 @@
           "note": "Local GPU ablation and calculated packing-domain oracle, not a paper performance reproduction."
         }
       ]
+    },
+    {
+      "id": "DI-INITIAL-VS-REUSE-ISOLATION",
+      "title": "Separate DI initial sampling from temporal/spatial reuse",
+      "question_ids": [
+        "Q3"
+      ],
+      "topic": "Implementation correctness",
+      "claim": "Kitchen already differs from the native reference in initial-only DI: B4 −1.159% ±0.120% sample SE and B7 −1.004% ±0.316%. Temporal/spatial reuse is not the sole explanation. Reuse lowers perceptual error, while preferred mode depends on scene and HDR/LDR metric.",
+      "evidence_type": "measured",
+      "confidence": "medium",
+      "context": "B4 native PT+DI3.1 and guarded B7 ReSTIR PT+DI3.1, original720p scenes,14/2 bounce limits,MIP0,strictDI,five seeds. PT reuse fixed within B7.",
+      "strengths": "Explicit actual activation/mode checks; same renderer/reference/settings; all per-seed images and metric receipts retained.",
+      "limitations": "Process captures are not identical sampled paths; material/primary policies differ across B4/B7. Study cannot establish unbiasedness or throughput.",
+      "implications": "Inspect an initial-only deficit before attributing all darkening to temporal/spatial reuse. Preserve default behavior and avoid brightness compensation.",
+      "tags": [
+        "ReSTIR",
+        "DI",
+        "validation",
+        "HDR"
+      ],
+      "evidence": [
+        {
+          "source_id": "LOCAL-DI-REUSE-ISOLATION",
+          "locator": "DI_REUSE_ISOLATION.md; Benchmarks/development/2026-10-29-di-reuse-isolation/index.json",
+          "relation": "supports",
+          "note": "Frozen local GPU mode ablation, not a new algorithm or paper speedup reproduction."
+        }
+      ]
     }
   ],
   "actions": [
@@ -1634,7 +1676,8 @@
     "2026-10-29: Added unified33row B0–B10 performance/quality/image overview and fresh27quality/27timing nativeB2/B3/B5 cohort. Original-scene PT implementation remains an explicitly guarded development path, separate from accepted native measurements.",
     "2026-10-29: Original-scene guarded rendering and path-local fixes verified; quality discrepancy retained, exact-primary experiment rejected.",
     "2026-10-29: Finite rejected-shift targets verified with original-resolution5seed quality, matched environment filtering and native-DI controls; startup failures and remaining limits retained.",
-    "2026-10-29: Added a separate40capture material-packing precision ablation; legacy defaults, canonical cohorts and timing values remain preserved."
+    "2026-10-29: Added a separate40capture material-packing precision ablation; legacy defaults, canonical cohorts and timing values remain preserved.",
+    "2026-10-29: Added80capture initial/temporal/spatial/combined DI isolation; unchanged runtime/defaults and separate quality-only comparisons."
   ],
   "evidence_page": "evidence/index.html",
   "guide_pages": [

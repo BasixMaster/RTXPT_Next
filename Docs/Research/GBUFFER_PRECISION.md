@@ -55,6 +55,8 @@ The export contains 40 PNG images, sanitized capture/settings/metric receipts, t
 
 ## Summary and lessons learned
 
+Follow-up: [DI initial/temporal/spatial isolation](DI_REUSE_ISOLATION.md) keeps material rounding off and compares effective reuse modes without changing the renderer.
+
 B7 Convergence mean luminance moved from−0.351% to−0.037%; its seed-paired change was+0.314percentage points ±0.081 SE. Kitchen B7 stayed near−1.1%, with a change of−0.051percentage points ±0.191 SE. Native B4 shows no consistent brightness improvement across scenes. This supports a scene-dependent precision effect, not a complete explanation of the remaining DI discrepancy.
 
 B7 median HDR-FLIP improves slightly in both scenes. Kitchen B4 median HDR-FLIP is effectively unchanged and its mean per-seed HDR-FLIP change is positive. Lower absolute mean-brightness error alone would not establish better image quality. Keep legacy packing as the default and retain rounding as a named diagnostic ablation.

@@ -178,8 +178,8 @@
       "name": "Structured evidence schema separately validated; SQLite metric search",
       "status": "passed",
       "smape_matches": 2,
-      "sources": 30,
-      "findings": 35
+      "sources": 31,
+      "findings": 36
     },
     {
       "name": "No full-paper PDFs exported",
@@ -208,6 +208,10 @@
     },
     {
       "name": "Material precision:40matched captures,8groups,2rawPFMs,exact artifacts,explicit0/1 plus implicit legacy default and separate overview ablation",
+      "status": "passed"
+    },
+    {
+      "name": "DI reuse isolation:80original-scene captures,16groups,12contrasts,actual activation/flags,exact artifacts,reference agreement and independent aggregate checks",
       "status": "passed"
     }
   ],

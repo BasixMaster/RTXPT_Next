@@ -1,5 +1,7 @@
 # Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap
 
+[DI-stage isolation: initial sampling versus temporal/spatial reuse](DI_REUSE_ISOLATION.md).
+
 [DI brightness follow-up: matched material-precision ablation](GBUFFER_PRECISION.md). Canonical defaults remain unchanged.
 
 [**B0–B10 comparison overview: performance, quality and pictures**](COMPARISON_OVERVIEW.md) shows all eleven versions for each required scene, including missing or unsupported results.

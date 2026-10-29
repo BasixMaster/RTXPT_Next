@@ -1,0 +1,38 @@
+{
+  "scope": "Matched raw native PT+DI3.1 versus guarded ReSTIR PT+DI3.1, GI off, corrected original scenes; no image/diagnostic writes",
+  "quality_source": "2026-10-29-di-reuse-isolation, DI mode3 only, five quality seeds",
+  "dimensions": [
+    1280,
+    720
+  ],
+  "bounces": [
+    14,
+    2
+  ],
+  "environment_diffuse_mip": 0,
+  "legacy_material_packing": true,
+  "strict_di": true,
+  "di_mode": 3,
+  "seed": 0,
+  "warmup_seconds": 45,
+  "measurement_seconds": 15,
+  "repeats": 3,
+  "orders": [
+    [
+      "B4",
+      "B7"
+    ],
+    [
+      "B7",
+      "B4"
+    ],
+    [
+      "B4",
+      "B7"
+    ]
+  ],
+  "selection": "Last600 Original/NotSet rows for target process/swapchain, drop final16",
+  "scope_limits": "Process GPU engine active intervals are not full critical-path GPU latency or display FPS; one GPU and observed/unlocked clocks. Fixed1spp quality is not equal-time/error convergence.",
+  "cap_policy": "Existing app uncapped + temporary owned NVIDIA application association, verify known bounds, restore after every process. RTSS read-only SDK/profile audits under user earlier confirmation.",
+  "failure_policy": "Stop on first failed timing/receipt/restoration; preserve attempt, no automatic retries"
+}
