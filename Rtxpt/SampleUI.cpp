@@ -187,6 +187,11 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     m_ui.UseReSTIRPT                = cmdLine.UseReSTIRPT != 0;
     m_ui.B8InitialGIValidation = cmdLine.B8InitialGIValidation;
     m_ui.B8ValidationStage = cmdLine.B8ValidationStage;
+    if (cmdLine.B8GIReuseMode < -1 || cmdLine.B8GIReuseMode > 3 ||
+        (cmdLine.B8GIReuseMode >= 0 && !cmdLine.B8InitialGIValidation))
+        throw std::runtime_error("B8 NVIDIA GI approximation requires explicit development partition and mode0..3");
+    if (cmdLine.B8GIReuseMode >= 0)
+        m_ui.RTXDI.restirGI.resamplingMode = static_cast<rtxdi::ReSTIRGI_ResamplingMode>(cmdLine.B8GIReuseMode);
     if (cmdLine.PTGaussianPairingValidation && !cmdLine.PTPairedSpatialValidation)
         throw std::runtime_error("Gaussian pairing requires the explicit paired spatial development path");
     if (cmdLine.PTPairedSpatialValidation && (!cmdLine.B8InitialGIValidation || cmdLine.B8ValidationStage == 0 ||

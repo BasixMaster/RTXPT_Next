@@ -274,25 +274,25 @@
       "variant": "B8",
       "scene": "convergence",
       "algorithm": "ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1",
-      "status": "low_resolution_development_not_accepted",
-      "reason": "Disjoint initial-GI development executes; DI/PT reuse exercised in room. GI reuse, extended quality/convergence and new timing remain pending.",
-      "development_evidence": "Benchmarks/development/2026-10-29-b8-staged-partition/summary.json"
+      "status": "development_not_accepted",
+      "reason": "NVIDIA approximate GI reuse over disjoint short/long domains:14GPU snapshots, six64-frame quality sequences and18uncapped timings. Quality mixed; scoped checkpoint rows show actual metrics. Motion/equal-time/independent replication and canonical promotion pending.",
+      "development_evidence": "Benchmarks/development/2026-10-29-b8-nvidia-gi/summary.json"
     },
     {
       "variant": "B8",
       "scene": "kitchen",
       "algorithm": "ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1",
-      "status": "low_resolution_development_not_accepted",
-      "reason": "Disjoint initial-GI development executes; DI/PT reuse exercised in room. GI reuse, extended quality/convergence and new timing remain pending.",
-      "development_evidence": "Benchmarks/development/2026-10-29-b8-staged-partition/summary.json"
+      "status": "development_not_accepted",
+      "reason": "NVIDIA approximate GI reuse over disjoint short/long domains:14GPU snapshots, six64-frame quality sequences and18uncapped timings. Quality mixed; scoped checkpoint rows show actual metrics. Motion/equal-time/independent replication and canonical promotion pending.",
+      "development_evidence": "Benchmarks/development/2026-10-29-b8-nvidia-gi/summary.json"
     },
     {
       "variant": "B8",
       "scene": "opaque-room",
       "algorithm": "ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1",
-      "status": "low_resolution_development_not_accepted",
-      "reason": "Disjoint initial-GI development executes; DI/PT reuse exercised in room. GI reuse, extended quality/convergence and new timing remain pending.",
-      "development_evidence": "Benchmarks/development/2026-10-29-b8-staged-partition/summary.json"
+      "status": "development_not_accepted",
+      "reason": "NVIDIA approximate GI reuse over disjoint short/long domains:14GPU snapshots, six64-frame quality sequences and18uncapped timings. Quality mixed; scoped checkpoint rows show actual metrics. Motion/equal-time/independent replication and canonical promotion pending.",
+      "development_evidence": "Benchmarks/development/2026-10-29-b8-nvidia-gi/summary.json"
     },
     {
       "variant": "B9",

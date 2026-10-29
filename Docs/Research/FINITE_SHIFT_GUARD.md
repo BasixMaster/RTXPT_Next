@@ -94,3 +94,11 @@ A rejected path must contribute finite zero throughout MIS, including inverse no
 ## Changes
 
 - 2026-10-29: Added finite rejected-shift targets, raw/returned GPU diagnostics, matched filtering controls, source-level startup diagnosis, full-resolution quality and supplementary native-DI controls.
+
+## Published guidance for the remaining brightness difference
+
+NVIDIA's [Noise and Bias guide](https://github.com/NVIDIA-RTX/RTXDI/blob/main/Doc/NoiseAndBias.md) identifies incorrect target support, approximate reuse normalization, reused visibility and inconsistent previous-frame data as sources of brightness bias. In its documented DI pipeline, Basic correction is incomplete; ray-traced correction additionally tests whether each source could generate the selected sample. These mechanisms motivate controlled diagnostics, not a claim that one setting fixes every renderer or the separate GI approximation.
+
+Our Kitchen deficit also occurs with DI reuse disabled, as shown in [the isolation study](DI_REUSE_ISOLATION.md). Thus reuse normalization alone cannot explain it. The [material-precision test](GBUFFER_PRECISION.md) did not resolve Kitchen, and [the prefix-throughput probe](PREFIX_THROUGHPUT.md) did not observe the hypothesized above-one clamp losses in its eight physical samples. The next targeted investigation remains initial DI proposal/support, PDFs, BSDF/geometry factors and final contribution weights against a matched native direct estimator. Do not introduce an image brightness multiplier or claim the residual is a benefit of an improved algorithm.
+
+The [ReSTIR PT integration guide](https://github.com/NVIDIA-RTX/RTXDI/blob/main/Doc/RestirPT.md) recommends sharing path-tracer callbacks between initial sampling and hybrid replay to preserve consistency. The [GI guide](https://github.com/NVIDIA-RTX/RTXDI/blob/main/Doc/RestirGI.md) recommends checking initial GI without reuse for missing throughput/visibility factors. Its non-directional secondary-radiance approximation is a separate possible source of bias once GI reuse is enabled; it cannot explain the earlier GI-off B4/B7 deficit. Brightness investigation remains deferred while the requested B8 approximation is evaluated.

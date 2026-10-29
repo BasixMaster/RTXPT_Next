@@ -1,0 +1,51 @@
+{
+  "scope": "B8 disjoint DI/GI-short/PT-long: legacy initial-only GI versus NVIDIA non-directional temporal+spatial GI approximation; no general acceptance claim",
+  "warmup_seconds": 30,
+  "measurement_seconds": 15,
+  "repeats": 3,
+  "orders": [
+    [
+      "initial",
+      "gi"
+    ],
+    [
+      "gi",
+      "initial"
+    ],
+    [
+      "initial",
+      "gi"
+    ]
+  ],
+  "scenes": {
+    "opaque-room": [
+      "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+      0,
+      640,
+      360,
+      4,
+      4
+    ],
+    "convergence": [
+      "convergence-test.scene.json",
+      0,
+      1280,
+      720,
+      14,
+      2
+    ],
+    "kitchen": [
+      "kitchen-with-test-stuff.scene.json",
+      2,
+      1280,
+      720,
+      14,
+      2
+    ]
+  },
+  "selection": "Last600 Original/NotSet process/swapchain rows, drop final16",
+  "caps": "App uncapped; transactional exact-executable NVIDIA profile; read-only RTSS checks; restore every process",
+  "quality": "Separate full-resolution snapshots and64-frame static sequences; not equal-time quality or independent seed replication",
+  "desktop": "User confirmed active and display connected",
+  "timing_scope": "PresentMon per-process GPU engine busy and CPU cadence, not complete critical-path frame latency/FPS"
+}

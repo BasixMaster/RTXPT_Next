@@ -1,10 +1,10 @@
 # B8: disjoint DI, GI and ReSTIR PT contribution ownership
 
-Design/source audit only, 2026-10-29 Europe/Zurich. No B8 renderer implementation, build, GPU execution or unbiasedness result is asserted. Use [the canonical B0–B10 ledger](VERSION_MAPPING.md); this note proposes a transport contract for the requested combined mode.
+Retained strict-track design/source audit, 2026-10-29 Europe/Zurich. Subsequent initial-only implementation and the opt-in NVIDIA GI approximation are tracked in [the staged implementation](B8_STAGED_IMPLEMENTATION.md). This note is not a claim that strict glossy GI reuse is implemented. Use [the canonical B0–B10 ledger](VERSION_MAPPING.md); this note proposes a transport contract for the requested combined mode.
 
 ## Main conclusion
 
-DI, GI and PT may run together only after their **integrands** are disjoint. The current GI path collects the entire suffix after its first eligible non-delta scatter, while current ReSTIR PT also estimates indirect suffixes. Enabling both toggles would overlap. Moreover, “GI owns emission at the first secondary surface” overlaps ordinary DI: camera→primary→emitter already is a primary direct-light path.
+DI, GI and PT need either disjoint contribution domains or a correctly derived weighted combination over overlapping domains. This project chooses a **disjoint integrand partition** for B8. The current GI path collects the entire suffix after its first eligible non-delta scatter, while current ReSTIR PT also estimates indirect suffixes. Enabling both toggles would overlap. Moreover, “GI owns emission at the first secondary surface” overlaps ordinary DI: camera→primary→emitter already is a primary direct-light path.
 
 Use accepted **scattering count**, not UI names or raw ray-hit counts:
 
@@ -12,6 +12,8 @@ Use accepted **scattering count**, not UI names or raw ray-hit counts:
 - DI owns one-scattering direct lighting at the primary surface.
 - GI owns a restricted, provably valid two-scattering domain.
 - ReSTIR PT owns three-or-more-scattering paths.
+
+**Track distinction:** the user selected NVIDIA's documented non-directional GI approximation for practical B8 reuse. It retains the disjoint short-GI/long-PT split and explicitly accepts the inherited GI approximation and bias controls. Exact outgoing-direction reevaluation remains a separate research enhancement, not a prerequisite for that approximate track.
 
 For the first strict GI implementation that reuses unchanged secondary RGB, restrict its secondary endpoint to a **verified outgoing-direction-independent Lambertian response**. Native traces the remaining two-scattering paths. The current GI reservoir cannot correctly reevaluate glossy secondary outgoing radiance after reconnection, and the default diffuse model is Frostbite, not Lambertian. A later general GI implementation needs extended payload/reevaluation; it must not silently claim exact glossy reuse.
 

@@ -1,0 +1,800 @@
+{
+  "status": "measured_development_not_promoted",
+  "scope": "NVIDIA non-directional GI reuse on disjoint GI-short/PT-long contribution domains; original materials/cameras, no brightness fitting",
+  "runs": [
+    {
+      "group": "smoke",
+      "case": "room-cap1",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": [
+        {
+          "name": "frame_room-cap1.pfm.pt.bin.gi.bin",
+          "statistics": {
+            "pixels": 16107,
+            "valid": 8645,
+            "positive_weight": 0,
+            "m_greater_than_one": 8507,
+            "positive_age_valid": 8489,
+            "max_age_valid": 7,
+            "mean_m_valid": 16.54493927125506
+          }
+        }
+      ],
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 1,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.2159387222946545,
+                0.2159387222946545,
+                0.2159387222946545
+              ],
+              "nonzero_pixels": 175
+            },
+            "di": {
+              "mean_rgb": [
+                0.09441298966139265,
+                0.09386773441596767,
+                0.07510259109346562
+              ],
+              "nonzero_pixels": 7300
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "nonzero_pixels": 0
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "nonzero_pixels": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "group": "smoke",
+      "case": "room-cap2",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": [
+        {
+          "name": "frame_room-cap2.pfm.pt.bin.gi.bin",
+          "statistics": {
+            "pixels": 16107,
+            "valid": 8640,
+            "positive_weight": 8101,
+            "m_greater_than_one": 8000,
+            "positive_age_valid": 6981,
+            "max_age_valid": 7,
+            "mean_m_valid": 14.522337962962963
+          }
+        }
+      ],
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 2,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.2159387222946545,
+                0.2159387222946545,
+                0.2159387222946545
+              ],
+              "nonzero_pixels": 175
+            },
+            "di": {
+              "mean_rgb": [
+                0.09454419350960094,
+                0.09363485200079324,
+                0.07490406045184245
+              ],
+              "nonzero_pixels": 7306
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03632128519549186,
+                0.03093254005560375,
+                0.021408950204903122
+              ],
+              "nonzero_pixels": 8097
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "nonzero_pixels": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "group": "smoke",
+      "case": "room-first",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": [
+        {
+          "name": "frame_room-first.pfm.pt.bin.gi.bin",
+          "statistics": {
+            "pixels": 16107,
+            "valid": 8613,
+            "positive_weight": 5362,
+            "m_greater_than_one": 2611,
+            "positive_age_valid": 0,
+            "max_age_valid": 0,
+            "mean_m_valid": 1.3289213978869152
+          }
+        }
+      ],
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.2159387222946545,
+                0.2159387222946545,
+                0.2159387222946545
+              ],
+              "nonzero_pixels": 175
+            },
+            "di": {
+              "mean_rgb": [
+                0.09198238985153774,
+                0.0912668812228306,
+                0.0724816108990361
+              ],
+              "nonzero_pixels": 7180
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03261806785842001,
+                0.030147310304502583,
+                0.018455344279059458
+              ],
+              "nonzero_pixels": 5313
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.017885220526701585,
+                0.01836790904627541,
+                0.009041953469489165
+              ],
+              "nonzero_pixels": 5205
+            }
+          }
+        }
+      ]
+    },
+    {
+      "group": "smoke",
+      "case": "room-gi-1",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": null,
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.2159387222946545,
+                0.2159387222946545,
+                0.2159387222946545
+              ],
+              "nonzero_pixels": 175
+            },
+            "di": {
+              "mean_rgb": [
+                0.0939148767312575,
+                0.09300865373657632,
+                0.07433584912896282
+              ],
+              "nonzero_pixels": 7310
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02833692130262702,
+                0.029550176777860086,
+                0.017870081946075225
+              ],
+              "nonzero_pixels": 4624
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01792803267019898,
+                0.018025968552464664,
+                0.008741458801019198
+              ],
+              "nonzero_pixels": 8418
+            }
+          }
+        }
+      ]
+    },
+    {
+      "group": "smoke",
+      "case": "room-gi0",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": [
+        {
+          "name": "frame_room-gi0.pfm.pt.bin.gi.bin",
+          "statistics": {
+            "pixels": 16107,
+            "valid": 8600,
+            "positive_weight": 8600,
+            "m_greater_than_one": 0,
+            "positive_age_valid": 0,
+            "max_age_valid": 0,
+            "mean_m_valid": 1.0
+          }
+        }
+      ],
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.2159387222946545,
+                0.2159387222946545,
+                0.2159387222946545
+              ],
+              "nonzero_pixels": 175
+            },
+            "di": {
+              "mean_rgb": [
+                0.09403732829589213,
+                0.0932183715931092,
+                0.07463956275539572
+              ],
+              "nonzero_pixels": 7298
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02756448197484705,
+                0.028792622180863408,
+                0.01710444305790805
+              ],
+              "nonzero_pixels": 4626
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01792879608850236,
+                0.01802671690215728,
+                0.008742083856022882
+              ],
+              "nonzero_pixels": 8417
+            }
+          }
+        }
+      ]
+    },
+    {
+      "group": "smoke",
+      "case": "room-gi1",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": [
+        {
+          "name": "frame_room-gi1.pfm.pt.bin.gi.bin",
+          "statistics": {
+            "pixels": 16107,
+            "valid": 8635,
+            "positive_weight": 7278,
+            "m_greater_than_one": 7107,
+            "positive_age_valid": 5703,
+            "max_age_valid": 7,
+            "mean_m_valid": 5.290677475390851
+          }
+        }
+      ],
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.2159387222946545,
+                0.2159387222946545,
+                0.2159387222946545
+              ],
+              "nonzero_pixels": 175
+            },
+            "di": {
+              "mean_rgb": [
+                0.09526170890202637,
+                0.09455201259396215,
+                0.07575847450607928
+              ],
+              "nonzero_pixels": 7300
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03373136890884099,
+                0.0311862873159219,
+                0.02065411085166796
+              ],
+              "nonzero_pixels": 7270
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.017925520641751787,
+                0.01802531817094525,
+                0.00874017520109842
+              ],
+              "nonzero_pixels": 8410
+            }
+          }
+        }
+      ]
+    },
+    {
+      "group": "smoke",
+      "case": "room-gi2",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": [
+        {
+          "name": "frame_room-gi2.pfm.pt.bin.gi.bin",
+          "statistics": {
+            "pixels": 16107,
+            "valid": 8616,
+            "positive_weight": 5307,
+            "m_greater_than_one": 2672,
+            "positive_age_valid": 0,
+            "max_age_valid": 0,
+            "mean_m_valid": 1.3393686165273908
+          }
+        }
+      ],
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.2159387222946545,
+                0.2159387222946545,
+                0.2159387222946545
+              ],
+              "nonzero_pixels": 175
+            },
+            "di": {
+              "mean_rgb": [
+                0.09445222433092815,
+                0.09361004866782222,
+                0.07487442369914599
+              ],
+              "nonzero_pixels": 7313
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02893478046873025,
+                0.028755955869439388,
+                0.017658547204381713
+              ],
+              "nonzero_pixels": 5267
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01792758290251222,
+                0.018026585536584247,
+                0.008741550108215148
+              ],
+              "nonzero_pixels": 8419
+            }
+          }
+        }
+      ]
+    },
+    {
+      "group": "smoke",
+      "case": "room-gi3",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": [
+        {
+          "name": "frame_room-gi3.pfm.pt.bin.gi.bin",
+          "statistics": {
+            "pixels": 16107,
+            "valid": 8638,
+            "positive_weight": 8164,
+            "m_greater_than_one": 7958,
+            "positive_age_valid": 6904,
+            "max_age_valid": 7,
+            "mean_m_valid": 14.40680713128039
+          }
+        }
+      ],
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.2159387222946545,
+                0.2159387222946545,
+                0.2159387222946545
+              ],
+              "nonzero_pixels": 175
+            },
+            "di": {
+              "mean_rgb": [
+                0.09279624780566804,
+                0.09235444422014497,
+                0.07354837212326022
+              ],
+              "nonzero_pixels": 7306
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.037363726847618954,
+                0.031814640372974906,
+                0.02227649111361997
+              ],
+              "nonzero_pixels": 8168
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01792579709821154,
+                0.018025297695841287,
+                0.008740530608641321
+              ],
+              "nonzero_pixels": 8404
+            }
+          }
+        }
+      ]
+    },
+    {
+      "group": "full",
+      "case": "convergence-gi-1",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": null,
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 14,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.22800219442844133,
+                0.20801653117200153,
+                0.18572738669806213
+              ],
+              "nonzero_pixels": 163838
+            },
+            "di": {
+              "mean_rgb": [
+                0.14959103126098247,
+                0.10862378010299936,
+                0.07816753901541233
+              ],
+              "nonzero_pixels": 729661
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.05698679739234245,
+                0.03918995525138194,
+                0.022003857736773273
+              ],
+              "nonzero_pixels": 352057
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.04752241420481975,
+                0.03179723939431521,
+                0.0158777323918831
+              ],
+              "nonzero_pixels": 743451
+            }
+          }
+        }
+      ]
+    },
+    {
+      "group": "full",
+      "case": "room-gi-1",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": null,
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.20194173177083333,
+                0.20194173177083333,
+                0.20194173177083333
+              ],
+              "nonzero_pixels": 2341
+            },
+            "di": {
+              "mean_rgb": [
+                0.10047646220695848,
+                0.09972416906462361,
+                0.07913612204940161
+              ],
+              "nonzero_pixels": 113324
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.033634566419964866,
+                0.034657112043868336,
+                0.02154012509362979
+              ],
+              "nonzero_pixels": 72581
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.019024194125862173,
+                0.019592615522495988,
+                0.009202310698779506
+              ],
+              "nonzero_pixels": 134137
+            }
+          }
+        }
+      ]
+    },
+    {
+      "group": "full",
+      "case": "room-gi3",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": [
+        {
+          "name": "frame_room-gi3.pfm.pt.bin.gi.bin",
+          "statistics": {
+            "pixels": 230400,
+            "valid": 134616,
+            "positive_weight": 133629,
+            "m_greater_than_one": 132779,
+            "positive_age_valid": 122251,
+            "max_age_valid": 31,
+            "mean_m_valid": 23.53318327687645
+          }
+        }
+      ],
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.20194173177083333,
+                0.20194173177083333,
+                0.20194173177083333
+              ],
+              "nonzero_pixels": 2341
+            },
+            "di": {
+              "mean_rgb": [
+                0.10039593732993429,
+                0.09973421082780179,
+                0.07913163638259801
+              ],
+              "nonzero_pixels": 113300
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.04080610088305548,
+                0.03474423941793955,
+                0.024300515420683143
+              ],
+              "nonzero_pixels": 133313
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01902178240707144,
+                0.019592486171621,
+                0.009201434759630098
+              ],
+              "nonzero_pixels": 134138
+            }
+          }
+        }
+      ]
+    },
+    {
+      "group": "full-continuation",
+      "case": "convergence-gi3",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": [
+        {
+          "name": "frame_convergence-gi3.pfm.pt.bin.gi.bin",
+          "statistics": {
+            "pixels": 921600,
+            "valid": 752041,
+            "positive_weight": 747874,
+            "m_greater_than_one": 748481,
+            "positive_age_valid": 691025,
+            "max_age_valid": 31,
+            "mean_m_valid": 27.37454074977295
+          }
+        }
+      ],
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 14,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.22779066361072992,
+                0.20780894542429854,
+                0.18541869572389663
+              ],
+              "nonzero_pixels": 163767
+            },
+            "di": {
+              "mean_rgb": [
+                0.14837983522848744,
+                0.1079325946363517,
+                0.07775444175207263
+              ],
+              "nonzero_pixels": 729651
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.05310099491927152,
+                0.03441873988589375,
+                0.01872088305458116
+              ],
+              "nonzero_pixels": 739308
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.04768029482162092,
+                0.031948409894959895,
+                0.016035621826498148
+              ],
+              "nonzero_pixels": 743379
+            }
+          }
+        }
+      ]
+    },
+    {
+      "group": "full-continuation",
+      "case": "kitchen-gi-1",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": null,
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 14,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.0815586849928756,
+                0.0757392426146867,
+                0.06779471929230366
+              ],
+              "nonzero_pixels": 92421
+            },
+            "di": {
+              "mean_rgb": [
+                0.020987671270203363,
+                0.01674904619434124,
+                0.013994229061257404
+              ],
+              "nonzero_pixels": 677976
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.012169525793805305,
+                0.008788627132889814,
+                0.006661310864470174
+              ],
+              "nonzero_pixels": 215526
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.008314764869994381,
+                0.005466468794943972,
+                0.00406439461299063
+              ],
+              "nonzero_pixels": 774664
+            }
+          }
+        }
+      ]
+    },
+    {
+      "group": "full-continuation",
+      "case": "kitchen-gi3",
+      "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+      "status": "captured",
+      "gi": [
+        {
+          "name": "frame_kitchen-gi3.pfm.pt.bin.gi.bin",
+          "statistics": {
+            "pixels": 921600,
+            "valid": 807620,
+            "positive_weight": 772579,
+            "m_greater_than_one": 790376,
+            "positive_age_valid": 727850,
+            "max_age_valid": 31,
+            "mean_m_valid": 24.89516604343627
+          }
+        }
+      ],
+      "same_frame": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 14,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.08154472090297431,
+                0.07572820759850503,
+                0.06778793549488506
+              ],
+              "nonzero_pixels": 92428
+            },
+            "di": {
+              "mean_rgb": [
+                0.020696788004198524,
+                0.016456679750634876,
+                0.013616680591237836
+              ],
+              "nonzero_pixels": 675074
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.0059038497863932405,
+                0.004389604099819229,
+                0.0031609781435044068
+              ],
+              "nonzero_pixels": 747105
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.008434737717551696,
+                0.005573415856730814,
+                0.004174325329109302
+              ],
+              "nonzero_pixels": 774259
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "quality_status": "measured",
+  "timing_status": "measured",
+  "canonical_acceptance": false,
+  "raw_scope": "Large raw captures/reservoirs retained locally with hashes; small combined-GI snapshot bundled. No general unbiasedness, motion or equal-time convergence claim.",
+  "sequence_count": 6,
+  "timed_process_count": 18
+}

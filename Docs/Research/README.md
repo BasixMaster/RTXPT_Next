@@ -6,7 +6,7 @@
 
 [B10 GPU paired/vector pilot](B10_PAIRED_PILOT.md): reciprocal shared shifts, separate vector shading and three-scene development evidence. Full PT++ remains pending.
 
-[B8–B10 staged implementation and current GPU evidence](B8_STAGED_IMPLEMENTATION.md): disjoint initial-GI/PT-long foundation and limited PT++ ablation; full GI reuse and remaining B10 GPU mechanisms remain pending. Brightness work is deferred.
+[B8–B10 staged implementation and current GPU evidence](B8_STAGED_IMPLEMENTATION.md): NVIDIA non-directional GI reuse on the disjoint short-GI/long-PT split,14GPU snapshot/support checks and64-frame static quality on all required scenes. Quality is mixed; uncapped timing measured; canonical acceptance remains pending. Earlier PT++ pilots retain their original scope. Brightness work is deferred.
 
 [Calibrated prefix-throughput investigation](PREFIX_THROUGHPUT.md): no clamp activation observed in the sampled packed weights; defaults unchanged.
 
@@ -30,7 +30,7 @@ User-confirmed numbering, 2026-10-29: **B0 is unchanged RTXPT 1.9 with its origi
 | B5 | Native PT + DI 3.1 + GI 3.1 | Original-scene and registered-room quality/timing measured |
 | B6 | ReSTIR PT; DI/GI off | Registered-room quality/timing/history measured; original scenes have guarded development images; quality acceptance pending |
 | B7 | ReSTIR PT + DI 3.1; GI off | Scoped opaque checkpoint `de9fe651`; wider material/scene validation pending |
-| B8 | ReSTIR PT + DI 3.1 + GI 3.1 | Disjoint initial-GI development executes; full GI reuse/acceptance pending |
+| B8 | ReSTIR PT + DI 3.1 + GI 3.1 | NVIDIA approximate GI reuse executes; full-resolution64-frame quality measured, mixed results; uncapped timing measured; general acceptance pending |
 | B9 | B8 + limited PT++ | GI-initial-only footprint/roulette development ablation executes; full B8/B9 pending |
 | B10 | B8 + full remaining PT++ | Gaussian reciprocal-pair/vector GPU development executes; full PT++ pending |
 

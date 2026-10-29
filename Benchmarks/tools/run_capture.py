@@ -30,6 +30,7 @@ def main():
     ap.add_argument('--variant',choices=['B'+str(i) for i in range(11)])
     ap.add_argument('--b8-initial-gi-validation',action='store_true',help='Development only: initial DI/GI-short/PT-long partition; not a canonical B8 result')
     ap.add_argument('--b8-component',type=int,choices=range(5),default=0,help='Development output:0sum,1native,2DI,3GI-short,4PT-long')
+    ap.add_argument('--b8-gi-reuse-mode',type=int,choices=range(4),help='Opt into NVIDIA GI approximation:0 initial,1 temporal,2 spatial,3 both; omission preserves legacy initial-only control')
     ap.add_argument('--b8-validation-stage',type=int,choices=range(3),default=0,help='GI-short development:0 initial,1 DI/PT reuse,2 limited PT++ ablation; not canonical B9')
     ap.add_argument('--pt-paired-spatial-validation',action='store_true',help='Development only: adjacent reciprocal-pair shifts and vector shading; not full B10')
     ap.add_argument('--pt-replay-compaction-validation',action='store_true',help='Opt-in replay queue; reservoir capture enables the same-frame exact direct oracle')
@@ -38,6 +39,7 @@ def main():
     ap.add_argument('--label',required=True);ap.add_argument('--scene',required=True)
     ap.add_argument('--exposure',type=float,required=True);ap.add_argument('--width',type=int,default=1280);ap.add_argument('--height',type=int,default=720)
     ap.add_argument('--mode',choices=['digi','dipt','di','pt','default','reference'],default='digi')
+    ap.add_argument('--stop-animations',action='store_true',help='Freeze scene animations for static sequence comparisons')
     ap.add_argument('--simple',action='store_true');ap.add_argument('--reference-spp',type=int,default=2048)
     ap.add_argument('--record-start',type=float,default=20);ap.add_argument('--frames',type=int,default=1)
     ap.add_argument('--timeout',type=float,default=300);ap.add_argument('--presentmon',type=Path)
@@ -75,6 +77,8 @@ def main():
     args=[str(exe),'--scene',a.scene,'--width',str(a.width),'--height',str(a.height),'--overrideRadianceCacheMode','0','--useNEE','1','--NEEType',str(a.nee_type),'--useReSTIRDI',str(int(a.mode in ['digi','dipt','di'])),'--useReSTIRGI',str(int(a.mode=='digi')),'--standaloneDenoiser','0','--overrideAutoexposureOff','--overrideExposureOffset',str(a.exposure),'--disablePostProcessFilters','--realtimeAA','0','--disableFireflyFilters','--overrideSubSamplingMode','0','--nonInteractive','--capturePath',str(out/'frame.png'),'--captureSuffix',a.label,'--perfLog',str(out/'partial-perf.csv')]
     if (a.b8_component or a.b8_validation_stage) and not a.b8_initial_gi_validation:
         raise SystemExit('B8 component selection requires the explicit development partition')
+    if a.b8_gi_reuse_mode is not None and not a.b8_initial_gi_validation:
+        raise SystemExit('GI approximation requires explicit B8 development partition')
     if a.b8_initial_gi_validation:
         if a.variant is not None or a.mode!='dipt' or a.di_mode is None or a.nee_mis!=0 or not a.strict_di_validation:
             raise SystemExit('B8 development requires no canonical label, mode dipt, explicit DI mode, exact NEE MIS and strict DI')
@@ -83,6 +87,7 @@ def main():
         if a.b8_validation_stage==2 and (a.pt_reconnection_mode!=1 or not 0<(a.pt_roulette_probability or 0)<1):raise SystemExit('Limited PT++ ablation requires explicit footprint and roulette in(0,1)')
         args[args.index('--useReSTIRGI')+1]='1'
         args+=['--b8InitialGIValidation','true','--b8Component',str(a.b8_component),'--b8ValidationStage',str(a.b8_validation_stage)]
+    if a.b8_gi_reuse_mode is not None: args+=['--b8GIReuseMode',str(a.b8_gi_reuse_mode)]
     if a.pt_paired_spatial_validation:
         if not a.b8_initial_gi_validation or a.b8_validation_stage==0 or a.pt_mode not in (2,3) or a.pt_fixed_spatial_samples!=1:
             raise SystemExit('Paired pilot requires B8 stage1/2, spatial PT and one fixed neighbor')
@@ -127,6 +132,7 @@ def main():
         args+=['--useReSTIRPT','1','--restirPTMode',str(a.pt_mode)]
     if a.max_bounces is not None:args+=['--maxBounces',str(a.max_bounces)]
     if a.max_diffuse_bounces is not None:args+=['--maxDiffuseBounces',str(a.max_diffuse_bounces)]
+    if a.stop_animations and not a.simple:args+=['--stopAnimations']
     if a.simple:args+=['--stopAnimations','--captureSimple']
     else:args+=['--captureSequence','--sequenceFPS','60','--sequenceWarmupStart','0','--sequenceRecordStart',str(a.record_start),'--sequenceFrameCount',str(a.frames)]
     manifest=dict(label=a.label,scene=a.scene,mode=a.mode,output_track='unreconstructed tonemapped sRGB PNG; not linear HDR',exe_sha256=sha(exe),started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),command=args,cwd=str(exe.parent),settings=dict(width=a.width,height=a.height,exposure=a.exposure,aa=0,denoiser=0,radiance_cache=0,restir_di=int(a.mode=='digi'),restir_gi=int(a.mode=='digi'),simple=a.simple,record_start=None if a.simple else a.record_start,frames=1 if a.simple else a.frames,reference_spp=a.reference_spp if a.mode=='reference' else None),timing_scope='External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.',measurement_status='running')
@@ -135,7 +141,7 @@ def main():
     manifest['paired_spatial_pilot_requested']=a.pt_paired_spatial_validation
     manifest['gaussian_pairing_requested']=a.pt_gaussian_pairing_validation
     if a.b8_initial_gi_validation:
-        manifest['development_partition']=dict(contract_version=1,canonical_accepted=False,gi_reuse=False,component=a.b8_component,stage=a.b8_validation_stage,pt_min_light_inclusive_length=4)
+        manifest['development_partition']=dict(contract_version=1,canonical_accepted=False,gi_reuse=bool(a.b8_gi_reuse_mode),gi_approximation_mode=a.b8_gi_reuse_mode,component=a.b8_component,stage=a.b8_validation_stage,pt_min_light_inclusive_length=4)
     if a.pt_extended_scene_validation:manifest['development_extended_scene_transport']=dict(full_prefix_replay=True,canonical_accepted=False,diffuse_budget='Native sampled-lobe accounting with terminal-emission truncation')
     if a.linear_hdr:manifest['output_track']='unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata'
     manifest['settings']['linear_hdr_requested']=a.linear_hdr
@@ -175,9 +181,14 @@ def main():
             if a.linear_hdr and (len(main_pfms) != len(manifest['images']) or any(not Path(str(p)+'.json').is_file() for p in main_pfms)):
                 manifest['measurement_status']='failed_missing_hdr_capture'
             try:
-                manifest['effective_b8_partition']=verify_b8((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.b8_initial_gi_validation,a.b8_component,a.b8_validation_stage)
+                manifest['effective_b8_partition']=verify_b8((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.b8_initial_gi_validation,a.b8_component,a.b8_validation_stage,a.b8_gi_reuse_mode)
                 manifest['effective_paired_spatial_pilot']=verify_paired((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_paired_spatial_validation,a.pt_gaussian_pairing_validation)
                 manifest['effective_replay_queue']=verify_queue((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_replay_compaction_validation,a.capture_pt_reservoirs)
+                if a.b8_gi_reuse_mode is not None and a.capture_pt_reservoirs:
+                    from inspect_gi_reservoirs import inspect_file
+                    gi_files = list(out.glob('*.gi.bin'))
+                    if len(gi_files) != len(manifest['images']):raise ValueError('Missing GI reservoir snapshot')
+                    manifest['gi_reservoir_snapshots'] = [dict(name=p.name,statistics=inspect_file(p)) for p in gi_files]
                 if a.pt_replay_compaction_validation and a.capture_pt_reservoirs:
                     queue_stats=list(out.glob('*.stats.json'))
                     if len(queue_stats)!=len(manifest['images']):raise ValueError('Queue oracle statistics missing for a captured image')
@@ -196,7 +207,7 @@ def main():
             except ValueError as exc:manifest['measurement_status']='failed_sampling_contract';manifest['sampling_failure']=str(exc)
             try:manifest['effective_di_validation']=verify_di((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.strict_di_validation)
             except ValueError as exc:manifest['measurement_status']='failed_di_validation_contract';manifest['di_validation_failure']=str(exc)
-            try:manifest['effective_extended_scene_contract']=verify_extended((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode,a.b8_initial_gi_validation,a.b8_validation_stage)
+            try:manifest['effective_extended_scene_contract']=verify_extended((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode,a.b8_initial_gi_validation,a.b8_validation_stage,a.b8_gi_reuse_mode)
             except ValueError as exc:manifest['measurement_status']='failed_extended_scene_contract';manifest['extended_scene_failure']=str(exc)
             try:manifest['effective_pt_replay']=verify_pt_replay((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_replay_only_validation)
             except ValueError as exc:manifest['measurement_status']='failed_pt_replay_contract';manifest['pt_replay_failure']=str(exc)

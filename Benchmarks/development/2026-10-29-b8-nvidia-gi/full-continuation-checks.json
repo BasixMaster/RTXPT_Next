@@ -1,0 +1,153 @@
+[
+  {
+    "case": "convergence-gi3",
+    "gi_mode": 3,
+    "gi_snapshot": {
+      "pixels": 921600,
+      "valid": 752041,
+      "positive_weight": 747874,
+      "m_greater_than_one": 748481,
+      "positive_age_valid": 691025,
+      "max_age_valid": 31,
+      "mean_m_valid": 27.37454074977295
+    },
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 14,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.22779066361072992,
+              0.20780894542429854,
+              0.18541869572389663
+            ],
+            "nonzero_pixels": 163767
+          },
+          "di": {
+            "mean_rgb": [
+              0.14837983522848744,
+              0.1079325946363517,
+              0.07775444175207263
+            ],
+            "nonzero_pixels": 729651
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.05310099491927152,
+              0.03441873988589375,
+              0.01872088305458116
+            ],
+            "nonzero_pixels": 739308
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.04768029482162092,
+              0.031948409894959895,
+              0.016035621826498148
+            ],
+            "nonzero_pixels": 743379
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "kitchen-gi-1",
+    "gi_mode": -1,
+    "gi_snapshot": null,
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 14,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.0815586849928756,
+              0.0757392426146867,
+              0.06779471929230366
+            ],
+            "nonzero_pixels": 92421
+          },
+          "di": {
+            "mean_rgb": [
+              0.020987671270203363,
+              0.01674904619434124,
+              0.013994229061257404
+            ],
+            "nonzero_pixels": 677976
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.012169525793805305,
+              0.008788627132889814,
+              0.006661310864470174
+            ],
+            "nonzero_pixels": 215526
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.008314764869994381,
+              0.005466468794943972,
+              0.00406439461299063
+            ],
+            "nonzero_pixels": 774664
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "kitchen-gi3",
+    "gi_mode": 3,
+    "gi_snapshot": {
+      "pixels": 921600,
+      "valid": 807620,
+      "positive_weight": 772579,
+      "m_greater_than_one": 790376,
+      "positive_age_valid": 727850,
+      "max_age_valid": 31,
+      "mean_m_valid": 24.89516604343627
+    },
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 14,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.08154472090297431,
+              0.07572820759850503,
+              0.06778793549488506
+            ],
+            "nonzero_pixels": 92428
+          },
+          "di": {
+            "mean_rgb": [
+              0.020696788004198524,
+              0.016456679750634876,
+              0.013616680591237836
+            ],
+            "nonzero_pixels": 675074
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.0059038497863932405,
+              0.004389604099819229,
+              0.0031609781435044068
+            ],
+            "nonzero_pixels": 747105
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.008434737717551696,
+              0.005573415856730814,
+              0.004174325329109302
+            ],
+            "nonzero_pixels": 774259
+          }
+        }
+      }
+    ]
+  }
+]

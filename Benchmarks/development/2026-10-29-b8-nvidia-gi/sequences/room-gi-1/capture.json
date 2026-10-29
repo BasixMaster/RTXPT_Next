@@ -1,0 +1,1188 @@
+{
+  "label": "room-gi-1",
+  "scene": "WORKSPACE\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+  "mode": "dipt",
+  "output_track": "unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata",
+  "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+  "started_utc": "2026-10-29T22:38:30.174820+00:00",
+  "command": [
+    "WORKSPACE\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+    "--scene",
+    "WORKSPACE\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+    "--width",
+    "640",
+    "--height",
+    "360",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "1",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "WORKSPACE\\work\\2026-10-29-b8-gi-approx-sequences\\room-gi-1\\frame.png",
+    "--captureSuffix",
+    "room-gi-1",
+    "--perfLog",
+    "WORKSPACE\\work\\2026-10-29-b8-gi-approx-sequences\\room-gi-1\\partial-perf.csv",
+    "--b8InitialGIValidation",
+    "true",
+    "--b8Component",
+    "0",
+    "--b8ValidationStage",
+    "1",
+    "--ptFixedSpatialSamples",
+    "1",
+    "--strictDIValidation",
+    "true",
+    "--restirDIMode",
+    "3",
+    "--neeMIS",
+    "0",
+    "--environmentDiffuseMip",
+    "0",
+    "--benchmarkUncapped",
+    "true",
+    "--samplingSeed",
+    "47",
+    "--captureLinearHDR",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--useReSTIRPT",
+    "1",
+    "--restirPTMode",
+    "3",
+    "--maxBounces",
+    "4",
+    "--maxDiffuseBounces",
+    "4",
+    "--stopAnimations",
+    "--captureSequence",
+    "--sequenceFPS",
+    "60",
+    "--sequenceWarmupStart",
+    "0",
+    "--sequenceRecordStart",
+    "0.1",
+    "--sequenceFrameCount",
+    "64"
+  ],
+  "cwd": "WORKSPACE\\outputs\\RTXDI_Next\\bin",
+  "settings": {
+    "width": 640,
+    "height": 360,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 1,
+    "restir_gi": 1,
+    "simple": false,
+    "record_start": 0.1,
+    "frames": 64,
+    "reference_spp": null,
+    "linear_hdr_requested": true,
+    "sampling_seed_requested": 47,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": 3,
+    "nee_mis_requested": 0,
+    "nee_type": 2,
+    "restir_pt": 1,
+    "max_bounces_override": 4,
+    "max_diffuse_bounces_override": 4,
+    "pt_mode": 3
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+  "canonical_experiment": null,
+  "paired_spatial_pilot_requested": false,
+  "gaussian_pairing_requested": false,
+  "development_partition": {
+    "contract_version": 1,
+    "canonical_accepted": false,
+    "gi_reuse": false,
+    "gi_approximation_mode": null,
+    "component": 0,
+    "stage": 1,
+    "pt_min_light_inclusive_length": 4
+  },
+  "process_id": 25796,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 27.28100000001723,
+  "images": [
+    {
+      "name": "frame_000_room-gi-1.png",
+      "sha256": "83bb84c8c1be05e90551a72078f157f3b224ae9909a3e5094f6e0407b56d2a42",
+      "bytes": 515942
+    },
+    {
+      "name": "frame_001_room-gi-1.png",
+      "sha256": "6730c1062c65feb68e0d2e9f69bd57ed8436e514985fd0e3e00689750bf1c0b2",
+      "bytes": 515650
+    },
+    {
+      "name": "frame_002_room-gi-1.png",
+      "sha256": "fc2c133a082428d4218b79855622251b64ea67a0d54b81a16c71104c3bb88736",
+      "bytes": 515376
+    },
+    {
+      "name": "frame_003_room-gi-1.png",
+      "sha256": "ca32d8bc6f0de19482d535a1026ae4d71891a9a27a85aca12c8d53b9ce9a526a",
+      "bytes": 515475
+    },
+    {
+      "name": "frame_004_room-gi-1.png",
+      "sha256": "c9cb65b24b4dc7a0abf91f54d35929d0f67f6a71d767e2056293a8c40e3ba1fe",
+      "bytes": 515635
+    },
+    {
+      "name": "frame_005_room-gi-1.png",
+      "sha256": "1aec2e62a25fe09b48d3aca1306394c3e016d9d72ff51ebbab26bbb3a5b0e94a",
+      "bytes": 515923
+    },
+    {
+      "name": "frame_006_room-gi-1.png",
+      "sha256": "ca50ea9616dfd242545299a9cef6324baa7622f2ad475ffa18f8e5fd17ab69a9",
+      "bytes": 515241
+    },
+    {
+      "name": "frame_007_room-gi-1.png",
+      "sha256": "bf7faa2dc8063fba845645d81c6f91a3a7b5bb7efb7dabd73cda4f51700a1305",
+      "bytes": 515293
+    },
+    {
+      "name": "frame_008_room-gi-1.png",
+      "sha256": "53a1ecc6dcc8514bf203e90ce045829717f2ca4237ea19ee7707077949daf909",
+      "bytes": 515275
+    },
+    {
+      "name": "frame_009_room-gi-1.png",
+      "sha256": "447103bbf3d490d10b08aaf5a93c394629a92dab7cda1910ab3a806ed66e4b45",
+      "bytes": 515234
+    },
+    {
+      "name": "frame_010_room-gi-1.png",
+      "sha256": "7b313a68a710f50ecf6dc3bde5d55dcf4909a7ea2fa5acfee4262601969bb07a",
+      "bytes": 514748
+    },
+    {
+      "name": "frame_011_room-gi-1.png",
+      "sha256": "a7c5995eb7b665faf79357aadb0f79f49e5675485a1286059e83ac2dfb663897",
+      "bytes": 515005
+    },
+    {
+      "name": "frame_012_room-gi-1.png",
+      "sha256": "5ac584f2fc061e1485e105e9c146e42595f01adec129e49ba644901b0389de95",
+      "bytes": 515019
+    },
+    {
+      "name": "frame_013_room-gi-1.png",
+      "sha256": "4ecb7812242c159cd1cf147e4db81d0b23859caac99cb6053eb4cc273b7736d0",
+      "bytes": 515134
+    },
+    {
+      "name": "frame_014_room-gi-1.png",
+      "sha256": "1eb431682402ce6d41a284971fdbb06e016885546fb90bc6668af70602c97ddd",
+      "bytes": 515573
+    },
+    {
+      "name": "frame_015_room-gi-1.png",
+      "sha256": "6d936e4760c4d7bdd8d7f99e39385edd4fa9de576e3c85525b656ad9e2cee726",
+      "bytes": 515202
+    },
+    {
+      "name": "frame_016_room-gi-1.png",
+      "sha256": "ebee516a7959d62164d99282f8442bb1a3a614b0dfc2a484d6318436981d51a5",
+      "bytes": 515185
+    },
+    {
+      "name": "frame_017_room-gi-1.png",
+      "sha256": "cd07c4eed36e3faf80157a1faaaa0b5929f0af8c42fc09f9f4efd866bf791c03",
+      "bytes": 514867
+    },
+    {
+      "name": "frame_018_room-gi-1.png",
+      "sha256": "61ea31fa7c819f615d3521b8f456f1ac3fb2430e47299289e1da2388b8d5bd42",
+      "bytes": 515781
+    },
+    {
+      "name": "frame_019_room-gi-1.png",
+      "sha256": "b41a5a999a11e8161712c51f4801a41f8af0dd45d97b56850905133075e3589d",
+      "bytes": 515362
+    },
+    {
+      "name": "frame_020_room-gi-1.png",
+      "sha256": "88f14e7e5760dca44df2e2ccd51bc1cbda1276056490f53fae1058b945f08f73",
+      "bytes": 515129
+    },
+    {
+      "name": "frame_021_room-gi-1.png",
+      "sha256": "0f25f519911affa37f535e644de3df01008b6aafdaea44a7c388c852850ea686",
+      "bytes": 515027
+    },
+    {
+      "name": "frame_022_room-gi-1.png",
+      "sha256": "649ffba111a345c56d4d982c6cc565fa6449c0d54ee2754bf0d7fb2bc6c32350",
+      "bytes": 514978
+    },
+    {
+      "name": "frame_023_room-gi-1.png",
+      "sha256": "a1408d741defd55f32cd604018b7f528fc186c4324dd11455cad9256194b380c",
+      "bytes": 514871
+    },
+    {
+      "name": "frame_024_room-gi-1.png",
+      "sha256": "2fff3e529916f0fe492ec7df34008425a5767929240086307eb0af0208ccad0e",
+      "bytes": 514717
+    },
+    {
+      "name": "frame_025_room-gi-1.png",
+      "sha256": "293a650ae249f9b0b02c7cb3a93898e7d1f88f8f2ac34c0175837d4f6aaf5a77",
+      "bytes": 514794
+    },
+    {
+      "name": "frame_026_room-gi-1.png",
+      "sha256": "e7c61b7349166da300a02381267de621a1ca06a3ba67c624f74c5465c98559fe",
+      "bytes": 515228
+    },
+    {
+      "name": "frame_027_room-gi-1.png",
+      "sha256": "c16d08c14b78b139e7e4ea881147e944af530e014de5b65fdd2c0f48b7745181",
+      "bytes": 515525
+    },
+    {
+      "name": "frame_028_room-gi-1.png",
+      "sha256": "032ae50ea8fee23472911936551bbf0a746a3f1b7216b50e006f015a67fa46d6",
+      "bytes": 515356
+    },
+    {
+      "name": "frame_029_room-gi-1.png",
+      "sha256": "1de535514966ffc3a9aae9d416545322916ea69a70fe2aa81da41eee532801dc",
+      "bytes": 515635
+    },
+    {
+      "name": "frame_030_room-gi-1.png",
+      "sha256": "a053fc13fc4677c37c674a9e09acfbd4331ca02edf80bb927b35a95340c9d462",
+      "bytes": 515209
+    },
+    {
+      "name": "frame_031_room-gi-1.png",
+      "sha256": "136602a49dc90e46ee6e3d9fabfd0b86bc80289b6a5a253074373b3f5f9a93fc",
+      "bytes": 515317
+    },
+    {
+      "name": "frame_032_room-gi-1.png",
+      "sha256": "bc812e0d76b71cfdacd0889cd6236c2625072334e342384da9b43e69ffe7b381",
+      "bytes": 515178
+    },
+    {
+      "name": "frame_033_room-gi-1.png",
+      "sha256": "1049843a39b280b2f2cfd22c3913d3d21c8ea41623b4a6756b25552d9eeb92ef",
+      "bytes": 515138
+    },
+    {
+      "name": "frame_034_room-gi-1.png",
+      "sha256": "35d4e3de390d4e6c47b8f78965531ec3dd0fec0954040f5109a7b2eb3e2009f6",
+      "bytes": 515618
+    },
+    {
+      "name": "frame_035_room-gi-1.png",
+      "sha256": "9d574f5f460e638bc4c3fd9d7b2e477022bfda37b836ef97e4c6b39f47ec4cec",
+      "bytes": 515461
+    },
+    {
+      "name": "frame_036_room-gi-1.png",
+      "sha256": "1bdb5b5513f843167005eb48461fefec84ace1150282d498602200c73105ef3c",
+      "bytes": 515347
+    },
+    {
+      "name": "frame_037_room-gi-1.png",
+      "sha256": "58f3076e909b99dd9320250120449c4acd9923dd88547e9b993e332028cae7e2",
+      "bytes": 515538
+    },
+    {
+      "name": "frame_038_room-gi-1.png",
+      "sha256": "0560d17af85690d9afc81315b02f141e435880d0a19ff9aec3d04498e934672b",
+      "bytes": 515805
+    },
+    {
+      "name": "frame_039_room-gi-1.png",
+      "sha256": "8858a608a6cb659e349e58df85260f43237e50a69fc32044e17637f4e11e6f1d",
+      "bytes": 515604
+    },
+    {
+      "name": "frame_040_room-gi-1.png",
+      "sha256": "5e61648e8b023e500c624d93ac19ad79eb48551ffb6df18617b5641eb1920291",
+      "bytes": 515679
+    },
+    {
+      "name": "frame_041_room-gi-1.png",
+      "sha256": "9303e3db4ab3355b3680cfb33905a9915d7f7d34a259a268a8333674d07b7507",
+      "bytes": 515889
+    },
+    {
+      "name": "frame_042_room-gi-1.png",
+      "sha256": "cdafadb4657fa660d44428043dc63d4f2a6d0d3cd4da14245194d9426f76d916",
+      "bytes": 515709
+    },
+    {
+      "name": "frame_043_room-gi-1.png",
+      "sha256": "94bd41be8540661443a301d484f7bacfef66e9973a2783e0ad669c295fa44e7e",
+      "bytes": 515986
+    },
+    {
+      "name": "frame_044_room-gi-1.png",
+      "sha256": "69eebebf1d581a39a5875d24e9fe9b95317ff93107a323096334f5310499e26d",
+      "bytes": 515849
+    },
+    {
+      "name": "frame_045_room-gi-1.png",
+      "sha256": "bfb8560163de57a9db9cb49641cddb2df91110eb6e43a4446ca9d324bd0a8cdf",
+      "bytes": 516266
+    },
+    {
+      "name": "frame_046_room-gi-1.png",
+      "sha256": "f8097f252d5722304389af3f5400d84ce1e5885f354c50a8708051dafa884e73",
+      "bytes": 515919
+    },
+    {
+      "name": "frame_047_room-gi-1.png",
+      "sha256": "c0a2bb17d95bfb5c42d72dc5d5a72ec94d97e48abb2284e0697a6d9bf53a4635",
+      "bytes": 515851
+    },
+    {
+      "name": "frame_048_room-gi-1.png",
+      "sha256": "1c3a2a97372ae56b9a3a4f3e6cbe53b2a334c175d8ed74890bc44b73baa5a60f",
+      "bytes": 516079
+    },
+    {
+      "name": "frame_049_room-gi-1.png",
+      "sha256": "7bcb4147d2c7c2b8fadb5ad960504cb5cc01b5ccb640d7de3e329b117f076b39",
+      "bytes": 515595
+    },
+    {
+      "name": "frame_050_room-gi-1.png",
+      "sha256": "35caa49381ed583169f3de8ab79f9a72a01b32d77e512664e5d517f182631079",
+      "bytes": 515530
+    },
+    {
+      "name": "frame_051_room-gi-1.png",
+      "sha256": "2f3d7dc64386f9b9eb34a2fe8ff542fba9d758444a1afb22b978a47706b4af85",
+      "bytes": 514682
+    },
+    {
+      "name": "frame_052_room-gi-1.png",
+      "sha256": "6fe3f195410b94e243b3cfa7e2ea7abc7f6a75d4c5ae6cd942fc337da76bd54c",
+      "bytes": 515313
+    },
+    {
+      "name": "frame_053_room-gi-1.png",
+      "sha256": "e8c24cb51a34b8618f62a632ca499b647e7d638afed9224b6f072b9cf657989a",
+      "bytes": 515285
+    },
+    {
+      "name": "frame_054_room-gi-1.png",
+      "sha256": "b820a0385925ea3186587a0dec4b5df352f285c08ba1ba1402ac440111f3e38f",
+      "bytes": 515462
+    },
+    {
+      "name": "frame_055_room-gi-1.png",
+      "sha256": "276f6e522c04e52d3d7ade40cf869d6948175af98805911b1bc636ecffeaaad8",
+      "bytes": 515093
+    },
+    {
+      "name": "frame_056_room-gi-1.png",
+      "sha256": "c1171bb4f8074e2352445dfa956f66b3d7ac9264780eb025d3027c4fbca88ef9",
+      "bytes": 514875
+    },
+    {
+      "name": "frame_057_room-gi-1.png",
+      "sha256": "bfbad04c2155544320227e7f417762b045030c68a716ea5a175cce83754ee5f6",
+      "bytes": 515778
+    },
+    {
+      "name": "frame_058_room-gi-1.png",
+      "sha256": "199041a4a327d14b5e65fe08915f643737d17c00b5983e4c1f6f229ff562e84b",
+      "bytes": 515024
+    },
+    {
+      "name": "frame_059_room-gi-1.png",
+      "sha256": "961960e2c0217993eb7193225af8773e5da89150d948f2273cbc85860271253f",
+      "bytes": 515224
+    },
+    {
+      "name": "frame_060_room-gi-1.png",
+      "sha256": "8f79b5e93bcc6cb2c166b686215ec69f9b0e6b376e975817834af7a87f05694c",
+      "bytes": 515573
+    },
+    {
+      "name": "frame_061_room-gi-1.png",
+      "sha256": "4d5862bf62be2f906c61b331b90f4a6368f08da068f426f34734426873430ba7",
+      "bytes": 515424
+    },
+    {
+      "name": "frame_062_room-gi-1.png",
+      "sha256": "4a3dce79d1a688a46f545fa95c6fb511b67fb06892fcb3f84b17c25b22fb5c4e",
+      "bytes": 515180
+    },
+    {
+      "name": "frame_063_room-gi-1.png",
+      "sha256": "53000c9c7e5081a21a434dd69ba082a6c7443278cc6b4d01ec7844ccf39f9ced",
+      "bytes": 515475
+    }
+  ],
+  "linear_hdr_files": [
+    {
+      "name": "frame_000_room-gi-1.pfm",
+      "sha256": "d1230758150d5b7dd1df47f3e392d60b5fc270cfa774b28d195d05bcd80985dd",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_000_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_001_room-gi-1.pfm",
+      "sha256": "fd68e4c2c9f45aa3fa4c942ed8cf94a31fb31e367a5a3a5bb549e37a7b767cd6",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_001_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_002_room-gi-1.pfm",
+      "sha256": "e39c0cb4efcac894541c4421eb1e55da98ebe89ebe6158041f0f7469b6a08e41",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_002_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_003_room-gi-1.pfm",
+      "sha256": "d8a7f56f39d2a8ff695e18f6a9edf432dee76fc5fe62d2f069a5c2dc4ac86d8e",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_003_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_004_room-gi-1.pfm",
+      "sha256": "1b1034fc25e26540d8d9c1ae707d8734b64f1d0cccdd2070fe6f68558e244a8d",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_004_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_005_room-gi-1.pfm",
+      "sha256": "87ad76f7f3e5fed9c5f6194b4a19693044628905b096687da3df252f60b7a214",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_005_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_006_room-gi-1.pfm",
+      "sha256": "881f9ab3a724131d17738c919164a7dd9b6ee4870caf031a99a3232cbf905734",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_006_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_007_room-gi-1.pfm",
+      "sha256": "f80c01bd7e014496dbe3d0d8264410af97926f973d45ed02ee498875adffa8ae",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_007_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_008_room-gi-1.pfm",
+      "sha256": "6d9348500c0a779d1fe76ba4be7eead8445c0a806ee6347aedb7ed71bb15a02f",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_008_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_009_room-gi-1.pfm",
+      "sha256": "207bb5ac22f65fb297f311503ca6ac49dcf3407283c9c9bcf421fa1bb2cb2a47",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_009_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_010_room-gi-1.pfm",
+      "sha256": "7a3ae7ab5e31daa7963063aea2a0f365e590c2fb118c5bbf123c31fe41482ee6",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_010_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_011_room-gi-1.pfm",
+      "sha256": "861cc87557ca5a8cda3ab9e5ced522d696ff5cb997dc475312bf7fdf28405831",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_011_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_012_room-gi-1.pfm",
+      "sha256": "5798e315bfe76b763bba6c75bfce2423187ee9b67d80c6e819b5057b185f252a",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_012_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_013_room-gi-1.pfm",
+      "sha256": "3b26a014a96b2d691ceb957fbf1820e8ee5c4eeec89cbedf4088f43156ee6be7",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_013_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_014_room-gi-1.pfm",
+      "sha256": "682b6f72faa56c2bac5a1f9c8cfa6c01592e0d36cf7dbf1dce44ebc429808589",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_014_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_015_room-gi-1.pfm",
+      "sha256": "3b19fd84ad26d808825407f270fcd736453cf48683450405657800cab07912ce",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_015_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_016_room-gi-1.pfm",
+      "sha256": "fc244bbf843bed77c4e666741d96306d2a3d4e7d18dc1f78f57d8f7ccebb6b7b",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_016_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_017_room-gi-1.pfm",
+      "sha256": "71947efd7b7d2251e0dd510680ce473c4f4fc13910ceae97a7db6be2e7a8bdb3",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_017_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_018_room-gi-1.pfm",
+      "sha256": "bc88554447967deefee1ee623b7e9a97091b1320b8bd5cf32e756135549a8862",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_018_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_019_room-gi-1.pfm",
+      "sha256": "888ace3c8f2d78102032610bc1cda3899117784f1d40440085a461cf4ab557b0",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_019_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_020_room-gi-1.pfm",
+      "sha256": "11ad38520115bca94a2ffe8d3c893741eeab8d3e0d4e44a8f49614e7398b1a06",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_020_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_021_room-gi-1.pfm",
+      "sha256": "06c313878ed87b6aecf3ba575bed8ac6e28558c4b8b7b67d86cdf61307a855ba",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_021_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_022_room-gi-1.pfm",
+      "sha256": "c4617b5b8547b7528eebca512faaa4ff3ccde0e5cc8d722b441e756e9d9ceea2",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_022_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_023_room-gi-1.pfm",
+      "sha256": "f0eb07cc7c640d6ebf25293f8e6ac082c1885fb8f07f9fda8e922ba330a2f1dd",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_023_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_024_room-gi-1.pfm",
+      "sha256": "628efd18fad202be098e53c47b56e94b02b5e7268ed554c9c4f1da17e9a44a6b",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_024_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_025_room-gi-1.pfm",
+      "sha256": "5a41a40334f391fcfc96f9ccbc9f4f9dba51e9b3aa764f79a762631914a13ce3",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_025_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_026_room-gi-1.pfm",
+      "sha256": "00a2641895ac679a2d2366099899a65177543f1b0b12151c0f44a8046d4b156a",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_026_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_027_room-gi-1.pfm",
+      "sha256": "e1bed7e8d11fcf0e2c50149fd1f55bc4786a35d3bf668282d64f65cd8111cbb7",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_027_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_028_room-gi-1.pfm",
+      "sha256": "ad15cfa5be77f19346f8ace303324fe1c5c56c6a7a99e06724a42dbc61d2e5b2",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_028_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_029_room-gi-1.pfm",
+      "sha256": "33706916678190dbbfba75df04b08410f32015df0ac6543ed5e152c45982707b",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_029_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_030_room-gi-1.pfm",
+      "sha256": "95b179e82abd6a7248f822a96b3a35241c6c9fa08b3d52eadd2ba7f97a5aca10",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_030_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_031_room-gi-1.pfm",
+      "sha256": "b11937debe6bdf0fc7f46cd42afe0d63ca202a9454d6f844266ceacc24e2cddb",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_031_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_032_room-gi-1.pfm",
+      "sha256": "a04203b98c3558e4e8a9200a8ca6cc6991c38480e83af68411dd596942ace951",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_032_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_033_room-gi-1.pfm",
+      "sha256": "fbd45473184f527d57dde8aa624cab1b41d03259d491909afab233d9828a751d",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_033_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_034_room-gi-1.pfm",
+      "sha256": "2a58753a92fd31819adbaf030dc7e54268d2a7f014a9da2d9c5578886e7b9e5e",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_034_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_035_room-gi-1.pfm",
+      "sha256": "0d942062382ead89ca1acec67177e005d95298d49d62d15b460c6185e0a90b16",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_035_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_036_room-gi-1.pfm",
+      "sha256": "d4baf8807caf15ce4afea8dad61847cdcf12c6605e169840e3f9f3410a9fac5b",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_036_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_037_room-gi-1.pfm",
+      "sha256": "37c7338a03b8b2679898e015eaf8ab1d06e527dca14e8adfe4b760182c59c698",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_037_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_038_room-gi-1.pfm",
+      "sha256": "66626532e16e70f6a3f579fe660746414cfd8a0bcb286af10ab7ca4516f5429d",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_038_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_039_room-gi-1.pfm",
+      "sha256": "deda2047b6a76006a4033e3b1ecb189aa0a783241fded611ce51b311f7acc787",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_039_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_040_room-gi-1.pfm",
+      "sha256": "44ff2741d6911d518ad6645abb1dd54246d8fc9a769f125087fbff9c7d1a1f59",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_040_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_041_room-gi-1.pfm",
+      "sha256": "b8ba62bc5c30372fc369b2333c486c6141124a869eddd115c9ba3004f80ec373",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_041_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_042_room-gi-1.pfm",
+      "sha256": "d23c2c4955c48779f73e2d39a0d15c8b2f3955ee080cacd6db357d50c16ae08e",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_042_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_043_room-gi-1.pfm",
+      "sha256": "9ef15da9b01d6d60a9aded25716915fa3f64ac17e730447faa30721e7575289e",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_043_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_044_room-gi-1.pfm",
+      "sha256": "22e4100ac35144b0b14c7303d485e1773d8e3c04324259a8294a446e3d1681a5",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_044_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_045_room-gi-1.pfm",
+      "sha256": "afb0392d41b1f9a7dcc1746c61597fd27c701fbcc1a4698c5a03ca5287ad879e",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_045_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_046_room-gi-1.pfm",
+      "sha256": "41ba3e4bee1cb456922c977ee28ac17a6477665480cfc23a4d65af638baf43b9",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_046_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_047_room-gi-1.pfm",
+      "sha256": "e22bac3bd5268ae10861432a56baceef365577fb1d3598b62f6ce065484611d9",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_047_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_048_room-gi-1.pfm",
+      "sha256": "cd06c87038f645079c71e47a49c93cc072a13406f4583e6e2e4b56c9cb61d7dd",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_048_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_049_room-gi-1.pfm",
+      "sha256": "76bf85342539b31f0c0f50470860d015fb562f23d107a1fda0208d548b48c818",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_049_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_050_room-gi-1.pfm",
+      "sha256": "b0f09ca0a6f1fd46b2323cd82eb96fd8400db8d3911b9a230bf8360e237c663e",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_050_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_051_room-gi-1.pfm",
+      "sha256": "a561ab68a445dc161881336646ec660e36e15ca8213ad87994de644948cbadc6",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_051_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_052_room-gi-1.pfm",
+      "sha256": "b6bdff56f65a6f6d3f0e6b86d88073b275b082109675e12ec0561703b6b9e982",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_052_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_053_room-gi-1.pfm",
+      "sha256": "e27e8f10b2e7ef6ae5e54671da5ef7f89b8cfaaecb26d9b0a7c76fc5f777f5e2",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_053_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_054_room-gi-1.pfm",
+      "sha256": "ee33ccb93a594e8b9b22c391dd467144bf36928a3bc6560ed9ffe1d18996e2f0",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_054_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_055_room-gi-1.pfm",
+      "sha256": "39650dd0800ba030bbbc4ee8b6a7512aedc8ddf049fdfe18be963a07b03ef427",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_055_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_056_room-gi-1.pfm",
+      "sha256": "cfc266bcd2f220bd107b3d4d5e695728c88dbfa544630f68b6af3387db9751bd",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_056_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_057_room-gi-1.pfm",
+      "sha256": "2d1c1c93e56a56954c7143d62228795e0587d254b49342de07fe1afe66de49db",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_057_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_058_room-gi-1.pfm",
+      "sha256": "d5ef18a652ba2fff09b3110243e9dc5745bed7b7a5656e494a9d760004fec5ac",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_058_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_059_room-gi-1.pfm",
+      "sha256": "2d56c141857e262cf7f49a3e90d080fb5d2ef251a8bd5baf13d30b1888362371",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_059_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_060_room-gi-1.pfm",
+      "sha256": "0d9478f6f605a830a05f6d4f3bb01be3bee4b24385d9141294439d42d637798f",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_060_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_061_room-gi-1.pfm",
+      "sha256": "9efba12b16942dba1c844238d71d5e989899054f8ceec1ffb578dad419b4758b",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_061_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_062_room-gi-1.pfm",
+      "sha256": "34c811468b051724a4ec23a125a56214f1a7823f0831d62b09a3b9300d3393f4",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_062_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_063_room-gi-1.pfm",
+      "sha256": "69a3ff8aeefd45dc17d7e1693076a61585ea47c8171f446efa76b28676b7c18d",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_063_room-gi-1.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    }
+  ],
+  "effective_b8_partition": {
+    "development": true,
+    "contract_version": 1,
+    "gi_reuse": false,
+    "gi_approximation_mode": null,
+    "component": 0,
+    "stage": 1,
+    "pt_min_light_inclusive_length": 4,
+    "canonical_accepted": false
+  },
+  "effective_paired_spatial_pilot": {
+    "enabled": false,
+    "policy": "adjacent reciprocal pairs",
+    "pair_owned_shifts": false,
+    "vector_shading": false,
+    "canonical_accepted": false
+  },
+  "effective_replay_queue": {
+    "enabled": false,
+    "oracle": false,
+    "shift_stride_bytes": 104,
+    "indirect_dispatch": false,
+    "canonical_accepted": false
+  },
+  "effective_environment_filter": {
+    "diffuse_mip": 0.0,
+    "explicit_override": true,
+    "scope": "Filtering identity only; no renderer correctness or acceptance claim"
+  },
+  "effective_sampling": {
+    "coverage": "verified first-frame effective receipt",
+    "seed": 47,
+    "realtime": true,
+    "reference_pixel_center": false,
+    "pixel_jitter_scale": 0.0
+  },
+  "effective_di_validation": {
+    "coverage": "verified first-frame effective receipt",
+    "strict": true,
+    "boiling": false,
+    "discount_naive": false,
+    "temporal_permutation": false
+  },
+  "effective_extended_scene_contract": null,
+  "effective_pt_replay": {
+    "coverage": "verified first-frame effective receipt",
+    "replay_only": false,
+    "roughness_threshold": 0.100000001
+  },
+  "effective_pt_history": {
+    "coverage": "verified first-frame effective receipt",
+    "age_rejection": true,
+    "max_age": 30,
+    "max_history": 8
+  },
+  "effective_pt_spatial": {
+    "coverage": "verified first-frame effective receipt",
+    "samples": 1,
+    "boost": 1
+  },
+  "effective_ptpp": {
+    "coverage": "verified first-frame effective receipt",
+    "reconnection_mode": 0,
+    "roulette_probability": 0.0,
+    "diagnostics": false
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 6,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "not requested; legacy labels retain their original numbering"
+  },
+  "effective_gbuffer_precision": {
+    "rounded_materials": 0,
+    "explicit_override": false,
+    "scope": "Half-up after fp16 conversion; not exact/unbiased BSDF reconstruction"
+  },
+  "effective_di_reuse": {
+    "active": true,
+    "mode": 3,
+    "temporal": true,
+    "spatial": true,
+    "gi": true,
+    "pt": true,
+    "scope": "Effective first-frame settings; not estimator correctness or timing proof"
+  },
+  "effective_prefix_throughput": {
+    "preserve_above_one": false,
+    "capture_packed": false,
+    "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+  }
+}

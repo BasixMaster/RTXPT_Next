@@ -2,6 +2,78 @@
 
 The user deferred the brightness investigation and requested B8 through B10 next. No brightness correction, normalization, material change or reference adjustment is included here.
 
+## NVIDIA GI approximation: current implementation
+
+The user selected NVIDIA's practical non-directional GI approximation for B8 on 2026-10-29. `--b8GIReuseMode 0|1|2|3` selects initial, temporal, spatial or temporal+spatial GI within the existing disjoint contribution split. Omission preserves the previous initial-only GI control exactly. The portable capture/timing tools expose `--b8-gi-reuse-mode`. This is an explicit development mode; the option alone is not canonical acceptance.
+
+The initial-only control bypasses GI reservoir packing, filtering and final blending. The candidate includes those mechanisms as well as reuse, so this compares the complete GI approximation path rather than isolating temporal/spatial resampling alone.
+
+The application now routes short-GI exports through the supplied RTXDI3.1 temporal/spatial reservoir passes and final visibility/blending. Secondary RGB remains non-directional. Existing application Jacobian rejection/clamping, Basic bias correction, boiling filtering and roughness-dependent final blending remain approximations; no exact glossy-reconnection or unbiasedness claim is made. No scene material or brightness correction is introduced.
+
+GI history follows the PT partition/reset chronology: the first frame after a reset never reads GI history. None/spatial-only modes explicitly write the initial reservoir to slot0 rather than relying on a stale temporal-output index. Diagnostic captures include the final32-byte GI reservoir buffer, dimensions, frame, mode and tiled buffer indices. Stored M/age establish sample-history participation, not estimator correctness or a quality benefit.
+
+Source guidance:
+
+- [NVIDIA ReSTIR GI integration guide](https://github.com/NVIDIA-RTX/RTXDI/blob/main/Doc/RestirGI.md): initial-sample staging, non-directional secondary-radiance limitation and possible directional extensions.
+- [Original GRIS/ReSTIR PT implementation](https://github.com/DQLin/ReSTIR_PT): hybrid shifts and general path-resampling foundation.
+- [Conditional RIS paper](https://research.nvidia.com/labs/rtr/publication/kettunen2023conditional/) and [public prototype](https://github.com/NVlabs/conditional-restir-prototype): conditioning/weights for reused suffixes after unreused prefixes; these do not establish this project's exact triple-estimator integration.
+- [PT++ §6.1](https://cwyman.org/papers/i3d26_ReSTIRPT++.pdf): unifies direct and indirect candidates in one PT reservoir. This is a separate B10 mechanism from retaining standalone DI/GI/PT passes.
+
+**GPU validation completed:** eight177×91 room cases (legacy control, all four approximation modes, first-history frame and bounce caps1/2), plus six matched full-resolution snapshots (control/reuse for640×360 Room and1280×720 original Convergence/Kitchen). Raw same-frame component sums are finite/nonnegative and equal the completed output. GI-short and PT-long obey the tested bounce supports.
+
+| Combined GI reuse snapshot,32 history frames | Positive-weight GI pixels | GI pixels with aged samples |
+|---|---:|---:|
+| Room640×360 |133,629|122,251|
+| Convergence1280×720 |747,874|691,025|
+| Kitchen1280×720 |772,579|727,850|
+
+These counts show actual GI reservoir participation. They do not establish brightness agreement, quality improvement or unbiasedness. One Convergence capture rendered successfully but was excluded by a nested verifier that still assumed GI reuse off. A forwarding fix and regression test preceded a fresh passing capture; the excluded attempt remains recorded.
+
+[Evidence summary](../../Benchmarks/development/2026-10-29-b8-nvidia-gi/summary.json). Six64-frame static quality sequences and18cap-verified timing processes are complete; results are below. The earlier results below retain their original initial-GI scope.
+
+## Static64-frame quality: NVIDIA approximation versus initial GI
+
+One sequence per scene/mode, seed47; identical source/executable, original materials/cameras, fixed exposure, raw1spp, no reconstruction, MIP0. Room640×360 cap4/4 uses the retained2048spp native reference; originals1280×720 cap14/2 use the retained4096spp MIP0 native references. The native references are finite estimates, not ground truth. DI/PT both use temporal+spatial reuse; PT uses one spatial neighbor. Scene animations are explicitly stopped.
+
+| Scene / GI mode | Mean per-frame linear MSE ↓ | MSE of64-frame average ↓ | Frame64 HDR-FLIP ↓ | Frame64 LDR-FLIP ↓ | Mean raw Y difference |
+|---|---:|---:|---:|---:|---:|
+|room / Initial GI control|0.034602|0.000531|0.145792|0.089866|-0.307%|
+|room / NVIDIA temporal+spatial GI|0.004731|0.000404|0.110711|0.077162|+0.065%|
+|convergence / Initial GI control|1.513876|0.159663|0.381780|0.255432|-0.519%|
+|convergence / NVIDIA temporal+spatial GI|1.507680|0.180113|0.315019|0.211882|-1.384%|
+|kitchen / Initial GI control|1.035836|0.258452|0.520417|0.292854|-0.202%|
+|kitchen / NVIDIA temporal+spatial GI|2.022504|0.965234|0.458518|0.272080|-3.415%|
+
+**Mixed result:** Room improves in both frame error and error of the temporal average. Convergence has slightly lower mean frame MSE but higher mean-image MSE. Kitchen has lower representative FLIP but substantially higher linear frame/mean-image MSE and a more negative sample mean luminance difference with reused GI. Thus the approximation is operational, but these results do not justify promoting it as a universal quality improvement.
+
+Frame64 FLIP is a single image; MSE columns summarize all64frames and their average. The retained curve includes every frame plus official FLIP at frames1/8/32/64. This is static chronological averaging, not equal-time convergence, moving-scene testing or independent-seed replication. Correlated reuse samples mean64frames are not64independent trials. Signed luminance differences are measurements, not brightness corrections or a proof of asymptotic bias. No global scale/exposure fitting is applied.
+
+The Kitchen sample difference with active GI is separate from the earlier GI-off DI residual. NVIDIA documents non-directional secondary-radiance reuse and several bias controls; that guidance does not establish which mechanism causes each pixel error in this cohort. The brightness investigation remains deferred.
+
+## Uncapped timing: complete18-process comparison
+
+Three fresh process repeats per policy/scene, rotated order,30s warmup plus15s PresentMon2.6.0 recording. Same frozen renderer executable and699shader-cache files before/after every run; no image writes or reported trace loss. Application caps/VSync disabled, owned exact-executable NVIDIA limiter settings temporarily disabled, RTSS checked read-only, driver profile restored after every process. Unknown external limiters and background load remain limitations.
+
+| Scene | GI initial GPU busy ms ↓ | GI reuse GPU busy ms ↓ | Change | Initial CPU cadence ms | Reuse CPU cadence ms |
+|---|---:|---:|---:|---:|---:|
+|opaque-room|1.7631|1.8811|+6.69%|1.8176|1.9167|
+|convergence|10.3430|10.8529|+4.93%|10.2974|10.8039|
+|kitchen|12.5822|13.3488|+6.09%|12.6082|13.3391|
+
+Values are medians of per-process medians, using last600 Original/NotSet presentation rows and excluding the final16. GPU busy is per-process GPU engine time, not complete critical-path frame latency or renderer FPS. Three process repeats and their retained bootstrap intervals are exploratory; no equal-quality/equal-time speedup is established. The64-frame quality sequences are separate acquisitions from these no-image-write timing runs. Resident renderer-exclusive VRAM is not measured; diagnostic readback allocation is outside timed runs.
+
+[Exact timing receipts and CSV evidence](../../Benchmarks/development/2026-10-29-b8-nvidia-gi/timing-evidence/README.md) · [Timing summary and run intervals](../../Benchmarks/development/2026-10-29-b8-nvidia-gi/timing-evidence/summary.json)
+
+![Error of the accumulated mean over64static frames](assets/b8-nvidia-gi/convergence.svg)
+
+The convergence curves show error of chronological image averages from one sequence per mode/scene. They do not hold elapsed time fixed, establish independent sample counts or prove asymptotic bias.
+
+## Summary and lessons learned: practical B8
+
+NVIDIA GI reuse is now implemented and exercised alongside the disjoint DI/GI-short/PT-long split. Eight focused room gates, six full-resolution snapshots, six64-frame quality sequences and18uncapped timing processes complete this experimental checkpoint. The retained initial-only control remains selectable by omitting the new GI mode option.
+
+Quality is scene- and metric-dependent: Room improves, while Kitchen has larger linear error and a more negative empirical luminance difference despite lower representative FLIP. Convergence is mixed between frame and mean-image error. Do not promote this as a universal quality improvement or compensate brightness with a scale factor. Exact outgoing-direction GI reevaluation, moving/disocclusion tests, independent seeds and equal-time/error comparisons remain separate research/acceptance work. Earlier B9/B10 ablations retain their original initial-GI scope until explicitly rerun with this new mode.
+
 ## Implemented and exercised
 
 | Stage | Executed algorithm | Evidence and remaining scope |

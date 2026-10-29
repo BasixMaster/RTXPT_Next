@@ -104,9 +104,11 @@
     },
     {
       "id": "B8",
-      "status": "planned_partition_not_implemented",
+      "status": "partial",
       "algorithm": "ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1",
-      "cpu_prerequisite": "17exact tests passed; GPU integration pending"
+      "cpu_prerequisite": "17exact partition prerequisites retained; GPU implementation now has scoped snapshot evidence",
+      "runtime_status": "NVIDIA GI approximation implemented:14GPU snapshot/support gates, six64-frame sequences and18uncapped timings; quality mixed, no canonical promotion",
+      "evidence": "Benchmarks/development/2026-10-29-b8-nvidia-gi"
     },
     {
       "id": "B9",
@@ -304,6 +306,33 @@
       ],
       "reason": "One-neighbor spatial replay compaction executes.11captured-frame exact packed/vector GPU oracles and2queue-disabled regressions pass; finite RGB checked. Shared absent/source-normal metadata fixes preserve full oracle. Full history sequences, queue timing and remaining mechanisms pending; no promotion.",
       "evidence": "Benchmarks/development/2026-10-29-replay-queue"
+    },
+    {
+      "id": "b8-nvidia-gi-approximation",
+      "date": "2026-10-29",
+      "variants": [
+        "B8"
+      ],
+      "reason": "User selected documented NVIDIA approximation. Activated explicit GI reuse without overlapping short/long path domains;14GPU snapshots passed. Quality/timing pending; no brightness fitting or canonical promotion.",
+      "evidence": "Benchmarks/development/2026-10-29-b8-nvidia-gi"
+    },
+    {
+      "id": "b8-nvidia-gi-static-quality",
+      "date": "2026-10-29",
+      "variants": [
+        "B8"
+      ],
+      "reason": "Six64-frame static sequences completed at required resolutions. Mixed variance/perceptual/mean-image results, including Kitchen regression; timing in progress. No promotion or brightness correction.",
+      "evidence": "Benchmarks/development/2026-10-29-b8-nvidia-gi/quality.json"
+    },
+    {
+      "id": "b8-nvidia-gi-timing-complete",
+      "date": "2026-10-29",
+      "variants": [
+        "B8"
+      ],
+      "reason": "18uncapped no-image-write timing processes passed frozen identity/loss/cap/restoration checks. Complete experimental checkpoint; mixed quality remains explicit. No brightness correction or canonical promotion.",
+      "evidence": "Benchmarks/development/2026-10-29-b8-nvidia-gi/timing-evidence/summary.json"
     }
   ]
 }

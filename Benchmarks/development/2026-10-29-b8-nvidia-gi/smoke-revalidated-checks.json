@@ -1,0 +1,418 @@
+[
+  {
+    "case": "room-gi-1",
+    "gi_mode": -1,
+    "gi_snapshot": null,
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 4,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.2159387222946545,
+              0.2159387222946545,
+              0.2159387222946545
+            ],
+            "nonzero_pixels": 175
+          },
+          "di": {
+            "mean_rgb": [
+              0.0939148767312575,
+              0.09300865373657632,
+              0.07433584912896282
+            ],
+            "nonzero_pixels": 7310
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.02833692130262702,
+              0.029550176777860086,
+              0.017870081946075225
+            ],
+            "nonzero_pixels": 4624
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.01792803267019898,
+              0.018025968552464664,
+              0.008741458801019198
+            ],
+            "nonzero_pixels": 8418
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "room-gi0",
+    "gi_mode": 0,
+    "gi_snapshot": {
+      "pixels": 16107,
+      "valid": 8600,
+      "positive_weight": 8600,
+      "m_greater_than_one": 0,
+      "positive_age_valid": 0,
+      "max_age_valid": 0,
+      "mean_m_valid": 1.0
+    },
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 4,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.2159387222946545,
+              0.2159387222946545,
+              0.2159387222946545
+            ],
+            "nonzero_pixels": 175
+          },
+          "di": {
+            "mean_rgb": [
+              0.09403732829589213,
+              0.0932183715931092,
+              0.07463956275539572
+            ],
+            "nonzero_pixels": 7298
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.02756448197484705,
+              0.028792622180863408,
+              0.01710444305790805
+            ],
+            "nonzero_pixels": 4626
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.01792879608850236,
+              0.01802671690215728,
+              0.008742083856022882
+            ],
+            "nonzero_pixels": 8417
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "room-gi1",
+    "gi_mode": 1,
+    "gi_snapshot": {
+      "pixels": 16107,
+      "valid": 8635,
+      "positive_weight": 7278,
+      "m_greater_than_one": 7107,
+      "positive_age_valid": 5703,
+      "max_age_valid": 7,
+      "mean_m_valid": 5.290677475390851
+    },
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 4,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.2159387222946545,
+              0.2159387222946545,
+              0.2159387222946545
+            ],
+            "nonzero_pixels": 175
+          },
+          "di": {
+            "mean_rgb": [
+              0.09526170890202637,
+              0.09455201259396215,
+              0.07575847450607928
+            ],
+            "nonzero_pixels": 7300
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.03373136890884099,
+              0.0311862873159219,
+              0.02065411085166796
+            ],
+            "nonzero_pixels": 7270
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.017925520641751787,
+              0.01802531817094525,
+              0.00874017520109842
+            ],
+            "nonzero_pixels": 8410
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "room-gi2",
+    "gi_mode": 2,
+    "gi_snapshot": {
+      "pixels": 16107,
+      "valid": 8616,
+      "positive_weight": 5307,
+      "m_greater_than_one": 2672,
+      "positive_age_valid": 0,
+      "max_age_valid": 0,
+      "mean_m_valid": 1.3393686165273908
+    },
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 4,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.2159387222946545,
+              0.2159387222946545,
+              0.2159387222946545
+            ],
+            "nonzero_pixels": 175
+          },
+          "di": {
+            "mean_rgb": [
+              0.09445222433092815,
+              0.09361004866782222,
+              0.07487442369914599
+            ],
+            "nonzero_pixels": 7313
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.02893478046873025,
+              0.028755955869439388,
+              0.017658547204381713
+            ],
+            "nonzero_pixels": 5267
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.01792758290251222,
+              0.018026585536584247,
+              0.008741550108215148
+            ],
+            "nonzero_pixels": 8419
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "room-gi3",
+    "gi_mode": 3,
+    "gi_snapshot": {
+      "pixels": 16107,
+      "valid": 8638,
+      "positive_weight": 8164,
+      "m_greater_than_one": 7958,
+      "positive_age_valid": 6904,
+      "max_age_valid": 7,
+      "mean_m_valid": 14.40680713128039
+    },
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 4,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.2159387222946545,
+              0.2159387222946545,
+              0.2159387222946545
+            ],
+            "nonzero_pixels": 175
+          },
+          "di": {
+            "mean_rgb": [
+              0.09279624780566804,
+              0.09235444422014497,
+              0.07354837212326022
+            ],
+            "nonzero_pixels": 7306
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.037363726847618954,
+              0.031814640372974906,
+              0.02227649111361997
+            ],
+            "nonzero_pixels": 8168
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.01792579709821154,
+              0.018025297695841287,
+              0.008740530608641321
+            ],
+            "nonzero_pixels": 8404
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "room-first",
+    "gi_mode": 3,
+    "gi_snapshot": {
+      "pixels": 16107,
+      "valid": 8613,
+      "positive_weight": 5362,
+      "m_greater_than_one": 2611,
+      "positive_age_valid": 0,
+      "max_age_valid": 0,
+      "mean_m_valid": 1.3289213978869152
+    },
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 4,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.2159387222946545,
+              0.2159387222946545,
+              0.2159387222946545
+            ],
+            "nonzero_pixels": 175
+          },
+          "di": {
+            "mean_rgb": [
+              0.09198238985153774,
+              0.0912668812228306,
+              0.0724816108990361
+            ],
+            "nonzero_pixels": 7180
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.03261806785842001,
+              0.030147310304502583,
+              0.018455344279059458
+            ],
+            "nonzero_pixels": 5313
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.017885220526701585,
+              0.01836790904627541,
+              0.009041953469489165
+            ],
+            "nonzero_pixels": 5205
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "room-cap1",
+    "gi_mode": 3,
+    "gi_snapshot": {
+      "pixels": 16107,
+      "valid": 8645,
+      "positive_weight": 0,
+      "m_greater_than_one": 8507,
+      "positive_age_valid": 8489,
+      "max_age_valid": 7,
+      "mean_m_valid": 16.54493927125506
+    },
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 1,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.2159387222946545,
+              0.2159387222946545,
+              0.2159387222946545
+            ],
+            "nonzero_pixels": 175
+          },
+          "di": {
+            "mean_rgb": [
+              0.09441298966139265,
+              0.09386773441596767,
+              0.07510259109346562
+            ],
+            "nonzero_pixels": 7300
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "nonzero_pixels": 0
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "nonzero_pixels": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "room-cap2",
+    "gi_mode": 3,
+    "gi_snapshot": {
+      "pixels": 16107,
+      "valid": 8640,
+      "positive_weight": 8101,
+      "m_greater_than_one": 8000,
+      "positive_age_valid": 6981,
+      "max_age_valid": 7,
+      "mean_m_valid": 14.522337962962963
+    },
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 2,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.2159387222946545,
+              0.2159387222946545,
+              0.2159387222946545
+            ],
+            "nonzero_pixels": 175
+          },
+          "di": {
+            "mean_rgb": [
+              0.09454419350960094,
+              0.09363485200079324,
+              0.07490406045184245
+            ],
+            "nonzero_pixels": 7306
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.03632128519549186,
+              0.03093254005560375,
+              0.021408950204903122
+            ],
+            "nonzero_pixels": 8097
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "nonzero_pixels": 0
+          }
+        }
+      }
+    ]
+  }
+]

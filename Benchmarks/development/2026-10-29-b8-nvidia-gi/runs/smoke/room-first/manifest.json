@@ -1,0 +1,362 @@
+{
+  "label": "room-first",
+  "scene": "WORKSPACE\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+  "mode": "dipt",
+  "output_track": "unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata",
+  "exe_sha256": "c992c25a766fc750e53ddf55faae7fa544a911bd230c50934fd8d222eafd8d25",
+  "started_utc": "2026-10-29T22:32:13.932811+00:00",
+  "command": [
+    "WORKSPACE\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+    "--scene",
+    "WORKSPACE\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+    "--width",
+    "177",
+    "--height",
+    "91",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "1",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "WORKSPACE\\work\\2026-10-29-b8-gi-approx-smoke\\room-first\\frame.png",
+    "--captureSuffix",
+    "room-first",
+    "--perfLog",
+    "WORKSPACE\\work\\2026-10-29-b8-gi-approx-smoke\\room-first\\partial-perf.csv",
+    "--b8InitialGIValidation",
+    "true",
+    "--b8Component",
+    "0",
+    "--b8ValidationStage",
+    "1",
+    "--b8GIReuseMode",
+    "3",
+    "--captureNativeRadiance",
+    "true",
+    "--captureWarmupFrames",
+    "1",
+    "--ptFixedSpatialSamples",
+    "1",
+    "--capturePTReservoirs",
+    "true",
+    "--strictDIValidation",
+    "true",
+    "--restirDIMode",
+    "3",
+    "--neeMIS",
+    "0",
+    "--environmentDiffuseMip",
+    "0",
+    "--benchmarkUncapped",
+    "true",
+    "--samplingSeed",
+    "47",
+    "--captureLinearHDR",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--useReSTIRPT",
+    "1",
+    "--restirPTMode",
+    "3",
+    "--maxBounces",
+    "4",
+    "--maxDiffuseBounces",
+    "4",
+    "--stopAnimations",
+    "--captureSimple"
+  ],
+  "cwd": "WORKSPACE\\outputs\\RTXDI_Next\\bin",
+  "settings": {
+    "width": 177,
+    "height": 91,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 1,
+    "restir_gi": 1,
+    "simple": true,
+    "record_start": null,
+    "frames": 1,
+    "reference_spp": null,
+    "linear_hdr_requested": true,
+    "sampling_seed_requested": 47,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": 3,
+    "nee_mis_requested": 0,
+    "nee_type": 2,
+    "restir_pt": 1,
+    "max_bounces_override": 4,
+    "max_diffuse_bounces_override": 4,
+    "pt_mode": 3
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+  "canonical_experiment": null,
+  "paired_spatial_pilot_requested": false,
+  "gaussian_pairing_requested": false,
+  "development_partition": {
+    "contract_version": 1,
+    "canonical_accepted": false,
+    "gi_reuse": true,
+    "gi_approximation_mode": 3,
+    "component": 0,
+    "stage": 1,
+    "pt_min_light_inclusive_length": 4
+  },
+  "process_id": 8716,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 21.328000000008615,
+  "images": [
+    {
+      "name": "frame_room-first.png",
+      "sha256": "97db35ba3aed157bc73c22716aac346394be9efea9298d98a96a213cc9c1f11e",
+      "bytes": 33753
+    }
+  ],
+  "linear_hdr_files": [
+    {
+      "name": "frame_room-first.pfm",
+      "sha256": "4e02c34e0dd5ef2439b1b3cfef498b50bb898937a7031beae86aba698347f79b",
+      "bytes": 193299
+    },
+    {
+      "name": "frame_room-first.pfm.json",
+      "sha256": "7c060ebdd86c720010497ea9dfe582bce19183e70c3b88a97dadcfc337c48a4d",
+      "bytes": 596
+    },
+    {
+      "name": "frame_room-first.pfm.native-di-gi-pt.pfm",
+      "sha256": "4e02c34e0dd5ef2439b1b3cfef498b50bb898937a7031beae86aba698347f79b",
+      "bytes": 193299
+    },
+    {
+      "name": "frame_room-first.pfm.native-di-gi-pt.pfm.json",
+      "sha256": "7c060ebdd86c720010497ea9dfe582bce19183e70c3b88a97dadcfc337c48a4d",
+      "bytes": 596
+    },
+    {
+      "name": "frame_room-first.pfm.native-di-gi.pfm",
+      "sha256": "8e0a430c630b2b36f7b7815818cb9184da6173b4c3208ca38a077ba42a75b6db",
+      "bytes": 193299
+    },
+    {
+      "name": "frame_room-first.pfm.native-di-gi.pfm.json",
+      "sha256": "7c060ebdd86c720010497ea9dfe582bce19183e70c3b88a97dadcfc337c48a4d",
+      "bytes": 596
+    },
+    {
+      "name": "frame_room-first.pfm.native-di.pfm",
+      "sha256": "b3b1efda98ff6e6d9338a622159f884e71b6e8bb352f32da279f23a90ecd3f7c",
+      "bytes": 193299
+    },
+    {
+      "name": "frame_room-first.pfm.native-di.pfm.json",
+      "sha256": "7c060ebdd86c720010497ea9dfe582bce19183e70c3b88a97dadcfc337c48a4d",
+      "bytes": 596
+    },
+    {
+      "name": "frame_room-first.pfm.native.pfm",
+      "sha256": "81037c31e4afd08607997588a2d1cc8e106eb166f2ad165055a5a0d4788bf73f",
+      "bytes": 193299
+    },
+    {
+      "name": "frame_room-first.pfm.native.pfm.json",
+      "sha256": "7c060ebdd86c720010497ea9dfe582bce19183e70c3b88a97dadcfc337c48a4d",
+      "bytes": 596
+    },
+    {
+      "name": "frame_room-first.pfm.pt.bin",
+      "sha256": "da0a8ba23848ef7062a2f4d55e74c8b64c8749c1626c71735bca1554d8433622",
+      "bytes": 3538944
+    },
+    {
+      "name": "frame_room-first.pfm.pt.bin.gi.bin",
+      "sha256": "8d0f0fa72b03fd18b3915693d35dd179b8d1887dafaf578efa9c444c753cab09",
+      "bytes": 1769472
+    },
+    {
+      "name": "frame_room-first.pfm.pt.bin.gi.bin.json",
+      "sha256": "27c6f8984d069f4d189f81a34c2c48e60b118eef3e8c10dbc6e11a345bf59b17",
+      "bytes": 223
+    },
+    {
+      "name": "frame_room-first.pfm.pt.bin.json",
+      "sha256": "79b8cd957d16072e9a78899db41c51405d11814ff0f2e60298c27b2e7a560a13",
+      "bytes": 330
+    },
+    {
+      "name": "frame_room-first.pfm.pt.bin.stats.json",
+      "sha256": "9b9040809aba05399b96de76a4602ef0fccaff62de57f1dde5635b962cf04bbd",
+      "bytes": 1692
+    }
+  ],
+  "effective_b8_partition": {
+    "development": true,
+    "contract_version": 1,
+    "gi_reuse": true,
+    "gi_approximation_mode": 3,
+    "component": 0,
+    "stage": 1,
+    "pt_min_light_inclusive_length": 4,
+    "canonical_accepted": false
+  },
+  "effective_paired_spatial_pilot": {
+    "enabled": false,
+    "policy": "adjacent reciprocal pairs",
+    "pair_owned_shifts": false,
+    "vector_shading": false,
+    "canonical_accepted": false
+  },
+  "effective_replay_queue": {
+    "enabled": false,
+    "oracle": false,
+    "shift_stride_bytes": 104,
+    "indirect_dispatch": false,
+    "canonical_accepted": false
+  },
+  "gi_reservoir_snapshots": [
+    {
+      "name": "frame_room-first.pfm.pt.bin.gi.bin",
+      "statistics": {
+        "pixels": 16107,
+        "valid": 8613,
+        "positive_weight": 5362,
+        "m_greater_than_one": 2611,
+        "positive_age_valid": 0,
+        "max_age_valid": 0,
+        "mean_m_valid": 1.3289213978869152
+      }
+    }
+  ],
+  "b8_same_frame_checks": [
+    {
+      "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+      "max_bounces": 4,
+      "components": {
+        "native": {
+          "mean_rgb": [
+            0.2159387222946545,
+            0.2159387222946545,
+            0.2159387222946545
+          ],
+          "nonzero_pixels": 175
+        },
+        "di": {
+          "mean_rgb": [
+            0.09198238985153774,
+            0.0912668812228306,
+            0.0724816108990361
+          ],
+          "nonzero_pixels": 7180
+        },
+        "gi_short": {
+          "mean_rgb": [
+            0.03261806785842001,
+            0.030147310304502583,
+            0.018455344279059458
+          ],
+          "nonzero_pixels": 5313
+        },
+        "pt_long": {
+          "mean_rgb": [
+            0.017885220526701585,
+            0.01836790904627541,
+            0.009041953469489165
+          ],
+          "nonzero_pixels": 5205
+        }
+      }
+    }
+  ],
+  "effective_environment_filter": {
+    "diffuse_mip": 0.0,
+    "explicit_override": true,
+    "scope": "Filtering identity only; no renderer correctness or acceptance claim"
+  },
+  "effective_sampling": {
+    "coverage": "verified first-frame effective receipt",
+    "seed": 47,
+    "realtime": true,
+    "reference_pixel_center": false,
+    "pixel_jitter_scale": 0.0
+  },
+  "effective_di_validation": {
+    "coverage": "verified first-frame effective receipt",
+    "strict": true,
+    "boiling": false,
+    "discount_naive": false,
+    "temporal_permutation": false
+  },
+  "effective_extended_scene_contract": null,
+  "effective_pt_replay": {
+    "coverage": "verified first-frame effective receipt",
+    "replay_only": false,
+    "roughness_threshold": 0.100000001
+  },
+  "effective_pt_history": {
+    "coverage": "verified first-frame effective receipt",
+    "age_rejection": true,
+    "max_age": 30,
+    "max_history": 8
+  },
+  "effective_pt_spatial": {
+    "coverage": "verified first-frame effective receipt",
+    "samples": 1,
+    "boost": 1
+  },
+  "effective_ptpp": {
+    "coverage": "verified first-frame effective receipt",
+    "reconnection_mode": 0,
+    "roulette_probability": 0.0,
+    "diagnostics": true
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 1,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "not requested; legacy labels retain their original numbering"
+  },
+  "effective_gbuffer_precision": {
+    "rounded_materials": 0,
+    "explicit_override": false,
+    "scope": "Half-up after fp16 conversion; not exact/unbiased BSDF reconstruction"
+  },
+  "effective_di_reuse": {
+    "active": true,
+    "mode": 3,
+    "temporal": true,
+    "spatial": true,
+    "gi": true,
+    "pt": true,
+    "scope": "Effective first-frame settings; not estimator correctness or timing proof"
+  },
+  "effective_prefix_throughput": {
+    "preserve_above_one": false,
+    "capture_packed": false,
+    "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+  }
+}

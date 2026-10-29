@@ -81,6 +81,7 @@ struct CommandLineOptions
     bool PTDisableAgeRejectionValidation = false;
     bool PTReplayOnlyValidation    = false;
     bool B8InitialGIValidation = false;
+    int B8GIReuseMode = -1; // -1 preserves initial-only control; 0..3 opts into NVIDIA GI approximation.
     int B8ValidationStage = 0; // 0 initial-only, 1 DI/PT reuse, 2 limited PT++ ablation; GI reuse remains off.
     bool PTPairedSpatialValidation = false; // Adjacent reciprocal-pair/vector pilot, not full B10.
     bool PTGaussianPairingValidation = false; // Three resident tables, one per frame; not simultaneous three-neighbor reuse.

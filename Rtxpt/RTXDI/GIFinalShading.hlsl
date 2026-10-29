@@ -32,7 +32,7 @@ float GetMISWeight(float3 roughBrdf, float3 trueBrdf)
 
 bool ReSTIRGIFinalContribution(const uint2 pixelPosition, const RAB_Surface surface, out float4 radianceAndSpecAvg, out float hitDistance)
 {
-    if (g_RtxdiBridgeConst.giPTPartition != 0)
+    if (g_RtxdiBridgeConst.giPTPartition != 0 && (g_RtxdiBridgeConst.giPTPartition & 16u) == 0)
     {
         radianceAndSpecAvg = 0;
         hitDistance = 0;

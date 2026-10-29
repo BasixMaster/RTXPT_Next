@@ -7,7 +7,7 @@
   "summary": [
     "B0 preserves unchanged RTXPT1.9 defaults, original assets and runtime3.0. Canonical B1/B2 are native PT+DI/DI+GI3.0; B3/B4/B5 are native PT, +DI, +DI+GI on runtime3.1. VERSION_MAPPING.md preserves all legacy refs/data labels.",
     "B1–B5 native cohorts remain preserved. B6/B7 now have corrected original-resolution five-seed guarded quality evidence after finite rejected-shift targets prevented invalid MIS propagation; native startup stability and new throughput remain pending.",
-    "B8 initial-GI/PT-long and limited PT++ execute. B10 Gaussian reciprocal tables now pass GPU payload/transform and original-resolution diagnostic gates. One-neighbor room quality is a mixed MSE/FLIP tradeoff; full GI reuse, simultaneous multi-neighbor reuse, spatial replay queues have scoped GPU snapshot validation; temporal/multi-neighbor queues and canonical acceptance remain pending.",
+    "B8 NVIDIA non-directional GI reuse now has14GPU snapshot/support gates, six64-frame static sequences and18uncapped timing processes across all required scenes. Quality is mixed, including a Kitchen linear-error regression; no canonical promotion. Earlier B9/B10 pilots retain their initial-GI scope; remaining PT++ mechanisms and broader validation are pending.",
     "Fresh RTXPT1.9 PT-only raw control now covers all three required scenes with nine timings and nine PNG quality captures; original B0 defaults remain unchanged and HDR export is unsupported in that preserved binary."
   ],
   "questions": [
@@ -651,6 +651,19 @@
       "quality": "11captured-frame exact packed/vector GPU comparisons, including244654Convergence and41032Kitchen replays;2queue-disabled regressions; finite RGB; complete source overlay and rejected attempts.",
       "limitations": "One-neighbor spatial scheduling, GI initial only. Last-frame counters, direct-control history overwrite; no all-warmup/queue-only sequence, queue timing, full GI reuse, simultaneous neighbors or full PT++ acceptance.",
       "notes": "No epsilon or normal-word mask. Shared metadata policy canonicalizes absent normals and preserves original quantized source normals. Historical1f64042 timing/quality remains separate; brightness work deferred.",
+      "rights": "Application-owned prototype and measured evidence; pinned NVIDIA component/source licenses preserved."
+    },
+    {
+      "id": "LOCAL-B8-NVIDIA-GI",
+      "title": "B8 NVIDIA non-directional GI reuse: all-scene experimental checkpoint",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/B8_STAGED_IMPLEMENTATION.md",
+      "kind": "experiment",
+      "published_on": "2026-10-29",
+      "checked_on": "2026-10-29",
+      "access": "full",
+      "quality": "14GPU snapshot/support gates, six64-frame static quality sequences and18uncapped timing processes; exact source/cache/executable and cap/restoration receipts.",
+      "limitations": "GI secondary radiance is non-directional; quality is mixed, including Kitchen linear-error and empirical-luminance regression. No independent seed/motion/equal-time or canonical acceptance.",
+      "notes": "Initial-only control remains available. No material replacement, exposure fitting or brightness multiplier. Earlier B9/B10 pilots retain initial-GI scope.",
       "rights": "Application-owned prototype and measured evidence; pinned NVIDIA component/source licenses preserved."
     }
   ],
@@ -1873,6 +1886,36 @@
           "locator": "B10_GAUSSIAN_PAIRING.md; Benchmarks/development/2026-10-29-replay-queue/gpu-checks.json",
           "relation": "supports",
           "note": "Scoped exact snapshot comparisons; not full transport acceptance or performance."
+        }
+      ]
+    },
+    {
+      "id": "B8-NVIDIA-GI-APPROXIMATION",
+      "title": "Practical GI reuse works, with scene-dependent quality tradeoffs",
+      "question_ids": [
+        "Q3"
+      ],
+      "topic": "GI/PT integration",
+      "claim": "Disjoint short-GI/long-PT composition now executes NVIDIA GI temporal/spatial reuse on Room and original Convergence/Kitchen. Room error improves; Kitchen linear MSE and empirical mean-luminance difference worsen despite lower representative FLIP.",
+      "evidence_type": "measured",
+      "confidence": "high",
+      "context": "Explicit opt-in approximate B8 mode, static seed47 sequences and separate repeated uncapped timings; no canonical promotion.",
+      "strengths": "Retained initial-only control, actual GI M/age, same-frame finite/support checks, full-resolution images,64-frame curves and documented excluded harness attempt.",
+      "limitations": "One static sequence per mode/scene; GI approximation and inherited bias controls; no exact glossy reevaluation, independent seed replication, motion or equal-time comparison.",
+      "implications": "Keep metrics and approximation scope explicit; preserve brightness investigation as separate work. Proceed to PT++ ablations without claiming a universal B8 quality gain.",
+      "tags": [
+        "B8",
+        "ReSTIR-GI",
+        "approximation",
+        "quality",
+        "benchmark"
+      ],
+      "evidence": [
+        {
+          "source_id": "LOCAL-B8-NVIDIA-GI",
+          "locator": "B8_STAGED_IMPLEMENTATION.md; Benchmarks/development/2026-10-29-b8-nvidia-gi",
+          "relation": "supports",
+          "note": "Implementation, GPU participation and scoped measured comparison; not universal correctness or performance."
         }
       ]
     }

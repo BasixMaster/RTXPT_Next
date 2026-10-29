@@ -1,0 +1,78 @@
+{
+  "status": "measured_development_not_promoted",
+  "rows": [
+    {
+      "scene": "opaque-room",
+      "initial_gpu_busy_ms": 1.76315,
+      "reuse_gpu_busy_ms": 1.88105,
+      "gpu_busy_change_percent": 6.686895612965449,
+      "initial_cpu_cadence_ms": 1.81765,
+      "reuse_cpu_cadence_ms": 1.91675,
+      "initial_gpu_run_ci95": {
+        "low_ms": 1.75195,
+        "high_ms": 1.7843499999999999,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      },
+      "reuse_gpu_run_ci95": {
+        "low_ms": 1.8486,
+        "high_ms": 1.88895,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      }
+    },
+    {
+      "scene": "convergence",
+      "initial_gpu_busy_ms": 10.34295,
+      "reuse_gpu_busy_ms": 10.85285,
+      "gpu_busy_change_percent": 4.929928115286253,
+      "initial_cpu_cadence_ms": 10.29745,
+      "reuse_cpu_cadence_ms": 10.80385,
+      "initial_gpu_run_ci95": {
+        "low_ms": 10.324549999999999,
+        "high_ms": 10.35455,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      },
+      "reuse_gpu_run_ci95": {
+        "low_ms": 10.84655,
+        "high_ms": 10.881,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      }
+    },
+    {
+      "scene": "kitchen",
+      "initial_gpu_busy_ms": 12.5822,
+      "reuse_gpu_busy_ms": 13.3488,
+      "gpu_busy_change_percent": 6.092734180032111,
+      "initial_cpu_cadence_ms": 12.6082,
+      "reuse_cpu_cadence_ms": 13.3391,
+      "initial_gpu_run_ci95": {
+        "low_ms": 12.5463,
+        "high_ms": 12.97055,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      },
+      "reuse_gpu_run_ci95": {
+        "low_ms": 13.3041,
+        "high_ms": 13.3964,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      }
+    }
+  ],
+  "scope": "Disjoint B8 initial-only GI control versus NVIDIA GI approximation with temporal+spatial reuse; DI/PT temporal+spatial active, one PT neighbor. Three process repeats per policy; not equal-quality speedup or canonical promotion."
+}

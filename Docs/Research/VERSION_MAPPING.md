@@ -14,7 +14,7 @@ User-confirmed numbering, 2026-10-29. **B0 is the unchanged RTXPT 1.9 reference 
 | **B5** | **RTXPT native PT + DI 3.1 + GI 3.1** | DI/GI on; ReSTIR PT off. Fresh original-scene and registered-room quality and cap-verified timing are measured. |
 | **B6** | **ReSTIR PT / DI and GI off** | Separate DI/GI estimators off; existing native direct/fallback terms remain until explicitly replaced by a unified-lighting partition. No complete extended-scene benchmark is claimed. |
 | **B7** | **ReSTIR PT + DI 3.1** | DI direct plus PT indirect; GI off. Corrected static opaque checkpoint `de9fe651`; original-scene gates remain unresolved. |
-| **B8** | **ReSTIR PT + DI 3.1 + GI 3.1** | Opt-in disjoint initial-GI/PT-long development executes with DI/PT reuse. General GI reuse and complete canonical validation remain pending. |
+| **B8** | **ReSTIR PT + DI 3.1 + GI 3.1** | NVIDIA non-directional GI temporal/spatial reuse executes on disjoint GI-short/PT-long domains. Full-resolution static quality is measured with mixed results; uncapped timing measured; canonical validation remains pending. |
 | **B9** | **B8 + limited PT++** | A GI-initial-only footprint/initial-roulette development ablation executes; complete B8/B9 validation remains pending. The historical GI-off pilot is not B9. |
 | **B10** | **B8 + full remaining PT++** | Gaussian reciprocal-pair/vector GPU development executes. Simultaneous multi-neighbor reuse, replay queues, remaining mechanisms and full validation remain pending. No complete-paper implementation claim. |
 
@@ -60,7 +60,7 @@ Current scoped measurements: [registered-room B1/B4/B6/B7 comparison](REGISTERED
 
 Current native coverage: [fresh B2/B3/B5 original-scene and room results](NATIVE_MATRIX_RESULTS.md) adds27quality captures and27cap-verified timing processes. [The unified B0–B10 overview](COMPARISON_OVERVIEW.md) includes all versions, current metrics and representative pictures; historical cohorts remain separate.
 
-Current development: [B8–B10 staged implementation](B8_STAGED_IMPLEMENTATION.md) records the disjoint initial-GI GPU foundation and limited PT++ ablation. GI reuse and remaining B10 GPU mechanisms remain pending; brightness work is deferred.
+Current development: [B8–B10 staged implementation](B8_STAGED_IMPLEMENTATION.md) records the NVIDIA GI approximation, full-resolution original-scene checks and64-frame quality sequences. Earlier limited PT++ ablations retain their initial-only GI scope; remaining B10 mechanisms and canonical acceptance remain pending. Brightness fixes are deferred.
 
 Current timing checkpoint2026-10-29: [Gaussian versus adjacent pair/vector development](B10_GAUSSIAN_PAIRING.md#frozen-adjacent-versus-gaussian-timing) completes18cap-verified processes over all three scenes. Small descriptive timing differences and mixed quality do not promote full B10. Explicit replay compaction remains next; brightness fixes remain deferred.
 

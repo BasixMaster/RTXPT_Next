@@ -12,7 +12,7 @@
 | B5 | Native PT + DI 3.1 + GI 3.1 | ReSTIR PT off; all three native scene rows freshly measured. |
 | B6 | ReSTIR PT | DI/GI off; native direct/fallback ownership remains explicit. |
 | B7 | ReSTIR PT + DI 3.1 | GI off; measured static opaque checkpoint. |
-| B8 | ReSTIR PT + DI 3.1 + GI 3.1 | Disjoint initial-GI development executes; full GI reuse and acceptance pending. |
+| B8 | ReSTIR PT + DI 3.1 + GI 3.1 | NVIDIA non-directional GI reuse executes on the disjoint short-GI/long-PT split; original-resolution static quality measured, mixed results; uncapped timing measured; general acceptance pending. |
 | B9 | B8 + limited PT++ | GI-initial-only footprint/roulette ablation executes; complete B8/B9 pending. |
 | B10 | B8 + full remaining PT++ | Gaussian reciprocal-pair/vector GPU development executes; full PT++ and acceptance pending. |
 

@@ -1,6 +1,6 @@
 # Roadmap: canonical B0–B10
 
-**Live checkpoint:** Both measurement batches are complete and published:18pairing timing processes, plus9native PT-only timings and9PNG captures. Replay-queue code passes11captured-frame GPU scheduling oracles behind a development flag; sequence validation and queue timing are next. [Current queue details](B10_GAUSSIAN_PAIRING.md#replay-compaction--active-implementation-checkpoint). Full B10 remains incomplete.
+**Live checkpoint:** B8 now has opt-in NVIDIA non-directional GI temporal/spatial reuse on the existing disjoint GI-short/PT-long split. Eight room gates and six full-resolution control/reuse snapshots pass, including original Convergence/Kitchen. Six64-frame static quality sequences and18uncapped timing processes are complete; quality is mixed and the approximation is not promoted. Finish this B8 evaluation before advancing B9, then B10; exact glossy GI reevaluation is a separate future enhancement. Brightness correction remains deferred. [B8 details](B8_STAGED_IMPLEMENTATION.md).
 
 **Current numbering, confirmed 2026-10-29:** [VERSION_MAPPING.md](VERSION_MAPPING.md) defines all canonical variants and the retained legacy crosswalk. B0 remains the unchanged RTXPT 1.9 original-defaults reference. Old files, branches, tags and data IDs are not renumbered in place.
 

@@ -6,15 +6,22 @@ import re
 import numpy as np
 
 
-def verify(log, enabled=False, component=0, stage=0):
+def verify(log, enabled=False, component=0, stage=0, gi_mode=None):
     rows = re.findall(r'^B8_PARTITION_CONTRACT development=(\d+) version=(\d+) giReuse=(\d+) component=(\d+) minPTLength=(\d+)(?: stage=(\d+))?\s*$', log, re.MULTILINE)
     rows = [row[:5] + (row[5] or '0',) for row in rows]
     if not rows and not enabled:
         return None
-    expected = (str(int(enabled)), '1', '0', str(component), '4', str(stage))
+    expected = (str(int(enabled)), '1', str(int(gi_mode is not None and gi_mode > 0)), str(component), '4', str(stage))
     if not rows or set(rows) != {expected}:
         raise ValueError('Missing, conflicting or incompatible B8 partition receipt')
-    return dict(development=enabled, contract_version=1, gi_reuse=False,
+    approximation = re.findall(r'^B8_GI_APPROX_CONTRACT enabled=(\d+) mode=(-?\d+) directional=0 jacobianClamp=1 finalBlend=1\s*$', log, re.MULTILINE)
+    if gi_mode is not None:
+        if not enabled or gi_mode not in range(4) or set(approximation) != {('1', str(gi_mode))}:
+            raise ValueError('Missing/conflicting NVIDIA GI approximation receipt')
+    elif approximation and set(approximation) != {('0', '-1')}:
+        raise ValueError('Unrequested NVIDIA GI approximation')
+    return dict(development=enabled, contract_version=1, gi_reuse=gi_mode is not None and gi_mode > 0,
+                gi_approximation_mode=gi_mode,
                 component=component, stage=stage, pt_min_light_inclusive_length=4,
                 canonical_accepted=False)
 

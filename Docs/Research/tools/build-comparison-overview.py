@@ -34,10 +34,10 @@ def build(repo):
                      history_frames=None,quality_replication=None)
             if v in ['B8','B9','B10']:
                 row['report']='B8_STAGED_IMPLEMENTATION.md'
-                row['algorithm']={'B8':'B8 development: DI + GI-short initial + PT-long','B9':'B9 development: initial-GI split + footprint/roulette','B10':'B10 development: initial-GI split + Gaussian pair/vector pilot'}[v]
+                row['algorithm']={'B8':'B8 development: DI + approximate GI-short reuse + PT-long','B9':'B9 development: initial-GI split + footprint/roulette','B10':'B10 development: initial-GI split + Gaussian pair/vector pilot'}[v]
                 if v=='B8':
-                    row['image']='assets/b8-staged/'+({'convergence':'convergence','kitchen':'kitchen','opaque-room':'sum'}[scene])+'.png'
-                    row['note']+=' Image is a176x90 development illustration, not a matched comparison.'
+                    row['image']='assets/b8-nvidia-gi/'+('room' if scene=='opaque-room' else scene)+'-gi3.png'
+                    row['note']='NVIDIA non-directional GI reuse: '+('640x360 cap4/4' if scene=='opaque-room' else '1280x720 cap14/2')+',64-frame static quality measured; mixed results. Scoped timing is shown separately when available; no canonical promotion.'
                 elif v=='B10':
                     row['report']='B10_GAUSSIAN_PAIRING.md'
                     row['image']='assets/b10-gaussian/'+({'convergence':'convergence','kitchen':'kitchen','opaque-room':'room'}[scene])+'.png'
@@ -161,6 +161,33 @@ def build(repo):
                 algorithm='One-neighbor spatial replay queue; DI/GI initial',gpu_busy_ms=None,ldr_flip=None,hdr_flip=None,
                 image='assets/b10-queue/'+scene+'.png',report='B10_GAUSSIAN_PAIRING.md',
                 evidence=f"Exact snapshot: {q['width']}x{q['height']}, cap{'4/4' if scene=='opaque-room' else '14/2'}, {q['replay_requests']} replays,0 mismatches. Timing/quality scores pending."))
+    b8_path=dev/'2026-10-29-b8-nvidia-gi/summary.json'
+    if b8_path.exists():
+        b8=load(b8_path)
+        data['b8_nvidia_gi_development']=b8
+        data['source_hashes'][b8_path.relative_to(repo).as_posix()]=hashlib.sha256(b8_path.read_bytes()).hexdigest()
+        b8_quality_path=b8_path.parent/'quality.json'
+        b8_quality=load(b8_quality_path) if b8_quality_path.exists() else None
+        b8_timing_path=b8_path.parent/'timing-evidence/summary.json'
+        b8_timing=load(b8_timing_path) if b8_timing_path.exists() else None
+        for path in [b8_quality_path,b8_timing_path]:
+            if path.exists():data['source_hashes'][path.relative_to(repo).as_posix()]=hashlib.sha256(path.read_bytes()).hexdigest()
+        if b8_quality:data['b8_gi_quality']=b8_quality
+        if b8_timing:data['b8_gi_timing']=b8_timing
+        for scene in ['opaque-room','convergence','kitchen']:
+            name='room' if scene=='opaque-room' else scene
+            for mode in [-1,3]:
+                g=b8_quality['groups'][name][f'{name}-gi{mode}'] if b8_quality else None
+                t=next(x for x in b8_timing['rows'] if x['scene']==scene) if b8_timing else None
+                final_flip=g['selected_frame_flip'][-1] if g else None
+                checkpoints.append(dict(variant='B8',scene=scene,kind='b8_gi_initial' if mode<0 else 'b8_gi_reuse',
+                    label='B8 · GI initial control' if mode<0 else 'B8 · NVIDIA GI reuse',
+                    algorithm='DI + GI-short '+('initial' if mode<0 else 'temporal/spatial approximation')+' + PT-long',
+                    gpu_busy_ms=t['initial_gpu_busy_ms' if mode<0 else 'reuse_gpu_busy_ms'] if t else None,
+                    ldr_flip=final_flip['ldr_flip'] if g else None,hdr_flip=final_flip['hdr_flip']['mean'] if g else None,
+                    mean_frame_linear_mse=g['mean_frame_linear_mse'] if g else None,mean_image_linear_mse=g['mean_image_metrics']['linear_rgb_mse'] if g else None,
+                    mean_y_difference_percent=g['mean_y_difference_percent'] if g else None,image=f'assets/b8-nvidia-gi/{name}-gi{mode}.png',
+                    report='B8_STAGED_IMPLEMENTATION.md',evidence=('64-frame static sequence, frame64 FLIP; ' if g else 'Finite full-resolution snapshot; quality pending; ')+('3 uncapped timing processes. ' if t else 'timing pending. ')+('Initial-only GI control. ' if mode<0 else 'Nondirectional GI approximation. ')+('Cap4/4. ' if scene=='opaque-room' else 'Cap14/2. ')+'Mixed quality; not canonical acceptance.'))
     data['checkpoint_rows']=checkpoints
     for item in checkpoints:
         if item.get('image') and not (doc/item['image']).is_file():raise ValueError('Missing checkpoint picture')
@@ -169,7 +196,7 @@ def build(repo):
         'All eleven canonical versions appear below for each required scene. **The latest measured checkpoints now appear directly under B0 and B10 in these tables.** B10 Gaussian timing, Gaussian quality and replay-queue validation have separate rows because they are different acquisitions. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; its PT-only control is explicitly labelled as an override.','',
         'GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Rows from different cohorts are descriptive: settings and sampling policies must be checked before computing a relative gain. Known app/NVIDIA/RTSS cap boundaries were verified for accepted current timing cohorts; unknown external limiters and background load remain limitations.','',
         '[Machine-readable overview](comparison-overview.json) · [Algorithm definitions and identities](VERSION_MAPPING.md) · [Benchmark protocol](BENCHMARK_VERSIONS.md)','']
-    captions={'opaque-room':('Controlled room — registered environment','Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.scene.json. New checkpoint rows explicitly use4/4; the queue snapshot is176x90. This is a distinct fixture from the legacy no-environment room. Native controls retain their DI/MIS policies; B6/B7 use their documented PT/strict-DI policies.'),
+    captions={'opaque-room':('Controlled room — registered environment','Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.scene.json. B8 development pictures and new checkpoint rows explicitly use4/4; the queue snapshot is176x90. This is a distinct fixture from the legacy no-environment room. Native controls retain their DI/MIS policies; B6/B7 use their documented PT/strict-DI policies.'),
               'convergence':('Original Convergence','1280×720,1spp,14/2 bounce limits, exposure0. Original materials and camera preserved.'),
               'kitchen':('Original Kitchen','1280×720,1spp,14/2 bounce limits, exposure2. Original materials and camera preserved.')}
     def fmt(value,digits):return 'Unavailable' if value is None else f'{value:.{digits}f}'
@@ -201,7 +228,7 @@ def build(repo):
       '## Quality detail and convergence coverage','',
       'The JSON includes display MSE, available linear MSE and CPU cadence alongside each current result. [Registered-room history curves and finite-reference checks](REGISTERED_ROOM_RESULTS.md) cover B6/B7 at1,8,32,64 warm-up frames and three explicit seeds. These are separate1spp history-settling snapshots, not accumulated-spp convergence or time-to-equal-quality. Native captures use three process restarts without verified independent seeds. Original-scene native quality uses finite4096spp references; the room uses a separate finite8192spp native reference with discrepancy checks. HDR-FLIP is unavailable for native original-shader controls.','',
       '## Summary and lessons learned','',
-      'The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 now has a disjoint initial-GI GPU foundation, and a limited PT++ ablation executes. Their176x90 illustrations are explicitly development-only; B10 now has Gaussian table GPU development with extended-resolution pictures; full GI reuse, remaining PT++ mechanisms and accepted extended measurements remain pending.','',
+      'The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 now has NVIDIA GI temporal/spatial reuse with14scoped GPU checks; quality/timing are in progress. Earlier limited PT++ ablations retain their initial-only GI scope. Their176x90 illustrations are explicitly development-only; B10 now has Gaussian table GPU development with extended-resolution pictures; full GI reuse, remaining PT++ mechanisms and accepted extended measurements remain pending.','',
       '## Changes','', '- 2026-10-29: Added one generated overview with all33 version/scene rows, explicit missing coverage, representative images and retained historical cohort links.','']
     if gaussian:
         block=['## B10 Gaussian development — separate quality cohorts','',

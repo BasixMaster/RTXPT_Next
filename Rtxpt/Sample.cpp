@@ -2290,8 +2290,10 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
             uint32_t(m_ui.RTXDI.restirDI.spatialResamplingParams.discountNaiveSamples));
         std::printf("PT_EXTENDED_SCENE_CONTRACT development=%d diffuseBudget=%d fullPrefixReplay=%d\n",
             int(m_cmdLine.PTExtendedSceneValidation), m_ui.DiffuseBounceCount, int(m_cmdLine.PTReplayOnlyValidation));
-        std::printf("B8_PARTITION_CONTRACT development=%d version=1 giReuse=0 component=%d minPTLength=4 stage=%d\n",
-            int(m_ui.B8InitialGIValidation), m_ui.B8Component, m_ui.B8ValidationStage);
+        std::printf("B8_PARTITION_CONTRACT development=%d version=1 giReuse=%d component=%d minPTLength=4 stage=%d\n",
+            int(m_ui.B8InitialGIValidation), int(m_cmdLine.B8GIReuseMode > 0), m_ui.B8Component, m_ui.B8ValidationStage);
+        std::printf("B8_GI_APPROX_CONTRACT enabled=%d mode=%d directional=0 jacobianClamp=1 finalBlend=1\n",
+            int(m_cmdLine.B8GIReuseMode >= 0), m_cmdLine.B8GIReuseMode);
         std::printf("PT_PAIRED_CONTRACT enabled=%d adjacentReciprocal=%d pairOwnedShifts=%d vectorShading=%d\n",
             int(m_cmdLine.PTPairedSpatialValidation), int(m_cmdLine.PTPairedSpatialValidation && !m_cmdLine.PTGaussianPairingValidation),
             int(m_cmdLine.PTPairedSpatialValidation), int(m_cmdLine.PTPairedSpatialValidation));
@@ -2447,6 +2449,7 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
     bridgeParameters.usingReSTIRPT = m_ui.ActualUseReSTIRPT();
     // Bit0 owns the path-length split; bit1 selects the independent paired pilot.
     bridgeParameters.giPTPartition = m_ui.B8InitialGIValidation ? (m_cmdLine.PTPairedSpatialValidation ? 3u : 1u) : 0u;
+    if (m_cmdLine.B8GIReuseMode >= 0) bridgeParameters.giPTPartition |= 16u;
     if (m_cmdLine.PTGaussianPairingValidation) bridgeParameters.giPTPartition |= 4u;
     if (m_cmdLine.PTReplayCompactionValidation)
     {

@@ -7,7 +7,7 @@ def validate_request(enabled, mode, replay_only, variant):
         raise ValueError('Extended-scene development requires PT, full-prefix replay and no canonical acceptance label')
 
 
-def verify(log, enabled, diffuse_budget=None, requested_mode=None, combined_partition=False, partition_stage=0):
+def verify(log, enabled, diffuse_budget=None, requested_mode=None, combined_partition=False, partition_stage=0, gi_mode=None):
     if not enabled:
         return None
     rows=re.findall(r'^PT_EXTENDED_SCENE_CONTRACT development=(\d+) diffuseBudget=(\d+) fullPrefixReplay=(\d+)\s*$',log,re.MULTILINE)
@@ -23,7 +23,7 @@ def verify(log, enabled, diffuse_budget=None, requested_mode=None, combined_part
     expected_gi='1' if combined_partition else '0'
     if combined_partition:
         from b8_partition_contract import verify as verify_b8
-        verify_b8(log, True, 0, partition_stage)
+        verify_b8(log, True, 0, partition_stage, gi_mode)
     if len(set(transport))!=1 or transport[0][1:3]!=(expected_gi,'1') or int(transport[0][4])!=budget:
         raise ValueError('Extended-scene transport receipt is inconsistent')
     if requested_mode is not None and int(transport[0][0])!=int(requested_mode=='dipt'):

@@ -189,7 +189,7 @@
     },
     {
       "id": "B8",
-      "status": "development_partition_gi_initial_only",
+      "status": "development_nvidia_gi_approximation",
       "ref": null,
       "source_sha": null,
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -204,9 +204,13 @@
       "depends_on": [
         "validated PT/GI contribution partition"
       ],
-      "runtime_status": "Opt-in disjoint DI/GI-short/PT-long executes; DI/PT reuse exercised; GI temporal/spatial reuse remains off",
-      "preparation": "CPU partition and same-frame GPU support checks passed; full canonical validation pending",
-      "development_evidence": "Benchmarks/development/2026-10-29-b8-staged-partition"
+      "runtime_status": "Disjoint GI-short/PT-long with optional NVIDIA GI temporal/spatial reuse;14GPU smoke/support snapshots passed; original materials/cameras retained",
+      "preparation": "14GPU snapshot/support gates, six64-frame static quality sequences and18uncapped timing processes complete. Mixed quality; motion/independent-seed/equal-time acceptance remain pending.",
+      "development_evidence": "Benchmarks/development/2026-10-29-b8-nvidia-gi",
+      "development_evidence_history": [
+        "Benchmarks/development/2026-10-29-b8-staged-partition",
+        "Benchmarks/development/2026-10-29-b8-nvidia-gi"
+      ]
     },
     {
       "id": "B9",

@@ -1,0 +1,7 @@
+{
+  "case": "convergence-gi3",
+  "stage": "full",
+  "renderer_exit_code": 0,
+  "reason": "Extended-scene verifier did not forward the requested GI approximation mode to the nested partition check",
+  "resolution": "Updated forwarding and regression test; excluded attempt preserved; fresh continuation capture passed"
+}

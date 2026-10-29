@@ -189,8 +189,8 @@
       "name": "Structured evidence schema separately validated; SQLite metric search",
       "status": "passed",
       "smape_matches": 2,
-      "sources": 37,
-      "findings": 43
+      "sources": 38,
+      "findings": 44
     },
     {
       "name": "No full-paper PDFs exported",
@@ -255,8 +255,23 @@
       "timed_processes": 9
     },
     {
-      "name": "12scoped checkpoints inline beside B0/B10 across all three scene tables; timing/quality/oracle scopes separated",
+      "name": "18scoped checkpoints inline beside B0/B8/B10 across all three scene tables; timing/quality/oracle scopes separated",
       "status": "passed"
+    },
+    {
+      "name": "B8 NVIDIA GI approximation:14finite/support GPU snapshots, actual GI history participation and full-resolution original scenes",
+      "status": "passed",
+      "limits": "Nondirectional GI approximation; static quality mixed; scoped timing measured, no canonical promotion."
+    },
+    {
+      "name": "B8 six64-frame all-scene quality sequences, official selected-frame FLIP, explicit Kitchen regression and convergence figure",
+      "status": "passed",
+      "limits": "One seed/static sequence; not equal-time or independent replication."
+    },
+    {
+      "name": "B8 all18uncapped timing receipts: frozen identities, no image writes/loss and verified restoration",
+      "status": "passed",
+      "limits": "Per-process GPU busy/cadence, not complete frame latency or equal-quality speedup."
     },
     {
       "name": "11exact GPU queue snapshots, real original-scene replay, disabled regressions and source/evidence hashes",
@@ -270,6 +285,6 @@
     "One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.",
     "PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.",
     "Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.",
-    "Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; full GI reuse, queue-only histories/timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending."
+    "Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; general directional GI, queue-only histories/timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending."
   ]
 }

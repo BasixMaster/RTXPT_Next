@@ -8,6 +8,12 @@ TRANSPORT_CONTRACT di=1 gi=0 pt=1 diMode=3 neeMIS=0 maxBounces=14 maxDiffuseBoun
 
 
 class ExtendedSceneContractTests(unittest.TestCase):
+    def test_combined_approximate_gi_requires_explicit_requested_mode(self):
+        log=LOG.replace('gi=0','gi=1')+'B8_PARTITION_CONTRACT development=1 version=1 giReuse=1 component=0 minPTLength=4 stage=1\n'
+        log+='B8_GI_APPROX_CONTRACT enabled=1 mode=3 directional=0 jacobianClamp=1 finalBlend=1\n'
+        self.assertTrue(verify(log,True,2,'dipt',True,1,3)['combined_partition'])
+        for mode in (None,0,1,2):
+            with self.assertRaises(ValueError):verify(log,True,2,'dipt',True,1,mode)
     def test_records_actual_settings_without_promoting(self):
         receipt=verify(LOG,True,2)
         self.assertEqual(receipt['max_bounces'],14)

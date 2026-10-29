@@ -309,6 +309,7 @@ void RtxdiPass::PrepareResources(
         (bridgeParams.frameIndex != m_BridgeParameters.frameIndex + 1u ||
          bridgeParams.samplingSeed != m_BridgeParameters.samplingSeed ||
          bridgeParams.giPTPartition != m_BridgeParameters.giPTPartition ||
+         bridgeParams.userSettings.restirGI.resamplingMode != m_BridgeParameters.userSettings.restirGI.resamplingMode ||
          bridgeParams.extendedSceneValidation != m_BridgeParameters.extendedSceneValidation ||
          bridgeParams.maxDiffuseBounces != m_BridgeParameters.maxDiffuseBounces ||
          oldPT.resamplingMode != newPT.resamplingMode ||
@@ -616,6 +617,10 @@ void RtxdiPass::FillSharedConstants(struct RtxdiBridgeConstants& bridgeConstants
 
 	const auto& giSampleMode = m_ImportanceSamplingContext->GetReSTIRGIContext().GetResamplingMode();
 	bridgeConstants.reStirGIEnableTemporalResampling = ((giSampleMode == rtxdi::ReSTIRGI_ResamplingMode::Temporal) || (giSampleMode == rtxdi::ReSTIRGI_ResamplingMode::TemporalAndSpatial)) ? 1 : 0;
+    // The B8 GI history shares the PT reset/ownership chronology. Never read
+    // a reservoir from a previous scene, partition, mode or camera reset.
+    if ((m_BridgeParameters.giPTPartition & 16u) != 0 && !m_PTCameraHistoryValid)
+        bridgeConstants.reStirGIEnableTemporalResampling = 0;
 }
 
 void RtxdiPass::FillDIConstants(RTXDI_Parameters& diParams)
@@ -643,6 +648,12 @@ void RtxdiPass::FillGIConstants(RTXDI_GIParameters& giParams)
 
 	giParams.reservoirBufferParams = reSTIRGI.GetReservoirBufferParameters();
 	giParams.bufferIndices = reSTIRGI.GetBufferIndices();
+    // The initial-producing temporal shader always writes this index, even
+    // when temporal reuse is off. SDK None/Spatial leave it unchanged.
+    if ((m_BridgeParameters.giPTPartition & 16u) != 0 &&
+        (reSTIRGI.GetResamplingMode() == rtxdi::ReSTIRGI_ResamplingMode::None ||
+         reSTIRGI.GetResamplingMode() == rtxdi::ReSTIRGI_ResamplingMode::Spatial))
+        giParams.bufferIndices.temporalResamplingOutputBufferIndex = 0;
 	giParams.temporalResamplingParams = reSTIRGI.GetTemporalResamplingParameters();
 	giParams.boilingFilterParams = reSTIRGI.GetBoilingFilterParameters();
 	giParams.spatialResamplingParams = reSTIRGI.GetSpatialResamplingParameters();
@@ -723,7 +734,7 @@ void RtxdiPass::ExecuteGI(nvrhi::CommandListHandle commandList, nvrhi::BindingSe
 
 	dm::int2 dispatchSize = { (int)reSTIRGI.GetStaticParams().RenderWidth, (int)reSTIRGI.GetStaticParams().RenderHeight };
 
-    if (m_BridgeParameters.giPTPartition != 0)
+    if (m_BridgeParameters.giPTPartition != 0 && (m_BridgeParameters.giPTPartition & 16u) == 0)
     {
         // GI-short initial estimator reads only this frame's native exports.
         // No reservoir reuse, Jacobian clamp or approximate final blend.
@@ -733,6 +744,14 @@ void RtxdiPass::ExecuteGI(nvrhi::CommandListHandle commandList, nvrhi::BindingSe
         return;
     }
 	ExecuteRayTracingPass(commandList, m_GITemporalResamplingPass, "Temporal Resampling", dispatchSize, extraBindingSet);
+
+    if ((m_BridgeParameters.giPTPartition & 16u) != 0 && m_BridgeParameters.capturePTDiagnostics)
+        std::printf("B8_GI_DISPATCH frame=%u mode=%u temporal=%d spatial=%d history=%d\n",
+            m_BridgeParameters.frameIndex, unsigned(reSTIRGI.GetResamplingMode()),
+            int(m_PTCameraHistoryValid && (reSTIRGI.GetResamplingMode() == rtxdi::ReSTIRGI_ResamplingMode::Temporal ||
+                reSTIRGI.GetResamplingMode() == rtxdi::ReSTIRGI_ResamplingMode::TemporalAndSpatial)),
+            int(reSTIRGI.GetResamplingMode() == rtxdi::ReSTIRGI_ResamplingMode::Spatial ||
+                reSTIRGI.GetResamplingMode() == rtxdi::ReSTIRGI_ResamplingMode::TemporalAndSpatial), int(m_PTCameraHistoryValid));
 
 	if (reSTIRGI.GetResamplingMode() == rtxdi::ReSTIRGI_ResamplingMode::Spatial || reSTIRGI.GetResamplingMode() == rtxdi::ReSTIRGI_ResamplingMode::TemporalAndSpatial)
 	{
@@ -889,6 +908,39 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
 {
     if (!m_BridgeParameters.usingReSTIRPT || !m_rtxdiResources->HasPTResources())
         throw std::runtime_error("PT reservoir capture requires active PT resources");
+    if ((m_BridgeParameters.giPTPartition & 16u) != 0)
+    {
+        const auto giSource = m_rtxdiResources->GIReservoirBuffer;
+        nvrhi::BufferDesc giDesc;
+        giDesc.byteSize = giSource->getDesc().byteSize;
+        giDesc.cpuAccess = nvrhi::CpuAccessMode::Read;
+        giDesc.debugName = "B8GIReservoirDiagnosticReadback";
+        auto giStaging = m_device->createBuffer(giDesc);
+        if (!giStaging) throw std::runtime_error("GI reservoir staging allocation failed");
+        auto giCopy = m_device->createCommandList();
+        giCopy->open();
+        giCopy->copyBuffer(giStaging, 0, giSource, 0, giDesc.byteSize);
+        giCopy->close();
+        m_device->executeCommandList(giCopy);
+        m_device->waitForIdle();
+        const void* giMapped = m_device->mapBuffer(giStaging, nvrhi::CpuAccessMode::Read);
+        if (!giMapped) throw std::runtime_error("GI reservoir map failed");
+        std::ofstream giBinary(path + ".gi.bin", std::ios::binary);
+        giBinary.write(static_cast<const char*>(giMapped), std::streamsize(giDesc.byteSize));
+        m_device->unmapBuffer(giStaging);
+        if (!giBinary) throw std::runtime_error("GI reservoir write failed");
+        const auto& giContext = m_ImportanceSamplingContext->GetReSTIRGIContext();
+        const auto& giLayout = giContext.GetReservoirBufferParameters();
+        std::ofstream giMeta(path + ".gi.bin.json");
+        giMeta << "{\n  \"schema_version\": 1,\n  \"packed_stride_bytes\": 32,\n  \"block_size\": " << RTXDI_RESERVOIR_BLOCK_SIZE
+            << ",\n  \"width\": " << m_BridgeParameters.frameDims.x << ",\n  \"height\": " << m_BridgeParameters.frameDims.y
+            << ",\n  \"frame_index\": " << m_BridgeParameters.frameIndex
+            << ",\n  \"mode\": " << unsigned(giContext.GetResamplingMode())
+            << ",\n  \"array_pitch\": " << giLayout.reservoirArrayPitch
+            << ",\n  \"block_row_pitch\": " << giLayout.reservoirBlockRowPitch
+            << ",\n  \"final_index\": " << giContext.GetBufferIndices().finalShadingInputBufferIndex << "\n}\n";
+        if (!giMeta) throw std::runtime_error("GI reservoir metadata write failed");
+    }
     const auto source = m_rtxdiResources->PTReservoirBuffer;
     nvrhi::BufferDesc desc;
     desc.byteSize = source->getDesc().byteSize;

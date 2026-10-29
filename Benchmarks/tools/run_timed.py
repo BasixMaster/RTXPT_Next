@@ -32,6 +32,7 @@ def main():
     ap.add_argument('--pt-mode',type=int,choices=[0,1,2,3],default=3)
     ap.add_argument('--di-mode',type=int,choices=[0,1,2,3])
     ap.add_argument('--b8-initial-gi-validation',action='store_true')
+    ap.add_argument('--b8-gi-reuse-mode',type=int,choices=range(4),help='Opt into NVIDIA GI approximation:0 initial,1 temporal,2 spatial,3 both; omission preserves legacy initial-only control')
     ap.add_argument('--b8-validation-stage',type=int,choices=range(3),default=0)
     ap.add_argument('--pt-paired-spatial-validation',action='store_true')
     ap.add_argument('--pt-gaussian-pairing-validation',action='store_true')
@@ -51,6 +52,8 @@ def main():
     a=ap.parse_args();validate_extended_request(a.pt_extended_scene_validation,a.mode,a.pt_replay_only_validation,a.variant);canonical=prepare_experiment(a.variant,a.mode,a.variant_preset,a.pt_reconnection_mode,a.pt_roulette_probability);verify_snapshot(a.artifact_manifest,canonical)
     exe=a.exe.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
     if any(out.iterdir()):raise SystemExit('Run directory must be new/empty.')
+    if a.b8_gi_reuse_mode is not None and not a.b8_initial_gi_validation:
+        raise SystemExit('GI approximation requires explicit B8 development partition')
     if a.b8_initial_gi_validation:
         if a.variant is not None or a.mode!='dipt' or a.di_mode is None or a.nee_mis!=0 or not a.strict_di_validation or not a.benchmark_uncapped:
             raise SystemExit('Partition timing requires uncapped development DI/PT, explicit DI mode, exact MIS and strict DI; no canonical label')
@@ -83,6 +86,7 @@ def main():
     if a.b8_initial_gi_validation:
         args[args.index('--useReSTIRGI')+1]='1'
         args+=['--b8InitialGIValidation','true','--b8ValidationStage',str(a.b8_validation_stage)]
+    if a.b8_gi_reuse_mode is not None: args+=['--b8GIReuseMode',str(a.b8_gi_reuse_mode)]
     if a.pt_paired_spatial_validation:args+=['--ptPairedSpatialValidation','true']
     if a.pt_gaussian_pairing_validation:args+=['--ptGaussianPairingValidation','true']
     if a.environment_diffuse_mip is not None:args+=['--environmentDiffuseMip',str(a.environment_diffuse_mip)]
@@ -176,8 +180,8 @@ def main():
             if len(set(mis))!=1 or int(mis[0])!=a.nee_mis:raise ValueError('Native MIS override lacks matching effective receipt')
             manifest['effective_native_nee_mis']=int(mis[0])
         manifest['effective_canonical_experiment']=verify_experiment(receipt_log,canonical)
-        manifest['effective_extended_scene_contract']=verify_extended(receipt_log,a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode,a.b8_initial_gi_validation,a.b8_validation_stage)
-        manifest['effective_b8_partition']=verify_b8(receipt_log,a.b8_initial_gi_validation,0,a.b8_validation_stage)
+        manifest['effective_extended_scene_contract']=verify_extended(receipt_log,a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode,a.b8_initial_gi_validation,a.b8_validation_stage,a.b8_gi_reuse_mode)
+        manifest['effective_b8_partition']=verify_b8(receipt_log,a.b8_initial_gi_validation,0,a.b8_validation_stage,a.b8_gi_reuse_mode)
         manifest['effective_paired_spatial_pilot']=verify_paired(receipt_log,a.pt_paired_spatial_validation,a.pt_gaussian_pairing_validation)
         manifest['effective_di_reuse']=verify_di_reuse(receipt_log,a.di_mode,a.mode in ('di','dipt','digi'))
         manifest['effective_environment_filter']=verify_environment_filter(receipt_log,a.environment_diffuse_mip)
