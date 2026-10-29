@@ -1,0 +1,7 @@
+BENCHMARK_UNCAPPED vsync=0 fpsLimiter=0 reflexCap=0 reflexMode=0 frameGeneration=0 renderUnfocused=1
+SAMPLING_CONTRACT seed=47 realtime=1 referencePixelCenter=0 pixelJitterScale=0
+TRANSPORT_CONTRACT di=0 gi=0 pt=1 diMode=0 neeMIS=0 maxBounces=14 maxDiffuseBounces=2
+PT_EXTENDED_SCENE_CONTRACT development=1 diffuseBudget=2 fullPrefixReplay=1
+PT_REPLAY_CONTRACT replayOnly=1 roughnessThreshold=1
+PT_HISTORY_CONTRACT ageRejection=0 maxAge=30 maxHistory=8
+ENVIRONMENT_FILTER_CONTRACT diffuseMip=0

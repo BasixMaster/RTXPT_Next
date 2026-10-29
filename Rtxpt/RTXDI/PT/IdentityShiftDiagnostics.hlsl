@@ -3,7 +3,7 @@
 #pragma pack_matrix(row_major)
 #define RTXDI_RESTIR_PT_HYBRID_SHIFT
 #include "Bridge.hlsli"
-#include <Rtxdi/PT/HybridShift.hlsli>
+#include "Runtime/HybridShiftGuard.hlsli"
 
 [numthreads(RTXDI_SCREEN_SPACE_GROUP_SIZE, RTXDI_SCREEN_SPACE_GROUP_SIZE, 1)]
 void main(uint2 thread : SV_DispatchThreadID)

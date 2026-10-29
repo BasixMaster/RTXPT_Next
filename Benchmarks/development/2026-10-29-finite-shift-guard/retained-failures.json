@@ -1,0 +1,35 @@
+{
+  "scope": "Image-quality successes do not prove uninterrupted startup stability",
+  "events": [
+    {
+      "cohort": "V5",
+      "case": "kitchen/B6-mode3-s0",
+      "status": "native startup exception; process stopped after passive source-level debugging",
+      "source_location": "Rtxpt/Lighting/LightsBaker.cpp:451 in CreateRenderPasses; Windows exception handling before PT dispatch",
+      "completed_quality_images": 30,
+      "planned": 40
+    },
+    {
+      "cohort": "V6 main",
+      "case": "kitchen/B6-mode3-s0",
+      "renderer_exit_code": 3221225477,
+      "status": "startup access violation; no image; failure retained",
+      "completed_quality_images": 30,
+      "planned": 40
+    },
+    {
+      "cohort": "V6 follow-up",
+      "status": "One main-process debugger reproduction produced an image, then a single explicit supplementary block completed10images using unchanged frozen artifacts. No automatic retry.",
+      "quality_images": 10
+    },
+    {
+      "cohort": "original-resolution",
+      "status": "20formal images plus6native references completed without a failed launch in this block"
+    },
+    {
+      "cohort": "debugger setup",
+      "status": "First2debugger invocations stopped on helper-process initialization and were invalid reproductions; excluded. Main-process-only third invocation captured successfully."
+    }
+  ],
+  "limitations": "Null-resource checks and noninteractive error mode improve diagnostics; underlying intermittent native startup access violation remains unresolved."
+}

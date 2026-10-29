@@ -115,7 +115,12 @@
       },
       "inherited_features": "RTXDI3.1 packed64-byte reservoirs and forcedNEE reconnection already present; no pure2022 replica claim",
       "current_measured_source_sha": "80eac1bcf0ce9ae2c03535b8061c133d9f19a36c",
-      "current_measurement_scope": "Registered-env room only; original Convergence/Kitchen unsupported"
+      "current_measurement_scope": "Registered-env room only; original Convergence/Kitchen unsupported",
+      "guarded_original_scene_quality": {
+        "status": "measured_timing_pending",
+        "evidence": "Benchmarks/development/2026-10-29-finite-shift-guard",
+        "configuration": "Full-prefix14/2,1280x720,explicit environment MIP0,5seeds; native startup intermittency unresolved"
+      }
     },
     {
       "id": "B7",
@@ -133,7 +138,12 @@
       },
       "inherited_features": "RTXDI3.1 packed64-byte reservoirs and forcedNEE reconnection already present; no pure2022 replica claim",
       "current_measured_source_sha": "80eac1bcf0ce9ae2c03535b8061c133d9f19a36c",
-      "current_measurement_scope": "Registered-env room only; original Convergence/Kitchen unsupported"
+      "current_measurement_scope": "Registered-env room only; original Convergence/Kitchen unsupported",
+      "guarded_original_scene_quality": {
+        "status": "measured_timing_pending",
+        "evidence": "Benchmarks/development/2026-10-29-finite-shift-guard",
+        "configuration": "Full-prefix14/2,1280x720,explicit environment MIP0,5seeds; native startup intermittency unresolved"
+      }
     },
     {
       "id": "B8",

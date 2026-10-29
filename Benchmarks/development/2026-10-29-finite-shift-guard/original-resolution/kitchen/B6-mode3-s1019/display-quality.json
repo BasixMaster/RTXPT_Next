@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "kind": "display_quality_pair",
+  "relation": "accuracy_reference",
+  "reference": {
+    "file": "frame_reference4096.png",
+    "sha256": "bcc1fbb8806cf9c0acf0efd5ebbe72c640e4020e90d3782827d927984b0c8e25"
+  },
+  "test": {
+    "file": "frame_B6-mode3-s1019.png",
+    "sha256": "05d3c77d2443b9d23a6d5be5cb86ca88aea741f4a110bb98c8709b6cffdcfaf6"
+  },
+  "roi": null,
+  "dimensions": {
+    "width": 1280,
+    "height": 720
+  },
+  "metrics": {
+    "selected_pixels": 921600,
+    "total_pixels": 921600,
+    "decoded_rgb_exactly_equal": false,
+    "changed_pixels": 860721,
+    "changed_pixel_fraction": 0.9339420572916667,
+    "max_abs_channel_difference_8bit": 255,
+    "mse_srgb_encoded_rgb": 0.045742077182520616,
+    "psnr_srgb_encoded_rgb_db": 13.396841176386808,
+    "psnr_identical_infinite": false,
+    "smape_display_luma100": 36.61115015594011
+  },
+  "flip": {
+    "status": "measured",
+    "metric": "LDR-FLIP",
+    "evaluator": "official NVlabs flip-evaluator",
+    "evaluator_version": "1.7",
+    "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+    "full_frame_mean": 0.30251961946487427,
+    "selected_region_mean": 0.3025306761264801,
+    "selected_region_p95": 0.6213537454605103,
+    "parameters": {
+      "ppd": 67.0
+    },
+    "inactive_hdr_parameters": {
+      "status": "not_applicable_to_LDR",
+      "official_returned_defaults": {
+        "startExposure": "+inf",
+        "stopExposure": "+inf",
+        "numExposures": -1,
+        "tonemapper": "aces"
+      },
+      "sentinel_encoding": "Non-finite inactive HDR defaults are preserved as explicit strings, not numbers or metric substitutes."
+    },
+    "inputs": "normalized sRGB PNG; inputsRGB=True",
+    "note": "Full-frame evaluator map is computed before ROI reduction; not HDR-FLIP."
+  },
+  "definitions": {
+    "rgb": "Decoded 8-bit RGB PNG normalized to [0,1]; alpha excluded.",
+    "mse": "Mean squared RGB channel difference in encoded sRGB; peak value 1 for PSNR.",
+    "smape": "100*mean(|Yref-Ytest|/(|Yref|+|Ytest|+1e-4)); Y=.2126R+.7152G+.0722B applied to encoded sRGB. This is display luma, not scene luminance."
+  },
+  "limitations": [
+    "PNG captures are tonemapped display images, not raw linear HDR radiance.",
+    "A regression comparison against B0 measures cross-version difference, not image accuracy against converged truth.",
+    "An accuracy_reference relation is a user declaration; reference convergence and scene/config parity require external evidence.",
+    "These display-space metrics are not paper-exact HDR SMAPE, MAPE, RelMSE or HDR-FLIP and do not establish unbiasedness."
+  ]
+}

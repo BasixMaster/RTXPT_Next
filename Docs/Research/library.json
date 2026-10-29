@@ -6,7 +6,7 @@
   "updated_on": "2026-10-29",
   "summary": [
     "B0 preserves unchanged RTXPT1.9 defaults, original assets and runtime3.0. Canonical B1/B2 are native PT+DI/DI+GI3.0; B3/B4/B5 are native PT, +DI, +DI+GI on runtime3.1. VERSION_MAPPING.md preserves all legacy refs/data labels.",
-    "B1–B5 native controls have original-scene and registered-room timing/quality coverage. B6/B7 registered-room measurements are scoped; guarded Convergence/Kitchen captures now render at original resolution but retain an unresolved brightness deficit and no accepted throughput.",
+    "B1–B5 native cohorts remain preserved. B6/B7 now have corrected original-resolution five-seed guarded quality evidence after finite rejected-shift targets prevented invalid MIS propagation; native startup stability and new throughput remain pending.",
     "B8 GI/PT sharing has17exact CPU prerequisite tests but no combined GPU implementation. B9/B10 additional PT++ remain planned. Historical GI-off limited activations are B7 ablations, not B9."
   ],
   "questions": [
@@ -534,6 +534,19 @@
       "limitations": "Guarded development, not accepted throughput or generic support; unresolved brightness and earlier stability failures retained.",
       "notes": "Four original-resolution images; reduced-resolution v2/v3/v4 quality cohorts and delta-environment replay regression.",
       "rights": "Project source/benchmark licensing applies; no third-party paper figures copied."
+    },
+    {
+      "id": "LOCAL-FINITE-MIS",
+      "title": "Finite rejected-shift target fix and matched quality evidence",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/FINITE_SHIFT_GUARD.md",
+      "kind": "experiment",
+      "published_on": "2026-10-29",
+      "checked_on": "2026-10-29",
+      "access": "full",
+      "quality": "Local GPU counters, frozen artifact receipts, independent finite references and explicit acquisition failures.",
+      "limitations": "Guarded static transport; one GPU,5seeds. Smaller DI-enabled discrepancy and intermittent native startup fault remain. No new throughput or unbiasedness proof.",
+      "notes": "Zero Jacobian must return a finite zero target before inverse-MIS. MIP0 controls preserve defaults when omitted. Native DI control retains its own primary/plane policies.",
+      "rights": "Project renderer/benchmark rights; original measured figure, no copied paper artwork."
     }
   ],
   "findings": [
@@ -1463,6 +1476,35 @@
           "note": "Local GPU development evidence; not a paper reproduction or canonical promotion."
         }
       ]
+    },
+    {
+      "id": "FINITE-REJECTED-SHIFT-TARGET",
+      "title": "Zero-Jacobian shifts need finite targets before inverse-MIS",
+      "question_ids": [
+        "Q3"
+      ],
+      "topic": "Implementation correctness",
+      "claim": "Observed rejected PT shifts carried NaN targets into inverse-MIS. Returning finite zero only for Jacobian0 removed the observed returned NaNs; original-resolution5seed B6 mean differences were+0.014% Convergence and-0.362% Kitchen.",
+      "evidence_type": "measured",
+      "confidence": "high",
+      "context": "B6/B7 guarded full-prefix integration, original1280x720 scenes14/2,strict MIP0 reference track. B7 retains a smaller DI-enabled residual; a native PT+DI control also differs from reference.",
+      "strengths": "Before/after failure-boundary counters, frozen source/executable/cache checks,2reference seeds and explicit failed-launch records.",
+      "limitations": "Not unrestricted material/motion support or unbiasedness proof. No new throughput; native startup fault remains. Native-DI primary/plane policies differ from the PT integration.",
+      "implications": "Keep zero-measure contributions finite throughout normalization. Preserve matched integrands and distinguish renderer bugs from sampling variance, inherited precision and startup failures.",
+      "tags": [
+        "ReSTIR",
+        "MIS",
+        "validation",
+        "HDR"
+      ],
+      "evidence": [
+        {
+          "source_id": "LOCAL-FINITE-MIS",
+          "locator": "FINITE_SHIFT_GUARD.md; Benchmarks/development/2026-10-29-finite-shift-guard/index.json",
+          "relation": "supports",
+          "note": "Local source and GPU evidence; not paper speedup reproduction."
+        }
+      ]
     }
   ],
   "actions": [
@@ -1548,7 +1590,8 @@
     "Added two NVIDIA engineering guides outside the20-paper Wyman ranking; no new renderer feature activation or source-reported speedup treated as a local result.",
     "2026-10-29 canonical update supersedes earlier project numbering: B0unchanged reference; B1–B5native configurations; B6/B7PT; B8combined sharing pending; B9/B10PT++ planned. Source-record IDs B1/B2/B3 refer to paper entries and are preserved, not renamed as project versions.",
     "2026-10-29: Added unified33row B0–B10 performance/quality/image overview and fresh27quality/27timing nativeB2/B3/B5 cohort. Original-scene PT implementation remains an explicitly guarded development path, separate from accepted native measurements.",
-    "2026-10-29: Original-scene guarded rendering and path-local fixes verified; quality discrepancy retained, exact-primary experiment rejected."
+    "2026-10-29: Original-scene guarded rendering and path-local fixes verified; quality discrepancy retained, exact-primary experiment rejected.",
+    "2026-10-29: Finite rejected-shift targets verified with original-resolution5seed quality, matched environment filtering and native-DI controls; startup failures and remaining limits retained."
   ],
   "evidence_page": "evidence/index.html",
   "guide_pages": [

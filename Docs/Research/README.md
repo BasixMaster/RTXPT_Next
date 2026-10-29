@@ -2,6 +2,8 @@
 
 [**B0–B10 comparison overview: performance, quality and pictures**](COMPARISON_OVERVIEW.md) shows all eleven versions for each required scene, including missing or unsupported results.
 
+[Scene-fix follow-up: finite MIS targets, five-seed quality and remaining limits](FINITE_SHIFT_GUARD.md).
+
 User-confirmed numbering, 2026-10-29: **B0 is unchanged RTXPT 1.9 with its original defaults, renderer/dependency pins and scene assets.** The repository is RTXPT_Next. Read the [canonical B0–B10 mapping](VERSION_MAPPING.md); legacy files/tags/data IDs keep their earlier names and numeric results. `External/RTXDI-SDK` remains reference-only.
 
 | Version | Short algorithm overview | Current status |

@@ -1,5 +1,7 @@
 # ReSTIR PT on the original scenes: guarded development
 
+**Historical development checkpoint; see the [finite-target follow-up](FINITE_SHIFT_GUARD.md) for the corrected source and five-seed original-resolution results.**
+
 **2026-10-29: Convergence and Kitchen now render through the guarded replay-first path at their original1280×720 resolution, original materials/cameras and14/2 total/diffuse limits. Quality acceptance remains pending.** A reduced-resolution multi-seed study still shows a brightness deficit with combined reuse. This is a partial compatibility fix, not a completed general ReSTIR PT implementation or a measured speedup.
 
 [B0–B10 comparison overview](COMPARISON_OVERVIEW.md) · [Sanitized evidence index](../../Benchmarks/development/2026-10-29-original-scene-pt-development/index.json)

@@ -1,0 +1,48 @@
+{
+  "case": "B6-mode3-s4093",
+  "scene": "kitchen",
+  "variant": "B6",
+  "reuse_mode": 3,
+  "seed": 4093,
+  "metrics": {
+    "linear_rgb_mse": 2.5295072085967534,
+    "smape_cgns_y100": 52.56931494753947,
+    "full_frame_reference_mean_luminance": 0.10796510071960905,
+    "mape_rgb_ydenom": 0.997022064924269,
+    "relmse_project": 135.3815746746502,
+    "relative_metrics_available": true
+  },
+  "hdr_flip": {
+    "status": "measured",
+    "metric": "HDR-FLIP",
+    "evaluator": "official NVlabs flip-evaluator",
+    "evaluator_version": "1.7",
+    "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+    "mean": 0.5806957483291626,
+    "p95": 0.8214206695556641,
+    "parameters": {
+      "ppd": 67.0,
+      "startExposure": -4.530665397644043,
+      "stopExposure": 6.944202899932861,
+      "numExposures": 12,
+      "tonemapper": "ACES"
+    },
+    "inputs": "Stored nonnegative linear RGB; inputsRGB=False; no external exposure or tonemap transform"
+  },
+  "signed_mean_y_percent": 4.7864418632377745,
+  "ldr_flip": 0.3354550302028656,
+  "display_metrics": {
+    "selected_pixels": 57600,
+    "total_pixels": 57600,
+    "decoded_rgb_exactly_equal": false,
+    "changed_pixels": 53833,
+    "changed_pixel_fraction": 0.9346006944444445,
+    "max_abs_channel_difference_8bit": 255,
+    "mse_srgb_encoded_rgb": 0.05098464007789028,
+    "psnr_srgb_encoded_rgb_db": 12.925606422186268,
+    "psnr_identical_infinite": false,
+    "smape_display_luma100": 40.79028624616697
+  },
+  "pfm_sha256": "e9e9134f4eb6bc37a4a191da4f8e7312352b6ada6a65ebf06312e71943632d8b",
+  "exe_sha256": "e58ec3456232ab1df7b69b11741aa9838fc35f1688792bfa72effa578e146ed4"
+}

@@ -1,0 +1,8 @@
+{
+  "root_source_sha": "3bc6c6d1cbb7993c2293212707b56fa2887c7ec9",
+  "working_diff_sha256": "7b79618909cb98c5499c85dbbdf06ed301f6c8a14b0667feef602b389174298a",
+  "untracked_source_hashes": {
+    "Rtxpt/RTXDI/PT/Runtime/HybridShiftGuard.hlsli": "3f63cb57c93243df2f7bad5a1635f610fa1e12171c009cc66f24ccd87f0b0abe"
+  },
+  "scope": "Reconstruct measured renderer source: checkout root revision, decompress renderer-working.patch.gz and apply it, then decompress each renderer-untracked/<repo-relative-file>.gz onto its original path. Gzip preserves measured bytes; frozen hashes refer to uncompressed bytes. Dependency pins are in the frozen metadata."
+}

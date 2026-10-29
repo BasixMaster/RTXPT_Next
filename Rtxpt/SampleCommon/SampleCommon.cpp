@@ -159,6 +159,11 @@ static bool                 g_NonInteractive = false;
 void HelpersSetNonInteractive()
 {
     g_NonInteractive = true;
+#ifdef _WIN32
+    // Scripted failures must return to the capture owner rather than remain
+    // alive in Windows Error Reporting with an unresponsive startup window.
+    SetErrorMode(GetErrorMode() | SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX | SEM_NOOPENFILEERRORBOX);
+#endif
 }
 
 bool HelpersIsNonInteractive()

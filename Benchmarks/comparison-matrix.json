@@ -201,16 +201,22 @@
       "scene": "convergence",
       "algorithm": "ReSTIR PT; DI/GI off",
       "status": "in_progress",
-      "reason": "Original-resolution guarded replay-first rendering is finite and reuse active; reduced-resolution quality still shows a brightness deficit. No accepted throughput.",
-      "development_result": "Benchmarks/development/2026-10-29-original-scene-pt-development"
+      "reason": "Corrected finite-MIS targets; five-seed1280x720 matched MIP0 quality measured. Smaller DI-enabled residual and native startup intermittency remain; new throughput pending.",
+      "development_result": "Benchmarks/development/2026-10-29-finite-shift-guard",
+      "quality_result": "Benchmarks/development/2026-10-29-finite-shift-guard",
+      "quality_status": "measured_guarded_matched_filter",
+      "timing_status": "pending"
     },
     {
       "variant": "B6",
       "scene": "kitchen",
       "algorithm": "ReSTIR PT; DI/GI off",
       "status": "in_progress",
-      "reason": "Original-resolution guarded replay-first rendering is finite and reuse active; reduced-resolution quality still shows a brightness deficit. No accepted throughput.",
-      "development_result": "Benchmarks/development/2026-10-29-original-scene-pt-development"
+      "reason": "Corrected finite-MIS targets; five-seed1280x720 matched MIP0 quality measured. Smaller DI-enabled residual and native startup intermittency remain; new throughput pending.",
+      "development_result": "Benchmarks/development/2026-10-29-finite-shift-guard",
+      "quality_result": "Benchmarks/development/2026-10-29-finite-shift-guard",
+      "quality_status": "measured_guarded_matched_filter",
+      "timing_status": "pending"
     },
     {
       "variant": "B6",
@@ -226,16 +232,22 @@
       "scene": "convergence",
       "algorithm": "ReSTIR PT + ReSTIR DI3.1; GI off",
       "status": "in_progress",
-      "reason": "Original-resolution guarded replay-first rendering is finite and reuse active; reduced-resolution quality still shows a brightness deficit. No accepted throughput.",
-      "development_result": "Benchmarks/development/2026-10-29-original-scene-pt-development"
+      "reason": "Corrected finite-MIS targets; five-seed1280x720 matched MIP0 quality measured. Smaller DI-enabled residual and native startup intermittency remain; new throughput pending.",
+      "development_result": "Benchmarks/development/2026-10-29-finite-shift-guard",
+      "quality_result": "Benchmarks/development/2026-10-29-finite-shift-guard",
+      "quality_status": "measured_guarded_matched_filter",
+      "timing_status": "pending"
     },
     {
       "variant": "B7",
       "scene": "kitchen",
       "algorithm": "ReSTIR PT + ReSTIR DI3.1; GI off",
       "status": "in_progress",
-      "reason": "Original-resolution guarded replay-first rendering is finite and reuse active; reduced-resolution quality still shows a brightness deficit. No accepted throughput.",
-      "development_result": "Benchmarks/development/2026-10-29-original-scene-pt-development"
+      "reason": "Corrected finite-MIS targets; five-seed1280x720 matched MIP0 quality measured. Smaller DI-enabled residual and native startup intermittency remain; new throughput pending.",
+      "development_result": "Benchmarks/development/2026-10-29-finite-shift-guard",
+      "quality_result": "Benchmarks/development/2026-10-29-finite-shift-guard",
+      "quality_status": "measured_guarded_matched_filter",
+      "timing_status": "pending"
     },
     {
       "variant": "B7",

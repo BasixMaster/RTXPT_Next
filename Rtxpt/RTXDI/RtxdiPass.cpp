@@ -845,7 +845,7 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
          << ",\n  \"final_index\": " << indices.finalShadingInputBufferIndex << "\n}\n";
     if (!meta) throw std::runtime_error("PT reservoir metadata write failed");
     nvrhi::BufferDesc statsDesc;
-    statsDesc.byteSize = 32 * sizeof(uint32_t);
+    statsDesc.byteSize = 40 * sizeof(uint32_t);
     statsDesc.cpuAccess = nvrhi::CpuAccessMode::Read;
     statsDesc.debugName = "PTCounterReadback";
     auto stats = m_device->createBuffer(statsDesc);
@@ -876,7 +876,15 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
         << ",\n  \"identity_other_tests\": " << counters[14] << ",\n  \"identity_other_failures\": " << counters[15];
     statFile << ",\n  \"identity_debug_words\": [";
     for (int i=16;i<32;++i) { if(i>16) statFile << ","; statFile << counters[i]; }
-    statFile << "]\n}\n";
+    statFile << "]"
+        << ",\n  \"hybrid_shift_calls\": " << counters[32]
+        << ",\n  \"hybrid_raw_nonfinite_target\": " << counters[33]
+        << ",\n  \"hybrid_raw_nonfinite_jacobian\": " << counters[34]
+        << ",\n  \"hybrid_returned_nonfinite_weight_product\": " << counters[35]
+        << ",\n  \"hybrid_rejected_shift_zeroed\": " << counters[36]
+        << ",\n  \"hybrid_nonfinite_target_zero_jacobian\": " << counters[37]
+        << ",\n  \"hybrid_nonfinite_target_nonzero_jacobian\": " << counters[38]
+        << ",\n  \"hybrid_returned_nonfinite_target\": " << counters[39] << "\n}\n";
     m_device->unmapBuffer(stats);
     if (!statFile) throw std::runtime_error("PT counter metadata write failed");
 }

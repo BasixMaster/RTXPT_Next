@@ -70,6 +70,7 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
             ("captureNativeRadiance", "HDR diagnostic: save native radiance before DI/GI/PT additions", value(CaptureNativeRadiance))
             ("restirDIMode", "DI reuse override: 0 initial only, 1 temporal, 2 spatial, 3 both", value(OverrideReSTIRDIMode))
             ("neeMIS", "Native NEE MIS: 0 exact, 1 auto, 2 approximate", value(OverrideNEEMIS))
+            ("environmentDiffuseMip", "Explicit native environment diffuse MIP (0..16); 0 for matched unfiltered validation, omitted preserves defaults", value(OverrideEnvironmentDiffuseMip))
             ("restirPTMode", "PT resampling: 0 initial only, 1 temporal, 2 spatial, 3 both", value(ReSTIRPTMode))
             ("samplingSeed", "Validation scramble seed; zero retains the original random streams", value(SamplingSeed))
             ("referencePixelCenter", "Reference rays use pixel centers, matching raw realtime AA0", value(ReferencePixelCenter))

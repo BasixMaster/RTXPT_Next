@@ -1,0 +1,65 @@
+{
+  "scope": "Opaque default-path regression, same original seed0/h64 configuration",
+  "records": [
+    {
+      "variant": "B6",
+      "old_reference_sha256": "a2aa5f8944fc386a13c9c2eed1a6135543741a722c30fd5f956e8ca931b110b0",
+      "repeats": [
+        {
+          "case": "B6-r1",
+          "exactly_equal": true,
+          "max_abs": 0.0,
+          "linear_mse": 0.0,
+          "mean_rgb": [
+            0.35154564816685807,
+            0.35110481513586517,
+            0.3114154674927704
+          ],
+          "pfm_sha256": "a2aa5f8944fc386a13c9c2eed1a6135543741a722c30fd5f956e8ca931b110b0"
+        },
+        {
+          "case": "B6-r2",
+          "exactly_equal": true,
+          "max_abs": 0.0,
+          "linear_mse": 0.0,
+          "mean_rgb": [
+            0.35154564816685807,
+            0.35110481513586517,
+            0.3114154674927704
+          ],
+          "pfm_sha256": "a2aa5f8944fc386a13c9c2eed1a6135543741a722c30fd5f956e8ca931b110b0"
+        }
+      ]
+    },
+    {
+      "variant": "B7",
+      "old_reference_sha256": "363ae2f4e949ab9974d296298317f348f2a8f6c63f760f8f8f6b5b66f526227b",
+      "repeats": [
+        {
+          "case": "B7-r1",
+          "exactly_equal": false,
+          "max_abs": 0.9796142578125,
+          "linear_mse": 0.000637496548665377,
+          "mean_rgb": [
+            0.35027475721849544,
+            0.35005767659542875,
+            0.30958228526688697
+          ],
+          "pfm_sha256": "4562b7c8a21674f2acdf66708e2f005422b9ac1bf11a345bc64309128368c4ff"
+        },
+        {
+          "case": "B7-r2",
+          "exactly_equal": false,
+          "max_abs": 1.2158203125,
+          "linear_mse": 0.0006011925983288886,
+          "mean_rgb": [
+            0.3502388855620908,
+            0.35008438123027896,
+            0.3095814847309763
+          ],
+          "pfm_sha256": "714dee1fc13db6c68ae6bd76855c736f31b6831d5d9041c9bc863cb63e041c65"
+        }
+      ]
+    }
+  ]
+}

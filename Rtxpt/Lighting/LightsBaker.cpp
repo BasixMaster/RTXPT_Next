@@ -9,6 +9,7 @@
 */
 
 #include "LightsBaker.h"
+#include <stdexcept>
 
 #include <donut/engine/ShaderFactory.h>
 #include <donut/engine/FramebufferFactory.h>
@@ -437,6 +438,38 @@ void LightsBaker::CreateRenderPasses(const std::shared_ptr<ComputePipelineBaker>
         }
     }
 
+    // An unavailable allocation must not become a null dereference while
+    // collecting UI statistics. Keep the failed resource explicit in scripts.
+    const auto requireResource = [](const auto& resource, const char* name)
+    {
+        if (!resource)
+        {
+            const std::string message = std::string("LightsBaker resource unavailable: ") + name;
+            donut::log::error("%s", message.c_str());
+            std::fflush(nullptr);
+            throw std::runtime_error(message);
+        }
+    };
+    requireResource(m_controlBuffer, "ControlData");
+    requireResource(m_lightsBuffer, "LightsBuffer");
+    requireResource(m_lightsExBuffer, "LightsExBuffer");
+    requireResource(m_scratchBuffer, "LightsScratchBuffer");
+    requireResource(m_scratchList, "ScratchList");
+    requireResource(m_historyRemapCurrentToPastBuffer, "HistoryRemapCurrentToPast");
+    requireResource(m_historyRemapPastToCurrentBuffer, "HistoryRemapPastToCurrent");
+    requireResource(m_lightWeights, "LightsWeights");
+    requireResource(m_lightWeightsBoost, "LightsWeightsBoost");
+    requireResource(m_perLightProxyCounters, "PerLightProxyCounters");
+    requireResource(m_lightSamplingProxies, "LightSamplingProxies");
+    requireResource(m_NEE_AT_LocalSamplingBuffer, "LocalSamplingBuffer");
+    requireResource(m_NEE_AT_FeedbackTotalWeight, "FeedbackTotalWeight");
+    requireResource(m_NEE_AT_FeedbackCandidates, "FeedbackCandidates");
+    requireResource(m_NEE_AT_FeedbackTotalWeightScratch, "FeedbackTotalWeightScratch");
+    requireResource(m_NEE_AT_FeedbackCandidatesScratch, "FeedbackCandidatesScratch");
+    requireResource(m_NEE_AT_FeedbackTotalWeightBlended, "FeedbackTotalWeightBlended");
+    requireResource(m_NEE_AT_FeedbackCandidatesBlended, "FeedbackCandidatesBlended");
+    requireResource(m_envLightLookupMap, "EnvironmentLightLookup");
+    requireResource(m_NEE_AT_HistoryDepth, "HistoryDepth");
     m_allocatedVRAM = 0;
     m_allocatedVRAM += m_controlBuffer->getDesc().byteSize;
     m_allocatedVRAM += m_lightsBuffer->getDesc().byteSize;

@@ -67,6 +67,16 @@ def build(repo):
             row=next(x for x in rows if x['variant']==item['variant'] and x['scene']==item['scene'])
             row.update(item)
 
+    finite=dev/'2026-10-29-finite-shift-guard/overview-input.json'
+    if finite.exists():
+        update=load(finite)
+        if update['status']!='quality_measured_timing_pending':raise ValueError('Unexpected finite-shift evidence status')
+        inputs.append(finite)
+        for item in update['rows']:
+            if item['gpu_busy_ms'] is not None:raise ValueError('Quality captures cannot supply throughput')
+            row=next(x for x in rows if x['variant']==item['variant'] and x['scene']==item['scene'])
+            row.update(item)
+
     assert len(rows)==33 and len({(x['variant'],x['scene']) for x in rows})==33
     for x in rows:
         if x['image'] and not (doc/x['image']).is_file():raise ValueError('Missing overview image: '+x['image'])
@@ -90,12 +100,12 @@ def build(repo):
           '|---|---|---:|---:|---:|---|---|']
         for x in [r for r in rows if r['scene']==scene]:
             image=f'[![{x["variant"]} {scene} representative capture]({x["image"]})]({x["image"]})' if x['image'] else 'No eligible capture'
-            status='Development, not accepted †' if x.get('quality_status')=='guarded_development_not_accepted' else x['status'].replace('_',' ')
+            status=('Guarded quality measured; timing pending †' if x.get('quality_status')=='measured_guarded_matched_filter' else 'Development, not accepted †' if x.get('quality_status')=='guarded_development_not_accepted' else x['status'].replace('_',' '))
             md.append(f'| **{x["variant"]}** | {x["algorithm"]} | {fmt(x["gpu_busy_ms"],3)} | {fmt(x["ldr_flip"],6)} | {fmt(x["hdr_flip"],6)} | {image} | [{status}]({x["report"]}) |')
         md += ['', '<details><summary>Coverage and missing-data reasons</summary>','']
         for x in [r for r in rows if r['scene']==scene]:md += [f'- **{x["variant"]}:** {x["note"]}']
         md += ['','</details>','']
-    md += ['† Original-scene B6/B7 pictures and LDR-FLIP are guarded development captures: one explicit seed, active reuse and finite raw output. Reduced-resolution multi-seed tests retain an unresolved brightness deficit. Their timing remains unavailable and the pictures do not establish accepted support. See the [scene-fix report](PT_EXTENDED_SCENES.md).','', '## Historical observations — different cohorts','',
+    md += ['† Original-scene B6/B7 quality uses five explicit seeds and new matched MIP0 references after the finite-MIS-target fix. This differs from retained native timing/quality cohorts; it is not a new throughput result or unrestricted scene acceptance. Native startup intermittency and the smaller DI-enabled residual remain. See the [scene-fix follow-up](FINITE_SHIFT_GUARD.md).','', '## Historical observations — different cohorts','',
       'These retained measurements remain useful context, but are excluded from the current tables’ numeric columns. Their settings, scene identity or cap evidence differ. Historical images are available through the linked reports; they are not substitutes for missing current captures.','',
       '| Canonical interpretation | Scene | GPU busy ms | LDR-FLIP | Scope and pictures |',
       '|---|---|---:|---:|---|',
@@ -109,7 +119,7 @@ def build(repo):
       '## Quality detail and convergence coverage','',
       'The JSON includes display MSE, available linear MSE and CPU cadence alongside each current result. [Registered-room history curves and finite-reference checks](REGISTERED_ROOM_RESULTS.md) cover B6/B7 at1,8,32,64 warm-up frames and three explicit seeds. These are separate1spp history-settling snapshots, not accumulated-spp convergence or time-to-equal-quality. Native captures use three process restarts without verified independent seeds. Original-scene native quality uses finite4096spp references; the room uses a separate finite8192spp native reference with discrepancy checks. HDR-FLIP is unavailable for native original-shader controls.','',
       '## Summary and lessons learned','',
-      'The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have guarded original-scene development captures, with quality acceptance still pending because of a brightness deficit. B8 GPU sharing and B9/B10 PT++ configurations remain pending; their rows stay visible until eligible measurements exist.','',
+      'The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 GPU sharing and B9/B10 PT++ configurations remain pending; their rows stay visible until eligible measurements exist.','',
       '## Changes','', '- 2026-10-29: Added one generated overview with all33 version/scene rows, explicit missing coverage, representative images and retained historical cohort links.','']
     (doc/'COMPARISON_OVERVIEW.md').write_text('\n'.join(md),encoding='utf-8')
     print(json.dumps(dict(rows=len(rows),measured_rows=sum(x['gpu_busy_ms'] is not None for x in rows),images=sum(x['image'] is not None for x in rows))))

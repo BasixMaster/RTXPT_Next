@@ -1,0 +1,48 @@
+{
+  "case": "B6-mode0-s11",
+  "scene": "convergence",
+  "variant": "B6",
+  "reuse_mode": 0,
+  "seed": 11,
+  "metrics": {
+    "linear_rgb_mse": 0.8063067717512894,
+    "smape_cgns_y100": 51.99191593855761,
+    "full_frame_reference_mean_luminance": 0.40482621155502746,
+    "mape_rgb_ydenom": 0.9543680877995592,
+    "relmse_project": 14.702436720778143,
+    "relative_metrics_available": true
+  },
+  "hdr_flip": {
+    "status": "measured",
+    "metric": "HDR-FLIP",
+    "evaluator": "official NVlabs flip-evaluator",
+    "evaluator_version": "1.7",
+    "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+    "mean": 0.6064488887786865,
+    "p95": 0.833806037902832,
+    "parameters": {
+      "ppd": 67.0,
+      "startExposure": -3.863839626312256,
+      "stopExposure": 3.600955009460449,
+      "numExposures": 8,
+      "tonemapper": "ACES"
+    },
+    "inputs": "Stored nonnegative linear RGB; inputsRGB=False; no external exposure or tonemap transform"
+  },
+  "signed_mean_y_percent": -0.9256909452727365,
+  "ldr_flip": 0.39644795656204224,
+  "display_metrics": {
+    "selected_pixels": 57600,
+    "total_pixels": 57600,
+    "decoded_rgb_exactly_equal": false,
+    "changed_pixels": 54898,
+    "changed_pixel_fraction": 0.9530902777777778,
+    "max_abs_channel_difference_8bit": 255,
+    "mse_srgb_encoded_rgb": 0.10095685971919632,
+    "psnr_srgb_encoded_rgb_db": 9.958641666957726,
+    "psnr_identical_infinite": false,
+    "smape_display_luma100": 37.510699096184936
+  },
+  "pfm_sha256": "e462e5c79dd3cb90bfcedf36e3b7bda2051bcc8df9057bc0e2460169a5b9defc",
+  "exe_sha256": "e58ec3456232ab1df7b69b11741aa9838fc35f1688792bfa72effa578e146ed4"
+}

@@ -6,6 +6,7 @@ from capture_identity import transport_settings
 from sampling_contract import roulette_value, seed_value, verify as verify_sampling, verify_di, verify_pt_replay, verify_pt_history, verify_pt_spatial, verify_ptpp, verify_capture_history
 from artifact_manifest import validate as validate_artifacts
 from extended_scene_contract import validate_request as validate_extended_request, verify as verify_extended
+from environment_filter_contract import verify as verify_environment_filter
 
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def scene_argument(value, assets_dir=None):
@@ -45,6 +46,7 @@ def main():
     ap.add_argument('--strict-di-validation',action='store_true')
     ap.add_argument('--di-mode',type=int,choices=[0,1,2,3])
     ap.add_argument('--nee-mis',type=int,choices=[0,1,2])
+    ap.add_argument('--environment-diffuse-mip',type=int,choices=range(17),metavar='0..16')
     ap.add_argument('--nee-type',type=int,choices=[0,1,2],default=2)
     ap.add_argument('--sampling-seed',type=seed_value)
     ap.add_argument('--reference-pixel-center',action='store_true')
@@ -75,6 +77,7 @@ def main():
     if a.di_brdf_samples is not None:args+=['--diBrdfSamples',str(a.di_brdf_samples)]
     if a.di_mode is not None:args+=['--restirDIMode',str(a.di_mode)]
     if a.nee_mis is not None:args+=['--neeMIS',str(a.nee_mis)]
+    if a.environment_diffuse_mip is not None:args+=['--environmentDiffuseMip',str(a.environment_diffuse_mip)]
     if a.app_uncapped:args+=['--benchmarkUncapped','true']
     if a.sampling_seed is not None:args+=['--samplingSeed',str(a.sampling_seed)]
     if a.reference_pixel_center:args+=['--referencePixelCenter','true']
@@ -128,6 +131,8 @@ def main():
             if a.linear_hdr and (len([p for p in out.glob('*.pfm') if not p.name.endswith('.native.pfm')]) != len(manifest['images']) or len([p for p in out.glob('*.pfm.json') if not p.name.endswith('.native.pfm.json')]) != len(manifest['images'])):
                 manifest['measurement_status']='failed_missing_hdr_capture'
             if a.capture_native_radiance and len(list(out.glob('*.native.pfm'))) != len(manifest['images']):manifest['measurement_status']='failed_missing_native_component'
+            try:manifest['effective_environment_filter']=verify_environment_filter((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.environment_diffuse_mip)
+            except ValueError as exc:manifest['measurement_status']='failed_environment_filter_contract';manifest['environment_filter_failure']=str(exc)
             try:manifest['effective_sampling']=verify_sampling((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.sampling_seed,a.reference_pixel_center)
             except ValueError as exc:manifest['measurement_status']='failed_sampling_contract';manifest['sampling_failure']=str(exc)
             try:manifest['effective_di_validation']=verify_di((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.strict_di_validation)

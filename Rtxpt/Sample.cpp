@@ -2346,7 +2346,14 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
     constants.NEECandidateSamples               = m_ui.NEECandidateSamples;
     constants.NEEFullSamples                    = m_ui.NEEFullSamples;
 
+    if (m_cmdLine.OverrideEnvironmentDiffuseMip >= 0)
+        m_ui.EnvironmentMapDiffuseSampleMIPLevel = m_cmdLine.OverrideEnvironmentDiffuseMip;
     constants.EnvironmentMapDiffuseSampleMIPLevel = m_ui.EnvironmentMapDiffuseSampleMIPLevel;
+    if (m_frameIndex == 0)
+    {
+        std::printf("ENVIRONMENT_FILTER_CONTRACT diffuseMip=%g\n", constants.EnvironmentMapDiffuseSampleMIPLevel);
+        std::fflush(stdout);
+    }
 
 #if RTXPT_STOCHASTIC_TEXTURE_FILTERING_ENABLE
     // stochastic texture filtering type and size.

@@ -190,6 +190,10 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     if (cmdLine.OverrideReSTIRDIMode >= 0)
         m_ui.RTXDI.restirDI.resamplingMode = static_cast<rtxdi::ReSTIRDI_ResamplingMode>(cmdLine.OverrideReSTIRDIMode);
     if (cmdLine.OverrideNEEMIS >= 0) m_ui.NEEMISType = cmdLine.OverrideNEEMIS;
+    if (cmdLine.OverrideEnvironmentDiffuseMip < -1 || cmdLine.OverrideEnvironmentDiffuseMip > 16)
+        throw std::runtime_error("Environment diffuse MIP must be omitted or0..16");
+    if (cmdLine.OverrideEnvironmentDiffuseMip >= 0)
+        m_ui.EnvironmentMapDiffuseSampleMIPLevel = cmdLine.OverrideEnvironmentDiffuseMip;
     if (cmdLine.OverrideDILightMode < -1 || cmdLine.OverrideDILightMode > 2 || cmdLine.OverrideDIBrdfSamples < -1 || cmdLine.OverrideDIBrdfSamples > 32)
         throw std::runtime_error("DI light mode must be 0..2 and BRDF candidate count 0..32");
     if (cmdLine.OverrideDILightMode >= 0)

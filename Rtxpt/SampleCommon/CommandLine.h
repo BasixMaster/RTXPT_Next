@@ -57,6 +57,7 @@ struct CommandLineOptions
     int ReSTIRPTMode               = 3;
     int OverrideReSTIRDIMode       = -1;
     int OverrideNEEMIS            = -1;
+    int OverrideEnvironmentDiffuseMip = -1;
     int OverrideDILightMode       = -1;
     int OverrideDIBrdfSamples     = -1;
     bool CaptureNativeRadiance    = false;

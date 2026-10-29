@@ -1,0 +1,43 @@
+{
+  "scope": "Zero-Jacobian finite-target guard; explicit native/PT environment diffuse MIP0; matched finite-reference quality, no throughput claim",
+  "dimensions": [
+    1280,
+    720
+  ],
+  "transport_limits": [
+    14,
+    2
+  ],
+  "scenes": {
+    "convergence": [
+      "convergence-test.scene.json",
+      0
+    ],
+    "kitchen": [
+      "kitchen-with-test-stuff.scene.json",
+      2
+    ]
+  },
+  "seeds": [
+    0,
+    11,
+    47,
+    1019,
+    4093
+  ],
+  "reuse_modes": [
+    3
+  ],
+  "environment_diffuse_mip": 0,
+  "reference_spp": [
+    2048,
+    4096
+  ],
+  "reference_seeds": [
+    101,
+    103
+  ],
+  "estimator": "Full-prefix replay with native component weights and native diffuse-budget accounting; terminal-light connections only",
+  "exe_sha256": "e58ec3456232ab1df7b69b11741aa9838fc35f1688792bfa72effa578e146ed4",
+  "limits": "No general material/motion acceptance; no original-resolution result or equal-quality speedup inferred"
+}

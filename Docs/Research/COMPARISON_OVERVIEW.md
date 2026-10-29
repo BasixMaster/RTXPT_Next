@@ -52,8 +52,8 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 | **B3** | Native PT with RTXDI3.1 linked; DI/GI off | 2.565 | 0.375281 | Unavailable | [![B3 convergence representative capture](assets/native-matrix/convergence-B3.png)](assets/native-matrix/convergence-B3.png) | [measured known caps verified](NATIVE_MATRIX_RESULTS.md) |
 | **B4** | Native PT + ReSTIR DI3.1; GI off | 3.772 | 0.341623 | Unavailable | [![B4 convergence representative capture](assets/canonical-native-di/convergence-B4.png)](assets/canonical-native-di/convergence-B4.png) | [measured](CANONICAL_NATIVE_DI_RESULTS.md) |
 | **B5** | Native PT + ReSTIR DI3.1 + ReSTIR GI3.1 | 4.545 | 0.243522 | Unavailable | [![B5 convergence representative capture](assets/native-matrix/convergence-B5.png)](assets/native-matrix/convergence-B5.png) | [measured known caps verified](NATIVE_MATRIX_RESULTS.md) |
-| **B6** | ReSTIR PT; DI/GI off | Unavailable | 0.311804 | Unavailable | [![B6 convergence representative capture](assets/extended-scenes/convergence-B6.png)](assets/extended-scenes/convergence-B6.png) | [Development, not accepted †](PT_EXTENDED_SCENES.md) |
-| **B7** | ReSTIR PT + ReSTIR DI3.1; GI off | Unavailable | 0.232729 | Unavailable | [![B7 convergence representative capture](assets/extended-scenes/convergence-B7.png)](assets/extended-scenes/convergence-B7.png) | [Development, not accepted †](PT_EXTENDED_SCENES.md) |
+| **B6** | ReSTIR PT; DI/GI off | Unavailable | 0.300663 | 0.453476 | [![B6 convergence representative capture](assets/finite-shift-guard/convergence-B6.png)](assets/finite-shift-guard/convergence-B6.png) | [Guarded quality measured; timing pending †](FINITE_SHIFT_GUARD.md) |
+| **B7** | ReSTIR PT + ReSTIR DI3.1; GI off | Unavailable | 0.222129 | 0.333817 | [![B7 convergence representative capture](assets/finite-shift-guard/convergence-B7.png)](assets/finite-shift-guard/convergence-B7.png) | [Guarded quality measured; timing pending †](FINITE_SHIFT_GUARD.md) |
 | **B8** | ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1 | Unavailable | Unavailable | Unavailable | No eligible capture | [unsupported](VERSION_MAPPING.md) |
 | **B9** | B8 + limited PT++ | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
 | **B10** | B8 + full PT++ | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
@@ -66,8 +66,8 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 - **B3:** Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.
 - **B4:** Original scene/material/camera retained;3quality and3timing process repetitions/configuration
 - **B5:** Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.
-- **B6:** Original1280x720 guarded replay-first capture, seed0/h64. Raw HDR finite and temporal/spatial reservoirs active. Reduced-resolution multi-seed tests still show an unresolved brightness deficit; no accepted throughput result.
-- **B7:** Original1280x720 guarded replay-first capture, seed0/h64. Raw HDR finite and temporal/spatial reservoirs active. Reduced-resolution multi-seed tests still show an unresolved brightness deficit; no accepted throughput result.
+- **B6:** Five-seed1280x720 matched MIP0 quality; finite zero-Jacobian targets prevent invalid MIS propagation. Guarded replay-first transport; original scene/material/camera14/2. Throughput and general stability acceptance pending.
+- **B7:** Five-seed1280x720 matched MIP0 quality; finite zero-Jacobian targets prevent invalid MIS propagation. Guarded replay-first transport; original scene/material/camera14/2. Throughput and general stability acceptance pending.
 - **B8:** PT/GI contribution partition is not implemented; no combined execution or B9/B10 performance claimed
 - **B9:** PT/GI contribution partition is not implemented; no combined execution or B9/B10 performance claimed
 - **B10:** PT/GI contribution partition is not implemented; no combined execution or B9/B10 performance claimed
@@ -86,8 +86,8 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 | **B3** | Native PT with RTXDI3.1 linked; DI/GI off | 3.258 | 0.382364 | Unavailable | [![B3 kitchen representative capture](assets/native-matrix/kitchen-B3.png)](assets/native-matrix/kitchen-B3.png) | [measured known caps verified](NATIVE_MATRIX_RESULTS.md) |
 | **B4** | Native PT + ReSTIR DI3.1; GI off | 4.446 | 0.386295 | Unavailable | [![B4 kitchen representative capture](assets/canonical-native-di/kitchen-B4.png)](assets/canonical-native-di/kitchen-B4.png) | [measured](CANONICAL_NATIVE_DI_RESULTS.md) |
 | **B5** | Native PT + ReSTIR DI3.1 + ReSTIR GI3.1 | 5.421 | 0.351458 | Unavailable | [![B5 kitchen representative capture](assets/native-matrix/kitchen-B5.png)](assets/native-matrix/kitchen-B5.png) | [measured known caps verified](NATIVE_MATRIX_RESULTS.md) |
-| **B6** | ReSTIR PT; DI/GI off | Unavailable | 0.336293 | Unavailable | [![B6 kitchen representative capture](assets/extended-scenes/kitchen-B6.png)](assets/extended-scenes/kitchen-B6.png) | [Development, not accepted †](PT_EXTENDED_SCENES.md) |
-| **B7** | ReSTIR PT + ReSTIR DI3.1; GI off | Unavailable | 0.283695 | Unavailable | [![B7 kitchen representative capture](assets/extended-scenes/kitchen-B7.png)](assets/extended-scenes/kitchen-B7.png) | [Development, not accepted †](PT_EXTENDED_SCENES.md) |
+| **B6** | ReSTIR PT; DI/GI off | Unavailable | 0.302520 | 0.546629 | [![B6 kitchen representative capture](assets/finite-shift-guard/kitchen-B6.png)](assets/finite-shift-guard/kitchen-B6.png) | [Guarded quality measured; timing pending †](FINITE_SHIFT_GUARD.md) |
+| **B7** | ReSTIR PT + ReSTIR DI3.1; GI off | Unavailable | 0.249775 | 0.440491 | [![B7 kitchen representative capture](assets/finite-shift-guard/kitchen-B7.png)](assets/finite-shift-guard/kitchen-B7.png) | [Guarded quality measured; timing pending †](FINITE_SHIFT_GUARD.md) |
 | **B8** | ReSTIR PT + ReSTIR DI3.1 + ReSTIR GI3.1 | Unavailable | Unavailable | Unavailable | No eligible capture | [unsupported](VERSION_MAPPING.md) |
 | **B9** | B8 + limited PT++ | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
 | **B10** | B8 + full PT++ | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
@@ -100,15 +100,15 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 - **B3:** Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.
 - **B4:** Original scene/material/camera retained;3quality and3timing process repetitions/configuration
 - **B5:** Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.
-- **B6:** Original1280x720 guarded replay-first capture, seed0/h64. Raw HDR finite and temporal/spatial reservoirs active. Reduced-resolution multi-seed tests still show an unresolved brightness deficit; no accepted throughput result.
-- **B7:** Original1280x720 guarded replay-first capture, seed0/h64. Raw HDR finite and temporal/spatial reservoirs active. Reduced-resolution multi-seed tests still show an unresolved brightness deficit; no accepted throughput result.
+- **B6:** Five-seed1280x720 matched MIP0 quality; finite zero-Jacobian targets prevent invalid MIS propagation. Guarded replay-first transport; original scene/material/camera14/2. Throughput and general stability acceptance pending.
+- **B7:** Five-seed1280x720 matched MIP0 quality; finite zero-Jacobian targets prevent invalid MIS propagation. Guarded replay-first transport; original scene/material/camera14/2. Throughput and general stability acceptance pending.
 - **B8:** PT/GI contribution partition is not implemented; no combined execution or B9/B10 performance claimed
 - **B9:** PT/GI contribution partition is not implemented; no combined execution or B9/B10 performance claimed
 - **B10:** PT/GI contribution partition is not implemented; no combined execution or B9/B10 performance claimed
 
 </details>
 
-† Original-scene B6/B7 pictures and LDR-FLIP are guarded development captures: one explicit seed, active reuse and finite raw output. Reduced-resolution multi-seed tests retain an unresolved brightness deficit. Their timing remains unavailable and the pictures do not establish accepted support. See the [scene-fix report](PT_EXTENDED_SCENES.md).
+† Original-scene B6/B7 quality uses five explicit seeds and new matched MIP0 references after the finite-MIS-target fix. This differs from retained native timing/quality cohorts; it is not a new throughput result or unrestricted scene acceptance. Native startup intermittency and the smaller DI-enabled residual remain. See the [scene-fix follow-up](FINITE_SHIFT_GUARD.md).
 
 ## Historical observations — different cohorts
 
@@ -130,7 +130,7 @@ The JSON includes display MSE, available linear MSE and CPU cadence alongside ea
 
 ## Summary and lessons learned
 
-The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have guarded original-scene development captures, with quality acceptance still pending because of a brightness deficit. B8 GPU sharing and B9/B10 PT++ configurations remain pending; their rows stay visible until eligible measurements exist.
+The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 GPU sharing and B9/B10 PT++ configurations remain pending; their rows stay visible until eligible measurements exist.
 
 ## Changes
 

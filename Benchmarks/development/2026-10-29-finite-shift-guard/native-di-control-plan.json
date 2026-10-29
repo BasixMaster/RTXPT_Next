@@ -1,0 +1,22 @@
+{
+  "scope": "Supplementary native PT+DI3.1 quality control, not a new timing cohort or replacement for frozen B4. Native primary replacement/plane policies retained; those differ from the PT integration.",
+  "dimensions": [
+    1280,
+    720
+  ],
+  "transport_limits": [
+    14,
+    2
+  ],
+  "environment_diffuse_mip": 0,
+  "di_mode": 3,
+  "strict_di": true,
+  "seeds": [
+    0,
+    11,
+    47,
+    1019,
+    4093
+  ],
+  "references": "2026-10-29-finite-guard-original-resolution native4096 refs"
+}

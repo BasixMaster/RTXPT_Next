@@ -3,6 +3,7 @@
 #pragma pack_matrix(row_major)
 #define RTXDI_RESTIR_PT_HYBRID_SHIFT
 #include "Bridge.hlsli"
+#include "Runtime/HybridShiftGuard.hlsli"
 #include <Rtxdi/PT/SpatialResampling.hlsli>
 
 [numthreads(RTXDI_SCREEN_SPACE_GROUP_SIZE, RTXDI_SCREEN_SPACE_GROUP_SIZE, 1)]

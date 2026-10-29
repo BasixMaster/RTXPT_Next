@@ -1,0 +1,56 @@
+{
+  "status": "incomplete_cohort_no_full_acceptance",
+  "completed_cases": 30,
+  "planned_cases": 40,
+  "exclusion": "Kitchen B6 combined seed0 native light-resource setup exception, diagnosed via PDB and stopped before first frame; remaining Kitchen combined cases not run",
+  "groups": [
+    {
+      "scene": "convergence",
+      "variant": "B6",
+      "reuse_mode": 0,
+      "n": 5,
+      "mean_signed_y_percent": 0.5264634938332315,
+      "sample_se": 0.8091604584464724
+    },
+    {
+      "scene": "convergence",
+      "variant": "B6",
+      "reuse_mode": 3,
+      "n": 5,
+      "mean_signed_y_percent": -0.48819572753584345,
+      "sample_se": 0.2430269525226261
+    },
+    {
+      "scene": "convergence",
+      "variant": "B7",
+      "reuse_mode": 0,
+      "n": 5,
+      "mean_signed_y_percent": -0.25936615209211306,
+      "sample_se": 0.9712401404169407
+    },
+    {
+      "scene": "convergence",
+      "variant": "B7",
+      "reuse_mode": 3,
+      "n": 5,
+      "mean_signed_y_percent": -0.7276571373760744,
+      "sample_se": 0.2481047720050394
+    },
+    {
+      "scene": "kitchen",
+      "variant": "B6",
+      "reuse_mode": 0,
+      "n": 5,
+      "mean_signed_y_percent": 1.6384181887702178,
+      "sample_se": 1.8176126100987473
+    },
+    {
+      "scene": "kitchen",
+      "variant": "B7",
+      "reuse_mode": 0,
+      "n": 5,
+      "mean_signed_y_percent": 2.3728717220071185,
+      "sample_se": 1.4680716777247698
+    }
+  ]
+}

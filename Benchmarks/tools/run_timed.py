@@ -8,6 +8,7 @@ from sampling_contract import roulette_value, seed_value, verify as verify_sampl
 from run_capture import scene_argument
 from artifact_manifest import validate as validate_artifacts
 from extended_scene_contract import validate_request as validate_extended_request, verify as verify_extended
+from environment_filter_contract import verify as verify_environment_filter
 from rtss_caps import RTSSBackend
 from rtss_readonly import collect as collect_rtss,validate as validate_rtss
 
@@ -28,6 +29,7 @@ def main():
     ap.add_argument('--pt-replay-only-validation',action='store_true')
     ap.add_argument('--pt-extended-scene-validation',action='store_true',help='Guarded development only; no canonical result label')
     ap.add_argument('--nee-mis',type=int,choices=[0,1,2])
+    ap.add_argument('--environment-diffuse-mip',type=int,choices=range(17),metavar='0..16')
     ap.add_argument('--sampling-seed',type=seed_value)
     ap.add_argument('--strict-di-validation',action='store_true')
     ap.add_argument('--pt-disable-age-rejection-validation',action='store_true')
@@ -54,6 +56,7 @@ def main():
     if animates(scene_data):raise SystemExit('Static-capture guard requires an original scene with animation disabled.')
     args=[str(exe),'--scene',a.scene,'--width',str(a.width),'--height',str(a.height),'--overrideRadianceCacheMode','0','--useNEE','1','--NEEType','2','--useReSTIRDI',str(int(a.mode in ['digi','dipt','di'])),'--useReSTIRGI',str(int(a.mode=='digi')),'--standaloneDenoiser','0','--overrideAutoexposureOff','--overrideExposureOffset',str(a.exposure),'--disablePostProcessFilters','--overrideToRealtimeMode','--realtimeSamplesPerPixel','1','--realtimeAA','0','--disableFireflyFilters','--overrideSubSamplingMode','0','--nonInteractive','--captureSequence','--sequenceWarmupStart','0','--sequenceRecordStart','20','--sequenceFPS','60','--sequenceFrameCount','1','--capturePath',str(out/'unused.png'),'--perfLog',str(out/'partial-perf.csv')]
     if a.nee_mis is not None:args+=['--neeMIS',str(a.nee_mis)]
+    if a.environment_diffuse_mip is not None:args+=['--environmentDiffuseMip',str(a.environment_diffuse_mip)]
     if a.sampling_seed is not None:args+=['--samplingSeed',str(a.sampling_seed)]
     if a.strict_di_validation:args+=['--strictDIValidation','true']
     if a.pt_replay_only_validation:args+=['--ptReplayOnlyValidation','true']
@@ -144,6 +147,7 @@ def main():
             manifest['effective_native_nee_mis']=int(mis[0])
         manifest['effective_canonical_experiment']=verify_experiment(receipt_log,canonical)
         manifest['effective_extended_scene_contract']=verify_extended(receipt_log,a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode)
+        manifest['effective_environment_filter']=verify_environment_filter(receipt_log,a.environment_diffuse_mip)
         manifest['effective_sampling']=verify_sampling(receipt_log,a.sampling_seed)
         manifest['effective_di_validation']=verify_di(receipt_log,a.strict_di_validation)
         manifest['effective_pt_history']=verify_pt_history(receipt_log,a.pt_disable_age_rejection_validation)

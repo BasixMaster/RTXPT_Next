@@ -1,0 +1,6 @@
+SAMPLING_CONTRACT seed=101 realtime=0 referencePixelCenter=1 pixelJitterScale=0
+TRANSPORT_CONTRACT di=0 gi=0 pt=0 diMode=3 neeMIS=0 maxBounces=14 maxDiffuseBounces=2
+PT_EXTENDED_SCENE_CONTRACT development=0 diffuseBudget=2 fullPrefixReplay=0
+PT_REPLAY_CONTRACT replayOnly=0 roughnessThreshold=0.100000001
+PT_HISTORY_CONTRACT ageRejection=1 maxAge=30 maxHistory=8
+ENVIRONMENT_FILTER_CONTRACT diffuseMip=0

@@ -195,6 +195,25 @@ for scene in ['convergence','kitchen']:
         assert row['status']=='in_progress' and row['gpu_busy_ms'] is None and row['image']
 checks.append(dict(name='Guarded original-scene evidence:4original-resolution captures, active finite reuse, zero pure-replay self failures and explicit non-acceptance',status='passed'))
 
+finite=P/'Benchmarks/development/2026-10-29-finite-shift-guard'
+finite_index=json.loads((finite/'index.json').read_text());assert finite_index['status']=='quality_measured_timing_pending'
+assert finite_index['counts']==dict(original_resolution_quality=20,reduced_quality=40,native_di_quality=10,references=12,selected_raw_pfms=6)
+for name,digest in finite_index['files'].items():assert hashlib.sha256((finite/name).read_bytes()).hexdigest()==digest
+for cohort,count in [('original-resolution',20),('reduced',40),('native-di-control',10)]:
+    captures=list((finite/cohort).rglob('capture.json'));assert len(captures)==count
+    for path in captures:
+        capture=json.loads(path.read_text());assert capture['measurement_status']=='captured' and capture['artifact_identity_after_capture']['validated']
+        assert capture['effective_environment_filter']['diffuse_mip']==0
+    summary=json.loads((finite/(cohort+'-quality-summary.json')).read_text())
+    assert len(summary['rows'])==count
+for path in (finite/'original-resolution').rglob('diagnostic-counters.json'):
+    counters=json.loads(path.read_text());assert counters['hybrid_returned_nonfinite_target']==counters['hybrid_returned_nonfinite_weight_product']==0
+assert len(list(finite.rglob('*.pfm')))==6 and (D/'FINITE_SHIFT_GUARD.md').exists()
+for row in overview['rows']:
+    if row['variant'] in ['B6','B7'] and row['scene']!='opaque-room':
+        assert row['quality_status']=='measured_guarded_matched_filter' and row['gpu_busy_ms'] is None and row['hdr_flip'] is not None
+checks.append(dict(name='Finite rejected-shift targets:70quality images,12references,6selected raw PFMs, matched filters, finite returned diagnostics and no invented throughput',status='passed'))
+
 receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 GPU sharing and B9/B10 remain planned.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))
