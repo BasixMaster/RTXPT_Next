@@ -107,6 +107,7 @@ struct RtxdiBridgeParameters
     bool usingLightSampling;
     bool usingReGIR;
     bool usingReSTIRPT = false;
+    uint32_t giPTPartition = 0; // Initial-only disjoint development contract.
     bool extendedSceneValidation = false;
     uint32_t maxDiffuseBounces = 0;
     // Assert on camera cuts, scene/material changes and history-invalidating mode changes.
@@ -151,7 +152,7 @@ public:
     void ExecuteFusedDIGIFinal(nvrhi::CommandListHandle commandList,
         nvrhi::BindingSetHandle extraBindingSet);
     void ExecutePT(nvrhi::CommandListHandle commandList,
-        nvrhi::BindingSetHandle extraBindingSet);
+        nvrhi::BindingSetHandle extraBindingSet, bool skipFinal = false);
     void EndFrame();
     // Submitted/idle-safe diagnostic only; never call inside a timed frame.
     void CapturePTReservoirs(const std::string& path);

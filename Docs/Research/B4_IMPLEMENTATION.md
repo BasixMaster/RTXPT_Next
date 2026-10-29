@@ -2,6 +2,8 @@
 
 > **LEGACY FILENAME AND NUMBERING.** This file keeps its path to preserve existing links. The old-B4 remaining-PT++ plan below now belongs to **canonical B10** under the user-confirmed [B0–B10 mapping](VERSION_MAPPING.md). Old-B3 refers to a **GI-off B7 limited-feature pilot**, not canonical B9. Existing source refs, raw evidence and numeric results are not renamed.
 
+The [staged implementation](B8_STAGED_IMPLEMENTATION.md) now contains exact CPU paired-MIS/vector-weight tests, reciprocal pairing-texture construction and a replay-queue model. They are prerequisites, not dispatched B10 GPU features.
+
 ## Current B10 scope and dependency
 
 Continue all remaining PT++ mechanisms with independent oracles, isolated feature controls and measured ablations: reciprocal pairing, replay compaction, unified primary direct/indirect reservoirs, vector-weight shading, duplication confidence reduction and dual-motion disocclusion recovery, plus specifically identified remaining micro-optimizations. The B8 PT + DI3.1 + GI3.1 sharing foundation must first define disjoint contributions or valid MIS. Adding overlapping indirect outputs does not implement B8, and a GI-off limited pilot does not implement B9.

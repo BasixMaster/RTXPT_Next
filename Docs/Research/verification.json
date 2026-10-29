@@ -63,6 +63,7 @@
         "Rtxpt/AdvancedSampleUI.cpp",
         "Rtxpt/CMakeLists.txt",
         "Rtxpt/Lighting/LightsBaker.cpp",
+        "Rtxpt/RTXDI/GIFinalShading.hlsl",
         "Rtxpt/RTXDI/PT/Bridge.hlsli",
         "Rtxpt/RTXDI/PT/FinalShading.hlsl",
         "Rtxpt/RTXDI/PT/GenerateInitialSamples.hlsl",
@@ -84,6 +85,7 @@
         "Rtxpt/RTXDI/SurfaceData.hlsli",
         "Rtxpt/Sample.cpp",
         "Rtxpt/SampleCommon/CaptureScriptManager.cpp",
+        "Rtxpt/SampleCommon/CaptureScriptManager.h",
         "Rtxpt/SampleCommon/CommandLine.cpp",
         "Rtxpt/SampleCommon/CommandLine.h",
         "Rtxpt/SampleCommon/HdrCapture.cpp",
@@ -178,8 +180,8 @@
       "name": "Structured evidence schema separately validated; SQLite metric search",
       "status": "passed",
       "smape_matches": 2,
-      "sources": 32,
-      "findings": 37
+      "sources": 33,
+      "findings": 38
     },
     {
       "name": "No full-paper PDFs exported",
@@ -217,6 +219,11 @@
     {
       "name": "Calibrated prefix:8frozen physical snapshots,exact default/preserve buffers,known synthetic packed words,restoration,finite radiance and CLI rejection",
       "status": "passed"
+    },
+    {
+      "name": "B8 staged frozen bytes, same-frame cap support, completed sequences, scoped original scenes and initial-only roulette",
+      "status": "passed",
+      "limits": "GI reuse off; no canonical acceptance or new timing."
     }
   ],
   "passed": true,
@@ -225,6 +232,6 @@
     "One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.",
     "PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.",
     "Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.",
-    "Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 GPU sharing and B9/B10 remain planned."
+    "Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development and limited PT++ ablation execute; full GI reuse, B10 GPU mechanisms and canonical acceptance remain pending."
   ]
 }

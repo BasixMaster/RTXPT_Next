@@ -50,12 +50,18 @@ namespace PathTracer
         const uint ownerPlane = (g_Const.ptConsts.frameIndex % 2) == 0;
         const uint ownerAddress = GenericTSPixelToAddress(path.GetPixelPos(), ownerPlane,
             g_Const.ptConsts.genericTSLineStride, g_Const.ptConsts.genericTSPlaneStride);
+#if !PT_USE_GI_PT_PARTITION
         if (onDominantDenoisingLayer && RTXPT_PTOwnsPrimary(u_PTPrimaryData[ownerAddress], g_Const.ptConsts.frameIndex))
             return false;
+#endif
         #endif
 
         #if PATH_TRACER_MODE==PT_DENOISING_LAYERS_FILL && PT_USE_RESTIR_GI
-        if (onDominantDenoisingLayer && !path.hasFlag(PathFlags::restirGIStarted) && bs.pdf != 0 )
+        bool collectThisPrimary = onDominantDenoisingLayer;
+#if PT_USE_GI_PT_PARTITION
+        collectThisPrimary = collectThisPrimary && RTXPT_PTOwnsPrimary(u_PTPrimaryData[ownerAddress], g_Const.ptConsts.frameIndex);
+#endif
+        if (collectThisPrimary && !path.hasFlag(PathFlags::restirGIStarted) && bs.pdf != 0 )
         {
             // if 
             //  a.) >previous< state was that we were on the denoising layer and it's a dominant branch,
@@ -224,16 +230,20 @@ namespace PathTracer
 
         Surface surface = Bridge::loadSurface( InstanceIndex(), GeometryIndex(), PrimitiveIndex(), barycentrics, rayDir, path.rayCone, path.getVertexIndex(), path.GetPixelPos(), workingContext.Debug);
 
-        // if (surface.shadingData.shadingFlags.isPSDBlockMotionVectorsAtSurface())   // we've given up on this for now
-        //     path.setFlag(PathFlags::exportSpecHitTBlocked, true);
-
-#if PATH_TRACER_MODE==PT_DENOISING_LAYERS_FILL && PT_USE_RESTIR_GI
+#if PATH_TRACER_MODE==PT_DENOISING_LAYERS_FILL && PT_USE_RESTIR_GI && !PT_USE_GI_PT_PARTITION
+        // Preserve the standalone native-GI export order. The new partition's
+        // endpoint collection is separately gated below, after null rejection.
         if (path.hasFlag(PathFlags::restirGICollectSecondarySurface))
         {
             ReSTIRGI_StoreSecondarySurfacePositionAndNormal(path.GetPixelPos(), surface.shadingData.posW, surface.shadingData.N);
             path.setFlag(PathFlags::restirGICollectSecondarySurface, false);
         }
 #endif
+
+        // if (surface.shadingData.shadingFlags.isPSDBlockMotionVectorsAtSurface())   // we've given up on this for now
+        //     path.setFlag(PathFlags::exportSpecHitTBlocked, true);
+
+
 
 #if PATH_TRACER_MODE==PT_DENOISING_LAYERS_FILL
         // an example of debugging RayCone data for the specific pixel selected in the UI, at the first bounce (vertex index 1)
@@ -277,6 +287,14 @@ namespace PathTracer
 #endif
             return;
         }
+
+#if PATH_TRACER_MODE==PT_DENOISING_LAYERS_FILL && PT_USE_RESTIR_GI && PT_USE_GI_PT_PARTITION
+        if (path.hasFlag(PathFlags::restirGICollectSecondarySurface))
+        {
+            ReSTIRGI_StoreSecondarySurfacePositionAndNormal(path.GetPixelPos(), surface.shadingData.posW, surface.shadingData.N);
+            path.setFlag(PathFlags::restirGICollectSecondarySurface, false);
+        }
+#endif
 
         // These will not change anymore, so make const shortcuts
         const ShadingData shadingData    = surface.shadingData;
@@ -404,6 +422,11 @@ namespace PathTracer
 
         // Terminate after scatter ray on last vertex has been processed. Also terminates here if DenoisingLayersHandleHit terminated path. Also terminate based on "Russian roulette" if enabled.
         bool pathStopping = path.isTerminatingAtNextBounce();
+#if PATH_TRACER_MODE==PT_DENOISING_LAYERS_FILL && PT_USE_GI_PT_PARTITION
+        // Collect terminal x3 emission (k2) above, then stop before x3 NEE (k3).
+        // Unsupported primaries never start GI and retain full native fallback.
+        pathStopping = pathStopping || (path.hasFlag(PathFlags::restirGIStarted) && path.getVertexIndex() >= 3);
+#endif
         
 #if PATH_TRACER_MODE!=PT_REFERENCE
         // this needs to happen before updating throughput

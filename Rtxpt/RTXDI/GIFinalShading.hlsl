@@ -32,6 +32,21 @@ float GetMISWeight(float3 roughBrdf, float3 trueBrdf)
 
 bool ReSTIRGIFinalContribution(const uint2 pixelPosition, const RAB_Surface surface, out float4 radianceAndSpecAvg, out float hitDistance)
 {
+    if (g_RtxdiBridgeConst.giPTPartition != 0)
+    {
+        radianceAndSpecAvg = 0;
+        hitDistance = 0;
+        const float4 secondary = u_SecondarySurfaceRadiance[pixelPosition];
+        if (secondary.w <= 0) return false;
+        const float3 displacement = u_SecondarySurfacePositionNormal[pixelPosition].xyz - surface.GetPosW();
+        hitDistance = length(displacement);
+        if (hitDistance <= 0) return false;
+        // Fixed outgoing x2 radiance; general non-delta BSDF is valid here.
+        // Empty/zero draws remain zero; no conditioning on successful samples.
+        const float4 primary = surface.Eval(displacement / hitDistance);
+        radianceAndSpecAvg = primary * float4(secondary.rgb, Average(secondary.rgb)) / secondary.w;
+        return any(radianceAndSpecAvg.rgb > 0);
+    }
     RTXDI_GIReservoir finalReservoir = RTXDI_LoadGIReservoir(
         g_RtxdiBridgeConst.restirGI.reservoirBufferParams,
         pixelPosition, 

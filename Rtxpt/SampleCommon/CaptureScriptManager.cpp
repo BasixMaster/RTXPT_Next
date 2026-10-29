@@ -210,12 +210,16 @@ void CaptureScriptManager::PreAnim(float& fElapsedTimeSeconds)
     if (m_start && !m_screenshotFileName.empty())
     {
         m_app.SetSceneTime(m_sequenceBeginTime);
+        m_sequenceCaptureTime = m_sequenceBeginTime - m_sequenceDeltaTime;
         m_start = false;
         m_active = true;
         m_resetAndWarmupCounter = -1;
     }
     if (m_active && m_type == 1)
+    {
         fElapsedTimeSeconds = m_sequenceDeltaTime;
+        m_sequenceCaptureTime += m_sequenceDeltaTime;
+    }
 }
 
 void CaptureScriptManager::PostAnim()
@@ -256,7 +260,9 @@ void CaptureScriptManager::PostRender(const std::function<bool(const char*)>& du
 
         if (m_type == 1)
         {
-            if (m_app.GetSceneTime() < m_sequenceRecordStartTime) // if not, we're still in warmup - exit
+            // Scene animation can loop or remain zero when no animation exists.
+            // Recording progress follows the fixed capture cadence instead.
+            if (m_sequenceCaptureTime + 1e-9 < m_sequenceRecordStartTime)
                 return;
 
             if (m_sequenceRecordCounter == -1) // start sequence if in sequence mode

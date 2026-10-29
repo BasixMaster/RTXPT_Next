@@ -43,5 +43,12 @@ class ExtendedSceneContractTests(unittest.TestCase):
             with self.assertRaises(ValueError):validate_request(*args)
         validate_request(True,'dipt',True,None)
 
+    def test_combined_development_requires_verified_partition(self):
+        combined=LOG.replace('gi=0','gi=1')
+        with self.assertRaises(ValueError):verify(combined,True,2,'dipt',True)
+        receipt='B8_PARTITION_CONTRACT development=1 version=1 giReuse=0 component=0 minPTLength=4 stage=0\n'
+        self.assertTrue(verify(combined+receipt,True,2,'dipt',True)['combined_partition'])
+        with self.assertRaises(ValueError):verify(combined+receipt.replace('giReuse=0','giReuse=1'),True,2,'dipt',True)
+
 
 if __name__=='__main__':unittest.main()

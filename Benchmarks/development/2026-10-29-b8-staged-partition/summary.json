@@ -1,0 +1,3044 @@
+{
+  "scope": "Initial-GI staged development; no canonical acceptance or timing. Brightness deferred by user.",
+  "runs": {
+    "smoke-cap1": {
+      "status": "captured",
+      "exe_sha256": "fc280e999d9c19975971a10e8c4a293e38c20b33efbfbe94458fb66285f36a7b",
+      "images": 1,
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 1,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09107574730208426,
+                0.09068688991093876,
+                0.07176197501971866
+              ],
+              "nonzero_pixels": 6905
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "nonzero_pixels": 0
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "nonzero_pixels": 0
+            }
+          }
+        }
+      ]
+    },
+    "smoke-cap2": {
+      "status": "captured",
+      "exe_sha256": "fc280e999d9c19975971a10e8c4a293e38c20b33efbfbe94458fb66285f36a7b",
+      "images": 1,
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 2,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09117543110341737,
+                0.09068123821658318,
+                0.07184629872290775
+              ],
+              "nonzero_pixels": 6895
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.029617839189942437,
+                0.031366266456968855,
+                0.019283607079073638
+              ],
+              "nonzero_pixels": 4101
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "nonzero_pixels": 0
+            }
+          }
+        }
+      ]
+    },
+    "smoke-cap3": {
+      "status": "captured",
+      "exe_sha256": "fc280e999d9c19975971a10e8c4a293e38c20b33efbfbe94458fb66285f36a7b",
+      "images": 1,
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09142731351759097,
+                0.09083641992148125,
+                0.07201895316065562
+              ],
+              "nonzero_pixels": 6902
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.029798731478777797,
+                0.0313157592382696,
+                0.01943902838787045
+              ],
+              "nonzero_pixels": 4530
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012082410938661508,
+                0.012165560027716136,
+                0.005891162209739589
+              ],
+              "nonzero_pixels": 3663
+            }
+          }
+        }
+      ]
+    },
+    "smoke-cap4": {
+      "status": "captured",
+      "exe_sha256": "fc280e999d9c19975971a10e8c4a293e38c20b33efbfbe94458fb66285f36a7b",
+      "images": 1,
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.0910932583226399,
+                0.0907284839774924,
+                0.07189590480140966
+              ],
+              "nonzero_pixels": 6888
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02979888300025704,
+                0.031315804494902344,
+                0.01943925307555632
+              ],
+              "nonzero_pixels": 4532
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.017035058626171315,
+                0.017197528455143024,
+                0.007886297775037361
+              ],
+              "nonzero_pixels": 4561
+            }
+          }
+        }
+      ]
+    },
+    "b8-sequence-clockfixed": {
+      "status": "captured",
+      "exe_sha256": "3c4962257784120d4acea5c955d6b2d5651af9946d22431fd392aacd131c90d6",
+      "images": 64,
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 0,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09136253252550207,
+                0.09048683402890509,
+                0.07182392485515036
+              ],
+              "nonzero_pixels": 6898
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.0284468693263603,
+                0.029694624200011746,
+                0.01801185298974466
+              ],
+              "nonzero_pixels": 4572
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012589826510109082,
+                0.012515402487432114,
+                0.006333843426722469
+              ],
+              "nonzero_pixels": 3725
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09119822294874624,
+                0.09043482207138129,
+                0.07165104412295
+              ],
+              "nonzero_pixels": 6900
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03189235298772051,
+                0.032726870398178246,
+                0.021083043154441948
+              ],
+              "nonzero_pixels": 4490
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.011879884677402901,
+                0.012632732398130677,
+                0.006008144799205992
+              ],
+              "nonzero_pixels": 3749
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09117859269332404,
+                0.09042712599039078,
+                0.07165551696612377
+              ],
+              "nonzero_pixels": 6915
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.029847840750307747,
+                0.031207743768740182,
+                0.018831109902774444
+              ],
+              "nonzero_pixels": 4618
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012114096718906153,
+                0.012660356193329348,
+                0.006200900007829521
+              ],
+              "nonzero_pixels": 3761
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09154824591571033,
+                0.09093106155368415,
+                0.07203897575311588
+              ],
+              "nonzero_pixels": 6917
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.031070938683820493,
+                0.031996956001026464,
+                0.020431815780172443
+              ],
+              "nonzero_pixels": 4538
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.011787149840683648,
+                0.012467460688015427,
+                0.0059326615297433105
+              ],
+              "nonzero_pixels": 3717
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09132430787866164,
+                0.09081618556696357,
+                0.07193327345932372
+              ],
+              "nonzero_pixels": 6910
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.0315239372540905,
+                0.03217641874169461,
+                0.02010098576846749
+              ],
+              "nonzero_pixels": 4647
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012160411503429365,
+                0.012942803801611216,
+                0.006530096468449843
+              ],
+              "nonzero_pixels": 3704
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.0913235086082208,
+                0.09069961806138356,
+                0.07187130594569625
+              ],
+              "nonzero_pixels": 6907
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02922515106020552,
+                0.03037841324553345,
+                0.01847640201825686
+              ],
+              "nonzero_pixels": 4604
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.011097236813017816,
+                0.012250736336966958,
+                0.005533132630616728
+              ],
+              "nonzero_pixels": 3729
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09165435520311196,
+                0.09104383759050057,
+                0.07212020066952464
+              ],
+              "nonzero_pixels": 6919
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.032381916226762716,
+                0.034076203180081914,
+                0.021726513537343103
+              ],
+              "nonzero_pixels": 4557
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.013138187164911117,
+                0.012910353358496319,
+                0.006838740197697071
+              ],
+              "nonzero_pixels": 3630
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09078148752074651,
+                0.0901751924456671,
+                0.07144787998663055
+              ],
+              "nonzero_pixels": 6910
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.029946399423660654,
+                0.0306562483988025,
+                0.01873721998899874
+              ],
+              "nonzero_pixels": 4639
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012178105962547389,
+                0.01299538476148037,
+                0.006600151907163437
+              ],
+              "nonzero_pixels": 3704
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09145791525717335,
+                0.09085596409635713,
+                0.07192302995333166
+              ],
+              "nonzero_pixels": 6921
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02864333629758671,
+                0.029397830630492682,
+                0.018083743047383097
+              ],
+              "nonzero_pixels": 4477
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012736783421250305,
+                0.012702264286803476,
+                0.00629007030993399
+              ],
+              "nonzero_pixels": 3729
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09123301802184244,
+                0.09074410128999841,
+                0.07183895240152123
+              ],
+              "nonzero_pixels": 6907
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.034714356433562556,
+                0.03600861614174915,
+                0.02419591724421039
+              ],
+              "nonzero_pixels": 4573
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012276561287316409,
+                0.01269996983535362,
+                0.006411169777915935
+              ],
+              "nonzero_pixels": 3719
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09162384297962141,
+                0.09087263329914122,
+                0.07208983121119966
+              ],
+              "nonzero_pixels": 6904
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03148531840380394,
+                0.0319500488200874,
+                0.02025604167520398
+              ],
+              "nonzero_pixels": 4457
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.011934848761919773,
+                0.01231306509462872,
+                0.005900920378138321
+              ],
+              "nonzero_pixels": 3706
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09173247698656839,
+                0.09102231184716779,
+                0.07217755771119787
+              ],
+              "nonzero_pixels": 6924
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03273039167427053,
+                0.032674528887928135,
+                0.02058683065603478
+              ],
+              "nonzero_pixels": 4536
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01222858311928282,
+                0.012300674500639992,
+                0.006182819307603017
+              ],
+              "nonzero_pixels": 3724
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09118526906076103,
+                0.09039017169764547,
+                0.0715834409487669
+              ],
+              "nonzero_pixels": 6918
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03207789653855743,
+                0.03332475766614832,
+                0.021353187351816832
+              ],
+              "nonzero_pixels": 4549
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01202012746397293,
+                0.012916413288224828,
+                0.006372436726785669
+              ],
+              "nonzero_pixels": 3769
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09125454126283376,
+                0.0905152917660848,
+                0.07181803855029019
+              ],
+              "nonzero_pixels": 6942
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.030852352011233868,
+                0.031574787549448737,
+                0.01998603545279816
+              ],
+              "nonzero_pixels": 4535
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012454210056198968,
+                0.013024647658069929,
+                0.0066416839457521535
+              ],
+              "nonzero_pixels": 3690
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09148638767726494,
+                0.09064125101072619,
+                0.07185426614049709
+              ],
+              "nonzero_pixels": 6933
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02944702755170639,
+                0.03065917444123764,
+                0.019082973156161982
+              ],
+              "nonzero_pixels": 4460
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01169526566083383,
+                0.012241293414674625,
+                0.005967236584936729
+              ],
+              "nonzero_pixels": 3736
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09144482295019458,
+                0.09063793915991832,
+                0.07187564115632664
+              ],
+              "nonzero_pixels": 6906
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.030176921173779653,
+                0.03136415452969195,
+                0.019813627809888185
+              ],
+              "nonzero_pixels": 4619
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012718617588733182,
+                0.012827612169914775,
+                0.006326357549940697
+              ],
+              "nonzero_pixels": 3779
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09125852362074033,
+                0.0905623491364296,
+                0.07181799765111822
+              ],
+              "nonzero_pixels": 6909
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.0322738767422811,
+                0.03346958097183343,
+                0.020996481364574094
+              ],
+              "nonzero_pixels": 4612
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012801693835192257,
+                0.013497639481316914,
+                0.00701742350227303
+              ],
+              "nonzero_pixels": 3729
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09197745350274172,
+                0.09144768603522369,
+                0.07245599807738656
+              ],
+              "nonzero_pixels": 6926
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.032692612914575474,
+                0.033260734755583485,
+                0.021381704618382937
+              ],
+              "nonzero_pixels": 4670
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012520127434923192,
+                0.012458380898742965,
+                0.006165368885102898
+              ],
+              "nonzero_pixels": 3758
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09134347690927862,
+                0.09070246044282962,
+                0.07177056605842981
+              ],
+              "nonzero_pixels": 6930
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.030211671110656528,
+                0.029965334438314343,
+                0.018278828993289156
+              ],
+              "nonzero_pixels": 4537
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.013527820650676285,
+                0.013521589594657974,
+                0.006674761923425125
+              ],
+              "nonzero_pixels": 3755
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09146788806249999,
+                0.09098118182008315,
+                0.07206129216485553
+              ],
+              "nonzero_pixels": 6911
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03521187539504032,
+                0.03472421919230861,
+                0.023073903520149413
+              ],
+              "nonzero_pixels": 4503
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012773386976032546,
+                0.012555901928230969,
+                0.00607979902339102
+              ],
+              "nonzero_pixels": 3766
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09113762680102479,
+                0.09052386001279258,
+                0.071675311747675
+              ],
+              "nonzero_pixels": 6905
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03015728382901712,
+                0.03207673248693799,
+                0.019912041068980188
+              ],
+              "nonzero_pixels": 4544
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012861803885210644,
+                0.013028822914518491,
+                0.006970923668657891
+              ],
+              "nonzero_pixels": 3660
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.0915846858023092,
+                0.09089767502037564,
+                0.0719710346160814
+              ],
+              "nonzero_pixels": 6894
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.031418884071436795,
+                0.031321188160265336,
+                0.019151126213296496
+              ],
+              "nonzero_pixels": 4616
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012451915947174786,
+                0.01248158977715054,
+                0.00629037558806665
+              ],
+              "nonzero_pixels": 3730
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09137024087737305,
+                0.09067494547126269,
+                0.07188916622162467
+              ],
+              "nonzero_pixels": 6929
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02976275449148332,
+                0.030485471187516898,
+                0.018546212216218314
+              ],
+              "nonzero_pixels": 4636
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.013240764293857295,
+                0.014079857143488797,
+                0.007638377696275711
+              ],
+              "nonzero_pixels": 3675
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.0916079892918016,
+                0.0908348219826667,
+                0.07197644619101828
+              ],
+              "nonzero_pixels": 6907
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02991120984232185,
+                0.03042545993294981,
+                0.018532539166585364
+              ],
+              "nonzero_pixels": 4535
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012360128045383126,
+                0.011898828143573771,
+                0.005735537063593817
+              ],
+              "nonzero_pixels": 3702
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09111002507158603,
+                0.09050134310141357,
+                0.07158980283020723
+              ],
+              "nonzero_pixels": 6895
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.031969180206457774,
+                0.03272545037772318,
+                0.02079515979446546
+              ],
+              "nonzero_pixels": 4607
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.011993339654020588,
+                0.012899563999639617,
+                0.006800169354737407
+              ],
+              "nonzero_pixels": 3670
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09116939957996811,
+                0.09059883243206776,
+                0.07161876966781688
+              ],
+              "nonzero_pixels": 6898
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03284534501532713,
+                0.03301843770525672,
+                0.02075650788316823
+              ],
+              "nonzero_pixels": 4594
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.014096664629801355,
+                0.013632004113510402,
+                0.007444357119425379
+              ],
+              "nonzero_pixels": 3698
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09132983575038837,
+                0.09052977428367041,
+                0.0716961547130286
+              ],
+              "nonzero_pixels": 6895
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.029572781754864587,
+                0.029538232106903588,
+                0.017754348608279468
+              ],
+              "nonzero_pixels": 4573
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.015375011169699707,
+                0.014616539348104987,
+                0.007388297630229382
+              ],
+              "nonzero_pixels": 3766
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09183106453280256,
+                0.09116278050674333,
+                0.07228885172969765
+              ],
+              "nonzero_pixels": 6938
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.033146994116932456,
+                0.03303019881549508,
+                0.02131738740988452
+              ],
+              "nonzero_pixels": 4607
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012694927609779617,
+                0.012459011639308447,
+                0.0060889776908990105
+              ],
+              "nonzero_pixels": 3657
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09123801095317108,
+                0.0906246102217472,
+                0.07185152948580005
+              ],
+              "nonzero_pixels": 6927
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.029089780283546206,
+                0.030655823501222063,
+                0.018453541510935985
+              ],
+              "nonzero_pixels": 4560
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012240013562970692,
+                0.012381254734866547,
+                0.006306260636057517
+              ],
+              "nonzero_pixels": 3652
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.0913713703778657,
+                0.09046030694035569,
+                0.07174555042175332
+              ],
+              "nonzero_pixels": 6913
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.029761161982561603,
+                0.030202373030661332,
+                0.017897705109131457
+              ],
+              "nonzero_pixels": 4546
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012527994984629177,
+                0.012459596735660475,
+                0.0065677206285975195
+              ],
+              "nonzero_pixels": 3650
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09169748804409697,
+                0.0908287415563157,
+                0.07195675094245058
+              ],
+              "nonzero_pixels": 6900
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.031187155391230726,
+                0.03189444666483788,
+                0.01974961938280048
+              ],
+              "nonzero_pixels": 4667
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.014783114872195503,
+                0.015456990265485013,
+                0.008685203239020675
+              ],
+              "nonzero_pixels": 3728
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09138429142308957,
+                0.0906131180398392,
+                0.07171584556650634
+              ],
+              "nonzero_pixels": 6936
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03183333829722621,
+                0.03168343795896179,
+                0.019913210497811588
+              ],
+              "nonzero_pixels": 4509
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.011333354035712251,
+                0.011796787629524868,
+                0.005564750791198075
+              ],
+              "nonzero_pixels": 3697
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09165114536505155,
+                0.0908789841100724,
+                0.0719755110716579
+              ],
+              "nonzero_pixels": 6926
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03130815437797344,
+                0.031452454152432356,
+                0.019551202056534364
+              ],
+              "nonzero_pixels": 4564
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.013261839269538118,
+                0.01233357981675201,
+                0.006056694964868854
+              ],
+              "nonzero_pixels": 3711
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09080042331056161,
+                0.0900548953374829,
+                0.0713056191049441
+              ],
+              "nonzero_pixels": 6876
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03061155837518398,
+                0.032220183783257854,
+                0.020164148539605766
+              ],
+              "nonzero_pixels": 4637
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.011743003378311793,
+                0.012861116279405777,
+                0.006388344374871013
+              ],
+              "nonzero_pixels": 3769
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09141793108422949,
+                0.09061485049173687,
+                0.07192723067345644
+              ],
+              "nonzero_pixels": 6928
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.031217225750136857,
+                0.03320154924735878,
+                0.021060507913882084
+              ],
+              "nonzero_pixels": 4591
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01349657154218717,
+                0.013435937663671946,
+                0.0069874928981968855
+              ],
+              "nonzero_pixels": 3741
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09115847767603517,
+                0.09062670767307282,
+                0.07176663406720066
+              ],
+              "nonzero_pixels": 6913
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.031726808345528566,
+                0.03189479183368008,
+                0.019851644777438858
+              ],
+              "nonzero_pixels": 4533
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.013037860788630716,
+                0.013232882110157398,
+                0.0068015405212086865
+              ],
+              "nonzero_pixels": 3694
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09134960641162564,
+                0.09071844259295801,
+                0.07186242219324064
+              ],
+              "nonzero_pixels": 6902
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02901439949343301,
+                0.030007977460068887,
+                0.017748375346112732
+              ],
+              "nonzero_pixels": 4592
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01216701196525434,
+                0.012379511487152842,
+                0.0060880596025122535
+              ],
+              "nonzero_pixels": 3782
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09128135678668817,
+                0.09050761925978491,
+                0.07170865239594319
+              ],
+              "nonzero_pixels": 6907
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03147549908796344,
+                0.03305516505256446,
+                0.020695391854252478
+              ],
+              "nonzero_pixels": 4652
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012031755223870278,
+                0.012819386469294326,
+                0.006372283357712958
+              ],
+              "nonzero_pixels": 3726
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09133722109325004,
+                0.09058461720594252,
+                0.07173812019102502
+              ],
+              "nonzero_pixels": 6908
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03232842572409697,
+                0.03259224615088015,
+                0.020718576104351967
+              ],
+              "nonzero_pixels": 4555
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012530133451777276,
+                0.012131118917405002,
+                0.005856196123241174
+              ],
+              "nonzero_pixels": 3758
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09099255311067658,
+                0.09031643661284687,
+                0.07149526544216306
+              ],
+              "nonzero_pixels": 6922
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03212856642826639,
+                0.03336240248848694,
+                0.021325599131259053
+              ],
+              "nonzero_pixels": 4533
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.013042500178621273,
+                0.013359713306029638,
+                0.006738555085177373
+              ],
+              "nonzero_pixels": 3664
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09149876181600672,
+                0.09090061174573923,
+                0.07205524201119187
+              ],
+              "nonzero_pixels": 6914
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03394331050792126,
+                0.033181640934763536,
+                0.02156455089723823
+              ],
+              "nonzero_pixels": 4610
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.011878884177316319,
+                0.012562261653518435,
+                0.006174720808713123
+              ],
+              "nonzero_pixels": 3724
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09125842060705629,
+                0.0906371158782882,
+                0.07183832700053851
+              ],
+              "nonzero_pixels": 6913
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03247198728900967,
+                0.034139254467204366,
+                0.021604442043286383
+              ],
+              "nonzero_pixels": 4561
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012569639436674841,
+                0.01256117005315092,
+                0.006199457052380147
+              ],
+              "nonzero_pixels": 3734
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09162806691319654,
+                0.09095534348502905,
+                0.07210732590444763
+              ],
+              "nonzero_pixels": 6897
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02974571203718884,
+                0.030931118446769136,
+                0.01890079350483538
+              ],
+              "nonzero_pixels": 4649
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.013089224526827986,
+                0.014092870165753847,
+                0.0071659277221470166
+              ],
+              "nonzero_pixels": 3721
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09177013351534954,
+                0.09115307859775394,
+                0.07225452476754936
+              ],
+              "nonzero_pixels": 6910
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03343693293405302,
+                0.03403066468208727,
+                0.022114397088686625
+              ],
+              "nonzero_pixels": 4533
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.011744385028276782,
+                0.011970034644308717,
+                0.005685089197423723
+              ],
+              "nonzero_pixels": 3672
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09100113988223701,
+                0.09026903656094966,
+                0.07145076374137642
+              ],
+              "nonzero_pixels": 6906
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.032524372486755104,
+                0.033007006802492675,
+                0.0210034968199754
+              ],
+              "nonzero_pixels": 4575
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.013394818801169444,
+                0.013042613664510275,
+                0.006724878852114533
+              ],
+              "nonzero_pixels": 3702
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09160606531859046,
+                0.09093448660063623,
+                0.07208025650017791
+              ],
+              "nonzero_pixels": 6895
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03332655242070405,
+                0.032755968083787446,
+                0.020929549404918545
+              ],
+              "nonzero_pixels": 4584
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.013147090435630143,
+                0.013438439903536228,
+                0.00704449178519273
+              ],
+              "nonzero_pixels": 3731
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09137492769143798,
+                0.09067077425242674,
+                0.07173892197885899
+              ],
+              "nonzero_pixels": 6926
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.030922848038902186,
+                0.032335741716352374,
+                0.020089361267258424
+              ],
+              "nonzero_pixels": 4630
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01213021550816719,
+                0.012422291776447585,
+                0.006176310469104786
+              ],
+              "nonzero_pixels": 3674
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09159728540013534,
+                0.09093860687330516,
+                0.07217483152117994
+              ],
+              "nonzero_pixels": 6914
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.030569275261627303,
+                0.031529696334642594,
+                0.019626681826481914
+              ],
+              "nonzero_pixels": 4543
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012188486322158515,
+                0.012294737851679928,
+                0.006078537839530694
+              ],
+              "nonzero_pixels": 3684
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09115510424504979,
+                0.09034582199999178,
+                0.07148187966133007
+              ],
+              "nonzero_pixels": 6907
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.029860513040212668,
+                0.03125702035095956,
+                0.019429926502734722
+              ],
+              "nonzero_pixels": 4599
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.011890323885311985,
+                0.011919304875261856,
+                0.005818125594294433
+              ],
+              "nonzero_pixels": 3680
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.0911068824091644,
+                0.09069366472011263,
+                0.07171956823781284
+              ],
+              "nonzero_pixels": 6919
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03202523635418126,
+                0.032530001031629965,
+                0.02050336218918815
+              ],
+              "nonzero_pixels": 4600
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.013821340224357567,
+                0.013799758872600517,
+                0.007415381570657094
+              ],
+              "nonzero_pixels": 3785
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.0914748321729477,
+                0.09072257838766984,
+                0.07198404904567834
+              ],
+              "nonzero_pixels": 6919
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.0332662473159908,
+                0.03355020797162345,
+                0.021733367175917433
+              ],
+              "nonzero_pixels": 4594
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012135051506938357,
+                0.012543907016515731,
+                0.006078550306082976
+              ],
+              "nonzero_pixels": 3664
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09197464193584341,
+                0.09119440665976568,
+                0.0723637128568659
+              ],
+              "nonzero_pixels": 6926
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.030773093092321145,
+                0.030850622881994104,
+                0.019042371371478746
+              ],
+              "nonzero_pixels": 4566
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012723340127955783,
+                0.012792521982331469,
+                0.006573831910888354
+              ],
+              "nonzero_pixels": 3694
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09134925868399818,
+                0.09066463431550396,
+                0.07193916106615404
+              ],
+              "nonzero_pixels": 6915
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.033550111983310094,
+                0.03453050758125204,
+                0.022080236492734967
+              ],
+              "nonzero_pixels": 4643
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012347356079503744,
+                0.012878980818721983,
+                0.006376304703228401
+              ],
+              "nonzero_pixels": 3731
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09158636127984283,
+                0.09092436229264496,
+                0.07198709644226715
+              ],
+              "nonzero_pixels": 6905
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03102983334148773,
+                0.03150806616653096,
+                0.019441842299067612
+              ],
+              "nonzero_pixels": 4601
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01232627442840374,
+                0.012896752383823347,
+                0.006424392673252809
+              ],
+              "nonzero_pixels": 3720
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09173564810418722,
+                0.09125794234375159,
+                0.07237324334982068
+              ],
+              "nonzero_pixels": 6919
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.030492875145541297,
+                0.03095824002768054,
+                0.01913240649784454
+              ],
+              "nonzero_pixels": 4565
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012370138393357547,
+                0.012629162429860143,
+                0.0060705521191009365
+              ],
+              "nonzero_pixels": 3689
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09087464155422317,
+                0.0899502901341578,
+                0.07127769409556582
+              ],
+              "nonzero_pixels": 6895
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03301502110229598,
+                0.035310470862220035,
+                0.022809375194136543
+              ],
+              "nonzero_pixels": 4607
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012756912440362603,
+                0.012422653539764761,
+                0.006223737704332428
+              ],
+              "nonzero_pixels": 3744
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09149242824300972,
+                0.09071520137591194,
+                0.07193308654006081
+              ],
+              "nonzero_pixels": 6914
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.030554631408868414,
+                0.03128682492357312,
+                0.0193128204631685
+              ],
+              "nonzero_pixels": 4511
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012050996107434986,
+                0.012891082582299155,
+                0.006079942021857608
+              ],
+              "nonzero_pixels": 3708
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09077030714187358,
+                0.09020665660124234,
+                0.07148919124720675
+              ],
+              "nonzero_pixels": 6908
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.0320030497368237,
+                0.03169204857238014,
+                0.019835701994974204
+              ],
+              "nonzero_pixels": 4633
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.013570986326896782,
+                0.013429272415662052,
+                0.007040833234034404
+              ],
+              "nonzero_pixels": 3707
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09132611799345475,
+                0.09070512959075094,
+                0.0718705206846047
+              ],
+              "nonzero_pixels": 6896
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03243657748657044,
+                0.03300987804176832,
+                0.020689352451249806
+              ],
+              "nonzero_pixels": 4596
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012273329594219574,
+                0.011890986448887622,
+                0.005653581433374472
+              ],
+              "nonzero_pixels": 3664
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09112168935061705,
+                0.09038116515736387,
+                0.07158043676554554
+              ],
+              "nonzero_pixels": 6923
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.0314712639371253,
+                0.03208701990996346,
+                0.01990682961362781
+              ],
+              "nonzero_pixels": 4580
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01282313611697067,
+                0.013098495694422964,
+                0.006640161321771265
+              ],
+              "nonzero_pixels": 3732
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.0911351462393397,
+                0.09050522665258008,
+                0.07178484445268457
+              ],
+              "nonzero_pixels": 6899
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03204614692038358,
+                0.033007249593584226,
+                0.021161752190403265
+              ],
+              "nonzero_pixels": 4489
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.012439507494370143,
+                0.012118941060069836,
+                0.006133042324823562
+              ],
+              "nonzero_pixels": 3696
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09073878458202488,
+                0.09038079432917363,
+                0.07158190881588844
+              ],
+              "nonzero_pixels": 6911
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02973019979668386,
+                0.031445465026178746,
+                0.019277225762154116
+              ],
+              "nonzero_pixels": 4566
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01234226669325973,
+                0.012546690410435803,
+                0.006338364807794793
+              ],
+              "nonzero_pixels": 3731
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09124592349610545,
+                0.0907643366906077,
+                0.07190592866202798
+              ],
+              "nonzero_pixels": 6905
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03185472601290905,
+                0.033037982136011126,
+                0.020832134805845493
+              ],
+              "nonzero_pixels": 4596
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.013464081355116585,
+                0.014504447756241066,
+                0.007159390052159627
+              ],
+              "nonzero_pixels": 3782
+            }
+          }
+        },
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 3,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09169199296997653,
+                0.09099150648095992,
+                0.07213076502461024
+              ],
+              "nonzero_pixels": 6918
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.03349124227434096,
+                0.03517700020562519,
+                0.023261248640189268
+              ],
+              "nonzero_pixels": 4520
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01179702239807206,
+                0.012590143385559622,
+                0.006115738464274792
+              ],
+              "nonzero_pixels": 3704
+            }
+          }
+        }
+      ]
+    },
+    "b7-sequence": {
+      "status": "captured",
+      "exe_sha256": "3c4962257784120d4acea5c955d6b2d5651af9946d22431fd392aacd131c90d6",
+      "images": 64,
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "partition": {
+        "development": false,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 0,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "checks": null
+    },
+    "native-reference": {
+      "status": "captured",
+      "exe_sha256": "3c4962257784120d4acea5c955d6b2d5651af9946d22431fd392aacd131c90d6",
+      "images": 1,
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "partition": {
+        "development": false,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 0,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "checks": null
+    },
+    "original-convergence-test": {
+      "status": "failed_extended_scene_contract",
+      "exe_sha256": "3c4962257784120d4acea5c955d6b2d5651af9946d22431fd392aacd131c90d6",
+      "images": 1,
+      "actual_scene_sha256": "c3afaa933c5084ba04f8e5100b64bb8b488ab312f4042849705a15e5bf5af549",
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 0,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 14,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.2124576790088957,
+                0.19167924240758322,
+                0.16687703411085436
+              ],
+              "nonzero_pixels": 2673
+            },
+            "di": {
+              "mean_rgb": [
+                0.15654793488557892,
+                0.11032886552163447,
+                0.07736690986261825
+              ],
+              "nonzero_pixels": 8510
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.0515960718646194,
+                0.03479547245108118,
+                0.020092744496886177
+              ],
+              "nonzero_pixels": 5283
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.04047259063356452,
+                0.02710551339568514,
+                0.012272166675238899
+              ],
+              "nonzero_pixels": 5007
+            }
+          }
+        }
+      ],
+      "offline_revalidation": {
+        "scope": "Verified effective development settings; not scene correctness or canonical acceptance",
+        "full_prefix_replay": true,
+        "diffuse_budget": 2,
+        "max_bounces": 14,
+        "combined_partition": true,
+        "canonical_accepted": false
+      }
+    },
+    "original-kitchen-with-test-stuff": {
+      "status": "captured",
+      "exe_sha256": "3c4962257784120d4acea5c955d6b2d5651af9946d22431fd392aacd131c90d6",
+      "images": 1,
+      "actual_scene_sha256": "2af5735fb02fc01badd83671641d54b7f1c69859c8c9bcdf335ca95d9daae552",
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 0,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 14,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.06937732153920212,
+                0.06481626333687643,
+                0.05895590733623866
+              ],
+              "nonzero_pixels": 1182
+            },
+            "di": {
+              "mean_rgb": [
+                0.02241800320193623,
+                0.017558861708249707,
+                0.01437718677475597
+              ],
+              "nonzero_pixels": 2203
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.012902438046053202,
+                0.009146977264923278,
+                0.007397971806502102
+              ],
+              "nonzero_pixels": 1188
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.005196773012479146,
+                0.0033247901484219715,
+                0.0021523701309254673
+              ],
+              "nonzero_pixels": 1041
+            }
+          }
+        }
+      ]
+    },
+    "stage1-pt1-di0": {
+      "status": "captured",
+      "exe_sha256": "3c4962257784120d4acea5c955d6b2d5651af9946d22431fd392aacd131c90d6",
+      "images": 1,
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 1,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09108483915527661,
+                0.09030790856540805,
+                0.07154692812173656
+              ],
+              "nonzero_pixels": 6893
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02844692837033007,
+                0.02969449668595887,
+                0.018012109801474243
+              ],
+              "nonzero_pixels": 4575
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.017418192658159467,
+                0.018171162086755337,
+                0.008551874783153486
+              ],
+              "nonzero_pixels": 8016
+            }
+          }
+        }
+      ]
+    },
+    "stage1-pt2-di0": {
+      "status": "captured",
+      "exe_sha256": "3c4962257784120d4acea5c955d6b2d5651af9946d22431fd392aacd131c90d6",
+      "images": 1,
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 1,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.09136249191231198,
+                0.09058156883475757,
+                0.07182370872810634
+              ],
+              "nonzero_pixels": 6912
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.02844661303767652,
+                0.029694647150057735,
+                0.018011688708205416
+              ],
+              "nonzero_pixels": 4575
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.017456623671030756,
+                0.017402405340713686,
+                0.008219182397229503
+              ],
+              "nonzero_pixels": 5188
+            }
+          }
+        }
+      ]
+    },
+    "stage1-pt3-di3": {
+      "status": "captured",
+      "exe_sha256": "3c4962257784120d4acea5c955d6b2d5651af9946d22431fd392aacd131c90d6",
+      "images": 1,
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 1,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.0919472855826219,
+                0.09124878019546018,
+                0.07248124549861508
+              ],
+              "nonzero_pixels": 7145
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.028446775531829005,
+                0.029694780639626762,
+                0.018011381495932136
+              ],
+              "nonzero_pixels": 4572
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.017995454374738415,
+                0.01820270981677253,
+                0.008842509936052139
+              ],
+              "nonzero_pixels": 8240
+            }
+          }
+        }
+      ]
+    },
+    "stage2-pt3-di3": {
+      "status": "captured",
+      "exe_sha256": "3c4962257784120d4acea5c955d6b2d5651af9946d22431fd392aacd131c90d6",
+      "images": 1,
+      "actual_scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "partition": {
+        "development": true,
+        "contract_version": 1,
+        "gi_reuse": false,
+        "component": 0,
+        "stage": 2,
+        "pt_min_light_inclusive_length": 4,
+        "canonical_accepted": false
+      },
+      "checks": [
+        {
+          "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+          "max_bounces": 4,
+          "components": {
+            "native": {
+              "mean_rgb": [
+                0.18570075757575757,
+                0.18570075757575757,
+                0.18570075757575757
+              ],
+              "nonzero_pixels": 148
+            },
+            "di": {
+              "mean_rgb": [
+                0.0924132321330935,
+                0.09199489631661863,
+                0.0730788752286121
+              ],
+              "nonzero_pixels": 7147
+            },
+            "gi_short": {
+              "mean_rgb": [
+                0.0284467330823342,
+                0.029694785497555828,
+                0.01801143666409483
+              ],
+              "nonzero_pixels": 4576
+            },
+            "pt_long": {
+              "mean_rgb": [
+                0.01832255669540227,
+                0.018376208356384077,
+                0.008722106803848285
+              ],
+              "nonzero_pixels": 8115
+            }
+          }
+        }
+      ]
+    }
+  },
+  "exclusions": [
+    "b8-sequence: stopped static-clock stall; original manifest retained privately"
+  ],
+  "final_artifacts": "Post-cohort snapshot, not a pre-frozen identity for earlier executable phases"
+}

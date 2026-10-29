@@ -39,6 +39,7 @@ def inspect(words, meta):
             max_age_valid=int(age[valid].max()) if valid.any() else None,
             mean_m_valid=float(m[valid].mean()) if valid.any() else None,
             valid_with_positive_weight=int((valid & (weight > 0)).sum()),
+            positive_weight_path_length_histogram={str(int(k)):int(v) for k,v in zip(*np.unique(path_length[valid & (weight > 0)],return_counts=True))},
             nonfinite_m=int((~np.isfinite(m)).sum()),
             nonfinite_weight_valid=int((valid & ~np.isfinite(weight)).sum()),
             nonfinite_target_valid=int((valid & ~np.isfinite(target).all(axis=-1)).sum()))

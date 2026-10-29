@@ -1,0 +1,35 @@
+{
+  "b8-sequence-clockfixed": {
+    "frames": 64,
+    "actual_resolution": [
+      176,
+      90
+    ],
+    "mean_of_frames": {
+      "linear_rgb_mse": 0.0005088654758224439,
+      "smape_cgns_y100": 2.166560547409352,
+      "full_frame_reference_mean_luminance": 0.31973701391992765,
+      "mape_rgb_ydenom": 0.03915544945136203,
+      "relmse_project": 0.014872790340176988,
+      "relative_metrics_available": true
+    },
+    "single_frame_rgb_mse_mean": 0.037445221617157985
+  },
+  "b7-sequence": {
+    "frames": 64,
+    "actual_resolution": [
+      176,
+      90
+    ],
+    "mean_of_frames": {
+      "linear_rgb_mse": 0.0006451124983687412,
+      "smape_cgns_y100": 2.657749781300379,
+      "full_frame_reference_mean_luminance": 0.31973701391992765,
+      "mape_rgb_ydenom": 0.04774963077166639,
+      "relmse_project": 0.025113596939131268,
+      "relative_metrics_available": true
+    },
+    "single_frame_rgb_mse_mean": 0.041763263616862625
+  },
+  "scope": "64-frame low-resolution static-room initial-only integration smoke; no brightness fixes, no timing acceptance or canonical promotion"
+}

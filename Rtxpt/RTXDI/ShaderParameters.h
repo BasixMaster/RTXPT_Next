@@ -248,7 +248,7 @@ struct RtxdiBridgeConstants
     uint reStirGIEnableTemporalResampling;
     uint reStirGIVaryAgeThreshold;
     uint ptExtendedSceneValidation;
-    uint _padding2;
+    uint giPTPartition;
 
     RTXDI_PTParameters restirPT;
     float3 ptCameraPosition;

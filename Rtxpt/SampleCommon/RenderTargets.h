@@ -41,6 +41,7 @@ public:
     };
 
     nvrhi::TextureHandle NativeRadianceCapture; // Optional diagnostic snapshot; never used by estimator.
+    nvrhi::TextureHandle B8StageCapture[3]; // Same-frame cumulative native+DI, +GI-short, +PT-long.
     nvrhi::TextureHandle AccumulatedRadiance;   // used only in non-realtime mode
     nvrhi::TextureHandle LdrColor;              // final, post-tonemapped color
     nvrhi::TextureHandle LdrColorScratch;       // used for ping-ponging post-process stuff vs LdrColor

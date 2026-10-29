@@ -185,6 +185,27 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     m_ui.UseReSTIRDI                = cmdLine.UseReSTIRDI != 0;
     m_ui.UseReSTIRGI                = cmdLine.UseReSTIRGI != 0;
     m_ui.UseReSTIRPT                = cmdLine.UseReSTIRPT != 0;
+    m_ui.B8InitialGIValidation = cmdLine.B8InitialGIValidation;
+    m_ui.B8ValidationStage = cmdLine.B8ValidationStage;
+    if (cmdLine.B8ValidationStage < 0 || cmdLine.B8ValidationStage > 2 ||
+        (cmdLine.B8ValidationStage != 0 && !cmdLine.B8InitialGIValidation))
+        throw std::runtime_error("B8 validation stage requires the development partition and stage0..2");
+    m_ui.B8Component = cmdLine.B8Component;
+    if (cmdLine.B8Component < 0 || cmdLine.B8Component > 4 ||
+        (cmdLine.B8Component != 0 && !cmdLine.B8InitialGIValidation))
+        throw std::runtime_error("B8 component output requires the initial-only development partition and a selector in0..4");
+    if (cmdLine.B8InitialGIValidation &&
+        (!m_ui.UseReSTIRPT || !m_ui.UseReSTIRGI || !m_ui.UseReSTIRDI || !m_ui.UseNEE ||
+         cmdLine.OverrideReSTIRDIMode < 0 ||
+         cmdLine.OverrideNEEMIS != 0 || !cmdLine.StrictDIValidation ||
+         !cmdLine.OverrideToRealtimeMode))
+        throw std::runtime_error("B8 development requires explicit realtime DI/GI/PT on, DI mode, exact NEE MIS and strict DI");
+    if (cmdLine.B8InitialGIValidation &&
+        ((cmdLine.B8ValidationStage == 0 && (cmdLine.ReSTIRPTMode != 0 || cmdLine.OverrideReSTIRDIMode != 0)) ||
+         (cmdLine.B8ValidationStage < 2 && cmdLine.PTRouletteProbability != 0.0f) ||
+         (cmdLine.B8ValidationStage == 2 && (cmdLine.PTReconnectionMode != 1 ||
+          !(cmdLine.PTRouletteProbability > 0.0f && cmdLine.PTRouletteProbability < 1.0f)))))
+        throw std::runtime_error("B8 stage0 requires no reuse; stage0/1 require no roulette; stage2 requires footprint and explicit roulette in(0,1)");
     if (cmdLine.OverrideReSTIRDIMode < -1 || cmdLine.OverrideReSTIRDIMode > 3 || cmdLine.OverrideNEEMIS < -1 || cmdLine.OverrideNEEMIS > 2)
         throw std::runtime_error("DI reuse override must be 0..3 and native NEE MIS override 0..2");
     if (cmdLine.OverrideReSTIRDIMode >= 0)

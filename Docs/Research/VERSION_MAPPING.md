@@ -14,9 +14,9 @@ User-confirmed numbering, 2026-10-29. **B0 is the unchanged RTXPT 1.9 reference 
 | **B5** | **RTXPT native PT + DI 3.1 + GI 3.1** | DI/GI on; ReSTIR PT off. Fresh original-scene and registered-room quality and cap-verified timing are measured. |
 | **B6** | **ReSTIR PT / DI and GI off** | Separate DI/GI estimators off; existing native direct/fallback terms remain until explicitly replaced by a unified-lighting partition. No complete extended-scene benchmark is claimed. |
 | **B7** | **ReSTIR PT + DI 3.1** | DI direct plus PT indirect; GI off. Corrected static opaque checkpoint `de9fe651`; original-scene gates remain unresolved. |
-| **B8** | **ReSTIR PT + DI 3.1 + GI 3.1** | Planned shared configuration: requires disjoint GI/PT contributions or valid MIS. The present alternative-mode guard does not implement it. |
-| **B9** | **B8 + limited PT++** | Planned footprint/inverse-footprint reconnection and initial-generation-only roulette on a validated B8 foundation. The existing GI-off pilot is not B9. |
-| **B10** | **B8 + full remaining PT++** | Authorized future work, dependent on correct B8 sharing and individual correctness/feature/performance validation. No complete-paper implementation claim. |
+| **B8** | **ReSTIR PT + DI 3.1 + GI 3.1** | Opt-in disjoint initial-GI/PT-long development executes with DI/PT reuse. General GI reuse and complete canonical validation remain pending. |
+| **B9** | **B8 + limited PT++** | A GI-initial-only footprint/initial-roulette development ablation executes; complete B8/B9 validation remains pending. The historical GI-off pilot is not B9. |
+| **B10** | **B8 + full remaining PT++** | Exact paired-MIS/vector-weight, reciprocal texture and replay-queue CPU prerequisites pass. Full GPU implementation and independent validation remain pending. No complete-paper implementation claim. |
 
 ## Legacy crosswalk: preserve evidence identities
 
@@ -59,3 +59,5 @@ Canonical update2026-10-29: [B1/B4 native-DI quality and cap-verified timing](CA
 Current scoped measurements: [registered-room B1/B4/B6/B7 comparison](REGISTERED_ROOM_RESULTS.md) includes30quality captures,12timing processes and explicit history settling; [native original-scene report](CANONICAL_NATIVE_DI_RESULTS.md) now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.
 
 Current native coverage: [fresh B2/B3/B5 original-scene and room results](NATIVE_MATRIX_RESULTS.md) adds27quality captures and27cap-verified timing processes. [The unified B0–B10 overview](COMPARISON_OVERVIEW.md) includes all versions, current metrics and representative pictures; historical cohorts remain separate.
+
+Current development: [B8–B10 staged implementation](B8_STAGED_IMPLEMENTATION.md) records the disjoint initial-GI GPU foundation and limited PT++ ablation. GI reuse and B10 GPU mechanisms remain pending; brightness work is deferred.

@@ -355,7 +355,14 @@ namespace PathTracer
 #if PATH_TRACER_MODE==PT_DENOISING_LAYERS_FILL && PT_USE_RESTIR_DI
         // When ReSTIR DI is handling lighting, we skip NEE; at the moment RTXDI handles only reflection; in the case of first bounce transmission we still don't attemp to use
         // NEE due to complexity, and also the future where ReSTIR DI might handle transmission.
-        if (hasNonDeltaLobes && onDominantBranch && onDenoisingLayer)
+        bool diOwnsPrimary = hasNonDeltaLobes && onDominantBranch && onDenoisingLayer;
+#if PT_USE_GI_PT_PARTITION
+        const uint diOwnerPlane = (g_Const.ptConsts.frameIndex % 2) == 0;
+        const uint diOwnerAddress = GenericTSPixelToAddress(preScatterPath.GetPixelPos(), diOwnerPlane,
+            g_Const.ptConsts.genericTSLineStride, g_Const.ptConsts.genericTSPlaneStride);
+        diOwnsPrimary = diOwnsPrimary && RTXPT_PTOwnsPrimary(u_PTPrimaryData[diOwnerAddress], g_Const.ptConsts.frameIndex);
+#endif
+        if (diOwnsPrimary)
         {
             NEEResult result = NEEResult::empty();
             result.BSDFMISInfo.SkipEmissiveBRDF = true;

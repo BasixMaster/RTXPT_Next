@@ -17,10 +17,14 @@ def validate(data, repo=None):
         if key not in expected or key in found:raise ValueError('Unknown or duplicate comparison row')
         found.add(key)
         if not row.get('algorithm','').strip():raise ValueError('Each row needs an actual/proposed algorithm label')
-        if row['status'] not in ['measured','historical_unverified_caps','unsupported','pending','in_progress']:
+        development_statuses=['development_not_accepted','low_resolution_development_not_accepted']
+        if row['status'] not in ['measured','historical_unverified_caps','unsupported','pending','in_progress']+development_statuses:
             raise ValueError('Unknown comparison coverage status')
-        if row['status'] in ['unsupported','pending','in_progress'] and not row.get('reason','').strip():
+        if row['status'] in ['unsupported','pending','in_progress']+development_statuses and not row.get('reason','').strip():
             raise ValueError('Unavailable coverage needs an explicit reason')
+        if row['status'] in development_statuses:
+            if not row.get('development_evidence','').strip():raise ValueError('Development coverage needs separate evidence')
+            if repo is not None and not (Path(repo)/row['development_evidence']).exists():raise ValueError('Development evidence path missing')
         if row['status'] in ['measured','historical_unverified_caps']:
             if not row.get('result','').strip():raise ValueError('Measured coverage needs an evidence path')
             if repo is not None and not (Path(repo)/row['result']).exists():raise ValueError('Comparison evidence path missing')

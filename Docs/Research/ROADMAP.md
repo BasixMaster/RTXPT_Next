@@ -2,6 +2,8 @@
 
 **Current numbering, confirmed 2026-10-29:** [VERSION_MAPPING.md](VERSION_MAPPING.md) defines all canonical variants and the retained legacy crosswalk. B0 remains the unchanged RTXPT 1.9 original-defaults reference. Old files, branches, tags and data IDs are not renumbered in place.
 
+The user deferred brightness fixes and prioritized B8–B10. See [staged implementation](B8_STAGED_IMPLEMENTATION.md) for the executed initial-GI contribution split, DI/PT reuse and limited PT++ ablation, with explicit remaining gates.
+
 ## Current execution order and acceptance gates
 
 1. Preserve B0 defaults/source/assets. Define B1 native PT + DI3.0 and B2 native PT + DI/GI3.0 as explicit configurations, distinct from the B0 native-only raw control.

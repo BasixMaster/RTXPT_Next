@@ -281,6 +281,7 @@ void RtxdiPass::PrepareResources(
     const bool ptHistoryContractChanged = m_BridgeParameters.usingReSTIRPT && bridgeParams.usingReSTIRPT &&
         (bridgeParams.frameIndex != m_BridgeParameters.frameIndex + 1u ||
          bridgeParams.samplingSeed != m_BridgeParameters.samplingSeed ||
+         bridgeParams.giPTPartition != m_BridgeParameters.giPTPartition ||
          bridgeParams.extendedSceneValidation != m_BridgeParameters.extendedSceneValidation ||
          bridgeParams.maxDiffuseBounces != m_BridgeParameters.maxDiffuseBounces ||
          oldPT.resamplingMode != newPT.resamplingMode ||
@@ -571,6 +572,7 @@ void RtxdiPass::FillSharedConstants(struct RtxdiBridgeConstants& bridgeConstants
     bridgeConstants.ptHistoryValid = m_PTCameraHistoryValid ? 1 : 0;
     bridgeConstants.ptRouletteProbability = m_BridgeParameters.userSettings.restirPT.russianRouletteProbability;
     bridgeConstants.ptDiagnostics = m_BridgeParameters.capturePTDiagnostics ? 1u : 0u;
+    bridgeConstants.giPTPartition = m_BridgeParameters.giPTPartition;
     bridgeConstants.ptExtendedSceneValidation = m_BridgeParameters.extendedSceneValidation ? 1u : 0u;
 	bridgeConstants.frameDim = m_BridgeParameters.frameDims;
 	bridgeConstants.rayEpsilon = m_BridgeParameters.userSettings.rayEpsilon;
@@ -688,6 +690,15 @@ void RtxdiPass::ExecuteGI(nvrhi::CommandListHandle commandList, nvrhi::BindingSe
 
 	dm::int2 dispatchSize = { (int)reSTIRGI.GetStaticParams().RenderWidth, (int)reSTIRGI.GetStaticParams().RenderHeight };
 
+    if (m_BridgeParameters.giPTPartition != 0)
+    {
+        // GI-short initial estimator reads only this frame's native exports.
+        // No reservoir reuse, Jacobian clamp or approximate final blend.
+        if (!skipFinal)
+            ExecuteRayTracingPass(commandList, m_GIFinalShadingPass, "GI Short Initial Shading", dispatchSize, extraBindingSet);
+        GpuProfiler::End(commandList);
+        return;
+    }
 	ExecuteRayTracingPass(commandList, m_GITemporalResamplingPass, "Temporal Resampling", dispatchSize, extraBindingSet);
 
 	if (reSTIRGI.GetResamplingMode() == rtxdi::ReSTIRGI_ResamplingMode::Spatial || reSTIRGI.GetResamplingMode() == rtxdi::ReSTIRGI_ResamplingMode::TemporalAndSpatial)
@@ -713,7 +724,7 @@ void RtxdiPass::ExecuteFusedDIGIFinal(nvrhi::CommandListHandle commandList, nvrh
     ExecuteRayTracingPass(commandList, m_FusedDIGIFinalShadingPass, "Fused DI GI Final Shading", dispatchSize, extraBindingSet);
 }
 
-void RtxdiPass::ExecutePT(nvrhi::CommandListHandle commandList, nvrhi::BindingSetHandle extraBindingSet)
+void RtxdiPass::ExecutePT(nvrhi::CommandListHandle commandList, nvrhi::BindingSetHandle extraBindingSet, bool skipFinal)
 {
     if (!m_BridgeParameters.usingReSTIRPT || !m_PTPipelinesCreated || !m_rtxdiResources->HasPTResources())
         throw std::runtime_error("ReSTIR PT dispatched without its selected resource/pipeline state.");
@@ -740,6 +751,7 @@ void RtxdiPass::ExecutePT(nvrhi::CommandListHandle commandList, nvrhi::BindingSe
         ExecuteRayTracingPass(commandList, m_PTSpatialResamplingPass, "PT Spatial Resampling", dispatchSize, extraBindingSet);
     }
     nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
+    if (!skipFinal)
     ExecuteRayTracingPass(commandList, m_PTFinalShadingPass, "PT Final Shading", dispatchSize, extraBindingSet);
     GpuProfiler::End(commandList);
 }

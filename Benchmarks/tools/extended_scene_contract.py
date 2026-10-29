@@ -7,7 +7,7 @@ def validate_request(enabled, mode, replay_only, variant):
         raise ValueError('Extended-scene development requires PT, full-prefix replay and no canonical acceptance label')
 
 
-def verify(log, enabled, diffuse_budget=None, requested_mode=None):
+def verify(log, enabled, diffuse_budget=None, requested_mode=None, combined_partition=False, partition_stage=0):
     if not enabled:
         return None
     rows=re.findall(r'^PT_EXTENDED_SCENE_CONTRACT development=(\d+) diffuseBudget=(\d+) fullPrefixReplay=(\d+)\s*$',log,re.MULTILINE)
@@ -20,9 +20,14 @@ def verify(log, enabled, diffuse_budget=None, requested_mode=None):
     if len(set(replay_rows))!=1 or replay_rows[0][0]!='1' or float(replay_rows[0][1])!=1.0:
         raise ValueError('Full-prefix fixed-threshold replay was not activated')
     transport=re.findall(r'^TRANSPORT_CONTRACT di=([01]) gi=([01]) pt=([01]) diMode=\d+ neeMIS=\d+ maxBounces=(\d+) maxDiffuseBounces=(\d+)\s*$',log,re.MULTILINE)
-    if len(set(transport))!=1 or transport[0][1:3]!=('0','1') or int(transport[0][4])!=budget:
+    expected_gi='1' if combined_partition else '0'
+    if combined_partition:
+        from b8_partition_contract import verify as verify_b8
+        verify_b8(log, True, 0, partition_stage)
+    if len(set(transport))!=1 or transport[0][1:3]!=(expected_gi,'1') or int(transport[0][4])!=budget:
         raise ValueError('Extended-scene transport receipt is inconsistent')
     if requested_mode is not None and int(transport[0][0])!=int(requested_mode=='dipt'):
         raise ValueError('Actual DI activation differs from the requested extended-scene mode')
     return dict(scope='Verified effective development settings; not scene correctness or canonical acceptance',
-                full_prefix_replay=True,diffuse_budget=budget,max_bounces=int(transport[0][3]),canonical_accepted=False)
+                full_prefix_replay=True,diffuse_budget=budget,max_bounces=int(transport[0][3]),
+                combined_partition=combined_partition,canonical_accepted=False)

@@ -308,7 +308,16 @@ int2 RAB_ClampSamplePositionIntoView(int2 pixelPosition, bool previousFrame)
 
 RAB_Surface RAB_GetGBufferSurface(int2 pixelPosition, bool previousFrame)
 {
-    return getGBufferSurface(pixelPosition, previousFrame);
+    RAB_Surface surface = getGBufferSurface(pixelPosition, previousFrame);
+    if (g_RtxdiBridgeConst.giPTPartition != 0 && isValidPixelPosition(pixelPosition))
+    {
+        const uint plane = (g_Const.ptConsts.frameIndex % 2) == uint(previousFrame);
+        const uint address = GenericTSPixelToAddress(pixelPosition, plane,
+            g_Const.ptConsts.genericTSLineStride, g_Const.ptConsts.genericTSPlaneStride);
+        const uint expectedFrame = g_Const.ptConsts.frameIndex - uint(previousFrame);
+        if (!RTXPT_PTOwnsPrimary(u_PTPrimaryData[address], expectedFrame)) surface._isEmpty = true;
+    }
+    return surface;
 }
 
 // Checks if the given surface is valid, see RAB_GetGBufferSurface.

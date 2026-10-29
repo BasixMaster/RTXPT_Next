@@ -61,6 +61,7 @@ private:
     double                      m_sequenceBeginTime                 = 0.0;     // based on sequenceWarmupStart cmdLine parameter 
     double                      m_sequenceRecordStartTime           = 0.0;
     double                      m_sequenceDeltaTime                 = 1.0 / 60.0;
+    double                      m_sequenceCaptureTime               = 0.0; // Independent of looping/static scene animation time.
     int                         m_sequenceRecordFrames              = 0;
     int                         m_sequenceRecordCounter             = -1;
 

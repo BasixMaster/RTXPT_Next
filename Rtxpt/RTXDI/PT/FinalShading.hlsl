@@ -13,6 +13,7 @@ void main(uint2 thread : SV_DispatchThreadID)
     RTXDI_PTReservoir r = RTXDI_LoadPTReservoir(g_RtxdiBridgeConst.restirPT.reservoirBuffer,
         thread, g_RtxdiBridgeConst.restirPT.bufferIndices.finalShadingInputBufferIndex);
     if (!RTXDI_IsValidPTReservoir(r)) return;
+    if (g_RtxdiBridgeConst.giPTPartition != 0 && r.pathLength < 4) return;
     // targetFunction already includes the primary BSDF. Multiplying it again
     // would double-apply the primary surface's response.
     float3 radiance = r.targetFunction * r.weightSum;

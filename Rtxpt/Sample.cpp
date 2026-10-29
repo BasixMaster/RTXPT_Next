@@ -1333,6 +1333,7 @@ void Sample::GetPTPipelineGlobalMacros(std::vector<donut::engine::ShaderMacro> &
 
     macros.push_back({ "PT_USE_RESTIR_DI", (m_ui.ActualUseReSTIRDI()) ? ("1") : ("0") });   // these will match constants.useReSTIRDI but constants are used in other passes too
     macros.push_back({ "PT_USE_RESTIR_PT", m_ui.ActualUseReSTIRPT() ? "1" : "0" });
+    macros.push_back({ "PT_USE_GI_PT_PARTITION", m_ui.B8InitialGIValidation ? "1" : "0" });
     macros.push_back({ "PT_USE_RESTIR_GI", (m_ui.ActualUseReSTIRGI()) ? ("1") : ("0") });   // these will match constants.useReSTIRGI but constants are used in other passes too
 
     macros.push_back({ "RTXPT_USE_APPROXIMATE_MIS", (m_ui.ActualUseApproximateMIS()) ? ("1") : ("0") });
@@ -2289,6 +2290,8 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
             uint32_t(m_ui.RTXDI.restirDI.spatialResamplingParams.discountNaiveSamples));
         std::printf("PT_EXTENDED_SCENE_CONTRACT development=%d diffuseBudget=%d fullPrefixReplay=%d\n",
             int(m_cmdLine.PTExtendedSceneValidation), m_ui.DiffuseBounceCount, int(m_cmdLine.PTReplayOnlyValidation));
+        std::printf("B8_PARTITION_CONTRACT development=%d version=1 giReuse=0 component=%d minPTLength=4 stage=%d\n",
+            int(m_ui.B8InitialGIValidation), m_ui.B8Component, m_ui.B8ValidationStage);
         std::printf("PT_REPLAY_CONTRACT replayOnly=%d roughnessThreshold=%.9g\n", int(m_cmdLine.PTReplayOnlyValidation),
             double(m_ui.RTXDI.restirPT.reconnectionParams.roughnessThreshold));
         std::printf("PT_HISTORY_CONTRACT ageRejection=%u maxAge=%u maxHistory=%u\n",
@@ -2371,6 +2374,14 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
 void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraData cameraData, uint2 renderDims)
 {
     const bool envMapPresent = m_ui.EnvironmentMapParams.Enabled;
+    if (m_ui.B8InitialGIValidation &&
+        (!m_ui.ActualUseReSTIRPT() || !m_ui.ActualUseReSTIRDI() || !m_ui.ActualUseReSTIRGI() ||
+         (m_ui.B8ValidationStage == 0 && (uint32_t(m_ui.RTXDI.restirPT.resamplingMode) != 0 ||
+          uint32_t(m_ui.RTXDI.restirDI.resamplingMode) != 0)) || m_ui.NEEMISType != 0 ||
+         (m_ui.B8ValidationStage < 2 && m_ui.RTXDI.restirPT.russianRouletteProbability != 0.0f) ||
+         (m_ui.B8ValidationStage == 2 && (uint32_t(m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode) != 1 ||
+          !(m_ui.RTXDI.restirPT.russianRouletteProbability > 0.0f && m_ui.RTXDI.restirPT.russianRouletteProbability < 1.0f)))))
+        throw std::runtime_error("B8 initial development requires explicit initial-only modes");
 
     if (m_cmdLine.PTExtendedSceneValidation &&
         (!m_cmdLine.PTReplayOnlyValidation || !m_ui.ActualUseReSTIRPT() ||
@@ -2426,6 +2437,7 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
         bridgeParameters.userSettings.restirPT.hybridShiftParams.maxRcVertexLength = ptMaxPathLength + 1;
     }
     bridgeParameters.usingReSTIRPT = m_ui.ActualUseReSTIRPT();
+    bridgeParameters.giPTPartition = m_ui.B8InitialGIValidation ? 1u : 0u;
     bridgeParameters.extendedSceneValidation = m_cmdLine.PTExtendedSceneValidation;
     bridgeParameters.maxDiffuseBounces = uint32_t(m_ui.DiffuseBounceCount);
     bridgeParameters.resetReSTIRPT = m_ui.ResetRealtimeCaches || m_ui.ResetAccumulation;
@@ -3410,6 +3422,14 @@ void Sample::Render(nvrhi::IFramebuffer* framebuffer)
                 if (!m_renderTargets->NativeRadianceCapture || !rtxpt::SaveLinearHdrPFM(GetDevice(),
                     m_renderTargets->NativeRadianceCapture, hdrPath.string() + ".native.pfm", error))
                     throw std::runtime_error("Native radiance diagnostic capture failed: " + error);
+                if (m_ui.B8InitialGIValidation && m_ui.B8Component == 0)
+                {
+                    const char* suffixes[] = { ".native-di.pfm", ".native-di-gi.pfm", ".native-di-gi-pt.pfm" };
+                    for (int stage = 0; stage < 3; ++stage)
+                        if (!m_renderTargets->B8StageCapture[stage] || !rtxpt::SaveLinearHdrPFM(GetDevice(),
+                            m_renderTargets->B8StageCapture[stage], hdrPath.string() + suffixes[stage], error))
+                            throw std::runtime_error("B8 same-frame cumulative capture failed: " + error);
+                }
             }
         }
         // Present, the swapchain's kept state - Common is the same on D3D12 but means UNDEFINED (discard) on Vulkan.

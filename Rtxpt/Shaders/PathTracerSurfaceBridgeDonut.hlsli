@@ -561,6 +561,10 @@ void Bridge::ExportSurface(const PathState path, PathTracer::Surface surface, fl
 #if RTXPT_NESTED_DIELECTRICS_QUALITY > 0
             ownsPrimary = ownsPrimary && path.interiorList.isEmpty();
 #endif
+#if PT_USE_GI_PT_PARTITION
+            // Mixed delta/continuous primaries keep complete native fallback.
+            ownsPrimary = ownsPrimary && (nativeLobes & (uint)LobeType::Delta) == 0;
+#endif
             if (ownsPrimary) native.nativeVertexIndex |= RTXPT_PT_PRIMARY_ELIGIBLE;
             u_PTPrimaryData[idx] = native;
         }

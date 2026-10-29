@@ -1,0 +1,13 @@
+{
+  "original_manifest_status": "failed_extended_scene_contract",
+  "original_manifest_retained": true,
+  "reason": "Old verifier required GI off even when the new disjoint B8 receipt was valid; no image altered or rerendered",
+  "effective_extended": {
+    "scope": "Verified effective development settings; not scene correctness or canonical acceptance",
+    "full_prefix_replay": true,
+    "diffuse_budget": 2,
+    "max_bounces": 14,
+    "combined_partition": true,
+    "canonical_accepted": false
+  }
+}

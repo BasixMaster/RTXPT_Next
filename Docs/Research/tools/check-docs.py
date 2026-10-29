@@ -58,7 +58,10 @@ assert versions['numbering_scheme']=='2026-10-29-user-confirmed-B0-B10'
 for name in ['B0','B1','B2']:assert by_id[name]['source_sha']==baseline and by_id[name]['rtxdi_sha']=='a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6'
 for name in ['B3','B4','B5']:assert by_id[name]['source_sha']==b1 and by_id[name]['rtxdi_sha']=='f12037fa8e97ebc08e9e3edfd2de528ed1772a4b'
 for name in ['B6','B7']:assert by_id[name]['source_sha']=='de9fe651903f203327830e7361ac4237e00d508c'
-for name in ['B8','B9','B10']:assert by_id[name]['source_sha'] is None and by_id[name]['ref'] is None and by_id[name]['status'].startswith('planned')
+for name in ['B8','B9','B10']:
+    assert by_id[name]['source_sha'] is None and by_id[name]['ref'] is None
+    assert by_id[name]['status'] in ['development_partition_gi_initial_only','development_limited_ptpp_gi_initial_only','cpu_prerequisites_only']
+    assert (P/by_id[name]['development_evidence']/'summary.json').is_file()
 flags={'B1':(1,0,0),'B2':(1,1,0),'B3':(0,0,0),'B4':(1,0,0),'B5':(1,1,0),'B6':(0,0,1),'B7':(1,0,1),'B8':(1,1,1),'B9':(1,1,1),'B10':(1,1,1)}
 for name,expected_flags in flags.items():assert tuple(by_id[name]['configuration'][k] for k in ['restir_di','restir_gi','restir_pt'])==expected_flags
 assert 'original defaults' in by_id['B0']['configuration']
@@ -173,7 +176,12 @@ assert {x['scene'] for x in overview['rows']}=={'convergence','kitchen','opaque-
 for row in overview['rows']:
     assert row['gpu_busy_ms'] is None or row['gpu_busy_ms']>0
     if row['image']:assert (D/row['image']).is_file()
-    if row['variant'] in ['B8','B9','B10']:assert row['gpu_busy_ms'] is None and row['image'] is None
+    if row['variant'] in ['B8','B9','B10']:
+        assert row['gpu_busy_ms'] is None and row['hdr_flip'] is None and row['ldr_flip'] is None
+        assert row['report']=='B8_STAGED_IMPLEMENTATION.md'
+        if row['image'] is not None:
+            assert 'development' in row['status'] and '176x90' in row['note']
+        if row['variant']=='B10':assert row['image'] is None
 for relative,digest in overview['source_hashes'].items():
     assert hashlib.sha256((P/relative).read_bytes()).hexdigest()==digest
 assert 'id="comparison-overview"' in page and 'comparison-overview.json' in page
@@ -294,7 +302,33 @@ if prefix.exists():
     assert 'prefix_throughput_diagnostic' in overview and len(overview['rows'])==33
     checks.append(dict(name='Calibrated prefix:8frozen physical snapshots,exact default/preserve buffers,known synthetic packed words,restoration,finite radiance and CLI rejection',status='passed'))
 
-receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 GPU sharing and B9/B10 remain planned.'])
+staged=P/'Benchmarks/development/2026-10-29-b8-staged-partition'
+if staged.exists():
+    import gzip
+    for item in json.loads((staged/'files.json').read_text()):
+        blob=(staged/item['path']).read_bytes()
+        assert len(blob)==item['bytes'] and hashlib.sha256(blob).hexdigest()==item['sha256']
+    identity=json.loads((staged/'final-renderer-artifacts.json').read_text())
+    assert hashlib.sha256(gzip.decompress((staged/'renderer-source.patch.gz').read_bytes())).hexdigest()==identity['working_diff_sha256']
+    smoke=json.loads((staged/'summary.json').read_text())['runs']
+    for cap in range(1,5):
+        run=smoke['smoke-cap'+str(cap)];assert run['status']=='captured'
+        component=run['checks'][0]['components']
+        assert (component['gi_short']['nonzero_pixels']==0)==(cap<2)
+        assert (component['pt_long']['nonzero_pixels']==0)==(cap<3)
+    assert smoke['b8-sequence-clockfixed']['images']==smoke['b7-sequence']['images']==64
+    assert smoke['original-convergence-test']['offline_revalidation']['combined_partition']
+    assert smoke['original-kitchen-with-test-stuff']['status']=='captured'
+    packed=json.loads((staged/'staged-reservoir-checks.json').read_text())
+    for run in packed.values():
+        assert run['diagnostic_counters']['replay_roulette_tests']==0
+        for slot in run['reservoirs'].values():
+            assert slot['nonfinite_m']==slot['nonfinite_target_valid']==slot['nonfinite_weight_valid']==0
+            assert all(int(k)>=4 for k in slot['positive_weight_path_length_histogram'])
+    assert packed['stage2-pt3-di3']['diagnostic_counters']['roulette_tests']>0
+    checks.append(dict(name='B8 staged frozen bytes, same-frame cap support, completed sequences, scoped original scenes and initial-only roulette',status='passed',limits='GI reuse off; no canonical acceptance or new timing.'))
+
+receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development and limited PT++ ablation execute; full GI reuse, B10 GPU mechanisms and canonical acceptance remain pending.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))
 print(json.dumps(dict(passed=True,checks=len(checks),scenes=len(scenes),math_expressions=page.count('<math '))))

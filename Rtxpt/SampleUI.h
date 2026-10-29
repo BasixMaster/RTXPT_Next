@@ -161,7 +161,7 @@ struct SampleUIData
     bool                                ActualUseRTXDIPasses() const { return (RealtimeMode) && (ActualUseReSTIRDI() || ActualUseReSTIRGI() || ActualUseReSTIRPT()); }
     bool                                ActualUseReSTIRDI() const { return UseNEE && (RealtimeMode) && (UseReSTIRDI) && (RealtimeAA < 3 || !DisableReSTIRsWithDLSSRR); }
     bool                                ActualUseReSTIRPT() const { return RealtimeMode && UseReSTIRPT; }
-    bool                                ActualUseReSTIRGI() const { return !ActualUseReSTIRPT() && (RealtimeMode) && (UseReSTIRGI) && (RealtimeAA < 3 || !DisableReSTIRsWithDLSSRR); }
+    bool                                ActualUseReSTIRGI() const { return (!ActualUseReSTIRPT() || B8InitialGIValidation) && (RealtimeMode) && (UseReSTIRGI) && (RealtimeAA < 3 || !DisableReSTIRsWithDLSSRR); }
     uint                                ActualSamplesPerPixel() const { return (RealtimeMode && !(ActualUseReSTIRDI() || ActualUseReSTIRGI() || ActualUseReSTIRPT())) ? RealtimeSamplesPerPixel : 1u; }
     uint                                ActualSubSamplingMode() const { return (RealtimeMode && !(ActualUseReSTIRDI() || ActualUseReSTIRGI() || ActualUseReSTIRPT())) ? RealtimeSubSamplingMode : 0; }
     uint                                SubSamplingScaleX() const { return ActualSubSamplingMode() > 0 ? 2 : 1; }
@@ -220,6 +220,9 @@ struct SampleUIData
     bool                                UseReSTIRDI /*Defaults in CommandLine >*/;
     bool                                UseReSTIRGI /*Defaults in CommandLine >*/;
     bool                                UseReSTIRPT = false;
+    bool                                B8InitialGIValidation = false;
+    int                                 B8ValidationStage = 0;
+    int                                 B8Component = 0;
     bool                                CaptureNativeRadiance = false;
     bool                                RealtimeMode = true;
     int                                 RealtimeSamplesPerPixel /*Defaults in CommandLine >*/;        // equivalent to m_ui.AccumulationTarget in reference mode (except looping x times within frame)

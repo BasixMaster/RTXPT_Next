@@ -189,7 +189,7 @@
     },
     {
       "id": "B8",
-      "status": "planned_partition_not_implemented",
+      "status": "development_partition_gi_initial_only",
       "ref": null,
       "source_sha": null,
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -204,12 +204,13 @@
       "depends_on": [
         "validated PT/GI contribution partition"
       ],
-      "runtime_status": "Current application selects GI OR PT; requested combined flags do not prove this variant executes",
-      "preparation": "17 exact CPU prerequisite tests passed; no combined GPU implementation"
+      "runtime_status": "Opt-in disjoint DI/GI-short/PT-long executes; DI/PT reuse exercised; GI temporal/spatial reuse remains off",
+      "preparation": "CPU partition and same-frame GPU support checks passed; full canonical validation pending",
+      "development_evidence": "Benchmarks/development/2026-10-29-b8-staged-partition"
     },
     {
       "id": "B9",
-      "status": "planned",
+      "status": "development_limited_ptpp_gi_initial_only",
       "ref": null,
       "source_sha": null,
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -224,12 +225,13 @@
       "depends_on": [
         "B8"
       ],
-      "runtime_status": "Current application selects GI OR PT; requested combined flags do not prove this variant executes",
-      "ptpp_scope": "Footprint/inverse-footprint and initial-only roulette; legacy GI-off limited pilot is not this configuration"
+      "runtime_status": "GI-initial-only staged ablation executes with footprint and initial-only roulette; not complete canonical B9",
+      "ptpp_scope": "Footprint/inverse-footprint and initial-only roulette; legacy GI-off limited pilot is not this configuration",
+      "development_evidence": "Benchmarks/development/2026-10-29-b8-staged-partition"
     },
     {
       "id": "B10",
-      "status": "planned",
+      "status": "cpu_prerequisites_only",
       "ref": null,
       "source_sha": null,
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -244,8 +246,9 @@
       "depends_on": [
         "B8"
       ],
-      "runtime_status": "Current application selects GI OR PT; requested combined flags do not prove this variant executes",
-      "ptpp_scope": "Full remaining PT++ including replaycompaction,pairedreuse,unifieddirect/indirectreservoirs,vectorweights,duplicationreduction,dualmotion and auditablemicrooptimizations"
+      "runtime_status": "Exact pair-MIS/vector-weight tests, reciprocal texture construction and queue model pass; remaining mechanisms not dispatched by renderer",
+      "ptpp_scope": "Full remaining PT++ including replaycompaction,pairedreuse,unifieddirect/indirectreservoirs,vectorweights,duplicationreduction,dualmotion and auditablemicrooptimizations",
+      "development_evidence": "Benchmarks/development/2026-10-29-b8-staged-partition"
     }
   ],
   "legacy_registry": "Benchmarks/legacy/versions-before-2026-10-29.json",

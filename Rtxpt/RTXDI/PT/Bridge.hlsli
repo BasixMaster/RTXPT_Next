@@ -407,7 +407,7 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
             ctx.RecordPathRadianceMiss(randomContext.initialRandomSamplerState);
             // Continuous misses are covered by NEE. A delta connection cannot
             // be sampled by NEE and therefore retains explicit emitted light.
-            if (brs.properties.IsDelta() && ctx.ShouldSampleEmissiveSurfaces() && Bridge::HasEnvMap())
+            if ((g_RtxdiBridgeConst.giPTPartition == 0 || ctx.GetBounceDepth() >= 4) && brs.properties.IsDelta() && ctx.ShouldSampleEmissiveSurfaces() && Bridge::HasEnvMap())
             {
                 EnvMap env = Bridge::CreateEnvMap();
 #if defined(RTXDI_RESTIR_PT_HYBRID_SHIFT)
@@ -442,7 +442,7 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
 #endif
         ctx.RecordPathIntersection(surface);
         if (ctx.IsPathTerminated()) { user.replayDebugFlags |= 8; break; }
-        if (brs.properties.IsDelta() && ctx.ShouldSampleEmissiveSurfaces())
+        if ((g_RtxdiBridgeConst.giPTPartition == 0 || ctx.GetBounceDepth() >= 4) && brs.properties.IsDelta() && ctx.ShouldSampleEmissiveSurfaces())
             ctx.RecordEmissiveLightSample(emission, previousSurface, randomContext.initialRandomSamplerState);
         // Native truncation keeps terminal emission from this trace, but no
         // NEE or further scatter at its endpoint. Replay reconstructs all counters;
@@ -471,7 +471,10 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
                 RTXDI_SampledLightData data = RTXDI_SampledLightData_CreateInvalidData();
                 data.lightData = r.lightData;
                 data.uvData = r.uvData;
-                ctx.RecordNeeLightSample(data, reflected, 1.0f / r.weightSum,
+                // Filter contributions, not the prefix or proposal draws. NEE at
+                // depth2 is k2; NEE atdepth3 is k3 (light-inclusive length4).
+                if (g_RtxdiBridgeConst.giPTPartition == 0 || ctx.GetBounceDepth() + 1 >= 4)
+                    ctx.RecordNeeLightSample(data, reflected, 1.0f / r.weightSum,
                     surface.EvalPdf(normalize(light.position - surface.GetPosW()), true), light, randomContext.initialRandomSamplerState);
             }
         }

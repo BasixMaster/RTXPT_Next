@@ -9,6 +9,7 @@ from extended_scene_contract import validate_request as validate_extended_reques
 from environment_filter_contract import verify as verify_environment_filter
 from di_reuse_contract import verify as verify_di_reuse
 from throughput_contract import verify as verify_throughput, validate_request as validate_throughput
+from b8_partition_contract import verify as verify_b8, check_stages as check_b8_stages
 from gbuffer_precision_contract import verify as verify_gbuffer_precision, validate_request as validate_gbuffer_request
 
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
@@ -25,6 +26,9 @@ def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--exe',type=Path,required=True);ap.add_argument('--output',type=Path,required=True)
     ap.add_argument('--variant',choices=['B'+str(i) for i in range(11)])
+    ap.add_argument('--b8-initial-gi-validation',action='store_true',help='Development only: initial DI/GI-short/PT-long partition; not a canonical B8 result')
+    ap.add_argument('--b8-component',type=int,choices=range(5),default=0,help='Development output:0sum,1native,2DI,3GI-short,4PT-long')
+    ap.add_argument('--b8-validation-stage',type=int,choices=range(3),default=0,help='GI-short development:0 initial,1 DI/PT reuse,2 limited PT++ ablation; not canonical B9')
     ap.add_argument('--variant-preset',choices=['matched-raw','raw-native-control','limited-ptpp-ablation'],default='matched-raw')
     ap.add_argument('--label',required=True);ap.add_argument('--scene',required=True)
     ap.add_argument('--exposure',type=float,required=True);ap.add_argument('--width',type=int,default=1280);ap.add_argument('--height',type=int,default=720)
@@ -64,6 +68,16 @@ def main():
     a.scene=scene_argument(a.scene,exe.parent.parent/'Assets')
     if a.history_frames is not None and not a.simple:raise SystemExit('--history-frames requires --simple')
     args=[str(exe),'--scene',a.scene,'--width',str(a.width),'--height',str(a.height),'--overrideRadianceCacheMode','0','--useNEE','1','--NEEType',str(a.nee_type),'--useReSTIRDI',str(int(a.mode in ['digi','dipt','di'])),'--useReSTIRGI',str(int(a.mode=='digi')),'--standaloneDenoiser','0','--overrideAutoexposureOff','--overrideExposureOffset',str(a.exposure),'--disablePostProcessFilters','--realtimeAA','0','--disableFireflyFilters','--overrideSubSamplingMode','0','--nonInteractive','--capturePath',str(out/'frame.png'),'--captureSuffix',a.label,'--perfLog',str(out/'partial-perf.csv')]
+    if (a.b8_component or a.b8_validation_stage) and not a.b8_initial_gi_validation:
+        raise SystemExit('B8 component selection requires the explicit development partition')
+    if a.b8_initial_gi_validation:
+        if a.variant is not None or a.mode!='dipt' or a.di_mode is None or a.nee_mis!=0 or not a.strict_di_validation:
+            raise SystemExit('B8 initial development requires no canonical label, mode dipt, DI/PT mode0, exact NEE MIS and strict DI')
+        if a.b8_validation_stage==0 and (a.pt_mode!=0 or a.di_mode!=0):raise SystemExit('B8 stage0 requires DI/PT reuse off')
+        if a.b8_validation_stage<2 and (a.pt_roulette_probability or 0)!=0:raise SystemExit('B8 stage0/1 requires roulette off')
+        if a.b8_validation_stage==2 and (a.pt_reconnection_mode!=1 or not 0<(a.pt_roulette_probability or 0)<1):raise SystemExit('Limited PT++ ablation requires explicit footprint and roulette in(0,1)')
+        args[args.index('--useReSTIRGI')+1]='1'
+        args+=['--b8InitialGIValidation','true','--b8Component',str(a.b8_component),'--b8ValidationStage',str(a.b8_validation_stage)]
     if a.capture_native_radiance:
         if not a.linear_hdr:raise SystemExit('Native radiance diagnostics require --linear-hdr')
         args+=['--captureNativeRadiance','true']
@@ -103,6 +117,8 @@ def main():
     manifest=dict(label=a.label,scene=a.scene,mode=a.mode,output_track='unreconstructed tonemapped sRGB PNG; not linear HDR',exe_sha256=sha(exe),started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),command=args,cwd=str(exe.parent),settings=dict(width=a.width,height=a.height,exposure=a.exposure,aa=0,denoiser=0,radiance_cache=0,restir_di=int(a.mode=='digi'),restir_gi=int(a.mode=='digi'),simple=a.simple,record_start=None if a.simple else a.record_start,frames=1 if a.simple else a.frames,reference_spp=a.reference_spp if a.mode=='reference' else None),timing_scope='External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.',measurement_status='running')
     manifest['scene_sha256']=sha(exe.parent.parent/'Assets'/a.scene)
     manifest['canonical_experiment']=canonical
+    if a.b8_initial_gi_validation:
+        manifest['development_partition']=dict(contract_version=1,canonical_accepted=False,gi_reuse=False,component=a.b8_component,stage=a.b8_validation_stage,pt_min_light_inclusive_length=4)
     if a.pt_extended_scene_validation:manifest['development_extended_scene_transport']=dict(full_prefix_replay=True,canonical_accepted=False,diffuse_budget='Native sampled-lobe accounting with terminal-emission truncation')
     if a.linear_hdr:manifest['output_track']='unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata'
     manifest['settings']['linear_hdr_requested']=a.linear_hdr
@@ -137,8 +153,19 @@ def main():
             manifest['images']=[dict(name=p.name,sha256=sha(p),bytes=p.stat().st_size) for p in out.glob('*.png')]
             manifest['measurement_status']='captured' if renderer.returncode==0 and manifest['images'] else 'failed'
             manifest['linear_hdr_files']=[dict(name=p.name,sha256=sha(p),bytes=p.stat().st_size) for p in sorted(out.glob('*.pfm*'))]
-            if a.linear_hdr and (len([p for p in out.glob('*.pfm') if not p.name.endswith('.native.pfm')]) != len(manifest['images']) or len([p for p in out.glob('*.pfm.json') if not p.name.endswith('.native.pfm.json')]) != len(manifest['images'])):
+            diagnostic_suffixes=('.native.pfm','.native-di.pfm','.native-di-gi.pfm','.native-di-gi-pt.pfm')
+            main_pfms=[p for p in out.glob('*.pfm') if not p.name.endswith(diagnostic_suffixes)]
+            if a.linear_hdr and (len(main_pfms) != len(manifest['images']) or any(not Path(str(p)+'.json').is_file() for p in main_pfms)):
                 manifest['measurement_status']='failed_missing_hdr_capture'
+            try:
+                manifest['effective_b8_partition']=verify_b8((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.b8_initial_gi_validation,a.b8_component,a.b8_validation_stage)
+                if a.b8_initial_gi_validation and a.capture_native_radiance and a.b8_component==0:
+                    from analyze_hdr import read_pfm
+                    manifest['b8_same_frame_checks']=[check_b8_stages(
+                        *(read_pfm(str(p)+suffix) for suffix in ('.native.pfm','.native-di.pfm','.native-di-gi.pfm','.native-di-gi-pt.pfm')),
+                        read_pfm(p),a.max_bounces) for p in main_pfms]
+            except (ValueError,OSError,TypeError) as exc:
+                manifest['measurement_status']='failed_b8_partition_contract';manifest['b8_partition_failure']=str(exc)
             if a.capture_native_radiance and len(list(out.glob('*.native.pfm'))) != len(manifest['images']):manifest['measurement_status']='failed_missing_native_component'
             try:manifest['effective_environment_filter']=verify_environment_filter((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.environment_diffuse_mip)
             except ValueError as exc:manifest['measurement_status']='failed_environment_filter_contract';manifest['environment_filter_failure']=str(exc)
@@ -146,7 +173,7 @@ def main():
             except ValueError as exc:manifest['measurement_status']='failed_sampling_contract';manifest['sampling_failure']=str(exc)
             try:manifest['effective_di_validation']=verify_di((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.strict_di_validation)
             except ValueError as exc:manifest['measurement_status']='failed_di_validation_contract';manifest['di_validation_failure']=str(exc)
-            try:manifest['effective_extended_scene_contract']=verify_extended((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode)
+            try:manifest['effective_extended_scene_contract']=verify_extended((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode,a.b8_initial_gi_validation,a.b8_validation_stage)
             except ValueError as exc:manifest['measurement_status']='failed_extended_scene_contract';manifest['extended_scene_failure']=str(exc)
             try:manifest['effective_pt_replay']=verify_pt_replay((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_replay_only_validation)
             except ValueError as exc:manifest['measurement_status']='failed_pt_replay_contract';manifest['pt_replay_failure']=str(exc)

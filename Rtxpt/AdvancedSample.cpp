@@ -329,7 +329,22 @@ void AdvancedPathTracer::PathTrace(nvrhi::IFramebuffer* framebuffer, const Sampl
 
     // this is a performance optimization where final 2 passes from ReSTIR DI and ReSTIR GI are combined to avoid loading GBuffer twice
     static bool enableFusedDIGIFinal = true;
-    bool useFusedDIGIFinal = m_ui.ActualUseReSTIRDI() && m_ui.ActualUseReSTIRGI() && enableFusedDIGIFinal;
+    bool useFusedDIGIFinal = m_ui.ActualUseReSTIRDI() && m_ui.ActualUseReSTIRGI() && enableFusedDIGIFinal && !m_ui.B8InitialGIValidation;
+    const int component = m_ui.B8InitialGIValidation ? m_ui.B8Component : 0;
+    if (component > 1)
+        m_commandList->clearTextureFloat(m_renderTargets->OutputColor, nvrhi::AllSubresources, nvrhi::Color(0,0,0,0));
+    auto captureB8Stage = [&](int stage)
+    {
+        if (!m_ui.B8InitialGIValidation || !m_ui.CaptureNativeRadiance || component != 0) return;
+        if (!m_renderTargets->B8StageCapture[stage])
+        {
+            auto desc = m_renderTargets->OutputColor->getDesc();
+            desc.debugName = "B8CumulativeStageCapture";
+            m_renderTargets->B8StageCapture[stage] = GetDevice()->createTexture(desc);
+        }
+        m_commandList->copyTexture(m_renderTargets->B8StageCapture[stage], nvrhi::TextureSlice(),
+            m_renderTargets->OutputColor, nvrhi::TextureSlice());
+    };
 
     if (m_ui.ActualUseRTXDIPasses())
     {
@@ -337,16 +352,19 @@ void AdvancedPathTracer::PathTrace(nvrhi::IFramebuffer* framebuffer, const Sampl
 
         // this does all ReSTIR DI magic including applying the final sample into correct radiance buffer (depending on denoiser state)
         if (m_ui.ActualUseReSTIRDI())
-            m_rtxdiPass->Execute(m_commandList, m_bindingSet, useFusedDIGIFinal);
+            m_rtxdiPass->Execute(m_commandList, m_bindingSet, useFusedDIGIFinal || (component != 0 && component != 2));
+        captureB8Stage(0);
 
         if (m_ui.ActualUseReSTIRGI())
-            m_rtxdiPass->ExecuteGI(m_commandList, m_bindingSet, useFusedDIGIFinal);
+            m_rtxdiPass->ExecuteGI(m_commandList, m_bindingSet, useFusedDIGIFinal || (component != 0 && component != 3));
+        captureB8Stage(1);
 
         if (useFusedDIGIFinal)
             m_rtxdiPass->ExecuteFusedDIGIFinal(m_commandList, m_bindingSet);
 
         if (m_ui.ActualUseReSTIRPT())
-            m_rtxdiPass->ExecutePT(m_commandList, m_bindingSet);
+            m_rtxdiPass->ExecutePT(m_commandList, m_bindingSet, component != 0 && component != 4);
+        captureB8Stage(2);
     }
 
     {
