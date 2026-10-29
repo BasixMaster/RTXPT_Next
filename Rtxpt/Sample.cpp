@@ -2334,7 +2334,7 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
     constants.maxDenoisingLayerVertexDepth         = std::min( std::min( (uint)m_ui.DenoisingLayersMaxVertexDepth, cDenoisingLayerMaxVertexIndex ), (uint)m_ui.BounceCount );
     constants.allowPrimarySurfaceReplacement    = !m_ui.ActualUseReSTIRPT() && m_ui.AllowPrimarySurfaceReplacement;
     constants.denoisingLayersSplitStopThreshold    = m_ui.DenoisingLayersSplitStopThreshold;
-    constants._padding3                         = 0;
+    constants.roundedGBufferMaterials           = m_cmdLine.RoundedGBufferMaterials ? 1u : 0u;
     constants.denoisingLayersSuppressPrimaryIndirectSpecularK  = m_ui.DenoisingLayersSuppressPrimaryIndirectSpecular?m_ui.DenoisingLayersSuppressPrimaryIndirectSpecularK:0.0f;
     constants.denoisingLayersAntiAliasingFallthrough = m_ui.DenoisingLayersAntiAliasingFallthrough;
     constants.frameIndex                        = m_frameIndex & 0xFFFFFFFF; //GetFrameIndex();
@@ -2352,6 +2352,7 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
     if (m_frameIndex == 0)
     {
         std::printf("ENVIRONMENT_FILTER_CONTRACT diffuseMip=%g\n", constants.EnvironmentMapDiffuseSampleMIPLevel);
+        std::printf("GBUFFER_PRECISION_CONTRACT roundedMaterials=%u\n", constants.roundedGBufferMaterials);
         std::fflush(stdout);
     }
 

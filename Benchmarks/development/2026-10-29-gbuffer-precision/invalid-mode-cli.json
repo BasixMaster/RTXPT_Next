@@ -1,0 +1,8 @@
+{
+  "requested_mode": 2,
+  "completed": true,
+  "exit_code": 1,
+  "expected_diagnostic_present": true,
+  "stdout": "INFO: Error: eErrorNotInitialized encountered in slSetTag_clear\nERROR: roundedGBufferMaterials must be 0 or 1\nERROR: Error: eErrorNotInitialized encountered in slSetTag_clear\n",
+  "scope": "Post-quality CLI-only correction; no rendering occurred"
+}

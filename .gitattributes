@@ -12,3 +12,6 @@ Benchmarks/development/**/renderer-source.patch -whitespace
 
 # Preserve exact frozen evidence bytes and hashes across checkouts.
 Benchmarks/development/2026-10-29-finite-shift-guard/** -text
+
+# Exact-byte evidence for the opt-in material precision ablation.
+Benchmarks/development/2026-10-29-gbuffer-precision/** -text

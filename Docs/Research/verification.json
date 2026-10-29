@@ -178,8 +178,8 @@
       "name": "Structured evidence schema separately validated; SQLite metric search",
       "status": "passed",
       "smape_matches": 2,
-      "sources": 29,
-      "findings": 34
+      "sources": 30,
+      "findings": 35
     },
     {
       "name": "No full-paper PDFs exported",
@@ -204,6 +204,10 @@
     },
     {
       "name": "Finite rejected-shift targets:70quality images,12references,6selected raw PFMs, matched filters, finite returned diagnostics and no invented throughput",
+      "status": "passed"
+    },
+    {
+      "name": "Material precision:40matched captures,8groups,2rawPFMs,exact artifacts,explicit0/1 plus implicit legacy default and separate overview ablation",
       "status": "passed"
     }
   ],

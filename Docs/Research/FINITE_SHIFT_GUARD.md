@@ -39,6 +39,8 @@ FLIP values are medians across five seeds. HDR-FLIP1.7 uses PPD67 and ACES with 
 
 ## Remaining DI-enabled difference
 
+**Follow-up:** [Controlled GBuffer material precision test](GBUFFER_PRECISION.md) compares legacy truncation and opt-in rounding without changing canonical defaults. The original evidence below remains preserved.
+
 A supplementary native PT+DI3.1 control uses the same dimensions, bounce limits, five seeds, strict DI, explicit MIP0 and references. It retains native primary replacement/plane policies, which differ from the PT integration; it is not a one-variable PT ablation.
 
 |Scene|Native PT+DI control mean difference ± SE|Corrected PT+DI mean difference ± SE|

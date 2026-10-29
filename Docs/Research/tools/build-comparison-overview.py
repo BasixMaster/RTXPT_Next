@@ -81,10 +81,14 @@ def build(repo):
     for x in rows:
         if x['image'] and not (doc/x['image']).is_file():raise ValueError('Missing overview image: '+x['image'])
         if x['gpu_busy_ms'] is not None and x['gpu_busy_ms']<=0:raise ValueError('Unavailable timings cannot be zero')
+    precision_path=dev/'2026-10-29-gbuffer-precision/quality-summary.json'
+    precision=load(precision_path) if precision_path.exists() else None
+    if precision:inputs.append(precision_path)
     data=dict(schema_version=1,numbering_scheme=registry['numbering_scheme'],updated_on='2026-10-29',
               metrics=dict(gpu_busy_ms='Median of per-process GPUBusy medians; not complete critical-path frame time/FPS',
                            ldr_flip='Official LDR-FLIP1.7, PPD67; lower is better',hdr_flip='Official HDR-FLIP1.7; scene-reference-only exposure parameters'),
               source_hashes={p.relative_to(repo).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},rows=rows)
+    if precision:data['material_precision_ablation']=precision
     (doc/'comparison-overview.json').write_text(json.dumps(data,indent=2,allow_nan=False)+'\n',encoding='utf-8')
     md=['# B0–B10 comparison overview','',
         'All eleven canonical versions appear below for each required scene. Performance, quality and representative pictures share the same row. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; a raw native-control preset does not replace its original defaults.','',
@@ -121,6 +125,22 @@ def build(repo):
       '## Summary and lessons learned','',
       'The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 GPU sharing and B9/B10 PT++ configurations remain pending; their rows stay visible until eligible measurements exist.','',
       '## Changes','', '- 2026-10-29: Added one generated overview with all33 version/scene rows, explicit missing coverage, representative images and retained historical cohort links.','']
+    if precision:
+        md += ['## Material precision ablation — defaults unchanged','',
+               'A separate matched five-seed experiment compares legacy material truncation with opt-in half-up rounding for B4/B7. These quality-only rows do not replace canonical results or supply throughput. Full settings, uncertainty and limitations: [precision follow-up](GBUFFER_PRECISION.md).','',
+               '|Scene / variant|Legacy mean Y difference|Rounded mean Y difference|HDR-FLIP legacy → rounded ↓|Legacy / rounded seed0 pictures|',
+               '|---|---:|---:|---:|---|']
+        groups={(x['scene'],x['variant'],x['rounded']):x for x in precision['groups']}
+        for scene in ['convergence','kitchen']:
+            for variant in ['B4','B7']:
+                a=groups[scene,variant,0];c=groups[scene,variant,1]
+                pictures=[]
+                for mode in [0,1]:
+                    name=f'assets/gbuffer-precision/{scene}-{variant}-r{mode}-s0.png'
+                    if not (doc/name).is_file():raise ValueError('Missing precision ablation picture')
+                    pictures.append(f'<a href="{name}"><img src="{name}" width="120" alt="{scene} {variant} rounded={mode}"></a>')
+                md.append(f"|{scene.title()} / {variant}|{a['mean_signed_y_percent']:+.3f}%|{c['mean_signed_y_percent']:+.3f}%|{a['median_hdr_flip']:.5f} → {c['median_hdr_flip']:.5f}|{' '.join(pictures)}|")
+        md += ['', 'Signed Y uses raw linear HDR against the same finite reference, without brightness normalization. The full report includes sample standard errors, LDR-FLIP and all per-seed data. No general energy-preservation or unbiasedness claim.','']
     (doc/'COMPARISON_OVERVIEW.md').write_text('\n'.join(md),encoding='utf-8')
     print(json.dumps(dict(rows=len(rows),measured_rows=sum(x['gpu_busy_ms'] is not None for x in rows),images=sum(x['image'] is not None for x in rows))))
 

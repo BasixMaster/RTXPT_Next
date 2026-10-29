@@ -1,0 +1,194 @@
+{
+  "label": "convergence-B4-r1-s47",
+  "scene": "convergence-test.scene.json",
+  "mode": "di",
+  "output_track": "unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata",
+  "exe_sha256": "d6760bd9e95a78ef4372156d62d0a877a46cdb0d0b5ffdab576155648d2a453a",
+  "started_utc": "2026-10-29T14:08:05.002600+00:00",
+  "command": [
+    "[WORKSPACE]\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+    "--scene",
+    "convergence-test.scene.json",
+    "--width",
+    "1280",
+    "--height",
+    "720",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "0",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "[WORKSPACE]\\work\\2026-10-29-gbuffer-precision-v2\\convergence-B4-r1-s47\\frame.png",
+    "--captureSuffix",
+    "convergence-B4-r1-s47",
+    "--perfLog",
+    "[WORKSPACE]\\work\\2026-10-29-gbuffer-precision-v2\\convergence-B4-r1-s47\\partial-perf.csv",
+    "--captureWarmupFrames",
+    "64",
+    "--strictDIValidation",
+    "true",
+    "--restirDIMode",
+    "3",
+    "--neeMIS",
+    "0",
+    "--environmentDiffuseMip",
+    "0",
+    "--roundedGBufferMaterials",
+    "1",
+    "--benchmarkUncapped",
+    "true",
+    "--samplingSeed",
+    "47",
+    "--captureLinearHDR",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--maxBounces",
+    "14",
+    "--maxDiffuseBounces",
+    "2",
+    "--stopAnimations",
+    "--captureSimple"
+  ],
+  "cwd": "[WORKSPACE]\\outputs\\RTXDI_Next\\bin",
+  "settings": {
+    "width": 1280,
+    "height": 720,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 1,
+    "restir_gi": 0,
+    "simple": true,
+    "record_start": null,
+    "frames": 1,
+    "reference_spp": null,
+    "linear_hdr_requested": true,
+    "sampling_seed_requested": 47,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": 3,
+    "nee_mis_requested": 0,
+    "nee_type": 2,
+    "restir_pt": 0,
+    "max_bounces_override": 14,
+    "max_diffuse_bounces_override": 2,
+    "pt_mode": null
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "scene_sha256": "c3afaa933c5084ba04f8e5100b64bb8b488ab312f4042849705a15e5bf5af549",
+  "canonical_experiment": null,
+  "artifact_identity": {
+    "manifest_sha256": "a1a60ab3754d2130345384c5b50ce0f0763f08af5fa4fcd37d38edbe550eefc0",
+    "root_source_sha": "e0eecedfa86a163f62f4268fbc6bbab0745098e8",
+    "working_diff_sha256": "bb13ef7ac6731e762f86ad99f64126d2df3b628290c03014c9277af20112c914",
+    "executable_sha256": "d6760bd9e95a78ef4372156d62d0a877a46cdb0d0b5ffdab576155648d2a453a",
+    "shader_files": 610,
+    "validated": true
+  },
+  "process_id": 62360,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 12.312999999994645,
+  "images": [
+    {
+      "name": "frame_convergence-B4-r1-s47.png",
+      "sha256": "92cba0b6d68469af50de158565f0e31471bf2b62cd652162b61e59ce6b90a90b",
+      "bytes": 3579587
+    }
+  ],
+  "linear_hdr_files": [
+    {
+      "name": "frame_convergence-B4-r1-s47.pfm",
+      "sha256": "09e28b51683449dc294e56b7ef791af8e77ffae8ff83f699ceccdc229091579d",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_convergence-B4-r1-s47.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    }
+  ],
+  "effective_environment_filter": {
+    "diffuse_mip": 0.0,
+    "explicit_override": true,
+    "scope": "Filtering identity only; no renderer correctness or acceptance claim"
+  },
+  "effective_sampling": {
+    "coverage": "verified first-frame effective receipt",
+    "seed": 47,
+    "realtime": true,
+    "reference_pixel_center": false,
+    "pixel_jitter_scale": 0.0
+  },
+  "effective_di_validation": {
+    "coverage": "verified first-frame effective receipt",
+    "strict": true,
+    "boiling": false,
+    "discount_naive": false,
+    "temporal_permutation": false
+  },
+  "effective_extended_scene_contract": null,
+  "effective_pt_replay": {
+    "coverage": "verified first-frame effective receipt",
+    "replay_only": false,
+    "roughness_threshold": 0.100000001
+  },
+  "effective_pt_history": {
+    "coverage": "verified first-frame effective receipt",
+    "age_rejection": true,
+    "max_age": 30,
+    "max_history": 8
+  },
+  "effective_pt_spatial": {
+    "coverage": "verified first-frame effective receipt",
+    "samples": 1,
+    "boost": 8
+  },
+  "effective_ptpp": {
+    "coverage": "verified first-frame effective receipt",
+    "reconnection_mode": 0,
+    "roulette_probability": 0.0,
+    "diagnostics": false
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 64,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "not requested; legacy labels retain their original numbering"
+  },
+  "effective_gbuffer_precision": {
+    "rounded_materials": 1,
+    "explicit_override": true,
+    "scope": "Half-up after fp16 conversion; not exact/unbiased BSDF reconstruction"
+  },
+  "artifact_identity_after_capture": {
+    "manifest_sha256": "a1a60ab3754d2130345384c5b50ce0f0763f08af5fa4fcd37d38edbe550eefc0",
+    "root_source_sha": "e0eecedfa86a163f62f4268fbc6bbab0745098e8",
+    "working_diff_sha256": "bb13ef7ac6731e762f86ad99f64126d2df3b628290c03014c9277af20112c914",
+    "executable_sha256": "d6760bd9e95a78ef4372156d62d0a877a46cdb0d0b5ffdab576155648d2a453a",
+    "shader_files": 610,
+    "validated": true
+  }
+}

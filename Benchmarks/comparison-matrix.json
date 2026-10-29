@@ -143,7 +143,8 @@
       "result": "Benchmarks/development/2026-10-29-canonical-native-di-timing",
       "quality_status": "measured_display_only",
       "timing_status": "measured_known_caps_verified",
-      "quality_result": "Benchmarks/development/2026-10-29-canonical-native-di"
+      "quality_result": "Benchmarks/development/2026-10-29-canonical-native-di",
+      "material_precision_ablation": "Benchmarks/development/2026-10-29-gbuffer-precision"
     },
     {
       "variant": "B4",
@@ -154,7 +155,8 @@
       "result": "Benchmarks/development/2026-10-29-canonical-native-di-timing",
       "quality_status": "measured_display_only",
       "timing_status": "measured_known_caps_verified",
-      "quality_result": "Benchmarks/development/2026-10-29-canonical-native-di"
+      "quality_result": "Benchmarks/development/2026-10-29-canonical-native-di",
+      "material_precision_ablation": "Benchmarks/development/2026-10-29-gbuffer-precision"
     },
     {
       "variant": "B4",
@@ -236,7 +238,8 @@
       "development_result": "Benchmarks/development/2026-10-29-finite-shift-guard",
       "quality_result": "Benchmarks/development/2026-10-29-finite-shift-guard",
       "quality_status": "measured_guarded_matched_filter",
-      "timing_status": "pending"
+      "timing_status": "pending",
+      "material_precision_ablation": "Benchmarks/development/2026-10-29-gbuffer-precision"
     },
     {
       "variant": "B7",
@@ -247,7 +250,8 @@
       "development_result": "Benchmarks/development/2026-10-29-finite-shift-guard",
       "quality_result": "Benchmarks/development/2026-10-29-finite-shift-guard",
       "quality_status": "measured_guarded_matched_filter",
-      "timing_status": "pending"
+      "timing_status": "pending",
+      "material_precision_ablation": "Benchmarks/development/2026-10-29-gbuffer-precision"
     },
     {
       "variant": "B7",

@@ -135,3 +135,16 @@ The current registered-room comparison shows B7 costing19.4%more process GPU bus
 ## Changes
 
 - 2026-10-29: Added one generated overview with all33 version/scene rows, explicit missing coverage, representative images and retained historical cohort links.
+
+## Material precision ablation — defaults unchanged
+
+A separate matched five-seed experiment compares legacy material truncation with opt-in half-up rounding for B4/B7. These quality-only rows do not replace canonical results or supply throughput. Full settings, uncertainty and limitations: [precision follow-up](GBUFFER_PRECISION.md).
+
+|Scene / variant|Legacy mean Y difference|Rounded mean Y difference|HDR-FLIP legacy → rounded ↓|Legacy / rounded seed0 pictures|
+|---|---:|---:|---:|---|
+|Convergence / B4|-0.370%|-0.270%|0.43186 → 0.43114|<a href="assets/gbuffer-precision/convergence-B4-r0-s0.png"><img src="assets/gbuffer-precision/convergence-B4-r0-s0.png" width="120" alt="convergence B4 rounded=0"></a> <a href="assets/gbuffer-precision/convergence-B4-r1-s0.png"><img src="assets/gbuffer-precision/convergence-B4-r1-s0.png" width="120" alt="convergence B4 rounded=1"></a>|
+|Convergence / B7|-0.351%|-0.037%|0.33360 → 0.33293|<a href="assets/gbuffer-precision/convergence-B7-r0-s0.png"><img src="assets/gbuffer-precision/convergence-B7-r0-s0.png" width="120" alt="convergence B7 rounded=0"></a> <a href="assets/gbuffer-precision/convergence-B7-r1-s0.png"><img src="assets/gbuffer-precision/convergence-B7-r1-s0.png" width="120" alt="convergence B7 rounded=1"></a>|
+|Kitchen / B4|-0.833%|-0.936%|0.58597 → 0.58601|<a href="assets/gbuffer-precision/kitchen-B4-r0-s0.png"><img src="assets/gbuffer-precision/kitchen-B4-r0-s0.png" width="120" alt="kitchen B4 rounded=0"></a> <a href="assets/gbuffer-precision/kitchen-B4-r1-s0.png"><img src="assets/gbuffer-precision/kitchen-B4-r1-s0.png" width="120" alt="kitchen B4 rounded=1"></a>|
+|Kitchen / B7|-1.062%|-1.114%|0.44106 → 0.44025|<a href="assets/gbuffer-precision/kitchen-B7-r0-s0.png"><img src="assets/gbuffer-precision/kitchen-B7-r0-s0.png" width="120" alt="kitchen B7 rounded=0"></a> <a href="assets/gbuffer-precision/kitchen-B7-r1-s0.png"><img src="assets/gbuffer-precision/kitchen-B7-r1-s0.png" width="120" alt="kitchen B7 rounded=1"></a>|
+
+Signed Y uses raw linear HDR against the same finite reference, without brightness normalization. The full report includes sample standard errors, LDR-FLIP and all per-seed data. No general energy-preservation or unbiasedness claim.

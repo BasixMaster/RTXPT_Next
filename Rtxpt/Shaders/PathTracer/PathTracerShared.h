@@ -69,7 +69,7 @@ struct PathTracerConstants
     uint    useReSTIRPT;
 
     float   denoisingLayersSplitStopThreshold;
-    float   _padding3;
+    uint    roundedGBufferMaterials;       // Reuses padding; packed surface/reservoir ABI unchanged.
     uint    samplingSeed;                  // Validation scramble; zero preserves legacy streams.
     float   denoisingLayersSuppressPrimaryIndirectSpecularK;
 

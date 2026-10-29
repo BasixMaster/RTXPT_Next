@@ -58,6 +58,7 @@ struct CommandLineOptions
     int OverrideReSTIRDIMode       = -1;
     int OverrideNEEMIS            = -1;
     int OverrideEnvironmentDiffuseMip = -1;
+    int RoundedGBufferMaterials = 0; // Opt-in precision ablation; legacy packing remains default.
     int OverrideDILightMode       = -1;
     int OverrideDIBrdfSamples     = -1;
     bool CaptureNativeRadiance    = false;

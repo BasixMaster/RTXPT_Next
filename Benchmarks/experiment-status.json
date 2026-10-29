@@ -30,7 +30,12 @@
       "id": "B4",
       "status": "measured_original_scenes_and_registered_room",
       "algorithm": "Native PT + ReSTIR DI3.1; GI off",
-      "evidence": "Benchmarks/development/2026-10-29-registered-room"
+      "evidence": "Benchmarks/development/2026-10-29-registered-room",
+      "material_precision_ablation": {
+        "status": "measured_not_promoted",
+        "evidence": "Benchmarks/development/2026-10-29-gbuffer-precision",
+        "default": "Legacy truncation retained; opt-in numeric0/1 precision switch"
+      }
     },
     {
       "id": "B5",
@@ -58,6 +63,11 @@
         "status": "quality_measured_timing_pending",
         "evidence": "Benchmarks/development/2026-10-29-finite-shift-guard",
         "limitation": "Guarded static full-prefix scope; residual DI-enabled discrepancy and native startup intermittency; no new throughput"
+      },
+      "material_precision_ablation": {
+        "status": "measured_not_promoted",
+        "evidence": "Benchmarks/development/2026-10-29-gbuffer-precision",
+        "default": "Legacy truncation retained; opt-in numeric0/1 precision switch"
       }
     },
     {
@@ -164,6 +174,16 @@
       ],
       "reason": "NaN targets on rejected zero-Jacobian shifts no longer poison inverse-MIS.20full-resolution PT quality images,40reduced images across explicit blocks,10native-DI controls,12references; failed native startups retained.",
       "evidence": "Benchmarks/development/2026-10-29-finite-shift-guard"
+    },
+    {
+      "id": "gbuffer-material-precision-ablation-measured",
+      "date": "2026-10-29",
+      "variants": [
+        "B4",
+        "B7"
+      ],
+      "reason": "Forty matched original-resolution captures compare inherited truncation with opt-in half-up material rounding; canonical defaults and older cohorts unchanged. No throughput.",
+      "evidence": "Benchmarks/development/2026-10-29-gbuffer-precision"
     }
   ]
 }

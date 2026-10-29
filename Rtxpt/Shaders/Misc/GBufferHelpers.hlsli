@@ -285,9 +285,20 @@ uint Hash(uint s)
 	return s;
 }
 
-// TODO: check the miniengine variant - I think this does rounding down so over time loses energy
+// Legacy truncation stays the default. The opt-in diagnostic follows the
+// half-up rounding/clamp used by PathTracer/Utils/Packing.hlsli, retaining
+// this GBuffer's existing high-red/low-blue layout (different from that helper).
 uint Encode_R11G11B10_FLOAT(float3 rgb)
 {
+    if (g_Const.ptConsts.roundedGBufferMaterials != 0)
+    {
+        // Nonnegative material domain. Avoid rounding the largest values to INF.
+        rgb = min(rgb, asfloat(0x477C0000));
+        uint r = ((f32tof16(rgb.x) + 8u) << 17u) & 0xFFE00000u;
+        uint g = ((f32tof16(rgb.y) + 8u) << 6u) & 0x001FFC00u;
+        uint b = ((f32tof16(rgb.z) + 16u) >> 5u) & 0x000003FFu;
+        return r | g | b;
+    }
 	uint r = (f32tof16(rgb.x) << 17) & 0xFFE00000;
 	uint g = (f32tof16(rgb.y) << 6) & 0x001FFC00;
 	uint b = (f32tof16(rgb.z) >> 5) & 0x000003FF;

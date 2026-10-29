@@ -7,6 +7,7 @@ from sampling_contract import roulette_value, seed_value, verify as verify_sampl
 from artifact_manifest import validate as validate_artifacts
 from extended_scene_contract import validate_request as validate_extended_request, verify as verify_extended
 from environment_filter_contract import verify as verify_environment_filter
+from gbuffer_precision_contract import verify as verify_gbuffer_precision, validate_request as validate_gbuffer_request
 
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def scene_argument(value, assets_dir=None):
@@ -46,13 +47,14 @@ def main():
     ap.add_argument('--strict-di-validation',action='store_true')
     ap.add_argument('--di-mode',type=int,choices=[0,1,2,3])
     ap.add_argument('--nee-mis',type=int,choices=[0,1,2])
+    ap.add_argument('--rounded-gbuffer-materials',type=int,choices=[0,1],help='Explicit diagnostic material packing; omitted preserves legacy truncation')
     ap.add_argument('--environment-diffuse-mip',type=int,choices=range(17),metavar='0..16')
     ap.add_argument('--nee-type',type=int,choices=[0,1,2],default=2)
     ap.add_argument('--sampling-seed',type=seed_value)
     ap.add_argument('--reference-pixel-center',action='store_true')
     ap.add_argument('--linear-hdr',action='store_true',help='Request raw PFM plus metadata; requires a renderer with captureLinearHDR support.')
     ap.add_argument('--artifact-manifest',type=Path,help='Optional strict frozen source/executable/shader identity; compile caches before freezing.')
-    a=ap.parse_args();validate_extended_request(a.pt_extended_scene_validation,a.mode,a.pt_replay_only_validation,a.variant);canonical=prepare_experiment(a.variant,a.mode,a.variant_preset,a.pt_reconnection_mode,a.pt_roulette_probability);verify_snapshot(a.artifact_manifest,canonical)
+    a=ap.parse_args();validate_gbuffer_request(a.rounded_gbuffer_materials,a.variant);validate_extended_request(a.pt_extended_scene_validation,a.mode,a.pt_replay_only_validation,a.variant);canonical=prepare_experiment(a.variant,a.mode,a.variant_preset,a.pt_reconnection_mode,a.pt_roulette_probability);verify_snapshot(a.artifact_manifest,canonical)
     exe=a.exe.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
     if any(out.iterdir()):raise SystemExit('Output directory must be new/empty; never append distinct runs.')
     a.scene=scene_argument(a.scene,exe.parent.parent/'Assets')
@@ -78,6 +80,7 @@ def main():
     if a.di_mode is not None:args+=['--restirDIMode',str(a.di_mode)]
     if a.nee_mis is not None:args+=['--neeMIS',str(a.nee_mis)]
     if a.environment_diffuse_mip is not None:args+=['--environmentDiffuseMip',str(a.environment_diffuse_mip)]
+    if a.rounded_gbuffer_materials is not None:args+=['--roundedGBufferMaterials',str(a.rounded_gbuffer_materials)]
     if a.app_uncapped:args+=['--benchmarkUncapped','true']
     if a.sampling_seed is not None:args+=['--samplingSeed',str(a.sampling_seed)]
     if a.reference_pixel_center:args+=['--referencePixelCenter','true']
@@ -151,6 +154,8 @@ def main():
             except ValueError as exc:manifest['measurement_status']='failed_capture_history';manifest['capture_history_failure']=str(exc)
             try:manifest['effective_canonical_experiment']=verify_experiment((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),canonical)
             except ValueError as exc:manifest['measurement_status']='failed_canonical_experiment';manifest['canonical_failure']=str(exc)
+            try:manifest['effective_gbuffer_precision']=verify_gbuffer_precision((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.rounded_gbuffer_materials)
+            except ValueError as exc:manifest['measurement_status']='failed_gbuffer_precision_contract';manifest['gbuffer_precision_failure']=str(exc)
             manifest['resource_scope']='nvidia-smi values cover the whole device including other applications; not renderer-exclusive allocation.'
             manifest['resource_samples']=samples
             if a.artifact_manifest:

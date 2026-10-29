@@ -214,6 +214,32 @@ for row in overview['rows']:
         assert row['quality_status']=='measured_guarded_matched_filter' and row['gpu_busy_ms'] is None and row['hdr_flip'] is not None
 checks.append(dict(name='Finite rejected-shift targets:70quality images,12references,6selected raw PFMs, matched filters, finite returned diagnostics and no invented throughput',status='passed'))
 
+precision=P/'Benchmarks/development/2026-10-29-gbuffer-precision'
+if precision.exists():
+    index=json.loads((precision/'index.json').read_text())
+    assert index['counts']==dict(quality=40,scenes=2,variants=2,precision_settings=2,seeds=5,selected_raw_pfms=2)
+    for name,digest in index['files'].items():assert hashlib.sha256((precision/name).read_bytes()).hexdigest()==digest
+    summary=json.loads((precision/'quality-summary.json').read_text());assert len(summary['rows'])==40 and len(summary['groups'])==8
+    observed=set()
+    for path in (precision/'captures').glob('*/capture.json'):
+        m=json.loads(path.read_text());assert m['measurement_status']=='captured'
+        assert m['artifact_identity']['validated'] and m['artifact_identity_after_capture']['validated']
+        assert m['artifact_identity']==m['artifact_identity_after_capture']
+        assert m['effective_environment_filter']['diffuse_mip']==0
+        q=json.loads((path.parent/'quality.json').read_text());assert m['effective_gbuffer_precision']['rounded_materials']==q['rounded']
+        observed.add((q['scene'],q['variant'],q['rounded'],q['seed']))
+    assert observed=={(scene,variant,mode,seed) for scene in ['convergence','kitchen'] for variant in ['B4','B7'] for mode in [0,1] for seed in [0,11,47,1019,4093]}
+    default=json.loads((precision/'implicit-default-probe.json').read_text())
+    assert default['measurement_status']=='captured' and default['effective_gbuffer_precision']['rounded_materials']==0 and not default['effective_gbuffer_precision']['explicit_override']
+    invalid=json.loads((precision/'invalid-mode-cli.json').read_text());assert invalid['completed'] and invalid['expected_diagnostic_present']
+    old_art=json.loads((precision/'frozen-artifacts.json').read_text());final_art=json.loads((precision/'post-cli-artifacts.json').read_text());assert old_art['shader_file_hashes']==final_art['shader_file_hashes']
+    for variant,mode in [('B4',0),('B7',1)]:
+        post=json.loads((precision/('post-cli-'+variant+'.json')).read_text());assert post['measurement_status']=='captured' and post['effective_gbuffer_precision']['rounded_materials']==mode and post['artifact_identity_after_capture']['validated']
+    assert len(list(precision.rglob('*.pfm')))==2
+    assert (D/'GBUFFER_PRECISION.md').exists() and '[RESULT_INTERPRETATION]' not in (D/'GBUFFER_PRECISION.md').read_text()
+    assert 'material_precision_ablation' in overview and len(overview['rows'])==33
+    checks.append(dict(name='Material precision:40matched captures,8groups,2rawPFMs,exact artifacts,explicit0/1 plus implicit legacy default and separate overview ablation',status='passed'))
+
 receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 GPU sharing and B9/B10 remain planned.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))

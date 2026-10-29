@@ -1,0 +1,177 @@
+{
+  "reason": "Boolean CLI value enabled the option despite false text; receipt rejected warmup before measurement. Corrected numeric0/1 and started a new cohort.",
+  "capture": {
+    "label": "convergence-B4-r0-s0-warm",
+    "scene": "convergence-test.scene.json",
+    "mode": "di",
+    "output_track": "unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata",
+    "exe_sha256": "70be3a064e733f189c1e73d85c435af6606765926b9808408d4245af2f2556ab",
+    "started_utc": "2026-10-29T13:59:55.549596+00:00",
+    "command": [
+      "[WORKSPACE]\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+      "--scene",
+      "convergence-test.scene.json",
+      "--width",
+      "1280",
+      "--height",
+      "720",
+      "--overrideRadianceCacheMode",
+      "0",
+      "--useNEE",
+      "1",
+      "--NEEType",
+      "2",
+      "--useReSTIRDI",
+      "1",
+      "--useReSTIRGI",
+      "0",
+      "--standaloneDenoiser",
+      "0",
+      "--overrideAutoexposureOff",
+      "--overrideExposureOffset",
+      "0.0",
+      "--disablePostProcessFilters",
+      "--realtimeAA",
+      "0",
+      "--disableFireflyFilters",
+      "--overrideSubSamplingMode",
+      "0",
+      "--nonInteractive",
+      "--capturePath",
+      "[WORKSPACE]\\work\\2026-10-29-gbuffer-precision\\convergence-B4-r0-s0-warm\\frame.png",
+      "--captureSuffix",
+      "convergence-B4-r0-s0-warm",
+      "--perfLog",
+      "[WORKSPACE]\\work\\2026-10-29-gbuffer-precision\\convergence-B4-r0-s0-warm\\partial-perf.csv",
+      "--captureWarmupFrames",
+      "1",
+      "--strictDIValidation",
+      "true",
+      "--restirDIMode",
+      "3",
+      "--neeMIS",
+      "0",
+      "--environmentDiffuseMip",
+      "0",
+      "--roundedGBufferMaterials",
+      "false",
+      "--benchmarkUncapped",
+      "true",
+      "--samplingSeed",
+      "0",
+      "--captureLinearHDR",
+      "true",
+      "--overrideToRealtimeMode",
+      "--realtimeSamplesPerPixel",
+      "1",
+      "--maxBounces",
+      "14",
+      "--maxDiffuseBounces",
+      "2",
+      "--stopAnimations",
+      "--captureSimple"
+    ],
+    "cwd": "[WORKSPACE]\\outputs\\RTXDI_Next\\bin",
+    "settings": {
+      "width": 1280,
+      "height": 720,
+      "exposure": 0.0,
+      "aa": 0,
+      "denoiser": 0,
+      "radiance_cache": 0,
+      "restir_di": 1,
+      "restir_gi": 0,
+      "simple": true,
+      "record_start": null,
+      "frames": 1,
+      "reference_spp": null,
+      "linear_hdr_requested": true,
+      "sampling_seed_requested": 0,
+      "reference_pixel_center_requested": false,
+      "di_mode_requested": 3,
+      "nee_mis_requested": 0,
+      "nee_type": 2,
+      "restir_pt": 0,
+      "max_bounces_override": 14,
+      "max_diffuse_bounces_override": 2,
+      "pt_mode": null
+    },
+    "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+    "measurement_status": "failed_gbuffer_precision_contract",
+    "scene_sha256": "c3afaa933c5084ba04f8e5100b64bb8b488ab312f4042849705a15e5bf5af549",
+    "canonical_experiment": null,
+    "process_id": 66812,
+    "renderer_exit_code": 0,
+    "elapsed_wall_s": 16.21899999998277,
+    "images": [
+      {
+        "name": "frame_convergence-B4-r0-s0-warm.png",
+        "sha256": "5ba9a96e6521c0452774ced10de0f7074eea505ae461efab612d83f5c8ff7a53",
+        "bytes": 3597051
+      }
+    ],
+    "linear_hdr_files": [
+      {
+        "name": "frame_convergence-B4-r0-s0-warm.pfm",
+        "sha256": "d4389445dc9c1d468cad228a8c32fa34a32503c184ddf8c834b85620e62a6fdd",
+        "bytes": 11059217
+      },
+      {
+        "name": "frame_convergence-B4-r0-s0-warm.pfm.json",
+        "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+        "bytes": 602
+      }
+    ],
+    "effective_environment_filter": {
+      "diffuse_mip": 0.0,
+      "explicit_override": true,
+      "scope": "Filtering identity only; no renderer correctness or acceptance claim"
+    },
+    "effective_sampling": {
+      "coverage": "verified first-frame effective receipt",
+      "seed": 0,
+      "realtime": true,
+      "reference_pixel_center": false,
+      "pixel_jitter_scale": 0.0
+    },
+    "effective_di_validation": {
+      "coverage": "verified first-frame effective receipt",
+      "strict": true,
+      "boiling": false,
+      "discount_naive": false,
+      "temporal_permutation": false
+    },
+    "effective_extended_scene_contract": null,
+    "effective_pt_replay": {
+      "coverage": "verified first-frame effective receipt",
+      "replay_only": false,
+      "roughness_threshold": 0.100000001
+    },
+    "effective_pt_history": {
+      "coverage": "verified first-frame effective receipt",
+      "age_rejection": true,
+      "max_age": 30,
+      "max_history": 8
+    },
+    "effective_pt_spatial": {
+      "coverage": "verified first-frame effective receipt",
+      "samples": 1,
+      "boost": 8
+    },
+    "effective_ptpp": {
+      "coverage": "verified first-frame effective receipt",
+      "reconnection_mode": 0,
+      "roulette_probability": 0.0,
+      "diagnostics": false
+    },
+    "effective_capture_history": {
+      "coverage": "verified actual capture warmup",
+      "warmup_frames": 1,
+      "scope": "history warmup; not accumulated spp"
+    },
+    "effective_canonical_experiment": {
+      "coverage": "not requested; legacy labels retain their original numbering"
+    },
+    "gbuffer_precision_failure": "Effective GBuffer precision differs from request"
+  }
+}

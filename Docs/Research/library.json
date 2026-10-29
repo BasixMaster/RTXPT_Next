@@ -547,6 +547,19 @@
       "limitations": "Guarded static transport; one GPU,5seeds. Smaller DI-enabled discrepancy and intermittent native startup fault remain. No new throughput or unbiasedness proof.",
       "notes": "Zero Jacobian must return a finite zero target before inverse-MIS. MIP0 controls preserve defaults when omitted. Native DI control retains its own primary/plane policies.",
       "rights": "Project renderer/benchmark rights; original measured figure, no copied paper artwork."
+    },
+    {
+      "id": "LOCAL-GBUFFER-PRECISION",
+      "title": "Matched DI material-packing precision ablation",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/GBUFFER_PRECISION.md",
+      "kind": "experiment",
+      "published_on": "2026-10-29",
+      "checked_on": "2026-10-29",
+      "access": "full",
+      "quality": "Forty raw-HDR captures, two scenes, two algorithms, two precision settings, five explicit seeds with frozen artifacts.",
+      "limitations": "One GPU, static guarded scenes and finite references. Half-up after fp16 is not exact material reconstruction or estimator-unbiasedness proof. No throughput or default promotion.",
+      "notes": "Original baselines/defaults preserved. Failed Boolean-option warmup rejected before measured numeric0/1 cohort.",
+      "rights": "Project renderer and original measured evidence; no paper artwork copied."
     }
   ],
   "findings": [
@@ -1505,6 +1518,35 @@
           "note": "Local source and GPU evidence; not paper speedup reproduction."
         }
       ]
+    },
+    {
+      "id": "GBUFFER-MATERIAL-PRECISION-ABLATION",
+      "title": "Measure material quantization separately from estimator fixes",
+      "question_ids": [
+        "Q3"
+      ],
+      "topic": "Implementation correctness",
+      "claim": "A matched opt-in packing ablation separates legacy material truncation from half-up rounding without changing packed layouts, radiance scale or canonical defaults. Full signed luminance and FLIP outcomes are recorded in GBUFFER_PRECISION.md.",
+      "evidence_type": "measured",
+      "confidence": "medium",
+      "context": "B4 native PT+DI3.1 and B7 guarded ReSTIR PT+DI3.1; original720p Convergence/Kitchen,14/2 bounces,MIP0,strictDI,five seeds.",
+      "strengths": "Matched within-variant precision setting, raw linear HDR, unchanged independent references, per-capture effective receipts and artifact checks.",
+      "limitations": "Quantized material changes can affect BSDF shape and brightness. Five-seed static results do not establish unbiasedness, general scene support, stability or throughput.",
+      "implications": "Keep estimator-bug fixes distinct from optional precision changes; retain a candidate only under a separately identified quality/performance contract.",
+      "tags": [
+        "ReSTIR",
+        "precision",
+        "validation",
+        "HDR"
+      ],
+      "evidence": [
+        {
+          "source_id": "LOCAL-GBUFFER-PRECISION",
+          "locator": "GBUFFER_PRECISION.md; Benchmarks/development/2026-10-29-gbuffer-precision/index.json",
+          "relation": "supports",
+          "note": "Local GPU ablation and calculated packing-domain oracle, not a paper performance reproduction."
+        }
+      ]
     }
   ],
   "actions": [
@@ -1591,7 +1633,8 @@
     "2026-10-29 canonical update supersedes earlier project numbering: B0unchanged reference; B1–B5native configurations; B6/B7PT; B8combined sharing pending; B9/B10PT++ planned. Source-record IDs B1/B2/B3 refer to paper entries and are preserved, not renamed as project versions.",
     "2026-10-29: Added unified33row B0–B10 performance/quality/image overview and fresh27quality/27timing nativeB2/B3/B5 cohort. Original-scene PT implementation remains an explicitly guarded development path, separate from accepted native measurements.",
     "2026-10-29: Original-scene guarded rendering and path-local fixes verified; quality discrepancy retained, exact-primary experiment rejected.",
-    "2026-10-29: Finite rejected-shift targets verified with original-resolution5seed quality, matched environment filtering and native-DI controls; startup failures and remaining limits retained."
+    "2026-10-29: Finite rejected-shift targets verified with original-resolution5seed quality, matched environment filtering and native-DI controls; startup failures and remaining limits retained.",
+    "2026-10-29: Added a separate40capture material-packing precision ablation; legacy defaults, canonical cohorts and timing values remain preserved."
   ],
   "evidence_page": "evidence/index.html",
   "guide_pages": [

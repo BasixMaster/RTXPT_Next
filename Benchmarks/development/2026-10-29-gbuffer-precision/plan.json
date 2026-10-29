@@ -1,0 +1,26 @@
+{
+  "hypothesis": "Legacy material packing truncation contributes to native DI/PT+DI brightness deficit. Half-up after fp16 conversion changes material reconstruction, not PDFs/lighting scaling.",
+  "decision": "Compare signed raw-linear mean luminance and HDR-FLIP to unchanged independent native reference; reject universal-fix claims if scene/variant residuals persist.",
+  "control": "explicit roundedMaterials=0, legacy packing",
+  "candidate": "explicit roundedMaterials=1, half-up packing at identical layout",
+  "dimensions": [
+    1280,
+    720
+  ],
+  "bounce_limits": [
+    14,
+    2
+  ],
+  "history_frames": 64,
+  "seeds": [
+    0,
+    11,
+    47,
+    1019,
+    4093
+  ],
+  "scope": "Separate B4/B7 precision ablation, not promoted canonical defaults; no throughput",
+  "reference": "2026-10-29-finite-guard-original-resolution native4096 seed101",
+  "failure_policy": "Stop on first failed launch, preserve all evidence, no automatic retries",
+  "source_sha": "e0eecedfa86a163f62f4268fbc6bbab0745098e8"
+}

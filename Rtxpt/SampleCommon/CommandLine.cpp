@@ -70,6 +70,7 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
             ("captureNativeRadiance", "HDR diagnostic: save native radiance before DI/GI/PT additions", value(CaptureNativeRadiance))
             ("restirDIMode", "DI reuse override: 0 initial only, 1 temporal, 2 spatial, 3 both", value(OverrideReSTIRDIMode))
             ("neeMIS", "Native NEE MIS: 0 exact, 1 auto, 2 approximate", value(OverrideNEEMIS))
+            ("roundedGBufferMaterials", "Diagnostic: rounded material GBuffer packing; default retains legacy truncation", value(RoundedGBufferMaterials))
             ("environmentDiffuseMip", "Explicit native environment diffuse MIP (0..16); 0 for matched unfiltered validation, omitted preserves defaults", value(OverrideEnvironmentDiffuseMip))
             ("restirPTMode", "PT resampling: 0 initial only, 1 temporal, 2 spatial, 3 both", value(ReSTIRPTMode))
             ("samplingSeed", "Validation scramble seed; zero retains the original random streams", value(SamplingSeed))
@@ -102,6 +103,17 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
 		int argc = _argc;
 		char const* const* argv = _argv;
 		options.parse(argc, argv);
+        if (RoundedGBufferMaterials < 0 || RoundedGBufferMaterials > 1)
+        {
+            // Validation occurs before SampleBaseApp applies noninteractive logging.
+            if (nonInteractive)
+            {
+                donut::log::EnableOutputToMessageBox(false);
+                donut::log::EnableOutputToConsole(true);
+            }
+            donut::log::error("roundedGBufferMaterials must be 0 or 1");
+            return false;
+        }
 
 		if (help)
 		{

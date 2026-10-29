@@ -80,7 +80,12 @@
         "restir_gi": 0,
         "restir_pt": 0
       },
-      "benchmark_adapter": "Native benchmark controls; preserve original shaders/estimator and record actual first-frame DI/GI activation"
+      "benchmark_adapter": "Native benchmark controls; preserve original shaders/estimator and record actual first-frame DI/GI activation",
+      "material_precision_ablation": {
+        "status": "measured_not_promoted",
+        "evidence": "Benchmarks/development/2026-10-29-gbuffer-precision",
+        "default": "Legacy truncation retained; opt-in numeric0/1 precision switch"
+      }
     },
     {
       "id": "B5",
@@ -143,6 +148,11 @@
         "status": "measured_timing_pending",
         "evidence": "Benchmarks/development/2026-10-29-finite-shift-guard",
         "configuration": "Full-prefix14/2,1280x720,explicit environment MIP0,5seeds; native startup intermittency unresolved"
+      },
+      "material_precision_ablation": {
+        "status": "measured_not_promoted",
+        "evidence": "Benchmarks/development/2026-10-29-gbuffer-precision",
+        "default": "Legacy truncation retained; opt-in numeric0/1 precision switch"
       }
     },
     {

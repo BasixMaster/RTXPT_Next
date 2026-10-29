@@ -1,0 +1,19 @@
+{
+  "scope": "Independent representable-value search oracle compared to a CPU port, not GPU execution or unbiasedness proof",
+  "channels": [
+    {
+      "discarded_half_bits": 4,
+      "finite_half_inputs": 31744,
+      "oracle_mismatches": 0,
+      "nonfinite_decoded": 0,
+      "note": "Nearest representable to clamped fp16, ties upward. fp32-to-fp16 double rounding and material/BSDF bias are outside this calculated check."
+    },
+    {
+      "discarded_half_bits": 5,
+      "finite_half_inputs": 31744,
+      "oracle_mismatches": 0,
+      "nonfinite_decoded": 0,
+      "note": "Nearest representable to clamped fp16, ties upward. fp32-to-fp16 double rounding and material/BSDF bias are outside this calculated check."
+    }
+  ]
+}

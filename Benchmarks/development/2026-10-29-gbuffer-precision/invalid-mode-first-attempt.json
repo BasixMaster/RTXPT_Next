@@ -1,0 +1,8 @@
+{
+  "scope": "Excluded negative CLI diagnostic, not a quality capture",
+  "requested_mode": 2,
+  "timeout_seconds": 15,
+  "outcome": "process_timeout_owned_child_terminated",
+  "cause_from_source": "New option validation logged an error before SampleBaseApp disabled Donut Windows message boxes. Donut default callback can show a modal error box.",
+  "claim": "No failed numeric0/1 measured capture; first invalid-input attempt was not a pass"
+}
