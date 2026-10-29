@@ -1,0 +1,19 @@
+{
+  "updated_on": "2026-10-29",
+  "state": "partial_gpu_snapshot_oracles_passed",
+  "title": "B10 one-neighbor spatial replay queue — snapshot oracles pass",
+  "summary": "The opt-in one-neighbor spatial replay queue now passes11captured-frame GPU oracles, including Convergence244654replays and Kitchen41032replays. Every packed-history word and vector-radiance bit matches its same-frame direct control. Native and direct-pair queue-disabled regressions pass. Queue performance, queue-only temporal-history sequences and full B10 acceptance remain pending.",
+  "completed": [
+    "18 cap-verified adjacent/Gaussian timing processes with retained mixed quality",
+    "9 cap-verified preserved1.9 PT-only timings and9PNG captures",
+    "Release build,218 Python tests and native pairing fixture pass",
+    "11captured-frame scheduling oracles plus2queue-disabled renderer regressions pass"
+  ],
+  "remaining": [
+    "Cap-verified queue/direct timing and memory measurements",
+    "Accumulate/check errors across every warmup frame and validate queue-only multi-frame history, motion/reset/resize and large2D/forced-overflow cases",
+    "Simultaneous multiple neighbors and temporal replay compaction",
+    "Full GI reuse, unified primary direct/indirect reservoirs, duplication reduction and dual-motion recovery"
+  ],
+  "brightness": "Deferred by user; no brightness correction applied"
+}

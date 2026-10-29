@@ -13,6 +13,7 @@
 #include "RtxdiResources.h"
 #include "PT/PairingTables.h"
 #include <cstdio>
+#include <stdexcept>
 #include <rtxdi/DI/ReSTIRDI.h>
 #include <rtxdi/PT/ReSTIRPT.h>
 #include <rtxdi/LightSampling/RISBufferSegmentAllocator.h>
@@ -43,7 +44,7 @@ RtxdiResources::RtxdiResources(
     uint32_t maxEmissiveTriangles,
     uint32_t maxPrimitiveLights,
     uint32_t maxGeometryInstances,
-    const rtxdi::ReSTIRPTContext* ptContext, bool gaussianPairs) : m_MaxEmissiveMeshes(maxEmissiveMeshes)
+    const rtxdi::ReSTIRPTContext* ptContext, bool gaussianPairs, bool replayCompaction) : m_MaxEmissiveMeshes(maxEmissiveMeshes)
     , m_MaxEmissiveTriangles(maxEmissiveTriangles)
     , m_MaxPrimitiveLights(maxPrimitiveLights)
     , m_MaxGeometryInstances(maxGeometryInstances)
@@ -180,8 +181,30 @@ RtxdiResources::RtxdiResources(
     ptNeighborDesc.debugName = "PTSpatialNeighborSelectionBuffer";
     PTSpatialNeighborSelectionBuffer = device->createBuffer(ptNeighborDesc);
 
+    m_HasReplayCompaction = m_HasPTResources && replayCompaction;
+    const uint64_t queuePixels = m_HasReplayCompaction ? uint64_t(ptContext->GetStaticParams().RenderWidth) * ptContext->GetStaticParams().RenderHeight : 1;
+    if (queuePixels == 0 || queuePixels > 0xffffffffull-63)
+        throw std::runtime_error("Replay queue pixel count exceeds its bounded 32-bit index/grid contract");
+    auto queueBuffer = [&](uint64_t bytes, uint32_t stride, const char* name, bool indirect = false)
+    {
+        nvrhi::BufferDesc desc;
+        desc.byteSize = bytes; desc.structStride = stride;
+        desc.canHaveUAVs = true; desc.canHaveRawViews = stride == 0;
+        desc.isDrawIndirectArgs = indirect;
+        desc.initialState = nvrhi::ResourceStates::UnorderedAccess;
+        desc.keepInitialState = true; desc.debugName = name;
+        auto buffer = device->createBuffer(desc);
+        if (!buffer) throw std::runtime_error("PT replay queue allocation failed");
+        return buffer;
+    };
+    PTShiftCache = queueBuffer(queuePixels * 104, 104, "PTUnpackedShiftCache");
+    PTReplayQueue = queueBuffer(queuePixels * 4, 4, "PTReplaySourceIndices");
+    PTReplayControl = queueBuffer(32, 0, "PTReplayCountAndGrid");
+    PTReplayArgs = queueBuffer(16, 0, "PTReplayIndirectArgs", true);
+    PTReplayOracle = queueBuffer(queuePixels * 76, 0, "PTReplaySameFrameOracle");
+
     nvrhi::BufferDesc ptDiagnosticDesc;
-    ptDiagnosticDesc.byteSize = 48 * sizeof(uint32_t);
+    ptDiagnosticDesc.byteSize = 96 * sizeof(uint32_t);
     ptDiagnosticDesc.structStride = sizeof(uint32_t);
     ptDiagnosticDesc.initialState = nvrhi::ResourceStates::UnorderedAccess;
     ptDiagnosticDesc.keepInitialState = true;

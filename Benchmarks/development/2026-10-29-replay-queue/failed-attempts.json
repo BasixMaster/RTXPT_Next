@@ -1,0 +1,46 @@
+[
+  {
+    "id": "initial-UAV-collision",
+    "reason": "Queue UAV60/61 overlapped native GI60/61; now free slots22\u201326. Startup failed; no image/timing accepted.",
+    "retained_local_failure": {
+      "case": "room-first",
+      "type": "CalledProcessError",
+      "policy": "Preserve first failure and stop; no automatic retries"
+    }
+  },
+  {
+    "id": "absent-path-NaN-normal",
+    "reason": "Vectors matched;163 packed normal-word differences. Canonicalized only zero-length, zero-weight, zero-target path normals; M and estimator fields retained.",
+    "retained_local_failure": {
+      "case": "room-first",
+      "type": "CalledProcessError",
+      "policy": "Preserve first failure and stop; no automatic retries"
+    }
+  },
+  {
+    "id": "unsupported-tiny-window",
+    "reason": "Requested5x3 was actually176x3 due window minimum width; strict dimension check rejected it. Corrected to177x3.",
+    "retained_local_failure": {
+      "case": "tiny-edge",
+      "type": "CalledProcessError",
+      "policy": "Preserve first failure and stop; no automatic retries"
+    }
+  },
+  {
+    "id": "source-normal-contraction",
+    "reason": "Convergence executed244654replays; RGB bits matched, but2history snorm-z words differed by1unit. Both schedules now carry the unchanged normal from the immutable source instead of a cache round trip.",
+    "retained_local_failure": {
+      "case": "convergence",
+      "type": "CalledProcessError",
+      "policy": "Preserve first failure and stop; no automatic retries"
+    }
+  },
+  {
+    "id": "source-normal-carry-alone-rejected",
+    "reason": "The unchanged source-normal float carry alone did not eliminate4packed normal differences on Convergence; vector RGB bits still matched. It was replaced by exact encoded source-normal preservation."
+  },
+  {
+    "id": "precise-normal-encoding-rejected",
+    "reason": "Precise arithmetic propagated upstream and changed222576packed outputs and232772vector outputs in the Convergence probe. This candidate was rejected and removed; no relaxed oracle or normal-word mask is used."
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "case": "default",
+    "scope": "Queue disabled:finite image and effective activation/paired ownership; no timing or baseline-quality claim",
+    "effective_queue": {
+      "enabled": false,
+      "oracle": false,
+      "shift_stride_bytes": 104,
+      "indirect_dispatch": false,
+      "canonical_accepted": false
+    },
+    "status": "passed"
+  },
+  {
+    "case": "dipt",
+    "scope": "Queue disabled:finite image and effective activation/paired ownership; no timing or baseline-quality claim",
+    "effective_queue": {
+      "enabled": false,
+      "oracle": false,
+      "shift_stride_bytes": 104,
+      "indirect_dispatch": false,
+      "canonical_accepted": false
+    },
+    "status": "passed"
+  }
+]

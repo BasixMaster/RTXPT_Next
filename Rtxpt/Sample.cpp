@@ -2298,6 +2298,8 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
         std::printf("PT_PAIR_POLICY gaussian=%d residentTables=%d activeTablesPerFrame=%d sigma=16 frameTransforms=%d\n",
             int(m_cmdLine.PTGaussianPairingValidation), m_cmdLine.PTGaussianPairingValidation ? 3 : 0,
             int(m_cmdLine.PTGaussianPairingValidation), int(m_cmdLine.PTGaussianPairingValidation));
+        std::printf("PT_QUEUE_CONTRACT enabled=%d shiftStride=104 requestCapacityPerPixel=1 oracle=%d indirect=1\n",
+            int(m_cmdLine.PTReplayCompactionValidation),int(m_cmdLine.PTReplayCompactionValidation && m_cmdLine.CapturePTReservoirs));
         std::printf("PT_REPLAY_CONTRACT replayOnly=%d roughnessThreshold=%.9g\n", int(m_cmdLine.PTReplayOnlyValidation),
             double(m_ui.RTXDI.restirPT.reconnectionParams.roughnessThreshold));
         std::printf("PT_HISTORY_CONTRACT ageRejection=%u maxAge=%u maxHistory=%u\n",
@@ -2446,6 +2448,12 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
     // Bit0 owns the path-length split; bit1 selects the independent paired pilot.
     bridgeParameters.giPTPartition = m_ui.B8InitialGIValidation ? (m_cmdLine.PTPairedSpatialValidation ? 3u : 1u) : 0u;
     if (m_cmdLine.PTGaussianPairingValidation) bridgeParameters.giPTPartition |= 4u;
+    if (m_cmdLine.PTReplayCompactionValidation)
+    {
+        if (!m_cmdLine.PTPairedSpatialValidation || !m_ui.B8InitialGIValidation)
+            throw std::runtime_error("Replay compaction requires the independent paired B8 development path");
+        bridgeParameters.giPTPartition |= 8u;
+    }
     if (m_cmdLine.PTPairedSpatialValidation &&
         (m_ui.RTXDI.restirPT.spatialResamplingParams.enableSpatialHeuristicMode ||
          (uint32_t(m_ui.RTXDI.restirPT.resamplingMode) != 2 && uint32_t(m_ui.RTXDI.restirPT.resamplingMode) != 3) ||

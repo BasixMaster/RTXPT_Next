@@ -1,0 +1,19 @@
+{
+  "base_root": "1f640425b4e37d255f8d01f0a6dbc2004e71dc3f",
+  "files": {
+    "Rtxpt/RTXDI/PT/ReplayCompaction.hlsl": "e02ff78a3985d7b6241ee929616d60d23d460154ad1646f9e6609aa123399c58",
+    "Rtxpt/RTXDI/PT/Runtime/PairedSpatialPilot.hlsli": "5a23cceb1c8815bb664814916e7d8e08bef3e7a5bacdeaac5c9ed554344ffca7",
+    "Rtxpt/RTXDI/RayTracingPass.cpp": "4f2cdd76eb5ab9d323c3989ac2e2a190b5229c517c9c01ed9ef41eb7fa3aa3e9",
+    "Rtxpt/RTXDI/RayTracingPass.h": "c97cfb5515d37f5cf96d32d6515c2f0fe28dd60b0e6a54c70473b81241e09378",
+    "Rtxpt/RTXDI/RtxdiPass.cpp": "d588d37e505eeee8820fbae975d57af8ce35499e028b01e4dbb254aa59f7c375",
+    "Rtxpt/RTXDI/RtxdiPass.h": "95bcb8c6a11a40ec7be51a448da585d1623abb026b9b3a851e51c10b9a6e4d11",
+    "Rtxpt/RTXDI/RtxdiResources.cpp": "b61af565f4581118b738a1617ab3e384329c86d7fa81ddb8402f813b65ee7fbe",
+    "Rtxpt/RTXDI/RtxdiResources.h": "7f419ce1f560d5c11f7a4318de74b1ad66d3a66462f00831cd8249c9e998b8f0",
+    "Rtxpt/Sample.cpp": "79a2604dac4620375d7b20839c1b95a3a801c5ba292043488f39655d061e1390",
+    "Rtxpt/SampleCommon/CommandLine.cpp": "acd8b7a7f7fc787b0cd3ee61994fb51bf10e7bd8d77d004e495a3caa1f652aad",
+    "Rtxpt/SampleCommon/CommandLine.h": "dc310b7d063af94823ba0de8455d2ca72d747b7eda14779d634615f0840e4479",
+    "Rtxpt/shaders.cfg": "b6237d7a81e343bbec9ad0b01de2ac4f3189fafe77aebf3c60e1b979e121cf7b"
+  },
+  "archive": "source-overrides.tar.gz",
+  "scope": "Overlay these exact full application source files on the base root; preserve component licenses. Binary and compiled caches are identified, not redistributed."
+}

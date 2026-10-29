@@ -70,7 +70,7 @@ Explicit replay compaction is next: preserve cheap-shift work, compact actual pi
 
 Also pending: simultaneous multi-neighbor paired reuse, unified primary direct/indirect ownership, duplication-map production, dual-motion recovery and general secondary-radiance reevaluation for GI reuse. Full B8/B9/B10 acceptance still needs replicated quality, motion/reset tests, convergence/equal-time comparisons and accepted total-frame timing.
 
-Application cap receipts show vsync, limiter, reflex cap and frame generation off. No new driver/RTSS-audited total timing or FPS result is accepted here. Table-generation time, shader work counters and capture duration are not substituted for it.
+Application cap receipts show vsync, limiter, reflex cap and frame generation off. The subsequent timing cohort below verifies driver/RTSS cap boundaries; it measures process GPU busy/cadence, not complete GPU critical-path latency or FPS. Table-generation time, shader work counters and capture duration are not substituted for it.
 
 ## Summary and lessons learned
 
@@ -78,4 +78,72 @@ Reciprocity survived native generation, GPU upload, frame transforms, tile bound
 
 [Sanitized evidence and reproduction](../../Benchmarks/development/2026-10-29-gaussian-pairing/README.md) includes table bytes, source/executable identities, GPU counters, selected raw HDR, official metrics and exclusions. Large reservoir snapshots/raw sequences remain locally retained with hashes. The final identity is post-cohort; this is not represented as a pre-frozen timing experiment.
 
-The bounded Release build, native CTest fixture and **207 Python tests** pass. These checks do not establish full PT++ or canonical acceptance.
+The bounded Release build, native CTest fixture and **211 Python tests** pass. These checks do not establish full PT++ or canonical acceptance.
+
+## Frozen adjacent versus Gaussian timing
+
+The fresh cohort uses three process repetitions per policy and required scene,45seconds warmup plus30seconds measurement, with no image capture scheduled. Policy order alternates adjacent/Gaussian, Gaussian/adjacent, adjacent/Gaussian. All18runs pass source/executable/682shader-cache identity, process-filtered trace completeness, no reported trace loss, zero image writes, application/NVIDIA/RTSS cap boundaries and verified restoration after every process. Source1f64042 and executable90e6dafa remain fixed throughout.
+
+|Scene|Adjacent GPU busy ms|Gaussian GPU busy ms|Change|Adjacent CPU cadence ms|Gaussian CPU cadence ms|
+|---|---:|---:|---:|---:|---:|
+|opaque-room|1.5873|1.5915|+0.27%|1.6524|1.6623|
+|convergence|7.2950|7.1838|-1.52%|7.2683|7.2136|
+|kitchen|8.4429|8.2623|-2.14%|8.4238|8.2345|
+
+GPU busy is time with at least one target-process GPU engine active; CPU cadence is the interval between CPU frame starts. Neither inverse GPU busy nor displayed-frame cadence is renderer FPS. Last600 Original/NotSet process/swapchain rows are selected and final16 excluded. Per-run medians and bootstrap ranges are retained in the comparison JSON; three process repeats are exploratory. Room and Convergence process-median ranges overlap. Kitchen shows a lower Gaussian median in this cohort, but neither its small timing difference nor the mixed room MSE/FLIP tradeoff establishes a general or equal-quality speedup.
+
+Both policies use one spatial neighbor, DI initial sampling, GI-short initial sampling and spatial PT-long reuse, seed47, strict DI/exact NEE MIS, MIP0, no AA/denoiser/cache. Room is640x360,4/4; original Convergence/Kitchen1280x720,14/2, exposure0/2. Full GI reuse, simultaneous multiple neighbors and replay compaction are absent.
+
+The timing harness now schedules no capture for uncapped runs, using the existing unfocused-render guard. This avoids the repaired static capture clock reaching a scheduled image during a long measurement. The prior compatibility path remains explicit for frozen older builds. The availability probe and earlier no-event attempts are excluded from timing statistics.
+
+[Timing evidence, complete traces and sanitized receipts](../../Benchmarks/development/2026-10-29-gaussian-timing/README.md). Original-scene adjacent quality snapshots now accompany the retained Gaussian snapshots; both are single1spp images after eight warm-up frames, not eight accumulated samples or replicated scene acceptance.
+
+|Original scene|Adjacent linear MSE|Gaussian linear MSE|Adjacent HDR-FLIP|Gaussian HDR-FLIP|Adjacent display-FLIP|Gaussian display-FLIP|
+|---|---:|---:|---:|---:|---:|---:|
+|convergence|2.67638|2.95359|0.532309|0.536508|0.350750|0.351035|
+|kitchen|0.72231|0.899919|0.748246|0.752397|0.406818|0.406308|
+
+These original-scene quality rows use the same finite references and fixed reference-only HDR-FLIP parameters. Process acquisition and warm-up remain distinct from the steady-state timing windows. No brightness correction or acceptance waiver is applied.
+
+### Original-scene pairing pictures — same settings
+
+Each picture is one1spp image after eight warm-up frames;1280x720, original14/2 budgets, identical finite-reference/metric settings. These are development snapshots, not independent quality repetitions or equal-time results.
+
+|Scene|Adjacent pair/vector|Gaussian pair/vector|
+|---|---|---|
+|Convergence|[![Adjacent Convergence](assets/b10-gaussian/adjacent-convergence.png)](assets/b10-gaussian/adjacent-convergence.png)|[![Gaussian Convergence](assets/b10-gaussian/convergence.png)](assets/b10-gaussian/convergence.png)|
+|Kitchen|[![Adjacent Kitchen](assets/b10-gaussian/adjacent-kitchen.png)](assets/b10-gaussian/adjacent-kitchen.png)|[![Gaussian Kitchen](assets/b10-gaussian/kitchen.png)](assets/b10-gaussian/kitchen.png)|
+
+## Replay compaction — active implementation checkpoint
+
+The opt-in one-neighbor spatial replay queue now passes11captured-frame GPU oracles, including Convergence244654replays and Kitchen41032replays. Every packed-history word and vector-radiance bit matches its same-frame direct control. Native and direct-pair queue-disabled regressions pass. Queue performance, queue-only temporal-history sequences and full B10 acceptance remain pending.
+
+The prototype classifies each eligible directed spatial shift once, executes cheap reconnections directly, enqueues actual random-replay sources and dispatches the compacted list indirectly. One source request per pixel bounds capacity; unexpected overflow evaluates a direct fallback and fails validation. The two directed shifts remain shared by both paired outputs. This is the one-neighbor spatial increment; temporal compaction and simultaneous multiple-neighbor reuse remain pending.
+
+|Case|Resolution|Compared pixels|Replay requests|Cheap shifts|Packed / RGB mismatches|
+|---|---:|---:|---:|---:|---|
+|room-first|176x90|15840|0|4484|0 / 0|
+|room-h8|176x90|15840|0|4554|0 / 0|
+|zero-cap1|176x90|15840|0|0|0 / 0|
+|zero-cap2|176x90|15840|0|0|0 / 0|
+|odd-edge|177x91|16107|0|4594|0 / 0|
+|tiny-edge|177x3|531|0|1|0 / 0|
+|gaussian|176x90|15840|0|1332|0 / 0|
+|temporal|176x90|15840|0|7809|0 / 0|
+|roulette|176x90|15840|148|2047|0 / 0|
+|convergence|1280x720|921600|244654|0|0 / 0|
+|kitchen|1280x720|921600|41032|0|0 / 0|
+
+**Scope:** these are exact same-frame, last-captured-frame snapshots over immutable input/frame/RNG, not a proof for every warmup frame or an independent queue-only history sequence. The diagnostic control overwrites the final history after comparison; persistent error accumulation and independent multi-frame histories remain a required next gate. All16packed32-bit words and three RGB bit patterns are compared with no epsilon or word mask. Raw captured RGB is finite/nonnegative. Captures execute the diagnostic control and cannot supply queue performance.
+
+Declared temporary payload is104Nbytes for unpacked shifted reservoirs,4Nbytes for source indices,76Nbytes for the diagnostic oracle and48bytes for control/indirect arguments:184N+48bytes, about161.72MiB at1280x720. The oracle buffer remains allocated in this prototype even with diagnostics off. These are buffer payloads, excluding placement/alignment, existing histories and readback; renderer-exclusive VRAM is not measured. Ordinary history retains the64-byte ABI.
+
+**Shared metadata policy:** absent zero-length/zero-weight/zero-target path normals use a deterministic placeholder while preserving M. Hybrid spatial shifts never change the reconnection normal, so both schedules preserve its original encoded source bits instead of normalizing/re-quantizing it through different shader contraction boundaries. This shared policy is separate from queue scheduling and differs from historical1f64042 history encoding. The old timing/quality cohort remains untouched; no old/new image-equality or queue speedup is inferred. Brightness normalization is not applied.
+
+The strict gate exposed and retained: initial UAV60/61 overlap with native GI (fixed by free22–26);163absent-path normal mismatches; a5pixel window request silently expanded to176pixels (rejected and replaced by177x3); rare one-unit snorm history differences; and a rejected precise-arithmetic experiment that propagated into transport. The [Microsoft precise-variable rules](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-variable-syntax) explain why arithmetic restrictions can affect upstream computations. No precise-arithmetic transport change was retained.
+
+[Sanitized evidence, rejected-attempt counters, complete source overlay and reproduction](../../Benchmarks/development/2026-10-29-replay-queue/README.md). The portable11-case GPU runner ships in Benchmarks/tools/run_replay_queue_oracles.py. Post-cohort source/executable/cache identities are retained; this is not a pre-frozen timing experiment.
+
+## Remaining B10 work after this checkpoint
+
+Next: queue-only multi-frame/warmup error tracking, cap-verified queue/direct performance and memory, then multi-neighbor reuse and temporal scheduling. Full GI reuse, unified primary DI/indirect reservoirs, duplication-map production, dual-motion recovery and complete micro-optimization/equal-time/convergence validation remain pending. B8/B9/B10 remain unpromoted.

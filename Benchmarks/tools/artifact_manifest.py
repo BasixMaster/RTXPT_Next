@@ -7,7 +7,11 @@ from pathlib import Path
 import argparse,datetime,hashlib,json,subprocess
 
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
-def git(repo,*args):return subprocess.check_output(['git','-C',str(repo),*args],stderr=subprocess.PIPE)
+def git(repo,*args):
+    # Relative submodule gitfiles must resolve from the physical worktree.
+    # A junction in a frozen control can otherwise point Git at the parent
+    # control's nonexistent .git/modules directory instead of the real owner.
+    return subprocess.check_output(['git','-C',str(Path(repo).resolve()),*args],stderr=subprocess.PIPE)
 def snapshot(repo,exe):
     repo=Path(repo).resolve();exe=Path(exe).resolve()
     source_paths=['Rtxpt','CMakeLists.txt']

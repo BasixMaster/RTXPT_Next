@@ -50,4 +50,9 @@ struct RayTracingPass
         nvrhi::IDescriptorTable* descriptorTable,
         const void* pushConstants = nullptr,
         size_t pushConstantSize = 0);
+
+    void ExecuteIndirect(nvrhi::ICommandList* commandList, nvrhi::IBuffer* arguments,
+        uint32_t offset, nvrhi::IBindingSet* bindingSet,
+        nvrhi::IBindingSet* extraBindingSet, nvrhi::IDescriptorTable* descriptorTable,
+        const void* pushConstants = nullptr, size_t pushConstantSize = 0);
 };

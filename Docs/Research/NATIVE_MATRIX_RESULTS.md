@@ -67,3 +67,27 @@ Fresh cap-verified measurements replace the need to rely on historical cap-unver
 ## Changes
 
 - 2026-10-29: Completed B2/B3/B5 quality and performance coverage for all three required scenes; retained all earlier evidence unchanged.
+
+## Fresh RTXPT1.9 PT-only override
+
+**B0/raw-native-control** uses preserved1.9 source303b408 plus the host-only benchmark-controls-v2 adapter4e380f9, RTXDI3.0 a14e079 and original Assets a56be4e. Native PT and NEE remain on; effective receipts confirm ReSTIR DI/GI/PT all off. It does not replace B0 original defaults or the B2 DI+GI configuration. Native shaders are unchanged.
+
+|Scene|GPU busy ms|CPU cadence ms|Display-FLIP|Display MSE|
+|---|---:|---:|---:|---:|
+|opaque-room|0.8307|0.8743|0.121162|0.0139288|
+|convergence|2.5172|2.4667|0.372227|0.0866742|
+|kitchen|3.2427|3.2611|0.376870|0.0691566|
+
+Nine timing processes pass frozen source/executable/501shader-cache identities, no image writes, complete traces with no reported loss, application/NVIDIA/RTSS cap boundaries and per-process verified restoration. Protocol:45s warmup plus30s measurement, last600 Original/NotSet process/swapchain rows minus final16, three process repeats per scene. GPU busy and CPU cadence are separate metrics; no inverse-GPU-busy FPS is inferred.
+
+Nine PNG quality captures use three process restarts; no independent-seed claim. Original Convergence/Kitchen remain1280x720,14/2, exposure0/2. Room is640x360,4/4, separate from earlier3/3 native-room results. Native MIS/filter policies remain unchanged and differ from strict modern PT development settings. Quality is descriptive against the documented finite native references, not an isolated algorithm-version gain.
+
+**HDR-FLIP and linear MSE are unavailable:** the preserved executable has no raw-HDR exporter. An initial unsupported-HDR preflight failed without an image or timing; it remains excluded. The subsequent supported PNG cohort is separate. No transport or renderer-source workaround was applied.
+
+|Room|Original Convergence|Original Kitchen|
+|---|---|---|
+|[![B0 PT-only Room](assets/native-pt-only/opaque-room.png)](assets/native-pt-only/opaque-room.png)|[![B0 PT-only Convergence](assets/native-pt-only/convergence.png)](assets/native-pt-only/convergence.png)|[![B0 PT-only Kitchen](assets/native-pt-only/kitchen.png)](assets/native-pt-only/kitchen.png)|
+
+[Sanitized captures, quality, timing, cap/restoration receipts and exclusions](../../Benchmarks/development/2026-10-29-fresh-b0-pt-only/README.md). [Exact portable five-file native adapter patch](../../Testing/native-controls-v2/README.md) and the shipped PT-only runner support reproduction; toolchain versions may change executable hashes.
+
+The comparison overview shows this control in its own supplemental table so original B0 defaults retain their identity. Brightness fixes remain deferred.

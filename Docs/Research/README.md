@@ -1,6 +1,8 @@
 # Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap
 
-[B10 Gaussian GPU pairing and extended scene checks](B10_GAUSSIAN_PAIRING.md): full-resolution diagnostic pictures and640×360 quality tradeoffs; replay compaction remains next.
+**Current work:** completed pairing and fresh native PT-only results are in the [comparison overview](COMPARISON_OVERVIEW.md). [Replay compaction](B10_GAUSSIAN_PAIRING.md#replay-compaction--active-implementation-checkpoint) passes11captured-frame exact GPU oracles; queue timing/sequences and full B10 remain pending.
+
+[B10 Gaussian GPU pairing and extended scene checks](B10_GAUSSIAN_PAIRING.md): full-resolution pictures, quality tradeoffs and18cap-verified adjacent/Gaussian timing runs; replay compaction remains next.
 
 [B10 GPU paired/vector pilot](B10_PAIRED_PILOT.md): reciprocal shared shifts, separate vector shading and three-scene development evidence. Full PT++ remains pending.
 
@@ -70,3 +72,5 @@ Canonical update2026-10-29: [B1/B4 native-DI quality and cap-verified timing](CA
 Current scoped measurements: [registered-room B1/B4/B6/B7 comparison](REGISTERED_ROOM_RESULTS.md) includes30quality captures,12timing processes and explicit history settling; [native original-scene report](CANONICAL_NATIVE_DI_RESULTS.md) now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.
 
 Current native coverage: [fresh B2/B3/B5 original-scene and room results](NATIVE_MATRIX_RESULTS.md) adds27quality captures and27cap-verified timing processes. [The unified B0–B10 overview](COMPARISON_OVERVIEW.md) includes all versions, current metrics and representative pictures; historical cohorts remain separate.
+
+Fresh requested control: [RTXPT1.9 PT-only override](NATIVE_MATRIX_RESULTS.md#fresh-rtxpt19-pt-only-override) now has9cap-verified timing processes and9PNG captures across Room and original Convergence/Kitchen. Native PT/NEE on, DI/GI off; original B0 defaults remain preserved. HDR export is unsupported in that unchanged binary.

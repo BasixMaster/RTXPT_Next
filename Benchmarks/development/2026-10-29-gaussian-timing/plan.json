@@ -1,0 +1,51 @@
+{
+  "scope": "Development-only Gaussian versus adjacent one-neighbor pair/vector schedule; GI initial only; no full B10 claim",
+  "warmup_seconds": 45,
+  "measurement_seconds": 30,
+  "repeats": 3,
+  "orders": [
+    [
+      "adjacent",
+      "gaussian"
+    ],
+    [
+      "gaussian",
+      "adjacent"
+    ],
+    [
+      "adjacent",
+      "gaussian"
+    ]
+  ],
+  "scenes": {
+    "opaque-room": [
+      "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+      0,
+      640,
+      360,
+      4,
+      4
+    ],
+    "convergence": [
+      "convergence-test.scene.json",
+      0,
+      1280,
+      720,
+      14,
+      2
+    ],
+    "kitchen": [
+      "kitchen-with-test-stuff.scene.json",
+      2,
+      1280,
+      720,
+      14,
+      2
+    ]
+  },
+  "selection": "Last600 Original/NotSet process/swapchain rows, drop final16",
+  "caps": "App uncapped; transactional exact-executable NVIDIA profile; read-only RTSS checks; restore every process",
+  "quality": "Existing Gaussian full-resolution/room cohort plus new adjacent original-resolution snapshots; not replicated original-scene or equal-time quality",
+  "desktop": "User confirmed active and display connected",
+  "timing_scope": "PresentMon per-process GPU engine busy and CPU cadence, not complete critical-path frame latency/FPS"
+}

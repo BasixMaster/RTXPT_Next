@@ -30,4 +30,31 @@ class ArtifactManifestTests(unittest.TestCase):
     def test_executable_change_rejected(self):
         self.exe.write_bytes(b'different executable')
         with self.assertRaisesRegex(ValueError,'executable'):validate(self.manifest,self.exe)
+    def linked_module(self):
+        physical=self.root/'physical';physical.mkdir()
+        child=physical/'child';admin=physical/'admin'
+        subprocess.run(['git','init','--separate-git-dir',str(admin),str(child)],check=True,capture_output=True)
+        (child/'source.txt').write_text('original')
+        def g(*args):return subprocess.check_output(['git','-C',str(child),*args],stderr=subprocess.PIPE)
+        g('add','source.txt');g('-c','user.name=Test','-c','user.email=test@example.invalid','commit','-m','child fixture')
+        # Git marks this file hidden on Windows; r+ preserves that attribute.
+        with (child/'.git').open('r+') as stream:
+            stream.write('gitdir: ../admin\n');stream.truncate()
+        link=self.root/'LinkedModule'
+        if os.name=='nt':
+            subprocess.run(['cmd','/c','mklink','/J',str(link),str(child)],check=True,capture_output=True)
+        else:link.symlink_to(child,target_is_directory=True)
+        head=g('rev-parse','HEAD').decode().strip()
+        subprocess.run(['git','-C',str(self.root),'update-index','--add','--cacheinfo','160000,'+head+',LinkedModule'],check=True,capture_output=True)
+        subprocess.run(['git','-C',str(self.root),'-c','user.name=Test','-c','user.email=test@example.invalid','commit','-m','linked fixture'],check=True,capture_output=True)
+        self.manifest.write_text(json.dumps(snapshot(self.root,self.exe)))
+        return child,head
+    def test_linked_relative_gitfile_records_real_module(self):
+        child,head=self.linked_module()
+        entry=json.loads(self.manifest.read_text())['submodules']['LinkedModule']
+        self.assertEqual(entry['checked_out_sha'],head)
+        self.assertTrue(validate(self.manifest,self.exe)['validated'])
+    def test_linked_module_edits_remain_rejected(self):
+        child,head=self.linked_module();(child/'source.txt').write_text('changed')
+        with self.assertRaisesRegex(ValueError,'submodules'):validate(self.manifest,self.exe)
 if __name__=='__main__':unittest.main()

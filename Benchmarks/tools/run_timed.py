@@ -12,6 +12,9 @@ from extended_scene_contract import validate_request as validate_extended_reques
 from environment_filter_contract import verify as verify_environment_filter
 from rtss_caps import RTSSBackend
 from rtss_readonly import collect as collect_rtss,validate as validate_rtss
+from b8_partition_contract import verify as verify_b8
+from paired_pilot_contract import verify as verify_paired
+from di_reuse_contract import verify as verify_di_reuse
 
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def main():
@@ -27,6 +30,11 @@ def main():
     ap.add_argument('--driver-cap-audit',type=Path)
     ap.add_argument('--max-bounces',type=int);ap.add_argument('--max-diffuse-bounces',type=int)
     ap.add_argument('--pt-mode',type=int,choices=[0,1,2,3],default=3)
+    ap.add_argument('--di-mode',type=int,choices=[0,1,2,3])
+    ap.add_argument('--b8-initial-gi-validation',action='store_true')
+    ap.add_argument('--b8-validation-stage',type=int,choices=range(3),default=0)
+    ap.add_argument('--pt-paired-spatial-validation',action='store_true')
+    ap.add_argument('--pt-gaussian-pairing-validation',action='store_true')
     ap.add_argument('--pt-replay-only-validation',action='store_true')
     ap.add_argument('--pt-extended-scene-validation',action='store_true',help='Guarded development only; no canonical result label')
     ap.add_argument('--nee-mis',type=int,choices=[0,1,2])
@@ -43,6 +51,16 @@ def main():
     a=ap.parse_args();validate_extended_request(a.pt_extended_scene_validation,a.mode,a.pt_replay_only_validation,a.variant);canonical=prepare_experiment(a.variant,a.mode,a.variant_preset,a.pt_reconnection_mode,a.pt_roulette_probability);verify_snapshot(a.artifact_manifest,canonical)
     exe=a.exe.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
     if any(out.iterdir()):raise SystemExit('Run directory must be new/empty.')
+    if a.b8_initial_gi_validation:
+        if a.variant is not None or a.mode!='dipt' or a.di_mode is None or a.nee_mis!=0 or not a.strict_di_validation or not a.benchmark_uncapped:
+            raise SystemExit('Partition timing requires uncapped development DI/PT, explicit DI mode, exact MIS and strict DI; no canonical label')
+        if a.b8_validation_stage==0 and (a.pt_mode!=0 or a.di_mode!=0):raise SystemExit('Partition stage0 requires initial-only DI/PT')
+        if a.b8_validation_stage<2 and (a.pt_roulette_probability or 0)!=0:raise SystemExit('Partition stage0/1 requires roulette off')
+        if a.b8_validation_stage==2 and (a.pt_reconnection_mode!=1 or not 0<(a.pt_roulette_probability or 0)<1):raise SystemExit('Limited stage2 requires footprint and explicit roulette in(0,1)')
+    elif a.b8_validation_stage:raise SystemExit('Partition stage requires explicit development partition')
+    if a.pt_paired_spatial_validation and (not a.b8_initial_gi_validation or a.b8_validation_stage==0 or a.pt_mode not in (2,3) or a.pt_fixed_spatial_samples!=1):
+        raise SystemExit('Paired timing requires partition stage1/2, PT spatial reuse and one fixed neighbor')
+    if a.pt_gaussian_pairing_validation and not a.pt_paired_spatial_validation:raise SystemExit('Gaussian timing requires paired development')
     rtss=None
     if a.rtss_install_dir or a.rtss_helper or a.rtss_user_confirmed_disabled:
         if not (a.rtss_install_dir and a.rtss_helper and a.rtss_user_confirmed_disabled):raise SystemExit('RTSS read-only verification requires install-dir, helper and user-confirmed-disabled together.')
@@ -55,8 +73,18 @@ def main():
         if isinstance(x,list):return any(animates(v) for v in x)
         return False
     if animates(scene_data):raise SystemExit('Static-capture guard requires an original scene with animation disabled.')
-    args=[str(exe),'--scene',a.scene,'--width',str(a.width),'--height',str(a.height),'--overrideRadianceCacheMode','0','--useNEE','1','--NEEType','2','--useReSTIRDI',str(int(a.mode in ['digi','dipt','di'])),'--useReSTIRGI',str(int(a.mode=='digi')),'--standaloneDenoiser','0','--overrideAutoexposureOff','--overrideExposureOffset',str(a.exposure),'--disablePostProcessFilters','--overrideToRealtimeMode','--realtimeSamplesPerPixel','1','--realtimeAA','0','--disableFireflyFilters','--overrideSubSamplingMode','0','--nonInteractive','--captureSequence','--sequenceWarmupStart','0','--sequenceRecordStart','20','--sequenceFPS','60','--sequenceFrameCount','1','--capturePath',str(out/'unused.png'),'--perfLog',str(out/'partial-perf.csv')]
+    args=[str(exe),'--scene',a.scene,'--width',str(a.width),'--height',str(a.height),'--overrideRadianceCacheMode','0','--useNEE','1','--NEEType','2','--useReSTIRDI',str(int(a.mode in ['digi','dipt','di'])),'--useReSTIRGI',str(int(a.mode=='digi')),'--standaloneDenoiser','0','--overrideAutoexposureOff','--overrideExposureOffset',str(a.exposure),'--disablePostProcessFilters','--overrideToRealtimeMode','--realtimeSamplesPerPixel','1','--realtimeAA','0','--disableFireflyFilters','--overrideSubSamplingMode','0','--nonInteractive','--perfLog',str(out/'partial-perf.csv')]
+    if not a.benchmark_uncapped:
+        # Compatibility for frozen legacy builds; their capture-clock behavior
+        # is separate from current uncapped/no-capture renderer loops.
+        args+=['--captureSequence','--sequenceWarmupStart','0','--sequenceRecordStart','20','--sequenceFPS','60','--sequenceFrameCount','1','--capturePath',str(out/'unused.png')]
     if a.nee_mis is not None:args+=['--neeMIS',str(a.nee_mis)]
+    if a.di_mode is not None:args+=['--restirDIMode',str(a.di_mode)]
+    if a.b8_initial_gi_validation:
+        args[args.index('--useReSTIRGI')+1]='1'
+        args+=['--b8InitialGIValidation','true','--b8ValidationStage',str(a.b8_validation_stage)]
+    if a.pt_paired_spatial_validation:args+=['--ptPairedSpatialValidation','true']
+    if a.pt_gaussian_pairing_validation:args+=['--ptGaussianPairingValidation','true']
     if a.environment_diffuse_mip is not None:args+=['--environmentDiffuseMip',str(a.environment_diffuse_mip)]
     if a.sampling_seed is not None:args+=['--samplingSeed',str(a.sampling_seed)]
     if a.strict_di_validation:args+=['--strictDIValidation','true']
@@ -76,7 +104,9 @@ def main():
         args+=['--benchmarkUncapped=true']
     manifest=dict(label=a.label,scene=a.scene,mode=a.mode,started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),command=args,cwd=str(exe.parent),exe_sha256=sha(exe),presentmon_sha256=sha(a.presentmon),settings=dict(width=a.width,height=a.height,exposure=a.exposure,aa=0,denoiser=0,sharc=0,restir_di=int(a.mode=='digi'),restir_gi=int(a.mode=='digi'),animations=False),warmup_wall_s=a.warmup_seconds,measurement_wall_s=a.measure_seconds,no_image_writes=True,selection='Last600 Original/NotSet process/swapchain rows, dropping final16, preregistered.',timing_scope='PresentMon CPU frame cadence and process GPU engine busy/wait intervals; not exclusive DI/GI feature time or display latency.',resource_scope='nvidia-smi whole-device allocation/utilization includes background applications, not exclusive renderer VRAM.',status='running')
     manifest['canonical_experiment']=canonical
-    manifest['render_unfocused_guard']='Existing active capture keeps ShouldRenderUnfocused true. Original static sceneTime remains0, so20s capture never writes; owned process is bounded and terminated after timing.'
+    manifest['development_partition_requested']=a.b8_initial_gi_validation
+    manifest['gaussian_pairing_requested']=a.pt_gaussian_pairing_validation
+    manifest['render_unfocused_guard']=('BenchmarkUncapped keeps ShouldRenderUnfocused true; no capture is scheduled; owned renderer is bounded and terminated after timing.' if a.benchmark_uncapped else 'Legacy frozen-build active-capture compatibility; not safe for newer fixed-clock renderers without uncapped mode.')
     manifest['scene_sha256']=sha(scene_path)
     if a.artifact_manifest:manifest['artifact_identity']=validate_artifacts(a.artifact_manifest,exe)
     manifest['settings'].update(transport_settings(args))
@@ -146,7 +176,10 @@ def main():
             if len(set(mis))!=1 or int(mis[0])!=a.nee_mis:raise ValueError('Native MIS override lacks matching effective receipt')
             manifest['effective_native_nee_mis']=int(mis[0])
         manifest['effective_canonical_experiment']=verify_experiment(receipt_log,canonical)
-        manifest['effective_extended_scene_contract']=verify_extended(receipt_log,a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode)
+        manifest['effective_extended_scene_contract']=verify_extended(receipt_log,a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode,a.b8_initial_gi_validation,a.b8_validation_stage)
+        manifest['effective_b8_partition']=verify_b8(receipt_log,a.b8_initial_gi_validation,0,a.b8_validation_stage)
+        manifest['effective_paired_spatial_pilot']=verify_paired(receipt_log,a.pt_paired_spatial_validation,a.pt_gaussian_pairing_validation)
+        manifest['effective_di_reuse']=verify_di_reuse(receipt_log,a.di_mode,a.mode in ('di','dipt','digi'))
         manifest['effective_environment_filter']=verify_environment_filter(receipt_log,a.environment_diffuse_mip)
         manifest['effective_sampling']=verify_sampling(receipt_log,a.sampling_seed)
         manifest['effective_di_validation']=verify_di(receipt_log,a.strict_di_validation)

@@ -1,0 +1,56 @@
+{
+  "status": "measured_scoped_override",
+  "rows": [
+    {
+      "variant": "B0",
+      "preset": "raw-native-control",
+      "scene": "opaque-room",
+      "algorithm": "RTXPT1.9 native PT; ReSTIR DI/GI/PT off; native NEE on",
+      "status": "measured_scoped_override",
+      "gpu_busy_ms": 0.83075,
+      "cpu_cadence_ms": 0.8743,
+      "linear_mse": null,
+      "hdr_flip": null,
+      "ldr_flip": 0.12116169929504395,
+      "display_mse": 0.013928821310400963,
+      "image": "assets/native-pt-only/opaque-room.png",
+      "report": "NATIVE_MATRIX_RESULTS.md",
+      "cohort": "fresh-b0-pt-only-2026-10-29",
+      "note": "Separate original-source PT-only override; not original B0 defaults. Room4/4; originals14/2. Native MIS/filter policies retained. Three process restarts; no independent-seed claim."
+    },
+    {
+      "variant": "B0",
+      "preset": "raw-native-control",
+      "scene": "convergence",
+      "algorithm": "RTXPT1.9 native PT; ReSTIR DI/GI/PT off; native NEE on",
+      "status": "measured_scoped_override",
+      "gpu_busy_ms": 2.5172499999999998,
+      "cpu_cadence_ms": 2.4667,
+      "linear_mse": null,
+      "hdr_flip": null,
+      "ldr_flip": 0.3722265660762787,
+      "display_mse": 0.08667419850826263,
+      "image": "assets/native-pt-only/convergence.png",
+      "report": "NATIVE_MATRIX_RESULTS.md",
+      "cohort": "fresh-b0-pt-only-2026-10-29",
+      "note": "Separate original-source PT-only override; not original B0 defaults. Room4/4; originals14/2. Native MIS/filter policies retained. Three process restarts; no independent-seed claim."
+    },
+    {
+      "variant": "B0",
+      "preset": "raw-native-control",
+      "scene": "kitchen",
+      "algorithm": "RTXPT1.9 native PT; ReSTIR DI/GI/PT off; native NEE on",
+      "status": "measured_scoped_override",
+      "gpu_busy_ms": 3.2427,
+      "cpu_cadence_ms": 3.2611499999999998,
+      "linear_mse": null,
+      "hdr_flip": null,
+      "ldr_flip": 0.37687036395072937,
+      "display_mse": 0.06915661692619324,
+      "image": "assets/native-pt-only/kitchen.png",
+      "report": "NATIVE_MATRIX_RESULTS.md",
+      "cohort": "fresh-b0-pt-only-2026-10-29",
+      "note": "Separate original-source PT-only override; not original B0 defaults. Room4/4; originals14/2. Native MIS/filter policies retained. Three process restarts; no independent-seed claim."
+    }
+  ]
+}

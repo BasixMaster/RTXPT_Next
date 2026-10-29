@@ -1,0 +1,78 @@
+{
+  "status": "measured_development_not_promoted",
+  "rows": [
+    {
+      "scene": "opaque-room",
+      "adjacent_gpu_busy_ms": 1.58725,
+      "gaussian_gpu_busy_ms": 1.5915,
+      "gpu_busy_change_percent": 0.2677587021578054,
+      "adjacent_cpu_cadence_ms": 1.6524,
+      "gaussian_cpu_cadence_ms": 1.66225,
+      "adjacent_gpu_run_ci95": {
+        "low_ms": 1.5811,
+        "high_ms": 1.8151,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      },
+      "gaussian_gpu_run_ci95": {
+        "low_ms": 1.5542,
+        "high_ms": 1.8105,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      }
+    },
+    {
+      "scene": "convergence",
+      "adjacent_gpu_busy_ms": 7.29505,
+      "gaussian_gpu_busy_ms": 7.18385,
+      "gpu_busy_change_percent": -1.5243212863517042,
+      "adjacent_cpu_cadence_ms": 7.26835,
+      "gaussian_cpu_cadence_ms": 7.2136499999999995,
+      "adjacent_gpu_run_ci95": {
+        "low_ms": 7.26545,
+        "high_ms": 7.3407,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      },
+      "gaussian_gpu_run_ci95": {
+        "low_ms": 7.13795,
+        "high_ms": 7.30165,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      }
+    },
+    {
+      "scene": "kitchen",
+      "adjacent_gpu_busy_ms": 8.442900000000002,
+      "gaussian_gpu_busy_ms": 8.2623,
+      "gpu_busy_change_percent": -2.1390754361653164,
+      "adjacent_cpu_cadence_ms": 8.42385,
+      "gaussian_cpu_cadence_ms": 8.2345,
+      "adjacent_gpu_run_ci95": {
+        "low_ms": 8.4244,
+        "high_ms": 8.469850000000001,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      },
+      "gaussian_gpu_run_ci95": {
+        "low_ms": 8.13505,
+        "high_ms": 8.3095,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      }
+    }
+  ],
+  "scope": "Single-neighbor pair/vector, GI initial only, three process repeats per policy. Not full B10 or equal-quality speedup."
+}

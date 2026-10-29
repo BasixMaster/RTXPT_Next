@@ -80,6 +80,11 @@ RtxdiPass::RtxdiPass(
         nvrhi::BindingLayoutItem::StructuredBuffer_UAV(17),       //u_PTReservoirs
         nvrhi::BindingLayoutItem::RawBuffer_UAV(18),              //u_PTSpatialNeighborSelection
         nvrhi::BindingLayoutItem::StructuredBuffer_UAV(19),       //u_PTDiagnosticCounters
+        nvrhi::BindingLayoutItem::StructuredBuffer_UAV(22),
+        nvrhi::BindingLayoutItem::StructuredBuffer_UAV(23),
+        nvrhi::BindingLayoutItem::RawBuffer_UAV(24),
+        nvrhi::BindingLayoutItem::RawBuffer_UAV(25),
+        nvrhi::BindingLayoutItem::RawBuffer_UAV(26),
 
 		nvrhi::BindingLayoutItem::VolatileConstantBuffer(5),	//g_RtxdiBridgeConst
 
@@ -209,6 +214,12 @@ void RtxdiPass::CreatePTPipelines(nvrhi::BindingLayoutHandle extraBindingLayout)
         m_PTFinalShadingPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/FinalShading.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout);
     if (!initialized)
         throw std::runtime_error("Failed to compile/create the selected ReSTIR PT passes.");
+    if ((m_BridgeParameters.giPTPartition & 8u) != 0)
+        for (uint32_t phase = 1; phase <= 7; ++phase)
+            if (!m_PTQueuePass[phase-1].Init(m_device, *m_shaderFactory, "app/RTXDI/PT/ReplayCompaction.hlsl",
+                {{"RTXPT_QUEUE_PHASE", std::to_string(phase)}}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE,
+                m_bindingLayout, extraBindingLayout, m_bindlessLayout))
+                throw std::runtime_error("Failed to create PT replay compaction phase");
     m_PTPipelinesCreated = true;
 }
 
@@ -234,6 +245,12 @@ void RtxdiPass::CreateBindingSet(const RenderTargets& renderTargets)
             nvrhi::BindingSetItem::StructuredBuffer_UAV(17, m_rtxdiResources->PTReservoirBuffer),
             nvrhi::BindingSetItem::RawBuffer_UAV(18, m_rtxdiResources->PTSpatialNeighborSelectionBuffer),
             nvrhi::BindingSetItem::StructuredBuffer_UAV(19, m_rtxdiResources->PTDiagnosticCounters),
+            nvrhi::BindingSetItem::StructuredBuffer_UAV(22, m_rtxdiResources->PTShiftCache),
+            nvrhi::BindingSetItem::StructuredBuffer_UAV(23, m_rtxdiResources->PTReplayQueue),
+            nvrhi::BindingSetItem::RawBuffer_UAV(24, m_rtxdiResources->PTReplayControl),
+            nvrhi::BindingSetItem::RawBuffer_UAV(25, m_rtxdiResources->PTReplayOracle),
+            // Do not bind the live indirect args as a UAV during indirect execution.
+            nvrhi::BindingSetItem::RawBuffer_UAV(26, m_rtxdiResources->PTReplayOracle),
 			
 			nvrhi::BindingSetItem::ConstantBuffer(5, m_rtxdiConstantBuffer),
 
@@ -241,6 +258,14 @@ void RtxdiPass::CreateBindingSet(const RenderTargets& renderTargets)
 		};
 
 		const nvrhi::BindingSetHandle bindingSet = m_device->createBindingSet(bindingSetDesc, m_bindingLayout);
+
+        if (currentFrame)
+        {
+            for (auto& item : bindingSetDesc.bindings)
+                if (item.slot == 26 && item.type == nvrhi::ResourceType::RawBuffer_UAV)
+                    item = nvrhi::BindingSetItem::RawBuffer_UAV(26,m_rtxdiResources->PTReplayArgs);
+            m_PTQueueArgsBindingSet = m_device->createBindingSet(bindingSetDesc,m_bindingLayout);
+        }
 		if (currentFrame)
 			m_bindingSet = bindingSet;
 		else
@@ -350,7 +375,8 @@ void RtxdiPass::PrepareResources(
         numEmissiveTriangles > m_rtxdiResources->GetMaxEmissiveTriangles() ||
         numPrimitiveLights > m_rtxdiResources->GetMaxPrimitiveLights() ||
         numGeometryInstances > m_rtxdiResources->GetMaxGeometryInstances() ||
-        m_rtxdiResources->HasGaussianPairs() != ((m_BridgeParameters.giPTPartition & 4u) != 0)))
+        m_rtxdiResources->HasGaussianPairs() != ((m_BridgeParameters.giPTPartition & 4u) != 0) ||
+        m_rtxdiResources->HasReplayCompaction() != ((m_BridgeParameters.giPTPartition & 8u) != 0)))
     {
         m_rtxdiResources = nullptr;
     }
@@ -372,7 +398,8 @@ void RtxdiPass::PrepareResources(
             (numPrimitiveLights + primitiveAllocationQuantum - 1) & ~(primitiveAllocationQuantum - 1),
             numGeometryInstances,
             m_BridgeParameters.usingReSTIRPT ? &m_ImportanceSamplingContext->GetReSTIRPTContext() : nullptr,
-            (m_BridgeParameters.giPTPartition & 4u) != 0);
+            (m_BridgeParameters.giPTPartition & 4u) != 0,
+            (m_BridgeParameters.giPTPartition & 8u) != 0);
 
         rtxdiResourceCreated = true;
         m_PTNeedsClear = m_BridgeParameters.usingReSTIRPT;
@@ -546,6 +573,8 @@ void RtxdiPass::FillConstants(nvrhi::CommandListHandle commandList)
 	bridgeConstants.localLightsRISBufferSegmentParams = m_ImportanceSamplingContext->GetLocalLightRISBufferSegmentParams();
 	bridgeConstants.environmentLightRISBufferSegmentParams = m_ImportanceSamplingContext->GetEnvironmentLightRISBufferSegmentParams();
 	bridgeConstants.runtimeParams = m_ImportanceSamplingContext->GetReSTIRDIContext().GetRuntimeParams();
+    if ((m_BridgeParameters.giPTPartition & 8u) != 0 && bridgeConstants.runtimeParams.activeCheckerboardField != 0)
+        throw std::runtime_error("Replay queue validation requires full-resolution reservoirs, checkerboard off");
 
 	FillSharedConstants(bridgeConstants);
 	FillDIConstants(bridgeConstants.restirDI);
@@ -755,7 +784,34 @@ void RtxdiPass::ExecutePT(nvrhi::CommandListHandle commandList, nvrhi::BindingSe
     if (mode == rtxdi::ReSTIRPT_ResamplingMode::Spatial || mode == rtxdi::ReSTIRPT_ResamplingMode::TemporalAndSpatial)
     {
         nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
-        ExecuteRayTracingPass(commandList, m_PTSpatialResamplingPass, "PT Spatial Resampling", dispatchSize, extraBindingSet);
+        if ((m_BridgeParameters.giPTPartition & 8u) != 0)
+        {
+            commandList->clearBufferUInt(m_rtxdiResources->PTReplayControl,0);
+            nvrhi::utils::BufferUavBarrier(commandList,m_rtxdiResources->PTReplayControl);
+            ExecuteRayTracingPass(commandList,m_PTQueuePass[0],"PT Classify Replay",dispatchSize,extraBindingSet);
+            nvrhi::utils::BufferUavBarrier(commandList,m_rtxdiResources->PTReplayControl);
+            nvrhi::utils::BufferUavBarrier(commandList,m_rtxdiResources->PTReplayQueue);
+            nvrhi::utils::BufferUavBarrier(commandList,m_rtxdiResources->PTShiftCache);
+            SampleMiniConstants queuePush = {};
+            m_PTQueuePass[1].Execute(commandList,1,1,m_PTQueueArgsBindingSet,extraBindingSet,m_Scene->GetDescriptorTable(),&queuePush,sizeof(queuePush));
+            nvrhi::utils::BufferUavBarrier(commandList,m_rtxdiResources->PTReplayControl);
+            nvrhi::utils::BufferUavBarrier(commandList,m_rtxdiResources->PTReplayArgs);
+            m_PTQueuePass[2].ExecuteIndirect(commandList,m_rtxdiResources->PTReplayArgs,0,m_bindingSet,extraBindingSet,m_Scene->GetDescriptorTable(),&queuePush,sizeof(queuePush));
+            nvrhi::utils::BufferUavBarrier(commandList,m_rtxdiResources->PTShiftCache);
+            ExecuteRayTracingPass(commandList,m_PTQueuePass[3],"PT Queued Pair Resampling",dispatchSize,extraBindingSet);
+            if (m_BridgeParameters.capturePTDiagnostics)
+            {
+                nvrhi::utils::BufferUavBarrier(commandList,m_rtxdiResources->PTReservoirBuffer);
+                nvrhi::utils::BufferUavBarrier(commandList,m_rtxdiResources->PTSpatialNeighborSelectionBuffer);
+                ExecuteRayTracingPass(commandList,m_PTQueuePass[4],"PT Preserve Queue Oracle",dispatchSize,extraBindingSet);
+                nvrhi::utils::BufferUavBarrier(commandList,m_rtxdiResources->PTReplayOracle);
+                ExecuteRayTracingPass(commandList,m_PTQueuePass[6],"PT Direct Oracle Control",dispatchSize,extraBindingSet);
+                nvrhi::utils::BufferUavBarrier(commandList,m_rtxdiResources->PTReservoirBuffer);
+                nvrhi::utils::BufferUavBarrier(commandList,m_rtxdiResources->PTSpatialNeighborSelectionBuffer);
+                ExecuteRayTracingPass(commandList,m_PTQueuePass[5],"PT Compare Queue Oracle",dispatchSize,extraBindingSet);
+            }
+        }
+        else ExecuteRayTracingPass(commandList, m_PTSpatialResamplingPass, "PT Spatial Resampling", dispatchSize, extraBindingSet);
         if ((m_BridgeParameters.giPTPartition & 2u) != 0)
             nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTSpatialNeighborSelectionBuffer);
     }
@@ -866,7 +922,7 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
          << ",\n  \"final_index\": " << indices.finalShadingInputBufferIndex << "\n}\n";
     if (!meta) throw std::runtime_error("PT reservoir metadata write failed");
     nvrhi::BufferDesc statsDesc;
-    statsDesc.byteSize = 48 * sizeof(uint32_t);
+    statsDesc.byteSize = 96 * sizeof(uint32_t);
     statsDesc.cpuAccess = nvrhi::CpuAccessMode::Read;
     statsDesc.debugName = "PTCounterReadback";
     auto stats = m_device->createBuffer(statsDesc);
@@ -913,7 +969,20 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
         << ",\n  \"paired_nonfinite_vectors\": " << counters[44]
         << ",\n  \"paired_nonreciprocal_links\": " << counters[45]
         << ",\n  \"paired_in_view_nonlocal_pairs\": " << counters[46]
-        << ",\n  \"paired_max_link_distance_squared\": " << counters[47] << "\n}\n";
+        << ",\n  \"paired_max_link_distance_squared\": " << counters[47]
+        << ",\n  \"queue_overflow\": " << counters[48]
+        << ",\n  \"queue_cheap_shifts\": " << counters[49]
+        << ",\n  \"queue_replay_requests\": " << counters[50]
+        << ",\n  \"queue_oracle_pixels\": " << counters[51]
+        << ",\n  \"queue_reservoir_mismatches\": " << counters[52]
+        << ",\n  \"queue_vector_mismatches\": " << counters[53]
+        << ",\n  \"queue_shift_stride_bytes\": " << counters[54]
+        << ",\n  \"queue_cache_elements\": " << counters[55];
+    statFile << ",\n  \"queue_word_mismatches\": [";
+    for(int i=56;i<72;++i) { if(i>56) statFile << ","; statFile << counters[i]; }
+    statFile << "],\n  \"queue_first_difference\": [";
+    for(int i=72;i<92;++i) { if(i>72) statFile << ","; statFile << counters[i]; }
+    statFile << "]\n}\n";
     m_device->unmapBuffer(stats);
     if (!statFile) throw std::runtime_error("PT counter metadata write failed");
     if ((m_BridgeParameters.giPTPartition & 4u) != 0)

@@ -246,9 +246,15 @@
       "depends_on": [
         "B8"
       ],
-      "runtime_status": "Three resident Gaussian reciprocal tables, one transformed table per frame, with shared shifts/vector shading execute. GI initial only; simultaneous multi-neighbor reuse, replay compaction and full acceptance pending.",
+      "runtime_status": "Gaussian reciprocal pair/vector development and opt-in one-neighbor spatial replay queues execute.11captured-frame exact GPU oracles and2disabled regressions pass. GI initial only; queue-only histories/timing, temporal queues, simultaneous neighbors and full acceptance pending.",
       "ptpp_scope": "Full remaining PT++ including replaycompaction,pairedreuse,unifieddirect/indirectreservoirs,vectorweights,duplicationreduction,dualmotion and auditablemicrooptimizations",
-      "development_evidence": "Benchmarks/development/2026-10-29-gaussian-pairing"
+      "development_evidence": "Benchmarks/development/2026-10-29-gaussian-pairing",
+      "implementation_stage": "spatial_replay_queue_snapshot_oracles",
+      "development_evidence_history": [
+        "Benchmarks/development/2026-10-29-gaussian-pairing",
+        "Benchmarks/development/2026-10-29-gaussian-timing",
+        "Benchmarks/development/2026-10-29-replay-queue"
+      ]
     }
   ],
   "legacy_registry": "Benchmarks/legacy/versions-before-2026-10-29.json",

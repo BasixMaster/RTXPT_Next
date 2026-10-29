@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "collected_utc": "2026-10-29T20:41:32.705165+00:00",
+  "executable": "Rtxpt.exe",
+  "executable_sha256": "90e6dafa7ed6823cfdb93e4b87e1b5219a897527248f48fee1264e5072d1f5eb",
+  "helper_sha256": "cd6d91262bfe3ed05400e6e3b8037c6b3f9e6fb142a079e5b425385ad2c25005",
+  "helper_exit": 0,
+  "native": {
+    "schema_version": 1,
+    "read_only": true,
+    "application_profile_found": true,
+    "application_lookup_status": 0,
+    "profile_scope": "application_with_inheritance",
+    "settings": {
+      "foreground_fps": {
+        "status": 0,
+        "value": 0,
+        "location": 0,
+        "predefined": 0
+      },
+      "background_fps": {
+        "status": 0,
+        "value": 0,
+        "location": 0,
+        "predefined": 0
+      },
+      "vsync": {
+        "status": 0,
+        "value": 138504007,
+        "location": 0,
+        "predefined": 0
+      }
+    },
+    "external_limiters": "unknown; NVAPI does not enumerate third-party limiters"
+  },
+  "interpretation": {
+    "settings": {
+      "foreground_fps": {
+        "state": "disabled",
+        "value": 0,
+        "location": 0
+      },
+      "background_fps": {
+        "state": "disabled",
+        "value": 0,
+        "location": 0
+      },
+      "vsync": {
+        "state": "forced_off",
+        "value": 138504007,
+        "location": 0
+      }
+    },
+    "driver_cap_coverage": "known",
+    "driver_limit_detected": false,
+    "driver_allows_uncapped_application": true,
+    "external_limiters": "unknown; must be checked separately",
+    "fully_uncapped_verified": false
+  },
+  "mutation_performed": false
+}

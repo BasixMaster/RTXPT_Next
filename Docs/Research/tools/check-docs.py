@@ -407,7 +407,33 @@ if gaussian.exists():
         assert struct.unpack('>II',(D/'assets/b10-gaussian'/f'{name}.png').read_bytes()[16:24])==size
     checks.append(dict(name='Gaussian native/GPU exact bytes, 7reciprocity/coverage gates, original-resolution images, 130official FLIP evaluations and explicit quality tradeoff',status='passed',limits='One table/neighbor per frame; GI initial only; queues, remaining features and timing pending.'))
 
-receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; full GI reuse, simultaneous multi-neighbor reuse, replay queues, remaining mechanisms and canonical acceptance remain pending.'])
+# Subsequent measured cohorts remain separate from full-version acceptance.
+for cohort,expected_count in [('2026-10-29-gaussian-timing',18),('2026-10-29-fresh-b0-pt-only',9)]:
+    root=P/'Benchmarks/development'/cohort
+    index=json.loads((root/'files.json').read_text())
+    for name,expected_sha in index.items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==expected_sha,name
+    runs=list((root/'timing').glob('*/run.json'));assert len(runs)==expected_count
+    for file in runs:
+        run=json.loads(file.read_text());restore=json.loads((file.parent/'restoration-receipt.json').read_text())
+        assert run['status']=='timed_completed' and run['image_write_count']==0 and not run['reported_trace_loss']
+        assert run['artifact_identity_after_capture']['validated'] and restore['restoration_verified']
+    checks.append(dict(name=cohort+' exact evidence hashes and accepted cap/freeze/restoration receipts',status='passed',timed_processes=expected_count))
+assert len(overview['b0_pt_only_override']['rows'])==3 and len(overview['gaussian_pairing_timing']['rows'])==3
+queue=P/'Benchmarks/development/2026-10-29-replay-queue'
+index=json.loads((queue/'files.json').read_text())
+for name,expected_sha in index.items():assert hashlib.sha256((queue/name).read_bytes()).hexdigest()==expected_sha,name
+q=json.loads((queue/'gpu-checks.json').read_text());assert q['status']=='passed_scoped_scheduling_oracle' and len(q['rows'])==11
+for row in q['rows']:
+    assert row['compared_pixels']==row['width']*row['height'] and row['finite_nonnegative_rgb']
+    assert row['reservoir_mismatches']==row['vector_mismatches']==row['overflow']==0
+for scene in ['convergence','kitchen']:
+    row=next(v for v in q['rows'] if v['case']==scene)
+    assert (row['width'],row['height'])==(1280,720) and row['replay_requests']>0
+assert len(json.loads((queue/'queue-disabled-regressions.json').read_text()))==2
+assert overview['replay_compaction_status']['state']=='partial_gpu_snapshot_oracles_passed'
+checks.append(dict(name='11exact GPU queue snapshots, real original-scene replay, disabled regressions and source/evidence hashes',status='passed',limits='Captured-frame checks only; queue-only histories, timing, full GI reuse and complete PT++ remain pending.'))
+
+receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; full GI reuse, queue-only histories/timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))
 print(json.dumps(dict(passed=True,checks=len(checks),scenes=len(scenes),math_expressions=page.count('<math '))))

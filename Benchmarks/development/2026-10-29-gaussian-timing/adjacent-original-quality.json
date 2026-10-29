@@ -1,0 +1,64 @@
+{
+  "convergence": {
+    "scope": "Single1spp image after8warmup frames, not independent quality replication",
+    "reference_sha256": "9189238be4e1ca4e482acce79b841628e6d56a2bae3fd7a14b57dafae3dff5af",
+    "test_sha256": "ee7b7a3e2a4d353e16d62e2dec9322672bccaa2fb9c75cc17f0fba3994551647",
+    "metrics": {
+      "linear_rgb_mse": 2.6763756115172974,
+      "smape_cgns_y100": 43.685155757367205,
+      "full_frame_reference_mean_luminance": 0.4028925357846507,
+      "mape_rgb_ydenom": 0.8125206867063641,
+      "relmse_project": 10.82420746081718,
+      "relative_metrics_available": true
+    },
+    "hdr_flip": {
+      "status": "measured",
+      "metric": "HDR-FLIP",
+      "evaluator": "official NVlabs flip-evaluator",
+      "evaluator_version": "1.7",
+      "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+      "mean": 0.5323091149330139,
+      "p95": 0.7736963629722595,
+      "parameters": {
+        "ppd": 67.0,
+        "startExposure": -5.117674350738525,
+        "stopExposure": 3.6030263900756836,
+        "numExposures": 9,
+        "tonemapper": "ACES"
+      },
+      "inputs": "Stored nonnegative linear RGB; inputsRGB=False; no external exposure or tonemap transform"
+    },
+    "ldr_flip_mean": 0.3507499396800995
+  },
+  "kitchen": {
+    "scope": "Single1spp image after8warmup frames, not independent quality replication",
+    "reference_sha256": "5c5d7929c37d1ac371a28050879c554e5e0e0b7fedfce93f829d8a846bc96185",
+    "test_sha256": "09a76fa1be09fa04cc28439e021908b3b4ef1939822326a9a9c3830f99d86e1c",
+    "metrics": {
+      "linear_rgb_mse": 0.7223099592211707,
+      "smape_cgns_y100": 73.02649771211904,
+      "full_frame_reference_mean_luminance": 0.11080162979992278,
+      "mape_rgb_ydenom": 1.2316385437840003,
+      "relmse_project": 331.6323738778373,
+      "relative_metrics_available": true
+    },
+    "hdr_flip": {
+      "status": "measured",
+      "metric": "HDR-FLIP",
+      "evaluator": "official NVlabs flip-evaluator",
+      "evaluator_version": "1.7",
+      "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+      "mean": 0.748245894908905,
+      "p95": 0.9682494401931763,
+      "parameters": {
+        "ppd": 67.0,
+        "startExposure": -7.385184288024902,
+        "stopExposure": 6.939349174499512,
+        "numExposures": 15,
+        "tonemapper": "ACES"
+      },
+      "inputs": "Stored nonnegative linear RGB; inputsRGB=False; no external exposure or tonemap transform"
+    },
+    "ldr_flip_mean": 0.40681809186935425
+  }
+}

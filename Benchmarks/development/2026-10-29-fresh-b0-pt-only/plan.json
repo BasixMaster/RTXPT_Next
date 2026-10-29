@@ -1,0 +1,44 @@
+{
+  "variant": "B0",
+  "preset": "raw-native-control",
+  "algorithm": "Preserved RTXPT1.9 native PT; ReSTIR DI/GI/PT off; native NEE retained",
+  "source": "303b408ab81790a5051abd7573830b7a4112eb8e",
+  "adapter_scope": "Actual source identity recorded by frozen-artifacts.json; effective original-source/runtime receipts mandatory",
+  "runtime": "a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6",
+  "assets": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+  "scenes": {
+    "opaque-room": [
+      "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+      0,
+      640,
+      360,
+      4,
+      4
+    ],
+    "convergence": [
+      "convergence-test.scene.json",
+      0,
+      1280,
+      720,
+      14,
+      2
+    ],
+    "kitchen": [
+      "kitchen-with-test-stuff.scene.json",
+      2,
+      1280,
+      720,
+      14,
+      2
+    ]
+  },
+  "repetitions": 3,
+  "warmup_seconds": 45,
+  "measure_seconds": 30,
+  "selection": "Last600 Original/NotSet rows,drop final16",
+  "quality": "Three process restarts; native simple-capture warmup; no independent-seed claim; raw HDR and display image",
+  "scope": "Fresh cohort, B0 PT-only override, not unchanged original defaults. Native shaders/MIS retained. Room4/4 differs from older3/3 room cohort.",
+  "caps": "Application uncapped; owned exact-exe NVIDIA profile; readonly RTSS checks; restore every process",
+  "timing_scope": "Per-process GPU engine busy and CPU cadence; not complete critical-path GPU latency or FPS",
+  "executed_quality_track": "PNG only; preserved executable does not support raw-HDR capture. HDR-FLIP and linear MSE unavailable."
+}

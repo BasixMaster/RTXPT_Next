@@ -115,8 +115,10 @@
     },
     {
       "id": "B10",
-      "status": "planned",
-      "algorithm": "B8 + full PT++"
+      "status": "partial",
+      "algorithm": "B8 + full PT++",
+      "scope": "One-neighbor spatial replay queue snapshot oracles; full PT++/GI reuse and queue timing/sequences pending.",
+      "evidence": "Benchmarks/development/2026-10-29-replay-queue"
     }
   ],
   "transitions": [
@@ -275,6 +277,33 @@
       ],
       "reason": "Actual native/GPU payload identity, global frame transforms and seven ownership/finite diagnostics pass, including original resolutions. One-neighbor room cohort trades higher MSE for slightly lower FLIP; no promotion. Simultaneous multi-neighbor reuse, compaction, full GI reuse and total timing remain pending.",
       "evidence": "Benchmarks/development/2026-10-29-gaussian-pairing"
+    },
+    {
+      "id": "b10-frozen-pairing-timing",
+      "date": "2026-10-29",
+      "variants": [
+        "B10"
+      ],
+      "reason": "18 frozen/cap-verified timing processes completed across room and original Convergence/Kitchen. Small scene-specific differences; one neighbor, GI initial only and mixed quality, no full B10 promotion. Replay compaction pending.",
+      "evidence": "Benchmarks/development/2026-10-29-gaussian-timing"
+    },
+    {
+      "id": "fresh-b0-native-pt-only",
+      "date": "2026-10-29",
+      "variants": [
+        "B0"
+      ],
+      "reason": "User-requested separate PT-only override completed9PNG quality captures and9cap-verified timing processes. Original-source native shaders/runtime3.0/assets retained. HDR metrics unavailable; original defaults unchanged. Unsupported-HDR preflight excluded.",
+      "evidence": "Benchmarks/development/2026-10-29-fresh-b0-pt-only"
+    },
+    {
+      "id": "b10-spatial-replay-queue-snapshot-oracles",
+      "date": "2026-10-29",
+      "variants": [
+        "B10"
+      ],
+      "reason": "One-neighbor spatial replay compaction executes.11captured-frame exact packed/vector GPU oracles and2queue-disabled regressions pass; finite RGB checked. Shared absent/source-normal metadata fixes preserve full oracle. Full history sequences, queue timing and remaining mechanisms pending; no promotion.",
+      "evidence": "Benchmarks/development/2026-10-29-replay-queue"
     }
   ]
 }

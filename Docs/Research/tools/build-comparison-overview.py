@@ -126,6 +126,14 @@ def build(repo):
     if di_reuse:data['di_reuse_ablation']=di_reuse
     if prefix:data['prefix_throughput_diagnostic']=prefix
     if gaussian:data['gaussian_pairing_development']=gaussian
+    pairing_timing=dev/'2026-10-29-gaussian-timing/summary.json'
+    if pairing_timing.exists():
+        data['gaussian_pairing_timing']=load(pairing_timing)
+        data['source_hashes'][pairing_timing.relative_to(repo).as_posix()]=hashlib.sha256(pairing_timing.read_bytes()).hexdigest()
+    native_override=dev/'2026-10-29-fresh-b0-pt-only/overview-input.json'
+    if native_override.exists():
+        data['b0_pt_only_override']=load(native_override)
+        data['source_hashes'][native_override.relative_to(repo).as_posix()]=hashlib.sha256(native_override.read_bytes()).hexdigest()
     (doc/'comparison-overview.json').write_text(json.dumps(data,indent=2,allow_nan=False)+'\n',encoding='utf-8')
     md=['# B0–B10 comparison overview','',
         'All eleven canonical versions appear below for each required scene. Performance, quality and representative pictures share the same row. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; a raw native-control preset does not replace its original defaults.','',
@@ -217,6 +225,27 @@ def build(repo):
                     pictures.append(f'<a href="{name}"><img src="{name}" width="120" alt="{scene} {variant} {kind}"></a>')
                 md.append(f"|{scene.title()} / {variant}|{a['max_component']:.1f} / {a['pixels_above_one']}|{c['max_component']:.1f} / {c['pixels_above_one']}|{' '.join(pictures)}|")
         md += ['', 'One seed and final-frame packed weights only; not a raw-float range proof, unbiasedness result or throughput benchmark. The legacy clamp remains default.','']
+    if 'gaussian_pairing_timing' in data:
+        md += ['## Paired development timing — adjacent versus Gaussian','',
+               'Three process repetitions per policy/scene,45s warmup plus30s capture, no image writes. Source/executable/682shader-cache identities stayed frozen; app/NVIDIA/RTSS cap checks and driver restoration passed. One spatial neighbor, DI initial and GI initial only; this is not full B10. GPU busy is process engine activity, not renderer FPS. Small differences remain exploratory. [Quality, images, uncertainty and full scope](B10_GAUSSIAN_PAIRING.md).','',
+               '|Scene|Adjacent GPU busy ms|Gaussian GPU busy ms|Change|','|---|---:|---:|---:|']
+        for x in data['gaussian_pairing_timing']['rows']:
+            md.append(f"|{x['scene']}|{x['adjacent_gpu_busy_ms']:.4f}|{x['gaussian_gpu_busy_ms']:.4f}|{x['gpu_busy_change_percent']:+.2f}%|")
+        md += ['']
+    if 'b0_pt_only_override' in data:
+        md += ['## Fresh B0 PT-only override — separate from original defaults','',
+               'Preserved RTXPT1.9/runtime3.0 with native PT and NEE; ReSTIR DI/GI/PT off. Three quality process restarts and three cap-verified timing runs per scene. Original scenes1280x720,14/2; room640x360,4/4, distinct from the earlier3/3 native-room cohort. Native MIS/filter policies remain unchanged. HDR metrics are unavailable because this preserved binary has no raw-HDR exporter. [Report and evidence](NATIVE_MATRIX_RESULTS.md).','',
+               '|Scene|GPU busy ms|CPU cadence ms|Display-FLIP|Display MSE|Picture|','|---|---:|---:|---:|---:|---|']
+        for x in data['b0_pt_only_override']['rows']:
+            md.append(f"|{x['scene']}|{x['gpu_busy_ms']:.4f}|{x['cpu_cadence_ms']:.4f}|{x['ldr_flip']:.6f}|{x['display_mse']:.6g}|[![B0 PT-only {x['scene']}]({x['image']})]({x['image']})|")
+        md += ['']
+    queue_status=doc/'replay-compaction-status.json'
+    if queue_status.exists():
+        q=load(queue_status)
+        md[2:2]=['**Current implementation status:** '+q['summary']+' [Detailed queue checkpoint](B10_GAUSSIAN_PAIRING.md#replay-compaction--active-implementation-checkpoint).','']
+        data['replay_compaction_status']=q
+        data['source_hashes'][queue_status.relative_to(repo).as_posix()]=hashlib.sha256(queue_status.read_bytes()).hexdigest()
+        (doc/'comparison-overview.json').write_text(json.dumps(data,indent=2,allow_nan=False)+'\n',encoding='utf-8')
     (doc/'COMPARISON_OVERVIEW.md').write_text('\n'.join(md),encoding='utf-8')
     print(json.dumps(dict(rows=len(rows),measured_rows=sum(x['gpu_busy_ms'] is not None for x in rows),images=sum(x['image'] is not None for x in rows))))
 

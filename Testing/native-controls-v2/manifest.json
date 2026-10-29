@@ -1,0 +1,36 @@
+{
+  "base": "303b408ab81790a5051abd7573830b7a4112eb8e",
+  "runtime": "a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6",
+  "assets": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+  "measured_adapter_commit": "4e380f9f85dba35b86b6a3bbd97e7acdfb324dec",
+  "patch_sha256": "366026d5ac1c17d01b043bedb970962b9f7d8e9fa541280c7732c1fb3cb48c8c",
+  "scope": "Five host-control/receipt files only; no shader/estimator/dependency/asset changes. Preserved binary has no raw-HDR exporter.",
+  "files": {
+    "Rtxpt/Sample.cpp": {
+      "before": "d5150ec11fa08b56555414f48db30fe0bcdafcc7d807fd57f8cc2e3fcfe5ab66",
+      "after": "16ee4e29f82f8971cbcfb0dab2ee3e04da4dcb76955d036bafa0e2b8285c41c3",
+      "after_git_blob_sha256": "16ee4e29f82f8971cbcfb0dab2ee3e04da4dcb76955d036bafa0e2b8285c41c3"
+    },
+    "Rtxpt/SampleCommon/CommandLine.cpp": {
+      "before": "07fee7537dc9eac54648a96a5dbee7fb156b6fbd92ef03c075f245a911e18626",
+      "after": "6797afdc91bf32a62a2dffb288542637e5d3f4a5b907642f66ce0afe73ef96a7",
+      "after_git_blob_sha256": "6797afdc91bf32a62a2dffb288542637e5d3f4a5b907642f66ce0afe73ef96a7"
+    },
+    "Rtxpt/SampleCommon/CommandLine.h": {
+      "before": "012e6bc890ae31cda2bbef290dbf131e9f5b3e0ac953475af5d596b7b7622bbf",
+      "after": "55f667b9663b52c1112fe8fdc52f480a3e1cc77f8f6c7c1e06ca95eab486c85c",
+      "after_git_blob_sha256": "55f667b9663b52c1112fe8fdc52f480a3e1cc77f8f6c7c1e06ca95eab486c85c"
+    },
+    "Rtxpt/SampleUI.cpp": {
+      "before": "bad44b1c44f9498ef2cd5ffa096b40895f064888daca4da01c299633aa287872",
+      "after": "07797e75aa0160145a81183c13f1a1b7ccbc1da25cc10d1bd5d02c6327a94889",
+      "after_git_blob_sha256": "07797e75aa0160145a81183c13f1a1b7ccbc1da25cc10d1bd5d02c6327a94889"
+    },
+    "Rtxpt/SampleUI.h": {
+      "before": "d873abdac5f93cd0f9ddc49c58e1015c59e2ca54c83da85ca4b348d69844bd4d",
+      "after": "03e133c5a64a4dfd5a73bec77a93a60acaacc2179bcc604e37e51f9108fbd105",
+      "after_git_blob_sha256": "03e133c5a64a4dfd5a73bec77a93a60acaacc2179bcc604e37e51f9108fbd105"
+    }
+  },
+  "patch_verification": "Applied to pristine upstream five-file fixture; exact byte comparison against native adapter HEAD passed for all five files."
+}

@@ -9,6 +9,7 @@
 */
 
 #include "RayTracingPass.h"
+#include <stdexcept>
 
 #include <donut/engine/ShaderFactory.h>
 #include <donut/core/math/math.h>
@@ -153,4 +154,21 @@ void RayTracingPass::Execute(
         args.depth = 1;
         commandList->dispatchRays(args);
     }
+}
+
+void RayTracingPass::ExecuteIndirect(nvrhi::ICommandList* commandList,
+    nvrhi::IBuffer* arguments, uint32_t offset, nvrhi::IBindingSet* bindingSet,
+    nvrhi::IBindingSet* extraBindingSet, nvrhi::IDescriptorTable* descriptorTable,
+    const void* pushConstants, size_t pushConstantSize)
+{
+    if (!ComputePipeline) throw std::runtime_error("Indirect PT replay requires the inline-ray-query compute pipeline");
+    nvrhi::ComputeState state;
+    state.bindings = { extraBindingSet };
+    if (descriptorTable) state.bindings.push_back(descriptorTable);
+    if (bindingSet) state.bindings.push_back(bindingSet);
+    state.pipeline = ComputePipeline;
+    state.indirectParams = arguments;
+    commandList->setComputeState(state);
+    if (pushConstants) commandList->setPushConstants(pushConstants,pushConstantSize);
+    commandList->dispatchIndirect(offset);
 }

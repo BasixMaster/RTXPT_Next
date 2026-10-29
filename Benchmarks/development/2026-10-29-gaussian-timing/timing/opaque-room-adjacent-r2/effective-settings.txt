@@ -1,0 +1,8 @@
+TRANSPORT_CONTRACT di=1 gi=1 pt=1 diMode=0 neeMIS=0 maxBounces=4 maxDiffuseBounces=4
+PT_EXTENDED_SCENE_CONTRACT development=0 diffuseBudget=4 fullPrefixReplay=0
+B8_PARTITION_CONTRACT development=1 version=1 giReuse=0 component=0 minPTLength=4 stage=1
+PT_PAIRED_CONTRACT enabled=1 adjacentReciprocal=1 pairOwnedShifts=1 vectorShading=1
+PT_PAIR_POLICY gaussian=0 residentTables=0 activeTablesPerFrame=0 sigma=16 frameTransforms=0
+PT_REPLAY_CONTRACT replayOnly=0 roughnessThreshold=0.100000001
+PT_HISTORY_CONTRACT ageRejection=1 maxAge=30 maxHistory=8
+PT_SPATIAL_CONTRACT samples=1 boost=1

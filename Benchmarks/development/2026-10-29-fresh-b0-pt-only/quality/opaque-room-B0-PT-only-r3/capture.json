@@ -1,0 +1,178 @@
+{
+  "label": "opaque-room-B0-PT-only-r3",
+  "scene": "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+  "mode": "default",
+  "output_track": "unreconstructed tonemapped sRGB PNG; not linear HDR",
+  "exe_sha256": "6db074d35ed7050142ecfa42101e9ba79152e6155caa9b5d5954c093d3f5d362",
+  "started_utc": "2026-10-29T21:09:30.280153+00:00",
+  "command": [
+    "[WORKSPACE]\\work\\native-controls-v2-B0\\bin\\Rtxpt.exe",
+    "--scene",
+    "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+    "--width",
+    "640",
+    "--height",
+    "360",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "0",
+    "--useReSTIRGI",
+    "0",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "[WORKSPACE]\\work\\2026-10-29-fresh-b0-pt-only-v2\\quality\\opaque-room-B0-PT-only-r3\\frame.png",
+    "--captureSuffix",
+    "opaque-room-B0-PT-only-r3",
+    "--perfLog",
+    "[WORKSPACE]\\work\\2026-10-29-fresh-b0-pt-only-v2\\quality\\opaque-room-B0-PT-only-r3\\partial-perf.csv",
+    "--benchmarkUncapped",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--maxBounces",
+    "4",
+    "--maxDiffuseBounces",
+    "4",
+    "--stopAnimations",
+    "--captureSimple"
+  ],
+  "cwd": "[WORKSPACE]\\work\\native-controls-v2-B0\\bin",
+  "settings": {
+    "width": 640,
+    "height": 360,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 0,
+    "restir_gi": 0,
+    "simple": true,
+    "record_start": null,
+    "frames": 1,
+    "reference_spp": null,
+    "linear_hdr_requested": false,
+    "sampling_seed_requested": null,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": null,
+    "nee_mis_requested": null,
+    "nee_type": 2,
+    "restir_pt": 0,
+    "max_bounces_override": 4,
+    "max_diffuse_bounces_override": 4,
+    "pt_mode": null
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+  "canonical_experiment": {
+    "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+    "variant": "B0",
+    "preset": "raw-native-control",
+    "algorithm": "Unchanged RTXPT v1.9 reference: original defaults and dependencies",
+    "expected_flags": {
+      "di": 0,
+      "gi": 0,
+      "pt": 0
+    },
+    "expected_runtime_sha": "a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6",
+    "expected_base_sha": "303b408ab81790a5051abd7573830b7a4112eb8e",
+    "expected_assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+    "display_label": "B0 \u00b7 raw-native-control \u00b7 Unchanged RTXPT v1.9 reference: original defaults and dependencies",
+    "limitation": "B0 raw control is not original default rendering"
+  },
+  "paired_spatial_pilot_requested": false,
+  "gaussian_pairing_requested": false,
+  "artifact_identity": {
+    "manifest_sha256": "14e1f2d7094d87912b79bbf945c99698d0c4fdd991792ba7614b0d2e51ce9532",
+    "root_source_sha": "4e380f9f85dba35b86b6a3bbd97e7acdfb324dec",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "executable_sha256": "6db074d35ed7050142ecfa42101e9ba79152e6155caa9b5d5954c093d3f5d362",
+    "shader_files": 501,
+    "validated": true
+  },
+  "process_id": 63152,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 5.48399999999674,
+  "images": [
+    {
+      "name": "frame_opaque-room-B0-PT-only-r3.png",
+      "sha256": "65e278f68bc959457d9e385d9c32b3f2707bc0411da4c818d5d2135ec499d0c5",
+      "bytes": 486363
+    }
+  ],
+  "linear_hdr_files": [],
+  "effective_b8_partition": null,
+  "effective_paired_spatial_pilot": null,
+  "effective_environment_filter": null,
+  "effective_sampling": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_di_validation": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_extended_scene_contract": null,
+  "effective_pt_replay": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_pt_history": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_pt_spatial": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_ptpp": {
+    "coverage": "unavailable; legacy renderer receipt absent"
+  },
+  "effective_capture_history": {
+    "coverage": "unavailable; legacy capture receipt absent"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "verified effective first-frame transport receipt",
+    "flags": {
+      "di": 0,
+      "gi": 0,
+      "pt": 0
+    },
+    "di_mode": 3,
+    "nee_mis": 1,
+    "max_bounces": 4,
+    "max_diffuse_bounces": 4,
+    "runtime_scope": "Runtime identity requires frozen source/build evidence in addition to this transport receipt"
+  },
+  "effective_gbuffer_precision": null,
+  "effective_di_reuse": {
+    "active": false,
+    "mode": 3,
+    "temporal": false,
+    "spatial": false,
+    "gi": false,
+    "pt": false,
+    "scope": "Effective first-frame settings; not estimator correctness or timing proof"
+  },
+  "effective_prefix_throughput": null,
+  "artifact_identity_after_capture": {
+    "manifest_sha256": "14e1f2d7094d87912b79bbf945c99698d0c4fdd991792ba7614b0d2e51ce9532",
+    "root_source_sha": "4e380f9f85dba35b86b6a3bbd97e7acdfb324dec",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "executable_sha256": "6db074d35ed7050142ecfa42101e9ba79152e6155caa9b5d5954c093d3f5d362",
+    "shader_files": 501,
+    "validated": true
+  }
+}

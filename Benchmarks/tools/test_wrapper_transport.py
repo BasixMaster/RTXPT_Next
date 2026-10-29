@@ -45,6 +45,27 @@ class WrapperTransportTests(unittest.TestCase):
             with mock.patch.object(sys,'argv',self.command(run_capture,mode,out)),mock.patch.object(run_capture.subprocess,'Popen',side_effect=completed),contextlib.redirect_stdout(io.StringIO()):run_capture.main()
             self.assert_parity(out,launched,expected)
 
+    def test_uncapped_timing_never_schedules_image_capture(self):
+        out=self.root/'uncapped-no-capture';launched=[]
+        def stop(command,**kwargs):launched.extend(command);raise StopBeforeLaunch('No GPU launched')
+        audit=self.root/'synthetic-audit.json';audit.write_text('{}')
+        args=self.command(run_timed,'default',out)+['--benchmark-uncapped','--driver-cap-audit',str(audit)]
+        with mock.patch.object(sys,'argv',args),mock.patch.object(run_timed,'validate_audit',return_value={}),mock.patch.object(run_timed.subprocess,'Popen',side_effect=stop):
+            with self.assertRaises(StopBeforeLaunch):run_timed.main()
+        self.assertIn('--benchmarkUncapped=true',launched)
+        for flag in ('--captureSequence','--capturePath','--sequenceRecordStart','--captureSimple'):
+            self.assertNotIn(flag,launched)
+        manifest=json.loads((out/'manifest.json').read_text())
+        self.assertIn('no capture is scheduled',manifest['render_unfocused_guard'])
+
+    def test_legacy_timing_retains_explicit_capture_compatibility(self):
+        out=self.root/'legacy-capture-compatibility';launched=[]
+        def stop(command,**kwargs):launched.extend(command);raise StopBeforeLaunch('No GPU launched')
+        with mock.patch.object(sys,'argv',self.command(run_timed,'default',out)),mock.patch.object(run_timed.subprocess,'Popen',side_effect=stop):
+            with self.assertRaises(StopBeforeLaunch):run_timed.main()
+        self.assertIn('--captureSequence',launched)
+        self.assertIn('Legacy frozen-build',json.loads((out/'manifest.json').read_text())['render_unfocused_guard'])
+
     def test_capture_ptpp_and_history_use_effective_receipts(self):
         out=self.root/'ptpp-capture';launched=[]
         args=self.command(run_capture,'dipt',out)+['--pt-reconnection-mode','1','--pt-roulette-probability','0.8','--history-frames','8']

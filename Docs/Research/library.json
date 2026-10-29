@@ -7,7 +7,8 @@
   "summary": [
     "B0 preserves unchanged RTXPT1.9 defaults, original assets and runtime3.0. Canonical B1/B2 are native PT+DI/DI+GI3.0; B3/B4/B5 are native PT, +DI, +DI+GI on runtime3.1. VERSION_MAPPING.md preserves all legacy refs/data labels.",
     "B1–B5 native cohorts remain preserved. B6/B7 now have corrected original-resolution five-seed guarded quality evidence after finite rejected-shift targets prevented invalid MIS propagation; native startup stability and new throughput remain pending.",
-    "B8 initial-GI/PT-long and limited PT++ execute. B10 Gaussian reciprocal tables now pass GPU payload/transform and original-resolution diagnostic gates. One-neighbor room quality is a mixed MSE/FLIP tradeoff; full GI reuse, simultaneous multi-neighbor reuse, replay queues and canonical acceptance remain pending."
+    "B8 initial-GI/PT-long and limited PT++ execute. B10 Gaussian reciprocal tables now pass GPU payload/transform and original-resolution diagnostic gates. One-neighbor room quality is a mixed MSE/FLIP tradeoff; full GI reuse, simultaneous multi-neighbor reuse, spatial replay queues have scoped GPU snapshot validation; temporal/multi-neighbor queues and canonical acceptance remain pending.",
+    "Fresh RTXPT1.9 PT-only raw control now covers all three required scenes with nine timings and nine PNG quality captures; original B0 defaults remain unchanged and HDR export is unsupported in that preserved binary."
   ],
   "questions": [
     {
@@ -621,10 +622,36 @@
       "published_on": "2026-10-29",
       "checked_on": "2026-10-29",
       "access": "full",
-      "quality": "Actual C++ producer fixture, independent table/transform validator, exact GPU payload readback, seven dispatch/finite diagnostics and official HDR/display FLIP.",
-      "limitations": "One transformed table/neighbor per frame, GI initial only; one room sequence per policy and one image per original scene. No full PT++ or total timing claim.",
+      "quality": "Actual C++ producer fixture, independent table/transform validator, exact GPU payload readback, seven dispatch/finite diagnostics and official HDR/display FLIP. Subsequent frozen18-process adjacent/Gaussian timing cohort verifies cap boundaries, complete traces and restoration.",
+      "limitations": "One transformed table/neighbor per frame, GI initial only; one room quality sequence per policy and single original-scene snapshots. Three timing repeats per policy/scene are exploratory; process GPU busy is not complete critical-path latency/FPS. No full PT++ claim.",
       "notes": "Gaussian room MSE increases about4.7% while FLIP decreases slightly; candidate remains experimental. Brightness untouched.",
       "rights": "Project-owned code/tests/evidence; no copied paper artwork."
+    },
+    {
+      "id": "LOCAL-B0-PT-ONLY",
+      "title": "Fresh preserved RTXPT1.9 native PT-only control",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/NATIVE_MATRIX_RESULTS.md",
+      "kind": "experiment",
+      "published_on": "2026-10-29",
+      "checked_on": "2026-10-29",
+      "access": "full",
+      "quality": "Nine cap-verified timing processes and nine PNG captures across the registered room and original Convergence/Kitchen; exact original source/runtime/assets and native-shader preservation.",
+      "limitations": "Explicit B0 raw PT-only override, not original defaults. Three process restarts, no independent-seed claim; preserved binary lacks raw-HDR export. Different cohorts and native estimator policies limit relative comparisons.",
+      "notes": "Native PT and NEE on, ReSTIR DI/GI/PT off. HDR metrics unavailable. Failed unsupported-HDR preflight excluded; original binary unchanged.",
+      "rights": "Project-owned protocol, captures, metrics and host adapter; component licenses preserved."
+    },
+    {
+      "id": "LOCAL-B10-QUEUE",
+      "title": "One-neighbor spatial replay compaction: exact GPU snapshot oracles",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/B10_GAUSSIAN_PAIRING.md",
+      "kind": "experiment",
+      "published_on": "2026-10-29",
+      "checked_on": "2026-10-29",
+      "access": "full",
+      "quality": "11captured-frame exact packed/vector GPU comparisons, including244654Convergence and41032Kitchen replays;2queue-disabled regressions; finite RGB; complete source overlay and rejected attempts.",
+      "limitations": "One-neighbor spatial scheduling, GI initial only. Last-frame counters, direct-control history overwrite; no all-warmup/queue-only sequence, queue timing, full GI reuse, simultaneous neighbors or full PT++ acceptance.",
+      "notes": "No epsilon or normal-word mask. Shared metadata policy canonicalizes absent normals and preserves original quantized source normals. Historical1f64042 timing/quality remains separate; brightness work deferred.",
+      "rights": "Application-owned prototype and measured evidence; pinned NVIDIA component/source licenses preserved."
     }
   ],
   "findings": [
@@ -1743,7 +1770,7 @@
       "confidence": "high",
       "context": "Scoped development; no independent-trial general quality or performance acceptance.",
       "strengths": "Independent native/payload/matrix oracles, actual GPU reverse-link/work counters and two metrics families.",
-      "limitations": "Three simultaneous neighbors, queues, full GI reuse, motion/reset stress tests and accepted total timing remain pending.",
+      "limitations": "Three simultaneous neighbors, full GI reuse, replay-queue validation, motion/reset stress tests and equal-quality/total-critical-path measurements remain pending.",
       "implications": "Retain adjacent control and isolate scheduling before attributing gains to the full paper.",
       "tags": [
         "ReSTIR",
@@ -1758,6 +1785,94 @@
           "locator": "B10_GAUSSIAN_PAIRING.md; Benchmarks/development/2026-10-29-gaussian-pairing/gpu-checks.json",
           "relation": "supports",
           "note": "Structural GPU evidence and single-cohort tradeoff, not full algorithm acceptance."
+        }
+      ]
+    },
+    {
+      "id": "B10-PAIRING-TIMING",
+      "title": "Gaussian versus adjacent timing changes are small and scene specific",
+      "question_ids": [
+        "Q3"
+      ],
+      "topic": "Performance evaluation",
+      "claim": "The18-process frozen cohort measures Gaussian-minus-adjacent process GPU-busy changes of+0.27% in Room,-1.52% in Convergence and-2.14% in Kitchen. No images are written during timing; application/NVIDIA/RTSS checks and restoration pass.",
+      "evidence_type": "measured",
+      "confidence": "medium",
+      "context": "One-neighbor pair/vector development, GI initial only; three process repeats per policy/scene,45s warmup plus30s capture.",
+      "strengths": "Frozen source/executable/682shader-cache identity, preregistered row selection and complete process-filtered traces.",
+      "limitations": "Small exploratory differences; room/Convergence process-median ranges overlap. Mixed quality; not equal-quality speedup or full PT++ acceptance.",
+      "implications": "Keep the adjacent control and isolate queue scheduling next.",
+      "tags": [
+        "PT++",
+        "pairing",
+        "timing",
+        "validation"
+      ],
+      "evidence": [
+        {
+          "source_id": "LOCAL-B10-GAUSSIAN",
+          "locator": "B10_GAUSSIAN_PAIRING.md; Benchmarks/development/2026-10-29-gaussian-timing/comparison.json",
+          "relation": "supports",
+          "note": "All18 accepted scoped timing receipts and quality tradeoffs retained."
+        }
+      ]
+    },
+    {
+      "id": "B0-PT-ONLY-FRESH",
+      "title": "Preserved native PT-only control is measured separately from original defaults",
+      "question_ids": [
+        "Q3"
+      ],
+      "topic": "Baseline measurement",
+      "claim": "Median process GPU busy is0.83075ms in the room,2.51725ms in original Convergence and3.2427ms in original Kitchen, with ReSTIR DI/GI/PT off. Display-FLIP medians are0.121162,0.372227 and0.376870 against the specified finite references.",
+      "evidence_type": "measured",
+      "confidence": "medium",
+      "context": "Three process repeats per scene; room640x360 cap4/4, originals1280x720 cap14/2. Raw AA/cache/denoiser-off override; native shaders retained.",
+      "strengths": "501shader-cache/executable/source freeze, effective mode/provenance receipts, known cap boundaries and per-process restoration; exact portable host patch.",
+      "limitations": "GPU busy is not critical-path frame latency/FPS. No HDR metrics or independent-seed proof. Original B0 defaults and B2 DI/GI configuration stay separate.",
+      "implications": "Use explicit actual-mode labels and compare matched cohorts; preserve baseline behavior.",
+      "tags": [
+        "baseline",
+        "RTXPT1.9",
+        "native-PT",
+        "timing",
+        "FLIP"
+      ],
+      "evidence": [
+        {
+          "source_id": "LOCAL-B0-PT-ONLY",
+          "locator": "NATIVE_MATRIX_RESULTS.md; Benchmarks/development/2026-10-29-fresh-b0-pt-only",
+          "relation": "supports",
+          "note": "Nine accepted timing and nine display-quality records; first failed HDR preflight excluded."
+        }
+      ]
+    },
+    {
+      "id": "B10-QUEUE-SNAPSHOT-ORACLES",
+      "title": "Compacted spatial replay matches the shared direct control in11captured snapshots",
+      "question_ids": [
+        "Q3"
+      ],
+      "topic": "Scheduling correctness",
+      "claim": "All16packed history words and3vector RGB words match for every captured pixel across11cases. Original Convergence and Kitchen exercise actual indirect replay; empty, odd/tiny-edge, Gaussian, temporal and roulette configurations also pass. Queue-disabled native/direct-pair checks pass.",
+      "evidence_type": "measured",
+      "confidence": "high",
+      "context": "Experimental one-neighbor spatial replay queue with shared absent/source-normal metadata policy; not canonical B10.",
+      "strengths": "Strict exact same-frame oracle over immutable inputs/frame/RNG; prior failures retained; finite raw RGB and source/cache/executable identities.",
+      "limitations": "Only captured-frame counters are accepted. Full warmup error accumulation, independent queue histories, motion/reset/resize, large2D/overflow stress, queue performance/memory and remaining PT++ mechanisms pending.",
+      "implications": "Complete full-sequence checks and cap-verified queue/direct profiling before promotion or speedup claims.",
+      "tags": [
+        "PT++",
+        "replay-compaction",
+        "GPU-oracle",
+        "validation"
+      ],
+      "evidence": [
+        {
+          "source_id": "LOCAL-B10-QUEUE",
+          "locator": "B10_GAUSSIAN_PAIRING.md; Benchmarks/development/2026-10-29-replay-queue/gpu-checks.json",
+          "relation": "supports",
+          "note": "Scoped exact snapshot comparisons; not full transport acceptance or performance."
         }
       ]
     }

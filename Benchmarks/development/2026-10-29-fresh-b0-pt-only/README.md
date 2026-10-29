@@ -1,0 +1,7 @@
+# Fresh RTXPT1.9 PT-only raw override
+
+Nine quality captures and nine process-filtered timing runs, three per required scene. All effective receipts confirm DI/GI/PT reservoir estimators off; native PT and NEE remain on. Original shader sources are unchanged; the benchmark adapter exposes controls and provenance. This does not replace B0 original defaults or imply that upstream cannot use DI/GI. Source/runtime/assets and warmed shader identities are frozen.
+
+Timing uses45s warmup/30s measurement, last600 Original/NotSet rows minus final16. App uncapped, transactional exact-exe NVIDIA profile and readonly RTSS checks; restoration verified after each process. Process GPU busy and CPU frame cadence are not complete GPU critical-path latency/FPS. Three repetitions are exploratory.
+
+Quality includes display-FLIP and encoded display MSE against finite native references. The preserved binary has no raw-HDR exporter; HDR-FLIP and linear MSE are unavailable. Three process restarts do not establish independent seeds. Room cap4/4 is separate from the previous native3/3 room cohort. Native MIS/filter policies differ from modern strict PT development controls; do not infer a pure algorithm speedup from these cohorts. The first preflight with an unsupported raw-HDR switch failed before producing an image; it is retained locally and excluded from accepted measurements. Private resource telemetry and driver recovery state are excluded.

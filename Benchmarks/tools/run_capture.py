@@ -11,6 +11,7 @@ from di_reuse_contract import verify as verify_di_reuse
 from throughput_contract import verify as verify_throughput, validate_request as validate_throughput
 from b8_partition_contract import verify as verify_b8, check_stages as check_b8_stages
 from paired_pilot_contract import verify as verify_paired
+from replay_queue_contract import verify as verify_queue, check_counters as check_queue_counters
 from gbuffer_precision_contract import verify as verify_gbuffer_precision, validate_request as validate_gbuffer_request
 
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
@@ -31,6 +32,7 @@ def main():
     ap.add_argument('--b8-component',type=int,choices=range(5),default=0,help='Development output:0sum,1native,2DI,3GI-short,4PT-long')
     ap.add_argument('--b8-validation-stage',type=int,choices=range(3),default=0,help='GI-short development:0 initial,1 DI/PT reuse,2 limited PT++ ablation; not canonical B9')
     ap.add_argument('--pt-paired-spatial-validation',action='store_true',help='Development only: adjacent reciprocal-pair shifts and vector shading; not full B10')
+    ap.add_argument('--pt-replay-compaction-validation',action='store_true',help='Opt-in replay queue; reservoir capture enables the same-frame exact direct oracle')
     ap.add_argument('--pt-gaussian-pairing-validation',action='store_true',help='Paired development: three resident Gaussian tables, one transformed table per frame')
     ap.add_argument('--variant-preset',choices=['matched-raw','raw-native-control','limited-ptpp-ablation'],default='matched-raw')
     ap.add_argument('--label',required=True);ap.add_argument('--scene',required=True)
@@ -88,6 +90,9 @@ def main():
     if a.pt_gaussian_pairing_validation:
         if not a.pt_paired_spatial_validation:raise SystemExit('Gaussian policy requires the paired spatial development path')
         args+=['--ptGaussianPairingValidation','true']
+    if a.pt_replay_compaction_validation:
+        if not a.pt_paired_spatial_validation:raise SystemExit('Replay compaction requires paired B8 development')
+        args+=['--ptReplayCompactionValidation','true']
     if a.capture_native_radiance:
         if not a.linear_hdr:raise SystemExit('Native radiance diagnostics require --linear-hdr')
         args+=['--captureNativeRadiance','true']
@@ -172,6 +177,11 @@ def main():
             try:
                 manifest['effective_b8_partition']=verify_b8((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.b8_initial_gi_validation,a.b8_component,a.b8_validation_stage)
                 manifest['effective_paired_spatial_pilot']=verify_paired((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_paired_spatial_validation,a.pt_gaussian_pairing_validation)
+                manifest['effective_replay_queue']=verify_queue((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_replay_compaction_validation,a.capture_pt_reservoirs)
+                if a.pt_replay_compaction_validation and a.capture_pt_reservoirs:
+                    queue_stats=list(out.glob('*.stats.json'))
+                    if len(queue_stats)!=len(manifest['images']):raise ValueError('Queue oracle statistics missing for a captured image')
+                    manifest['queue_same_frame_oracles']=[check_queue_counters(json.loads(p.read_text()),a.width,a.height) for p in queue_stats]
                 if a.b8_initial_gi_validation and a.capture_native_radiance and a.b8_component==0:
                     from analyze_hdr import read_pfm
                     manifest['b8_same_frame_checks']=[check_b8_stages(

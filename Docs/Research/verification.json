@@ -78,6 +78,8 @@
         "Rtxpt/RTXDI/PT/TemporalResampling.hlsl",
         "Rtxpt/RTXDI/PrepareLightsPass.cpp",
         "Rtxpt/RTXDI/PrepareLightsPass.h",
+        "Rtxpt/RTXDI/RayTracingPass.cpp",
+        "Rtxpt/RTXDI/RayTracingPass.h",
         "Rtxpt/RTXDI/RtxdiApplicationBridge.hlsli",
         "Rtxpt/RTXDI/RtxdiApplicationSettings.cpp",
         "Rtxpt/RTXDI/RtxdiPass.cpp",
@@ -124,7 +126,8 @@
         "Testing/B2/control-adapters/manifest.json",
         "Testing/B2/control-adapters/prepare_controls.py",
         "Testing/B2/diffuse_budget_reference.py",
-        "Testing/B2/test_diffuse_budget.py"
+        "Testing/B2/test_diffuse_budget.py",
+        "Rtxpt/RTXDI/PT/ReplayCompaction.hlsl"
       ],
       "reason": "Registry validation does not prove runtime activation or estimator correctness."
     },
@@ -183,8 +186,8 @@
       "name": "Structured evidence schema separately validated; SQLite metric search",
       "status": "passed",
       "smape_matches": 2,
-      "sources": 35,
-      "findings": 40
+      "sources": 37,
+      "findings": 43
     },
     {
       "name": "No full-paper PDFs exported",
@@ -237,6 +240,21 @@
       "name": "Gaussian native/GPU exact bytes, 7reciprocity/coverage gates, original-resolution images, 130official FLIP evaluations and explicit quality tradeoff",
       "status": "passed",
       "limits": "One table/neighbor per frame; GI initial only; queues, remaining features and timing pending."
+    },
+    {
+      "name": "2026-10-29-gaussian-timing exact evidence hashes and accepted cap/freeze/restoration receipts",
+      "status": "passed",
+      "timed_processes": 18
+    },
+    {
+      "name": "2026-10-29-fresh-b0-pt-only exact evidence hashes and accepted cap/freeze/restoration receipts",
+      "status": "passed",
+      "timed_processes": 9
+    },
+    {
+      "name": "11exact GPU queue snapshots, real original-scene replay, disabled regressions and source/evidence hashes",
+      "status": "passed",
+      "limits": "Captured-frame checks only; queue-only histories, timing, full GI reuse and complete PT++ remain pending."
     }
   ],
   "passed": true,
@@ -245,6 +263,6 @@
     "One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.",
     "PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.",
     "Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.",
-    "Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; full GI reuse, simultaneous multi-neighbor reuse, replay queues, remaining mechanisms and canonical acceptance remain pending."
+    "Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; full GI reuse, queue-only histories/timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending."
   ]
 }

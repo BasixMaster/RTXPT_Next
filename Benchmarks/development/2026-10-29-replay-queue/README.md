@@ -1,0 +1,11 @@
+# Paired spatial replay compaction GPU oracle
+
+11 cases pass exact same-frame comparisons of all16packed reservoir words and3vector RGB words per pixel. Both schedules read identical immutable inputs/frame/RNG; the direct control executes after the queued result is preserved. Images are diagnostic results after the matched direct control, not independent quality repetitions. Actual replay requests in original scenes exercise indirect dispatch; zero-cap cases exercise empty queues.
+
+The prototype retains cheap shifts, bounds one request per source pixel, preserves zero-weight sample M, uses separate UAV-written and indirect-bound argument descriptors, and shares each directed shift across both paired outputs. Overflow has a direct fallback but fails validation. Ordinary history remains64bytes; the temporary unpacked shift cache is104bytes. Queue/source indices use4bytes per pixel. A76byte-per-pixel diagnostic oracle buffer remains allocated in this prototype even with diagnostics off. Declared extra payload is184N+48bytes, excluding descriptor/allocation alignment, existing history and readback. This is not measured renderer-exclusive VRAM.
+
+Source metadata corrections canonicalize only unused normals on zero-length/zero-contribution paths and preserve the original encoded reconnection normal bits from the selected immutable source in both schedules. They are not brightness fixes or relaxed comparisons. Earlier failures and exact counters remain recorded; the fixed5pixel window request is not claimed as supported.
+
+No accepted queue timing, speedup, full GI reuse, simultaneous multiple-neighbor reuse, motion/resize stress or complete PT++ claim. All32-bit words in64-byte history records are still compared exactly; there is no epsilon or word mask. Finite raw RGB was checked. Baseline source/dependency/assets and prior benchmark evidence remain preserved.
+
+Reproduce with Benchmarks/tools/run_replay_queue_oracles.py against this source overlay and the pinned dependencies. Output must stay outside the public repository. Raw PFMs/reservoirs and private diagnostics remain locally retained with hashes. Post-cohort identities are not a pre-frozen timing experiment.

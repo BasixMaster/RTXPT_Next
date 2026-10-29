@@ -1,5 +1,7 @@
 # Roadmap: canonical B0–B10
 
+**Live checkpoint:** Both measurement batches are complete and published:18pairing timing processes, plus9native PT-only timings and9PNG captures. Replay-queue code passes11captured-frame GPU scheduling oracles behind a development flag; sequence validation and queue timing are next. [Current queue details](B10_GAUSSIAN_PAIRING.md#replay-compaction--active-implementation-checkpoint). Full B10 remains incomplete.
+
 **Current numbering, confirmed 2026-10-29:** [VERSION_MAPPING.md](VERSION_MAPPING.md) defines all canonical variants and the retained legacy crosswalk. B0 remains the unchanged RTXPT 1.9 original-defaults reference. Old files, branches, tags and data IDs are not renumbered in place.
 
 The user deferred brightness fixes and prioritized B8–B10. See [staged implementation](B8_STAGED_IMPLEMENTATION.md) for the executed initial-GI contribution split, DI/PT reuse and limited PT++ ablation, with explicit remaining gates.
@@ -97,3 +99,9 @@ For RTXPT1.9/B1/B2+ report raw and reconstructed image-quality metrics, complete
 The [NVIDIA whitepaper review](NVIDIA_WHITEPAPERS.md) adds immediate per-signal/pass profiling and later SER/OMM/tracing-model ablations. CLAS/PTLAS remains a separate geometry-scalability branch with explicit Agility SDK/HLSL/driver capability gates; it is not a substitute for ReSTIR-LoD's estimator/Jacobian work. Source-reported case-study gains are not RTXPT Next measurements.
 
 Current native coverage: [fresh B2/B3/B5 original-scene and room results](NATIVE_MATRIX_RESULTS.md) adds27quality captures and27cap-verified timing processes. [The unified B0–B10 overview](COMPARISON_OVERVIEW.md) includes all versions, current metrics and representative pictures; historical cohorts remain separate.
+
+Current timing checkpoint2026-10-29: [Gaussian versus adjacent pair/vector development](B10_GAUSSIAN_PAIRING.md#frozen-adjacent-versus-gaussian-timing) completes18cap-verified processes over all three scenes. Small descriptive timing differences and mixed quality do not promote full B10. Explicit replay compaction remains next; brightness fixes remain deferred.
+
+Fresh requested control: [RTXPT1.9 PT-only override](NATIVE_MATRIX_RESULTS.md#fresh-rtxpt19-pt-only-override) now has9cap-verified timing processes and9PNG captures across Room and original Convergence/Kitchen. Native PT/NEE on, DI/GI off; original B0 defaults remain preserved. HDR export is unsupported in that unchanged binary.
+
+Latest scoped checkpoint2026-10-29: [one-neighbor spatial replay queue](B10_GAUSSIAN_PAIRING.md#replay-compaction--active-implementation-checkpoint) passes11captured-frame exact GPU oracles and2queue-disabled regressions. Queue timing, full multi-frame histories, temporal queues, simultaneous multi-neighbor reuse and remaining B10 mechanisms are pending. No full PT++ or speedup claim.

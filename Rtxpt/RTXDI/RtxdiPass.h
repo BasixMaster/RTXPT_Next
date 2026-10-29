@@ -197,6 +197,8 @@ private:
     RayTracingPass m_PTIdentityShiftDiagnosticsPass;
     RayTracingPass m_PTTemporalResamplingPass;
     RayTracingPass m_PTSpatialResamplingPass;
+    RayTracingPass m_PTQueuePass[7];
+    nvrhi::BindingSetHandle m_PTQueueArgsBindingSet;
     RayTracingPass m_PTFinalShadingPass;
     bool m_PTPipelinesCreated = false;
     bool m_PTNeedsClear = false;

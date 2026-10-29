@@ -61,3 +61,9 @@ Current scoped measurements: [registered-room B1/B4/B6/B7 comparison](REGISTERED
 Current native coverage: [fresh B2/B3/B5 original-scene and room results](NATIVE_MATRIX_RESULTS.md) adds27quality captures and27cap-verified timing processes. [The unified B0–B10 overview](COMPARISON_OVERVIEW.md) includes all versions, current metrics and representative pictures; historical cohorts remain separate.
 
 Current development: [B8–B10 staged implementation](B8_STAGED_IMPLEMENTATION.md) records the disjoint initial-GI GPU foundation and limited PT++ ablation. GI reuse and remaining B10 GPU mechanisms remain pending; brightness work is deferred.
+
+Current timing checkpoint2026-10-29: [Gaussian versus adjacent pair/vector development](B10_GAUSSIAN_PAIRING.md#frozen-adjacent-versus-gaussian-timing) completes18cap-verified processes over all three scenes. Small descriptive timing differences and mixed quality do not promote full B10. Explicit replay compaction remains next; brightness fixes remain deferred.
+
+Fresh requested control: [RTXPT1.9 PT-only override](NATIVE_MATRIX_RESULTS.md#fresh-rtxpt19-pt-only-override) now has9cap-verified timing processes and9PNG captures across Room and original Convergence/Kitchen. Native PT/NEE on, DI/GI off; original B0 defaults remain preserved. HDR export is unsupported in that unchanged binary.
+
+Latest scoped checkpoint2026-10-29: [one-neighbor spatial replay queue](B10_GAUSSIAN_PAIRING.md#replay-compaction--active-implementation-checkpoint) passes11captured-frame exact GPU oracles and2queue-disabled regressions. Queue timing, full multi-frame histories, temporal queues, simultaneous multi-neighbor reuse and remaining B10 mechanisms are pending. No full PT++ or speedup claim.

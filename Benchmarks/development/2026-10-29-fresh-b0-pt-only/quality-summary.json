@@ -1,0 +1,161 @@
+{
+  "opaque-room": {
+    "scope": "Three native1spp process restarts, no independent-seed claim; B0 raw PT-only override. Finite modern native-reference estimator differs in MIS/filter policies; descriptive error, not pure runtime-version gain.",
+    "reference_sha256": "6c069152ae8972397e7be9980c551db3d097501a4fbd5733127abfffe614bbe0",
+    "reference_spp": 2048,
+    "hdr_parameters": {
+      "ppd": 67.0,
+      "startExposure": -3.262051582336426,
+      "stopExposure": 4.551913738250732,
+      "numExposures": 8,
+      "tonemapper": "ACES"
+    },
+    "frames": [
+      {
+        "repetition": 1,
+        "png_sha256": "7ded4c5adf2ef4404eca501cd48c525ccee9584d0a70592019edbef117287cdb",
+        "hdr_flip": null,
+        "linear_mse": null,
+        "ldr_flip_mean": 0.12116175144910812,
+        "display_mse": 0.01392409112304449
+      },
+      {
+        "repetition": 2,
+        "png_sha256": "f45a6e4cee8ebc71a4b3b6ce53659d95a87123d28b25a283c8a2d31baaa300d4",
+        "hdr_flip": null,
+        "linear_mse": null,
+        "ldr_flip_mean": 0.12116169929504395,
+        "display_mse": 0.013934179209172726
+      },
+      {
+        "repetition": 3,
+        "png_sha256": "65e278f68bc959457d9e385d9c32b3f2707bc0411da4c818d5d2135ec499d0c5",
+        "hdr_flip": null,
+        "linear_mse": null,
+        "ldr_flip_mean": 0.12110330909490585,
+        "display_mse": 0.013928821310400963
+      }
+    ],
+    "median": {
+      "linear_mse": null,
+      "hdr_flip": null,
+      "ldr_flip": 0.12116169929504395,
+      "display_mse": 0.013928821310400963
+    },
+    "display_metric_identity": {
+      "evaluator": "official NVlabs flip-evaluator",
+      "version": "1.7",
+      "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+      "parameters": {
+        "ppd": 67.0
+      },
+      "inputs": "Stored renderer PNG decoded to sRGB float32; inputsRGB=True; no exposure rescale"
+    }
+  },
+  "convergence": {
+    "scope": "Three native1spp process restarts, no independent-seed claim; B0 raw PT-only override. Finite modern native-reference estimator differs in MIS/filter policies; descriptive error, not pure runtime-version gain.",
+    "reference_sha256": "9189238be4e1ca4e482acce79b841628e6d56a2bae3fd7a14b57dafae3dff5af",
+    "reference_spp": 4096,
+    "hdr_parameters": {
+      "ppd": 67.0,
+      "startExposure": -5.117674350738525,
+      "stopExposure": 3.6030263900756836,
+      "numExposures": 9,
+      "tonemapper": "ACES"
+    },
+    "frames": [
+      {
+        "repetition": 1,
+        "png_sha256": "d07378d3e4c3f3e2d72bfb7d86d893185786ee988cfa105698640cdd8e645ed7",
+        "hdr_flip": null,
+        "linear_mse": null,
+        "ldr_flip_mean": 0.3722265660762787,
+        "display_mse": 0.08666200190782547
+      },
+      {
+        "repetition": 2,
+        "png_sha256": "535a01ea8c4fa25369e0e77ec8ccf506364372df6ddc331869deb7bbf8596cc2",
+        "hdr_flip": null,
+        "linear_mse": null,
+        "ldr_flip_mean": 0.3722090721130371,
+        "display_mse": 0.08670002967119217
+      },
+      {
+        "repetition": 3,
+        "png_sha256": "c78eb649e4f0b9e2fb57a5aedfa2fef0eed8b2a50d950886874ffc15b7dfe5ee",
+        "hdr_flip": null,
+        "linear_mse": null,
+        "ldr_flip_mean": 0.37229782342910767,
+        "display_mse": 0.08667419850826263
+      }
+    ],
+    "median": {
+      "linear_mse": null,
+      "hdr_flip": null,
+      "ldr_flip": 0.3722265660762787,
+      "display_mse": 0.08667419850826263
+    },
+    "display_metric_identity": {
+      "evaluator": "official NVlabs flip-evaluator",
+      "version": "1.7",
+      "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+      "parameters": {
+        "ppd": 67.0
+      },
+      "inputs": "Stored renderer PNG decoded to sRGB float32; inputsRGB=True; no exposure rescale"
+    }
+  },
+  "kitchen": {
+    "scope": "Three native1spp process restarts, no independent-seed claim; B0 raw PT-only override. Finite modern native-reference estimator differs in MIS/filter policies; descriptive error, not pure runtime-version gain.",
+    "reference_sha256": "5c5d7929c37d1ac371a28050879c554e5e0e0b7fedfce93f829d8a846bc96185",
+    "reference_spp": 4096,
+    "hdr_parameters": {
+      "ppd": 67.0,
+      "startExposure": -7.385184288024902,
+      "stopExposure": 6.939349174499512,
+      "numExposures": 15,
+      "tonemapper": "ACES"
+    },
+    "frames": [
+      {
+        "repetition": 1,
+        "png_sha256": "005093a976508439790ebe0c84a989309d583ee38032a132ea564ade5deef60a",
+        "hdr_flip": null,
+        "linear_mse": null,
+        "ldr_flip_mean": 0.37687036395072937,
+        "display_mse": 0.06915661692619324
+      },
+      {
+        "repetition": 2,
+        "png_sha256": "06da8619bc3cdc2463500759baead234d1317f4a0e41ded5711d76791881fe05",
+        "hdr_flip": null,
+        "linear_mse": null,
+        "ldr_flip_mean": 0.37740907073020935,
+        "display_mse": 0.06919990479946136
+      },
+      {
+        "repetition": 3,
+        "png_sha256": "452dc762fc009c1724a0f235fa756887c4a96b37dd72f99b5d27d3b71f6b11cc",
+        "hdr_flip": null,
+        "linear_mse": null,
+        "ldr_flip_mean": 0.37682202458381653,
+        "display_mse": 0.06909148395061493
+      }
+    ],
+    "median": {
+      "linear_mse": null,
+      "hdr_flip": null,
+      "ldr_flip": 0.37687036395072937,
+      "display_mse": 0.06915661692619324
+    },
+    "display_metric_identity": {
+      "evaluator": "official NVlabs flip-evaluator",
+      "version": "1.7",
+      "native_sha256": "c08024cea439ebf92a62221d2c97de5321c83e2cf70e0fb791d2cd0bec6700cb",
+      "parameters": {
+        "ppd": 67.0
+      },
+      "inputs": "Stored renderer PNG decoded to sRGB float32; inputsRGB=True; no exposure rescale"
+    }
+  }
+}

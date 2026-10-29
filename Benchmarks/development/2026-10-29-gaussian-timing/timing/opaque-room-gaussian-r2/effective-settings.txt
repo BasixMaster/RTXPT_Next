@@ -1,0 +1,9 @@
+PT_PAIR_TABLE_UPLOAD tables=3 entries=161516 bytes=1292128 sigma=16 format=RG32_SINT
+TRANSPORT_CONTRACT di=1 gi=1 pt=1 diMode=0 neeMIS=0 maxBounces=4 maxDiffuseBounces=4
+PT_EXTENDED_SCENE_CONTRACT development=0 diffuseBudget=4 fullPrefixReplay=0
+B8_PARTITION_CONTRACT development=1 version=1 giReuse=0 component=0 minPTLength=4 stage=1
+PT_PAIRED_CONTRACT enabled=1 adjacentReciprocal=0 pairOwnedShifts=1 vectorShading=1
+PT_PAIR_POLICY gaussian=1 residentTables=3 activeTablesPerFrame=1 sigma=16 frameTransforms=1
+PT_REPLAY_CONTRACT replayOnly=0 roughnessThreshold=0.100000001
+PT_HISTORY_CONTRACT ageRejection=1 maxAge=30 maxHistory=8
+PT_SPATIAL_CONTRACT samples=1 boost=1

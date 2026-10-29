@@ -1,5 +1,7 @@
 # B0–B10 comparison overview
 
+**Current implementation status:** The opt-in one-neighbor spatial replay queue now passes11captured-frame GPU oracles, including Convergence244654replays and Kitchen41032replays. Every packed-history word and vector-radiance bit matches its same-frame direct control. Native and direct-pair queue-disabled regressions pass. Queue performance, queue-only temporal-history sequences and full B10 acceptance remain pending. [Detailed queue checkpoint](B10_GAUSSIAN_PAIRING.md#replay-compaction--active-implementation-checkpoint).
+
 All eleven canonical versions appear below for each required scene. Performance, quality and representative pictures share the same row. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; a raw native-control preset does not replace its original defaults.
 
 GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Rows from different cohorts are descriptive: settings and sampling policies must be checked before computing a relative gain. Known app/NVIDIA/RTSS cap boundaries were verified for accepted current timing cohorts; unknown external limiters and background load remain limitations.
@@ -187,3 +189,23 @@ A calibrated diagnostic found zero packed prefix pixels above one in eight physi
 |Kitchen / B7|1.0 / 0|1.0 / 0|<a href="assets/prefix-throughput/kitchen-B7-omitted-default-s0.png"><img src="assets/prefix-throughput/kitchen-B7-omitted-default-s0.png" width="120" alt="kitchen B7 omitted-default"></a> <a href="assets/prefix-throughput/kitchen-B7-preserve1-s0.png"><img src="assets/prefix-throughput/kitchen-B7-preserve1-s0.png" width="120" alt="kitchen B7 preserve1"></a>|
 
 One seed and final-frame packed weights only; not a raw-float range proof, unbiasedness result or throughput benchmark. The legacy clamp remains default.
+
+## Paired development timing — adjacent versus Gaussian
+
+Three process repetitions per policy/scene,45s warmup plus30s capture, no image writes. Source/executable/682shader-cache identities stayed frozen; app/NVIDIA/RTSS cap checks and driver restoration passed. One spatial neighbor, DI initial and GI initial only; this is not full B10. GPU busy is process engine activity, not renderer FPS. Small differences remain exploratory. [Quality, images, uncertainty and full scope](B10_GAUSSIAN_PAIRING.md).
+
+|Scene|Adjacent GPU busy ms|Gaussian GPU busy ms|Change|
+|---|---:|---:|---:|
+|opaque-room|1.5873|1.5915|+0.27%|
+|convergence|7.2950|7.1838|-1.52%|
+|kitchen|8.4429|8.2623|-2.14%|
+
+## Fresh B0 PT-only override — separate from original defaults
+
+Preserved RTXPT1.9/runtime3.0 with native PT and NEE; ReSTIR DI/GI/PT off. Three quality process restarts and three cap-verified timing runs per scene. Original scenes1280x720,14/2; room640x360,4/4, distinct from the earlier3/3 native-room cohort. Native MIS/filter policies remain unchanged. HDR metrics are unavailable because this preserved binary has no raw-HDR exporter. [Report and evidence](NATIVE_MATRIX_RESULTS.md).
+
+|Scene|GPU busy ms|CPU cadence ms|Display-FLIP|Display MSE|Picture|
+|---|---:|---:|---:|---:|---|
+|opaque-room|0.8307|0.8743|0.121162|0.0139288|[![B0 PT-only opaque-room](assets/native-pt-only/opaque-room.png)](assets/native-pt-only/opaque-room.png)|
+|convergence|2.5172|2.4667|0.372227|0.0866742|[![B0 PT-only convergence](assets/native-pt-only/convergence.png)](assets/native-pt-only/convergence.png)|
+|kitchen|3.2427|3.2611|0.376870|0.0691566|[![B0 PT-only kitchen](assets/native-pt-only/kitchen.png)](assets/native-pt-only/kitchen.png)|

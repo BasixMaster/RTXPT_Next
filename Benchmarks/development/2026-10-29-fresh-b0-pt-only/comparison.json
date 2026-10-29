@@ -1,0 +1,2729 @@
+{
+  "opaque-room": {
+    "schema_version": 1,
+    "kind": "presentmon_group",
+    "label": "B0/PT-only raw override",
+    "tool": "PresentMon 2.x CSV; exact executable/version/checksum belong in run manifest",
+    "selection_policy": {
+      "process_name": "Rtxpt.exe",
+      "last_n": 600,
+      "drop_tail": 16,
+      "allowed_frame_types": [
+        "NotSet",
+        "Original"
+      ]
+    },
+    "process_runs": 3,
+    "present_configuration": {
+      "PresentRuntime": [
+        "DXGI"
+      ],
+      "SyncInterval": [
+        "0"
+      ],
+      "AllowsTearing": [
+        "0"
+      ],
+      "PresentMode": [
+        "Composed: Flip"
+      ]
+    },
+    "runs": [
+      {
+        "file": "presentmon.csv",
+        "sha256": "27191df48aba33db67dac07f4926ad5b91709858227a8403f36f19361f7bbf67",
+        "source_columns": [
+          "Application",
+          "ProcessID",
+          "SwapChainAddress",
+          "PresentRuntime",
+          "SyncInterval",
+          "PresentFlags",
+          "AllowsTearing",
+          "PresentMode",
+          "CPUStartTime",
+          "FrameTime",
+          "CPUBusy",
+          "CPUWait",
+          "GPULatency",
+          "GPUTime",
+          "GPUBusy",
+          "GPUWait",
+          "DisplayLatency",
+          "DisplayedTime",
+          "AnimationError",
+          "AnimationTime",
+          "MsFlipDelay",
+          "AllInputToPhotonLatency",
+          "ClickToPhotonLatency"
+        ],
+        "identity": {
+          "application": "Rtxpt.exe",
+          "process_id": "43656",
+          "swapchain": "0x242DE8ADD50"
+        },
+        "selection": {
+          "target_process_frames": 31720,
+          "excluded_other_identity_frames": 0,
+          "frame_type_column_present": false,
+          "frame_type_counts": {
+            "column_unavailable": 31720
+          },
+          "allowed_frame_types": [
+            "NotSet",
+            "Original"
+          ],
+          "eligible_frames": 31720,
+          "excluded_frame_type_frames": 0,
+          "drop_tail_frames": 16,
+          "retained_last_frames": 600,
+          "selected_first_csv_line": 31106,
+          "selected_last_csv_line": 31705,
+          "cpu_start_column": "CPUStartTime",
+          "selected_first_cpu_start": "29430.9792",
+          "selected_last_cpu_start": "29966.7530"
+        },
+        "present_metadata": {
+          "PresentRuntime": [
+            "DXGI"
+          ],
+          "SyncInterval": [
+            "0"
+          ],
+          "PresentFlags": [
+            "512"
+          ],
+          "AllowsTearing": [
+            "0"
+          ],
+          "PresentMode": [
+            "Composed: Flip"
+          ]
+        },
+        "metrics": {
+          "CPUFrameTime": {
+            "status": "measured",
+            "source_column": "FrameTime",
+            "units": "ms",
+            "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.7761,
+              "max_ms": 1.2845,
+              "mean_ms": 0.8943203333333334,
+              "median_ms": 0.8743,
+              "p95_ms": 1.05814,
+              "p99_ms": 1.15617,
+              "sample_stdev_ms": 0.08159085773949595
+            }
+          },
+          "CPUBusy": {
+            "status": "measured",
+            "source_column": "CPUBusy",
+            "units": "ms",
+            "meaning": "CPU work interval before present; not accumulated CPU core time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.6745,
+              "max_ms": 1.1569,
+              "mean_ms": 0.782334,
+              "median_ms": 0.77225,
+              "p95_ms": 0.9194399999999991,
+              "p99_ms": 1.0488119999999999,
+              "sample_stdev_ms": 0.07567829886344417
+            }
+          },
+          "CPUWait": {
+            "status": "measured",
+            "source_column": "CPUWait",
+            "units": "ms",
+            "meaning": "CPU waiting before starting the next frame.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0928,
+              "max_ms": 0.4055,
+              "mean_ms": 0.11198633333333334,
+              "median_ms": 0.1009,
+              "p95_ms": 0.14562499999999998,
+              "p99_ms": 0.27855399999999997,
+              "sample_stdev_ms": 0.030297157889520372
+            }
+          },
+          "GPUTime": {
+            "status": "measured",
+            "source_column": "GPUTime",
+            "units": "ms",
+            "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.8001,
+              "max_ms": 1.1871,
+              "mean_ms": 0.880949,
+              "median_ms": 0.8371,
+              "p95_ms": 1.0497649999999998,
+              "p99_ms": 1.0758839999999994,
+              "sample_stdev_ms": 0.0852078127359932
+            }
+          },
+          "GPUBusy": {
+            "status": "measured",
+            "source_column": "GPUBusy",
+            "units": "ms",
+            "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.796,
+              "max_ms": 1.1823,
+              "mean_ms": 0.8751285,
+              "median_ms": 0.83075,
+              "p95_ms": 1.044025,
+              "p99_ms": 1.0712539999999995,
+              "sample_stdev_ms": 0.08434690809938764
+            }
+          },
+          "GPUWait": {
+            "status": "measured",
+            "source_column": "GPUWait",
+            "units": "ms",
+            "meaning": "GPU idle time inside the frame GPU interval.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0013,
+              "max_ms": 0.0331,
+              "mean_ms": 0.0058205,
+              "median_ms": 0.0048,
+              "p95_ms": 0.013504999999999994,
+              "p99_ms": 0.0165,
+              "sample_stdev_ms": 0.0031357217672602026
+            }
+          },
+          "GPULatency": {
+            "status": "measured",
+            "source_column": "GPULatency",
+            "units": "ms",
+            "meaning": "CPU frame start until GPU work begins; not GPU execution time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.4906,
+              "max_ms": 2.0354,
+              "mean_ms": 1.1897366666666667,
+              "median_ms": 1.2981500000000001,
+              "p95_ms": 1.8559649999999994,
+              "p99_ms": 1.961851,
+              "sample_stdev_ms": 0.4883990786118155
+            }
+          },
+          "DisplayedTime": {
+            "status": "measured",
+            "source_column": "DisplayedTime",
+            "units": "ms",
+            "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time.",
+            "valid_frames": 129,
+            "missing_frames": 471,
+            "statistics": {
+              "count": 129,
+              "min_ms": 4.1,
+              "max_ms": 4.2426,
+              "mean_ms": 4.166662790697674,
+              "median_ms": 4.1656,
+              "p95_ms": 4.20192,
+              "p99_ms": 4.233236,
+              "sample_stdev_ms": 0.021188923513269
+            }
+          },
+          "DisplayLatency": {
+            "status": "measured",
+            "source_column": "DisplayLatency",
+            "units": "ms",
+            "meaning": "CPU frame start until display; not GPU execution time.",
+            "valid_frames": 129,
+            "missing_frames": 471,
+            "statistics": {
+              "count": 129,
+              "min_ms": 9.8295,
+              "max_ms": 11.7937,
+              "mean_ms": 10.730352713178295,
+              "median_ms": 10.6607,
+              "p95_ms": 11.4503,
+              "p99_ms": 11.657628,
+              "sample_stdev_ms": 0.49992079326965627
+            }
+          }
+        },
+        "limitations": [
+          "Frame-row selection does not prove no image writes or steady state; verify the capture manifest and timing boundary.",
+          "If FrameType is unavailable, generated-frame exclusion is not established by this CSV. Disable frame generation in the renderer and record that setting.",
+          "No explicit trace-loss event count is inferred from frame data.",
+          "PresentMon metrics have different scopes; GPUTime, GPUBusy and CPUFrameTime are not interchangeable."
+        ]
+      },
+      {
+        "file": "presentmon.csv",
+        "sha256": "ea873c85316bb199d8f664b5a0925f5d919e51d626d3764be51d95aec118fb05",
+        "source_columns": [
+          "Application",
+          "ProcessID",
+          "SwapChainAddress",
+          "PresentRuntime",
+          "SyncInterval",
+          "PresentFlags",
+          "AllowsTearing",
+          "PresentMode",
+          "CPUStartTime",
+          "FrameTime",
+          "CPUBusy",
+          "CPUWait",
+          "GPULatency",
+          "GPUTime",
+          "GPUBusy",
+          "GPUWait",
+          "DisplayLatency",
+          "DisplayedTime",
+          "AnimationError",
+          "AnimationTime",
+          "MsFlipDelay",
+          "AllInputToPhotonLatency",
+          "ClickToPhotonLatency"
+        ],
+        "identity": {
+          "application": "Rtxpt.exe",
+          "process_id": "304",
+          "swapchain": "0x17C53D623E0"
+        },
+        "selection": {
+          "target_process_frames": 31589,
+          "excluded_other_identity_frames": 0,
+          "frame_type_column_present": false,
+          "frame_type_counts": {
+            "column_unavailable": 31589
+          },
+          "allowed_frame_types": [
+            "NotSet",
+            "Original"
+          ],
+          "eligible_frames": 31589,
+          "excluded_frame_type_frames": 0,
+          "drop_tail_frames": 16,
+          "retained_last_frames": 600,
+          "selected_first_csv_line": 30975,
+          "selected_last_csv_line": 31574,
+          "cpu_start_column": "CPUStartTime",
+          "selected_first_cpu_start": "29421.7024",
+          "selected_last_cpu_start": "29959.7740"
+        },
+        "present_metadata": {
+          "PresentRuntime": [
+            "DXGI"
+          ],
+          "SyncInterval": [
+            "0"
+          ],
+          "PresentFlags": [
+            "512"
+          ],
+          "AllowsTearing": [
+            "0"
+          ],
+          "PresentMode": [
+            "Composed: Flip"
+          ]
+        },
+        "metrics": {
+          "CPUFrameTime": {
+            "status": "measured",
+            "source_column": "FrameTime",
+            "units": "ms",
+            "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.7688,
+              "max_ms": 1.662,
+              "mean_ms": 0.8986178333333333,
+              "median_ms": 0.87485,
+              "p95_ms": 1.1051099999999998,
+              "p99_ms": 1.1842169999999999,
+              "sample_stdev_ms": 0.09911158547784465
+            }
+          },
+          "CPUBusy": {
+            "status": "measured",
+            "source_column": "CPUBusy",
+            "units": "ms",
+            "meaning": "CPU work interval before present; not accumulated CPU core time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.6748,
+              "max_ms": 1.3837,
+              "mean_ms": 0.787564,
+              "median_ms": 0.7712,
+              "p95_ms": 0.9807799999999999,
+              "p99_ms": 1.0497020000000001,
+              "sample_stdev_ms": 0.09217167497001431
+            }
+          },
+          "CPUWait": {
+            "status": "measured",
+            "source_column": "CPUWait",
+            "units": "ms",
+            "meaning": "CPU waiting before starting the next frame.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0912,
+              "max_ms": 0.3447,
+              "mean_ms": 0.11105383333333334,
+              "median_ms": 0.1014,
+              "p95_ms": 0.138015,
+              "p99_ms": 0.26902,
+              "sample_stdev_ms": 0.027650630147457302
+            }
+          },
+          "GPUTime": {
+            "status": "measured",
+            "source_column": "GPUTime",
+            "units": "ms",
+            "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.796,
+              "max_ms": 1.1456,
+              "mean_ms": 0.8792583333333334,
+              "median_ms": 0.83755,
+              "p95_ms": 1.052315,
+              "p99_ms": 1.071102,
+              "sample_stdev_ms": 0.08578943666303265
+            }
+          },
+          "GPUBusy": {
+            "status": "measured",
+            "source_column": "GPUBusy",
+            "units": "ms",
+            "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.7908,
+              "max_ms": 1.1394,
+              "mean_ms": 0.8738186666666666,
+              "median_ms": 0.8312,
+              "p95_ms": 1.0472,
+              "p99_ms": 1.0659070000000002,
+              "sample_stdev_ms": 0.0849835907850849
+            }
+          },
+          "GPUWait": {
+            "status": "measured",
+            "source_column": "GPUWait",
+            "units": "ms",
+            "meaning": "GPU idle time inside the frame GPU interval.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0016,
+              "max_ms": 0.0443,
+              "mean_ms": 0.0054396666666666664,
+              "median_ms": 0.0047,
+              "p95_ms": 0.012209999999999992,
+              "p99_ms": 0.016706999999999993,
+              "sample_stdev_ms": 0.0033209397701781354
+            }
+          },
+          "GPULatency": {
+            "status": "measured",
+            "source_column": "GPULatency",
+            "units": "ms",
+            "meaning": "CPU frame start until GPU work begins; not GPU execution time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.4792,
+              "max_ms": 2.0992,
+              "mean_ms": 1.207655,
+              "median_ms": 1.3314,
+              "p95_ms": 1.9401899999999999,
+              "p99_ms": 2.023792,
+              "sample_stdev_ms": 0.5482895201486542
+            }
+          },
+          "DisplayedTime": {
+            "status": "measured",
+            "source_column": "DisplayedTime",
+            "units": "ms",
+            "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time.",
+            "valid_frames": 130,
+            "missing_frames": 470,
+            "statistics": {
+              "count": 130,
+              "min_ms": 4.0492,
+              "max_ms": 4.2738,
+              "mean_ms": 4.166171538461539,
+              "median_ms": 4.16665,
+              "p95_ms": 4.19791,
+              "p99_ms": 4.223184,
+              "sample_stdev_ms": 0.024691169166811258
+            }
+          },
+          "DisplayLatency": {
+            "status": "measured",
+            "source_column": "DisplayLatency",
+            "units": "ms",
+            "meaning": "CPU frame start until display; not GPU execution time.",
+            "valid_frames": 130,
+            "missing_frames": 470,
+            "statistics": {
+              "count": 130,
+              "min_ms": 9.6851,
+              "max_ms": 11.8443,
+              "mean_ms": 10.706803076923077,
+              "median_ms": 10.73,
+              "p95_ms": 11.53078,
+              "p99_ms": 11.791517999999998,
+              "sample_stdev_ms": 0.5501411559439335
+            }
+          }
+        },
+        "limitations": [
+          "Frame-row selection does not prove no image writes or steady state; verify the capture manifest and timing boundary.",
+          "If FrameType is unavailable, generated-frame exclusion is not established by this CSV. Disable frame generation in the renderer and record that setting.",
+          "No explicit trace-loss event count is inferred from frame data.",
+          "PresentMon metrics have different scopes; GPUTime, GPUBusy and CPUFrameTime are not interchangeable."
+        ]
+      },
+      {
+        "file": "presentmon.csv",
+        "sha256": "27ad9c4301a31d8b20674636be3d4237ee47689eaca8d8bb8dc96398a21656a4",
+        "source_columns": [
+          "Application",
+          "ProcessID",
+          "SwapChainAddress",
+          "PresentRuntime",
+          "SyncInterval",
+          "PresentFlags",
+          "AllowsTearing",
+          "PresentMode",
+          "CPUStartTime",
+          "FrameTime",
+          "CPUBusy",
+          "CPUWait",
+          "GPULatency",
+          "GPUTime",
+          "GPUBusy",
+          "GPUWait",
+          "DisplayLatency",
+          "DisplayedTime",
+          "AnimationError",
+          "AnimationTime",
+          "MsFlipDelay",
+          "AllInputToPhotonLatency",
+          "ClickToPhotonLatency"
+        ],
+        "identity": {
+          "application": "Rtxpt.exe",
+          "process_id": "62424",
+          "swapchain": "0x1DD6D5E7AE0"
+        },
+        "selection": {
+          "target_process_frames": 30780,
+          "excluded_other_identity_frames": 0,
+          "frame_type_column_present": false,
+          "frame_type_counts": {
+            "column_unavailable": 30780
+          },
+          "allowed_frame_types": [
+            "NotSet",
+            "Original"
+          ],
+          "eligible_frames": 30780,
+          "excluded_frame_type_frames": 0,
+          "drop_tail_frames": 16,
+          "retained_last_frames": 600,
+          "selected_first_csv_line": 30166,
+          "selected_last_csv_line": 30765,
+          "cpu_start_column": "CPUStartTime",
+          "selected_first_cpu_start": "29429.9256",
+          "selected_last_cpu_start": "29960.9801"
+        },
+        "present_metadata": {
+          "PresentRuntime": [
+            "DXGI"
+          ],
+          "SyncInterval": [
+            "0"
+          ],
+          "PresentFlags": [
+            "512"
+          ],
+          "AllowsTearing": [
+            "0"
+          ],
+          "PresentMode": [
+            "Composed: Flip"
+          ]
+        },
+        "metrics": {
+          "CPUFrameTime": {
+            "status": "measured",
+            "source_column": "FrameTime",
+            "units": "ms",
+            "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.779,
+              "max_ms": 1.1907,
+              "mean_ms": 0.886597,
+              "median_ms": 0.86105,
+              "p95_ms": 1.05437,
+              "p99_ms": 1.1207639999999999,
+              "sample_stdev_ms": 0.07719400785735771
+            }
+          },
+          "CPUBusy": {
+            "status": "measured",
+            "source_column": "CPUBusy",
+            "units": "ms",
+            "meaning": "CPU work interval before present; not accumulated CPU core time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.6804,
+              "max_ms": 1.0823,
+              "mean_ms": 0.7639173333333333,
+              "median_ms": 0.74025,
+              "p95_ms": 0.9147749999999998,
+              "p99_ms": 0.996507,
+              "sample_stdev_ms": 0.06847337783408165
+            }
+          },
+          "CPUWait": {
+            "status": "measured",
+            "source_column": "CPUWait",
+            "units": "ms",
+            "meaning": "CPU waiting before starting the next frame.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0948,
+              "max_ms": 0.3795,
+              "mean_ms": 0.12267966666666667,
+              "median_ms": 0.1127,
+              "p95_ms": 0.18581499999999998,
+              "p99_ms": 0.34433699999999995,
+              "sample_stdev_ms": 0.039924430116020905
+            }
+          },
+          "GPUTime": {
+            "status": "measured",
+            "source_column": "GPUTime",
+            "units": "ms",
+            "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.3598,
+              "max_ms": 1.6351,
+              "mean_ms": 0.8865126666666666,
+              "median_ms": 0.82645,
+              "p95_ms": 1.2102349999999968,
+              "p99_ms": 1.607414,
+              "sample_stdev_ms": 0.20867694078546753
+            }
+          },
+          "GPUBusy": {
+            "status": "measured",
+            "source_column": "GPUBusy",
+            "units": "ms",
+            "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.3565,
+              "max_ms": 1.6327,
+              "mean_ms": 0.882198,
+              "median_ms": 0.8221,
+              "p95_ms": 1.2054499999999968,
+              "p99_ms": 1.605113,
+              "sample_stdev_ms": 0.20898336226960554
+            }
+          },
+          "GPUWait": {
+            "status": "measured",
+            "source_column": "GPUWait",
+            "units": "ms",
+            "meaning": "GPU idle time inside the frame GPU interval.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0014,
+              "max_ms": 0.0093,
+              "mean_ms": 0.004314666666666666,
+              "median_ms": 0.0046,
+              "p95_ms": 0.0052,
+              "p99_ms": 0.006500999999999999,
+              "sample_stdev_ms": 0.0009342231230430283
+            }
+          },
+          "GPULatency": {
+            "status": "measured",
+            "source_column": "GPULatency",
+            "units": "ms",
+            "meaning": "CPU frame start until GPU work begins; not GPU execution time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.6157,
+              "max_ms": 2.5129,
+              "mean_ms": 1.693478,
+              "median_ms": 1.7039499999999999,
+              "p95_ms": 2.0824049999999996,
+              "p99_ms": 2.379121,
+              "sample_stdev_ms": 0.2672380129059172
+            }
+          },
+          "DisplayedTime": {
+            "status": "measured",
+            "source_column": "DisplayedTime",
+            "units": "ms",
+            "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time.",
+            "valid_frames": 128,
+            "missing_frames": 472,
+            "statistics": {
+              "count": 128,
+              "min_ms": 4.0813,
+              "max_ms": 4.2518,
+              "mean_ms": 4.16628515625,
+              "median_ms": 4.16525,
+              "p95_ms": 4.209639999999999,
+              "p99_ms": 4.249018,
+              "sample_stdev_ms": 0.027518120271604336
+            }
+          },
+          "DisplayLatency": {
+            "status": "measured",
+            "source_column": "DisplayLatency",
+            "units": "ms",
+            "meaning": "CPU frame start until display; not GPU execution time.",
+            "valid_frames": 128,
+            "missing_frames": 472,
+            "statistics": {
+              "count": 128,
+              "min_ms": 9.8387,
+              "max_ms": 12.08,
+              "mean_ms": 11.14187421875,
+              "median_ms": 11.231200000000001,
+              "p95_ms": 11.58616,
+              "p99_ms": 11.798365,
+              "sample_stdev_ms": 0.3307822816204497
+            }
+          }
+        },
+        "limitations": [
+          "Frame-row selection does not prove no image writes or steady state; verify the capture manifest and timing boundary.",
+          "If FrameType is unavailable, generated-frame exclusion is not established by this CSV. Disable frame generation in the renderer and record that setting.",
+          "No explicit trace-loss event count is inferred from frame data.",
+          "PresentMon metrics have different scopes; GPUTime, GPUBusy and CPUFrameTime are not interchangeable."
+        ]
+      }
+    ],
+    "summary": {
+      "CPUFrameTime": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 0.8743,
+        "median_of_run_p95s_ms": 1.05814,
+        "run_median_ci95": {
+          "low_ms": 0.86105,
+          "high_ms": 0.87485,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "CPUBusy": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU work interval before present; not accumulated CPU core time.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 0.7712,
+        "median_of_run_p95s_ms": 0.9194399999999991,
+        "run_median_ci95": {
+          "low_ms": 0.74025,
+          "high_ms": 0.77225,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "CPUWait": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU waiting before starting the next frame.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 0.1014,
+        "median_of_run_p95s_ms": 0.14562499999999998,
+        "run_median_ci95": {
+          "low_ms": 0.1009,
+          "high_ms": 0.1127,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "GPUTime": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 0.8371,
+        "median_of_run_p95s_ms": 1.052315,
+        "run_median_ci95": {
+          "low_ms": 0.82645,
+          "high_ms": 0.83755,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "GPUBusy": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 0.83075,
+        "median_of_run_p95s_ms": 1.0472,
+        "run_median_ci95": {
+          "low_ms": 0.8221,
+          "high_ms": 0.8312,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "GPUWait": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "GPU idle time inside the frame GPU interval.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 0.0047,
+        "median_of_run_p95s_ms": 0.012209999999999992,
+        "run_median_ci95": {
+          "low_ms": 0.0046,
+          "high_ms": 0.0048,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "GPULatency": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU frame start until GPU work begins; not GPU execution time.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 1.3314,
+        "median_of_run_p95s_ms": 1.9401899999999999,
+        "run_median_ci95": {
+          "low_ms": 1.2981500000000001,
+          "high_ms": 1.7039499999999999,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "DisplayedTime": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 4.1656,
+        "median_of_run_p95s_ms": 4.20192,
+        "run_median_ci95": {
+          "low_ms": 4.16525,
+          "high_ms": 4.16665,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "DisplayLatency": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU frame start until display; not GPU execution time.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 10.73,
+        "median_of_run_p95s_ms": 11.53078,
+        "run_median_ci95": {
+          "low_ms": 10.6607,
+          "high_ms": 11.231200000000001,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      }
+    },
+    "limitations": [
+      "Each supplied CSV must represent one independent process invocation. Cross-run source/scene/configuration identity needs manifests.",
+      "Fewer than five process repetitions is exploratory under the project protocol.",
+      "This tool emits no total GPU FPS or generated-frame throughput inference."
+    ]
+  },
+  "convergence": {
+    "schema_version": 1,
+    "kind": "presentmon_group",
+    "label": "B0/PT-only raw override",
+    "tool": "PresentMon 2.x CSV; exact executable/version/checksum belong in run manifest",
+    "selection_policy": {
+      "process_name": "Rtxpt.exe",
+      "last_n": 600,
+      "drop_tail": 16,
+      "allowed_frame_types": [
+        "NotSet",
+        "Original"
+      ]
+    },
+    "process_runs": 3,
+    "present_configuration": {
+      "PresentRuntime": [
+        "DXGI"
+      ],
+      "SyncInterval": [
+        "0"
+      ],
+      "AllowsTearing": [
+        "0"
+      ],
+      "PresentMode": [
+        "Composed: Flip"
+      ]
+    },
+    "runs": [
+      {
+        "file": "presentmon.csv",
+        "sha256": "38393e0d95ec814de3904671678e594748197da1da821e1269e96b738f354a81",
+        "source_columns": [
+          "Application",
+          "ProcessID",
+          "SwapChainAddress",
+          "PresentRuntime",
+          "SyncInterval",
+          "PresentFlags",
+          "AllowsTearing",
+          "PresentMode",
+          "CPUStartTime",
+          "FrameTime",
+          "CPUBusy",
+          "CPUWait",
+          "GPULatency",
+          "GPUTime",
+          "GPUBusy",
+          "GPUWait",
+          "DisplayLatency",
+          "DisplayedTime",
+          "AnimationError",
+          "AnimationTime",
+          "MsFlipDelay",
+          "AllInputToPhotonLatency",
+          "ClickToPhotonLatency"
+        ],
+        "identity": {
+          "application": "Rtxpt.exe",
+          "process_id": "20536",
+          "swapchain": "0x22C454C4AB0"
+        },
+        "selection": {
+          "target_process_frames": 11852,
+          "excluded_other_identity_frames": 0,
+          "frame_type_column_present": false,
+          "frame_type_counts": {
+            "column_unavailable": 11852
+          },
+          "allowed_frame_types": [
+            "NotSet",
+            "Original"
+          ],
+          "eligible_frames": 11852,
+          "excluded_frame_type_frames": 0,
+          "drop_tail_frames": 16,
+          "retained_last_frames": 600,
+          "selected_first_csv_line": 11238,
+          "selected_last_csv_line": 11837,
+          "cpu_start_column": "CPUStartTime",
+          "selected_first_cpu_start": "28431.1349",
+          "selected_last_cpu_start": "29927.0681"
+        },
+        "present_metadata": {
+          "PresentRuntime": [
+            "DXGI"
+          ],
+          "SyncInterval": [
+            "0"
+          ],
+          "PresentFlags": [
+            "512"
+          ],
+          "AllowsTearing": [
+            "0"
+          ],
+          "PresentMode": [
+            "Composed: Flip"
+          ]
+        },
+        "metrics": {
+          "CPUFrameTime": {
+            "status": "measured",
+            "source_column": "FrameTime",
+            "units": "ms",
+            "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.8275,
+              "max_ms": 11.995,
+              "mean_ms": 2.4972515,
+              "median_ms": 2.4667,
+              "p95_ms": 2.8202049999999996,
+              "p99_ms": 3.0304519999999995,
+              "sample_stdev_ms": 0.6212195905345037
+            }
+          },
+          "CPUBusy": {
+            "status": "measured",
+            "source_column": "CPUBusy",
+            "units": "ms",
+            "meaning": "CPU work interval before present; not accumulated CPU core time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.7231,
+              "max_ms": 11.8779,
+              "mean_ms": 2.377346333333333,
+              "median_ms": 2.3470500000000003,
+              "p95_ms": 2.7015249999999997,
+              "p99_ms": 2.929164,
+              "sample_stdev_ms": 0.6199094615512468
+            }
+          },
+          "CPUWait": {
+            "status": "measured",
+            "source_column": "CPUWait",
+            "units": "ms",
+            "meaning": "CPU waiting before starting the next frame.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0958,
+              "max_ms": 0.3335,
+              "mean_ms": 0.11990516666666666,
+              "median_ms": 0.11365,
+              "p95_ms": 0.182915,
+              "p99_ms": 0.292906,
+              "sample_stdev_ms": 0.03247399560607319
+            }
+          },
+          "GPUTime": {
+            "status": "measured",
+            "source_column": "GPUTime",
+            "units": "ms",
+            "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 1.7767,
+              "max_ms": 3.1972,
+              "mean_ms": 2.479356166666667,
+              "median_ms": 2.52075,
+              "p95_ms": 2.872614999999997,
+              "p99_ms": 3.139205,
+              "sample_stdev_ms": 0.22616822456963429
+            }
+          },
+          "GPUBusy": {
+            "status": "measured",
+            "source_column": "GPUBusy",
+            "units": "ms",
+            "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 1.7725,
+              "max_ms": 3.1952,
+              "mean_ms": 2.4751303333333334,
+              "median_ms": 2.5172499999999998,
+              "p95_ms": 2.868444999999997,
+              "p99_ms": 3.137201,
+              "sample_stdev_ms": 0.22653081290458973
+            }
+          },
+          "GPUWait": {
+            "status": "measured",
+            "source_column": "GPUWait",
+            "units": "ms",
+            "meaning": "GPU idle time inside the frame GPU interval.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0015,
+              "max_ms": 0.0422,
+              "mean_ms": 0.004225833333333333,
+              "median_ms": 0.0039,
+              "p95_ms": 0.006404999999999996,
+              "p99_ms": 0.008803999999999998,
+              "sample_stdev_ms": 0.002816250714282801
+            }
+          },
+          "GPULatency": {
+            "status": "measured",
+            "source_column": "GPULatency",
+            "units": "ms",
+            "meaning": "CPU frame start until GPU work begins; not GPU execution time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 1.8712,
+              "max_ms": 11.617,
+              "mean_ms": 6.549219,
+              "median_ms": 6.5537,
+              "p95_ms": 7.04089,
+              "p99_ms": 7.273447,
+              "sample_stdev_ms": 0.5535473929720112
+            }
+          },
+          "DisplayedTime": {
+            "status": "measured",
+            "source_column": "DisplayedTime",
+            "units": "ms",
+            "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time.",
+            "valid_frames": 359,
+            "missing_frames": 241,
+            "statistics": {
+              "count": 359,
+              "min_ms": 4.0231,
+              "max_ms": 8.4055,
+              "mean_ms": 4.177894707520891,
+              "median_ms": 4.1665,
+              "p95_ms": 4.20344,
+              "p99_ms": 4.245176,
+              "sample_stdev_ms": 0.22526448836981558
+            }
+          },
+          "DisplayLatency": {
+            "status": "measured",
+            "source_column": "DisplayLatency",
+            "units": "ms",
+            "meaning": "CPU frame start until display; not GPU execution time.",
+            "valid_frames": 359,
+            "missing_frames": 241,
+            "statistics": {
+              "count": 359,
+              "min_ms": 13.5886,
+              "max_ms": 23.2024,
+              "mean_ms": 18.37090974930362,
+              "median_ms": 18.2946,
+              "p95_ms": 19.766450000000003,
+              "p99_ms": 19.911798,
+              "sample_stdev_ms": 0.933247766559003
+            }
+          }
+        },
+        "limitations": [
+          "Frame-row selection does not prove no image writes or steady state; verify the capture manifest and timing boundary.",
+          "If FrameType is unavailable, generated-frame exclusion is not established by this CSV. Disable frame generation in the renderer and record that setting.",
+          "No explicit trace-loss event count is inferred from frame data.",
+          "PresentMon metrics have different scopes; GPUTime, GPUBusy and CPUFrameTime are not interchangeable."
+        ]
+      },
+      {
+        "file": "presentmon.csv",
+        "sha256": "4564629cf413ad8093ce5286f4adc8a802db71a1213f316a19139b35232e07c2",
+        "source_columns": [
+          "Application",
+          "ProcessID",
+          "SwapChainAddress",
+          "PresentRuntime",
+          "SyncInterval",
+          "PresentFlags",
+          "AllowsTearing",
+          "PresentMode",
+          "CPUStartTime",
+          "FrameTime",
+          "CPUBusy",
+          "CPUWait",
+          "GPULatency",
+          "GPUTime",
+          "GPUBusy",
+          "GPUWait",
+          "DisplayLatency",
+          "DisplayedTime",
+          "AnimationError",
+          "AnimationTime",
+          "MsFlipDelay",
+          "AllInputToPhotonLatency",
+          "ClickToPhotonLatency"
+        ],
+        "identity": {
+          "application": "Rtxpt.exe",
+          "process_id": "25588",
+          "swapchain": "0x2A5E55C3C20"
+        },
+        "selection": {
+          "target_process_frames": 11369,
+          "excluded_other_identity_frames": 0,
+          "frame_type_column_present": false,
+          "frame_type_counts": {
+            "column_unavailable": 11369
+          },
+          "allowed_frame_types": [
+            "NotSet",
+            "Original"
+          ],
+          "eligible_frames": 11369,
+          "excluded_frame_type_frames": 0,
+          "drop_tail_frames": 16,
+          "retained_last_frames": 600,
+          "selected_first_csv_line": 10755,
+          "selected_last_csv_line": 11354,
+          "cpu_start_column": "CPUStartTime",
+          "selected_first_cpu_start": "28392.7208",
+          "selected_last_cpu_start": "29920.1945"
+        },
+        "present_metadata": {
+          "PresentRuntime": [
+            "DXGI"
+          ],
+          "SyncInterval": [
+            "0"
+          ],
+          "PresentFlags": [
+            "512"
+          ],
+          "AllowsTearing": [
+            "0"
+          ],
+          "PresentMode": [
+            "Composed: Flip"
+          ]
+        },
+        "metrics": {
+          "CPUFrameTime": {
+            "status": "measured",
+            "source_column": "FrameTime",
+            "units": "ms",
+            "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 1.1531,
+              "max_ms": 5.9995,
+              "mean_ms": 2.5510508333333335,
+              "median_ms": 2.52765,
+              "p95_ms": 3.00798,
+              "p99_ms": 3.6264169999999996,
+              "sample_stdev_ms": 0.32088553901334566
+            }
+          },
+          "CPUBusy": {
+            "status": "measured",
+            "source_column": "CPUBusy",
+            "units": "ms",
+            "meaning": "CPU work interval before present; not accumulated CPU core time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 1.0237,
+              "max_ms": 5.8166,
+              "mean_ms": 2.4144411666666667,
+              "median_ms": 2.3999,
+              "p95_ms": 2.819024999999999,
+              "p99_ms": 3.5146290000000002,
+              "sample_stdev_ms": 0.30715890867856427
+            }
+          },
+          "CPUWait": {
+            "status": "measured",
+            "source_column": "CPUWait",
+            "units": "ms",
+            "meaning": "CPU waiting before starting the next frame.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0959,
+              "max_ms": 1.0809,
+              "mean_ms": 0.13660966666666666,
+              "median_ms": 0.11585000000000001,
+              "p95_ms": 0.25273999999999996,
+              "p99_ms": 0.3697639999999998,
+              "sample_stdev_ms": 0.06975019203345174
+            }
+          },
+          "GPUTime": {
+            "status": "measured",
+            "source_column": "GPUTime",
+            "units": "ms",
+            "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 1.7681,
+              "max_ms": 4.1168,
+              "mean_ms": 2.55479,
+              "median_ms": 2.53435,
+              "p95_ms": 3.1515750000000002,
+              "p99_ms": 3.553499999999999,
+              "sample_stdev_ms": 0.3156481515220158
+            }
+          },
+          "GPUBusy": {
+            "status": "measured",
+            "source_column": "GPUBusy",
+            "units": "ms",
+            "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 1.7628,
+              "max_ms": 4.115,
+              "mean_ms": 2.5501015,
+              "median_ms": 2.5305999999999997,
+              "p95_ms": 3.148865,
+              "p99_ms": 3.547928999999999,
+              "sample_stdev_ms": 0.3157756932198299
+            }
+          },
+          "GPUWait": {
+            "status": "measured",
+            "source_column": "GPUWait",
+            "units": "ms",
+            "meaning": "GPU idle time inside the frame GPU interval.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0,
+              "max_ms": 0.0515,
+              "mean_ms": 0.0046885,
+              "median_ms": 0.0045,
+              "p95_ms": 0.0064,
+              "p99_ms": 0.009101999999999999,
+              "sample_stdev_ms": 0.002498270069247551
+            }
+          },
+          "GPULatency": {
+            "status": "measured",
+            "source_column": "GPULatency",
+            "units": "ms",
+            "meaning": "CPU frame start until GPU work begins; not GPU execution time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 4.4103,
+              "max_ms": 9.2869,
+              "mean_ms": 6.768857,
+              "median_ms": 6.6536,
+              "p95_ms": 7.811724999999999,
+              "p99_ms": 8.692287,
+              "sample_stdev_ms": 0.47946550933520765
+            }
+          },
+          "DisplayedTime": {
+            "status": "measured",
+            "source_column": "DisplayedTime",
+            "units": "ms",
+            "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time.",
+            "valid_frames": 368,
+            "missing_frames": 232,
+            "statistics": {
+              "count": 368,
+              "min_ms": 4.0245,
+              "max_ms": 4.3462,
+              "mean_ms": 4.166307065217391,
+              "median_ms": 4.1662,
+              "p95_ms": 4.194855,
+              "p99_ms": 4.226420999999999,
+              "sample_stdev_ms": 0.0234896638890324
+            }
+          },
+          "DisplayLatency": {
+            "status": "measured",
+            "source_column": "DisplayLatency",
+            "units": "ms",
+            "meaning": "CPU frame start until display; not GPU execution time.",
+            "valid_frames": 368,
+            "missing_frames": 232,
+            "statistics": {
+              "count": 368,
+              "min_ms": 16.8804,
+              "max_ms": 22.6425,
+              "mean_ms": 18.789025,
+              "median_ms": 18.7163,
+              "p95_ms": 20.402425,
+              "p99_ms": 21.372812999999997,
+              "sample_stdev_ms": 0.9823589254681133
+            }
+          }
+        },
+        "limitations": [
+          "Frame-row selection does not prove no image writes or steady state; verify the capture manifest and timing boundary.",
+          "If FrameType is unavailable, generated-frame exclusion is not established by this CSV. Disable frame generation in the renderer and record that setting.",
+          "No explicit trace-loss event count is inferred from frame data.",
+          "PresentMon metrics have different scopes; GPUTime, GPUBusy and CPUFrameTime are not interchangeable."
+        ]
+      },
+      {
+        "file": "presentmon.csv",
+        "sha256": "0d0aa8bfbfe2f10e105e0beba163ae422ad4e69b58b03995a4182e6944cb06fa",
+        "source_columns": [
+          "Application",
+          "ProcessID",
+          "SwapChainAddress",
+          "PresentRuntime",
+          "SyncInterval",
+          "PresentFlags",
+          "AllowsTearing",
+          "PresentMode",
+          "CPUStartTime",
+          "FrameTime",
+          "CPUBusy",
+          "CPUWait",
+          "GPULatency",
+          "GPUTime",
+          "GPUBusy",
+          "GPUWait",
+          "DisplayLatency",
+          "DisplayedTime",
+          "AnimationError",
+          "AnimationTime",
+          "MsFlipDelay",
+          "AllInputToPhotonLatency",
+          "ClickToPhotonLatency"
+        ],
+        "identity": {
+          "application": "Rtxpt.exe",
+          "process_id": "40112",
+          "swapchain": "0x24756485010"
+        },
+        "selection": {
+          "target_process_frames": 11994,
+          "excluded_other_identity_frames": 0,
+          "frame_type_column_present": false,
+          "frame_type_counts": {
+            "column_unavailable": 11994
+          },
+          "allowed_frame_types": [
+            "NotSet",
+            "Original"
+          ],
+          "eligible_frames": 11994,
+          "excluded_frame_type_frames": 0,
+          "drop_tail_frames": 16,
+          "retained_last_frames": 600,
+          "selected_first_csv_line": 11380,
+          "selected_last_csv_line": 11979,
+          "cpu_start_column": "CPUStartTime",
+          "selected_first_cpu_start": "28463.9257",
+          "selected_last_cpu_start": "29933.2450"
+        },
+        "present_metadata": {
+          "PresentRuntime": [
+            "DXGI"
+          ],
+          "SyncInterval": [
+            "0"
+          ],
+          "PresentFlags": [
+            "512"
+          ],
+          "AllowsTearing": [
+            "0"
+          ],
+          "PresentMode": [
+            "Composed: Flip"
+          ]
+        },
+        "metrics": {
+          "CPUFrameTime": {
+            "status": "measured",
+            "source_column": "FrameTime",
+            "units": "ms",
+            "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 1.9329,
+              "max_ms": 3.0851,
+              "mean_ms": 2.45291,
+              "median_ms": 2.4570499999999997,
+              "p95_ms": 2.73894,
+              "p99_ms": 2.89767,
+              "sample_stdev_ms": 0.1788948178672772
+            }
+          },
+          "CPUBusy": {
+            "status": "measured",
+            "source_column": "CPUBusy",
+            "units": "ms",
+            "meaning": "CPU work interval before present; not accumulated CPU core time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 1.8333,
+              "max_ms": 2.9855,
+              "mean_ms": 2.3359373333333333,
+              "median_ms": 2.3342,
+              "p95_ms": 2.61643,
+              "p99_ms": 2.761422,
+              "sample_stdev_ms": 0.1748952271323559
+            }
+          },
+          "CPUWait": {
+            "status": "measured",
+            "source_column": "CPUWait",
+            "units": "ms",
+            "meaning": "CPU waiting before starting the next frame.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0966,
+              "max_ms": 0.3679,
+              "mean_ms": 0.11697266666666667,
+              "median_ms": 0.1134,
+              "p95_ms": 0.15427499999999994,
+              "p99_ms": 0.303305,
+              "sample_stdev_ms": 0.029940464903202856
+            }
+          },
+          "GPUTime": {
+            "status": "measured",
+            "source_column": "GPUTime",
+            "units": "ms",
+            "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 1.7665,
+              "max_ms": 3.4282,
+              "mean_ms": 2.452413,
+              "median_ms": 2.4949000000000003,
+              "p95_ms": 2.967215,
+              "p99_ms": 3.127637,
+              "sample_stdev_ms": 0.24379813764163422
+            }
+          },
+          "GPUBusy": {
+            "status": "measured",
+            "source_column": "GPUBusy",
+            "units": "ms",
+            "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 1.763,
+              "max_ms": 3.4265,
+              "mean_ms": 2.4482583333333334,
+              "median_ms": 2.49105,
+              "p95_ms": 2.9629299999999996,
+              "p99_ms": 3.125538,
+              "sample_stdev_ms": 0.2440823461116374
+            }
+          },
+          "GPUWait": {
+            "status": "measured",
+            "source_column": "GPUWait",
+            "units": "ms",
+            "meaning": "GPU idle time inside the frame GPU interval.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0,
+              "max_ms": 0.0268,
+              "mean_ms": 0.004154666666666667,
+              "median_ms": 0.0041,
+              "p95_ms": 0.006204999999999995,
+              "p99_ms": 0.007300999999999999,
+              "sample_stdev_ms": 0.0015159072685910467
+            }
+          },
+          "GPULatency": {
+            "status": "measured",
+            "source_column": "GPULatency",
+            "units": "ms",
+            "meaning": "CPU frame start until GPU work begins; not GPU execution time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 6.0954,
+              "max_ms": 7.4677,
+              "mean_ms": 6.517473666666667,
+              "median_ms": 6.48285,
+              "p95_ms": 6.946415,
+              "p99_ms": 7.297281999999999,
+              "sample_stdev_ms": 0.22209556209973266
+            }
+          },
+          "DisplayedTime": {
+            "status": "measured",
+            "source_column": "DisplayedTime",
+            "units": "ms",
+            "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time.",
+            "valid_frames": 353,
+            "missing_frames": 247,
+            "statistics": {
+              "count": 353,
+              "min_ms": 3.501,
+              "max_ms": 4.8118,
+              "mean_ms": 4.16629150141643,
+              "median_ms": 4.1665,
+              "p95_ms": 4.20712,
+              "p99_ms": 4.248220000000001,
+              "sample_stdev_ms": 0.05544626274663506
+            }
+          },
+          "DisplayLatency": {
+            "status": "measured",
+            "source_column": "DisplayLatency",
+            "units": "ms",
+            "meaning": "CPU frame start until display; not GPU execution time.",
+            "valid_frames": 353,
+            "missing_frames": 247,
+            "statistics": {
+              "count": 353,
+              "min_ms": 16.8804,
+              "max_ms": 19.9725,
+              "mean_ms": 18.284390651558073,
+              "median_ms": 18.2607,
+              "p95_ms": 19.63064,
+              "p99_ms": 19.835639999999998,
+              "sample_stdev_ms": 0.7552242739200324
+            }
+          }
+        },
+        "limitations": [
+          "Frame-row selection does not prove no image writes or steady state; verify the capture manifest and timing boundary.",
+          "If FrameType is unavailable, generated-frame exclusion is not established by this CSV. Disable frame generation in the renderer and record that setting.",
+          "No explicit trace-loss event count is inferred from frame data.",
+          "PresentMon metrics have different scopes; GPUTime, GPUBusy and CPUFrameTime are not interchangeable."
+        ]
+      }
+    ],
+    "summary": {
+      "CPUFrameTime": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 2.4667,
+        "median_of_run_p95s_ms": 2.8202049999999996,
+        "run_median_ci95": {
+          "low_ms": 2.4570499999999997,
+          "high_ms": 2.52765,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "CPUBusy": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU work interval before present; not accumulated CPU core time.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 2.3470500000000003,
+        "median_of_run_p95s_ms": 2.7015249999999997,
+        "run_median_ci95": {
+          "low_ms": 2.3342,
+          "high_ms": 2.3999,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "CPUWait": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU waiting before starting the next frame.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 0.11365,
+        "median_of_run_p95s_ms": 0.182915,
+        "run_median_ci95": {
+          "low_ms": 0.1134,
+          "high_ms": 0.11585000000000001,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "GPUTime": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 2.52075,
+        "median_of_run_p95s_ms": 2.967215,
+        "run_median_ci95": {
+          "low_ms": 2.4949000000000003,
+          "high_ms": 2.53435,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "GPUBusy": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 2.5172499999999998,
+        "median_of_run_p95s_ms": 2.9629299999999996,
+        "run_median_ci95": {
+          "low_ms": 2.49105,
+          "high_ms": 2.5305999999999997,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "GPUWait": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "GPU idle time inside the frame GPU interval.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 0.0041,
+        "median_of_run_p95s_ms": 0.0064,
+        "run_median_ci95": {
+          "low_ms": 0.0039,
+          "high_ms": 0.0045,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "GPULatency": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU frame start until GPU work begins; not GPU execution time.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 6.5537,
+        "median_of_run_p95s_ms": 7.04089,
+        "run_median_ci95": {
+          "low_ms": 6.48285,
+          "high_ms": 6.6536,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "DisplayedTime": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 4.1665,
+        "median_of_run_p95s_ms": 4.20344,
+        "run_median_ci95": {
+          "low_ms": 4.1662,
+          "high_ms": 4.1665,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "DisplayLatency": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU frame start until display; not GPU execution time.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 18.2946,
+        "median_of_run_p95s_ms": 19.766450000000003,
+        "run_median_ci95": {
+          "low_ms": 18.2607,
+          "high_ms": 18.7163,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      }
+    },
+    "limitations": [
+      "Each supplied CSV must represent one independent process invocation. Cross-run source/scene/configuration identity needs manifests.",
+      "Fewer than five process repetitions is exploratory under the project protocol.",
+      "This tool emits no total GPU FPS or generated-frame throughput inference."
+    ]
+  },
+  "kitchen": {
+    "schema_version": 1,
+    "kind": "presentmon_group",
+    "label": "B0/PT-only raw override",
+    "tool": "PresentMon 2.x CSV; exact executable/version/checksum belong in run manifest",
+    "selection_policy": {
+      "process_name": "Rtxpt.exe",
+      "last_n": 600,
+      "drop_tail": 16,
+      "allowed_frame_types": [
+        "NotSet",
+        "Original"
+      ]
+    },
+    "process_runs": 3,
+    "present_configuration": {
+      "PresentRuntime": [
+        "DXGI"
+      ],
+      "SyncInterval": [
+        "0"
+      ],
+      "AllowsTearing": [
+        "0"
+      ],
+      "PresentMode": [
+        "Composed: Flip"
+      ]
+    },
+    "runs": [
+      {
+        "file": "presentmon.csv",
+        "sha256": "3119c19e31f1d828c7572e38db53a79925a96dde52793adc056f8493eb28e627",
+        "source_columns": [
+          "Application",
+          "ProcessID",
+          "SwapChainAddress",
+          "PresentRuntime",
+          "SyncInterval",
+          "PresentFlags",
+          "AllowsTearing",
+          "PresentMode",
+          "CPUStartTime",
+          "FrameTime",
+          "CPUBusy",
+          "CPUWait",
+          "GPULatency",
+          "GPUTime",
+          "GPUBusy",
+          "GPUWait",
+          "DisplayLatency",
+          "DisplayedTime",
+          "AnimationError",
+          "AnimationTime",
+          "MsFlipDelay",
+          "AllInputToPhotonLatency",
+          "ClickToPhotonLatency"
+        ],
+        "identity": {
+          "application": "Rtxpt.exe",
+          "process_id": "53464",
+          "swapchain": "0x276E1E6F9F0"
+        },
+        "selection": {
+          "target_process_frames": 9045,
+          "excluded_other_identity_frames": 0,
+          "frame_type_column_present": false,
+          "frame_type_counts": {
+            "column_unavailable": 9045
+          },
+          "allowed_frame_types": [
+            "NotSet",
+            "Original"
+          ],
+          "eligible_frames": 9045,
+          "excluded_frame_type_frames": 0,
+          "drop_tail_frames": 16,
+          "retained_last_frames": 600,
+          "selected_first_csv_line": 8431,
+          "selected_last_csv_line": 9030,
+          "cpu_start_column": "CPUStartTime",
+          "selected_first_cpu_start": "27966.6128",
+          "selected_last_cpu_start": "29916.6216"
+        },
+        "present_metadata": {
+          "PresentRuntime": [
+            "DXGI"
+          ],
+          "SyncInterval": [
+            "0"
+          ],
+          "PresentFlags": [
+            "512"
+          ],
+          "AllowsTearing": [
+            "0"
+          ],
+          "PresentMode": [
+            "Composed: Flip"
+          ]
+        },
+        "metrics": {
+          "CPUFrameTime": {
+            "status": "measured",
+            "source_column": "FrameTime",
+            "units": "ms",
+            "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 2.5639,
+              "max_ms": 4.0003,
+              "mean_ms": 3.2555365,
+              "median_ms": 3.2189,
+              "p95_ms": 3.7063749999999995,
+              "p99_ms": 3.944174,
+              "sample_stdev_ms": 0.22995965840099689
+            }
+          },
+          "CPUBusy": {
+            "status": "measured",
+            "source_column": "CPUBusy",
+            "units": "ms",
+            "meaning": "CPU work interval before present; not accumulated CPU core time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 2.4439,
+              "max_ms": 3.8778,
+              "mean_ms": 3.1344458333333334,
+              "median_ms": 3.09985,
+              "p95_ms": 3.5485249999999993,
+              "p99_ms": 3.7856449999999997,
+              "sample_stdev_ms": 0.22219744888978232
+            }
+          },
+          "CPUWait": {
+            "status": "measured",
+            "source_column": "CPUWait",
+            "units": "ms",
+            "meaning": "CPU waiting before starting the next frame.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0975,
+              "max_ms": 0.4463,
+              "mean_ms": 0.12109066666666667,
+              "median_ms": 0.1118,
+              "p95_ms": 0.184005,
+              "p99_ms": 0.28092099999999987,
+              "sample_stdev_ms": 0.033576518837589074
+            }
+          },
+          "GPUTime": {
+            "status": "measured",
+            "source_column": "GPUTime",
+            "units": "ms",
+            "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 2.488,
+              "max_ms": 4.2036,
+              "mean_ms": 3.2561441666666666,
+              "median_ms": 3.2323500000000003,
+              "p95_ms": 3.73298,
+              "p99_ms": 4.009981,
+              "sample_stdev_ms": 0.2510178326729769
+            }
+          },
+          "GPUBusy": {
+            "status": "measured",
+            "source_column": "GPUBusy",
+            "units": "ms",
+            "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 2.4821,
+              "max_ms": 4.2009,
+              "mean_ms": 3.2514578333333333,
+              "median_ms": 3.2276499999999997,
+              "p95_ms": 3.73026,
+              "p99_ms": 4.007448999999999,
+              "sample_stdev_ms": 0.2512127999460486
+            }
+          },
+          "GPUWait": {
+            "status": "measured",
+            "source_column": "GPUWait",
+            "units": "ms",
+            "meaning": "GPU idle time inside the frame GPU interval.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0016,
+              "max_ms": 0.029,
+              "mean_ms": 0.004686333333333333,
+              "median_ms": 0.0049,
+              "p95_ms": 0.005704999999999996,
+              "p99_ms": 0.008301,
+              "sample_stdev_ms": 0.0014731361463665791
+            }
+          },
+          "GPULatency": {
+            "status": "measured",
+            "source_column": "GPULatency",
+            "units": "ms",
+            "meaning": "CPU frame start until GPU work begins; not GPU execution time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 8.102,
+              "max_ms": 10.4449,
+              "mean_ms": 8.775875333333333,
+              "median_ms": 8.6424,
+              "p95_ms": 9.80765,
+              "p99_ms": 10.197711,
+              "sample_stdev_ms": 0.452179881980245
+            }
+          },
+          "DisplayedTime": {
+            "status": "measured",
+            "source_column": "DisplayedTime",
+            "units": "ms",
+            "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time.",
+            "valid_frames": 469,
+            "missing_frames": 131,
+            "statistics": {
+              "count": 469,
+              "min_ms": 3.6437,
+              "max_ms": 4.6813,
+              "mean_ms": 4.166258635394456,
+              "median_ms": 4.1657,
+              "p95_ms": 4.1948799999999995,
+              "p99_ms": 4.21948,
+              "sample_stdev_ms": 0.03800059596717357
+            }
+          },
+          "DisplayLatency": {
+            "status": "measured",
+            "source_column": "DisplayLatency",
+            "units": "ms",
+            "meaning": "CPU frame start until display; not GPU execution time.",
+            "valid_frames": 469,
+            "missing_frames": 131,
+            "statistics": {
+              "count": 469,
+              "min_ms": 19.8324,
+              "max_ms": 25.3443,
+              "mean_ms": 21.750231130063966,
+              "median_ms": 21.7116,
+              "p95_ms": 23.83448,
+              "p99_ms": 24.594136,
+              "sample_stdev_ms": 1.096092416448709
+            }
+          }
+        },
+        "limitations": [
+          "Frame-row selection does not prove no image writes or steady state; verify the capture manifest and timing boundary.",
+          "If FrameType is unavailable, generated-frame exclusion is not established by this CSV. Disable frame generation in the renderer and record that setting.",
+          "No explicit trace-loss event count is inferred from frame data.",
+          "PresentMon metrics have different scopes; GPUTime, GPUBusy and CPUFrameTime are not interchangeable."
+        ]
+      },
+      {
+        "file": "presentmon.csv",
+        "sha256": "7728b6abc534cf3af2503c05053fcbc298f9df12a7121a80fa5834c4072161cb",
+        "source_columns": [
+          "Application",
+          "ProcessID",
+          "SwapChainAddress",
+          "PresentRuntime",
+          "SyncInterval",
+          "PresentFlags",
+          "AllowsTearing",
+          "PresentMode",
+          "CPUStartTime",
+          "FrameTime",
+          "CPUBusy",
+          "CPUWait",
+          "GPULatency",
+          "GPUTime",
+          "GPUBusy",
+          "GPUWait",
+          "DisplayLatency",
+          "DisplayedTime",
+          "AnimationError",
+          "AnimationTime",
+          "MsFlipDelay",
+          "AllInputToPhotonLatency",
+          "ClickToPhotonLatency"
+        ],
+        "identity": {
+          "application": "Rtxpt.exe",
+          "process_id": "10188",
+          "swapchain": "0x15F5D8FACF0"
+        },
+        "selection": {
+          "target_process_frames": 9117,
+          "excluded_other_identity_frames": 0,
+          "frame_type_column_present": false,
+          "frame_type_counts": {
+            "column_unavailable": 9117
+          },
+          "allowed_frame_types": [
+            "NotSet",
+            "Original"
+          ],
+          "eligible_frames": 9117,
+          "excluded_frame_type_frames": 0,
+          "drop_tail_frames": 16,
+          "retained_last_frames": 600,
+          "selected_first_csv_line": 8503,
+          "selected_last_csv_line": 9102,
+          "cpu_start_column": "CPUStartTime",
+          "selected_first_cpu_start": "27941.4133",
+          "selected_last_cpu_start": "29926.6589"
+        },
+        "present_metadata": {
+          "PresentRuntime": [
+            "DXGI"
+          ],
+          "SyncInterval": [
+            "0"
+          ],
+          "PresentFlags": [
+            "512"
+          ],
+          "AllowsTearing": [
+            "0"
+          ],
+          "PresentMode": [
+            "Composed: Flip"
+          ]
+        },
+        "metrics": {
+          "CPUFrameTime": {
+            "status": "measured",
+            "source_column": "FrameTime",
+            "units": "ms",
+            "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 2.7777,
+              "max_ms": 4.2501,
+              "mean_ms": 3.313998,
+              "median_ms": 3.2611499999999998,
+              "p95_ms": 3.7943199999999995,
+              "p99_ms": 3.8859529999999998,
+              "sample_stdev_ms": 0.24687456683286527
+            }
+          },
+          "CPUBusy": {
+            "status": "measured",
+            "source_column": "CPUBusy",
+            "units": "ms",
+            "meaning": "CPU work interval before present; not accumulated CPU core time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 2.6725,
+              "max_ms": 4.1468,
+              "mean_ms": 3.196559,
+              "median_ms": 3.14295,
+              "p95_ms": 3.6735299999999995,
+              "p99_ms": 3.780536,
+              "sample_stdev_ms": 0.2434939772984835
+            }
+          },
+          "CPUWait": {
+            "status": "measured",
+            "source_column": "CPUWait",
+            "units": "ms",
+            "meaning": "CPU waiting before starting the next frame.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0983,
+              "max_ms": 0.3214,
+              "mean_ms": 0.117439,
+              "median_ms": 0.11095,
+              "p95_ms": 0.15160500000000002,
+              "p99_ms": 0.21681399999999978,
+              "sample_stdev_ms": 0.022125690708213516
+            }
+          },
+          "GPUTime": {
+            "status": "measured",
+            "source_column": "GPUTime",
+            "units": "ms",
+            "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 2.4873,
+              "max_ms": 4.7379,
+              "mean_ms": 3.3136211666666666,
+              "median_ms": 3.2478499999999997,
+              "p95_ms": 3.81149,
+              "p99_ms": 4.229842,
+              "sample_stdev_ms": 0.3305436386172878
+            }
+          },
+          "GPUBusy": {
+            "status": "measured",
+            "source_column": "GPUBusy",
+            "units": "ms",
+            "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 2.4827,
+              "max_ms": 4.7358,
+              "mean_ms": 3.3091341666666665,
+              "median_ms": 3.2427,
+              "p95_ms": 3.8082949999999998,
+              "p99_ms": 4.22794,
+              "sample_stdev_ms": 0.3308130319169965
+            }
+          },
+          "GPUWait": {
+            "status": "measured",
+            "source_column": "GPUWait",
+            "units": "ms",
+            "meaning": "GPU idle time inside the frame GPU interval.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0015,
+              "max_ms": 0.0274,
+              "mean_ms": 0.004487,
+              "median_ms": 0.0045,
+              "p95_ms": 0.0068,
+              "p99_ms": 0.008201,
+              "sample_stdev_ms": 0.0019836723334624197
+            }
+          },
+          "GPULatency": {
+            "status": "measured",
+            "source_column": "GPULatency",
+            "units": "ms",
+            "meaning": "CPU frame start until GPU work begins; not GPU execution time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 8.2068,
+              "max_ms": 11.0574,
+              "mean_ms": 8.981044,
+              "median_ms": 8.745999999999999,
+              "p95_ms": 10.233795,
+              "p99_ms": 10.628067,
+              "sample_stdev_ms": 0.6020965151756357
+            }
+          },
+          "DisplayedTime": {
+            "status": "measured",
+            "source_column": "DisplayedTime",
+            "units": "ms",
+            "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time.",
+            "valid_frames": 477,
+            "missing_frames": 123,
+            "statistics": {
+              "count": 477,
+              "min_ms": 4.0729,
+              "max_ms": 4.2503,
+              "mean_ms": 4.16627358490566,
+              "median_ms": 4.1665,
+              "p95_ms": 4.19984,
+              "p99_ms": 4.235596,
+              "sample_stdev_ms": 0.022419377833864777
+            }
+          },
+          "DisplayLatency": {
+            "status": "measured",
+            "source_column": "DisplayLatency",
+            "units": "ms",
+            "meaning": "CPU frame start until display; not GPU execution time.",
+            "valid_frames": 477,
+            "missing_frames": 123,
+            "statistics": {
+              "count": 477,
+              "min_ms": 19.8474,
+              "max_ms": 26.1498,
+              "mean_ms": 22.102840880503145,
+              "median_ms": 21.9937,
+              "p95_ms": 24.5695,
+              "p99_ms": 25.382160000000002,
+              "sample_stdev_ms": 1.2700526646699961
+            }
+          }
+        },
+        "limitations": [
+          "Frame-row selection does not prove no image writes or steady state; verify the capture manifest and timing boundary.",
+          "If FrameType is unavailable, generated-frame exclusion is not established by this CSV. Disable frame generation in the renderer and record that setting.",
+          "No explicit trace-loss event count is inferred from frame data.",
+          "PresentMon metrics have different scopes; GPUTime, GPUBusy and CPUFrameTime are not interchangeable."
+        ]
+      },
+      {
+        "file": "presentmon.csv",
+        "sha256": "ea4089421bb92bc87fbd7cdca11dd4f45e4a04fac3f6f4777c083a136d1671e8",
+        "source_columns": [
+          "Application",
+          "ProcessID",
+          "SwapChainAddress",
+          "PresentRuntime",
+          "SyncInterval",
+          "PresentFlags",
+          "AllowsTearing",
+          "PresentMode",
+          "CPUStartTime",
+          "FrameTime",
+          "CPUBusy",
+          "CPUWait",
+          "GPULatency",
+          "GPUTime",
+          "GPUBusy",
+          "GPUWait",
+          "DisplayLatency",
+          "DisplayedTime",
+          "AnimationError",
+          "AnimationTime",
+          "MsFlipDelay",
+          "AllInputToPhotonLatency",
+          "ClickToPhotonLatency"
+        ],
+        "identity": {
+          "application": "Rtxpt.exe",
+          "process_id": "50660",
+          "swapchain": "0x1AC495E3DF0"
+        },
+        "selection": {
+          "target_process_frames": 9234,
+          "excluded_other_identity_frames": 0,
+          "frame_type_column_present": false,
+          "frame_type_counts": {
+            "column_unavailable": 9234
+          },
+          "allowed_frame_types": [
+            "NotSet",
+            "Original"
+          ],
+          "eligible_frames": 9234,
+          "excluded_frame_type_frames": 0,
+          "drop_tail_frames": 16,
+          "retained_last_frames": 600,
+          "selected_first_csv_line": 8620,
+          "selected_last_csv_line": 9219,
+          "cpu_start_column": "CPUStartTime",
+          "selected_first_cpu_start": "27703.3050",
+          "selected_last_cpu_start": "29912.3337"
+        },
+        "present_metadata": {
+          "PresentRuntime": [
+            "DXGI"
+          ],
+          "SyncInterval": [
+            "0"
+          ],
+          "PresentFlags": [
+            "512"
+          ],
+          "AllowsTearing": [
+            "0"
+          ],
+          "PresentMode": [
+            "Composed: Flip"
+          ]
+        },
+        "metrics": {
+          "CPUFrameTime": {
+            "status": "measured",
+            "source_column": "FrameTime",
+            "units": "ms",
+            "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 1.331,
+              "max_ms": 5.2923,
+              "mean_ms": 3.687662,
+              "median_ms": 3.59145,
+              "p95_ms": 4.581179999999999,
+              "p99_ms": 4.994358,
+              "sample_stdev_ms": 0.5735422600204647
+            }
+          },
+          "CPUBusy": {
+            "status": "measured",
+            "source_column": "CPUBusy",
+            "units": "ms",
+            "meaning": "CPU work interval before present; not accumulated CPU core time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 1.1915,
+              "max_ms": 5.1717,
+              "mean_ms": 3.529577833333333,
+              "median_ms": 3.43585,
+              "p95_ms": 4.383729999999999,
+              "p99_ms": 4.854871,
+              "sample_stdev_ms": 0.5530328018226331
+            }
+          },
+          "CPUWait": {
+            "status": "measured",
+            "source_column": "CPUWait",
+            "units": "ms",
+            "meaning": "CPU waiting before starting the next frame.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0999,
+              "max_ms": 0.5136,
+              "mean_ms": 0.15808416666666666,
+              "median_ms": 0.1277,
+              "p95_ms": 0.3061199999999999,
+              "p99_ms": 0.403603,
+              "sample_stdev_ms": 0.06881994435147262
+            }
+          },
+          "GPUTime": {
+            "status": "measured",
+            "source_column": "GPUTime",
+            "units": "ms",
+            "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 2.4686,
+              "max_ms": 6.1709,
+              "mean_ms": 3.6877788333333332,
+              "median_ms": 3.5321,
+              "p95_ms": 4.548869999999999,
+              "p99_ms": 5.490123,
+              "sample_stdev_ms": 0.6237835123013463
+            }
+          },
+          "GPUBusy": {
+            "status": "measured",
+            "source_column": "GPUBusy",
+            "units": "ms",
+            "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 2.4666,
+              "max_ms": 6.1665,
+              "mean_ms": 3.6833648333333335,
+              "median_ms": 3.527,
+              "p95_ms": 4.544479999999999,
+              "p99_ms": 5.482005,
+              "sample_stdev_ms": 0.6238144094807085
+            }
+          },
+          "GPUWait": {
+            "status": "measured",
+            "source_column": "GPUWait",
+            "units": "ms",
+            "meaning": "GPU idle time inside the frame GPU interval.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 0.0,
+              "max_ms": 0.0429,
+              "mean_ms": 0.004414,
+              "median_ms": 0.0042,
+              "p95_ms": 0.006804999999999995,
+              "p99_ms": 0.0089,
+              "sample_stdev_ms": 0.0021583948775449674
+            }
+          },
+          "GPULatency": {
+            "status": "measured",
+            "source_column": "GPULatency",
+            "units": "ms",
+            "meaning": "CPU frame start until GPU work begins; not GPU execution time.",
+            "valid_frames": 600,
+            "missing_frames": 0,
+            "statistics": {
+              "count": 600,
+              "min_ms": 6.792,
+              "max_ms": 13.8054,
+              "mean_ms": 10.028498333333333,
+              "median_ms": 9.7143,
+              "p95_ms": 12.43705,
+              "p99_ms": 13.265813000000001,
+              "sample_stdev_ms": 1.5235326369188213
+            }
+          },
+          "DisplayedTime": {
+            "status": "measured",
+            "source_column": "DisplayedTime",
+            "units": "ms",
+            "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time.",
+            "valid_frames": 515,
+            "missing_frames": 85,
+            "statistics": {
+              "count": 515,
+              "min_ms": 3.9303,
+              "max_ms": 8.4143,
+              "mean_ms": 4.295782524271845,
+              "median_ms": 4.1673,
+              "p95_ms": 4.22561,
+              "p99_ms": 8.344472,
+              "sample_stdev_ms": 0.7248100149070575
+            }
+          },
+          "DisplayLatency": {
+            "status": "measured",
+            "source_column": "DisplayLatency",
+            "units": "ms",
+            "meaning": "CPU frame start until display; not GPU execution time.",
+            "valid_frames": 515,
+            "missing_frames": 85,
+            "statistics": {
+              "count": 515,
+              "min_ms": 18.5223,
+              "max_ms": 29.8616,
+              "mean_ms": 23.615033980582524,
+              "median_ms": 24.1734,
+              "p95_ms": 27.593119999999992,
+              "p99_ms": 28.7308,
+              "sample_stdev_ms": 2.209314383805299
+            }
+          }
+        },
+        "limitations": [
+          "Frame-row selection does not prove no image writes or steady state; verify the capture manifest and timing boundary.",
+          "If FrameType is unavailable, generated-frame exclusion is not established by this CSV. Disable frame generation in the renderer and record that setting.",
+          "No explicit trace-loss event count is inferred from frame data.",
+          "PresentMon metrics have different scopes; GPUTime, GPUBusy and CPUFrameTime are not interchangeable."
+        ]
+      }
+    ],
+    "summary": {
+      "CPUFrameTime": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU frame-start cadence, including CPU busy/wait. Not GPU work duration or display duration.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 3.2611499999999998,
+        "median_of_run_p95s_ms": 3.7943199999999995,
+        "run_median_ci95": {
+          "low_ms": 3.2189,
+          "high_ms": 3.59145,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "CPUBusy": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU work interval before present; not accumulated CPU core time.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 3.14295,
+        "median_of_run_p95s_ms": 3.6735299999999995,
+        "run_median_ci95": {
+          "low_ms": 3.09985,
+          "high_ms": 3.43585,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "CPUWait": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU waiting before starting the next frame.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 0.1118,
+        "median_of_run_p95s_ms": 0.184005,
+        "run_median_ci95": {
+          "low_ms": 0.11095,
+          "high_ms": 0.1277,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "GPUTime": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "GPU frame interval including GPU wait; distinct from GPU active-engine duration.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 3.2478499999999997,
+        "median_of_run_p95s_ms": 3.81149,
+        "run_median_ci95": {
+          "low_ms": 3.2323500000000003,
+          "high_ms": 3.5321,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "GPUBusy": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "Time with at least one target-process GPU engine active. Not utilization percent, exclusive feature cost or total GPU frame latency.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 3.2427,
+        "median_of_run_p95s_ms": 3.8082949999999998,
+        "run_median_ci95": {
+          "low_ms": 3.2276499999999997,
+          "high_ms": 3.527,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "GPUWait": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "GPU idle time inside the frame GPU interval.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 0.0045,
+        "median_of_run_p95s_ms": 0.0068,
+        "run_median_ci95": {
+          "low_ms": 0.0042,
+          "high_ms": 0.0049,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "GPULatency": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU frame start until GPU work begins; not GPU execution time.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 8.745999999999999,
+        "median_of_run_p95s_ms": 10.233795,
+        "run_median_ci95": {
+          "low_ms": 8.6424,
+          "high_ms": 9.7143,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "DisplayedTime": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "Display residence time; unavailable for frames not displayed. Not renderer execution time.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 4.1665,
+        "median_of_run_p95s_ms": 4.19984,
+        "run_median_ci95": {
+          "low_ms": 4.1657,
+          "high_ms": 4.1673,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      "DisplayLatency": {
+        "status": "measured",
+        "units": "ms",
+        "meaning": "CPU frame start until display; not GPU execution time.",
+        "measured_process_runs": 3,
+        "median_of_run_medians_ms": 21.9937,
+        "median_of_run_p95s_ms": 24.5695,
+        "run_median_ci95": {
+          "low_ms": 21.7116,
+          "high_ms": 24.1734,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      }
+    },
+    "limitations": [
+      "Each supplied CSV must represent one independent process invocation. Cross-run source/scene/configuration identity needs manifests.",
+      "Fewer than five process repetitions is exploratory under the project protocol.",
+      "This tool emits no total GPU FPS or generated-frame throughput inference."
+    ]
+  }
+}
