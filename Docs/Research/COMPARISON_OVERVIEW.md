@@ -2,7 +2,7 @@
 
 **Current implementation status:** The opt-in one-neighbor spatial replay queue now passes11captured-frame GPU oracles, including Convergence244654replays and Kitchen41032replays. Every packed-history word and vector-radiance bit matches its same-frame direct control. Native and direct-pair queue-disabled regressions pass. Queue performance, queue-only temporal-history sequences and full B10 acceptance remain pending. [Detailed queue checkpoint](B10_GAUSSIAN_PAIRING.md#replay-compaction--active-implementation-checkpoint).
 
-All eleven canonical versions appear below for each required scene. Performance, quality and representative pictures share the same row. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; a raw native-control preset does not replace its original defaults.
+All eleven canonical versions appear below for each required scene. **The latest measured checkpoints now appear directly under B0 and B10 in these tables.** B10 Gaussian timing, Gaussian quality and replay-queue validation have separate rows because they are different acquisitions. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; its PT-only control is explicitly labelled as an override.
 
 GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Rows from different cohorts are descriptive: settings and sampling policies must be checked before computing a relative gain. Known app/NVIDIA/RTSS cap boundaries were verified for accepted current timing cohorts; unknown external limiters and background load remain limitations.
 
@@ -10,11 +10,12 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 
 ## Controlled room — registered environment
 
-640×360,1spp,3/3 bounce limits; opaque-room-registered-env.scene.json. This is a distinct fixture from the legacy no-environment room. Native controls retain their DI/MIS policies; B6/B7 use their documented PT/strict-DI policies.
+Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.scene.json. New checkpoint rows explicitly use4/4; the queue snapshot is176x90. This is a distinct fixture from the legacy no-environment room. Native controls retain their DI/MIS policies; B6/B7 use their documented PT/strict-DI policies.
 
 | Version | Algorithm | GPU busy ms ↓ | LDR-FLIP ↓ | HDR-FLIP ↓ | Picture | Evidence status |
 |---|---|---:|---:|---:|---|---|
 | **B0** | Unchanged RTXPT v1.9 reference: original defaults and dependencies | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **↳ B0 · PT-only control** | RTXPT1.9 native PT; ReSTIR DI/GI/PT off; native NEE on | 0.831 | 0.121162 | Unavailable | [![B0 · PT-only control opaque-room](assets/native-pt-only/opaque-room.png)](assets/native-pt-only/opaque-room.png) | [Measured override; original defaults preserved. Room4/4; originals14/2.](NATIVE_MATRIX_RESULTS.md) |
 | **B1** | v1.9 native PT + ReSTIR DI3.0; GI off | 1.283 | 0.121484 | Unavailable | [![B1 opaque-room representative capture](assets/registered-room/B1.png)](assets/registered-room/B1.png) | [measured](REGISTERED_ROOM_RESULTS.md) |
 | **B2** | v1.9 native PT + ReSTIR DI3.0 + ReSTIR GI3.0 | 1.441 | 0.094603 | Unavailable | [![B2 opaque-room representative capture](assets/native-matrix/opaque-room-B2.png)](assets/native-matrix/opaque-room-B2.png) | [measured known caps verified](NATIVE_MATRIX_RESULTS.md) |
 | **B3** | Native PT with RTXDI3.1 linked; DI/GI off | 0.805 | 0.116744 | Unavailable | [![B3 opaque-room representative capture](assets/native-matrix/opaque-room-B3.png)](assets/native-matrix/opaque-room-B3.png) | [measured known caps verified](NATIVE_MATRIX_RESULTS.md) |
@@ -25,6 +26,9 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 | **B8** | B8 development: DI + GI-short initial + PT-long | Unavailable | Unavailable | Unavailable | [![B8 opaque-room representative capture](assets/b8-staged/sum.png)](assets/b8-staged/sum.png) | [low resolution development not accepted](B8_STAGED_IMPLEMENTATION.md) |
 | **B9** | B9 development: initial-GI split + footprint/roulette | Unavailable | Unavailable | Unavailable | [![B9 opaque-room representative capture](assets/b8-staged/limited-ptpp.png)](assets/b8-staged/limited-ptpp.png) | [development not accepted](B8_STAGED_IMPLEMENTATION.md) |
 | **B10** | B10 development: initial-GI split + Gaussian pair/vector pilot | Unavailable | Unavailable | Unavailable | [![B10 opaque-room representative capture](assets/b10-gaussian/room.png)](assets/b10-gaussian/room.png) | [development not accepted](B10_GAUSSIAN_PAIRING.md) |
+| **↳ B10 · Gaussian timing** | DI initial + GI initial + paired/vector PT; one Gaussian neighbor | 1.591 | Unavailable | Unavailable | No images during timing | [3 timed processes; quality is a separate row. Room4/4; originals14/2.](B10_GAUSSIAN_PAIRING.md) |
+| **↳ B10 · Gaussian quality** | One-neighbor paired/vector PT; GI initial only | Unavailable | 0.096257 | 0.159373 | [![B10 · Gaussian quality opaque-room](assets/b10-gaussian/room.png)](assets/b10-gaussian/room.png) | [Quality-only cohort: 64-frame sequence, cap4/4.](B10_GAUSSIAN_PAIRING.md) |
+| **↳ B10 · Replay queue** | One-neighbor spatial replay queue; DI/GI initial | Unavailable | Unavailable | Unavailable | [![B10 · Replay queue opaque-room](assets/b10-queue/opaque-room.png)](assets/b10-queue/opaque-room.png) | [Exact snapshot: 176x90, cap4/4, 0 replays,0 mismatches. Timing/quality scores pending.](B10_GAUSSIAN_PAIRING.md) |
 
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -49,6 +53,7 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 | Version | Algorithm | GPU busy ms ↓ | LDR-FLIP ↓ | HDR-FLIP ↓ | Picture | Evidence status |
 |---|---|---:|---:|---:|---|---|
 | **B0** | Unchanged RTXPT v1.9 reference: original defaults and dependencies | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **↳ B0 · PT-only control** | RTXPT1.9 native PT; ReSTIR DI/GI/PT off; native NEE on | 2.517 | 0.372227 | Unavailable | [![B0 · PT-only control convergence](assets/native-pt-only/convergence.png)](assets/native-pt-only/convergence.png) | [Measured override; original defaults preserved. Room4/4; originals14/2.](NATIVE_MATRIX_RESULTS.md) |
 | **B1** | v1.9 native PT + ReSTIR DI3.0; GI off | 3.796 | 0.341609 | Unavailable | [![B1 convergence representative capture](assets/canonical-native-di/convergence-B1.png)](assets/canonical-native-di/convergence-B1.png) | [measured](CANONICAL_NATIVE_DI_RESULTS.md) |
 | **B2** | v1.9 native PT + ReSTIR DI3.0 + ReSTIR GI3.0 | 4.510 | 0.243459 | Unavailable | [![B2 convergence representative capture](assets/native-matrix/convergence-B2.png)](assets/native-matrix/convergence-B2.png) | [measured known caps verified](NATIVE_MATRIX_RESULTS.md) |
 | **B3** | Native PT with RTXDI3.1 linked; DI/GI off | 2.565 | 0.375281 | Unavailable | [![B3 convergence representative capture](assets/native-matrix/convergence-B3.png)](assets/native-matrix/convergence-B3.png) | [measured known caps verified](NATIVE_MATRIX_RESULTS.md) |
@@ -59,6 +64,9 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 | **B8** | B8 development: DI + GI-short initial + PT-long | Unavailable | Unavailable | Unavailable | [![B8 convergence representative capture](assets/b8-staged/convergence.png)](assets/b8-staged/convergence.png) | [low resolution development not accepted](B8_STAGED_IMPLEMENTATION.md) |
 | **B9** | B9 development: initial-GI split + footprint/roulette | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](B8_STAGED_IMPLEMENTATION.md) |
 | **B10** | B10 development: initial-GI split + Gaussian pair/vector pilot | Unavailable | Unavailable | Unavailable | [![B10 convergence representative capture](assets/b10-gaussian/convergence.png)](assets/b10-gaussian/convergence.png) | [development not accepted](B10_GAUSSIAN_PAIRING.md) |
+| **↳ B10 · Gaussian timing** | DI initial + GI initial + paired/vector PT; one Gaussian neighbor | 7.184 | Unavailable | Unavailable | No images during timing | [3 timed processes; quality is a separate row. Room4/4; originals14/2.](B10_GAUSSIAN_PAIRING.md) |
+| **↳ B10 · Gaussian quality** | One-neighbor paired/vector PT; GI initial only | Unavailable | 0.351035 | 0.536508 | [![B10 · Gaussian quality convergence](assets/b10-gaussian/convergence.png)](assets/b10-gaussian/convergence.png) | [Quality-only cohort: 1 image,8 warmup frames, cap14/2.](B10_GAUSSIAN_PAIRING.md) |
+| **↳ B10 · Replay queue** | One-neighbor spatial replay queue; DI/GI initial | Unavailable | Unavailable | Unavailable | [![B10 · Replay queue convergence](assets/b10-queue/convergence.png)](assets/b10-queue/convergence.png) | [Exact snapshot: 1280x720, cap14/2, 244654 replays,0 mismatches. Timing/quality scores pending.](B10_GAUSSIAN_PAIRING.md) |
 
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -83,6 +91,7 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 | Version | Algorithm | GPU busy ms ↓ | LDR-FLIP ↓ | HDR-FLIP ↓ | Picture | Evidence status |
 |---|---|---:|---:|---:|---|---|
 | **B0** | Unchanged RTXPT v1.9 reference: original defaults and dependencies | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **↳ B0 · PT-only control** | RTXPT1.9 native PT; ReSTIR DI/GI/PT off; native NEE on | 3.243 | 0.376870 | Unavailable | [![B0 · PT-only control kitchen](assets/native-pt-only/kitchen.png)](assets/native-pt-only/kitchen.png) | [Measured override; original defaults preserved. Room4/4; originals14/2.](NATIVE_MATRIX_RESULTS.md) |
 | **B1** | v1.9 native PT + ReSTIR DI3.0; GI off | 4.455 | 0.386252 | Unavailable | [![B1 kitchen representative capture](assets/canonical-native-di/kitchen-B1.png)](assets/canonical-native-di/kitchen-B1.png) | [measured](CANONICAL_NATIVE_DI_RESULTS.md) |
 | **B2** | v1.9 native PT + ReSTIR DI3.0 + ReSTIR GI3.0 | 5.370 | 0.352840 | Unavailable | [![B2 kitchen representative capture](assets/native-matrix/kitchen-B2.png)](assets/native-matrix/kitchen-B2.png) | [measured known caps verified](NATIVE_MATRIX_RESULTS.md) |
 | **B3** | Native PT with RTXDI3.1 linked; DI/GI off | 3.258 | 0.382364 | Unavailable | [![B3 kitchen representative capture](assets/native-matrix/kitchen-B3.png)](assets/native-matrix/kitchen-B3.png) | [measured known caps verified](NATIVE_MATRIX_RESULTS.md) |
@@ -93,6 +102,9 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 | **B8** | B8 development: DI + GI-short initial + PT-long | Unavailable | Unavailable | Unavailable | [![B8 kitchen representative capture](assets/b8-staged/kitchen.png)](assets/b8-staged/kitchen.png) | [low resolution development not accepted](B8_STAGED_IMPLEMENTATION.md) |
 | **B9** | B9 development: initial-GI split + footprint/roulette | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](B8_STAGED_IMPLEMENTATION.md) |
 | **B10** | B10 development: initial-GI split + Gaussian pair/vector pilot | Unavailable | Unavailable | Unavailable | [![B10 kitchen representative capture](assets/b10-gaussian/kitchen.png)](assets/b10-gaussian/kitchen.png) | [development not accepted](B10_GAUSSIAN_PAIRING.md) |
+| **↳ B10 · Gaussian timing** | DI initial + GI initial + paired/vector PT; one Gaussian neighbor | 8.262 | Unavailable | Unavailable | No images during timing | [3 timed processes; quality is a separate row. Room4/4; originals14/2.](B10_GAUSSIAN_PAIRING.md) |
+| **↳ B10 · Gaussian quality** | One-neighbor paired/vector PT; GI initial only | Unavailable | 0.406308 | 0.752397 | [![B10 · Gaussian quality kitchen](assets/b10-gaussian/kitchen.png)](assets/b10-gaussian/kitchen.png) | [Quality-only cohort: 1 image,8 warmup frames, cap14/2.](B10_GAUSSIAN_PAIRING.md) |
+| **↳ B10 · Replay queue** | One-neighbor spatial replay queue; DI/GI initial | Unavailable | Unavailable | Unavailable | [![B10 · Replay queue kitchen](assets/b10-queue/kitchen.png)](assets/b10-queue/kitchen.png) | [Exact snapshot: 1280x720, cap14/2, 41032 replays,0 mismatches. Timing/quality scores pending.](B10_GAUSSIAN_PAIRING.md) |
 
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -141,7 +153,7 @@ The room comparison uses one64-frame sequence per policy at640x360, cap4/4, one 
 |gaussian-convergence|1280x720 / 1|2.95359|0.536508|0.351035|
 |gaussian-kitchen|1280x720 / 1|0.899919|0.752397|0.406308|
 
-Gaussian room MSE increases about4.7% while FLIP decreases slightly. This mixed result is not promoted. Full GI reuse, simultaneous multi-neighbor reuse, replay compaction and total timing remain pending.
+Gaussian room MSE increases about4.7% while FLIP decreases slightly. This mixed result is not promoted. Pairing timings and spatial-queue snapshot checks are now shown in the scene tables above; full GI reuse, simultaneous multi-neighbor reuse, queue timing and full-history acceptance remain pending.
 
 ## Summary and lessons learned
 

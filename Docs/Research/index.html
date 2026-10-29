@@ -108,11 +108,11 @@
 <p>Fresh requested control: <a href="#native-matrix-results">RTXPT1.9 PT-only override</a> now has9cap-verified timing processes and9PNG captures across Room and original Convergence/Kitchen. Native PT/NEE on, DI/GI off; original B0 defaults remain preserved. HDR export is unsupported in that unchanged binary.</p>
 </section><section class="doc-panel" id="comparison-overview"><h2 id="comparison-overview-heading-1">B0–B10 comparison overview</h2>
 <p><strong>Current implementation status:</strong> The opt-in one-neighbor spatial replay queue now passes11captured-frame GPU oracles, including Convergence244654replays and Kitchen41032replays. Every packed-history word and vector-radiance bit matches its same-frame direct control. Native and direct-pair queue-disabled regressions pass. Queue performance, queue-only temporal-history sequences and full B10 acceptance remain pending. <a href="#b10-gaussian-pairing">Detailed queue checkpoint</a>.</p>
-<p>All eleven canonical versions appear below for each required scene. Performance, quality and representative pictures share the same row. <strong>Not measured means unavailable, never zero.</strong> B0 remains the unchanged RTXPT1.9 reference; a raw native-control preset does not replace its original defaults.</p>
+<p>All eleven canonical versions appear below for each required scene. <strong>The latest measured checkpoints now appear directly under B0 and B10 in these tables.</strong> B10 Gaussian timing, Gaussian quality and replay-queue validation have separate rows because they are different acquisitions. <strong>Not measured means unavailable, never zero.</strong> B0 remains the unchanged RTXPT1.9 reference; its PT-only control is explicitly labelled as an override.</p>
 <p>GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Rows from different cohorts are descriptive: settings and sampling policies must be checked before computing a relative gain. Known app/NVIDIA/RTSS cap boundaries were verified for accepted current timing cohorts; unknown external limiters and background load remain limitations.</p>
 <p><a href="comparison-overview.json">Machine-readable overview</a> · <a href="#version-mapping">Algorithm definitions and identities</a> · <a href="#benchmark-versions">Benchmark protocol</a></p>
 <h3 id="comparison-overview-heading-2">Controlled room — registered environment</h3>
-<p>640×360,1spp,3/3 bounce limits; opaque-room-registered-env.scene.json. This is a distinct fixture from the legacy no-environment room. Native controls retain their DI/MIS policies; B6/B7 use their documented PT/strict-DI policies.</p>
+<p>Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.scene.json. New checkpoint rows explicitly use4/4; the queue snapshot is176x90. This is a distinct fixture from the legacy no-environment room. Native controls retain their DI/MIS policies; B6/B7 use their documented PT/strict-DI policies.</p>
 <div class="doc-table" tabindex="0" role="region" aria-label="B0–B10 comparison overview table"><table>
 <thead>
 <tr>
@@ -133,6 +133,15 @@
 <td align="right">Unavailable</td>
 <td>No eligible capture</td>
 <td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>↳ B0 · PT-only control</strong></td>
+<td>RTXPT1.9 native PT; ReSTIR DI/GI/PT off; native NEE on</td>
+<td align="right">0.831</td>
+<td align="right">0.121162</td>
+<td align="right">Unavailable</td>
+<td><a href="assets/native-pt-only/opaque-room.png"><img src="assets/native-pt-only/opaque-room.png" alt="B0 · PT-only control opaque-room"></a></td>
+<td><a href="#native-matrix-results">Measured override; original defaults preserved. Room4/4; originals14/2.</a></td>
 </tr>
 <tr>
 <td><strong>B1</strong></td>
@@ -224,6 +233,33 @@
 <td><a href="assets/b10-gaussian/room.png"><img src="assets/b10-gaussian/room.png" alt="B10 opaque-room representative capture"></a></td>
 <td><a href="#b10-gaussian-pairing">development not accepted</a></td>
 </tr>
+<tr>
+<td><strong>↳ B10 · Gaussian timing</strong></td>
+<td>DI initial + GI initial + paired/vector PT; one Gaussian neighbor</td>
+<td align="right">1.591</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No images during timing</td>
+<td><a href="#b10-gaussian-pairing">3 timed processes; quality is a separate row. Room4/4; originals14/2.</a></td>
+</tr>
+<tr>
+<td><strong>↳ B10 · Gaussian quality</strong></td>
+<td>One-neighbor paired/vector PT; GI initial only</td>
+<td align="right">Unavailable</td>
+<td align="right">0.096257</td>
+<td align="right">0.159373</td>
+<td><a href="assets/b10-gaussian/room.png"><img src="assets/b10-gaussian/room.png" alt="B10 · Gaussian quality opaque-room"></a></td>
+<td><a href="#b10-gaussian-pairing">Quality-only cohort: 64-frame sequence, cap4/4.</a></td>
+</tr>
+<tr>
+<td><strong>↳ B10 · Replay queue</strong></td>
+<td>One-neighbor spatial replay queue; DI/GI initial</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td><a href="assets/b10-queue/opaque-room.png"><img src="assets/b10-queue/opaque-room.png" alt="B10 · Replay queue opaque-room"></a></td>
+<td><a href="#b10-gaussian-pairing">Exact snapshot: 176x90, cap4/4, 0 replays,0 mismatches. Timing/quality scores pending.</a></td>
+</tr>
 </tbody></table></div>
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -264,6 +300,15 @@
 <td align="right">Unavailable</td>
 <td>No eligible capture</td>
 <td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>↳ B0 · PT-only control</strong></td>
+<td>RTXPT1.9 native PT; ReSTIR DI/GI/PT off; native NEE on</td>
+<td align="right">2.517</td>
+<td align="right">0.372227</td>
+<td align="right">Unavailable</td>
+<td><a href="assets/native-pt-only/convergence.png"><img src="assets/native-pt-only/convergence.png" alt="B0 · PT-only control convergence"></a></td>
+<td><a href="#native-matrix-results">Measured override; original defaults preserved. Room4/4; originals14/2.</a></td>
 </tr>
 <tr>
 <td><strong>B1</strong></td>
@@ -355,6 +400,33 @@
 <td><a href="assets/b10-gaussian/convergence.png"><img src="assets/b10-gaussian/convergence.png" alt="B10 convergence representative capture"></a></td>
 <td><a href="#b10-gaussian-pairing">development not accepted</a></td>
 </tr>
+<tr>
+<td><strong>↳ B10 · Gaussian timing</strong></td>
+<td>DI initial + GI initial + paired/vector PT; one Gaussian neighbor</td>
+<td align="right">7.184</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No images during timing</td>
+<td><a href="#b10-gaussian-pairing">3 timed processes; quality is a separate row. Room4/4; originals14/2.</a></td>
+</tr>
+<tr>
+<td><strong>↳ B10 · Gaussian quality</strong></td>
+<td>One-neighbor paired/vector PT; GI initial only</td>
+<td align="right">Unavailable</td>
+<td align="right">0.351035</td>
+<td align="right">0.536508</td>
+<td><a href="assets/b10-gaussian/convergence.png"><img src="assets/b10-gaussian/convergence.png" alt="B10 · Gaussian quality convergence"></a></td>
+<td><a href="#b10-gaussian-pairing">Quality-only cohort: 1 image,8 warmup frames, cap14/2.</a></td>
+</tr>
+<tr>
+<td><strong>↳ B10 · Replay queue</strong></td>
+<td>One-neighbor spatial replay queue; DI/GI initial</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td><a href="assets/b10-queue/convergence.png"><img src="assets/b10-queue/convergence.png" alt="B10 · Replay queue convergence"></a></td>
+<td><a href="#b10-gaussian-pairing">Exact snapshot: 1280x720, cap14/2, 244654 replays,0 mismatches. Timing/quality scores pending.</a></td>
+</tr>
 </tbody></table></div>
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -395,6 +467,15 @@
 <td align="right">Unavailable</td>
 <td>No eligible capture</td>
 <td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>↳ B0 · PT-only control</strong></td>
+<td>RTXPT1.9 native PT; ReSTIR DI/GI/PT off; native NEE on</td>
+<td align="right">3.243</td>
+<td align="right">0.376870</td>
+<td align="right">Unavailable</td>
+<td><a href="assets/native-pt-only/kitchen.png"><img src="assets/native-pt-only/kitchen.png" alt="B0 · PT-only control kitchen"></a></td>
+<td><a href="#native-matrix-results">Measured override; original defaults preserved. Room4/4; originals14/2.</a></td>
 </tr>
 <tr>
 <td><strong>B1</strong></td>
@@ -485,6 +566,33 @@
 <td align="right">Unavailable</td>
 <td><a href="assets/b10-gaussian/kitchen.png"><img src="assets/b10-gaussian/kitchen.png" alt="B10 kitchen representative capture"></a></td>
 <td><a href="#b10-gaussian-pairing">development not accepted</a></td>
+</tr>
+<tr>
+<td><strong>↳ B10 · Gaussian timing</strong></td>
+<td>DI initial + GI initial + paired/vector PT; one Gaussian neighbor</td>
+<td align="right">8.262</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No images during timing</td>
+<td><a href="#b10-gaussian-pairing">3 timed processes; quality is a separate row. Room4/4; originals14/2.</a></td>
+</tr>
+<tr>
+<td><strong>↳ B10 · Gaussian quality</strong></td>
+<td>One-neighbor paired/vector PT; GI initial only</td>
+<td align="right">Unavailable</td>
+<td align="right">0.406308</td>
+<td align="right">0.752397</td>
+<td><a href="assets/b10-gaussian/kitchen.png"><img src="assets/b10-gaussian/kitchen.png" alt="B10 · Gaussian quality kitchen"></a></td>
+<td><a href="#b10-gaussian-pairing">Quality-only cohort: 1 image,8 warmup frames, cap14/2.</a></td>
+</tr>
+<tr>
+<td><strong>↳ B10 · Replay queue</strong></td>
+<td>One-neighbor spatial replay queue; DI/GI initial</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td><a href="assets/b10-queue/kitchen.png"><img src="assets/b10-queue/kitchen.png" alt="B10 · Replay queue kitchen"></a></td>
+<td><a href="#b10-gaussian-pairing">Exact snapshot: 1280x720, cap14/2, 41032 replays,0 mismatches. Timing/quality scores pending.</a></td>
 </tr>
 </tbody></table></div>
 <details><summary>Coverage and missing-data reasons</summary>
@@ -610,7 +718,7 @@
 <td align="right">0.406308</td>
 </tr>
 </tbody></table></div>
-<p>Gaussian room MSE increases about4.7% while FLIP decreases slightly. This mixed result is not promoted. Full GI reuse, simultaneous multi-neighbor reuse, replay compaction and total timing remain pending.</p>
+<p>Gaussian room MSE increases about4.7% while FLIP decreases slightly. This mixed result is not promoted. Pairing timings and spatial-queue snapshot checks are now shown in the scene tables above; full GI reuse, simultaneous multi-neighbor reuse, queue timing and full-history acceptance remain pending.</p>
 <h3 id="comparison-overview-heading-8">Summary and lessons learned</h3>
 <p>The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 now has a disjoint initial-GI GPU foundation, and a limited PT++ ablation executes. Their176x90 illustrations are explicitly development-only; B10 now has Gaussian table GPU development with extended-resolution pictures; full GI reuse, remaining PT++ mechanisms and accepted extended measurements remain pending.</p>
 <h3 id="comparison-overview-heading-9">Changes</h3>

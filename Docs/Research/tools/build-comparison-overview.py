@@ -134,12 +134,42 @@ def build(repo):
     if native_override.exists():
         data['b0_pt_only_override']=load(native_override)
         data['source_hashes'][native_override.relative_to(repo).as_posix()]=hashlib.sha256(native_override.read_bytes()).hexdigest()
+    # Render scoped checkpoints beside their canonical version in each scene.
+    # Keep timing, quality and queue-oracle acquisitions explicitly distinct.
+    checkpoints=[]
+    for item in data.get('b0_pt_only_override',{}).get('rows',[]):
+        checkpoints.append(dict(item,kind='native_pt_only',label='B0 · PT-only control',
+            evidence='Measured override; original defaults preserved. Room4/4; originals14/2.'))
+    for item in data.get('gaussian_pairing_timing',{}).get('rows',[]):
+        checkpoints.append(dict(variant='B10',scene=item['scene'],kind='gaussian_timing',label='B10 · Gaussian timing',
+            algorithm='DI initial + GI initial + paired/vector PT; one Gaussian neighbor',
+            gpu_busy_ms=item['gaussian_gpu_busy_ms'],ldr_flip=None,hdr_flip=None,image=None,
+            report='B10_GAUSSIAN_PAIRING.md',evidence='3 timed processes; quality is a separate row. Room4/4; originals14/2.'))
+    for item in (gaussian or {}).get('rows',[]):
+        if not item['label'].startswith('gaussian-'):continue
+        scene=item['scene'];image='assets/b10-gaussian/'+('room' if scene=='opaque-room' else scene)+'.png'
+        checkpoints.append(dict(item,variant='B10',kind='gaussian_quality',label='B10 · Gaussian quality',
+            algorithm='One-neighbor paired/vector PT; GI initial only',gpu_busy_ms=None,image=image,
+            report='B10_GAUSSIAN_PAIRING.md',evidence='Quality-only cohort: '+('64-frame sequence, cap4/4.' if scene=='opaque-room' else '1 image,8 warmup frames, cap14/2.')))
+    queue_checks=dev/'2026-10-29-replay-queue/gpu-checks.json'
+    if queue_checks.exists():
+        data['source_hashes'][queue_checks.relative_to(repo).as_posix()]=hashlib.sha256(queue_checks.read_bytes()).hexdigest()
+        queue=load(queue_checks)
+        for scene,case in [('opaque-room','room-h8'),('convergence','convergence'),('kitchen','kitchen')]:
+            q=next(x for x in queue['rows'] if x['case']==case)
+            checkpoints.append(dict(variant='B10',scene=scene,kind='spatial_queue_oracle',label='B10 · Replay queue',
+                algorithm='One-neighbor spatial replay queue; DI/GI initial',gpu_busy_ms=None,ldr_flip=None,hdr_flip=None,
+                image='assets/b10-queue/'+scene+'.png',report='B10_GAUSSIAN_PAIRING.md',
+                evidence=f"Exact snapshot: {q['width']}x{q['height']}, cap{'4/4' if scene=='opaque-room' else '14/2'}, {q['replay_requests']} replays,0 mismatches. Timing/quality scores pending."))
+    data['checkpoint_rows']=checkpoints
+    for item in checkpoints:
+        if item.get('image') and not (doc/item['image']).is_file():raise ValueError('Missing checkpoint picture')
     (doc/'comparison-overview.json').write_text(json.dumps(data,indent=2,allow_nan=False)+'\n',encoding='utf-8')
     md=['# B0–B10 comparison overview','',
-        'All eleven canonical versions appear below for each required scene. Performance, quality and representative pictures share the same row. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; a raw native-control preset does not replace its original defaults.','',
+        'All eleven canonical versions appear below for each required scene. **The latest measured checkpoints now appear directly under B0 and B10 in these tables.** B10 Gaussian timing, Gaussian quality and replay-queue validation have separate rows because they are different acquisitions. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; its PT-only control is explicitly labelled as an override.','',
         'GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Rows from different cohorts are descriptive: settings and sampling policies must be checked before computing a relative gain. Known app/NVIDIA/RTSS cap boundaries were verified for accepted current timing cohorts; unknown external limiters and background load remain limitations.','',
         '[Machine-readable overview](comparison-overview.json) · [Algorithm definitions and identities](VERSION_MAPPING.md) · [Benchmark protocol](BENCHMARK_VERSIONS.md)','']
-    captions={'opaque-room':('Controlled room — registered environment','640×360,1spp,3/3 bounce limits; opaque-room-registered-env.scene.json. This is a distinct fixture from the legacy no-environment room. Native controls retain their DI/MIS policies; B6/B7 use their documented PT/strict-DI policies.'),
+    captions={'opaque-room':('Controlled room — registered environment','Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.scene.json. New checkpoint rows explicitly use4/4; the queue snapshot is176x90. This is a distinct fixture from the legacy no-environment room. Native controls retain their DI/MIS policies; B6/B7 use their documented PT/strict-DI policies.'),
               'convergence':('Original Convergence','1280×720,1spp,14/2 bounce limits, exposure0. Original materials and camera preserved.'),
               'kitchen':('Original Kitchen','1280×720,1spp,14/2 bounce limits, exposure2. Original materials and camera preserved.')}
     def fmt(value,digits):return 'Unavailable' if value is None else f'{value:.{digits}f}'
@@ -151,6 +181,9 @@ def build(repo):
             image=f'[![{x["variant"]} {scene} representative capture]({x["image"]})]({x["image"]})' if x['image'] else 'No eligible capture'
             status=('Guarded quality measured; timing pending †' if x.get('quality_status')=='measured_guarded_matched_filter' else 'Development, not accepted †' if x.get('quality_status')=='guarded_development_not_accepted' else x['status'].replace('_',' '))
             md.append(f'| **{x["variant"]}** | {x["algorithm"]} | {fmt(x["gpu_busy_ms"],3)} | {fmt(x["ldr_flip"],6)} | {fmt(x["hdr_flip"],6)} | {image} | [{status}]({x["report"]}) |')
+            for c in [c for c in checkpoints if c['scene']==scene and c['variant']==x['variant']]:
+                picture=f'[![{c["label"]} {scene}]({c["image"]})]({c["image"]})' if c.get('image') else 'No images during timing'
+                md.append(f'| **↳ {c["label"]}** | {c["algorithm"]} | {fmt(c.get("gpu_busy_ms"),3)} | {fmt(c.get("ldr_flip"),6)} | {fmt(c.get("hdr_flip"),6)} | {picture} | [{c["evidence"]}]({c["report"]}) |')
         md += ['', '<details><summary>Coverage and missing-data reasons</summary>','']
         for x in [r for r in rows if r['scene']==scene]:md += [f'- **{x["variant"]}:** {x["note"]}']
         md += ['','</details>','']
@@ -176,7 +209,7 @@ def build(repo):
             '|Case|Resolution / frames|Linear RGB MSE ↓|HDR-FLIP ↓|Display-FLIP ↓|','|---|---|---:|---:|---:|']
         for r in gaussian['rows']:
             block.append(f"|{r['label']}|{r['resolution']} / {r['frames']}|{r['linear_mse']:.6g}|{r['hdr_flip']:.6f}|{r['ldr_flip']:.6f}|")
-        block+=['','Gaussian room MSE increases about4.7% while FLIP decreases slightly. This mixed result is not promoted. Full GI reuse, simultaneous multi-neighbor reuse, replay compaction and total timing remain pending.','']
+        block+=['','Gaussian room MSE increases about4.7% while FLIP decreases slightly. This mixed result is not promoted. Pairing timings and spatial-queue snapshot checks are now shown in the scene tables above; full GI reuse, simultaneous multi-neighbor reuse, queue timing and full-history acceptance remain pending.','']
         where=md.index('## Summary and lessons learned');md[where:where]=block
     if precision:
         md += ['## Material precision ablation — defaults unchanged','',

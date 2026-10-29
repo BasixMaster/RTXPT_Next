@@ -69,6 +69,7 @@
         "Rtxpt/RTXDI/PT/GenerateInitialSamples.hlsl",
         "Rtxpt/RTXDI/PT/IdentityShiftDiagnostics.hlsl",
         "Rtxpt/RTXDI/PT/PairingTables.h",
+        "Rtxpt/RTXDI/PT/ReplayCompaction.hlsl",
         "Rtxpt/RTXDI/PT/Runtime/DiffuseBudget.hlsli",
         "Rtxpt/RTXDI/PT/Runtime/DiffuseBudget.md",
         "Rtxpt/RTXDI/PT/Runtime/HybridShiftGuard.hlsli",
@@ -127,7 +128,9 @@
         "Testing/B2/control-adapters/prepare_controls.py",
         "Testing/B2/diffuse_budget_reference.py",
         "Testing/B2/test_diffuse_budget.py",
-        "Rtxpt/RTXDI/PT/ReplayCompaction.hlsl"
+        "Testing/native-controls-v2/README.md",
+        "Testing/native-controls-v2/manifest.json",
+        "Testing/native-controls-v2/rtxpt19-host-controls.patch"
       ],
       "reason": "Registry validation does not prove runtime activation or estimator correctness."
     },
@@ -250,6 +253,10 @@
       "name": "2026-10-29-fresh-b0-pt-only exact evidence hashes and accepted cap/freeze/restoration receipts",
       "status": "passed",
       "timed_processes": 9
+    },
+    {
+      "name": "12scoped checkpoints inline beside B0/B10 across all three scene tables; timing/quality/oracle scopes separated",
+      "status": "passed"
     },
     {
       "name": "11exact GPU queue snapshots, real original-scene replay, disabled regressions and source/evidence hashes",

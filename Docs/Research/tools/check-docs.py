@@ -419,6 +419,16 @@ for cohort,expected_count in [('2026-10-29-gaussian-timing',18),('2026-10-29-fre
         assert run['artifact_identity_after_capture']['validated'] and restore['restoration_verified']
     checks.append(dict(name=cohort+' exact evidence hashes and accepted cap/freeze/restoration receipts',status='passed',timed_processes=expected_count))
 assert len(overview['b0_pt_only_override']['rows'])==3 and len(overview['gaussian_pairing_timing']['rows'])==3
+checkpoint_rows=overview['checkpoint_rows']
+assert len(checkpoint_rows)==12
+for scene in ['opaque-room','convergence','kitchen']:
+    scoped=[x for x in checkpoint_rows if x['scene']==scene]
+    assert {x['kind'] for x in scoped}=={'native_pt_only','gaussian_timing','gaussian_quality','spatial_queue_oracle'}
+    assert all(x.get('gpu_busy_ms') is None for x in scoped if x['kind'] in ['gaussian_quality','spatial_queue_oracle'])
+    assert all(x.get('ldr_flip') is None and x.get('hdr_flip') is None for x in scoped if x['kind'] in ['gaussian_timing','spatial_queue_oracle'])
+    for x in scoped:
+        if x.get('image'):assert (D/x['image']).is_file()
+checks.append(dict(name='12scoped checkpoints inline beside B0/B10 across all three scene tables; timing/quality/oracle scopes separated',status='passed'))
 queue=P/'Benchmarks/development/2026-10-29-replay-queue'
 index=json.loads((queue/'files.json').read_text())
 for name,expected_sha in index.items():assert hashlib.sha256((queue/name).read_bytes()).hexdigest()==expected_sha,name
