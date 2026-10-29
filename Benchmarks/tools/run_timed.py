@@ -7,6 +7,7 @@ from capture_identity import transport_settings
 from sampling_contract import roulette_value, seed_value, verify as verify_sampling, verify_di, verify_pt_history, verify_pt_spatial, verify_ptpp
 from run_capture import scene_argument
 from artifact_manifest import validate as validate_artifacts
+from extended_scene_contract import validate_request as validate_extended_request, verify as verify_extended
 from rtss_caps import RTSSBackend
 from rtss_readonly import collect as collect_rtss,validate as validate_rtss
 
@@ -24,6 +25,8 @@ def main():
     ap.add_argument('--driver-cap-audit',type=Path)
     ap.add_argument('--max-bounces',type=int);ap.add_argument('--max-diffuse-bounces',type=int)
     ap.add_argument('--pt-mode',type=int,choices=[0,1,2,3],default=3)
+    ap.add_argument('--pt-replay-only-validation',action='store_true')
+    ap.add_argument('--pt-extended-scene-validation',action='store_true',help='Guarded development only; no canonical result label')
     ap.add_argument('--nee-mis',type=int,choices=[0,1,2])
     ap.add_argument('--sampling-seed',type=seed_value)
     ap.add_argument('--strict-di-validation',action='store_true')
@@ -34,7 +37,7 @@ def main():
     ap.add_argument('--artifact-manifest',type=Path,help='Optional strict frozen source/executable/shader identity; warm/compile caches before freezing.')
     ap.add_argument('--rtss-install-dir',type=Path);ap.add_argument('--rtss-helper',type=Path)
     ap.add_argument('--rtss-user-confirmed-disabled',action='store_true',help='User has disabled RTSS cap; collect only read-only SDK/profile boundary audits.')
-    a=ap.parse_args();canonical=prepare_experiment(a.variant,a.mode,a.variant_preset,a.pt_reconnection_mode,a.pt_roulette_probability);verify_snapshot(a.artifact_manifest,canonical)
+    a=ap.parse_args();validate_extended_request(a.pt_extended_scene_validation,a.mode,a.pt_replay_only_validation,a.variant);canonical=prepare_experiment(a.variant,a.mode,a.variant_preset,a.pt_reconnection_mode,a.pt_roulette_probability);verify_snapshot(a.artifact_manifest,canonical)
     exe=a.exe.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
     if any(out.iterdir()):raise SystemExit('Run directory must be new/empty.')
     rtss=None
@@ -53,6 +56,8 @@ def main():
     if a.nee_mis is not None:args+=['--neeMIS',str(a.nee_mis)]
     if a.sampling_seed is not None:args+=['--samplingSeed',str(a.sampling_seed)]
     if a.strict_di_validation:args+=['--strictDIValidation','true']
+    if a.pt_replay_only_validation:args+=['--ptReplayOnlyValidation','true']
+    if a.pt_extended_scene_validation:args+=['--ptExtendedSceneValidation','true']
     if a.pt_disable_age_rejection_validation:args+=['--ptDisableAgeRejectionValidation','true']
     if a.pt_reconnection_mode is not None:args+=['--ptReconnectionMode',str(a.pt_reconnection_mode)]
     if a.pt_roulette_probability is not None:args+=['--ptRouletteProbability',str(a.pt_roulette_probability)]
@@ -138,6 +143,7 @@ def main():
             if len(set(mis))!=1 or int(mis[0])!=a.nee_mis:raise ValueError('Native MIS override lacks matching effective receipt')
             manifest['effective_native_nee_mis']=int(mis[0])
         manifest['effective_canonical_experiment']=verify_experiment(receipt_log,canonical)
+        manifest['effective_extended_scene_contract']=verify_extended(receipt_log,a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode)
         manifest['effective_sampling']=verify_sampling(receipt_log,a.sampling_seed)
         manifest['effective_di_validation']=verify_di(receipt_log,a.strict_di_validation)
         manifest['effective_pt_history']=verify_pt_history(receipt_log,a.pt_disable_age_rejection_validation)

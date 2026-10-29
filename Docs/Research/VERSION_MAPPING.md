@@ -8,10 +8,10 @@ User-confirmed numbering, 2026-10-29. **B0 is the unchanged RTXPT 1.9 reference 
 |---|---|---|
 | **B0** | **Unchanged RTXPT 1.9 reference** | Original upstream defaults; source `303b408ab81790a5051abd7573830b7a4112eb8e`, RTXDI 3.0 `a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6`, Assets `a56be4ed65029d2733fd02f00f4027ffd541eda8`. A raw control with overrides is separately labelled. |
 | **B1** | **RTXPT native PT + DI 3.0** | DI on; GI and ReSTIR PT off. Original-scene DI quality and cap-verified timing measured. |
-| **B2** | **RTXPT native PT + DI 3.0 + GI 3.0** | DI/GI on; ReSTIR PT off. Historical original-scene observations exist, with unverified cap coverage. |
-| **B3** | **RTXPT native PT / runtime 3.1** | DI/GI/ReSTIR PT off. Raw native-control observations exist; they are not a ReSTIR direct-light baseline. |
+| **B2** | **RTXPT native PT + DI 3.0 + GI 3.0** | DI/GI on; ReSTIR PT off. Fresh original-scene and registered-room quality and cap-verified timing are measured. |
+| **B3** | **RTXPT native PT / runtime 3.1** | DI/GI/ReSTIR PT off. Fresh native-only results cover all three required scenes; they are not a ReSTIR direct-light baseline. |
 | **B4** | **RTXPT native PT + DI 3.1** | DI on; GI and ReSTIR PT off. Original-scene DI quality and cap-verified timing measured; priority comparator to B1 and B7. |
-| **B5** | **RTXPT native PT + DI 3.1 + GI 3.1** | DI/GI on; ReSTIR PT off. Historical original-scene observations exist, with unverified cap coverage. |
+| **B5** | **RTXPT native PT + DI 3.1 + GI 3.1** | DI/GI on; ReSTIR PT off. Fresh original-scene and registered-room quality and cap-verified timing are measured. |
 | **B6** | **ReSTIR PT / DI and GI off** | Separate DI/GI estimators off; existing native direct/fallback terms remain until explicitly replaced by a unified-lighting partition. No complete extended-scene benchmark is claimed. |
 | **B7** | **ReSTIR PT + DI 3.1** | DI direct plus PT indirect; GI off. Corrected static opaque checkpoint `de9fe651`; original-scene gates remain unresolved. |
 | **B8** | **ReSTIR PT + DI 3.1 + GI 3.1** | Planned shared configuration: requires disjoint GI/PT contributions or valid MIS. The present alternative-mode guard does not implement it. |
@@ -57,3 +57,5 @@ Canonical IDs separate runtime, DI/GI/PT combination and PT++ scope. Legacy evid
 Canonical update2026-10-29: [B1/B4 native-DI quality and cap-verified timing](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures and links12 accepted cap-verified timing runs; initial missing-trace attempts remain excluded.
 
 Current scoped measurements: [registered-room B1/B4/B6/B7 comparison](REGISTERED_ROOM_RESULTS.md) includes30quality captures,12timing processes and explicit history settling; [native original-scene report](CANONICAL_NATIVE_DI_RESULTS.md) now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.
+
+Current native coverage: [fresh B2/B3/B5 original-scene and room results](NATIVE_MATRIX_RESULTS.md) adds27quality captures and27cap-verified timing processes. [The unified B0–B10 overview](COMPARISON_OVERVIEW.md) includes all versions, current metrics and representative pictures; historical cohorts remain separate.

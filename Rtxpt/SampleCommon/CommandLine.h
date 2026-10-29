@@ -76,6 +76,7 @@ struct CommandLineOptions
     int PTFixedSpatialSamples      = -1;
     bool PTDisableAgeRejectionValidation = false;
     bool PTReplayOnlyValidation    = false;
+    bool PTExtendedSceneValidation = false; // Replay-first diagnostic; requires explicit opt-in.
     bool StrictDIValidation        = false;
     bool DisableFireflyFilters      = false;
     bool DisablePostProcessFilters  = false;

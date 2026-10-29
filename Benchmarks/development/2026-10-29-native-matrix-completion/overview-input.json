@@ -1,0 +1,212 @@
+{
+  "status": "accepted",
+  "rows": [
+    {
+      "scene": "convergence",
+      "variant": "B2",
+      "status": "measured_known_caps_verified",
+      "note": "Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.",
+      "gpu_busy_ms": 4.50995,
+      "cpu_cadence_ms": 4.5787,
+      "ldr_flip": 0.24345919489860535,
+      "ldr_flip_range": [
+        0.24298466742038727,
+        0.2435961365699768
+      ],
+      "display_mse": 0.01856145005660216,
+      "hdr_flip": null,
+      "linear_mse": null,
+      "image": "assets/native-matrix/convergence-B2.png",
+      "report": "NATIVE_MATRIX_RESULTS.md",
+      "cohort": "native-matrix-completion-2026-10-29",
+      "quality_replication": "3 process restarts; independent seeds unavailable",
+      "history_frames": 64,
+      "reference_sha256": "fe43f82642027576e938cf03fb124fd04596f4993343ab16db21194bf45351f0",
+      "reference_spp": 4096
+    },
+    {
+      "scene": "convergence",
+      "variant": "B3",
+      "status": "measured_known_caps_verified",
+      "note": "Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.",
+      "gpu_busy_ms": 2.5654,
+      "cpu_cadence_ms": 2.5284,
+      "ldr_flip": 0.3752807676792145,
+      "ldr_flip_range": [
+        0.37526166439056396,
+        0.3756867051124573
+      ],
+      "display_mse": 0.08776012620235095,
+      "hdr_flip": null,
+      "linear_mse": null,
+      "image": "assets/native-matrix/convergence-B3.png",
+      "report": "NATIVE_MATRIX_RESULTS.md",
+      "cohort": "native-matrix-completion-2026-10-29",
+      "quality_replication": "3 process restarts; independent seeds unavailable",
+      "history_frames": 64,
+      "reference_sha256": "fe43f82642027576e938cf03fb124fd04596f4993343ab16db21194bf45351f0",
+      "reference_spp": 4096
+    },
+    {
+      "scene": "convergence",
+      "variant": "B5",
+      "status": "measured_known_caps_verified",
+      "note": "Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.",
+      "gpu_busy_ms": 4.5447,
+      "cpu_cadence_ms": 4.587,
+      "ldr_flip": 0.24352170526981354,
+      "ldr_flip_range": [
+        0.24329009652137756,
+        0.24356800317764282
+      ],
+      "display_mse": 0.018562896448748343,
+      "hdr_flip": null,
+      "linear_mse": null,
+      "image": "assets/native-matrix/convergence-B5.png",
+      "report": "NATIVE_MATRIX_RESULTS.md",
+      "cohort": "native-matrix-completion-2026-10-29",
+      "quality_replication": "3 process restarts; independent seeds unavailable",
+      "history_frames": 64,
+      "reference_sha256": "fe43f82642027576e938cf03fb124fd04596f4993343ab16db21194bf45351f0",
+      "reference_spp": 4096
+    },
+    {
+      "scene": "kitchen",
+      "variant": "B2",
+      "status": "measured_known_caps_verified",
+      "note": "Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.",
+      "gpu_busy_ms": 5.3698,
+      "cpu_cadence_ms": 5.37735,
+      "ldr_flip": 0.35283976793289185,
+      "ldr_flip_range": [
+        0.3515622913837433,
+        0.3534034490585327
+      ],
+      "display_mse": 0.03241011886008942,
+      "hdr_flip": null,
+      "linear_mse": null,
+      "image": "assets/native-matrix/kitchen-B2.png",
+      "report": "NATIVE_MATRIX_RESULTS.md",
+      "cohort": "native-matrix-completion-2026-10-29",
+      "quality_replication": "3 process restarts; independent seeds unavailable",
+      "history_frames": 64,
+      "reference_sha256": "59c6f1aad43753c709978774615d1fb3078b8eca213adf45a28b60dde0ec4aa6",
+      "reference_spp": 4096
+    },
+    {
+      "scene": "kitchen",
+      "variant": "B3",
+      "status": "measured_known_caps_verified",
+      "note": "Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.",
+      "gpu_busy_ms": 3.2579000000000002,
+      "cpu_cadence_ms": 3.243,
+      "ldr_flip": 0.3823637366294861,
+      "ldr_flip_range": [
+        0.3823637366294861,
+        0.3823637366294861
+      ],
+      "display_mse": 0.07151400035776838,
+      "hdr_flip": null,
+      "linear_mse": null,
+      "image": "assets/native-matrix/kitchen-B3.png",
+      "report": "NATIVE_MATRIX_RESULTS.md",
+      "cohort": "native-matrix-completion-2026-10-29",
+      "quality_replication": "3 process restarts; independent seeds unavailable",
+      "history_frames": 64,
+      "reference_sha256": "59c6f1aad43753c709978774615d1fb3078b8eca213adf45a28b60dde0ec4aa6",
+      "reference_spp": 4096
+    },
+    {
+      "scene": "kitchen",
+      "variant": "B5",
+      "status": "measured_known_caps_verified",
+      "note": "Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.",
+      "gpu_busy_ms": 5.4207,
+      "cpu_cadence_ms": 5.4346499999999995,
+      "ldr_flip": 0.35145846009254456,
+      "ldr_flip_range": [
+        0.35064762830734253,
+        0.35232868790626526
+      ],
+      "display_mse": 0.032222789228368354,
+      "hdr_flip": null,
+      "linear_mse": null,
+      "image": "assets/native-matrix/kitchen-B5.png",
+      "report": "NATIVE_MATRIX_RESULTS.md",
+      "cohort": "native-matrix-completion-2026-10-29",
+      "quality_replication": "3 process restarts; independent seeds unavailable",
+      "history_frames": 64,
+      "reference_sha256": "59c6f1aad43753c709978774615d1fb3078b8eca213adf45a28b60dde0ec4aa6",
+      "reference_spp": 4096
+    },
+    {
+      "scene": "opaque-room",
+      "variant": "B2",
+      "status": "measured_known_caps_verified",
+      "note": "Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.",
+      "gpu_busy_ms": 1.4412,
+      "cpu_cadence_ms": 1.5218,
+      "ldr_flip": 0.09460251033306122,
+      "ldr_flip_range": [
+        0.09443967044353485,
+        0.09484249353408813
+      ],
+      "display_mse": 0.0035193852391174328,
+      "hdr_flip": null,
+      "linear_mse": null,
+      "image": "assets/native-matrix/opaque-room-B2.png",
+      "report": "NATIVE_MATRIX_RESULTS.md",
+      "cohort": "native-matrix-completion-2026-10-29",
+      "quality_replication": "3 process restarts; independent seeds unavailable",
+      "history_frames": 64,
+      "reference_sha256": "df17a18ddc00bb79318ea46ea70be26c3697af7e33bd4202fad68a821aa67f4b",
+      "reference_spp": 8192
+    },
+    {
+      "scene": "opaque-room",
+      "variant": "B3",
+      "status": "measured_known_caps_verified",
+      "note": "Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.",
+      "gpu_busy_ms": 0.8048,
+      "cpu_cadence_ms": 0.9305,
+      "ldr_flip": 0.11674375087022781,
+      "ldr_flip_range": [
+        0.11674150079488754,
+        0.11676859855651855
+      ],
+      "display_mse": 0.013356152169927521,
+      "hdr_flip": null,
+      "linear_mse": null,
+      "image": "assets/native-matrix/opaque-room-B3.png",
+      "report": "NATIVE_MATRIX_RESULTS.md",
+      "cohort": "native-matrix-completion-2026-10-29",
+      "quality_replication": "3 process restarts; independent seeds unavailable",
+      "history_frames": 64,
+      "reference_sha256": "df17a18ddc00bb79318ea46ea70be26c3697af7e33bd4202fad68a821aa67f4b",
+      "reference_spp": 8192
+    },
+    {
+      "scene": "opaque-room",
+      "variant": "B5",
+      "status": "measured_known_caps_verified",
+      "note": "Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.",
+      "gpu_busy_ms": 1.46065,
+      "cpu_cadence_ms": 1.5537,
+      "ldr_flip": 0.09396078437566757,
+      "ldr_flip_range": [
+        0.09363587200641632,
+        0.09396856278181076
+      ],
+      "display_mse": 0.0034712611424380937,
+      "hdr_flip": null,
+      "linear_mse": null,
+      "image": "assets/native-matrix/opaque-room-B5.png",
+      "report": "NATIVE_MATRIX_RESULTS.md",
+      "cohort": "native-matrix-completion-2026-10-29",
+      "quality_replication": "3 process restarts; independent seeds unavailable",
+      "history_frames": 64,
+      "reference_sha256": "df17a18ddc00bb79318ea46ea70be26c3697af7e33bd4202fad68a821aa67f4b",
+      "reference_spp": 8192
+    }
+  ]
+}

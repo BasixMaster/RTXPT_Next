@@ -240,3 +240,5 @@ This project includes NVAPI software. All uses of NVAPI software are governed by
 Historical checkpoint: [legacy B2 static opaque results](Docs/Research/B2_RESULTS.md) maps to canonical B7. It reports corrected ReSTIR PT integration; original material/medium and motion coverage remain pending. Current numbering is defined in [the variant mapping](Docs/Research/VERSION_MAPPING.md).
 
 Measured updates: [B1/B4 original-scene DI controls](Docs/Research/CANONICAL_NATIVE_DI_RESULTS.md) and [B1/B4/B6/B7 registered-room comparison](Docs/Research/REGISTERED_ROOM_RESULTS.md). The latter measures a19.41%GPU-busy increase and45.09%lower LDR-FLIP for configured B7 versus B4; no equal-quality speedup is claimed. B8 GPU integration remains pending after17exact CPU prerequisite tests.
+
+[**Unified B0–B10 comparison: performance, quality and pictures**](Docs/Research/COMPARISON_OVERVIEW.md) shows every required scene/variant row. [Fresh B2/B3/B5 native results](Docs/Research/NATIVE_MATRIX_RESULTS.md) complete the native scene matrix; original-scene ReSTIR PT compatibility is being validated separately.

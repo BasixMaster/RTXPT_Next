@@ -76,46 +76,63 @@
       "variant": "B2",
       "scene": "convergence",
       "algorithm": "v1.9 native PT + ReSTIR DI3.0 + ReSTIR GI3.0",
-      "status": "historical_unverified_caps",
-      "reason": "Legacy DI+GI configuration matches; historical cap coverage unverified, fresh matched runs pending",
-      "result": "Benchmarks/results/2026-10-28-b1"
+      "status": "measured",
+      "reason": "Three quality processes and three cap-verified timing processes; native shaders and scene/camera preserved. Separate acquisition cohort from B1/B4/B6/B7.",
+      "result": "Benchmarks/development/2026-10-29-native-matrix-completion",
+      "quality_status": "measured_display_only",
+      "timing_status": "measured_known_caps_verified"
     },
     {
       "variant": "B2",
       "scene": "kitchen",
       "algorithm": "v1.9 native PT + ReSTIR DI3.0 + ReSTIR GI3.0",
-      "status": "historical_unverified_caps",
-      "reason": "Legacy DI+GI configuration matches; historical cap coverage unverified, fresh matched runs pending",
-      "result": "Benchmarks/results/2026-10-28-b1"
+      "status": "measured",
+      "reason": "Three quality processes and three cap-verified timing processes; native shaders and scene/camera preserved. Separate acquisition cohort from B1/B4/B6/B7.",
+      "result": "Benchmarks/development/2026-10-29-native-matrix-completion",
+      "quality_status": "measured_display_only",
+      "timing_status": "measured_known_caps_verified"
     },
     {
       "variant": "B2",
       "scene": "opaque-room",
       "algorithm": "v1.9 native PT + ReSTIR DI3.0 + ReSTIR GI3.0",
-      "status": "pending",
-      "reason": "Fresh matched configuration benchmark pending; legacy labels are not canonical results"
+      "status": "measured",
+      "reason": "Three quality processes and three cap-verified timing processes; native shaders and scene/camera preserved. Separate acquisition cohort from B1/B4/B6/B7.",
+      "result": "Benchmarks/development/2026-10-29-native-matrix-completion",
+      "quality_status": "measured_display_only",
+      "timing_status": "measured_known_caps_verified",
+      "fixture": "opaque-room-registered-env.scene.json"
     },
     {
       "variant": "B3",
       "scene": "convergence",
       "algorithm": "Native PT with RTXDI3.1 linked; DI/GI off",
-      "status": "pending",
-      "reason": "Fresh matched configuration benchmark pending; legacy labels are not canonical results"
+      "status": "measured",
+      "reason": "Three quality processes and three cap-verified timing processes; native shaders and scene/camera preserved. Separate acquisition cohort from B1/B4/B6/B7.",
+      "result": "Benchmarks/development/2026-10-29-native-matrix-completion",
+      "quality_status": "measured_display_only",
+      "timing_status": "measured_known_caps_verified"
     },
     {
       "variant": "B3",
       "scene": "kitchen",
       "algorithm": "Native PT with RTXDI3.1 linked; DI/GI off",
-      "status": "pending",
-      "reason": "Fresh matched configuration benchmark pending; legacy labels are not canonical results"
+      "status": "measured",
+      "reason": "Three quality processes and three cap-verified timing processes; native shaders and scene/camera preserved. Separate acquisition cohort from B1/B4/B6/B7.",
+      "result": "Benchmarks/development/2026-10-29-native-matrix-completion",
+      "quality_status": "measured_display_only",
+      "timing_status": "measured_known_caps_verified"
     },
     {
       "variant": "B3",
       "scene": "opaque-room",
       "algorithm": "Native PT with RTXDI3.1 linked; DI/GI off",
       "status": "measured",
-      "reason": "Legacy migration native-control track only; no DI/GI",
-      "result": "Benchmarks/development/2026-10-28-b2-static-opaque"
+      "reason": "Three quality processes and three cap-verified timing processes; native shaders and scene/camera preserved. Separate acquisition cohort from B1/B4/B6/B7.",
+      "result": "Benchmarks/development/2026-10-29-native-matrix-completion",
+      "quality_status": "measured_display_only",
+      "timing_status": "measured_known_caps_verified",
+      "fixture": "opaque-room-registered-env.scene.json"
     },
     {
       "variant": "B4",
@@ -152,38 +169,48 @@
       "variant": "B5",
       "scene": "convergence",
       "algorithm": "Native PT + ReSTIR DI3.1 + ReSTIR GI3.1",
-      "status": "historical_unverified_caps",
-      "reason": "Legacy DI+GI configuration matches; historical cap coverage unverified, fresh matched runs pending",
-      "result": "Benchmarks/results/2026-10-28-b1"
+      "status": "measured",
+      "reason": "Three quality processes and three cap-verified timing processes; native shaders and scene/camera preserved. Separate acquisition cohort from B1/B4/B6/B7.",
+      "result": "Benchmarks/development/2026-10-29-native-matrix-completion",
+      "quality_status": "measured_display_only",
+      "timing_status": "measured_known_caps_verified"
     },
     {
       "variant": "B5",
       "scene": "kitchen",
       "algorithm": "Native PT + ReSTIR DI3.1 + ReSTIR GI3.1",
-      "status": "historical_unverified_caps",
-      "reason": "Legacy DI+GI configuration matches; historical cap coverage unverified, fresh matched runs pending",
-      "result": "Benchmarks/results/2026-10-28-b1"
+      "status": "measured",
+      "reason": "Three quality processes and three cap-verified timing processes; native shaders and scene/camera preserved. Separate acquisition cohort from B1/B4/B6/B7.",
+      "result": "Benchmarks/development/2026-10-29-native-matrix-completion",
+      "quality_status": "measured_display_only",
+      "timing_status": "measured_known_caps_verified"
     },
     {
       "variant": "B5",
       "scene": "opaque-room",
       "algorithm": "Native PT + ReSTIR DI3.1 + ReSTIR GI3.1",
-      "status": "pending",
-      "reason": "Fresh matched configuration benchmark pending; legacy labels are not canonical results"
+      "status": "measured",
+      "reason": "Three quality processes and three cap-verified timing processes; native shaders and scene/camera preserved. Separate acquisition cohort from B1/B4/B6/B7.",
+      "result": "Benchmarks/development/2026-10-29-native-matrix-completion",
+      "quality_status": "measured_display_only",
+      "timing_status": "measured_known_caps_verified",
+      "fixture": "opaque-room-registered-env.scene.json"
     },
     {
       "variant": "B6",
       "scene": "convergence",
       "algorithm": "ReSTIR PT; DI/GI off",
-      "status": "unsupported",
-      "reason": "Transmission/BLEND materials and binding14/2 diffuse budget remain unsupported"
+      "status": "in_progress",
+      "reason": "Original-resolution guarded replay-first rendering is finite and reuse active; reduced-resolution quality still shows a brightness deficit. No accepted throughput.",
+      "development_result": "Benchmarks/development/2026-10-29-original-scene-pt-development"
     },
     {
       "variant": "B6",
       "scene": "kitchen",
       "algorithm": "ReSTIR PT; DI/GI off",
-      "status": "unsupported",
-      "reason": "Transmission/BLEND materials and binding14/2 diffuse budget remain unsupported"
+      "status": "in_progress",
+      "reason": "Original-resolution guarded replay-first rendering is finite and reuse active; reduced-resolution quality still shows a brightness deficit. No accepted throughput.",
+      "development_result": "Benchmarks/development/2026-10-29-original-scene-pt-development"
     },
     {
       "variant": "B6",
@@ -198,15 +225,17 @@
       "variant": "B7",
       "scene": "convergence",
       "algorithm": "ReSTIR PT + ReSTIR DI3.1; GI off",
-      "status": "unsupported",
-      "reason": "Transmission/BLEND materials and binding14/2 diffuse budget remain unsupported"
+      "status": "in_progress",
+      "reason": "Original-resolution guarded replay-first rendering is finite and reuse active; reduced-resolution quality still shows a brightness deficit. No accepted throughput.",
+      "development_result": "Benchmarks/development/2026-10-29-original-scene-pt-development"
     },
     {
       "variant": "B7",
       "scene": "kitchen",
       "algorithm": "ReSTIR PT + ReSTIR DI3.1; GI off",
-      "status": "unsupported",
-      "reason": "Transmission/BLEND materials and binding14/2 diffuse budget remain unsupported"
+      "status": "in_progress",
+      "reason": "Original-resolution guarded replay-first rendering is finite and reuse active; reduced-resolution quality still shows a brightness deficit. No accepted throughput.",
+      "development_result": "Benchmarks/development/2026-10-29-original-scene-pt-development"
     },
     {
       "variant": "B7",

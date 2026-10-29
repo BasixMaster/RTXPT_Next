@@ -51,6 +51,12 @@ if(RTXPT_D3D_AGILITY_SDK_VERSION AND (RTXPT_D3D_AGILITY_SDK_VERSION GREATER_EQUA
     string(APPEND shadermake_options " -m 6_9")
 endif()
 
+set(RTXPT_SHADER_COMPILE_JOBS 2 CACHE STRING "Maximum concurrent shader compiler processes")
+if(NOT RTXPT_SHADER_COMPILE_JOBS MATCHES "^[1-9][0-9]*$")
+    message(FATAL_ERROR "RTXPT_SHADER_COMPILE_JOBS must be a positive integer")
+endif()
+string(APPEND shadermake_options " --jobs ${RTXPT_SHADER_COMPILE_JOBS}")
+
 donut_compile_shaders(
     TARGET rtxpt_shaders
     CONFIG ${CMAKE_CURRENT_SOURCE_DIR}/shaders.cfg

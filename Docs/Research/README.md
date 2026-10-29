@@ -1,16 +1,18 @@
 # Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap
 
+[**B0–B10 comparison overview: performance, quality and pictures**](COMPARISON_OVERVIEW.md) shows all eleven versions for each required scene, including missing or unsupported results.
+
 User-confirmed numbering, 2026-10-29: **B0 is unchanged RTXPT 1.9 with its original defaults, renderer/dependency pins and scene assets.** The repository is RTXPT_Next. Read the [canonical B0–B10 mapping](VERSION_MAPPING.md); legacy files/tags/data IDs keep their earlier names and numeric results. `External/RTXDI-SDK` remains reference-only.
 
 | Version | Short algorithm overview | Current status |
 |---|---|---|
 | B0 | Unchanged RTXPT 1.9 reference | Original defaults and source303b408/runtimea14e079/Assets a56be4e preserved |
 | B1 | Native PT + DI 3.0; GI off | Original-scene and registered-room quality/timing measured |
-| B2 | Native PT + DI 3.0 + GI 3.0 | Historical original-scene observations; cap coverage unverified |
-| B3 | Native PT / runtime 3.1; DI/GI off | Raw native-control observation exists |
+| B2 | Native PT + DI 3.0 + GI 3.0 | Original-scene and registered-room quality/timing measured |
+| B3 | Native PT / runtime 3.1; DI/GI off | Fresh native-only quality/timing measured on all three scenes |
 | B4 | Native PT + DI 3.1; GI off | Original-scene and registered-room quality/timing measured |
-| B5 | Native PT + DI 3.1 + GI 3.1 | Historical original-scene observations; cap coverage unverified |
-| B6 | ReSTIR PT; DI/GI off | Registered-room quality/timing/history measured; original scenes unsupported |
+| B5 | Native PT + DI 3.1 + GI 3.1 | Original-scene and registered-room quality/timing measured |
+| B6 | ReSTIR PT; DI/GI off | Registered-room quality/timing/history measured; original scenes have guarded development images; quality acceptance pending |
 | B7 | ReSTIR PT + DI 3.1; GI off | Scoped opaque checkpoint `de9fe651`; wider material/scene validation pending |
 | B8 | ReSTIR PT + DI 3.1 + GI 3.1 | Planned valid sharing partition/MIS; overlapping estimates cannot simply be added |
 | B9 | B8 + limited PT++ | Planned after B8; existing GI-off pilot is a B7 ablation, not B9 |
@@ -52,3 +54,5 @@ RTXDI is sampling machinery; RTXPT is the renderer. Canonical IDs now distinguis
 Canonical update2026-10-29: [B1/B4 native-DI quality and cap-verified timing](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures and links12 accepted cap-verified timing runs; initial missing-trace attempts remain excluded.
 
 Current scoped measurements: [registered-room B1/B4/B6/B7 comparison](REGISTERED_ROOM_RESULTS.md) includes30quality captures,12timing processes and explicit history settling; [native original-scene report](CANONICAL_NATIVE_DI_RESULTS.md) now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.
+
+Current native coverage: [fresh B2/B3/B5 original-scene and room results](NATIVE_MATRIX_RESULTS.md) adds27quality captures and27cap-verified timing processes. [The unified B0–B10 overview](COMPARISON_OVERVIEW.md) includes all versions, current metrics and representative pictures; historical cohorts remain separate.

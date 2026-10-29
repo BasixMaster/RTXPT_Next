@@ -107,6 +107,8 @@ struct RtxdiBridgeParameters
     bool usingLightSampling;
     bool usingReGIR;
     bool usingReSTIRPT = false;
+    bool extendedSceneValidation = false;
+    uint32_t maxDiffuseBounces = 0;
     // Assert on camera cuts, scene/material changes and history-invalidating mode changes.
     bool resetReSTIRPT = false;
     bool capturePTDiagnostics = false;
@@ -191,6 +193,7 @@ private:
 	RayTracingPass m_GISpatialResamplingPass;
     RayTracingPass m_GIFinalShadingPass;
     RayTracingPass m_PTGenerateInitialSamplesPass;
+    RayTracingPass m_PTIdentityShiftDiagnosticsPass;
     RayTracingPass m_PTTemporalResamplingPass;
     RayTracingPass m_PTSpatialResamplingPass;
     RayTracingPass m_PTFinalShadingPass;

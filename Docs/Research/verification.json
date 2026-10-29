@@ -61,6 +61,7 @@
       "development_source_changes": [
         "Rtxpt/AdvancedSample.cpp",
         "Rtxpt/AdvancedSampleUI.cpp",
+        "Rtxpt/CMakeLists.txt",
         "Rtxpt/RTXDI/PT/Bridge.hlsli",
         "Rtxpt/RTXDI/PT/FinalShading.hlsl",
         "Rtxpt/RTXDI/PT/GenerateInitialSamples.hlsl",
@@ -101,7 +102,9 @@
         "Rtxpt/Shaders/PathTracerBridgeDonut.hlsli",
         "Rtxpt/Shaders/PathTracerSurfaceBridgeDonut.hlsli",
         "Rtxpt/shaders.cfg",
+        "Testing/B2/Scenes/COMPARISON_FIXTURE.md",
         "Testing/B2/Scenes/README.md",
+        "Testing/B2/Scenes/opaque-room-registered-env.scene.json",
         "Testing/B2/Scenes/opaque-room-sky.scene.json",
         "Testing/B2/Scenes/opaque-room-sun.scene.json",
         "Testing/B2/Scenes/opaque-room.gltf",
@@ -112,7 +115,8 @@
         "Testing/B2/control-adapters/manifest.json",
         "Testing/B2/control-adapters/prepare_controls.py",
         "Testing/B2/diffuse_budget_reference.py",
-        "Testing/B2/test_diffuse_budget.py"
+        "Testing/B2/test_diffuse_budget.py",
+        "Rtxpt/RTXDI/PT/IdentityShiftDiagnostics.hlsl"
       ],
       "reason": "Registry validation does not prove runtime activation or estimator correctness."
     },
@@ -171,8 +175,8 @@
       "name": "Structured evidence schema separately validated; SQLite metric search",
       "status": "passed",
       "smape_matches": 2,
-      "sources": 27,
-      "findings": 32
+      "sources": 28,
+      "findings": 33
     },
     {
       "name": "No full-paper PDFs exported",
@@ -182,6 +186,18 @@
       "name": "Build/GPU and display-quality evidence recorded",
       "status": "evidence_present",
       "reason": "This checker validates retained identity/completeness; it does not rebuild binaries, rerun GPU measurements or prove estimator correctness. See the native-DI/registered-room reports, legacy reports and result manifests."
+    },
+    {
+      "name": "Native B2/B3/B5 completion:27Q/27T frozen identities and restoration",
+      "status": "passed"
+    },
+    {
+      "name": "Unified canonical overview: all33 scene/variant rows, exact evidence hashes and explicit missing values",
+      "status": "passed"
+    },
+    {
+      "name": "Guarded original-scene evidence:4original-resolution captures, active finite reuse, zero pure-replay self failures and explicit non-acceptance",
+      "status": "passed"
     }
   ],
   "passed": true,

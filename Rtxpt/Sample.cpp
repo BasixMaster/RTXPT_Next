@@ -2287,6 +2287,8 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
         std::printf("DI_VALIDATION_CONTRACT strict=%d boiling=%u discountNaive=%u\n", int(m_cmdLine.StrictDIValidation),
             uint32_t(m_ui.RTXDI.restirDI.boilingFilterParams.enableBoilingFilter),
             uint32_t(m_ui.RTXDI.restirDI.spatialResamplingParams.discountNaiveSamples));
+        std::printf("PT_EXTENDED_SCENE_CONTRACT development=%d diffuseBudget=%d fullPrefixReplay=%d\n",
+            int(m_cmdLine.PTExtendedSceneValidation), m_ui.DiffuseBounceCount, int(m_cmdLine.PTReplayOnlyValidation));
         std::printf("PT_REPLAY_CONTRACT replayOnly=%d roughnessThreshold=%.9g\n", int(m_cmdLine.PTReplayOnlyValidation),
             double(m_ui.RTXDI.restirPT.reconnectionParams.roughnessThreshold));
         std::printf("PT_HISTORY_CONTRACT ageRejection=%u maxAge=%u maxHistory=%u\n",
@@ -2360,16 +2362,24 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
 {
     const bool envMapPresent = m_ui.EnvironmentMapParams.Enabled;
 
+    if (m_cmdLine.PTExtendedSceneValidation &&
+        (!m_cmdLine.PTReplayOnlyValidation || !m_ui.ActualUseReSTIRPT() ||
+         m_ui.RTXDI.restirPT.reconnectionParams.roughnessThreshold != 1.0f ||
+         m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode != RTXDI_PTReconnectionMode::FixedThreshold ||
+         m_ui.RTXDI.restirPT.russianRouletteProbability != 0.0f))
+        throw std::runtime_error("Extended-scene development requires full-prefix replay; mid-path suffix budget and roulette are not validated");
     if (m_ui.ActualUseReSTIRPT())
     {
         // Until replay carries medium state and suffix diffuse counts, refuse
         // unsupported contracts rather than producing an apparently valid image.
         if (!m_ui.UseNEE || m_ui.RealtimeAA != 0 || m_ui.ActualUseStandaloneDenoiser() || m_ui.CameraAperture != 0.0f)
             throw std::runtime_error("B2 prototype requires NEE on, realtimeAA=0, standaloneDenoiser=0 and pinhole camera.");
-        if (m_ui.BounceCount < 1 || m_ui.BounceCount > 32 || m_ui.DiffuseBounceCount < m_ui.BounceCount)
+        if (m_ui.BounceCount < 1 || m_ui.BounceCount > 32 ||
+            (m_ui.DiffuseBounceCount < m_ui.BounceCount && !m_cmdLine.PTExtendedSceneValidation))
             throw std::runtime_error("B2 prototype requires maxBounces in1..32 and a nonbinding diffuse cap (maxDiffuseBounces >= maxBounces).");
         for (const auto& material : m_scene->GetSceneGraph()->GetMaterials())
         {
+            if (m_cmdLine.PTExtendedSceneValidation) continue; // Explicit replay-first diagnostic, not general promotion.
             const auto* pt = PTMaterial::SafeCast(material);
             if ((pt && (pt->EnableTransmission || pt->DiffuseTransmissionFactor > 0.0f)) ||
                 (material->domain != donut::engine::MaterialDomain::Opaque && material->domain != donut::engine::MaterialDomain::AlphaTested))
@@ -2406,6 +2416,8 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
         bridgeParameters.userSettings.restirPT.hybridShiftParams.maxRcVertexLength = ptMaxPathLength + 1;
     }
     bridgeParameters.usingReSTIRPT = m_ui.ActualUseReSTIRPT();
+    bridgeParameters.extendedSceneValidation = m_cmdLine.PTExtendedSceneValidation;
+    bridgeParameters.maxDiffuseBounces = uint32_t(m_ui.DiffuseBounceCount);
     bridgeParameters.resetReSTIRPT = m_ui.ResetRealtimeCaches || m_ui.ResetAccumulation;
     bridgeParameters.capturePTDiagnostics = m_cmdLine.CapturePTReservoirs;
     bridgeParameters.samplingSeed = m_cmdLine.SamplingSeed;

@@ -204,6 +204,9 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
         m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode = cmdLine.PTReconnectionMode == 0 ?
             RTXDI_PTReconnectionMode::FixedThreshold : RTXDI_PTReconnectionMode::Footprint;
     m_ui.RTXDI.restirPT.russianRouletteProbability = cmdLine.PTRouletteProbability;
+    if (cmdLine.PTExtendedSceneValidation &&
+        (!cmdLine.PTReplayOnlyValidation || !m_ui.UseReSTIRPT || cmdLine.PTRouletteProbability != 0.0f))
+        throw std::runtime_error("Extended-scene PT validation requires ReSTIR PT, full-prefix replay and roulette off");
     if (cmdLine.PTReplayOnlyValidation && cmdLine.PTReconnectionMode == 1)
         throw std::runtime_error("Replay-only diagnostic requires fixed-threshold reconnection");
     if (cmdLine.PTFixedSpatialSamples < -1 || cmdLine.PTFixedSpatialSamples == 0 || cmdLine.PTFixedSpatialSamples > 32)

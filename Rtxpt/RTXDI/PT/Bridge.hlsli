@@ -60,6 +60,9 @@ struct RAB_PathTracerUserData
     RTXDI_PTPathTraceInvocationType pathType;
     uint2 pixelPosition;
     float firstHitDistance;
+    uint replayDebugFlags;
+    float replayDebugPdf;
+    float replayDebugEmission;
     PathState nativeState;
 };
 RAB_PathTracerUserData RAB_EmptyPathTracerUserData()
@@ -83,7 +86,7 @@ float RAB_GetMISWeightForNEE(uint lightIndex, RAB_LightSample lightSample,
 #include <Rtxdi/PT/PathTracerContext.hlsli>
 #include <Rtxdi/PT/PathTracerRandomContext.hlsli>
 
-RAB_RayPayload RTXPT_PTTrace(RayDesc ray)
+RAB_RayPayload RTXPT_PTTrace(RayDesc ray, bool visibilityRay = false)
 {
     RAB_RayPayload p = (RAB_RayPayload)0;
     p.instanceIndex = ~0u;
@@ -92,8 +95,11 @@ RAB_RayPayload RTXPT_PTTrace(RayDesc ray)
     while (q.Proceed())
     {
         if (q.CandidateType() == CANDIDATE_NON_OPAQUE_TRIANGLE &&
-            Bridge::AlphaTestVisibilityRay(q.CandidateInstanceID(), q.CandidateInstanceIndex(),
-                q.CandidateGeometryIndex(), q.CandidatePrimitiveIndex(), q.CandidateTriangleBarycentrics()))
+            (visibilityRay ?
+                Bridge::AlphaTestVisibilityRay(q.CandidateInstanceID(), q.CandidateInstanceIndex(),
+                    q.CandidateGeometryIndex(), q.CandidatePrimitiveIndex(), q.CandidateTriangleBarycentrics()) :
+                Bridge::AlphaTest(q.CandidateInstanceID(), q.CandidateInstanceIndex(),
+                    q.CandidateGeometryIndex(), q.CandidatePrimitiveIndex(), q.CandidateTriangleBarycentrics())))
             q.CommitNonOpaqueTriangleHit();
     }
     if (q.CommittedStatus() == COMMITTED_TRIANGLE_HIT)
@@ -165,6 +171,8 @@ float3 RTXPT_PTMediumTransmittance(PathState path, float distance)
 template<typename PTContextType>
 void RTXPT_PTApplyMediumThroughput(inout RTXDI_PathTracerContext<PTContextType> ctx, float3 transmittance)
 {
+    if (g_RtxdiBridgeConst.ptDiagnostics != 0 && any(transmittance < 1.0f))
+        InterlockedAdd(u_PTDiagnosticCounters[5], 1);
     ctx.MultiplyPathThroughput(transmittance);
 #if defined(RTXDI_RESTIR_PT_INITIAL_SAMPLING)
     // Application adapter pinned to RTXDI-Library f12037fa8e97ebc08e9e3edfd2de528ed1772a4b.
@@ -230,7 +238,7 @@ float3 RTXPT_PTShadowTransport(RAB_Surface surface, float3 samplePosition)
     // fallback/termination; 32 bounds traversal without inventing an unbounded loop.
     for (uint segment = 0; segment < 32; ++segment)
     {
-        RAB_RayPayload hit = RTXPT_PTTrace(ray);
+        RAB_RayPayload hit = RTXPT_PTTrace(ray, true);
         const float segmentDistance = hit.instanceIndex == ~0u ? ray.TMax : hit.committedRayT;
         transmittance *= RTXPT_PTMediumTransmittance(path, segmentDistance);
         if (hit.instanceIndex == ~0u) return transmittance;
@@ -246,8 +254,9 @@ float3 RTXPT_PTShadowTransport(RAB_Surface surface, float3 samplePosition)
     return float3(0, 0, 0); // Same conservative failure policy as a terminated native path.
 }
 
-RTXDI_BrdfRaySample RTXPT_PTSampleBsdf(RAB_Surface s, inout RTXDI_RandomSamplerState rng)
+RTXDI_BrdfRaySample RTXPT_PTSampleBsdf(RAB_Surface s, inout RTXDI_RandomSamplerState rng, out uint nativeLobe)
 {
+    nativeLobe = 0;
     RTXDI_BrdfRaySample brs = RTXDI_EmptyBrdfRaySample();
     BSDFSample sample = (BSDFSample)0;
     float3 wo;
@@ -258,6 +267,7 @@ RTXDI_BrdfRaySample RTXPT_PTSampleBsdf(RAB_Surface s, inout RTXDI_RandomSamplerS
     float4 randoms = float4(RTXDI_GetNextRandom(rng), RTXDI_GetNextRandom(rng), RTXDI_GetNextRandom(rng), RTXDI_GetNextRandom(rng));
 #endif
     if (!bsdf.sample(s._ToLocal(s._V), wo, sample.pdf, sample.weight, sample.lobe, sample.lobeP, randoms)) return brs;
+    nativeLobe = sample.lobe;
     brs.outDirection = s._FromLocal(wo);
     // The native BSDF marks a delta event with a zero solid-angle PDF, while
     // sample.weight already includes discrete lobe selection. RTXDI's context
@@ -268,11 +278,23 @@ RTXDI_BrdfRaySample RTXPT_PTSampleBsdf(RAB_Surface s, inout RTXDI_RandomSamplerS
     // For a continuous mixture the native sampler's component weight is not
     // the marginal BSDF used by RTXDI reconnection. Use that same full BSDF
     // here with its full mixture PDF. Discrete delta mass remains separate.
-    brs.brdfTimesNoL = delta ? sample.weight * brs.outPdf : s.Eval(brs.outDirection).rgb;
+    // A binding diffuse budget depends on the sampled native component. Full
+    // marginal BSDF throughput with a sampled-component cutoff changes the
+    // estimator. In the full-prefix PSS replay track preserve native component
+    // weight (including lobe-selection factors); terminal NEE still uses the
+    // complete BSDF, and its final edge is outside the counted prefix.
+    brs.brdfTimesNoL = (delta || g_RtxdiBridgeConst.ptExtendedSceneValidation != 0) ?
+        sample.weight * brs.outPdf : s.Eval(brs.outDirection).rgb;
     if (delta) { brs.properties.SetDelta(); brs.properties.SetSpecular(); }
     if ((sample.lobe & (uint)LobeType::Specular) != 0) brs.properties.SetSpecular();
     if ((sample.lobe & (uint)LobeType::Transmission) != 0) brs.properties.SetTransmission();
     return brs;
+}
+
+RTXDI_BrdfRaySample RTXPT_PTSampleBsdf(RAB_Surface s, inout RTXDI_RandomSamplerState rng)
+{
+    uint ignoredNativeLobe;
+    return RTXPT_PTSampleBsdf(s, rng, ignoredNativeLobe);
 }
 
 template<typename PTContextType>
@@ -288,9 +310,12 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
     {
         ctx.BeginPathState();
         RAB_Surface previousSurface = ctx.GetIntersectionSurface();
-        RTXDI_BrdfRaySample brs = RTXPT_PTSampleBsdf(previousSurface, randomContext.replayRandomSamplerState);
+        uint nativeLobe;
+        RTXDI_BrdfRaySample brs = RTXPT_PTSampleBsdf(previousSurface, randomContext.replayRandomSamplerState, nativeLobe);
+        user.replayDebugFlags = brs.properties.IsDelta() ? 1 : 0;
+        user.replayDebugPdf = brs.outPdf;
         ctx.SetBrdfRaySample(brs);
-        if (!ctx.ValidContinuationRayBrdfOverPdf()) break;
+        if (!ctx.ValidContinuationRayBrdfOverPdf()) { user.replayDebugFlags |= 64; break; }
         ctx.MultiplyPathThroughput(ctx.GetContinuationRayBrdfOverPdf());
         // PT++ section 6.2.4: initial RNG owns roulette. The hybrid-shift
         // context returns false, preserving the complete deterministic replay.
@@ -312,9 +337,24 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
             ctx.MultiplyPathThroughput(1.0f / rr);
             ctx.RecordRussianRouletteProbability(rr);
         }
+        bool diffuseBudgetExceeded = false;
+        if (g_RtxdiBridgeConst.ptExtendedSceneValidation != 0)
+        {
+            // Match native GenerateScatterRay, including its alternating diffuse
+            // transmission policy. Null/alpha-rejected intersections never enter here.
+            const bool diffuse = (nativeLobe & (uint)LobeType::Diffuse) != 0 ||
+                previousSurface.GetRoughness() > 0.25f; // Native kSpecularRoughnessThreshold.
+            if (diffuse && !((nativeLobe & (uint)LobeType::DiffuseTransmission) != 0 &&
+                (user.nativeState.getVertexIndex() % 2) == 1))
+                user.nativeState.incrementCounter(PackedCounters::DiffuseBounces);
+            diffuseBudgetExceeded = user.nativeState.getCounter(PackedCounters::DiffuseBounces) > Bridge::getMaxDiffuseBounceLimit();
+            if (diffuseBudgetExceeded && g_RtxdiBridgeConst.ptDiagnostics != 0)
+                InterlockedAdd(u_PTDiagnosticCounters[6], 1);
+        }
         user.nativeState.clearScatterEventFlags();
         if (brs.properties.IsTransmission())
         {
+            if (g_RtxdiBridgeConst.ptDiagnostics != 0) InterlockedAdd(u_PTDiagnosticCounters[4], 1);
             user.nativeState.setScatterTransmission();
             PathTracer::UpdateNestedDielectricsOnScatterTransmission(
                 RTXPT_PTShadingDataForMedium(previousSurface), user.nativeState, working);
@@ -334,7 +374,7 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
         ray.TMin = 0.0;
         ray.TMax = RTXDI_MAX_FLOAT32;
         ctx.SetContinuationRay(ray);
-        if (!ctx.AnalyzePathReconnectibilityBeforeTrace()) break;
+        if (!ctx.AnalyzePathReconnectibilityBeforeTrace()) { user.replayDebugFlags |= 128; break; }
         const uint nextNativeVertex = user.nativeState.getVertexIndex() + 1;
         RAB_RayPayload hit = (RAB_RayPayload)0;
         PathTracer::Surface nativeSurface = (PathTracer::Surface)0;
@@ -358,28 +398,56 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
             // False interfaces consume neither a BSDF draw nor a PT bounce.
             ray.Origin = user.nativeState.GetOrigin();
         }
-        if (!accepted) { ctx.SetPathTermination(true); break; }
+        if (!accepted) { user.replayDebugFlags |= 32; ctx.SetPathTermination(true); break; }
         hit.committedRayT = totalHitDistance;
         ctx.SetTraceResult(hit);
         if (hit.instanceIndex == ~0u)
         {
+            user.replayDebugFlags |= 2;
             ctx.RecordPathRadianceMiss(randomContext.initialRandomSamplerState);
             // Continuous misses are covered by NEE. A delta connection cannot
             // be sampled by NEE and therefore retains explicit emitted light.
             if (brs.properties.IsDelta() && ctx.ShouldSampleEmissiveSurfaces() && Bridge::HasEnvMap())
             {
                 EnvMap env = Bridge::CreateEnvMap();
-                ctx.RecordEnvironmentMapLightSample(env.Eval(ray.Direction), previousSurface, randomContext.initialRandomSamplerState);
+#if defined(RTXDI_RESTIR_PT_HYBRID_SHIFT)
+                // RTXDI's default hybrid callback omits secondary-bounce
+                // environment light for its direct-light partition. RTXPT's PT
+                // owner retains the discrete delta connection: NEE/DI cannot
+                // evaluate that Dirac lobe. Restore only this pure-PSS domain.
+                if (ctx.IsSecondaryBounce() && ctx.ctx.selectedPathLength == ctx.GetBounceDepth() &&
+                    ctx.ctx.replayRcVertexLength > ctx.GetBounceDepth())
+                    ctx.ctx.radiance += env.Eval(ray.Direction) * ctx.GetPathThroughput();
+                else
+#endif
+                    ctx.RecordEnvironmentMapLightSample(env.Eval(ray.Direction), previousSurface, randomContext.initialRandomSamplerState);
             }
             break;
         }
         if (user.firstHitDistance == 0) user.firstHitDistance = hit.committedRayT;
         float3 emission = nativeSurface.shadingData.GetEmission();
+        user.replayDebugEmission = RTXDI_Luminance(emission);
+        if (any(emission>0)) user.replayDebugFlags |= 4;
         RAB_Surface surface = RTXPT_PTCollectNativeSurface(nativeSurface, hit.committedRayT, user.nativeState);
+#if defined(RTXDI_RESTIR_PT_HYBRID_SHIFT)
+        // A terminal connection can be evaluated by RecordPathIntersection
+        // itself. Reject an over-budget replay prefix BEFORE that callback;
+        // terminal BSDF emission at selectedPathLength is still allowed.
+        // Pinned adapter for RTXDI-Library f12037f's selectedPathLength member.
+        if (diffuseBudgetExceeded && ctx.GetBounceDepth() < ctx.ctx.selectedPathLength)
+        {
+            ctx.SetPathTermination(true);
+            break;
+        }
+#endif
         ctx.RecordPathIntersection(surface);
-        if (ctx.IsPathTerminated()) break;
+        if (ctx.IsPathTerminated()) { user.replayDebugFlags |= 8; break; }
         if (brs.properties.IsDelta() && ctx.ShouldSampleEmissiveSurfaces())
             ctx.RecordEmissiveLightSample(emission, previousSurface, randomContext.initialRandomSamplerState);
+        // Native truncation keeps terminal emission from this trace, but no
+        // NEE or further scatter at its endpoint. Replay reconstructs all counters;
+        // no unstored suffix diffuse budget is guessed at a mid-path connection.
+        if (diffuseBudgetExceeded) { ctx.SetPathTermination(true); break; }
         if (ctx.ShouldSampleNee())
         {
             RAB_LightSample light = RAB_EmptyLightSample();

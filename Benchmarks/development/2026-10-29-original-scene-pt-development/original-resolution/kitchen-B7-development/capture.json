@@ -1,0 +1,220 @@
+{
+  "label": "kitchen-B7-development",
+  "scene": "kitchen-with-test-stuff.scene.json",
+  "mode": "dipt",
+  "output_track": "unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata",
+  "exe_sha256": "893d874079fd0820a1d2db26acec399ff9f7c67ca1c7d30a1d4f4117e5d579c8",
+  "started_utc": "2026-10-29T08:02:44.279521+00:00",
+  "command": [
+    "[WORKSPACE]\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+    "--scene",
+    "kitchen-with-test-stuff.scene.json",
+    "--width",
+    "1280",
+    "--height",
+    "720",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "0",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "2.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "[WORKSPACE]\\work\\2026-10-29-original-resolution-pt-development\\kitchen-B7-development\\frame.png",
+    "--captureSuffix",
+    "kitchen-B7-development",
+    "--perfLog",
+    "[WORKSPACE]\\work\\2026-10-29-original-resolution-pt-development\\kitchen-B7-development\\partial-perf.csv",
+    "--captureWarmupFrames",
+    "64",
+    "--ptFixedSpatialSamples",
+    "1",
+    "--capturePTReservoirs",
+    "true",
+    "--ptDisableAgeRejectionValidation",
+    "true",
+    "--ptReplayOnlyValidation",
+    "true",
+    "--ptExtendedSceneValidation",
+    "true",
+    "--strictDIValidation",
+    "true",
+    "--restirDIMode",
+    "3",
+    "--neeMIS",
+    "0",
+    "--benchmarkUncapped",
+    "true",
+    "--samplingSeed",
+    "0",
+    "--captureLinearHDR",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--useReSTIRPT",
+    "1",
+    "--restirPTMode",
+    "3",
+    "--maxBounces",
+    "14",
+    "--maxDiffuseBounces",
+    "2",
+    "--stopAnimations",
+    "--captureSimple"
+  ],
+  "cwd": "[WORKSPACE]\\outputs\\RTXDI_Next\\bin",
+  "settings": {
+    "width": 1280,
+    "height": 720,
+    "exposure": 2.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 1,
+    "restir_gi": 0,
+    "simple": true,
+    "record_start": null,
+    "frames": 1,
+    "reference_spp": null,
+    "linear_hdr_requested": true,
+    "sampling_seed_requested": 0,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": 3,
+    "nee_mis_requested": 0,
+    "nee_type": 2,
+    "restir_pt": 1,
+    "max_bounces_override": 14,
+    "max_diffuse_bounces_override": 2,
+    "pt_mode": 3
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "scene_sha256": "2af5735fb02fc01badd83671641d54b7f1c69859c8c9bcdf335ca95d9daae552",
+  "canonical_experiment": null,
+  "development_extended_scene_transport": {
+    "full_prefix_replay": true,
+    "canonical_accepted": false,
+    "diffuse_budget": "Native sampled-lobe accounting with terminal-emission truncation"
+  },
+  "artifact_identity": {
+    "manifest_sha256": "d9614189d014eccf01dbbf7023eea4149ebc23ad58fbdd10db7b1c2bab21ef85",
+    "root_source_sha": "9345bf39cf66784c3dc05fd055aacebeabd167b6",
+    "working_diff_sha256": "37343bbb0f73e6497f92ee628a1a4ba692c4dc280f76c37577766abae6f9f59c",
+    "executable_sha256": "893d874079fd0820a1d2db26acec399ff9f7c67ca1c7d30a1d4f4117e5d579c8",
+    "shader_files": 602,
+    "validated": true
+  },
+  "process_id": 7676,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 8.78200000000652,
+  "images": [
+    {
+      "name": "frame_kitchen-B7-development.png",
+      "sha256": "9d7a58a81c2b5415946e4c4b535c3319106f7a628a0d33f66388032861c2222b",
+      "bytes": 3221008
+    }
+  ],
+  "linear_hdr_files": [
+    {
+      "name": "frame_kitchen-B7-development.pfm",
+      "sha256": "937d4c5f11a1845491b2c407a79952e9481f95cb272f73eddd554b51e876ba55",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_kitchen-B7-development.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_kitchen-B7-development.pfm.pt.bin",
+      "sha256": "6b52bb881fd2b02047c61961a80b8ada7dfef7b0aafe539aa3a33572c3da2cd8",
+      "bytes": 176947200
+    },
+    {
+      "name": "frame_kitchen-B7-development.pfm.pt.bin.json",
+      "sha256": "0a436e4449713837b1989d108ae5642e2256f1e418f9a31b1d6bfe78520856af",
+      "bytes": 334
+    },
+    {
+      "name": "frame_kitchen-B7-development.pfm.pt.bin.stats.json",
+      "sha256": "d8a9737f37ed0cc08634aed440ebed0a9f6530ac3b8363fbb86f304119559d3d",
+      "bytes": 712
+    }
+  ],
+  "effective_sampling": {
+    "coverage": "verified first-frame effective receipt",
+    "seed": 0,
+    "realtime": true,
+    "reference_pixel_center": false,
+    "pixel_jitter_scale": 0.0
+  },
+  "effective_di_validation": {
+    "coverage": "verified first-frame effective receipt",
+    "strict": true,
+    "boiling": false,
+    "discount_naive": false,
+    "temporal_permutation": false
+  },
+  "effective_extended_scene_contract": {
+    "scope": "Verified effective development settings; not scene correctness or canonical acceptance",
+    "full_prefix_replay": true,
+    "diffuse_budget": 2,
+    "max_bounces": 14,
+    "canonical_accepted": false
+  },
+  "effective_pt_replay": {
+    "coverage": "verified first-frame effective receipt",
+    "replay_only": true,
+    "roughness_threshold": 1.0
+  },
+  "effective_pt_history": {
+    "coverage": "verified first-frame effective receipt",
+    "age_rejection": false,
+    "max_age": 30,
+    "max_history": 8
+  },
+  "effective_pt_spatial": {
+    "coverage": "verified first-frame effective receipt",
+    "samples": 1,
+    "boost": 1
+  },
+  "effective_ptpp": {
+    "coverage": "verified first-frame effective receipt",
+    "reconnection_mode": 0,
+    "roulette_probability": 0.0,
+    "diagnostics": true
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 64,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "not requested; legacy labels retain their original numbering"
+  },
+  "artifact_identity_after_capture": {
+    "manifest_sha256": "d9614189d014eccf01dbbf7023eea4149ebc23ad58fbdd10db7b1c2bab21ef85",
+    "root_source_sha": "9345bf39cf66784c3dc05fd055aacebeabd167b6",
+    "working_diff_sha256": "37343bbb0f73e6497f92ee628a1a4ba692c4dc280f76c37577766abae6f9f59c",
+    "executable_sha256": "893d874079fd0820a1d2db26acec399ff9f7c67ca1c7d30a1d4f4117e5d579c8",
+    "shader_files": 602,
+    "validated": true
+  }
+}

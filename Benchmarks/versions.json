@@ -34,7 +34,7 @@
     },
     {
       "id": "B2",
-      "status": "pending_matched_benchmark",
+      "status": "measured_original_scenes_and_registered_room",
       "ref": "303b408ab81790a5051abd7573830b7a4112eb8e",
       "source_sha": "303b408ab81790a5051abd7573830b7a4112eb8e",
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -46,11 +46,12 @@
         "restir_gi": 1,
         "restir_pt": 0
       },
-      "benchmark_adapter": "Native benchmark controls; preserve original shaders/estimator and record actual first-frame DI/GI activation"
+      "benchmark_adapter": "Native benchmark controls; preserve original shaders/estimator and record actual first-frame DI/GI activation",
+      "current_measurement": "2026-10-29-native-matrix-completion"
     },
     {
       "id": "B3",
-      "status": "measured_native_control",
+      "status": "measured_original_scenes_and_registered_room",
       "ref": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
       "source_sha": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -62,7 +63,8 @@
         "restir_gi": 0,
         "restir_pt": 0
       },
-      "benchmark_adapter": "Native benchmark controls; preserve original shaders/estimator and record actual first-frame DI/GI activation"
+      "benchmark_adapter": "Native benchmark controls; preserve original shaders/estimator and record actual first-frame DI/GI activation",
+      "current_measurement": "2026-10-29-native-matrix-completion"
     },
     {
       "id": "B4",
@@ -82,7 +84,7 @@
     },
     {
       "id": "B5",
-      "status": "pending_matched_benchmark",
+      "status": "measured_original_scenes_and_registered_room",
       "ref": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
       "source_sha": "7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee",
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -94,7 +96,8 @@
         "restir_gi": 1,
         "restir_pt": 0
       },
-      "benchmark_adapter": "Native benchmark controls; preserve original shaders/estimator and record actual first-frame DI/GI activation"
+      "benchmark_adapter": "Native benchmark controls; preserve original shaders/estimator and record actual first-frame DI/GI activation",
+      "current_measurement": "2026-10-29-native-matrix-completion"
     },
     {
       "id": "B6",
@@ -386,6 +389,26 @@
       "quality_scope": "30captured images,3finite native references; commonLDR, modernHDR and history settling",
       "cap_coverage": "Known app/NVIDIA/RTSS boundaries verified; other external limiters unknown",
       "conclusion": "B7 versus B4 costs19.41%more processGPUbusy with45.09%lower steady LDR-FLIP; no equal-quality speedup. Original Convergence/Kitchen PT gates remain."
+    },
+    {
+      "id": "2026-10-29-native-matrix-completion",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "status": "measured_scoped",
+      "variants": [
+        "B2",
+        "B3",
+        "B5"
+      ],
+      "scenes": [
+        "convergence",
+        "kitchen",
+        "opaque-room"
+      ],
+      "report": "Docs/Research/NATIVE_MATRIX_RESULTS.md",
+      "path": "Benchmarks/development/2026-10-29-native-matrix-completion",
+      "quality_captures": 27,
+      "timed_runs": 27,
+      "scope": "Native unchanged shader controls, display metrics, known cap boundaries verified; separate acquisition cohort"
     }
   ],
   "comparison_policy": {

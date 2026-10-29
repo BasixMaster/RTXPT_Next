@@ -5,6 +5,7 @@ import argparse,subprocess,time,json,hashlib,os,datetime,csv
 from capture_identity import transport_settings
 from sampling_contract import roulette_value, seed_value, verify as verify_sampling, verify_di, verify_pt_replay, verify_pt_history, verify_pt_spatial, verify_ptpp, verify_capture_history
 from artifact_manifest import validate as validate_artifacts
+from extended_scene_contract import validate_request as validate_extended_request, verify as verify_extended
 
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def scene_argument(value, assets_dir=None):
@@ -29,6 +30,7 @@ def main():
     ap.add_argument('--timeout',type=float,default=300);ap.add_argument('--presentmon',type=Path)
     ap.add_argument('--max-bounces',type=int);ap.add_argument('--max-diffuse-bounces',type=int)
     ap.add_argument('--pt-mode',type=int,choices=[0,1,2,3],default=3)
+    ap.add_argument('--pt-extended-scene-validation',action='store_true',help='Development replay-first original-scene transport; no canonical acceptance claim')
     ap.add_argument('--app-uncapped',action='store_true',help='Quality captures: disable app caps only; external cap audit belongs to timed runs.')
     ap.add_argument('--capture-native-radiance',action='store_true')
     ap.add_argument('--history-frames',type=int,choices=range(1,4097),metavar='1..4096',help='Explicit simple-capture history warmup, not accumulated spp')
@@ -48,7 +50,7 @@ def main():
     ap.add_argument('--reference-pixel-center',action='store_true')
     ap.add_argument('--linear-hdr',action='store_true',help='Request raw PFM plus metadata; requires a renderer with captureLinearHDR support.')
     ap.add_argument('--artifact-manifest',type=Path,help='Optional strict frozen source/executable/shader identity; compile caches before freezing.')
-    a=ap.parse_args();canonical=prepare_experiment(a.variant,a.mode,a.variant_preset,a.pt_reconnection_mode,a.pt_roulette_probability);verify_snapshot(a.artifact_manifest,canonical)
+    a=ap.parse_args();validate_extended_request(a.pt_extended_scene_validation,a.mode,a.pt_replay_only_validation,a.variant);canonical=prepare_experiment(a.variant,a.mode,a.variant_preset,a.pt_reconnection_mode,a.pt_roulette_probability);verify_snapshot(a.artifact_manifest,canonical)
     exe=a.exe.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
     if any(out.iterdir()):raise SystemExit('Output directory must be new/empty; never append distinct runs.')
     a.scene=scene_argument(a.scene,exe.parent.parent/'Assets')
@@ -64,6 +66,10 @@ def main():
     if a.capture_pt_reservoirs:args+=['--capturePTReservoirs','true']
     if a.pt_disable_age_rejection_validation:args+=['--ptDisableAgeRejectionValidation','true']
     if a.pt_replay_only_validation:args+=['--ptReplayOnlyValidation','true']
+    if a.pt_extended_scene_validation:
+        if a.variant is not None or a.mode not in ['pt','dipt'] or not a.pt_replay_only_validation:
+            raise SystemExit('Extended-scene development requires PT mode, explicit full-prefix replay and no canonical result label')
+        args+=['--ptExtendedSceneValidation','true']
     if a.strict_di_validation:args+=['--strictDIValidation','true']
     if a.di_light_mode is not None:args+=['--diLightMode',str(a.di_light_mode)]
     if a.di_brdf_samples is not None:args+=['--diBrdfSamples',str(a.di_brdf_samples)]
@@ -85,6 +91,7 @@ def main():
     manifest=dict(label=a.label,scene=a.scene,mode=a.mode,output_track='unreconstructed tonemapped sRGB PNG; not linear HDR',exe_sha256=sha(exe),started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),command=args,cwd=str(exe.parent),settings=dict(width=a.width,height=a.height,exposure=a.exposure,aa=0,denoiser=0,radiance_cache=0,restir_di=int(a.mode=='digi'),restir_gi=int(a.mode=='digi'),simple=a.simple,record_start=None if a.simple else a.record_start,frames=1 if a.simple else a.frames,reference_spp=a.reference_spp if a.mode=='reference' else None),timing_scope='External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.',measurement_status='running')
     manifest['scene_sha256']=sha(exe.parent.parent/'Assets'/a.scene)
     manifest['canonical_experiment']=canonical
+    if a.pt_extended_scene_validation:manifest['development_extended_scene_transport']=dict(full_prefix_replay=True,canonical_accepted=False,diffuse_budget='Native sampled-lobe accounting with terminal-emission truncation')
     if a.linear_hdr:manifest['output_track']='unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata'
     manifest['settings']['linear_hdr_requested']=a.linear_hdr
     manifest['settings'].update(sampling_seed_requested=a.sampling_seed,reference_pixel_center_requested=a.reference_pixel_center,di_mode_requested=a.di_mode,nee_mis_requested=a.nee_mis,nee_type=a.nee_type)
@@ -125,6 +132,8 @@ def main():
             except ValueError as exc:manifest['measurement_status']='failed_sampling_contract';manifest['sampling_failure']=str(exc)
             try:manifest['effective_di_validation']=verify_di((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.strict_di_validation)
             except ValueError as exc:manifest['measurement_status']='failed_di_validation_contract';manifest['di_validation_failure']=str(exc)
+            try:manifest['effective_extended_scene_contract']=verify_extended((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode)
+            except ValueError as exc:manifest['measurement_status']='failed_extended_scene_contract';manifest['extended_scene_failure']=str(exc)
             try:manifest['effective_pt_replay']=verify_pt_replay((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_replay_only_validation)
             except ValueError as exc:manifest['measurement_status']='failed_pt_replay_contract';manifest['pt_replay_failure']=str(exc)
             try:manifest['effective_pt_history']=verify_pt_history((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_disable_age_rejection_validation)

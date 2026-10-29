@@ -6,10 +6,10 @@
 |---|---|---|
 | B0 | Unchanged RTXPT 1.9 reference | Original defaults and pins. |
 | B1 | Native PT + DI 3.0 | GI/ReSTIR PT off; original-scene quality/timing measured. |
-| B2 | Native PT + DI 3.0 + GI 3.0 | ReSTIR PT off; historical cap-unverified observations. |
-| B3 | Native PT / runtime 3.1 | DI/GI/ReSTIR PT off. |
+| B2 | Native PT + DI 3.0 + GI 3.0 | ReSTIR PT off; all three native scene rows freshly measured. |
+| B3 | Native PT / runtime 3.1 | DI/GI/ReSTIR PT off; all three native scene rows freshly measured. |
 | B4 | Native PT + DI 3.1 | GI/ReSTIR PT off; original-scene quality/timing measured. |
-| B5 | Native PT + DI 3.1 + GI 3.1 | ReSTIR PT off; historical cap-unverified observations. |
+| B5 | Native PT + DI 3.1 + GI 3.1 | ReSTIR PT off; all three native scene rows freshly measured. |
 | B6 | ReSTIR PT | DI/GI off; native direct/fallback ownership remains explicit. |
 | B7 | ReSTIR PT + DI 3.1 | GI off; measured static opaque checkpoint. |
 | B8 | ReSTIR PT + DI 3.1 + GI 3.1 | Planned; requires valid GI/PT partition or MIS. |
@@ -70,3 +70,5 @@ The version name alone did not explain which estimator ran. The algorithm label 
 Canonical update2026-10-29: [B1/B4 native-DI quality and cap-verified timing](CANONICAL_NATIVE_DI_RESULTS.md) retains12 original-scene captures and links12 accepted cap-verified timing runs; initial missing-trace attempts remain excluded.
 
 Current scoped measurements: [registered-room B1/B4/B6/B7 comparison](REGISTERED_ROOM_RESULTS.md) includes30quality captures,12timing processes and explicit history settling; [native original-scene report](CANONICAL_NATIVE_DI_RESULTS.md) now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.
+
+Current native coverage: [fresh B2/B3/B5 original-scene and room results](NATIVE_MATRIX_RESULTS.md) adds27quality captures and27cap-verified timing processes. [The unified B0–B10 overview](COMPARISON_OVERVIEW.md) includes all versions, current metrics and representative pictures; historical cohorts remain separate.

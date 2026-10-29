@@ -10,6 +10,7 @@
 
 #include "RtxdiPass.h"
 #include <cstddef>
+#include <cstring>
 #include <fstream>
 #include <cstdio>
 #include <stdexcept>
@@ -201,6 +202,7 @@ void RtxdiPass::CreatePTPipelines(nvrhi::BindingLayoutHandle extraBindingLayout)
         return;
     const bool initialized =
         m_PTGenerateInitialSamplesPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/GenerateInitialSamples.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout) &&
+        m_PTIdentityShiftDiagnosticsPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/IdentityShiftDiagnostics.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout) &&
         m_PTTemporalResamplingPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/TemporalResampling.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout) &&
         m_PTSpatialResamplingPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/SpatialResampling.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout) &&
         m_PTFinalShadingPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/FinalShading.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout);
@@ -279,6 +281,8 @@ void RtxdiPass::PrepareResources(
     const bool ptHistoryContractChanged = m_BridgeParameters.usingReSTIRPT && bridgeParams.usingReSTIRPT &&
         (bridgeParams.frameIndex != m_BridgeParameters.frameIndex + 1u ||
          bridgeParams.samplingSeed != m_BridgeParameters.samplingSeed ||
+         bridgeParams.extendedSceneValidation != m_BridgeParameters.extendedSceneValidation ||
+         bridgeParams.maxDiffuseBounces != m_BridgeParameters.maxDiffuseBounces ||
          oldPT.resamplingMode != newPT.resamplingMode ||
          oldPT.initialSamplingParams.numInitialSamples != newPT.initialSamplingParams.numInitialSamples ||
          oldPT.initialSamplingParams.maxBounceDepth != newPT.initialSamplingParams.maxBounceDepth ||
@@ -567,6 +571,7 @@ void RtxdiPass::FillSharedConstants(struct RtxdiBridgeConstants& bridgeConstants
     bridgeConstants.ptHistoryValid = m_PTCameraHistoryValid ? 1 : 0;
     bridgeConstants.ptRouletteProbability = m_BridgeParameters.userSettings.restirPT.russianRouletteProbability;
     bridgeConstants.ptDiagnostics = m_BridgeParameters.capturePTDiagnostics ? 1u : 0u;
+    bridgeConstants.ptExtendedSceneValidation = m_BridgeParameters.extendedSceneValidation ? 1u : 0u;
 	bridgeConstants.frameDim = m_BridgeParameters.frameDims;
 	bridgeConstants.rayEpsilon = m_BridgeParameters.userSettings.rayEpsilon;
 	bridgeConstants.localLightPdfTextureSize = uint2(m_rtxdiResources->LocalLightPdfTexture->getDesc().width, m_rtxdiResources->LocalLightPdfTexture->getDesc().height);
@@ -719,6 +724,11 @@ void RtxdiPass::ExecutePT(nvrhi::CommandListHandle commandList, nvrhi::BindingSe
     const dm::int2 dispatchSize = { int(params.RenderWidth), int(params.RenderHeight) };
     nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
     ExecuteRayTracingPass(commandList, m_PTGenerateInitialSamplesPass, "PT Initial Sampling", dispatchSize, extraBindingSet);
+    if (m_BridgeParameters.capturePTDiagnostics)
+    {
+        nvrhi::utils::BufferUavBarrier(commandList,m_rtxdiResources->PTReservoirBuffer);
+        ExecuteRayTracingPass(commandList,m_PTIdentityShiftDiagnosticsPass,"PT Identity Shift Diagnostics",dispatchSize,extraBindingSet);
+    }
     if (mode == rtxdi::ReSTIRPT_ResamplingMode::Temporal || mode == rtxdi::ReSTIRPT_ResamplingMode::TemporalAndSpatial)
     {
         nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
@@ -835,7 +845,7 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
          << ",\n  \"final_index\": " << indices.finalShadingInputBufferIndex << "\n}\n";
     if (!meta) throw std::runtime_error("PT reservoir metadata write failed");
     nvrhi::BufferDesc statsDesc;
-    statsDesc.byteSize = 4 * sizeof(uint32_t);
+    statsDesc.byteSize = 32 * sizeof(uint32_t);
     statsDesc.cpuAccess = nvrhi::CpuAccessMode::Read;
     statsDesc.debugName = "PTCounterReadback";
     auto stats = m_device->createBuffer(statsDesc);
@@ -848,10 +858,25 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
     m_device->waitForIdle();
     const auto* counters = static_cast<const uint32_t*>(m_device->mapBuffer(stats, nvrhi::CpuAccessMode::Read));
     if (!counters) throw std::runtime_error("PT counter map failed");
+    float selfShiftMaxError = 0;
+    std::memcpy(&selfShiftMaxError,counters+9,sizeof(float));
     std::ofstream statFile(path + ".stats.json");
     statFile << "{\n  \"scope\": \"last captured frame, diagnostics only\",\n  \"roulette_tests\": " << counters[0]
         << ",\n  \"roulette_terminated\": " << counters[1] << ",\n  \"roulette_survived\": " << counters[2]
-        << ",\n  \"replay_roulette_tests\": " << counters[3] << "\n}\n";
+        << ",\n  \"replay_roulette_tests\": " << counters[3]
+        << ",\n  \"transmission_scatter_events\": " << counters[4]
+        << ",\n  \"attenuated_medium_segments\": " << counters[5]
+        << ",\n  \"diffuse_budget_terminations\": " << counters[6]
+        << ",\n  \"identity_shift_tests_legacy_slot\": " << counters[7]
+        << ",\n  \"identity_shift_tests\": " << counters[7]
+        << ",\n  \"identity_shift_failures\": " << counters[8]
+        << ",\n  \"identity_shift_max_relative_error\": " << selfShiftMaxError
+        << ",\n  \"identity_nee_tests\": " << counters[10] << ",\n  \"identity_nee_failures\": " << counters[11]
+        << ",\n  \"identity_replay_tests\": " << counters[12] << ",\n  \"identity_replay_failures\": " << counters[13]
+        << ",\n  \"identity_other_tests\": " << counters[14] << ",\n  \"identity_other_failures\": " << counters[15];
+    statFile << ",\n  \"identity_debug_words\": [";
+    for (int i=16;i<32;++i) { if(i>16) statFile << ","; statFile << counters[i]; }
+    statFile << "]\n}\n";
     m_device->unmapBuffer(stats);
     if (!statFile) throw std::runtime_error("PT counter metadata write failed");
 }

@@ -1,0 +1,56 @@
+{
+  "variants": [
+    "B2",
+    "B3",
+    "B5"
+  ],
+  "scenes": {
+    "convergence": [
+      "convergence-test.scene.json",
+      0,
+      1280,
+      720,
+      14,
+      2
+    ],
+    "kitchen": [
+      "kitchen-with-test-stuff.scene.json",
+      2,
+      1280,
+      720,
+      14,
+      2
+    ],
+    "opaque-room": [
+      "[WORKSPACE]\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+      0,
+      640,
+      360,
+      3,
+      3
+    ]
+  },
+  "orders": [
+    [
+      "B2",
+      "B3",
+      "B5"
+    ],
+    [
+      "B5",
+      "B3",
+      "B2"
+    ],
+    [
+      "B3",
+      "B2",
+      "B5"
+    ]
+  ],
+  "repetitions": 3,
+  "warmup_seconds": 45,
+  "measure_seconds": 15,
+  "selection": "last600/drop16",
+  "quality": "3 process restarts, no independent seed claim",
+  "scope": "Native shader controls unchanged; new runs separate from earlier cohorts; no original-default B0 substitution"
+}

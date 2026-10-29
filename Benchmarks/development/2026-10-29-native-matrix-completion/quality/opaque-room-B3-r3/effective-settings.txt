@@ -1,0 +1,3 @@
+BENCHMARK_CONTROL_ADAPTER vsync=0 fpsLimiter=0 reflexCap=0 reflexMode=0 frameGeneration=0 renderUnfocused=1 maxBounces=3 maxDiffuseBounces=3
+TRANSPORT_CONTRACT di=0 gi=0 pt=0 diMode=3 neeMIS=1 maxBounces=3 maxDiffuseBounces=3
+NATIVE_CONTROLS_CONTRACT revision=2 root=7010bb4cda80788eb13cd9ee6143eb2f52a5b6ee runtime=f12037fa8e97ebc08e9e3edfd2de528ed1772a4b nee=1 neeType=2 approximateMIS=1 realtime=1 width=640 height=360 spp=1 envEnabled=1 envIntensity=0

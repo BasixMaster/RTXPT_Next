@@ -6,7 +6,7 @@
   "updated_on": "2026-10-29",
   "summary": [
     "B0 preserves unchanged RTXPT1.9 defaults, original assets and runtime3.0. Canonical B1/B2 are native PT+DI/DI+GI3.0; B3/B4/B5 are native PT, +DI, +DI+GI on runtime3.1. VERSION_MAPPING.md preserves all legacy refs/data labels.",
-    "B1/B4 original Convergence/Kitchen native-DI quality and known-cap timing are measured. Registered-env room comparisons measure B1/B4/B6/B7 quality, timing and modern history settling. B6/B7 original-scene material/diffuse gates remain.",
+    "B1–B5 native controls have original-scene and registered-room timing/quality coverage. B6/B7 registered-room measurements are scoped; guarded Convergence/Kitchen captures now render at original resolution but retain an unresolved brightness deficit and no accepted throughput.",
     "B8 GI/PT sharing has17exact CPU prerequisite tests but no combined GPU implementation. B9/B10 additional PT++ remain planned. Historical GI-off limited activations are B7 ablations, not B9."
   ],
   "questions": [
@@ -521,6 +521,19 @@
       "version": "20463fd355c817a50381343d9d12b7ac811d2e39",
       "family": "NVIDIA-engineering-whitepapers",
       "rights": "Folder-specific CC BY4.0, copyright NVIDIA2026, license https://github.com/NVIDIA-RTX/Whitepapers/blob/20463fd355c817a50381343d9d12b7ac811d2e39/dx_clusters_and_ptlas/LICENSE. Geometry folder excludes specified third-party game images. Original summaries only; no images/code copied; not an SDK/driver/asset license."
+    },
+    {
+      "id": "LOCAL-PT-DEV",
+      "title": "Original-scene ReSTIR PT development evidence,2026-10-29",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/PT_EXTENDED_SCENES.md",
+      "kind": "experiment",
+      "published_on": "2026-10-29",
+      "checked_on": "2026-10-29",
+      "access": "full",
+      "quality": "Local GPU observations with frozen identities and explicit reference/setting receipts.",
+      "limitations": "Guarded development, not accepted throughput or generic support; unresolved brightness and earlier stability failures retained.",
+      "notes": "Four original-resolution images; reduced-resolution v2/v3/v4 quality cohorts and delta-environment replay regression.",
+      "rights": "Project source/benchmark licensing applies; no third-party paper figures copied."
     }
   ],
   "findings": [
@@ -1303,10 +1316,10 @@
       "claim": "B0 retains source303b408, Assetsa56be4e and runtime3.0a14e079 unchanged. Legacy migration7010bb4 supplies the runtime3.1 native base; scoped PT integration supplies B6/B7. B8 GPU sharing and B9/B10 remain planned.",
       "evidence_type": "analytical",
       "confidence": "high",
-      "context": "Pinned source inspection2026-10-28 plus canonical registry/evidence update2026-10-29.",
+      "context": "Pinned source inspection2026-10-28; canonical identity and accepted native measurement update2026-10-29.",
       "strengths": "Exact Git trees and dependency pins.",
       "limitations": "Scoped original native-DI and controlled opaque PT results do not establish full scene/material coverage or combined PT/GI correctness.",
-      "implications": "Preserve immutable baseline/legacy refs and label actual modes, settings and measurement identities. Consult VERSION_MAPPING.md, CANONICAL_NATIVE_DI_RESULTS.md and REGISTERED_ROOM_RESULTS.md.",
+      "implications": "Use COMPARISON_OVERVIEW.md for all33 version/scene rows. NATIVE_MATRIX_RESULTS.md completes fresh B2/B3/B5 native coverage; CANONICAL_NATIVE_DI_RESULTS.md and REGISTERED_ROOM_RESULTS.md retain their separate cohorts. Original-scene PT remains development pending its own correctness/stability gates.",
       "tags": [
         "architecture"
       ],
@@ -1422,6 +1435,34 @@
           "note": "Directly inspected Markdown sections; project action is separate inference."
         }
       ]
+    },
+    {
+      "id": "PT-ORIGINAL-SCENE-DEVELOPMENT",
+      "title": "Original-scene ReSTIR PT execution is fixed before quality acceptance",
+      "question_ids": [
+        "Q3"
+      ],
+      "topic": "Implementation",
+      "claim": "Guarded replay-first PT/DI+PT renders original Convergence/Kitchen at1280x720 and14/2limits; reduced-resolution multi-seed tests retain a brightness deficit.",
+      "evidence_type": "measured",
+      "confidence": "high",
+      "context": "Confirmed continuation alpha, native component/diffuse accounting and discrete delta-environment replay fixes. Full scene support remains unaccepted.",
+      "strengths": "Frozen artifact identities, finite raw outputs, positive aged reservoirs, explicit seeds and independent finite-reference checks.",
+      "limitations": "No accepted new throughput, generic absorption or motion coverage. Exact-primary experiment rejected; earlier stability failures retained.",
+      "implications": "Resolve reuse energy discrepancy before original-scene speedup/PT++ claims. Keep guarded images and unavailable throughput explicit.",
+      "tags": [
+        "ReSTIR",
+        "RTXPT",
+        "validation"
+      ],
+      "evidence": [
+        {
+          "source_id": "LOCAL-PT-DEV",
+          "locator": "Docs/Research/PT_EXTENDED_SCENES.md; Benchmarks/development/2026-10-29-original-scene-pt-development/index.json",
+          "relation": "supports",
+          "note": "Local GPU development evidence; not a paper reproduction or canonical promotion."
+        }
+      ]
     }
   ],
   "actions": [
@@ -1505,7 +1546,9 @@
   "scope_changes": [
     "Final user-selected scope: RTXPT1.9 renderer+scenes baseline; future B1=RTXDI3.1 adoption; B2+=optimizations. User requested baseline/roadmap first and image-quality metrics.",
     "Added two NVIDIA engineering guides outside the20-paper Wyman ranking; no new renderer feature activation or source-reported speedup treated as a local result.",
-    "2026-10-29 canonical update supersedes earlier project numbering: B0unchanged reference; B1–B5native configurations; B6/B7PT; B8combined sharing pending; B9/B10PT++ planned. Source-record IDs B1/B2/B3 refer to paper entries and are preserved, not renamed as project versions."
+    "2026-10-29 canonical update supersedes earlier project numbering: B0unchanged reference; B1–B5native configurations; B6/B7PT; B8combined sharing pending; B9/B10PT++ planned. Source-record IDs B1/B2/B3 refer to paper entries and are preserved, not renamed as project versions.",
+    "2026-10-29: Added unified33row B0–B10 performance/quality/image overview and fresh27quality/27timing nativeB2/B3/B5 cohort. Original-scene PT implementation remains an explicitly guarded development path, separate from accepted native measurements.",
+    "2026-10-29: Original-scene guarded rendering and path-local fixes verified; quality discrepancy retained, exact-primary experiment rejected."
   ],
   "evidence_page": "evidence/index.html",
   "guide_pages": [

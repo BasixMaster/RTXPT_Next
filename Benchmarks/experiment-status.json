@@ -16,13 +16,15 @@
     },
     {
       "id": "B2",
-      "status": "pending_matched_benchmark",
-      "algorithm": "v1.9 native PT + ReSTIR DI3.0 + ReSTIR GI3.0"
+      "status": "measured_original_scenes_and_registered_room",
+      "algorithm": "v1.9 native PT + ReSTIR DI3.0 + ReSTIR GI3.0",
+      "evidence": "Benchmarks/development/2026-10-29-native-matrix-completion"
     },
     {
       "id": "B3",
-      "status": "measured_native_control",
-      "algorithm": "Native PT with RTXDI3.1 linked; DI/GI off"
+      "status": "measured_original_scenes_and_registered_room",
+      "algorithm": "Native PT with RTXDI3.1 linked; DI/GI off",
+      "evidence": "Benchmarks/development/2026-10-29-native-matrix-completion"
     },
     {
       "id": "B4",
@@ -32,20 +34,31 @@
     },
     {
       "id": "B5",
-      "status": "pending_matched_benchmark",
-      "algorithm": "Native PT + ReSTIR DI3.1 + ReSTIR GI3.1"
+      "status": "measured_original_scenes_and_registered_room",
+      "algorithm": "Native PT + ReSTIR DI3.1 + ReSTIR GI3.1",
+      "evidence": "Benchmarks/development/2026-10-29-native-matrix-completion"
     },
     {
       "id": "B6",
       "status": "measured_static_opaque_with_history_sweep",
       "algorithm": "ReSTIR PT; DI/GI off",
-      "evidence": "Benchmarks/development/2026-10-29-registered-room"
+      "evidence": "Benchmarks/development/2026-10-29-registered-room",
+      "original_scene_development": {
+        "status": "in_progress",
+        "evidence": "Benchmarks/development/2026-10-29-original-scene-pt-development",
+        "limitation": "Finite original-resolution images; brightness discrepancy unresolved; no throughput acceptance"
+      }
     },
     {
       "id": "B7",
       "status": "measured_static_opaque_with_history_sweep",
       "algorithm": "ReSTIR PT + ReSTIR DI3.1; GI off",
-      "evidence": "Benchmarks/development/2026-10-29-registered-room"
+      "evidence": "Benchmarks/development/2026-10-29-registered-room",
+      "original_scene_development": {
+        "status": "in_progress",
+        "evidence": "Benchmarks/development/2026-10-29-original-scene-pt-development",
+        "limitation": "Finite original-resolution images; brightness discrepancy unresolved; no throughput acceptance"
+      }
     },
     {
       "id": "B8",
@@ -110,6 +123,37 @@
       ],
       "reason": "17exact CPU tests validate declared prerequisite models; no combined GPU mode enabled",
       "evidence": "Benchmarks/development/2026-10-29-b8-partition-oracles"
+    },
+    {
+      "id": "native-matrix-completion-measured",
+      "date": "2026-10-29",
+      "variants": [
+        "B2",
+        "B3",
+        "B5"
+      ],
+      "reason": "27quality captures and27cap-verified isolated timing processes, original Convergence/Kitchen and registered room; all driver scopes restored",
+      "evidence": "Benchmarks/development/2026-10-29-native-matrix-completion"
+    },
+    {
+      "id": "original-scene-replay-first-development-started",
+      "date": "2026-10-29",
+      "variants": [
+        "B6",
+        "B7"
+      ],
+      "reason": "Continuation/shadow alpha separation, sampled-component throughput, diffuse accounting and terminal-replay development path built; GPU gates pending",
+      "evidence": "Docs/Research/PT_EXTENDED_SCENES.md"
+    },
+    {
+      "id": "original-scene-rendering-verified-quality-not-accepted",
+      "date": "2026-10-29",
+      "variants": [
+        "B6",
+        "B7"
+      ],
+      "reason": "Four original-resolution captures passed finite/active-reuse gates; delta-environment self-replay fixed. Reduced multi-seed quality retains a brightness deficit; exact-primary experiment rejected.",
+      "evidence": "Benchmarks/development/2026-10-29-original-scene-pt-development"
     }
   ]
 }

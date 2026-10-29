@@ -91,3 +91,5 @@ For RTXPT1.9/B1/B2+ report raw and reconstructed image-quality metrics, complete
 ## NVIDIA engineering guidance
 
 The [NVIDIA whitepaper review](NVIDIA_WHITEPAPERS.md) adds immediate per-signal/pass profiling and later SER/OMM/tracing-model ablations. CLAS/PTLAS remains a separate geometry-scalability branch with explicit Agility SDK/HLSL/driver capability gates; it is not a substitute for ReSTIR-LoD's estimator/Jacobian work. Source-reported case-study gains are not RTXPT Next measurements.
+
+Current native coverage: [fresh B2/B3/B5 original-scene and room results](NATIVE_MATRIX_RESULTS.md) adds27quality captures and27cap-verified timing processes. [The unified B0–B10 overview](COMPARISON_OVERVIEW.md) includes all versions, current metrics and representative pictures; historical cohorts remain separate.

@@ -157,6 +157,44 @@ checks.append(dict(name='Structured evidence schema separately validated; SQLite
 assert not list(D.rglob('*.pdf'))
 checks.append(dict(name='No full-paper PDFs exported',status='passed'))
 checks.append(dict(name='Build/GPU and display-quality evidence recorded',status='evidence_present',reason='This checker validates retained identity/completeness; it does not rebuild binaries, rerun GPU measurements or prove estimator correctness. See the native-DI/registered-room reports, legacy reports and result manifests.'))
+native_completion=P/'Benchmarks/development/2026-10-29-native-matrix-completion'
+native_index=json.loads((native_completion/'index.json').read_text())
+assert native_index['counts']=={'quality_captures':27,'timed_runs':27}
+for relative,digest in native_index['files'].items():assert hashlib.sha256((native_completion/relative).read_bytes()).hexdigest()==digest
+for folder in (native_completion/'timing').iterdir():
+    result=json.loads((folder/'run.json').read_text());restoration=json.loads((folder/'restoration.json').read_text())
+    assert result['status']=='timed_completed' and result['artifact_identity_after_capture']['validated'] and restoration['restoration_verified']
+    assert result['image_write_count']==0 and not result['reported_trace_loss']
+checks.append(dict(name='Native B2/B3/B5 completion:27Q/27T frozen identities and restoration',status='passed'))
+overview=json.loads((D/'comparison-overview.json').read_text(encoding='utf-8'))
+assert len(overview['rows'])==33 and len({(x['variant'],x['scene']) for x in overview['rows']})==33
+assert {x['variant'] for x in overview['rows']}=={'B'+str(i) for i in range(11)}
+assert {x['scene'] for x in overview['rows']}=={'convergence','kitchen','opaque-room'}
+for row in overview['rows']:
+    assert row['gpu_busy_ms'] is None or row['gpu_busy_ms']>0
+    if row['image']:assert (D/row['image']).is_file()
+    if row['variant'] in ['B8','B9','B10']:assert row['gpu_busy_ms'] is None and row['image'] is None
+for relative,digest in overview['source_hashes'].items():
+    assert hashlib.sha256((P/relative).read_bytes()).hexdigest()==digest
+assert 'id="comparison-overview"' in page and 'comparison-overview.json' in page
+checks.append(dict(name='Unified canonical overview: all33 scene/variant rows, exact evidence hashes and explicit missing values',status='passed'))
+extended=P/'Benchmarks/development/2026-10-29-original-scene-pt-development'
+ext_index=json.loads((extended/'index.json').read_text())
+assert ext_index['status']=='development_not_accepted' and ext_index['counts']['original_resolution_captures']==4
+for name,digest in ext_index['files'].items():assert hashlib.sha256((extended/name).read_bytes()).hexdigest()==digest
+for folder in (extended/'original-resolution').iterdir():
+    capture=json.loads((folder/'capture.json').read_text());statistics=json.loads((folder/'reservoir-statistics.json').read_text())['final_index']
+    assert capture['measurement_status']=='captured' and capture['artifact_identity_after_capture']['validated']
+    assert capture['effective_extended_scene_contract']['canonical_accepted'] is False
+    assert capture['settings']['width']==1280 and capture['settings']['height']==720
+    assert statistics['positive_age_valid']>0 and statistics['m_greater_than_one']>0 and statistics['midpath_reconnection_valid']==0
+for scene in ['convergence','kitchen']:
+    after=json.loads((extended/'identity-replay'/('after-'+scene+'.json')).read_text());assert after['identity_replay_failures']==0
+    for v in ['B6','B7']:
+        row=next(x for x in overview['rows'] if x['scene']==scene and x['variant']==v)
+        assert row['status']=='in_progress' and row['gpu_busy_ms'] is None and row['image']
+checks.append(dict(name='Guarded original-scene evidence:4original-resolution captures, active finite reuse, zero pure-replay self failures and explicit non-acceptance',status='passed'))
+
 receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 GPU sharing and B9/B10 remain planned.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))

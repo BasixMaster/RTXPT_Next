@@ -63,6 +63,7 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
             ("ptFixedSpatialSamples", "Diagnostic: fixed PT ordinary/boosted neighbor count (1..32)", value(PTFixedSpatialSamples))
             ("ptDisableAgeRejectionValidation", "Diagnostic: disable PT age-based history rejection, retaining history mass cap", value(PTDisableAgeRejectionValidation))
             ("ptReplayOnlyValidation", "Diagnostic: suppress mid-path PT reconnection; preserve terminal-light reconnection", value(PTReplayOnlyValidation))
+            ("ptExtendedSceneValidation", "Development: allow original-scene transport with full-prefix replay and native diffuse accounting", value(PTExtendedSceneValidation))
             ("strictDIValidation", "DI validation: disable boiling rejection and naive-neighbor discount; retain raytraced bias correction", value(StrictDIValidation))
             ("diLightMode", "DI local light proposals: 0 uniform, 1 power RIS, 2 ReGIR RIS", value(OverrideDILightMode))
             ("diBrdfSamples", "DI initial BRDF candidate count (0..32)", value(OverrideDIBrdfSamples))

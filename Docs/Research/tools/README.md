@@ -18,3 +18,7 @@ The check script requires Git, this project's baseline refs and source/assets ch
 ## Reproduce the registered-room figures
 
 The optional `plot-registered-room.py` reads the frozen public benchmark JSON and regenerates the two PNG/SVG figures. It does not rerun benchmarks or change metric inputs. Use the separately listed tested plotting dependency in `requirements-plotting.txt`; installation is explicit. Run `python plot-registered-room.py` from this directory. Metric definitions and evaluators remain in `Benchmarks/tools`.
+
+## Rebuild the unified comparison overview
+
+Run `python build-comparison-overview.py` before the normal MathML/HTML build. It reads the canonical registry, coverage matrix and frozen public metric summaries, validates images and regenerates `COMPARISON_OVERVIEW.md` plus `comparison-overview.json`. Missing measurements stay null. It does not run experiments.
