@@ -274,7 +274,7 @@ def build(repo):
         if reason:
             label='Not captured' if reason.startswith('Not captured') else 'Timing pending' if reason.startswith('Timing pending') else 'Not measured'
             return f'<abbr title="{escape(reason,quote=True)}">{label}</abbr>'
-        return 'Unavailable' 
+        return 'Unavailable'
     for scene in ['opaque-room','convergence','kitchen']:
         title,caption=captions[scene];md += ['## '+title,'',caption,'',
           '| Version | Algorithm | GPU busy ms ↓ | LDR-FLIP ↓ | HDR-FLIP ↓ | Picture | Evidence status |',
