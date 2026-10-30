@@ -122,7 +122,17 @@
       "status": "partial",
       "algorithm": "B8 + full PT++",
       "scope": "Duplication comparison complete:6GPU cases/384diagnostic frames,18quality sequences/1152frames and18uncapped timings. Tradeoffs, no promotion. Full PT++ remains partial.",
-      "evidence": "Benchmarks/development/2026-10-30-duplication-history"
+      "evidence": "Benchmarks/development/2026-10-30-duplication-history",
+      "finite_nee_initial_tree_pilot": {
+        "status": "scoped_gpu_prerequisite_passed",
+        "evidence": "Benchmarks/development/2026-10-30-unified-finite-nee",
+        "canonical_accepted": false,
+        "full_paper_mis": false,
+        "scope": "Finite local lights, NEE-only continuous transport, full-prefix replay; four Room snapshots; original scenes/quality/timing pending",
+        "identity_tests": 31472,
+        "identity_failures": 0,
+        "midpath_gate": "rejected; eight failures retained"
+      }
     },
     {
       "id": "B10.75",

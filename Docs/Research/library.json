@@ -12,7 +12,8 @@
     "B9-on-B8 completed eight GPU diagnostic cases,1152quality frames across three seeds and18uncapped timings. Room footprint+roulette adds11.52%GPU busy and increases measured error; original-scene roulette-only ablations reduce GPU busy7.08%/8.12% with mixed quality. Original-scene footprint and cross-launch bitidentity remain unestablished; no promotion.",
     "User-confirmed B10fullPT++, B11CGNS active, B12Stochastic PairwiseMIS, B13ReSTIRLoD, B14ReSTIRBDPTwithLW, B15ReSTIRPG, B16Multi-Layer Reservoir Splatting. B10.75/.50/.25 use inherited RTXPT1.9 sampling rates; ReSTIR integration remains pending. Implement B10 thenB11; definitions are not activation.",
     "B10 continuation: five static spatial queue cases compare272frames with queued output restored as history, zero packed/vector scheduling mismatches and a successful early-fault negative fixture. Full PT++ and active B11 CGNS remain pending; buffer ownership and guided reciprocal topology are explicit integration gates.",
-    "B10 duplication comparison completed6GPU gates,18quality sequences/1152frames and18uncapped timings. Averaged-image MSE improves in original scenes with per-frame/perceptual tradeoffs; Room/Convergence timing differences small, Kitchen cost+1.67%. Full B10 and B11 pending; source-aligned unified-lighting prerequisite has8exact tests, no renderer activation."
+    "B10 duplication comparison completed6GPU gates,18quality sequences/1152frames and18uncapped timings. Averaged-image MSE improves in original scenes with per-frame/perceptual tradeoffs; Room/Convergence timing differences small, Kitchen cost+1.67%. Full B10 and B11 pending; source-aligned unified-lighting prerequisite has8exact tests, no renderer activation.",
+    "2026-10-30: finite-light NEE-only unified initial tree passes four GPU snapshot modes/31,472identity checks with full-prefix replay. Mid-path trial rejected; full PT++ MIS, motion and performance remain pending."
   ],
   "questions": [
     {
@@ -682,6 +683,19 @@
       "limitations": "Original-scene footprint unsupported; three-seed/process exploratory uncertainty, failed cross-launch bitidentity, GI approximation; no motion/equal-time or canonical acceptance.",
       "notes": "Fresh matched B8 controls; original scenes roulette-only, Room footprint+roulette. Room regression retained; no brightness fit.",
       "rights": "Application-owned prototype and measured evidence; pinned NVIDIA component/source licenses preserved."
+    },
+    {
+      "id": "LOCAL-B10-UNIFIED-FINITE-NEE",
+      "title": "B10 finite-light unified initial-tree prerequisite",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/B10_UNIFIED_LIGHTING.md",
+      "kind": "experiment",
+      "published_on": "2026-10-30",
+      "checked_on": "2026-10-30",
+      "access": "full",
+      "quality": "Four source/executable-checked Room snapshots, all reuse modes, raw HDR/packed states,31,472unchanged identity checks; default-off and native rejection controls.",
+      "limitations": "NEE-only finite local lights, full-prefix replay, same seed; no full MIS, original scenes, motion, quality/bias/timing acceptance. Eight earlier mid-path failures retained.",
+      "notes": "Primary direct and indirect paths now compete in one reservoir. Standalone DI/GI off; default behavior preserved. Source presence/activation/validation/full-paper acceptance remain distinct.",
+      "rights": "Application integration and owned Room evidence; NVIDIA notices and component licenses retained."
     }
   ],
   "findings": [

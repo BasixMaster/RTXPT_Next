@@ -44,7 +44,7 @@ void main(uint2 thread : SV_DispatchThreadID)
     if (bad)
     {
         InterlockedAdd(u_PTDiagnosticCounters[8],1);
-        if (pureReplay)
+        if (pureReplay || g_RtxdiBridgeConst.ptUnifiedFiniteNEE != 0)
         {
             uint claimed;
             InterlockedCompareExchange(u_PTDiagnosticCounters[16],0,1,claimed);
@@ -54,7 +54,7 @@ void main(uint2 thread : SV_DispatchThreadID)
                 u_PTDiagnosticCounters[18]=pixel.y;
                 u_PTDiagnosticCounters[19]=canonical.pathLength;
                 u_PTDiagnosticCounters[20]=canonical.rcVertexLength;
-                u_PTDiagnosticCounters[21]=0;
+                u_PTDiagnosticCounters[21]=g_RtxdiBridgeConst.ptUnifiedFiniteNEE != 0 ? kind : 0;
                 u_PTDiagnosticCounters[22]=asuint(canonical.targetFunction.x);
                 u_PTDiagnosticCounters[23]=asuint(canonical.targetFunction.y);
                 u_PTDiagnosticCounters[24]=asuint(canonical.targetFunction.z);

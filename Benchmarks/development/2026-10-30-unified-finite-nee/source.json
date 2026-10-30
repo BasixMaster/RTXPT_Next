@@ -1,0 +1,17 @@
+{
+  "base_source": "249689d",
+  "overlay_files": {
+    "Rtxpt/RTXDI/PT/Bridge.hlsli": "b716efb1b44054a8ade3856b57466f99f90f8c0e6ecd5edc9d217a59f8c67877",
+    "Rtxpt/RTXDI/PT/IdentityShiftDiagnostics.hlsl": "dc6f2b15011c960c3965b016359505f0f44868201bbe6fa9b3197568f015178a",
+    "Rtxpt/RTXDI/RtxdiPass.cpp": "14105a68d6bd05368107509faca727ea0bba7786c5c7a19808777d17ef2fd50b",
+    "Rtxpt/RTXDI/RtxdiPass.h": "b092bccb568d1d7d407fcae26aba856b027b7e3b16c0f50a4958973670f91a12",
+    "Rtxpt/RTXDI/ShaderParameters.h": "1c45b85f7472d7157503700930a006dd3edc6b237a819445ae669bb0dafae882",
+    "Rtxpt/Sample.cpp": "e3c3f2d673aa4f1756733c714499bafc4c1dfab0641109a9c51e9213d543ee48",
+    "Rtxpt/SampleCommon/CommandLine.cpp": "a4f7a3246eddf87871de980f70727c9b67aa946dedfbd26b5d75c48dea05225b",
+    "Rtxpt/SampleCommon/CommandLine.h": "00de6c7dfe08e995d0bb409bcc00fb62325086a01d2d40dba110c6a5305e66ed",
+    "Rtxpt/SampleUI.cpp": "4949d9729ae37b10f37addaed70a1a449427620fbacfa6f0808b678aa78107c7"
+  },
+  "assets": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+  "rtxdi": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+  "exe_sha256": "f2eb5e5d14046cae0f3fe232faf828bb67083358acaf87b98fa8064d33e2853f"
+}

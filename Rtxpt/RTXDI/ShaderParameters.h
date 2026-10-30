@@ -257,6 +257,8 @@ struct RtxdiBridgeConstants
     float ptRouletteProbability;
     float3 ptPreviousPreviousCameraPosition;
     uint ptDiagnostics;
+    uint ptUnifiedFiniteNEE;
+    uint3 ptUnifiedPadding;
 };
 
 struct SecondarySurface

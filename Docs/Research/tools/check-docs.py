@@ -644,6 +644,31 @@ for name,digest in figures['inputs'].items():
 assert 'id="research-summary"' in page and 'RESEARCH_SUMMARY' in json.loads((D/'content-manifest.json').read_text())['chapters']
 checks.append(dict(name='Compact research synthesis: three figures match preserved evidence and exact oracle; measured versus calculated scope and searchable chapter retained',status='passed'))
 
+unified=P/'Benchmarks/development/2026-10-30-unified-finite-nee'
+unified_summary=json.loads((unified/'summary.json').read_text())
+unified_results=json.loads((unified/'results.json').read_text())
+assert len(unified_results)==4 and {r['mode'] for r in unified_results}=={0,1,2,3}
+assert unified_summary['identity_tests']==31472 and unified_summary['identity_failures']==0
+assert not unified_summary['full_ptpp'] and not unified_summary['canonical_accepted']
+assert unified_summary['controls']['native_guard_rejects_no_replay'] and unified_summary['controls']['guard_images']==0
+for row in unified_results:
+    case=unified/'cases'/row['label'];capture=json.loads((case/'capture.json').read_text())
+    assert capture['effective_unified_finite_nee']['active'] and not capture['effective_unified_finite_nee']['full_paper_mis']
+    assert capture['settings']['restir_di']==capture['settings']['restir_gi']==0 and capture['settings']['restir_pt']==1
+    assert row['exe_sha256']==unified_summary['exe_sha256']
+    assert row['counters']['identity_shift_failures']==0 and row['native_plus_pt_monotone']
+    hdr=gzip.decompress((case/'raw-hdr.pfm.gz').read_bytes())
+    assert hashlib.sha256(hdr).hexdigest()==row['raw_hdr_sha256']
+    from inspect_pt_reservoirs import inspect as inspect_unified
+    words=np.load(case/'packed-state.npz')['words'];metadata=json.loads((case/'packed-metadata.json').read_text())
+    assert inspect_unified(words,metadata)==row['statistics']
+    assert row['statistics']['initial_preserved_index']['positive_weight_path_length_histogram']['2']==5031
+    assert (D/f"assets/b10-unified-finite-nee/mode{row['mode']}.png").is_file()
+rejected=json.loads((unified/'rejected-midpath-results.json').read_text())
+assert all(r['counters']['identity_shift_failures']==8 and r['counters']['identity_nee_failures']==0 for r in rejected['results'])
+assert 'finite_nee_initial_tree_pilot' in by_id['B10'] and not by_id['B10']['finite_nee_initial_tree_pilot']['full_paper_mis']
+checks.append(dict(name='Finite-NEE unified initial-tree prerequisite: four GPU snapshots/31472identity checks, decoded states/raw hashes, native rejection and rejected mid-path trials retained; full PT++ remains pending',status='passed'))
+
 receipt=dict(updated_on='2026-10-30',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; general directional GI, broader moving/reset queue histories and timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))

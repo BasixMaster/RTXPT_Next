@@ -3,6 +3,7 @@ from pathlib import Path
 from experiment_contract import VARIANT_IDS, prepare as prepare_experiment, verify as verify_experiment, verify_snapshot
 import argparse,subprocess,time,json,hashlib,os,datetime,csv
 from capture_identity import transport_settings
+from unified_finite_nee_contract import validate_request as validate_unified, verify as verify_unified
 from sampling_contract import roulette_value, seed_value, verify as verify_sampling, verify_di, verify_pt_replay, verify_pt_history, verify_pt_spatial, verify_ptpp, verify_capture_history
 from artifact_manifest import validate as validate_artifacts
 from extended_scene_contract import validate_request as validate_extended_request, verify as verify_extended
@@ -58,6 +59,7 @@ def main():
     ap.add_argument('--capture-pt-reservoirs',action='store_true')
     ap.add_argument('--pt-disable-age-rejection-validation',action='store_true')
     ap.add_argument('--pt-replay-only-validation',action='store_true')
+    ap.add_argument('--pt-unified-finite-nee-validation',action='store_true',help='Finite-local-light unified NEE-only initial tree; not full PT++ MIS')
     ap.add_argument('--strict-di-validation',action='store_true')
     ap.add_argument('--di-mode',type=int,choices=[0,1,2,3])
     ap.add_argument('--nee-mis',type=int,choices=[0,1,2])
@@ -89,6 +91,8 @@ def main():
         if a.b8_validation_stage==2 and (a.pt_reconnection_mode!=1 or not 0<(a.pt_roulette_probability or 0)<1):raise SystemExit('Limited PT++ ablation requires explicit footprint and roulette in(0,1)')
         args[args.index('--useReSTIRGI')+1]='1'
         args+=['--b8InitialGIValidation','true','--b8Component',str(a.b8_component),'--b8ValidationStage',str(a.b8_validation_stage)]
+    validate_unified(a.pt_unified_finite_nee_validation,a.mode,a.variant,a.b8_initial_gi_validation,a.pt_extended_scene_validation,a.pt_paired_spatial_validation,a.pt_roulette_probability,a.pt_replay_only_validation)
+    if a.pt_unified_finite_nee_validation:args+=['--ptUnifiedFiniteNEEValidation','true']
     if a.b8_gi_reuse_mode is not None: args+=['--b8GIReuseMode',str(a.b8_gi_reuse_mode)]
     if a.pt_paired_spatial_validation:
         if not a.b8_initial_gi_validation or a.b8_validation_stage==0 or a.pt_mode not in (2,3) or a.pt_fixed_spatial_samples!=1:
@@ -151,6 +155,7 @@ def main():
     if a.pt_extended_scene_validation:manifest['development_extended_scene_transport']=dict(full_prefix_replay=True,canonical_accepted=False,diffuse_budget='Native sampled-lobe accounting with terminal-emission truncation')
     if a.linear_hdr:manifest['output_track']='unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata'
     manifest['settings']['linear_hdr_requested']=a.linear_hdr
+    manifest['unified_finite_nee_requested']=a.pt_unified_finite_nee_validation
     manifest['settings'].update(sampling_seed_requested=a.sampling_seed,reference_pixel_center_requested=a.reference_pixel_center,di_mode_requested=a.di_mode,nee_mis_requested=a.nee_mis,nee_type=a.nee_type)
     manifest['settings'].update(transport_settings(args))
     if a.artifact_manifest:manifest['artifact_identity']=validate_artifacts(a.artifact_manifest,exe)
@@ -230,6 +235,8 @@ def main():
             except ValueError as exc:manifest['measurement_status']='failed_di_validation_contract';manifest['di_validation_failure']=str(exc)
             try:manifest['effective_extended_scene_contract']=verify_extended((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode,a.b8_initial_gi_validation,a.b8_validation_stage,a.b8_gi_reuse_mode)
             except ValueError as exc:manifest['measurement_status']='failed_extended_scene_contract';manifest['extended_scene_failure']=str(exc)
+            try:manifest['effective_unified_finite_nee']=verify_unified((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_unified_finite_nee_validation)
+            except ValueError as exc:manifest['measurement_status']='failed_unified_finite_nee_contract';manifest['unified_finite_nee_failure']=str(exc)
             try:manifest['effective_pt_replay']=verify_pt_replay((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_replay_only_validation)
             except ValueError as exc:manifest['measurement_status']='failed_pt_replay_contract';manifest['pt_replay_failure']=str(exc)
             try:manifest['effective_pt_history']=verify_pt_history((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_disable_age_rejection_validation)

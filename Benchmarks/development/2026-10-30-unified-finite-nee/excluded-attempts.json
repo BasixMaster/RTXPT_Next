@@ -1,0 +1,18 @@
+{
+  "attempts": [
+    {
+      "stage": "first CLI",
+      "reason": "Missing required exposure; parser rejected before renderer launch",
+      "gpu_evidence": false
+    },
+    {
+      "stage": "unrestricted finite pilot modes0/3 and debug",
+      "reason": "Eight mid-path identity failures; direct NEE identities pass; not accepted"
+    },
+    {
+      "stage": "first native negative guard",
+      "exit_code": 3221226505,
+      "reason": "No console message; rejection not credited. Later explicit receipt confirms final guard; unrelated startup reliability remains open."
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Project instructions
 
+User-confirmed implementation priority (2026-10-30): prioritize feature integration. Use focused checks when required for the changed estimator, binding, memory or history behavior; reserve extended comparisons and broad audits for meaningful integration milestones. Expose experimental features behind explicit flags with documented limits/approximations, rather than delaying unrelated work until full-paper acceptance. Preserve essential guards against invalid weights, missing/double-counted contributions, nonfinite output and unsafe execution. Keep development availability separate from final B-version acceptance; do not weaken or rewrite existing evidence to claim completion. Known deferred brightness work does not block independent integration. Keep the visible landing-page roadmap, diagram and navigation consistent with B0–B16 plus B10.75/.50/.25, not only a buried roadmap chapter.
+
 Before reusing historical local captures, read Docs/Research/LOCAL_DATA_HISTORY.md and the cleanup evidence it links. Some old sequences retain four checkpoints; full latest B10 data and references remain. Preserve append-only cleanup history and reacquire missing frames before calculating new sequence metrics.
 
 Apply the paper/NVIDIA implementation guidance in AGENTS.md: closely follow the Wyman papers, supplements/author code and NVIDIA docs/reference code; trace changes to source locations and explicitly justify deviations. Never label an approximation or partial reproduction as the full published algorithm.

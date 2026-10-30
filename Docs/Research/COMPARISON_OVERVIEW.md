@@ -8,6 +8,10 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 
 [Compact research summary](RESEARCH_SUMMARY.md) · [Machine-readable overview](comparison-overview.json) · [Algorithm definitions and identities](VERSION_MAPPING.md) · [Benchmark protocol](BENCHMARK_VERSIONS.md)
 
+## Latest B10 unified initial-tree prerequisite
+
+The finite-local-light, NEE-only pilot now selects direct and indirect paths in one PT reservoir. Four Room modes pass31,472same-pixel checks with explicit full-prefix replay; the mid-path trial remains rejected. Original Convergence/Kitchen, comparable quality, timing and full PT++ MIS are unavailable for this pilot. [Scope, pictures, failed gate and source evidence](B10_UNIFIED_LIGHTING.md).
+
 ## Latest B10 duplication-history checkpoint
 
 Real map producer and previous-frame temporal consumer pass6GPU on/off gates across all three scenes (384frames). Deliberately biased opt-in. 18three-seed64-frame quality sequences and18uncapped timings are complete. Averaged-image error improves in original scenes with per-frame/perceptual tradeoffs; startup reliability remains unresolved. Full B10 and B11 remain incomplete. [Implementation, exact count evidence and remaining gates](B10_DUPLICATION_HISTORY.md).

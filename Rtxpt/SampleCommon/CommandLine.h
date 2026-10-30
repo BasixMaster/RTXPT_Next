@@ -80,6 +80,7 @@ struct CommandLineOptions
     float PTRouletteProbability = 0.0f;
     int PTFixedSpatialSamples      = -1;
     bool PTDisableAgeRejectionValidation = false;
+    bool PTUnifiedFiniteNEEValidation = false; // Opt-in finite-light NEE-only unified tree; not full paper MIS.
     bool PTReplayOnlyValidation    = false;
     bool B8InitialGIValidation = false;
     int B8GIReuseMode = -1; // -1 preserves initial-only control; 0..3 opts into NVIDIA GI approximation.

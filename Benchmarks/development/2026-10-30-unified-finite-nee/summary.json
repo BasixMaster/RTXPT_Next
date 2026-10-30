@@ -1,0 +1,37 @@
+{
+  "status": "scoped_gpu_prerequisite_passed",
+  "canonical_accepted": false,
+  "full_ptpp": false,
+  "full_paper_mis": false,
+  "modes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "scene": "owned opaque Room;177x91;4/4;seed47;8warmupframes",
+  "scope": "Finite local lights; one uniform NEE proposal, full-prefix replay, stopped scene; no environment/infinite lights/transmission/binding diffuse cap",
+  "cases": 4,
+  "source_files": 326,
+  "exe_sha256": "f2eb5e5d14046cae0f3fe232faf828bb67083358acaf87b98fa8064d33e2853f",
+  "identity_tests": 31472,
+  "identity_failures": 0,
+  "performance": "not measured; diagnostic captures include readbacks",
+  "limits": [
+    "No continuous BSDF-light MIS companion or multi-candidate RIS/PSS integration.",
+    "No original-scene, motion/reset/resize, equal-time, bias or performance acceptance.",
+    "Mid-path mode rejected after the preserved eight-failure exploratory capture."
+  ],
+  "controls": {
+    "default_off_capture": true,
+    "historical_bit_equivalence": false,
+    "native_guard_rejects_no_replay": true,
+    "guard_exit_code": 3221226505,
+    "guard_images": 0,
+    "exe_sha256": "f2eb5e5d14046cae0f3fe232faf828bb67083358acaf87b98fa8064d33e2853f"
+  },
+  "base_source": "249689d",
+  "source_state": "application source overlay plus source-input hashes; not a promoted B10 tag",
+  "diagnostic_threshold": "same-pixel target*Jacobian: relative >1% AND absolute >1e-4 fails; nonfinite fails; unchanged oracle",
+  "snapshot_scope": "Four final-frame readbacks after8warmupframes, not a per-frame sequence oracle or four independent quality trials."
+}

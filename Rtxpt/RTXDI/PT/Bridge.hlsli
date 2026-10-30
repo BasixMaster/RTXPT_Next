@@ -310,6 +310,31 @@ RTXDI_BrdfRaySample RTXPT_PTSampleBsdf(RAB_Surface s, inout RTXDI_RandomSamplerS
     return RTXPT_PTSampleBsdf(s, rng, ignoredNativeLobe);
 }
 
+// PT++ main section6.1 initial-tree ownership prerequisite. This pilot retains
+// the existing NEE-only continuous transport partition, not supplemental MIS.
+// Exactly one uniformly selected local light gives a known source probability;
+// no RIS-selected PDF is substituted for the hypothetical PSS source PDF.
+template<typename PTContextType>
+void RTXPT_PTRecordUniformFiniteNEE(inout RTXDI_PathTracerContext<PTContextType> ctx,
+    inout RTXDI_PathTracerRandomContext randomContext)
+{
+    const RTXDI_LightBufferRegion region = g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion;
+    if (region.numLights == 0) return;
+    uint offset = min(uint(RTXDI_GetNextRandom(randomContext.initialRandomSamplerState) * region.numLights), region.numLights - 1);
+    uint lightIndex = region.firstLightIndex + offset;
+    float2 uv = float2(RTXDI_GetNextRandom(randomContext.initialRandomSamplerState), RTXDI_GetNextRandom(randomContext.initialRandomSamplerState));
+    RAB_Surface surface = ctx.GetIntersectionSurface();
+    RAB_LightSample light = RAB_SamplePolymorphicLight(RAB_LoadLightInfo(lightIndex, false), surface, uv);
+    if (!(light.solidAnglePdf > 0.f)) return;
+    float3 reflected = RAB_GetReflectedBsdfRadianceForSurface(light.position, light.radiance, surface);
+    reflected *= float(region.numLights) / light.solidAnglePdf;
+    RTXDI_SampledLightData data = RTXDI_SampledLightData_CreateInvalidData();
+    RTXDI_SampledLightData_SetLightData(data, lightIndex);
+    RTXDI_SampledLightData_SetUVData(data, uv);
+    ctx.RecordNeeLightSample(data, reflected, 1.f / float(region.numLights),
+        surface.EvalPdf(normalize(light.position - surface.GetPosW()), true), light, randomContext.initialRandomSamplerState);
+}
+
 template<typename PTContextType>
 void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
     inout RTXDI_PathTracerRandomContext randomContext, inout RAB_PathTracerUserData user)
@@ -319,6 +344,16 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
     // or empty-medium assumption is substituted for an existing native prefix.
     user.nativeState = RTXPT_PTNativePath(ctx.GetIntersectionSurface(), user.pixelPosition);
     const PathTracer::WorkingContext working = RTXPT_PTWorkingContext();
+#if defined(RTXDI_RESTIR_PT_INITIAL_SAMPLING)
+    if (g_RtxdiBridgeConst.ptUnifiedFiniteNEE != 0)
+    {
+        // The SDK starts continuation tracing at depth2. At the primary hit,
+        // NEE has light-inclusive length2. Restore depth before BSDF tracing.
+        ctx.ctx.ptState.bounceDepth = 1;
+        RTXPT_PTRecordUniformFiniteNEE(ctx, randomContext);
+        ctx.ctx.ptState.bounceDepth = 2;
+    }
+#endif
     while (ctx.GetBounceDepth() <= ctx.GetMaxPathBounce())
     {
         ctx.BeginPathState();
@@ -461,7 +496,9 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
         // NEE or further scatter at its endpoint. Replay reconstructs all counters;
         // no unstored suffix diffuse budget is guessed at a mid-path connection.
         if (diffuseBudgetExceeded) { ctx.SetPathTermination(true); break; }
-        if (ctx.ShouldSampleNee())
+        if (ctx.ShouldSampleNee() && g_RtxdiBridgeConst.ptUnifiedFiniteNEE != 0)
+            RTXPT_PTRecordUniformFiniteNEE(ctx, randomContext);
+        else if (ctx.ShouldSampleNee())
         {
             RAB_LightSample light = RAB_EmptyLightSample();
             RTXDI_DIInitialSamplingParameters parameters = g_RtxdiBridgeConst.restirDI.initialSamplingParams;

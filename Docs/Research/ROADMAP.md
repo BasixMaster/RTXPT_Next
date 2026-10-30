@@ -1,5 +1,7 @@
 # Roadmap: B0–B16 and B10 sampling branches
 
+**New B10 prerequisite:** [finite-light unified initial-tree pilot](B10_UNIFIED_LIGHTING.md) passes four scoped GPU modes and31,472identity checks; full paper MIS and mid-path robustness remain pending.
+
 ## Current status — 2026-10-30
 
 **B10 is partially implemented; B11 is not active.** The latest [duplication-reduction ablation](B10_DUPLICATION_HISTORY.md) completes 6 GPU activation/count cases, 18 quality sequences (1,152 frames) and 18 uncapped timing processes across Room, Convergence and Kitchen. Averaged-image MSE improves in the original scenes with individual-frame/perceptual tradeoffs. Startup reliability remains unresolved; no full PT++ promotion is claimed.

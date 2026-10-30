@@ -1331,7 +1331,7 @@ void Sample::GetPTPipelineGlobalMacros(std::vector<donut::engine::ShaderMacro> &
 
     macros.push_back({ "PT_NEE_ENABLED", (m_ui.UseNEE)?("1"):("0") });
 
-    macros.push_back({ "PT_USE_RESTIR_DI", (m_ui.ActualUseReSTIRDI()) ? ("1") : ("0") });   // these will match constants.useReSTIRDI but constants are used in other passes too
+    macros.push_back({ "PT_USE_RESTIR_DI", (m_ui.ActualUseReSTIRDI() || m_cmdLine.PTUnifiedFiniteNEEValidation) ? ("1") : ("0") });   // these will match constants.useReSTIRDI but constants are used in other passes too
     macros.push_back({ "PT_USE_RESTIR_PT", m_ui.ActualUseReSTIRPT() ? "1" : "0" });
     macros.push_back({ "PT_USE_GI_PT_PARTITION", m_ui.B8InitialGIValidation ? "1" : "0" });
     macros.push_back({ "PT_USE_RESTIR_GI", (m_ui.ActualUseReSTIRGI()) ? ("1") : ("0") });   // these will match constants.useReSTIRGI but constants are used in other passes too
@@ -2338,7 +2338,9 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
         constants.fireflyFilterThreshold = (m_ui.RealtimeFireflyFilterEnabled)?(FireflyFilterThreshold(m_ui.RealtimeFireflyFilterThreshold, constants.preExposedGrayLuminance)):(disabledFF);
     else
         constants.fireflyFilterThreshold = (m_ui.ReferenceFireflyFilterEnabled)?(FireflyFilterThreshold(m_ui.ReferenceFireflyFilterThreshold, constants.preExposedGrayLuminance)):(disabledFF); // making it exposure-adaptive breaks determinism with accumulation (because there's a feedback loop), so that's disabled
-    constants.useReSTIRDI = m_ui.ActualUseReSTIRDI();
+    // Native shader flag means external primary-light ownership here. The
+    // unified pilot owns that contribution; the host DI pass remains OFF.
+    constants.useReSTIRDI = m_ui.ActualUseReSTIRDI() || m_cmdLine.PTUnifiedFiniteNEEValidation;
     constants.useReSTIRGI = m_ui.ActualUseReSTIRGI();
     constants.useReSTIRPT = m_ui.ActualUseReSTIRPT();
     constants.denoiserRadianceClampK = m_ui.DenoiserRadianceClampK;
@@ -2388,6 +2390,18 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
 void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraData cameraData, uint2 renderDims)
 {
     const bool envMapPresent = m_ui.EnvironmentMapParams.Enabled;
+    if (m_cmdLine.PTUnifiedFiniteNEEValidation &&
+        (!m_ui.ActualUseReSTIRPT() || m_ui.ActualUseReSTIRDI() || m_ui.ActualUseReSTIRGI() ||
+         m_ui.B8InitialGIValidation || m_cmdLine.PTExtendedSceneValidation ||
+         !m_cmdLine.PTReplayOnlyValidation || m_cmdLine.PTPairedSpatialValidation ||
+         m_cmdLine.PTDuplicationHistoryValidation || m_cmdLine.PTReplayCompactionValidation ||
+         m_ui.RTXDI.restirPT.russianRouletteProbability != 0.f ||
+         (envMapPresent && m_ui.EnvironmentMapParams.Intensity != 0.f)))
+    {
+        std::printf("PT_UNIFIED_FINITE_NEE_REJECT reason=unsupported-contract requires=full-prefix-PT-only-zero-environment-no-adaptations\n");
+        std::fflush(stdout);
+        throw std::runtime_error("Unified finite-NEE pilot requires explicit full-prefix replay, PT only, opaque/nonbinding transport, zero environment, no B8/pair/queue/roulette adaptations");
+    }
     if (m_ui.B8InitialGIValidation &&
         (!m_ui.ActualUseReSTIRPT() || !m_ui.ActualUseReSTIRDI() || !m_ui.ActualUseReSTIRGI() ||
          (m_ui.B8ValidationStage == 0 && (uint32_t(m_ui.RTXDI.restirPT.resamplingMode) != 0 ||
@@ -2458,6 +2472,9 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
         bridgeParameters.userSettings.restirPT.hybridShiftParams.maxRcVertexLength = ptMaxPathLength + 1;
     }
     bridgeParameters.usingReSTIRPT = m_ui.ActualUseReSTIRPT();
+    bridgeParameters.unifiedFiniteNEEPilot = m_cmdLine.PTUnifiedFiniteNEEValidation;
+    if (m_cmdLine.PTUnifiedFiniteNEEValidation && m_frameIndex == 0)
+        std::printf("PT_UNIFIED_FINITE_NEE enabled=1 primaryOwner=PT indirectOwner=PT standaloneDI=0 standaloneGI=0 localProposals=1 transport=NEE-only fullPaperMIS=0\n");
     if (m_cmdLine.PTDuplicationHistoryValidation)
     {
         if (!bridgeParameters.usingReSTIRPT || !m_ui.B8InitialGIValidation)

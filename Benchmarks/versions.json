@@ -272,6 +272,16 @@
         "path_space": "primary direct and all indirect paths",
         "standalone_di_gi_shading": "replaced by unified PT in paper-native preset",
         "B8_split": "preserved control; hybrid adaptation remains separately labelled"
+      },
+      "finite_nee_initial_tree_pilot": {
+        "status": "scoped_gpu_prerequisite_passed",
+        "evidence": "Benchmarks/development/2026-10-30-unified-finite-nee",
+        "canonical_accepted": false,
+        "full_paper_mis": false,
+        "scope": "Finite local lights, NEE-only continuous transport, full-prefix replay; four Room snapshots; original scenes/quality/timing pending",
+        "identity_tests": 31472,
+        "identity_failures": 0,
+        "midpath_gate": "rejected; eight failures retained"
       }
     },
     {

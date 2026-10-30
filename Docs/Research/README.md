@@ -1,4 +1,6 @@
-# Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap
+# Basix Pathtracing · RTXPT1.9 baseline and B0–B16 roadmap
+
+**New B10 prerequisite:** [finite-light unified initial-tree pilot](B10_UNIFIED_LIGHTING.md) passes four scoped GPU modes and31,472identity checks; full paper MIS and mid-path robustness remain pending.
 
 [**Compact research summary: findings, measured tradeoffs and next steps**](RESEARCH_SUMMARY.md).
 
@@ -22,7 +24,7 @@ Follow the Wyman papers, their supplementary material and author implementations
 
 [DI brightness follow-up: matched material-precision ablation](GBUFFER_PRECISION.md). Canonical defaults remain unchanged.
 
-[**B0–B10 comparison overview: performance, quality and pictures**](COMPARISON_OVERVIEW.md) shows all eleven versions for each required scene, including missing or unsupported results.
+[**B0–B16 and sampling variants: performance, quality and pictures**](COMPARISON_OVERVIEW.md) shows all20registered variants for each required scene, including missing or unsupported results.
 
 [Scene-fix follow-up: finite MIS targets, five-seed quality and remaining limits](FINITE_SHIFT_GUARD.md).
 
@@ -41,6 +43,15 @@ User-confirmed numbering, 2026-10-29: **B0 is unchanged RTXPT 1.9 with its origi
 | B8 | ReSTIR PT + DI 3.1 + GI 3.1 | NVIDIA approximate GI reuse executes; full-resolution64-frame quality measured, mixed results; uncapped timing measured; general acceptance pending |
 | B9 | B8 + limited PT++ | B8 GI reuse retained; Room footprint/roulette, original-scene roulette-only ablations; replicated quality and uncapped timing measured; original-scene footprint unsupported |
 | B10 | B8 + full remaining PT++ | Gaussian reciprocal-pair/vector GPU development executes; full PT++ pending |
+| **B10.75** | B10 with **0.75 spp** | Planned sampling branch; reuse RTXPT 1.9 native sub-sampling mode 1. |
+| **B10.50** | B10 with **0.50 spp** | Planned sampling branch; reuse RTXPT 1.9 native sub-sampling mode 2. |
+| **B10.25** | B10 with **0.25 spp** | Planned sampling branch; reuse RTXPT 1.9 native sub-sampling mode 3. |
+| **B11** | B10 + **Compatibility-Guided Neighbor Selection active** | Planned after B10; integrate the selector, storage, sharing and normalization. |
+| **B12** | B11 + **Stochastic Pairwise MIS** | Planned after B11; validate proposal support and combined weights. |
+| **B13** | B12 + **ReSTIR LoD** | Planned after B12; validate geometry correspondence and shift Jacobians. |
+| **B14** | B13 + **ReSTIR BDPT with LW version** | Planned after B13; preserve the requested LW designation and specify its exact scope before implementation. |
+| **B15** | B14 + **ReSTIR PG** | Planned after B14; validate guiding proposals, training cost and replay. |
+| **B16** | B15 + **Multi-Layer Reservoir Splatting** | Planned after B15; validate layer/visibility ownership and accumulation. |
 
 Every result states its actual algorithm, settings and source identity. Historical old-B0/old-B1 Convergence/Kitchen DI+GI rows map to B2/B5. The old opaque-room comparison maps to a separately labelled B0 native-control raw preset, B3 native control and B7 DI+PT. Its DI-off0.806ms row is not a B4 native-DI comparator. New B1/B4 and room B4/B7 measurements now supply DI-on controls; equal-time sample sweeps remain pending. The branch `baseline/rtxpt-1.9` and tag `rtxpt-1.9-baseline` retain exact upstream source; a moving main branch is not an unnamed baseline.
 
@@ -85,21 +96,10 @@ Fresh requested control: [RTXPT1.9 PT-only override](NATIVE_MATRIX_RESULTS.md#fr
 
 ## Cumulative roadmap extension
 
-| **B10** | Full PT++ | Complete the remaining paper mechanisms and validation; current pilots remain partial. |
-| **B10.75** | B10 at0.75average spp | RTXPT1.9 native sub-sampling mode1; ReSTIR integration pending. |
-| **B10.50** | B10 at0.5average spp | RTXPT1.9 native sub-sampling mode2; ReSTIR integration pending. |
-| **B10.25** | B10 at0.25average spp | RTXPT1.9 native sub-sampling mode3; ReSTIR integration pending. |
-| **B11** | B10 + Compatibility-Guided Neighbor Selection active | Explicit activation and validated neighbor selection required. |
-| **B12** | B11 + Stochastic Pairwise MIS | Validate combined selection probabilities, support and weights. |
-| **B13** | B12 + ReSTIR LoD | Geometry correspondence and forward/inverse Jacobians required. |
-| **B14** | B13 + ReSTIR BDPT with LW version | LW configuration scope and combined transport ownership to be specified. |
-| **B15** | B14 + ReSTIR PG | Guiding proposal, training cost and replay consistency required. |
-| **B16** | B15 + Multi-Layer Reservoir Splatting | Layer/visibility ownership and splat accumulation required. |
-
-RTXPT1.9 already supplies the sub-sampling mechanism. Sparse B10/ReSTIR integration and activation remain pending; B10 thenB11 are the current implementation priority.
+The complete sequence now appears in the table above and the [roadmap](ROADMAP.md). B11–B16 each add to the preceding stage; B10.75/.50/.25 are separate B10 sampling-budget branches. RTXPT1.9 supplies the native sub-sampling mechanism; integration with ReSTIR remains pending. Current priority: integrate B10, then B11.
 
 [B10 queue-history checkpoint](B10_QUEUE_HISTORY.md) · [B11 integration requirements](B11_INTEGRATION.md) — partial development; no new speedup claim.
 
 [B10 duplication temporal history](B10_DUPLICATION_HISTORY.md): completed three-scene quality/convergence/timing ablation; full B10 remains partial.
 
-[Paper-native unified lighting and exact supplemental oracle](B10_UNIFIED_LIGHTING.md) — planned renderer integration, mathematical prerequisites only.
+[Paper-native unified lighting and exact supplemental oracle](B10_UNIFIED_LIGHTING.md) — finite-light GPU prerequisite passes; full paper MIS remains pending.
