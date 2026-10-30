@@ -319,6 +319,18 @@
         "environment_nee_and_bsdf_miss_readback": true,
         "general_composition": false,
         "performance_quality": "not measured for this integration"
+      },
+      "unified_roulette_composition": {
+        "status": "scoped_gpu_prerequisite_passed",
+        "evidence": "Benchmarks/development/2026-10-30-unified-roulette",
+        "canonical_accepted": false,
+        "full_ptpp": false,
+        "survival": 0.8,
+        "gpu_cases": 6,
+        "identity_tests": 51566,
+        "identity_failures": 0,
+        "replay_roulette_tests": 0,
+        "scope": "Static opaque positive-environment Room,explicit PSS MIS/full-prefix,M1/M4;remaining composition/quality/timing pending"
       }
     },
     {

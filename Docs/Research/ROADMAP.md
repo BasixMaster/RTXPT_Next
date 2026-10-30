@@ -1,12 +1,12 @@
 # Roadmap: B0–B16 and B10 sampling branches
 
-**Latest B10 integration:** [finite + environment RIS/PSS MIS](B10_UNIFIED_LIGHTING.md) now runs in the unified PT reservoir. Six positive-environment GPU snapshots pass51,694identity checks. Full B10 performance/quality comparisons remain pending; composition and broader support are next.
+**Latest B10 integration:** [initial-only roulette now composes with unified finite/environment RIS/PSS MIS](B10_UNIFIED_LIGHTING.md). Six GPU snapshots pass51,566identity checks with zero replay roulette tests. Full B10 remains partial; performance/quality comparisons and remaining composition are pending.
 
 ## Current status — 2026-10-30
 
 **B10 is partially implemented; B11 is not active.** The latest [duplication-reduction ablation](B10_DUPLICATION_HISTORY.md) completes 6 GPU activation/count cases, 18 quality sequences (1,152 frames) and 18 uncapped timing processes across Room, Convergence and Kitchen. Averaged-image MSE improves in the original scenes with individual-frame/perceptual tradeoffs. Startup reliability remains unresolved; no full PT++ promotion is claimed.
 
-The [comparison overview](COMPARISON_OVERVIEW.md) includes both duplication policies beside B10, with performance, quality and pictures. Earlier [queue-history gates](B10_QUEUE_HISTORY.md), [Gaussian pairing](B10_GAUSSIAN_PAIRING.md) and [B9 measurements](B9_RESULTS.md) remain inspectable.
+The [comparison overview](COMPARISON_OVERVIEW.md) shows only the main Bx rows. Both duplication policies remain in the [detailed component report](B10_DUPLICATION_HISTORY.md), with performance, quality and pictures. Earlier [queue-history gates](B10_QUEUE_HISTORY.md), [Gaussian pairing](B10_GAUSSIAN_PAIRING.md) and [B9 measurements](B9_RESULTS.md) remain inspectable.
 
 ## Your B10+ roadmap
 

@@ -120,6 +120,7 @@
         "Testing/B2/Scenes/opaque-room-registered-env.scene.json",
         "Testing/B2/Scenes/opaque-room-sky.scene.json",
         "Testing/B2/Scenes/opaque-room-sun.scene.json",
+        "Testing/B2/Scenes/opaque-room-unified-env.scene.json",
         "Testing/B2/Scenes/opaque-room.gltf",
         "Testing/B2/Scenes/opaque-room.scene.json",
         "Testing/B2/control-adapters/.gitattributes",
@@ -190,7 +191,7 @@
       "name": "Structured evidence schema separately validated; SQLite metric search",
       "status": "passed",
       "smape_matches": 2,
-      "sources": 43,
+      "sources": 44,
       "findings": 45
     },
     {
@@ -256,7 +257,7 @@
       "timed_processes": 9
     },
     {
-      "name": "30scoped checkpoints inline beside B0/B8/B9/B10 across all three scene tables; timing/quality/oracle scopes separated",
+      "name": "Overview shows exactly60main Bx rows,20registered versions across3scenes;30experimental checkpoints retained as metadata and in detailed reports,not inline",
       "status": "passed"
     },
     {
@@ -331,6 +332,10 @@
     },
     {
       "name": "Environment RIS/MIS extension: six M1/M4positive-environment snapshots,51694identity checks,decoded environmentNEE/BSDFmisses,rawHDR/source hashes and preserved controls;no fullB10quality/timing claim",
+      "status": "passed"
+    },
+    {
+      "name": "Unified initial-only roulette composition: six snapshots/51566identity checks,counter proof of initial survival/termination and zero replay roulette;control and source preserved",
       "status": "passed"
     }
   ],

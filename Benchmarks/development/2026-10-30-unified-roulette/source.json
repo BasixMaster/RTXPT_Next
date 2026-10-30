@@ -1,0 +1,14 @@
+{
+  "base_source": "f58458c868b3c09126e624ee789fe4d54acb80e0",
+  "overlay_files": {
+    "Rtxpt/Sample.cpp": "f3363b5462231cadec2a77fa176c8d834481bdb280a857363ee9f68e8ad1eaad",
+    "Rtxpt/SampleCommon/CommandLine.cpp": "1d2270a0ea41c252b73fba1843c431f56f2f5aaa57b327c6b2b9463367bcc978",
+    "Rtxpt/SampleCommon/CommandLine.h": "093b0c8c691ff5a49b8aee0b9f8da9cd3f00f4c25178789fba1ed61fb3c41e88",
+    "Rtxpt/SampleUI.cpp": "2932db5be2a9a22d494d1359ace318627f9bc24a839e20fdf70698c5a658d8a5",
+    "Testing/B2/Scenes/opaque-room-unified-env.scene.json": "6c9c15877ca5d237722afaafd50fd867e6dc72e9f285e132be62310fa77bff51"
+  },
+  "rtxdi": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+  "sdk_reference": "a6efab966b7c3b272da0461578eb56ac61c7cbff",
+  "assets": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+  "exe_sha256": "931da8d6e0c77bfe705c6aa6fa895180c986cafa86595f6698fbf423e3ad7d5a"
+}

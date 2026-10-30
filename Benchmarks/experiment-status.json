@@ -169,6 +169,18 @@
         "environment_nee_and_bsdf_miss_readback": true,
         "general_composition": false,
         "performance_quality": "not measured for this integration"
+      },
+      "unified_roulette_composition": {
+        "status": "scoped_gpu_prerequisite_passed",
+        "evidence": "Benchmarks/development/2026-10-30-unified-roulette",
+        "canonical_accepted": false,
+        "full_ptpp": false,
+        "survival": 0.8,
+        "gpu_cases": 6,
+        "identity_tests": 51566,
+        "identity_failures": 0,
+        "replay_roulette_tests": 0,
+        "scope": "Static opaque positive-environment Room,explicit PSS MIS/full-prefix,M1/M4;remaining composition/quality/timing pending"
       }
     },
     {
@@ -510,6 +522,13 @@
       "status": "partial",
       "evidence": "Benchmarks/development/2026-10-30-unified-environment",
       "scope": "Environment RIS/MIS+BSDFmiss ownership integrated;6positive-environmentRoom snapshots/51694identity checks,0failures; finite-only control preserved; no performance/quality or fullPT++ acceptance."
+    },
+    {
+      "date": "2026-10-30",
+      "variant": "B10",
+      "status": "partial",
+      "evidence": "Benchmarks/development/2026-10-30-unified-roulette",
+      "scope": "Initial-only RR q.8 composed with unifiedfinite/environmentRIS/PSS;6snapshots/51566identitychecks0failures,replayRR0;no fullquality/performance acceptance."
     }
   ],
   "history": [

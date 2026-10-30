@@ -3,7 +3,7 @@ from sys import executable
 from html.parser import HTMLParser
 from urllib.parse import urlsplit,unquote
 from collections import Counter
-import json,sqlite3,subprocess,hashlib,sys,xml.etree.ElementTree as ET
+import re,json,sqlite3,subprocess,hashlib,sys,xml.etree.ElementTree as ET
 D=Path(sys.argv[1]).resolve() if len(sys.argv)>1 else Path(__file__).resolve().parents[1];P=D.parents[1]
 class Page(HTMLParser):
     def __init__(self):super().__init__();self.ids=[];self.links=[]
@@ -181,7 +181,8 @@ for row in overview['rows']:
     if row['image']:assert (D/row['image']).is_file()
     if row['variant'] in ['B8','B9','B10']:
         assert row['gpu_busy_ms'] is None and row['hdr_flip'] is None and row['ldr_flip'] is None
-        assert row['report']==('B10_GAUSSIAN_PAIRING.md' if row['variant']=='B10' else 'B9_RESULTS.md' if row['variant']=='B9' else 'B8_STAGED_IMPLEMENTATION.md')
+        assert row['report']==('B10_UNIFIED_LIGHTING.md' if row['variant']=='B10' else 'B9_RESULTS.md' if row['variant']=='B9' else 'B8_STAGED_IMPLEMENTATION.md')
+        if row['variant']=='B10':assert row['image'] is None
         if row['image'] is not None:
             assert 'development' in row['status']
             expected_size=('640x360' if row['scene']=='opaque-room' else '1280x720') if row['variant'] in ['B8','B9','B10'] else '176x90'
@@ -431,7 +432,15 @@ for scene in ['opaque-room','convergence','kitchen']:
     assert all(x.get('ldr_flip') is None and x.get('hdr_flip') is None for x in scoped if x['kind'] in ['gaussian_timing','spatial_queue_oracle'])
     for x in scoped:
         if x.get('image'):assert (D/x['image']).is_file()
-checks.append(dict(name='30scoped checkpoints inline beside B0/B8/B9/B10 across all three scene tables; timing/quality/oracle scopes separated',status='passed'))
+overview_markdown=(D/'COMPARISON_OVERVIEW.md').read_text()
+assert overview['display_policy']['registered_variants_only'] and not overview['display_policy']['experimental_rows_inline']
+assert '↳' not in overview_markdown and '| **B10 ·' not in overview_markdown
+main_ids=re.findall(r'^\| \*\*(B\d+(?:\.\d+)?)\*\* \|',overview_markdown,re.M)
+assert len(main_ids)==60 and set(main_ids)==set(by_id)
+for version_id in by_id:assert main_ids.count(version_id)==3
+assert overview_markdown.count('| Version | Algorithm |')==3
+assert 'B10_QUEUE_HISTORY.md' in overview_markdown
+checks.append(dict(name='Overview shows exactly60main Bx rows,20registered versions across3scenes;30experimental checkpoints retained as metadata and in detailed reports,not inline',status='passed'))
 b8=P/'Benchmarks/development/2026-10-29-b8-nvidia-gi'
 for name,expected_sha in json.loads((b8/'files.json').read_text()).items():
     assert hashlib.sha256((b8/name).read_bytes()).hexdigest()==expected_sha,name
@@ -757,6 +766,27 @@ for name,digest in source_overlay['overlay_files'].items():assert hashlib.sha256
 assert 'Testing/B2/Scenes/opaque-room-unified-env.scene.json' in source_overlay['overlay_files']
 assert by_id['B10']['environment_mis_integration']['identity_tests']==51694
 checks.append(dict(name='Environment RIS/MIS extension: six M1/M4positive-environment snapshots,51694identity checks,decoded environmentNEE/BSDFmisses,rawHDR/source hashes and preserved controls;no fullB10quality/timing claim',status='passed'))
+
+rr=P/'Benchmarks/development/2026-10-30-unified-roulette'
+rr_summary=json.loads((rr/'summary.json').read_text());rr_results=json.loads((rr/'results.json').read_text())
+assert len(rr_results)==6 and {(r['ris_candidates'],r['mode']) for r in rr_results}=={(1,0),(1,3),(4,0),(4,1),(4,2),(4,3)}
+assert rr_summary['identity_tests']==sum(r['counters']['identity_shift_tests'] for r in rr_results)==51566
+assert rr_summary['identity_failures']==0 and not rr_summary['full_ptpp'] and not rr_summary['canonical_accepted']
+assert rr_summary['controls']['roulette-off']['prior_hdr_bit_equal'] and rr_summary['controls']['native_missing_composition']['images']==0
+from unified_roulette_contract import check_counters as check_unified_rr
+for row in rr_results:
+    case=rr/'cases'/row['label'];capture=json.loads((case/'capture.json').read_text());check_unified_rr(row['counters'])
+    assert capture['effective_unified_roulette']['active'] and capture['effective_unified_roulette']['survival']==.8
+    assert capture['effective_unified_environment']['active'] and row['exe_sha256']==rr_summary['exe_sha256']
+    assert row['counters']['identity_shift_failures']==0
+    assert hashlib.sha256(gzip.decompress((case/'raw-hdr.pfm.gz').read_bytes())).hexdigest()==row['raw_hdr_sha256']
+    words=np.load(case/'packed-state.npz')['words'];meta=json.loads((case/'packed-metadata.json').read_text())
+    assert inspect_unified(words,meta)==row['statistics']
+    assert (D/f"assets/b10-unified-roulette/m{row['ris_candidates']}-mode{row['mode']}.png").is_file()
+rr_source=json.loads((rr/'source.json').read_text())
+for name,digest in rr_source['overlay_files'].items():assert hashlib.sha256((rr/'source-overlay'/name).read_bytes()).hexdigest()==digest
+assert by_id['B10']['unified_roulette_composition']['identity_tests']==51566
+checks.append(dict(name='Unified initial-only roulette composition: six snapshots/51566identity checks,counter proof of initial survival/termination and zero replay roulette;control and source preserved',status='passed'))
 
 receipt=dict(updated_on='2026-10-30',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; general directional GI, broader moving/reset queue histories and timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')

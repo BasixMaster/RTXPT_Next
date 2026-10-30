@@ -2402,7 +2402,7 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
          m_ui.B8InitialGIValidation || m_cmdLine.PTExtendedSceneValidation ||
          !m_cmdLine.PTReplayOnlyValidation || m_cmdLine.PTPairedSpatialValidation ||
          m_cmdLine.PTDuplicationHistoryValidation || m_cmdLine.PTReplayCompactionValidation ||
-         m_ui.RTXDI.restirPT.russianRouletteProbability != 0.f ||
+         (m_ui.RTXDI.restirPT.russianRouletteProbability != 0.f && !m_cmdLine.PTUnifiedRouletteValidation) ||
          (!m_cmdLine.PTUnifiedEnvironmentValidation && envMapPresent && m_ui.EnvironmentMapParams.Intensity != 0.f)))
     {
         std::printf("PT_UNIFIED_FINITE_NEE_REJECT reason=unsupported-contract requires=full-prefix-PT-only-zero-environment-no-adaptations\n");
@@ -2483,6 +2483,8 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
     bridgeParameters.unifiedMIS = m_cmdLine.PTUnifiedMISValidation;
     bridgeParameters.unifiedRISCandidates = uint32_t(m_cmdLine.PTUnifiedRISCandidates);
     bridgeParameters.unifiedEnvironment = m_cmdLine.PTUnifiedEnvironmentValidation;
+    if (m_cmdLine.PTUnifiedRouletteValidation && m_frameIndex == 0)
+        std::printf("PT_UNIFIED_ROULETTE enabled=1 survival=%.9g initialOnly=1 replayDraws=0 target=survival-free fullPTPP=0\n", double(m_ui.RTXDI.restirPT.russianRouletteProbability));
     if (m_cmdLine.PTUnifiedEnvironmentValidation && m_frameIndex == 0)
         std::printf("PT_UNIFIED_ENV enabled=1 proposal=MIP-descent companion=BSDF-miss target=single-sample-PSS standaloneDI=0 standaloneGI=0 fullPTPP=0\n");
     if (m_cmdLine.PTUnifiedRISCandidates > 0 && m_frameIndex == 0)

@@ -1,8 +1,8 @@
 """Restricted finite M1 MIS integration; never a full-PT++ acceptance receipt."""
 import re
 
-def validate_request(enabled,nee_only,mode,variant,b8=False,extended=False,paired=False,roulette=None,replay_only=False,reconnection=None,queue=False,duplication=False):
-    if enabled and (nee_only or mode!='pt' or variant is not None or b8 or extended or paired or (roulette or 0)!=0 or not replay_only or reconnection!=0 or queue or duplication):
+def validate_request(enabled,nee_only,mode,variant,b8=False,extended=False,paired=False,roulette=None,replay_only=False,reconnection=None,queue=False,duplication=False,unified_roulette=False,candidates=0):
+    if enabled and (nee_only or mode!='pt' or variant is not None or b8 or extended or paired or ((roulette or 0)!=0 and not (unified_roulette and candidates>0)) or not replay_only or reconnection!=0 or queue or duplication):
         raise ValueError('Finite unified MIS requires exclusive unlabelled PT, fixed-threshold full-prefix replay, no B8/extended/pair/roulette/queue/duplication')
 
 def verify(log,enabled,candidates=0):

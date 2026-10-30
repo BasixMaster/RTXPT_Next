@@ -12,6 +12,35 @@ The paper's full target uses one PT reservoir over direct and indirect path leng
 - [Authors' supplementary document](https://research.nvidia.com/labs/rtr/publication/lin2026restirptenhanced/lin2026restirptenhanced_supplemental.pdf), §§1 and5: lobe-indexed PSS, multi-candidate NEE MIS and UCW conversion. The privately cached supplement has13pages and SHA256 `6c43cf0d8cc01d0352a85800c00477ad3179fa9d5ab78dc217dfb23408e650b5`.
 - Pinned NVIDIA runtime `PT/InitialSamplingPathTracerContext.hlsli`, `PT/InitialSampling.hlsli`, `PT/HybridShift.hlsli` and the SDK shader/application bridge documentation define the integration interfaces. Presence of those interfaces does not establish application-side unification.
 
+## Initial-only roulette composition — 2026-10-30
+
+The unified finite/environment RIS/PSS preset now composes the existing initial-only Russian roulette implementation through an explicit opt-in flag. This follows PT++ §6.2.4 and supplement §6: roulette changes the initial sampling probability, while replay deterministically survives and retains the original survival-free PSS target. It is a composition checkpoint, not a newly invented roulette algorithm or full B10 completion.
+
+The SDK exempts the first continuation. At later eligible initial bounces, survival q multiplies the accumulated survival probability and throughput receives1/q. The SDK removes that survival factor from the stored target; the reservoir normalization retains the sampling compensation. Roulette uses the initial sampler, leaving the replay RNG untouched. The selected terminal-NEE UCW readback remains the NEE RIS weight; prefix survival is accounted for by the outer reservoir weight.
+
+### Focused GPU checks
+
+Six static positive-environment Room snapshots use177×91,4/4bounces,seed47,8warmupframes and constant q=0.8. All51,566identity checks pass at unchanged thresholds; raw HDR, packed state and NEE UCWs remain finite. Event counters show actual termination and survival, with **zero roulette tests during replay**.
+
+|NEE candidates|Reuse|Initial roulette tests|Terminated|Survived|Replay roulette tests|Identity failures|
+|---:|---|---:|---:|---:|---:|---:|
+|1|None|13,464|2,693|10,771|0|0|
+|1|Temporal + spatial|13,464|2,693|10,771|0|0|
+|4|None|13,538|2,696|10,842|0|0|
+|4|Temporal|13,538|2,696|10,842|0|0|
+|4|Spatial|13,538|2,696|10,842|0|0|
+|4|Temporal + spatial|13,538|2,696|10,842|0|0|
+
+These are final-frame diagnostics with a shared seed, not independent quality trials or per-frame sequence validation. The roulette-off mode0 raw HDR matches the previous retained environment capture bit for bit in one case, with zero roulette counters. A native invocation with q=0.8 but without the composition flag rejects with an explicit receipt and zero images.271tooltests pass. No brightness fitting or relaxed identity threshold was used.
+
+|M4 roulette: no reuse diagnostic|M4 roulette: combined reuse diagnostic|
+|---|---|
+|![Unified roulette M4 no reuse](assets/b10-unified-roulette/m4-mode0.png)|![Unified roulette M4 combined reuse](assets/b10-unified-roulette/m4-mode3.png)|
+
+The portable runner is `Benchmarks/tools/run_unified_roulette_validation.py --exe bin/Rtxpt.exe --output <new-directory> --candidates 4`. Its wrapper adds `--pt-unified-roulette-validation --pt-roulette-probability 0.8`; the native flag is `--ptUnifiedRouletteValidation true`. The flag requires explicit PSS MIS, full-prefix replay and survival in[0.1,1). The default remains roulette off. Existing probability changes reset history.
+
+**Performance and quality remain unmeasured for this composed mode.** Diagnostic captures include readbacks and are excluded from timing. Pairing/vector shading, replay queues, duplication recovery and dual motion still need composition and broader scene/motion support. B10 remains partial; B11 is inactive. [Data, source overlay and controls](../../Benchmarks/development/2026-10-30-unified-roulette/summary.json).
+
 ## Environment RIS/MIS extension — 2026-10-30
 
 The new default-off environment extension adds **MIP-importance-sampled environment NEE and complementary BSDF environment misses** to the unified reservoir, alongside finite-light RIS. It follows PT++ §6.1/supplement §5 and NVIDIA's native `EnvMapSampler::MIPDescentSample`/`MIPDescentEvalPdf` plus the SDK MIS/replay reference. The finite-only mode remains a preserved control. Standalone DI/GI shading stays off.

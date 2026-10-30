@@ -39,9 +39,10 @@ def build(repo):
                     row['image']='assets/b8-nvidia-gi/'+('room' if scene=='opaque-room' else scene)+'-gi3.png'
                     row['note']='NVIDIA non-directional GI reuse: '+('640x360 cap4/4' if scene=='opaque-room' else '1280x720 cap14/2')+',64-frame static quality measured; mixed results. Scoped timing is shown separately when available; no canonical promotion.'
                 elif v=='B10':
-                    row['report']='B10_GAUSSIAN_PAIRING.md'
-                    row['image']='assets/b10-gaussian/'+({'convergence':'convergence','kitchen':'kitchen','opaque-room':'room'}[scene])+'.png'
-                    row['note']+=' Image is '+('640x360' if scene=='opaque-room' else '1280x720')+' development coverage, not an accepted matched benchmark.'
+                    row['report']='B10_UNIFIED_LIGHTING.md'
+                    row['algorithm']='B10: Full PT++ (partial integration)'
+                    row['image']=None
+                    row['note']='Full B10 comparison pending. Component diagnostics, captures and ablations are available in the detailed B10 reports; no eligible full-version picture or performance/quality result yet.'
                 elif v=='B9' and scene=='opaque-room':
                     row['image']='assets/b8-staged/limited-ptpp.png'
                     row['note']+=' Image is a176x90 development illustration, not a matched comparison.'
@@ -226,25 +227,21 @@ def build(repo):
     for item in checkpoints:
         if item.get('image') and not (doc/item['image']).is_file():raise ValueError('Missing checkpoint picture')
     (doc/'comparison-overview.json').write_text(json.dumps(data,indent=2,allow_nan=False)+'\n',encoding='utf-8')
+    # User-confirmed presentation policy: only registered Bx variants in the
+    # overview. Historical/acquisition metadata stays available for provenance;
+    # experimental tables and images belong to their owning reports.
+    data['display_policy'] = dict(registered_variants_only=True,variants=[v['id'] for v in registry['versions']],experimental_rows_inline=False)
+    queue_status=doc/'replay-compaction-status.json'
+    if queue_status.exists():
+        data['replay_compaction_status']=load(queue_status)
+        data['source_hashes'][queue_status.relative_to(repo).as_posix()]=hashlib.sha256(queue_status.read_bytes()).hexdigest()
+    (doc/'comparison-overview.json').write_text(json.dumps(data,indent=2,allow_nan=False)+'\n',encoding='utf-8')
     md=['# B0–B16 and sampling-variant comparison overview','',
-        'All 20 registered variants appear below for each required scene. **The latest measured checkpoints now appear directly under B0 and B10 in these tables.** B10 Gaussian timing, Gaussian quality and replay-queue validation have separate rows because they are different acquisitions. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; its PT-only control is explicitly labelled as an override.','',
-        'GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Rows from different cohorts are descriptive: settings and sampling policies must be checked before computing a relative gain. Known app/NVIDIA/RTSS cap boundaries were verified for accepted current timing cohorts; unknown external limiters and background load remain limitations.','',
-        '[Compact research summary](RESEARCH_SUMMARY.md) · [Machine-readable overview](comparison-overview.json) · [Algorithm definitions and identities](VERSION_MAPPING.md) · [Benchmark protocol](BENCHMARK_VERSIONS.md)','']
-    md += ['## Latest B10 environment RIS/MIS integration', '', 'Finite and environment RIS/PSS MIS now share the unified reservoir. Six positive-environment Room snapshots pass51,694identity checks, with selected environment NEE and BSDF misses read back. The finite-only control is preserved. Full B10 performance/quality comparisons are still pending; these readback-heavy diagnostics are not a speed or quality result. The completed duplication component comparison remains separate. [Implementation, pictures, current performance/quality status and evidence](B10_UNIFIED_LIGHTING.md).', '']
-    md += ['## Earlier B10 finite multi-candidate RIS/PSS checkpoint', '', 'Finite-light M1/M4 RIS/PSS MIS now runs in the unified reservoir. Six Room snapshots pass48,130identity checks; actual PSS weights are read back and the earlier M1 control is preserved. These diagnostic pictures are not a new comparable performance/quality cohort. The newer environment extension above adds scoped static environment MIS; broader composition, original-scene convergence/timing and full B10 remain pending. [Implementation, pictures and source evidence](B10_UNIFIED_LIGHTING.md).', '']
-    md += ['## Earlier B10 finite M1 BSDF/NEE MIS checkpoint', '', 'The new default-off finite M1 unified MIS mode selects both BSDF-hit and NEE paths in one PT reservoir. Four Room modes pass31,492identity checks with full-prefix replay. The earlier NEE-only control is preserved. At that checkpoint, multi-candidate RIS/PSS was pending; the newer restricted mode above now implements it. Environment, broader reuse and full B10 remain pending. Diagnostic snapshots are not a comparable performance/quality cohort. [Implementation, pictures, limits and evidence](B10_UNIFIED_LIGHTING.md).', '']
-    md += ['## Earlier B10 unified initial-tree prerequisite', '', 'The finite-local-light, NEE-only pilot now selects direct and indirect paths in one PT reservoir. Four Room modes pass31,472same-pixel checks with explicit full-prefix replay; the mid-path trial remains rejected. Original Convergence/Kitchen, comparable quality, timing and full PT++ MIS are unavailable for this pilot. [Scope, pictures, failed gate and source evidence](B10_UNIFIED_LIGHTING.md).', '']
-    md += ['## Latest B10 duplication-history checkpoint', '', 'Real map producer and previous-frame temporal consumer pass6GPU on/off gates across all three scenes (384frames). Deliberately biased opt-in. 18three-seed64-frame quality sequences and18uncapped timings are complete. Averaged-image error improves in original scenes with per-frame/perceptual tradeoffs; startup reliability remains unresolved. Full B10 and B11 remain incomplete. [Implementation, exact count evidence and remaining gates](B10_DUPLICATION_HISTORY.md).', '']
-    if history:
-        md += ['## Latest B10 queue-history validation — partial development', '',
-               'Five static GPU cases compare272frames with actual queued output retained as history. Packed reservoir and RGB scheduling mismatches/overflow are zero; an injected early failure is rejected after a clean final frame. This is not full PT++, a quality improvement or a new timing result. B11 active CGNS remains pending. [Detailed evidence and remaining work](B10_QUEUE_HISTORY.md) · [B11 integration requirements](B11_INTEGRATION.md).', '',
-               '|Case|Resolution|Compared frames|Reservoir / RGB mismatches|Overflow|Diagnostic picture|', '|---|---:|---:|---:|---:|---|']
-        for row in history['rows']:
-            image='assets/b10-history/'+row['case']+'.png'
-            if not (doc/image).is_file():raise ValueError('Missing queue history diagnostic image')
-            md.append(f"|{row['case']}|{row['width']}×{row['height']}|{row['frames']}|0 / 0|0|<a href=\"{image}\"><img src=\"{image}\" width=\"140\" alt=\"{row['case']} queue-history diagnostic, not full B10\"></a>|")
-        md += ['', 'Pictures are final-frame scheduling diagnostics, not matched B10/B11 quality comparisons. Original-scene mid-path footprint and brightness investigation remain open. Driver-cap clearance is not asserted for these diagnostic captures.', '']
-    captions={'opaque-room':('Controlled room — registered environment','Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.scene.json. B8 development pictures and new checkpoint rows explicitly use4/4; the queue snapshot is176x90. This is a distinct fixture from the legacy no-environment room. Native controls retain their DI/MIS policies; B6/B7 use their documented PT/strict-DI policies.'),
+        'One row per registered Bx version and required scene, including the B10 sampling variants. **Unavailable means not measured, never zero.** Experimental checkpoints, overrides and ablations are kept in their detailed reports. B0 remains the unchanged RTXPT1.9 reference.','',
+        'GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Different cohorts are descriptive; check settings and sampling policies before calculating relative gains. Accepted current timing cohorts include app/NVIDIA/RTSS cap checks; unknown external limiters and background load remain limitations.','',
+        '**B10 is partial:** unified finite/environment MIS and initial-only roulette have scoped diagnostic checks, but no accepted full-B10 performance/quality comparison. [B10 implementation and evidence](B10_UNIFIED_LIGHTING.md) · [Roadmap](ROADMAP.md).','',
+        '[Research summary](RESEARCH_SUMMARY.md) · [Algorithm definitions](VERSION_MAPPING.md) · [Benchmark protocol](BENCHMARK_VERSIONS.md) · [Machine-readable data](comparison-overview.json)','']
+    captions={'opaque-room':('Controlled room — registered environment','Main rows use640×360,1spp,3/3 bounce limits unless the evidence status states a different development scope. Native controls retain their DI/MIS policies. Development pictures are illustrations, not accepted matched comparisons.'),
               'convergence':('Original Convergence','1280×720,1spp,14/2 bounce limits, exposure0. Original materials and camera preserved.'),
               'kitchen':('Original Kitchen','1280×720,1spp,14/2 bounce limits, exposure2. Original materials and camera preserved.')}
     def fmt(value,digits):return 'Unavailable' if value is None else f'{value:.{digits}f}'
@@ -256,104 +253,12 @@ def build(repo):
             image=f'[![{x["variant"]} {scene} representative capture]({x["image"]})]({x["image"]})' if x['image'] else 'No eligible capture'
             status=('Guarded quality measured; timing pending †' if x.get('quality_status')=='measured_guarded_matched_filter' else 'Development, not accepted †' if x.get('quality_status')=='guarded_development_not_accepted' else x['status'].replace('_',' '))
             md.append(f'| **{x["variant"]}** | {x["algorithm"]} | {fmt(x["gpu_busy_ms"],3)} | {fmt(x["ldr_flip"],6)} | {fmt(x["hdr_flip"],6)} | {image} | [{status}]({x["report"]}) |')
-            for c in [c for c in checkpoints if c['scene']==scene and c['variant']==x['variant']]:
-                picture=f'[![{c["label"]} {scene}]({c["image"]})]({c["image"]})' if c.get('image') else 'No images during timing'
-                md.append(f'| **↳ {c["label"]}** | {c["algorithm"]} | {fmt(c.get("gpu_busy_ms"),3)} | {fmt(c.get("ldr_flip"),6)} | {fmt(c.get("hdr_flip"),6)} | {picture} | [{c["evidence"]}]({c["report"]}) |')
         md += ['', '<details><summary>Coverage and missing-data reasons</summary>','']
         for x in [r for r in rows if r['scene']==scene]:md += [f'- **{x["variant"]}:** {x["note"]}']
         md += ['','</details>','']
-    md += ['† Original-scene B6/B7 quality uses five explicit seeds and new matched MIP0 references after the finite-MIS-target fix. This differs from retained native timing/quality cohorts; it is not a new throughput result or unrestricted scene acceptance. Native startup intermittency and the smaller DI-enabled residual remain. See the [scene-fix follow-up](FINITE_SHIFT_GUARD.md).','', '## Historical observations — different cohorts','',
-      'These retained measurements remain useful context, but are excluded from the current tables’ numeric columns. Their settings, scene identity or cap evidence differ. Historical images are available through the linked reports; they are not substitutes for missing current captures.','',
-      '| Canonical interpretation | Scene | GPU busy ms | LDR-FLIP | Scope and pictures |',
-      '|---|---|---:|---:|---|',
-      '| B2: native PT + DI/GI3.0 | Convergence | 4.4584 | 0.24355 | [Legacy migration cohort; caps unverified](B1_RESULTS.md) |',
-      '| B5: native PT + DI/GI3.1 | Convergence | 4.4530 | 0.24338 | [Legacy migration cohort; caps unverified](B1_RESULTS.md) |',
-      '| B2: native PT + DI/GI3.0 | Kitchen | 5.3398 | 0.35210 | [Legacy migration cohort; caps unverified](B1_RESULTS.md) |',
-      '| B5: native PT + DI/GI3.1 | Kitchen | 5.3591 | 0.35226 | [Legacy migration cohort; caps unverified](B1_RESULTS.md) |',
-      '| B0/raw-native-control, not original defaults | Legacy room, no registered environment | 0.803 | See report | [DI/GI off; different fixture](B2_RESULTS.md) |',
-      '| B3: native PT, DI/GI off | Legacy room, no registered environment | 0.806 | See report | [Different fixture](B2_RESULTS.md) |',
-      '| B7: ReSTIR PT + DI3.1 | Legacy room, no registered environment | 1.519 | See report | [Earlier checkpoint](B2_RESULTS.md) |','',
-      '## Quality detail and convergence coverage','',
-      'The JSON includes display MSE, available linear MSE and CPU cadence alongside each current result. [Registered-room history curves and finite-reference checks](REGISTERED_ROOM_RESULTS.md) cover B6/B7 at1,8,32,64 warm-up frames and three explicit seeds. These are separate1spp history-settling snapshots, not accumulated-spp convergence or time-to-equal-quality. Native captures use three process restarts without verified independent seeds. Original-scene native quality uses finite4096spp references; the room uses a separate finite8192spp native reference with discrepancy checks. HDR-FLIP is unavailable for native original-shader controls.','',
-      '## Summary and lessons learned','',
-      'The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 now has NVIDIA GI temporal/spatial reuse with14scoped GPU checks; quality/timing are in progress. Earlier limited PT++ ablations retain their initial-only GI scope. Their176x90 illustrations are explicitly development-only; B10 now has Gaussian table GPU development with extended-resolution pictures; full GI reuse, remaining PT++ mechanisms and accepted extended measurements remain pending.','',
-      '## Changes','', '- 2026-10-29: Added one generated overview with all33 version/scene rows, explicit missing coverage, representative images and retained historical cohort links.','']
-    if gaussian:
-        block=['## B10 Gaussian development — separate quality cohorts','',
-            'The room comparison uses one64-frame sequence per policy at640x360, cap4/4, one spatial neighbor and GI initial only. Original-scene rows are one1280x720 image each, original14/2 budgets, eight warm-up frames and spatial-only PT. These values do not replace or rank against the main accepted cohorts. [Full report and actual algorithm scope](B10_GAUSSIAN_PAIRING.md).','',
-            '|Case|Resolution / frames|Linear RGB MSE ↓|HDR-FLIP ↓|Display-FLIP ↓|','|---|---|---:|---:|---:|']
-        for r in gaussian['rows']:
-            block.append(f"|{r['label']}|{r['resolution']} / {r['frames']}|{r['linear_mse']:.6g}|{r['hdr_flip']:.6f}|{r['ldr_flip']:.6f}|")
-        block+=['','Gaussian room MSE increases about4.7% while FLIP decreases slightly. This mixed result is not promoted. Pairing timings and spatial-queue snapshot checks are now shown in the scene tables above; full GI reuse, simultaneous multi-neighbor reuse, queue timing and full-history acceptance remain pending.','']
-        where=md.index('## Summary and lessons learned');md[where:where]=block
-    if precision:
-        md += ['## Material precision ablation — defaults unchanged','',
-               'A separate matched five-seed experiment compares legacy material truncation with opt-in half-up rounding for B4/B7. These quality-only rows do not replace canonical results or supply throughput. Full settings, uncertainty and limitations: [precision follow-up](GBUFFER_PRECISION.md).','',
-               '|Scene / variant|Legacy mean Y difference|Rounded mean Y difference|HDR-FLIP legacy → rounded ↓|Legacy / rounded seed0 pictures|',
-               '|---|---:|---:|---:|---|']
-        groups={(x['scene'],x['variant'],x['rounded']):x for x in precision['groups']}
-        for scene in ['convergence','kitchen']:
-            for variant in ['B4','B7']:
-                a=groups[scene,variant,0];c=groups[scene,variant,1]
-                pictures=[]
-                for mode in [0,1]:
-                    name=f'assets/gbuffer-precision/{scene}-{variant}-r{mode}-s0.png'
-                    if not (doc/name).is_file():raise ValueError('Missing precision ablation picture')
-                    pictures.append(f'<a href="{name}"><img src="{name}" width="120" alt="{scene} {variant} rounded={mode}"></a>')
-                md.append(f"|{scene.title()} / {variant}|{a['mean_signed_y_percent']:+.3f}%|{c['mean_signed_y_percent']:+.3f}%|{a['median_hdr_flip']:.5f} → {c['median_hdr_flip']:.5f}|{' '.join(pictures)}|")
-        md += ['', 'Signed Y uses raw linear HDR against the same finite reference, without brightness normalization. The full report includes sample standard errors, LDR-FLIP and all per-seed data. No general energy-preservation or unbiasedness claim.','']
-    if di_reuse:
-        md += ['## DI reuse isolation — renderer unchanged','',
-               'A separate fixed-1spp five-seed study compares initial-only, temporal-only, spatial-only and combined DI within B4/B7. Material rounding remains off. These are quality-only ablations, not replacements for canonical timings. [Full settings, uncertainty, contrasts and pictures](DI_REUSE_ISOLATION.md).','',
-               '|Scene / variant|DI initial Y difference|Temporal Y difference|Spatial Y difference|Combined Y difference|Seed0 initial / combined|',
-               '|---|---:|---:|---:|---:|---|']
-        by_key={(x['scene'],x['variant'],x['di_mode']):x for x in di_reuse['groups']}
-        for scene in ['convergence','kitchen']:
-            for variant in ['B4','B7']:
-                values=[f"{by_key[scene,variant,mode]['mean_signed_y_percent']:+.3f}%" for mode in range(4)]
-                pictures=[]
-                for mode in [0,3]:
-                    name=f'assets/di-reuse-isolation/{scene}-{variant}-di{mode}-s0.png'
-                    if not (doc/name).is_file():raise ValueError('Missing DI reuse ablation picture')
-                    pictures.append(f'<a href="{name}"><img src="{name}" width="120" alt="{scene} {variant} DI mode{mode}"></a>')
-                md.append(f"|{scene.title()} / {variant}|{'|'.join(values)}|{' '.join(pictures)}|")
-        md += ['', 'All four modes keep DI active. Mode0 disables temporal/spatial reuse, not initial RIS or final DI shading. Signed Y uses the same raw-HDR finite references; it is not brightness-normalized. Full HDR/LDR-FLIP results and sample standard errors are in the linked report.','']
-    if prefix:
-        md += ['## Prefix-throughput diagnostic — no quality gain claimed','',
-               'A calibrated diagnostic found zero packed prefix pixels above one in eight physical snapshots. Omitted legacy default and preserve-above-one arrays were identical in the four observed pairs. This does not explain the sampled brightness discrepancy. The synthetic positive control is excluded from physical images and quality/performance claims. [Scope, calibration and pictures](PREFIX_THROUGHPUT.md).','',
-               '|Scene / variant|Default max / above-one pixels|Preserve max / above-one pixels|Default / preserve pictures|',
-               '|---|---:|---:|---|']
-        by_key={(x['scene'],x['variant'],x['preserve']):x for x in prefix['rows']}
-        for scene in ['convergence','kitchen']:
-            for variant in ['B4','B7']:
-                a=by_key[scene,variant,False]['statistics'];c=by_key[scene,variant,True]['statistics'];pictures=[]
-                for kind in ['omitted-default','preserve1']:
-                    name=f'assets/prefix-throughput/{scene}-{variant}-{kind}-s0.png'
-                    if not (doc/name).is_file():raise ValueError('Missing prefix diagnostic picture')
-                    pictures.append(f'<a href="{name}"><img src="{name}" width="120" alt="{scene} {variant} {kind}"></a>')
-                md.append(f"|{scene.title()} / {variant}|{a['max_component']:.1f} / {a['pixels_above_one']}|{c['max_component']:.1f} / {c['pixels_above_one']}|{' '.join(pictures)}|")
-        md += ['', 'One seed and final-frame packed weights only; not a raw-float range proof, unbiasedness result or throughput benchmark. The legacy clamp remains default.','']
-    if 'gaussian_pairing_timing' in data:
-        md += ['## Paired development timing — adjacent versus Gaussian','',
-               'Three process repetitions per policy/scene,45s warmup plus30s capture, no image writes. Source/executable/682shader-cache identities stayed frozen; app/NVIDIA/RTSS cap checks and driver restoration passed. One spatial neighbor, DI initial and GI initial only; this is not full B10. GPU busy is process engine activity, not renderer FPS. Small differences remain exploratory. [Quality, images, uncertainty and full scope](B10_GAUSSIAN_PAIRING.md).','',
-               '|Scene|Adjacent GPU busy ms|Gaussian GPU busy ms|Change|','|---|---:|---:|---:|']
-        for x in data['gaussian_pairing_timing']['rows']:
-            md.append(f"|{x['scene']}|{x['adjacent_gpu_busy_ms']:.4f}|{x['gaussian_gpu_busy_ms']:.4f}|{x['gpu_busy_change_percent']:+.2f}%|")
-        md += ['']
-    if 'b0_pt_only_override' in data:
-        md += ['## Fresh B0 PT-only override — separate from original defaults','',
-               'Preserved RTXPT1.9/runtime3.0 with native PT and NEE; ReSTIR DI/GI/PT off. Three quality process restarts and three cap-verified timing runs per scene. Original scenes1280x720,14/2; room640x360,4/4, distinct from the earlier3/3 native-room cohort. Native MIS/filter policies remain unchanged. HDR metrics are unavailable because this preserved binary has no raw-HDR exporter. [Report and evidence](NATIVE_MATRIX_RESULTS.md).','',
-               '|Scene|GPU busy ms|CPU cadence ms|Display-FLIP|Display MSE|Picture|','|---|---:|---:|---:|---:|---|']
-        for x in data['b0_pt_only_override']['rows']:
-            md.append(f"|{x['scene']}|{x['gpu_busy_ms']:.4f}|{x['cpu_cadence_ms']:.4f}|{x['ldr_flip']:.6f}|{x['display_mse']:.6g}|[![B0 PT-only {x['scene']}]({x['image']})]({x['image']})|")
-        md += ['']
-    queue_status=doc/'replay-compaction-status.json'
-    if queue_status.exists():
-        q=load(queue_status)
-        md[2:2]=['**Current implementation status:** '+q['summary']+' [Detailed queue checkpoint](B10_GAUSSIAN_PAIRING.md#replay-compaction--active-implementation-checkpoint).','']
-        data['replay_compaction_status']=q
-        data['source_hashes'][queue_status.relative_to(repo).as_posix()]=hashlib.sha256(queue_status.read_bytes()).hexdigest()
-        (doc/'comparison-overview.json').write_text(json.dumps(data,indent=2,allow_nan=False)+'\n',encoding='utf-8')
+    md += ['† Guarded original-scene B6/B7 quality uses five explicit seeds and matched MIP0 references. It is not unrestricted scene acceptance or a new throughput result. [Scene-support evidence](FINITE_SHIFT_GUARD.md).','',
+        '## Detailed studies','',
+        '[Unified lighting](B10_UNIFIED_LIGHTING.md) · [Replay queues](B10_QUEUE_HISTORY.md) · [Pairing and vector shading](B10_GAUSSIAN_PAIRING.md) · [Duplication history](B10_DUPLICATION_HISTORY.md) · [B9 ablations](B9_RESULTS.md) · [Native controls and overrides](NATIVE_MATRIX_RESULTS.md) · [DI reuse isolation](DI_REUSE_ISOLATION.md) · [Material precision](GBUFFER_PRECISION.md) · [Prefix throughput](PREFIX_THROUGHPUT.md)','']
     (doc/'COMPARISON_OVERVIEW.md').write_text('\n'.join(md),encoding='utf-8')
     print(json.dumps(dict(rows=len(rows),measured_rows=sum(x['gpu_busy_ms'] is not None for x in rows),images=sum(x['image'] is not None for x in rows))))
 

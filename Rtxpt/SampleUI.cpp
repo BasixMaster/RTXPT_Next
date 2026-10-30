@@ -187,6 +187,10 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     m_ui.UseReSTIRPT                = cmdLine.UseReSTIRPT != 0;
     m_ui.B8InitialGIValidation = cmdLine.B8InitialGIValidation;
     m_ui.B8ValidationStage = cmdLine.B8ValidationStage;
+    if (cmdLine.PTUnifiedRouletteValidation &&
+        (!cmdLine.PTUnifiedMISValidation || cmdLine.PTUnifiedRISCandidates < 1 || !cmdLine.PTReplayOnlyValidation ||
+         !std::isfinite(cmdLine.PTRouletteProbability) || cmdLine.PTRouletteProbability < 0.1f || cmdLine.PTRouletteProbability >= 1.f))
+        throw std::runtime_error("Unified roulette requires explicit PSS MIS, full-prefix replay and survival in[0.1,1)");
     if (cmdLine.PTUnifiedEnvironmentValidation && (!cmdLine.PTUnifiedMISValidation || cmdLine.PTUnifiedRISCandidates < 1 || !cmdLine.stopAnimations))
         throw std::runtime_error("Unified environment requires explicit PSS MIS and stopped animations");
     if (cmdLine.PTUnifiedRISCandidates < 0 || cmdLine.PTUnifiedRISCandidates > 32 ||
