@@ -254,15 +254,16 @@
       "depends_on": [
         "B8"
       ],
-      "runtime_status": "One-neighbor spatial replay queue now retains actual queue history under B8 GI3. Five static GPU cases/272frames pass exact packed/vector scheduling oracles; earlier-fault negative fixture rejected. Full PT++, temporal/multi-neighbor queues, motion, total timing and canonical acceptance remain pending.",
+      "runtime_status": "Duplication-map producer and prior-frame temporal consumer execute behind explicit deliberately biased opt-in. Six64-frame on/off GPU cases pass; enabled maps exactly match CPU counts with real nonzero reads. Extended quality14of18cases; startup failures on/off unresolved, timing not started. Full PT++ and B11 pending.",
       "ptpp_scope": "Full remaining PT++ including replaycompaction,pairedreuse,unifieddirect/indirectreservoirs,vectorweights,duplicationreduction,dualmotion and auditablemicrooptimizations",
-      "development_evidence": "Benchmarks/development/2026-10-30-queue-history",
-      "implementation_stage": "spatial_replay_queue_history_oracles",
+      "development_evidence": "Benchmarks/development/2026-10-30-duplication-history",
+      "implementation_stage": "duplication_temporal_history_gpu_oracles",
       "development_evidence_history": [
         "Benchmarks/development/2026-10-29-gaussian-pairing",
         "Benchmarks/development/2026-10-29-gaussian-timing",
         "Benchmarks/development/2026-10-29-replay-queue",
-        "Benchmarks/development/2026-10-30-queue-history"
+        "Benchmarks/development/2026-10-30-queue-history",
+        "Benchmarks/development/2026-10-30-duplication-history"
       ]
     },
     {

@@ -1,0 +1,130 @@
+{
+  "cases": [
+    {
+      "case": "room-off",
+      "enabled": false,
+      "queue_history": {
+        "frames_compared": 64,
+        "sticky_reservoir_failure": 0,
+        "sticky_vector_failure": 0,
+        "sticky_overflow_failure": 0,
+        "history": "Actual queued packed/vector outputs restored after each direct oracle; source/reset chronology scoped"
+      },
+      "disabled_map_not_produced": true,
+      "disabled_map_not_read": true,
+      "width": 177,
+      "height": 91,
+      "stats_sha256": "9b1a6e96e762285040b5b3f71359b2acc838c341182c9ba8893748338ecf40a4",
+      "scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "executable_sha256": "a3f44cb37000e2f23d39259d2b8c21d211bafa9b6e172a753fbe585493f4ca89"
+    },
+    {
+      "case": "room-on",
+      "enabled": true,
+      "queue_history": {
+        "frames_compared": 64,
+        "sticky_reservoir_failure": 0,
+        "sticky_vector_failure": 0,
+        "sticky_overflow_failure": 0,
+        "history": "Actual queued packed/vector outputs restored after each direct oracle; source/reset chronology scoped"
+      },
+      "pixels": 16107,
+      "nonzero_counts": 1196,
+      "max_count": 6,
+      "exact_count_match": true,
+      "temporal_reads": 8645,
+      "nonzero_temporal_reads": 1166,
+      "scope": "Exact current-map producer oracle plus previous-map read counters; not a transport-mean or quality claim",
+      "width": 177,
+      "height": 91,
+      "stats_sha256": "2050f29ef00cb09989b28b8afddf5fccf587ff28e35e19464ce07d12bc64b5a1",
+      "scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+      "executable_sha256": "a3f44cb37000e2f23d39259d2b8c21d211bafa9b6e172a753fbe585493f4ca89"
+    },
+    {
+      "case": "convergence-off",
+      "enabled": false,
+      "queue_history": {
+        "frames_compared": 64,
+        "sticky_reservoir_failure": 0,
+        "sticky_vector_failure": 0,
+        "sticky_overflow_failure": 0,
+        "history": "Actual queued packed/vector outputs restored after each direct oracle; source/reset chronology scoped"
+      },
+      "disabled_map_not_produced": true,
+      "disabled_map_not_read": true,
+      "width": 1280,
+      "height": 720,
+      "stats_sha256": "dc83afd732f5ea43b5601b5a824f3614275c63656cec87bd9b7debd43980b3a9",
+      "scene_sha256": "c3afaa933c5084ba04f8e5100b64bb8b488ab312f4042849705a15e5bf5af549",
+      "executable_sha256": "a3f44cb37000e2f23d39259d2b8c21d211bafa9b6e172a753fbe585493f4ca89"
+    },
+    {
+      "case": "convergence-on",
+      "enabled": true,
+      "queue_history": {
+        "frames_compared": 64,
+        "sticky_reservoir_failure": 0,
+        "sticky_vector_failure": 0,
+        "sticky_overflow_failure": 0,
+        "history": "Actual queued packed/vector outputs restored after each direct oracle; source/reset chronology scoped"
+      },
+      "pixels": 921600,
+      "nonzero_counts": 158104,
+      "max_count": 59,
+      "exact_count_match": true,
+      "temporal_reads": 752110,
+      "nonzero_temporal_reads": 157727,
+      "scope": "Exact current-map producer oracle plus previous-map read counters; not a transport-mean or quality claim",
+      "width": 1280,
+      "height": 720,
+      "stats_sha256": "bcd4c2e35991fd942fb9421c0d9edb06a7d1f624d286ed0938c29a84a5e44030",
+      "scene_sha256": "c3afaa933c5084ba04f8e5100b64bb8b488ab312f4042849705a15e5bf5af549",
+      "executable_sha256": "a3f44cb37000e2f23d39259d2b8c21d211bafa9b6e172a753fbe585493f4ca89"
+    },
+    {
+      "case": "kitchen-off",
+      "enabled": false,
+      "queue_history": {
+        "frames_compared": 64,
+        "sticky_reservoir_failure": 0,
+        "sticky_vector_failure": 0,
+        "sticky_overflow_failure": 0,
+        "history": "Actual queued packed/vector outputs restored after each direct oracle; source/reset chronology scoped"
+      },
+      "disabled_map_not_produced": true,
+      "disabled_map_not_read": true,
+      "width": 1280,
+      "height": 720,
+      "stats_sha256": "b4b8912f78dd5ef3dda1ca2be501646cac076071a642f108dbb5e28facc6640e",
+      "scene_sha256": "2af5735fb02fc01badd83671641d54b7f1c69859c8c9bcdf335ca95d9daae552",
+      "executable_sha256": "a3f44cb37000e2f23d39259d2b8c21d211bafa9b6e172a753fbe585493f4ca89"
+    },
+    {
+      "case": "kitchen-on",
+      "enabled": true,
+      "queue_history": {
+        "frames_compared": 64,
+        "sticky_reservoir_failure": 0,
+        "sticky_vector_failure": 0,
+        "sticky_overflow_failure": 0,
+        "history": "Actual queued packed/vector outputs restored after each direct oracle; source/reset chronology scoped"
+      },
+      "pixels": 921600,
+      "nonzero_counts": 222571,
+      "max_count": 25,
+      "exact_count_match": true,
+      "temporal_reads": 808152,
+      "nonzero_temporal_reads": 222554,
+      "scope": "Exact current-map producer oracle plus previous-map read counters; not a transport-mean or quality claim",
+      "width": 1280,
+      "height": 720,
+      "stats_sha256": "8cb9c1ed84f38d783cff356a307235658021991cc1fe9602624f1df3dba93587",
+      "scene_sha256": "2af5735fb02fc01badd83671641d54b7f1c69859c8c9bcdf335ca95d9daae552",
+      "executable_sha256": "a3f44cb37000e2f23d39259d2b8c21d211bafa9b6e172a753fbe585493f4ca89"
+    }
+  ],
+  "frames": 384,
+  "canonical_accepted": false,
+  "scope": "Six64-frame static development cases with on/off controls, three exact map/count consumer gates and spatial queue history oracles."
+}

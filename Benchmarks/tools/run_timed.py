@@ -36,6 +36,8 @@ def main():
     ap.add_argument('--b8-validation-stage',type=int,choices=range(4),default=0)
     ap.add_argument('--pt-paired-spatial-validation',action='store_true')
     ap.add_argument('--pt-gaussian-pairing-validation',action='store_true')
+    ap.add_argument('--pt-replay-compaction-validation',action='store_true')
+    ap.add_argument('--pt-duplication-history-validation',action='store_true')
     ap.add_argument('--pt-replay-only-validation',action='store_true')
     ap.add_argument('--pt-extended-scene-validation',action='store_true',help='Guarded development only; no canonical result label')
     ap.add_argument('--nee-mis',type=int,choices=[0,1,2])
@@ -90,6 +92,12 @@ def main():
     if a.b8_gi_reuse_mode is not None: args+=['--b8GIReuseMode',str(a.b8_gi_reuse_mode)]
     if a.pt_paired_spatial_validation:args+=['--ptPairedSpatialValidation','true']
     if a.pt_gaussian_pairing_validation:args+=['--ptGaussianPairingValidation','true']
+    if a.pt_replay_compaction_validation:
+        if not a.pt_paired_spatial_validation:raise SystemExit('Replay queue timing requires the explicit paired development path')
+        args+=['--ptReplayCompactionValidation','true']
+    if a.pt_duplication_history_validation:
+        if not a.b8_initial_gi_validation or a.pt_mode not in (1,3):raise SystemExit('Duplication timing requires B8 and temporal PT')
+        args+=['--ptDuplicationHistoryValidation','true']
     if a.environment_diffuse_mip is not None:args+=['--environmentDiffuseMip',str(a.environment_diffuse_mip)]
     if a.sampling_seed is not None:args+=['--samplingSeed',str(a.sampling_seed)]
     if a.strict_di_validation:args+=['--strictDIValidation','true']
@@ -184,6 +192,11 @@ def main():
         manifest['effective_extended_scene_contract']=verify_extended(receipt_log,a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode,a.b8_initial_gi_validation,a.b8_validation_stage,a.b8_gi_reuse_mode)
         manifest['effective_b8_partition']=verify_b8(receipt_log,a.b8_initial_gi_validation,0,a.b8_validation_stage,a.b8_gi_reuse_mode)
         manifest['effective_paired_spatial_pilot']=verify_paired(receipt_log,a.pt_paired_spatial_validation,a.pt_gaussian_pairing_validation)
+        from replay_queue_contract import verify as verify_queue
+        manifest['effective_replay_queue']=verify_queue(receipt_log,a.pt_replay_compaction_validation,False)
+        if a.pt_duplication_history_validation:
+            from duplication_contract import verify as verify_duplication
+            manifest['effective_duplication_history']=verify_duplication(receipt_log,True)
         manifest['effective_di_reuse']=verify_di_reuse(receipt_log,a.di_mode,a.mode in ('di','dipt','digi'))
         manifest['effective_environment_filter']=verify_environment_filter(receipt_log,a.environment_diffuse_mip)
         manifest['effective_sampling']=verify_sampling(receipt_log,a.sampling_seed)

@@ -1,0 +1,17 @@
+{
+  "pixels": 921600,
+  "nonzero_counts": 158104,
+  "max_count": 59,
+  "exact_count_match": true,
+  "temporal_reads": 752110,
+  "nonzero_temporal_reads": 157727,
+  "scope": "Exact current-map producer oracle plus previous-map read counters; not a transport-mean or quality claim",
+  "negative": {
+    "expected_rejection": true,
+    "reason": "GPU duplication map differs from independent17x17 count oracle",
+    "scope": "In-memory single-count corruption; GPU output preserved"
+  },
+  "raw_reservoir_sha256": "c9d4fbff1931811c00619c724c375e110419da6803b7763f61088f993c80d439",
+  "raw_map_sha256": "6a53c54f1514eba1499e62733de6549253c95d2e459816a85fc28a2c69734022",
+  "oracle_inputs_sha256": "eb4c354445fdb1d36ed3e0addd0c69992b594dd452ee4fd5afd08638602b142b"
+}

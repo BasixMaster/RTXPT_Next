@@ -1,0 +1,64 @@
+{
+  "effective_b8_partition": {
+    "development": true,
+    "contract_version": 1,
+    "gi_reuse": true,
+    "gi_approximation_mode": 3,
+    "component": 0,
+    "stage": 3,
+    "pt_min_light_inclusive_length": 4,
+    "canonical_accepted": false
+  },
+  "effective_replay_queue": {
+    "enabled": true,
+    "oracle": true,
+    "shift_stride_bytes": 104,
+    "indirect_dispatch": true,
+    "canonical_accepted": false
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 64,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "b8_same_frame_checks": [
+    {
+      "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+      "max_bounces": 14,
+      "components": {
+        "native": {
+          "mean_rgb": [
+            0.08205513902390117,
+            0.0761570750788087,
+            0.06812377519135933
+          ],
+          "nonzero_pixels": 92380
+        },
+        "di": {
+          "mean_rgb": [
+            0.020860032281165737,
+            0.017146964571244705,
+            0.013594428232560555
+          ],
+          "nonzero_pixels": 679748
+        },
+        "gi_short": {
+          "mean_rgb": [
+            0.005550363199888832,
+            0.003955064997102858,
+            0.003043148792025426
+          ],
+          "nonzero_pixels": 746859
+        },
+        "pt_long": {
+          "mean_rgb": [
+            0.009086694743859374,
+            0.006097265386423614,
+            0.0044948216384121525
+          ],
+          "nonzero_pixels": 767061
+        }
+      }
+    }
+  ]
+}

@@ -50,9 +50,22 @@ float3 RAB_GetPTSampleTargetPdfForSurface(float3 p, float3 radiance, RAB_Surface
 {
     return RAB_GetReflectedBsdfRadianceForSurface(p, radiance, s);
 }
-// B2 has duplication/history reduction disabled. There is no duplication
-// texture in this mode; enabling the feature requires its real producer/pass.
-uint RAB_GetDuplicationMapCount(int2 p) { return 0; }
+// Temporal reuse reads the prior completed frame's map, before the producer
+// overwrites it after final resampling. Kept separate from vector/CGNS storage.
+RWStructuredBuffer<uint> u_PTDuplicationMap : register(u27 VK_DESCRIPTOR_SET(2));
+uint RAB_GetDuplicationMapCount(int2 p)
+{
+    uint2 dims = uint2(g_Const.ptConsts.imageWidth, g_Const.ptConsts.imageHeight);
+    if (any(p < 0) || any(p >= int2(dims))) return 0;
+    uint count = u_PTDuplicationMap[uint(p.y) * dims.x + uint(p.x)];
+    if (g_RtxdiBridgeConst.ptDiagnostics != 0)
+    {
+        InterlockedAdd(u_PTDiagnosticCounters[96], 1);
+        if (count != 0) InterlockedAdd(u_PTDiagnosticCounters[97], 1);
+        InterlockedMax(u_PTDiagnosticCounters[98], count);
+    }
+    return count;
+}
 static const float RAB_DISTANT_LIGHT_DISTANCE = 100000.0f;
 
 struct RAB_PathTracerUserData

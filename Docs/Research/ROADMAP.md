@@ -1,5 +1,7 @@
 # Roadmap: canonical B0–B16 and B10 sampling variants
 
+**Latest B10 checkpoint:** [duplication temporal history](B10_DUPLICATION_HISTORY.md) now has6GPU on/off gates/384frames, exact map counts and active nonzero prior-map reads. Quality14of18sequences; startup reliability prevents timing. Full B10/B11 remain incomplete.
+
 **B10 continuation, 2026-10-30:** [five GPU queue-history cases /272frames](B10_QUEUE_HISTORY.md) pass exact scheduling comparisons, including the original scenes; an early-fault negative control passes. This closes the captured-frame-only gap for the scoped spatial queue. Full PT++ is still partial. [B11](B11_INTEGRATION.md) requires separate selector storage/producer and a derived combination with reciprocal pairing; its active configuration remains pending.
 
 **Live checkpoint:** B9-on-B8 has completed its scoped comparison: eight GPU diagnostics,1152quality frames and18uncapped timing runs. Room footprint+roulette regresses in GPU busy and error; Convergence/Kitchen roulette-only ablations reduce GPU busy with quality tradeoffs. Keep B8 as the control and B9 experimental. Original-scene footprint, motion/equal-time validation and deferred brightness investigation remain open; B10's remaining mechanisms are separate work. [B9 report](B9_RESULTS.md).

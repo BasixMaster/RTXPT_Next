@@ -1,5 +1,7 @@
 # B10 development: replay queue history validation
 
+**Latest B10 checkpoint:** [duplication temporal history](B10_DUPLICATION_HISTORY.md) now has6GPU on/off gates/384frames, exact map counts and active nonzero prior-map reads. Quality14of18sequences; startup reliability prevents timing. Full B10/B11 remain incomplete.
+
 ## Summary and lessons learned
 
 The spatial replay queue now preserves its actual output as the next frame's history while comparing every packed reservoir word and RGB shading bit against the direct scheduling control. Five static GPU cases cover **272 compared frames** with zero scheduling mismatches or overflow. A deliberately injected early mismatch remains detectable after later clean frames. This closes a diagnostic gap; **full B10 and B11 are not complete**. No new speedup or image-quality improvement is claimed.

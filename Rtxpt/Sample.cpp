@@ -2458,6 +2458,14 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
         bridgeParameters.userSettings.restirPT.hybridShiftParams.maxRcVertexLength = ptMaxPathLength + 1;
     }
     bridgeParameters.usingReSTIRPT = m_ui.ActualUseReSTIRPT();
+    if (m_cmdLine.PTDuplicationHistoryValidation)
+    {
+        if (!bridgeParameters.usingReSTIRPT || !m_ui.B8InitialGIValidation)
+            throw std::runtime_error("Duplication history validation requires the explicit B8/PT development path");
+        auto& temporal = bridgeParameters.userSettings.restirPT.temporalResamplingParams;
+        temporal.duplicationBasedHistoryReduction = 1;
+        temporal.historyReductionStrength = 0.5f;
+    }
     // Bit0 owns the path-length split; bit1 selects the independent paired pilot.
     bridgeParameters.giPTPartition = m_ui.B8InitialGIValidation ? (m_cmdLine.PTPairedSpatialValidation ? 3u : 1u) : 0u;
     if (m_cmdLine.B8GIReuseMode >= 0) bridgeParameters.giPTPartition |= 16u;

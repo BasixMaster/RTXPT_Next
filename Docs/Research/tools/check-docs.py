@@ -546,6 +546,39 @@ assert overview['queue_history_validation']==history
 assert 'id=\"b10-queue-history\"' in page and 'id=\"b11-integration\"' in page
 checks.append(dict(name='B10 static queue history:5GPU cases/272frames, exact state/vector comparisons, earlier-fault rejection, retained excluded attempts and export hashes',status='passed',limits='One spatial neighbor; static chronology; no full PT++, new performance/quality gain or B11 activation.'))
 
+dup_root=P/'Benchmarks/development/2026-10-30-duplication-history'
+dup=json.loads((dup_root/'diagnostics.json').read_text())
+assert dup['frames']==384 and len(dup['cases'])==6 and not dup['canonical_accepted']
+import numpy as np
+import sys
+sys.path.insert(0,str(P/'Benchmarks/tools'))
+from duplication_contract import count_reference
+for row in dup['cases']:
+    folder=dup_root/'diagnostics'/row['case'];stats=json.loads((folder/'stats.json').read_text())
+    assert hashlib.sha256((folder/'stats.json').read_bytes()).hexdigest()==row['stats_sha256']
+    assert stats['queue_sequence_frames']==64
+    assert all(stats[k]==0 for k in ['queue_sequence_reservoir_failure','queue_sequence_vector_failure','queue_sequence_overflow_failure'])
+    if row['enabled']:
+        check=json.loads((folder/'count-check.json').read_text())
+        assert hashlib.sha256((folder/'oracle-inputs.npz').read_bytes()).hexdigest()==check['oracle_inputs_sha256']
+        arrays=np.load(folder/'oracle-inputs.npz');packed=arrays['packed_final'];counts=arrays['counts']
+        ids=np.where(packed[...,3].copy().view('<f4')==0,0,packed[...,15])
+        assert np.array_equal(counts,count_reference(ids))
+        assert stats['duplication_produced_pixels']==row['width']*row['height'] and stats['duplication_nonzero_reads']>0 and check['negative']['expected_rejection']
+    else:assert stats['duplication_map_reads']==stats['duplication_produced_pixels']==0
+summary=json.loads((dup_root/'summary.json').read_text())
+assert overview['duplication_temporal_history']==summary and summary['eligible_quality_sequences']==14 and not summary['canonical_accepted']
+assert summary['timing']=='not_started_due_to_quality_startup_gate' and len(summary['missing_quality_cases'])==4
+eligibility=json.loads((dup_root/'quality-eligibility.json').read_text())
+assert len(eligibility['eligible_sequences'])==14 and eligibility['eligible_frames']==896
+assert len({x['case'] for x in eligibility['eligible_sequences']})==14
+for capture in eligibility['eligible_sequences']:
+    assert capture['frames']==64 and capture['renderer_exit_code']==0 and len(capture['captures'])==64
+    assert capture['executable_sha256']==json.loads((dup_root/'source.json').read_text())['executable_sha256']
+    assert all(len(x['pfm_sha256'])==len(x['png_sha256'])==64 for x in capture['captures'])
+assert 'id="b10-duplication-history"' in page
+checks.append(dict(name='B10 duplication:6GPU cases/384frames, exact exported17x17 counts, negative oracle and active/disabled map reads; incomplete quality and no timing correctly labelled',status='passed',limits='Deliberately biased temporal cap; static gates only; no complete PT++ or B11 activation.'))
+
 receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; general directional GI, broader moving/reset queue histories and timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))

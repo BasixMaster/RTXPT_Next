@@ -130,7 +130,8 @@
         "Testing/B2/test_diffuse_budget.py",
         "Testing/native-controls-v2/README.md",
         "Testing/native-controls-v2/manifest.json",
-        "Testing/native-controls-v2/rtxpt19-host-controls.patch"
+        "Testing/native-controls-v2/rtxpt19-host-controls.patch",
+        "Rtxpt/RTXDI/PT/ComputeDuplicationMap.hlsl"
       ],
       "reason": "Registry validation does not prove runtime activation or estimator correctness."
     },
@@ -292,6 +293,11 @@
       "name": "B10 static queue history:5GPU cases/272frames, exact state/vector comparisons, earlier-fault rejection, retained excluded attempts and export hashes",
       "status": "passed",
       "limits": "One spatial neighbor; static chronology; no full PT++, new performance/quality gain or B11 activation."
+    },
+    {
+      "name": "B10 duplication:6GPU cases/384frames, exact exported17x17 counts, negative oracle and active/disabled map reads; incomplete quality and no timing correctly labelled",
+      "status": "passed",
+      "limits": "Deliberately biased temporal cap; static gates only; no complete PT++ or B11 activation."
     }
   ],
   "passed": true,

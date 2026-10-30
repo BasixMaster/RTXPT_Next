@@ -121,8 +121,8 @@
       "id": "B10",
       "status": "partial",
       "algorithm": "B8 + full PT++",
-      "scope": "Five static spatial-queue history cases,272frames with exact packed/vector oracles and sticky early-failure rejection. Full PT++ mechanisms, temporal/multi-neighbor queues, motion and timing pending.",
-      "evidence": "Benchmarks/development/2026-10-30-queue-history"
+      "scope": "Real deliberately biased duplication temporal history:6GPU cases/384frames pass; quality14of18sequences, startup failure gate prevents timing. Full PT++ incomplete.",
+      "evidence": "Benchmarks/development/2026-10-30-duplication-history"
     },
     {
       "id": "B10.75",
@@ -451,6 +451,13 @@
       "status": "partial",
       "evidence": "Benchmarks/development/2026-10-30-queue-history",
       "scope": "Five static spatial-queue history cases,272frames with exact packed/vector oracles and sticky early-failure rejection. Full PT++ mechanisms, temporal/multi-neighbor queues, motion and timing pending."
+    },
+    {
+      "date": "2026-10-30",
+      "variant": "B10",
+      "status": "partial",
+      "evidence": "Benchmarks/development/2026-10-30-duplication-history",
+      "scope": "Real deliberately biased duplication temporal history:6GPU cases/384frames pass; quality14of18sequences, startup failure gate prevents timing. Full PT++ incomplete."
     }
   ]
 }

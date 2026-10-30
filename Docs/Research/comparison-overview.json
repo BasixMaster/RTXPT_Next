@@ -8,7 +8,7 @@
     "hdr_flip": "Official HDR-FLIP1.7; scene-reference-only exposure parameters"
   },
   "source_hashes": {
-    "Benchmarks/versions.json": "443ceb7738919eee6130a5d52d90797c4bc6694f67236ba1fd0ea2c4001d8c32",
+    "Benchmarks/versions.json": "0dbed50f02bd68211466ef13369efbf80fe64789fdf497deb073fb94e90bb40e",
     "Benchmarks/comparison-matrix.json": "136674228fe93a73d168a3802515ef017b327a93fe397ed6d14666571b3ea10e",
     "Benchmarks/development/2026-10-29-canonical-native-di/display-quality-summary.json": "b45c3ff27c71d0669a3df7b02e2392473c5405826962650f992e93072affdb2c",
     "Benchmarks/development/2026-10-29-canonical-native-di-timing/comparison.json": "2b2171e2abafb5c2e1aa7398da1880a475db858831a7549ab79b310fd0090dc1",
@@ -11327,6 +11327,23 @@
       "Full PT++ mechanisms and B11 active CGNS are pending.",
       "Brightness investigation remains deferred by user."
     ]
+  },
+  "duplication_temporal_history": {
+    "status": "development_duplication_temporal_history",
+    "canonical_accepted": false,
+    "diagnostics": "diagnostics.json",
+    "quality": "incomplete14of18sequences",
+    "timing": "not_started_due_to_quality_startup_gate",
+    "scope": "Real duplication count producer/previous-frame temporal consumer; deliberately biased opt-in. Full B10 and active B11 remain incomplete.",
+    "eligible_quality_sequences": 14,
+    "quality_frames_per_sequence": 64,
+    "missing_quality_cases": [
+      "convergence-off-s4093",
+      "convergence-on-s4093",
+      "kitchen-off-s4093",
+      "kitchen-on-s4093"
+    ],
+    "diagnostic_frames": 384
   },
   "checkpoint_rows": [
     {

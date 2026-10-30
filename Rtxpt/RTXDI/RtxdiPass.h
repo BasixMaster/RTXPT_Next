@@ -200,6 +200,7 @@ private:
     RayTracingPass m_PTQueuePass[7];
     nvrhi::BindingSetHandle m_PTQueueArgsBindingSet;
     RayTracingPass m_PTFinalShadingPass;
+    RayTracingPass m_PTDuplicationMapPass;
     bool m_PTPipelinesCreated = false;
     bool m_PTNeedsClear = false;
     bool m_PTCameraHistoryValid = false;

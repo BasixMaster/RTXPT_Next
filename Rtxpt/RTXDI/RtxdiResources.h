@@ -30,6 +30,7 @@ private:
     bool m_HasPTResources = false;
     bool m_HasGaussianPairs = false;
     bool m_HasReplayCompaction = false;
+    bool m_HasDuplicationMap = false;
 
 public:
     nvrhi::BufferHandle TaskBuffer;
@@ -45,6 +46,7 @@ public:
     nvrhi::BufferHandle PTReservoirBuffer;
     nvrhi::BufferHandle PTSpatialNeighborSelectionBuffer;
     nvrhi::BufferHandle PTDiagnosticCounters;
+    nvrhi::BufferHandle PTDuplicationMap;
     nvrhi::BufferHandle PTPairingOffsets;
     nvrhi::BufferHandle PTShiftCache, PTReplayQueue, PTReplayControl, PTReplayOracle, PTReplayArgs;
     nvrhi::TextureHandle LocalLightPdfTexture;
@@ -57,7 +59,7 @@ public:
         uint32_t maxEmissiveTriangles,
         uint32_t maxPrimitiveLights,
         uint32_t maxGeometryInstances,
-        const rtxdi::ReSTIRPTContext* ptContext = nullptr, bool gaussianPairs = false, bool replayCompaction = false);
+        const rtxdi::ReSTIRPTContext* ptContext = nullptr, bool gaussianPairs = false, bool replayCompaction = false, bool duplicationMap = false);
 
     void InitializeNeighborOffsets(nvrhi::ICommandList* commandList, uint32_t neighborOffsetCount);
 
@@ -68,6 +70,7 @@ public:
     bool HasPTResources() const { return m_HasPTResources; }
     bool HasGaussianPairs() const { return m_HasGaussianPairs; }
     bool HasReplayCompaction() const { return m_HasReplayCompaction; }
+    bool HasDuplicationMap() const { return m_HasDuplicationMap; }
 
     nvrhi::BufferHandle GetRisLightDataBuffer() const { return RisLightDataBuffer; }
     nvrhi::BufferHandle GetLightDataBuffer() const { return LightDataBuffer; }

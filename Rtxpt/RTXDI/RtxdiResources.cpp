@@ -44,7 +44,7 @@ RtxdiResources::RtxdiResources(
     uint32_t maxEmissiveTriangles,
     uint32_t maxPrimitiveLights,
     uint32_t maxGeometryInstances,
-    const rtxdi::ReSTIRPTContext* ptContext, bool gaussianPairs, bool replayCompaction) : m_MaxEmissiveMeshes(maxEmissiveMeshes)
+    const rtxdi::ReSTIRPTContext* ptContext, bool gaussianPairs, bool replayCompaction, bool duplicationMap) : m_MaxEmissiveMeshes(maxEmissiveMeshes)
     , m_MaxEmissiveTriangles(maxEmissiveTriangles)
     , m_MaxPrimitiveLights(maxPrimitiveLights)
     , m_MaxGeometryInstances(maxGeometryInstances)
@@ -181,6 +181,17 @@ RtxdiResources::RtxdiResources(
     ptNeighborDesc.debugName = "PTSpatialNeighborSelectionBuffer";
     PTSpatialNeighborSelectionBuffer = device->createBuffer(ptNeighborDesc);
 
+    m_HasDuplicationMap = m_HasPTResources && duplicationMap;
+    nvrhi::BufferDesc duplicationDesc;
+    duplicationDesc.byteSize = sizeof(uint32_t) * (m_HasDuplicationMap ? ptPitch : 1);
+    duplicationDesc.structStride = sizeof(uint32_t);
+    duplicationDesc.canHaveUAVs = true;
+    duplicationDesc.initialState = nvrhi::ResourceStates::UnorderedAccess;
+    duplicationDesc.keepInitialState = true;
+    duplicationDesc.debugName = "PTDuplicationMap";
+    PTDuplicationMap = device->createBuffer(duplicationDesc);
+    if (!PTDuplicationMap) throw std::runtime_error("PT duplication map allocation failed");
+
     m_HasReplayCompaction = m_HasPTResources && replayCompaction;
     const uint64_t queuePixels = m_HasReplayCompaction ? uint64_t(ptContext->GetStaticParams().RenderWidth) * ptContext->GetStaticParams().RenderHeight : 1;
     if (queuePixels == 0 || queuePixels > 0xffffffffull-63)
@@ -204,7 +215,7 @@ RtxdiResources::RtxdiResources(
     PTReplayOracle = queueBuffer(queuePixels * 76, 0, "PTReplaySameFrameOracle");
 
     nvrhi::BufferDesc ptDiagnosticDesc;
-    ptDiagnosticDesc.byteSize = 96 * sizeof(uint32_t);
+    ptDiagnosticDesc.byteSize = 100 * sizeof(uint32_t);
     ptDiagnosticDesc.structStride = sizeof(uint32_t);
     ptDiagnosticDesc.initialState = nvrhi::ResourceStates::UnorderedAccess;
     ptDiagnosticDesc.keepInitialState = true;

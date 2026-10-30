@@ -11,7 +11,8 @@
     "Fresh RTXPT1.9 PT-only raw control now covers all three required scenes with nine timings and nine PNG quality captures; original B0 defaults remain unchanged and HDR export is unsupported in that preserved binary.",
     "B9-on-B8 completed eight GPU diagnostic cases,1152quality frames across three seeds and18uncapped timings. Room footprint+roulette adds11.52%GPU busy and increases measured error; original-scene roulette-only ablations reduce GPU busy7.08%/8.12% with mixed quality. Original-scene footprint and cross-launch bitidentity remain unestablished; no promotion.",
     "User-confirmed B10fullPT++, B11CGNS active, B12Stochastic PairwiseMIS, B13ReSTIRLoD, B14ReSTIRBDPTwithLW, B15ReSTIRPG, B16Multi-Layer Reservoir Splatting. B10.75/.50/.25 use inherited RTXPT1.9 sampling rates; ReSTIR integration remains pending. Implement B10 thenB11; definitions are not activation.",
-    "B10 continuation: five static spatial queue cases compare272frames with queued output restored as history, zero packed/vector scheduling mismatches and a successful early-fault negative fixture. Full PT++ and active B11 CGNS remain pending; buffer ownership and guided reciprocal topology are explicit integration gates."
+    "B10 continuation: five static spatial queue cases compare272frames with queued output restored as history, zero packed/vector scheduling mismatches and a successful early-fault negative fixture. Full PT++ and active B11 CGNS remain pending; buffer ownership and guided reciprocal topology are explicit integration gates.",
+    "B10 duplication temporal history producer/consumer active experimentally:6GPU on/off cases/384frames pass exact counts and queue-history oracles. Deliberately biased opt-in; quality14of18sequences, startup failures on/off unresolved; timing not started. Full PT++ and B11 remain pending."
   ],
   "questions": [
     {

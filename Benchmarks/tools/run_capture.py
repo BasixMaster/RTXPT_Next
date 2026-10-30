@@ -34,6 +34,7 @@ def main():
     ap.add_argument('--b8-validation-stage',type=int,choices=range(4),default=0,help='GI-short development:0 initial,1 DI/PT reuse,2 limited PT++ ablation; not canonical B9')
     ap.add_argument('--pt-paired-spatial-validation',action='store_true',help='Development only: adjacent reciprocal-pair shifts and vector shading; not full B10')
     ap.add_argument('--pt-replay-compaction-validation',action='store_true',help='Opt-in replay queue; reservoir capture enables the same-frame exact direct oracle')
+    ap.add_argument('--pt-duplication-history-validation',action='store_true',help='Opt-in deliberately biased temporal history reduction using the prior duplication map')
     ap.add_argument('--pt-gaussian-pairing-validation',action='store_true',help='Paired development: three resident Gaussian tables, one transformed table per frame')
     ap.add_argument('--variant-preset',choices=['matched-raw','raw-native-control','limited-ptpp-ablation'],default='matched-raw')
     ap.add_argument('--label',required=True);ap.add_argument('--scene',required=True)
@@ -99,6 +100,10 @@ def main():
     if a.pt_replay_compaction_validation:
         if not a.pt_paired_spatial_validation:raise SystemExit('Replay compaction requires paired B8 development')
         args+=['--ptReplayCompactionValidation','true']
+    if a.pt_duplication_history_validation:
+        if not a.b8_initial_gi_validation or a.pt_mode not in (1,3):
+            raise SystemExit('Duplication history validation requires explicit B8 and temporal PT')
+        args+=['--ptDuplicationHistoryValidation','true']
     if a.capture_native_radiance:
         if not a.linear_hdr:raise SystemExit('Native radiance diagnostics require --linear-hdr')
         args+=['--captureNativeRadiance','true']
@@ -194,6 +199,21 @@ def main():
                     queue_stats=list(out.glob('*.stats.json'))
                     if len(queue_stats)!=len(manifest['images']):raise ValueError('Queue oracle statistics missing for a captured image')
                     manifest['queue_same_frame_oracles']=[check_queue_counters(json.loads(p.read_text()),a.width,a.height) for p in queue_stats]
+                if a.pt_duplication_history_validation:
+                    from duplication_contract import verify as verify_duplication, check_gpu as check_duplication
+                    import numpy as np
+                    manifest['effective_duplication_history']=verify_duplication((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),True)
+                    if a.capture_pt_reservoirs:
+                        maps=list(out.glob('*.pt.bin.duplication.bin'))
+                        if len(maps)!=len(manifest['images']):raise ValueError('Missing duplication map snapshot')
+                        manifest['duplication_map_checks']=[]
+                        for map_path in maps:
+                            reservoir_path=Path(str(map_path).removesuffix('.duplication.bin'))
+                            meta=json.loads(Path(str(reservoir_path)+'.json').read_text())
+                            stats=json.loads(Path(str(reservoir_path)+'.stats.json').read_text())
+                            manifest['duplication_map_checks'].append(check_duplication(
+                                np.frombuffer(reservoir_path.read_bytes(),'<u4').reshape(-1,16),meta,
+                                np.frombuffer(map_path.read_bytes(),'<u4').reshape(meta['height'],meta['width']),stats))
                 if a.b8_initial_gi_validation and a.capture_native_radiance and a.b8_component==0:
                     from analyze_hdr import read_pfm
                     manifest['b8_same_frame_checks']=[check_b8_stages(

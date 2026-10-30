@@ -1,5 +1,7 @@
 # B11 integration: compatibility-guided neighbor selection
 
+**Latest B10 checkpoint:** [duplication temporal history](B10_DUPLICATION_HISTORY.md) now has6GPU on/off gates/384frames, exact map counts and active nonzero prior-map reads. Quality14of18sequences; startup reliability prevents timing. Full B10/B11 remain incomplete.
+
 ## Summary and lessons learned
 
 **B11 is B10 plus active Compatibility-Guided Neighbor Selection (CGNS). It remains pending, with B10 completion as a dependency.** RTXDI3.1 supplies a real selector, but the current application neither dispatches it nor provides a compatible combined paired-reuse path. Turning on its flag would not implement B11 correctly.

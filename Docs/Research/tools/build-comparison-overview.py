@@ -212,6 +212,8 @@ def build(repo):
     if history:
         data['queue_history_validation']=history
         data['source_hashes'][history_path.relative_to(repo).as_posix()]=hashlib.sha256(history_path.read_bytes()).hexdigest()
+    duplication=load(repo/'Benchmarks/development/2026-10-30-duplication-history/summary.json')
+    data['duplication_temporal_history']=duplication
     data['checkpoint_rows']=checkpoints
     for item in checkpoints:
         if item.get('image') and not (doc/item['image']).is_file():raise ValueError('Missing checkpoint picture')
@@ -220,6 +222,7 @@ def build(repo):
         'All 20 registered variants appear below for each required scene. **The latest measured checkpoints now appear directly under B0 and B10 in these tables.** B10 Gaussian timing, Gaussian quality and replay-queue validation have separate rows because they are different acquisitions. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; its PT-only control is explicitly labelled as an override.','',
         'GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Rows from different cohorts are descriptive: settings and sampling policies must be checked before computing a relative gain. Known app/NVIDIA/RTSS cap boundaries were verified for accepted current timing cohorts; unknown external limiters and background load remain limitations.','',
         '[Machine-readable overview](comparison-overview.json) · [Algorithm definitions and identities](VERSION_MAPPING.md) · [Benchmark protocol](BENCHMARK_VERSIONS.md)','']
+    md += ['## Latest B10 duplication-history checkpoint', '', 'Real map producer and previous-frame temporal consumer pass6GPU on/off gates across all three scenes (384frames). Deliberately biased opt-in. Extended quality is14of18sequences; startup failures occurred on/off, so timing has not started. Full B10 and B11 remain incomplete. [Implementation, exact count evidence and remaining gates](B10_DUPLICATION_HISTORY.md).', '']
     if history:
         md += ['## Latest B10 queue-history validation — partial development', '',
                'Five static GPU cases compare272frames with actual queued output retained as history. Packed reservoir and RGB scheduling mismatches/overflow are zero; an injected early failure is rejected after a clean final frame. This is not full PT++, a quality improvement or a new timing result. B11 active CGNS remains pending. [Detailed evidence and remaining work](B10_QUEUE_HISTORY.md) · [B11 integration requirements](B11_INTEGRATION.md).', '',

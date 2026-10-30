@@ -8,6 +8,10 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 
 [Machine-readable overview](comparison-overview.json) · [Algorithm definitions and identities](VERSION_MAPPING.md) · [Benchmark protocol](BENCHMARK_VERSIONS.md)
 
+## Latest B10 duplication-history checkpoint
+
+Real map producer and previous-frame temporal consumer pass6GPU on/off gates across all three scenes (384frames). Deliberately biased opt-in. Extended quality is14of18sequences; startup failures occurred on/off, so timing has not started. Full B10 and B11 remain incomplete. [Implementation, exact count evidence and remaining gates](B10_DUPLICATION_HISTORY.md).
+
 ## Latest B10 queue-history validation — partial development
 
 Five static GPU cases compare272frames with actual queued output retained as history. Packed reservoir and RGB scheduling mismatches/overflow are zero; an injected early failure is rejected after a clean final frame. This is not full PT++, a quality improvement or a new timing result. B11 active CGNS remains pending. [Detailed evidence and remaining work](B10_QUEUE_HISTORY.md) · [B11 integration requirements](B11_INTEGRATION.md).

@@ -85,6 +85,7 @@ RtxdiPass::RtxdiPass(
         nvrhi::BindingLayoutItem::RawBuffer_UAV(24),
         nvrhi::BindingLayoutItem::RawBuffer_UAV(25),
         nvrhi::BindingLayoutItem::RawBuffer_UAV(26),
+        nvrhi::BindingLayoutItem::StructuredBuffer_UAV(27), // Separate previous-frame duplication map
 
 		nvrhi::BindingLayoutItem::VolatileConstantBuffer(5),	//g_RtxdiBridgeConst
 
@@ -150,11 +151,10 @@ void RtxdiPass::UpdateContextDynamicParameters()
     pt.SetDecorrelationParameters(ptSettings.decorrelationParams);
     pt.SetBoilingFilterParameters(ptSettings.boilingFilterParams);
 
-    // B2 intentionally has no CGNS/duplication/decorrelation passes. Refuse a
+    // CGNS/spatial duplication/decorrelation remain unsupported. Refuse a
     // settings mismatch instead of consuming unwritten side buffers.
     if (m_BridgeParameters.usingReSTIRPT &&
         (ptSettings.spatialResamplingParams.enableSpatialHeuristicMode != 0 ||
-         ptSettings.temporalResamplingParams.duplicationBasedHistoryReduction != 0 ||
          ptSettings.spatialResamplingParams.duplicationBasedHistoryReduction != 0 ||
          ptSettings.decorrelationParams.decorrelationMode != RTXDI_PTDecorrelationMode::None ||
          ptSettings.decorrelationParams.fireflyReplacementFilterEnable != 0))
@@ -211,7 +211,8 @@ void RtxdiPass::CreatePTPipelines(nvrhi::BindingLayoutHandle extraBindingLayout)
         m_PTIdentityShiftDiagnosticsPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/IdentityShiftDiagnostics.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout) &&
         m_PTTemporalResamplingPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/TemporalResampling.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout) &&
         m_PTSpatialResamplingPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/SpatialResampling.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout) &&
-        m_PTFinalShadingPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/FinalShading.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout);
+        m_PTFinalShadingPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/FinalShading.hlsl", {}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE, m_bindingLayout, extraBindingLayout, m_bindlessLayout) &&
+        m_PTDuplicationMapPass.Init(m_device, *m_shaderFactory, "app/RTXDI/PT/ComputeDuplicationMap.hlsl", {}, true, 16, m_bindingLayout, extraBindingLayout, m_bindlessLayout);
     if (!initialized)
         throw std::runtime_error("Failed to compile/create the selected ReSTIR PT passes.");
     if ((m_BridgeParameters.giPTPartition & 8u) != 0)
@@ -220,6 +221,9 @@ void RtxdiPass::CreatePTPipelines(nvrhi::BindingLayoutHandle extraBindingLayout)
                 {{"RTXPT_QUEUE_PHASE", std::to_string(phase)}}, true, RTXDI_SCREEN_SPACE_GROUP_SIZE,
                 m_bindingLayout, extraBindingLayout, m_bindlessLayout))
                 throw std::runtime_error("Failed to create PT replay compaction phase");
+    const auto& duplication = m_BridgeParameters.userSettings.restirPT.temporalResamplingParams;
+    std::printf("PT_DUPLICATION_CONTRACT enabled=%u radius=8 maxCount=255 previousFrame=1 strength=%f biased=%u\n",
+        duplication.duplicationBasedHistoryReduction, duplication.historyReductionStrength, duplication.duplicationBasedHistoryReduction);
     m_PTPipelinesCreated = true;
 }
 
@@ -251,6 +255,7 @@ void RtxdiPass::CreateBindingSet(const RenderTargets& renderTargets)
             nvrhi::BindingSetItem::RawBuffer_UAV(25, m_rtxdiResources->PTReplayOracle),
             // Do not bind the live indirect args as a UAV during indirect execution.
             nvrhi::BindingSetItem::RawBuffer_UAV(26, m_rtxdiResources->PTReplayOracle),
+            nvrhi::BindingSetItem::StructuredBuffer_UAV(27, m_rtxdiResources->PTDuplicationMap),
 			
 			nvrhi::BindingSetItem::ConstantBuffer(5, m_rtxdiConstantBuffer),
 
@@ -312,6 +317,8 @@ void RtxdiPass::PrepareResources(
          bridgeParams.userSettings.restirGI.resamplingMode != m_BridgeParameters.userSettings.restirGI.resamplingMode ||
          bridgeParams.extendedSceneValidation != m_BridgeParameters.extendedSceneValidation ||
          bridgeParams.maxDiffuseBounces != m_BridgeParameters.maxDiffuseBounces ||
+         oldPT.temporalResamplingParams.duplicationBasedHistoryReduction != newPT.temporalResamplingParams.duplicationBasedHistoryReduction ||
+         oldPT.temporalResamplingParams.historyReductionStrength != newPT.temporalResamplingParams.historyReductionStrength ||
          oldPT.resamplingMode != newPT.resamplingMode ||
          oldPT.initialSamplingParams.numInitialSamples != newPT.initialSamplingParams.numInitialSamples ||
          oldPT.initialSamplingParams.maxBounceDepth != newPT.initialSamplingParams.maxBounceDepth ||
@@ -377,7 +384,8 @@ void RtxdiPass::PrepareResources(
         numPrimitiveLights > m_rtxdiResources->GetMaxPrimitiveLights() ||
         numGeometryInstances > m_rtxdiResources->GetMaxGeometryInstances() ||
         m_rtxdiResources->HasGaussianPairs() != ((m_BridgeParameters.giPTPartition & 4u) != 0) ||
-        m_rtxdiResources->HasReplayCompaction() != ((m_BridgeParameters.giPTPartition & 8u) != 0)))
+        m_rtxdiResources->HasReplayCompaction() != ((m_BridgeParameters.giPTPartition & 8u) != 0) ||
+        m_rtxdiResources->HasDuplicationMap() != (m_BridgeParameters.userSettings.restirPT.temporalResamplingParams.duplicationBasedHistoryReduction != 0)))
     {
         m_rtxdiResources = nullptr;
     }
@@ -400,7 +408,8 @@ void RtxdiPass::PrepareResources(
             numGeometryInstances,
             m_BridgeParameters.usingReSTIRPT ? &m_ImportanceSamplingContext->GetReSTIRPTContext() : nullptr,
             (m_BridgeParameters.giPTPartition & 4u) != 0,
-            (m_BridgeParameters.giPTPartition & 8u) != 0);
+            (m_BridgeParameters.giPTPartition & 8u) != 0,
+            m_BridgeParameters.userSettings.restirPT.temporalResamplingParams.duplicationBasedHistoryReduction != 0);
 
         rtxdiResourceCreated = true;
         m_PTNeedsClear = m_BridgeParameters.usingReSTIRPT;
@@ -431,6 +440,9 @@ void RtxdiPass::BeginFrame(
         commandList->clearBufferUInt(m_rtxdiResources->PTReservoirBuffer, 0);
         commandList->clearBufferUInt(m_rtxdiResources->PTSpatialNeighborSelectionBuffer, 0xffffffffu);
         commandList->clearBufferUInt(m_rtxdiResources->PTDiagnosticCounters, 0);
+        commandList->clearBufferUInt(m_rtxdiResources->PTDuplicationMap, 0);
+        nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTDiagnosticCounters);
+        nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTDuplicationMap);
         nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
         nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTSpatialNeighborSelectionBuffer);
         commandList->commitBarriers();
@@ -443,6 +455,8 @@ void RtxdiPass::BeginFrame(
         // resets. Clear only frame-local counters after the initial full clear.
         const uint32_t frameCounters[92] = {};
         commandList->writeBuffer(m_rtxdiResources->PTDiagnosticCounters, frameCounters, sizeof(frameCounters));
+        const uint32_t duplicationCounters[4] = {};
+        commandList->writeBuffer(m_rtxdiResources->PTDiagnosticCounters, duplicationCounters, sizeof(duplicationCounters), 96 * sizeof(uint32_t));
         nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTDiagnosticCounters);
     }
     // Light preparation is needed for DI/ReGIR and PT next-event estimation.
@@ -841,6 +855,13 @@ void RtxdiPass::ExecutePT(nvrhi::CommandListHandle commandList, nvrhi::BindingSe
     nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
     if (!skipFinal)
     ExecuteRayTracingPass(commandList, m_PTFinalShadingPass, "PT Final Shading", dispatchSize, extraBindingSet);
+    if (m_rtxdiResources->HasDuplicationMap())
+    {
+        // Temporal reuse already consumed the previous map. Produce the map
+        // from this frame's final selected reservoirs only after resampling.
+        ExecuteRayTracingPass(commandList, m_PTDuplicationMapPass, "PT Duplication Map", dispatchSize, extraBindingSet);
+        nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTDuplicationMap);
+    }
     GpuProfiler::End(commandList);
 }
 
@@ -945,6 +966,25 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
             << ",\n  \"final_index\": " << giContext.GetBufferIndices().finalShadingInputBufferIndex << "\n}\n";
         if (!giMeta) throw std::runtime_error("GI reservoir metadata write failed");
     }
+    if (m_rtxdiResources->HasDuplicationMap())
+    {
+        nvrhi::BufferDesc mapDesc;
+        mapDesc.byteSize = uint64_t(m_BridgeParameters.frameDims.x) * m_BridgeParameters.frameDims.y * sizeof(uint32_t);
+        mapDesc.cpuAccess = nvrhi::CpuAccessMode::Read;
+        mapDesc.debugName = "PTDuplicationMapReadback";
+        auto mapStaging = m_device->createBuffer(mapDesc);
+        if (!mapStaging) throw std::runtime_error("PT duplication staging allocation failed");
+        auto mapCopy = m_device->createCommandList();
+        mapCopy->open();
+        mapCopy->copyBuffer(mapStaging, 0, m_rtxdiResources->PTDuplicationMap, 0, mapDesc.byteSize);
+        mapCopy->close(); m_device->executeCommandList(mapCopy); m_device->waitForIdle();
+        const void* mapData = m_device->mapBuffer(mapStaging, nvrhi::CpuAccessMode::Read);
+        if (!mapData) throw std::runtime_error("PT duplication readback map failed");
+        std::ofstream mapFile(path + ".duplication.bin", std::ios::binary);
+        mapFile.write(static_cast<const char*>(mapData), std::streamsize(mapDesc.byteSize));
+        m_device->unmapBuffer(mapStaging);
+        if (!mapFile) throw std::runtime_error("PT duplication map write failed");
+    }
     const auto source = m_rtxdiResources->PTReservoirBuffer;
     nvrhi::BufferDesc desc;
     desc.byteSize = source->getDesc().byteSize;
@@ -978,7 +1018,7 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
          << ",\n  \"final_index\": " << indices.finalShadingInputBufferIndex << "\n}\n";
     if (!meta) throw std::runtime_error("PT reservoir metadata write failed");
     nvrhi::BufferDesc statsDesc;
-    statsDesc.byteSize = 96 * sizeof(uint32_t);
+    statsDesc.byteSize = 100 * sizeof(uint32_t);
     statsDesc.cpuAccess = nvrhi::CpuAccessMode::Read;
     statsDesc.debugName = "PTCounterReadback";
     auto stats = m_device->createBuffer(statsDesc);
@@ -1039,6 +1079,10 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
     statFile << "],\n  \"queue_first_difference\": [";
     for(int i=72;i<92;++i) { if(i>72) statFile << ","; statFile << counters[i]; }
     statFile << "]"
+        << ",\n  \"duplication_map_reads\": " << counters[96]
+        << ",\n  \"duplication_nonzero_reads\": " << counters[97]
+        << ",\n  \"duplication_max_read_count\": " << counters[98]
+        << ",\n  \"duplication_produced_pixels\": " << counters[99]
         << ",\n  \"queue_sequence_frames\": " << counters[92]
         << ",\n  \"queue_sequence_reservoir_failure\": " << counters[93]
         << ",\n  \"queue_sequence_vector_failure\": " << counters[94]

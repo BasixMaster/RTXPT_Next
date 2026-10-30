@@ -91,3 +91,5 @@ Fresh requested control: [RTXPT1.9 PT-only override](NATIVE_MATRIX_RESULTS.md#fr
 RTXPT1.9 already supplies the sub-sampling mechanism. Sparse B10/ReSTIR integration and activation remain pending; B10 thenB11 are the current implementation priority.
 
 [B10 queue-history checkpoint](B10_QUEUE_HISTORY.md) · [B11 integration requirements](B11_INTEGRATION.md) — partial development; no new speedup claim.
+
+[B10 duplication temporal history](B10_DUPLICATION_HISTORY.md): actual producer/consumer GPU validation; incomplete extended quality and no new timing result.

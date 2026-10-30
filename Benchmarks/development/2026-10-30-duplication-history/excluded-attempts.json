@@ -1,0 +1,32 @@
+[
+  {
+    "case": "interrupted-C-volume-quality-cohort",
+    "status": "invalid_incomplete",
+    "reason": "System volume exhausted during original Convergence capture. Preserve every original byte and completed Room runs; do not mix with fresh three-seed cohort on a separate approved volume."
+  },
+  {
+    "case": "secondary-volume-setup",
+    "status": "setup_only",
+    "reason": "Creating the approved new parent required host filesystem access; no renderer result from those failed setup attempts."
+  },
+  {
+    "case": "room-on-s4093-initial",
+    "status": "failed_startup",
+    "renderer_exit_code": "0xC0000409",
+    "frames": 0,
+    "cause": "Unresolved; later separate capture succeeded."
+  },
+  {
+    "case": "original-scene-continuations",
+    "status": "failed_startup",
+    "renderer_exit_code": "0xC0000409",
+    "configuration": "convergence-off-s4093",
+    "attempts": 2,
+    "cause": "Unresolved; includes an attempt after cache cleanup; feature disabled."
+  },
+  {
+    "case": "continuation-wrapper-import",
+    "status": "postprocessing_failure_recovered",
+    "scope": "Renderer exited0 and produced64images; preserved wrapper ModuleNotFoundError, then independently verified manifest, image count and effective contract. No renderer retry for this wrapper failure."
+  }
+]
