@@ -1,5 +1,7 @@
 # Project instructions
 
+Before reusing historical local captures, read Docs/Research/LOCAL_DATA_HISTORY.md and the cleanup evidence it links. Some old sequences retain four checkpoints; full latest B10 data and references remain. Preserve append-only cleanup history and reacquire missing frames before calculating new sequence metrics.
+
 Apply the paper/NVIDIA implementation guidance in AGENTS.md: closely follow the Wyman papers, supplements/author code and NVIDIA docs/reference code; trace changes to source locations and explicitly justify deviations. Never label an approximation or partial reproduction as the full published algorithm.
 
 Follow AGENTS.md and Docs/Research/VERSION_MAPPING.md for canonical B0–B10. B0 is unchanged RTXPT1.9 original defaults/pins. B1=native PT+DI3.0; B2=native PT+DI/GI3.0; B3=native PT/runtime3.1, DI/GI off; B4=native PT+DI3.1; B5=native PT+DI/GI3.1; B6=ReSTIR PT, DI/GI off; B7=ReSTIR PT+DI3.1, GI off; B8 adds valid GI3.1 sharing; B9=B8+limited PT++; B10=B8+full remaining PT++. GI is off for B1/B4. Preserve licenses, scene pins and independent evidence; the linked SDK is reference-only.

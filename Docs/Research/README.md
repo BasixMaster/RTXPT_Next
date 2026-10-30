@@ -2,6 +2,8 @@
 
 ## Implementation guidance
 
+[Local data history and reproduction guide](LOCAL_DATA_HISTORY.md) records the 2026-10-30 cleanup, retained main data, older experiment lessons and how to reacquire pruned frame sequences.
+
 Follow the Wyman papers, their supplementary material and author implementations, together with NVIDIA documentation and pinned reference code, closely when implementing algorithms. Trace each change to its relevant section/equation or API/source location; preserve the stated estimator assumptions and weighting. Document paper-versus-SDK differences and clearly justify any necessary approximation or integration adaptation. Source presence, activation, partial reproduction and validated full implementation are distinct claims. This user-confirmed guidance applies to existing B10 work and all later variants; [AGENTS.md](../../AGENTS.md) is the maintained project instruction.
 
 **Current work:** B10 remains partial. The [duplication comparison](B10_DUPLICATION_HISTORY.md) now completes 18 quality sequences and 18 uncapped timing processes; full unification and dual motion remain pending. Your [B10–B16 roadmap and B10 sampling branches](ROADMAP.md) are the maintained execution sequence.

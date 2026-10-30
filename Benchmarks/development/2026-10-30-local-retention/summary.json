@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "completed",
+  "scope": "Basix Pathtracing only; owned workbench under Documents/Codex and three D-volume startup diagnostic runs",
+  "source_checkpoint": "1e2c0cd9899a21bf500de3422f06b46d32a77357",
+  "deleted_files": 4826,
+  "deleted_logical_bytes": 19965304360,
+  "volumes": [
+    {
+      "volume": "C:",
+      "deleted_files": 4466,
+      "logical_bytes": 17357496651,
+      "free_before": 17596084224,
+      "free_after": 34950840320,
+      "receipt_sha256": "be61a97fb9e07e9030aedd2e1fbcab83bf527aca6ed83667ee86f4378c8550e3"
+    },
+    {
+      "volume": "D:",
+      "deleted_files": 360,
+      "logical_bytes": 2607807709,
+      "free_before": 157365698560,
+      "free_after": 159974617088,
+      "receipt_sha256": "07bcb96a53183a466e6c66851d7b9e0df7c51127535e1d3cc55017d138968fb0"
+    }
+  ],
+  "pruned_capture_folders": 34,
+  "sequence_groups": 72,
+  "retained_complete_latest_quality_sequences": 18,
+  "retained_main_files": 3120,
+  "additional_complete_old_sequences": [
+    {
+      "path": "WORKSPACE/work/2026-10-29-b10-paired/paired-sequence",
+      "reason": "Historical executable hash is known but no exact matching frozen executable found; preserve complete sequence"
+    },
+    {
+      "path": "WORKSPACE/work/2026-10-29-b10-paired/random-sequence",
+      "reason": "Historical executable hash is known but no exact matching frozen executable found; preserve complete sequence"
+    }
+  ],
+  "published_results_source_references_assets_frozen_controls_preserved": true,
+  "local_safety_tests": 6,
+  "verification": {
+    "passed": true,
+    "checks": 8306,
+    "main_files": 3120
+  },
+  "deleted_ledger_sha256": "62e8dcdc9f6bc15ebb9bfc3889bcbedcea0208ec389e478af80cbe07275e4b59",
+  "reproduction_index_sha256": "11000b08f60de292dfa8b91ee0cc3a10ea821dfddeeaee3b92aa8807adf59ced",
+  "limits": [
+    "Interior frames were deleted, not archived. Reacquisition is required for new full-sequence metrics.",
+    "Hashes identify original data; they cannot recover pixels.",
+    "Whole-renderer same-seed bit identity is not established.",
+    "Three diagnostic command-only runs have no historical executable hash in their original records; one incomplete C acquisition has invalid original metadata.",
+    "Two complete older sequences without a matching frozen binary were excluded from cleanup.",
+    "Other projects in Documents and personal application folders were not deleted."
+  ]
+}
