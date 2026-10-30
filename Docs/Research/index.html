@@ -484,7 +484,7 @@
 <h3 id="local-data-history-heading-6">Summary and lessons learned</h3>
 <p>Keep compact authoritative evidence and executable reproduction inputs; retain full sequences where further temporal analysis is planned. Separate historical results from new acquisitions, and preserve failed attempts and scope limitations. Cleanup changes local data availability, never algorithm acceptance, measured values or the B10–B16 roadmap.</p>
 </section><section class="doc-panel" id="comparison-overview"><h2 id="comparison-overview-heading-1">B0–B16 and sampling-variant comparison overview</h2>
-<p>One row per registered Bx version and required scene, including the B10 sampling variants. <strong>Unavailable means not measured, never zero.</strong> Experimental checkpoints, overrides and ablations are kept in their detailed reports. B0 remains the unchanged RTXPT1.9 reference.</p>
+<p>One row per registered Bx version and required scene, including the B10 sampling variants. <strong>Unavailable means not measured, never zero.</strong> Matched B8/B9 measurements are included in their main rows with scoped-development labels. Other checkpoints, overrides and ablations are kept in their detailed reports. B0 remains the unchanged RTXPT1.9 reference.</p>
 <p>GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Different cohorts are descriptive; check settings and sampling policies before calculating relative gains. Accepted current timing cohorts include app/NVIDIA/RTSS cap checks; unknown external limiters and background load remain limitations.</p>
 <p><strong>B10 is partial:</strong> unified finite/environment MIS and initial-only roulette have scoped diagnostic checks, but no accepted full-B10 performance/quality comparison. <a href="#b10-unified-lighting">B10 implementation and evidence</a> · <a href="#roadmap">Roadmap</a>.</p>
 <p><a href="#research-summary">Research summary</a> · <a href="#version-mapping">Algorithm definitions</a> · <a href="#benchmark-versions">Benchmark protocol</a> · <a href="comparison-overview.json">Machine-readable data</a></p>
@@ -505,9 +505,9 @@
 <tbody><tr>
 <td><strong>B0</strong></td>
 <td>Unchanged RTXPT v1.9 reference: original defaults and dependencies</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="No matching unchanged-default B0 cohort; measured PT-only overrides remain separate.">Not measured</abbr></td>
+<td align="right"><abbr title="No matching unchanged-default B0 cohort; measured PT-only overrides remain separate.">Not measured</abbr></td>
+<td align="right"><abbr title="No matching unchanged-default B0 cohort; measured PT-only overrides remain separate.">Not measured</abbr></td>
 <td>No eligible capture</td>
 <td><a href="#version-mapping">pending</a></td>
 </tr>
@@ -516,7 +516,7 @@
 <td>v1.9 native PT + ReSTIR DI3.0; GI off</td>
 <td align="right">1.283</td>
 <td align="right">0.121484</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/registered-room/B1.png"><img src="assets/registered-room/B1.png" alt="B1 opaque-room representative capture"></a></td>
 <td><a href="#registered-room-results">measured</a></td>
 </tr>
@@ -525,7 +525,7 @@
 <td>v1.9 native PT + ReSTIR DI3.0 + ReSTIR GI3.0</td>
 <td align="right">1.441</td>
 <td align="right">0.094603</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/native-matrix/opaque-room-B2.png"><img src="assets/native-matrix/opaque-room-B2.png" alt="B2 opaque-room representative capture"></a></td>
 <td><a href="#native-matrix-results">measured known caps verified</a></td>
 </tr>
@@ -534,7 +534,7 @@
 <td>Native PT with RTXDI3.1 linked; DI/GI off</td>
 <td align="right">0.805</td>
 <td align="right">0.116744</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/native-matrix/opaque-room-B3.png"><img src="assets/native-matrix/opaque-room-B3.png" alt="B3 opaque-room representative capture"></a></td>
 <td><a href="#native-matrix-results">measured known caps verified</a></td>
 </tr>
@@ -543,7 +543,7 @@
 <td>Native PT + ReSTIR DI3.1; GI off</td>
 <td align="right">1.289</td>
 <td align="right">0.121719</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/registered-room/B4.png"><img src="assets/registered-room/B4.png" alt="B4 opaque-room representative capture"></a></td>
 <td><a href="#registered-room-results">measured</a></td>
 </tr>
@@ -552,7 +552,7 @@
 <td>Native PT + ReSTIR DI3.1 + ReSTIR GI3.1</td>
 <td align="right">1.461</td>
 <td align="right">0.093961</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/native-matrix/opaque-room-B5.png"><img src="assets/native-matrix/opaque-room-B5.png" alt="B5 opaque-room representative capture"></a></td>
 <td><a href="#native-matrix-results">measured known caps verified</a></td>
 </tr>
@@ -576,21 +576,21 @@
 </tr>
 <tr>
 <td><strong>B8</strong></td>
-<td>B8 development: DI + approximate GI-short reuse + PT-long</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
-<td><a href="assets/b8-nvidia-gi/room-gi3.png"><img src="assets/b8-nvidia-gi/room-gi3.png" alt="B8 opaque-room representative capture"></a></td>
-<td><a href="#b8-staged-implementation">development not accepted</a></td>
+<td>ReSTIR PT + DI3.1 + approximate GI3.1 (short/long split)</td>
+<td align="right">1.998</td>
+<td align="right">0.076983</td>
+<td align="right">0.110516</td>
+<td><a href="assets/b9-on-b8/room-B8.png"><img src="assets/b9-on-b8/room-B8.png" alt="B8 opaque-room representative capture"></a></td>
+<td><a href="#b9-results">measured scoped development</a></td>
 </tr>
 <tr>
 <td><strong>B9</strong></td>
-<td>B9 on B8: GI reuse + footprint/roulette</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
+<td>B8 + footprint/initial-only roulette</td>
+<td align="right">2.228</td>
+<td align="right">0.077476</td>
+<td align="right">0.111569</td>
 <td><a href="assets/b9-on-b8/room-B9.png"><img src="assets/b9-on-b8/room-B9.png" alt="B9 opaque-room representative capture"></a></td>
-<td><a href="#b9-results">development not accepted</a></td>
+<td><a href="#b9-results">measured scoped development</a></td>
 </tr>
 <tr>
 <td><strong>B10</strong></td>
@@ -694,8 +694,8 @@
 <li><strong>B5:</strong> Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.</li>
 <li><strong>B6:</strong> Explicit separate zero-intensity registered environment fixture, same owned model/materials/camera; preserve prior no-env data separately. Three timing repeats; native3quality processes or modern3seed history sweep.</li>
 <li><strong>B7:</strong> Explicit separate zero-intensity registered environment fixture, same owned model/materials/camera; preserve prior no-env data separately. Three timing repeats; native3quality processes or modern3seed history sweep.</li>
-<li><strong>B8:</strong> NVIDIA non-directional GI reuse: 640x360 cap4/4,64-frame static quality measured; mixed results. Scoped timing is shown separately when available; no canonical promotion.</li>
-<li><strong>B9:</strong> Eight GPU diagnostics passed; 640x360 cap4/4 snapshot shown. Three-seed64-frame quality and uncapped timing in progress. Original-scene footprint remains unsupported; no promotion.</li>
+<li><strong>B8:</strong> 640x360 cap4/4; Three seeds ×64static frames; frame64 FLIP. Three uncapped timings. Room cap4/4. Development, no promotion. Matched B8/B9 cohort; metric reporting does not promote general algorithm acceptance.</li>
+<li><strong>B9:</strong> 640x360 cap4/4; Three seeds ×64static frames; frame64 FLIP. Three uncapped timings. Room cap4/4. Development, no promotion. Matched B8/B9 cohort; metric reporting does not promote general algorithm acceptance.</li>
 <li><strong>B10:</strong> Full B10 comparison pending. Component diagnostics, captures and ablations are available in the detailed B10 reports; no eligible full-version picture or performance/quality result yet.</li>
 <li><strong>B10.75:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
 <li><strong>B10.50:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
@@ -726,9 +726,9 @@
 <tbody><tr>
 <td><strong>B0</strong></td>
 <td>Unchanged RTXPT v1.9 reference: original defaults and dependencies</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="No matching unchanged-default B0 cohort; measured PT-only overrides remain separate.">Not measured</abbr></td>
+<td align="right"><abbr title="No matching unchanged-default B0 cohort; measured PT-only overrides remain separate.">Not measured</abbr></td>
+<td align="right"><abbr title="No matching unchanged-default B0 cohort; measured PT-only overrides remain separate.">Not measured</abbr></td>
 <td>No eligible capture</td>
 <td><a href="#version-mapping">pending</a></td>
 </tr>
@@ -737,7 +737,7 @@
 <td>v1.9 native PT + ReSTIR DI3.0; GI off</td>
 <td align="right">3.796</td>
 <td align="right">0.341609</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/canonical-native-di/convergence-B1.png"><img src="assets/canonical-native-di/convergence-B1.png" alt="B1 convergence representative capture"></a></td>
 <td><a href="#canonical-native-di-results">measured</a></td>
 </tr>
@@ -746,7 +746,7 @@
 <td>v1.9 native PT + ReSTIR DI3.0 + ReSTIR GI3.0</td>
 <td align="right">4.510</td>
 <td align="right">0.243459</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/native-matrix/convergence-B2.png"><img src="assets/native-matrix/convergence-B2.png" alt="B2 convergence representative capture"></a></td>
 <td><a href="#native-matrix-results">measured known caps verified</a></td>
 </tr>
@@ -755,7 +755,7 @@
 <td>Native PT with RTXDI3.1 linked; DI/GI off</td>
 <td align="right">2.565</td>
 <td align="right">0.375281</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/native-matrix/convergence-B3.png"><img src="assets/native-matrix/convergence-B3.png" alt="B3 convergence representative capture"></a></td>
 <td><a href="#native-matrix-results">measured known caps verified</a></td>
 </tr>
@@ -764,7 +764,7 @@
 <td>Native PT + ReSTIR DI3.1; GI off</td>
 <td align="right">3.772</td>
 <td align="right">0.341623</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/canonical-native-di/convergence-B4.png"><img src="assets/canonical-native-di/convergence-B4.png" alt="B4 convergence representative capture"></a></td>
 <td><a href="#canonical-native-di-results">measured</a></td>
 </tr>
@@ -773,14 +773,14 @@
 <td>Native PT + ReSTIR DI3.1 + ReSTIR GI3.1</td>
 <td align="right">4.545</td>
 <td align="right">0.243522</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/native-matrix/convergence-B5.png"><img src="assets/native-matrix/convergence-B5.png" alt="B5 convergence representative capture"></a></td>
 <td><a href="#native-matrix-results">measured known caps verified</a></td>
 </tr>
 <tr>
 <td><strong>B6</strong></td>
 <td>ReSTIR PT; DI/GI off</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Timing pending for the corrected original-scene source; existing guarded quality captures are not throughput measurements.">Timing pending</abbr></td>
 <td align="right">0.300663</td>
 <td align="right">0.453476</td>
 <td><a href="assets/finite-shift-guard/convergence-B6.png"><img src="assets/finite-shift-guard/convergence-B6.png" alt="B6 convergence representative capture"></a></td>
@@ -789,7 +789,7 @@
 <tr>
 <td><strong>B7</strong></td>
 <td>ReSTIR PT + ReSTIR DI3.1; GI off</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Timing pending for the corrected original-scene source; existing guarded quality captures are not throughput measurements.">Timing pending</abbr></td>
 <td align="right">0.222129</td>
 <td align="right">0.333817</td>
 <td><a href="assets/finite-shift-guard/convergence-B7.png"><img src="assets/finite-shift-guard/convergence-B7.png" alt="B7 convergence representative capture"></a></td>
@@ -797,21 +797,21 @@
 </tr>
 <tr>
 <td><strong>B8</strong></td>
-<td>B8 development: DI + approximate GI-short reuse + PT-long</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
-<td><a href="assets/b8-nvidia-gi/convergence-gi3.png"><img src="assets/b8-nvidia-gi/convergence-gi3.png" alt="B8 convergence representative capture"></a></td>
-<td><a href="#b8-staged-implementation">development not accepted</a></td>
+<td>ReSTIR PT + DI3.1 + approximate GI3.1 (short/long split)</td>
+<td align="right">10.911</td>
+<td align="right">0.211896</td>
+<td align="right">0.315774</td>
+<td><a href="assets/b9-on-b8/convergence-B8.png"><img src="assets/b9-on-b8/convergence-B8.png" alt="B8 convergence representative capture"></a></td>
+<td><a href="#b9-results">measured scoped development</a></td>
 </tr>
 <tr>
 <td><strong>B9</strong></td>
-<td>B9 on B8: GI reuse + full-prefix roulette-only ablation</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
+<td>B8 + initial-only roulette; footprint unsupported</td>
+<td align="right">10.138</td>
+<td align="right">0.215269</td>
+<td align="right">0.319711</td>
 <td><a href="assets/b9-on-b8/convergence-B9.png"><img src="assets/b9-on-b8/convergence-B9.png" alt="B9 convergence representative capture"></a></td>
-<td><a href="#b9-results">development not accepted</a></td>
+<td><a href="#b9-results">measured scoped development</a></td>
 </tr>
 <tr>
 <td><strong>B10</strong></td>
@@ -915,8 +915,8 @@
 <li><strong>B5:</strong> Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.</li>
 <li><strong>B6:</strong> Five-seed1280x720 matched MIP0 quality; finite zero-Jacobian targets prevent invalid MIS propagation. Guarded replay-first transport; original scene/material/camera14/2. Throughput and general stability acceptance pending.</li>
 <li><strong>B7:</strong> Five-seed1280x720 matched MIP0 quality; finite zero-Jacobian targets prevent invalid MIS propagation. Guarded replay-first transport; original scene/material/camera14/2. Throughput and general stability acceptance pending.</li>
-<li><strong>B8:</strong> NVIDIA non-directional GI reuse: 1280x720 cap14/2,64-frame static quality measured; mixed results. Scoped timing is shown separately when available; no canonical promotion.</li>
-<li><strong>B9:</strong> Eight GPU diagnostics passed; 1280x720 cap14/2 snapshot shown. Three-seed64-frame quality and uncapped timing in progress. Original-scene footprint remains unsupported; no promotion.</li>
+<li><strong>B8:</strong> 1280x720 cap14/2; Three seeds ×64static frames; frame64 FLIP. Three uncapped timings. Original cap14/2; footprint unsupported. Development, no promotion. Matched B8/B9 cohort; metric reporting does not promote general algorithm acceptance.</li>
+<li><strong>B9:</strong> 1280x720 cap14/2; Three seeds ×64static frames; frame64 FLIP. Three uncapped timings. Original cap14/2; footprint unsupported. Development, no promotion. Matched B8/B9 cohort; metric reporting does not promote general algorithm acceptance.</li>
 <li><strong>B10:</strong> Full B10 comparison pending. Component diagnostics, captures and ablations are available in the detailed B10 reports; no eligible full-version picture or performance/quality result yet.</li>
 <li><strong>B10.75:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
 <li><strong>B10.50:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
@@ -947,9 +947,9 @@
 <tbody><tr>
 <td><strong>B0</strong></td>
 <td>Unchanged RTXPT v1.9 reference: original defaults and dependencies</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="No matching unchanged-default B0 cohort; measured PT-only overrides remain separate.">Not measured</abbr></td>
+<td align="right"><abbr title="No matching unchanged-default B0 cohort; measured PT-only overrides remain separate.">Not measured</abbr></td>
+<td align="right"><abbr title="No matching unchanged-default B0 cohort; measured PT-only overrides remain separate.">Not measured</abbr></td>
 <td>No eligible capture</td>
 <td><a href="#version-mapping">pending</a></td>
 </tr>
@@ -958,7 +958,7 @@
 <td>v1.9 native PT + ReSTIR DI3.0; GI off</td>
 <td align="right">4.455</td>
 <td align="right">0.386252</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/canonical-native-di/kitchen-B1.png"><img src="assets/canonical-native-di/kitchen-B1.png" alt="B1 kitchen representative capture"></a></td>
 <td><a href="#canonical-native-di-results">measured</a></td>
 </tr>
@@ -967,7 +967,7 @@
 <td>v1.9 native PT + ReSTIR DI3.0 + ReSTIR GI3.0</td>
 <td align="right">5.370</td>
 <td align="right">0.352840</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/native-matrix/kitchen-B2.png"><img src="assets/native-matrix/kitchen-B2.png" alt="B2 kitchen representative capture"></a></td>
 <td><a href="#native-matrix-results">measured known caps verified</a></td>
 </tr>
@@ -976,7 +976,7 @@
 <td>Native PT with RTXDI3.1 linked; DI/GI off</td>
 <td align="right">3.258</td>
 <td align="right">0.382364</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/native-matrix/kitchen-B3.png"><img src="assets/native-matrix/kitchen-B3.png" alt="B3 kitchen representative capture"></a></td>
 <td><a href="#native-matrix-results">measured known caps verified</a></td>
 </tr>
@@ -985,7 +985,7 @@
 <td>Native PT + ReSTIR DI3.1; GI off</td>
 <td align="right">4.446</td>
 <td align="right">0.386295</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/canonical-native-di/kitchen-B4.png"><img src="assets/canonical-native-di/kitchen-B4.png" alt="B4 kitchen representative capture"></a></td>
 <td><a href="#canonical-native-di-results">measured</a></td>
 </tr>
@@ -994,14 +994,14 @@
 <td>Native PT + ReSTIR DI3.1 + ReSTIR GI3.1</td>
 <td align="right">5.421</td>
 <td align="right">0.351458</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.">Not captured</abbr></td>
 <td><a href="assets/native-matrix/kitchen-B5.png"><img src="assets/native-matrix/kitchen-B5.png" alt="B5 kitchen representative capture"></a></td>
 <td><a href="#native-matrix-results">measured known caps verified</a></td>
 </tr>
 <tr>
 <td><strong>B6</strong></td>
 <td>ReSTIR PT; DI/GI off</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Timing pending for the corrected original-scene source; existing guarded quality captures are not throughput measurements.">Timing pending</abbr></td>
 <td align="right">0.302520</td>
 <td align="right">0.546629</td>
 <td><a href="assets/finite-shift-guard/kitchen-B6.png"><img src="assets/finite-shift-guard/kitchen-B6.png" alt="B6 kitchen representative capture"></a></td>
@@ -1010,7 +1010,7 @@
 <tr>
 <td><strong>B7</strong></td>
 <td>ReSTIR PT + ReSTIR DI3.1; GI off</td>
-<td align="right">Unavailable</td>
+<td align="right"><abbr title="Timing pending for the corrected original-scene source; existing guarded quality captures are not throughput measurements.">Timing pending</abbr></td>
 <td align="right">0.249775</td>
 <td align="right">0.440491</td>
 <td><a href="assets/finite-shift-guard/kitchen-B7.png"><img src="assets/finite-shift-guard/kitchen-B7.png" alt="B7 kitchen representative capture"></a></td>
@@ -1018,21 +1018,21 @@
 </tr>
 <tr>
 <td><strong>B8</strong></td>
-<td>B8 development: DI + approximate GI-short reuse + PT-long</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
-<td><a href="assets/b8-nvidia-gi/kitchen-gi3.png"><img src="assets/b8-nvidia-gi/kitchen-gi3.png" alt="B8 kitchen representative capture"></a></td>
-<td><a href="#b8-staged-implementation">development not accepted</a></td>
+<td>ReSTIR PT + DI3.1 + approximate GI3.1 (short/long split)</td>
+<td align="right">13.279</td>
+<td align="right">0.272643</td>
+<td align="right">0.459480</td>
+<td><a href="assets/b9-on-b8/kitchen-B8.png"><img src="assets/b9-on-b8/kitchen-B8.png" alt="B8 kitchen representative capture"></a></td>
+<td><a href="#b9-results">measured scoped development</a></td>
 </tr>
 <tr>
 <td><strong>B9</strong></td>
-<td>B9 on B8: GI reuse + full-prefix roulette-only ablation</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
-<td align="right">Unavailable</td>
+<td>B8 + initial-only roulette; footprint unsupported</td>
+<td align="right">12.201</td>
+<td align="right">0.275362</td>
+<td align="right">0.464556</td>
 <td><a href="assets/b9-on-b8/kitchen-B9.png"><img src="assets/b9-on-b8/kitchen-B9.png" alt="B9 kitchen representative capture"></a></td>
-<td><a href="#b9-results">development not accepted</a></td>
+<td><a href="#b9-results">measured scoped development</a></td>
 </tr>
 <tr>
 <td><strong>B10</strong></td>
@@ -1136,8 +1136,8 @@
 <li><strong>B5:</strong> Fresh native-control cohort:3 quality processes and3 cap-verified timing processes; original shader estimator retained. Different acquisition cohort from B1/B4 and B6/B7.</li>
 <li><strong>B6:</strong> Five-seed1280x720 matched MIP0 quality; finite zero-Jacobian targets prevent invalid MIS propagation. Guarded replay-first transport; original scene/material/camera14/2. Throughput and general stability acceptance pending.</li>
 <li><strong>B7:</strong> Five-seed1280x720 matched MIP0 quality; finite zero-Jacobian targets prevent invalid MIS propagation. Guarded replay-first transport; original scene/material/camera14/2. Throughput and general stability acceptance pending.</li>
-<li><strong>B8:</strong> NVIDIA non-directional GI reuse: 1280x720 cap14/2,64-frame static quality measured; mixed results. Scoped timing is shown separately when available; no canonical promotion.</li>
-<li><strong>B9:</strong> Eight GPU diagnostics passed; 1280x720 cap14/2 snapshot shown. Three-seed64-frame quality and uncapped timing in progress. Original-scene footprint remains unsupported; no promotion.</li>
+<li><strong>B8:</strong> 1280x720 cap14/2; Three seeds ×64static frames; frame64 FLIP. Three uncapped timings. Original cap14/2; footprint unsupported. Development, no promotion. Matched B8/B9 cohort; metric reporting does not promote general algorithm acceptance.</li>
+<li><strong>B9:</strong> 1280x720 cap14/2; Three seeds ×64static frames; frame64 FLIP. Three uncapped timings. Original cap14/2; footprint unsupported. Development, no promotion. Matched B8/B9 cohort; metric reporting does not promote general algorithm acceptance.</li>
 <li><strong>B10:</strong> Full B10 comparison pending. Component diagnostics, captures and ablations are available in the detailed B10 reports; no eligible full-version picture or performance/quality result yet.</li>
 <li><strong>B10.75:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
 <li><strong>B10.50:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>

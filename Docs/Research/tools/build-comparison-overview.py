@@ -5,6 +5,7 @@ No network or third-party dependencies; missing measurements stay null.
 """
 from pathlib import Path
 import hashlib
+from html import escape
 import json
 import statistics
 import sys
@@ -124,7 +125,7 @@ def build(repo):
             label='gaussian-'+scene;f=gf[scene]['groups'][label]
             gaussian['rows'].append(dict(label=label,scene=scene,resolution='1280x720',frames=1,
                 linear_mse=gq[label]['metrics']['linear_rgb_mse'],hdr_flip=f['mean_frame_hdr_flip'],ldr_flip=f['mean_frame_ldr_flip']))
-    data=dict(schema_version=1,numbering_scheme=registry['numbering_scheme'],updated_on='2026-10-29',
+    data=dict(schema_version=1,numbering_scheme=registry['numbering_scheme'],updated_on='2026-10-30',
               metrics=dict(gpu_busy_ms='Median of per-process GPUBusy medians; not complete critical-path frame time/FPS',
                            ldr_flip='Official LDR-FLIP1.7, PPD67; lower is better',hdr_flip='Official HDR-FLIP1.7; scene-reference-only exposure parameters'),
               source_hashes={p.relative_to(repo).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},rows=rows)
@@ -223,6 +224,29 @@ def build(repo):
     for row in dq['rows']:
         t=next(v for v in dt['rows'] if v['scene']==row['scene'])
         checkpoints.append(dict(row,kind='duplication_'+row['policy'],label='B10 dev · duplication '+row['policy'],gpu_busy_ms=t[row['policy']+'_gpu_busy_ms'],report='B10_DUPLICATION_HISTORY.md',evidence='Three seeds ×64frames; frame64 FLIP; three separate uncapped timings. Static development ablation, not full B10.'))
+    # Display the replicated matched B8/B9 cohort on their main version rows.
+    # Reporting scoped measurements is independent of canonical acceptance.
+    for row in rows:
+        if row['variant'] in ['B8','B9']:
+            kind='b9_matched_B8' if row['variant']=='B8' else 'b9_limited'
+            item=next((x for x in checkpoints if x['kind']==kind and x['scene']==row['scene']),None)
+            if item is not None:
+                if any(item.get(k) is None for k in ['gpu_busy_ms','ldr_flip','hdr_flip']):raise ValueError('Matched B8/B9 cohort is incomplete')
+                for key in ['gpu_busy_ms','ldr_flip','hdr_flip','linear_mse','image','algorithm']:
+                    if key in item:row[key]=item[key]
+                timing=next(x for x in b9_timing['rows'] if x['scene']==row['scene'])
+                row.update(cpu_cadence_ms=timing[row['variant']+'_cpu_cadence_ms'],status='measured_scoped_development',report='B9_RESULTS.md',cohort='b9-on-b8-2026-10-30',history_frames=64,quality_replication='3independent seeds ×64frames; frame64FLIP averages',canonical_accepted=False)
+                row['algorithm']='ReSTIR PT + DI3.1 + approximate GI3.1 (short/long split)' if row['variant']=='B8' else ('B8 + footprint/initial-only roulette' if row['scene']=='opaque-room' else 'B8 + initial-only roulette; footprint unsupported')
+                dims='640x360 cap4/4' if row['scene']=='opaque-room' else '1280x720 cap14/2'
+                row['note']=dims+'; '+item['evidence']+' Matched B8/B9 cohort; metric reporting does not promote general algorithm acceptance.'
+        missing={}
+        if row['variant']=='B0':
+            missing={key:'No matching unchanged-default B0 cohort; measured PT-only overrides remain separate.' for key in ['gpu_busy_ms','ldr_flip','hdr_flip']}
+        if row['variant'] in ['B1','B2','B3','B4','B5'] and row['hdr_flip'] is None:
+            missing['hdr_flip']='Not captured: preserved native executable has no raw-HDR exporter; HDR-FLIP cannot be recovered from its sRGB PNG.'
+        if row['variant'] in ['B6','B7'] and row['gpu_busy_ms'] is None:
+            missing['gpu_busy_ms']='Timing pending for the corrected original-scene source; existing guarded quality captures are not throughput measurements.'
+        row['missing_metrics']=missing
     data['checkpoint_rows']=checkpoints
     for item in checkpoints:
         if item.get('image') and not (doc/item['image']).is_file():raise ValueError('Missing checkpoint picture')
@@ -237,14 +261,20 @@ def build(repo):
         data['source_hashes'][queue_status.relative_to(repo).as_posix()]=hashlib.sha256(queue_status.read_bytes()).hexdigest()
     (doc/'comparison-overview.json').write_text(json.dumps(data,indent=2,allow_nan=False)+'\n',encoding='utf-8')
     md=['# B0–B16 and sampling-variant comparison overview','',
-        'One row per registered Bx version and required scene, including the B10 sampling variants. **Unavailable means not measured, never zero.** Experimental checkpoints, overrides and ablations are kept in their detailed reports. B0 remains the unchanged RTXPT1.9 reference.','',
+        'One row per registered Bx version and required scene, including the B10 sampling variants. **Unavailable means not measured, never zero.** Matched B8/B9 measurements are included in their main rows with scoped-development labels. Other checkpoints, overrides and ablations are kept in their detailed reports. B0 remains the unchanged RTXPT1.9 reference.','',
         'GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Different cohorts are descriptive; check settings and sampling policies before calculating relative gains. Accepted current timing cohorts include app/NVIDIA/RTSS cap checks; unknown external limiters and background load remain limitations.','',
         '**B10 is partial:** unified finite/environment MIS and initial-only roulette have scoped diagnostic checks, but no accepted full-B10 performance/quality comparison. [B10 implementation and evidence](B10_UNIFIED_LIGHTING.md) · [Roadmap](ROADMAP.md).','',
         '[Research summary](RESEARCH_SUMMARY.md) · [Algorithm definitions](VERSION_MAPPING.md) · [Benchmark protocol](BENCHMARK_VERSIONS.md) · [Machine-readable data](comparison-overview.json)','']
     captions={'opaque-room':('Controlled room — registered environment','Main rows use640×360,1spp,3/3 bounce limits unless the evidence status states a different development scope. Native controls retain their DI/MIS policies. Development pictures are illustrations, not accepted matched comparisons.'),
               'convergence':('Original Convergence','1280×720,1spp,14/2 bounce limits, exposure0. Original materials and camera preserved.'),
               'kitchen':('Original Kitchen','1280×720,1spp,14/2 bounce limits, exposure2. Original materials and camera preserved.')}
-    def fmt(value,digits):return 'Unavailable' if value is None else f'{value:.{digits}f}'
+    def fmt(value,digits,row,key):
+        if value is not None:return f'{value:.{digits}f}'
+        reason=row.get('missing_metrics',{}).get(key)
+        if reason:
+            label='Not captured' if reason.startswith('Not captured') else 'Timing pending' if reason.startswith('Timing pending') else 'Not measured'
+            return f'<abbr title="{escape(reason,quote=True)}">{label}</abbr>'
+        return 'Unavailable' 
     for scene in ['opaque-room','convergence','kitchen']:
         title,caption=captions[scene];md += ['## '+title,'',caption,'',
           '| Version | Algorithm | GPU busy ms ↓ | LDR-FLIP ↓ | HDR-FLIP ↓ | Picture | Evidence status |',
@@ -252,7 +282,7 @@ def build(repo):
         for x in [r for r in rows if r['scene']==scene]:
             image=f'[![{x["variant"]} {scene} representative capture]({x["image"]})]({x["image"]})' if x['image'] else 'No eligible capture'
             status=('Guarded quality measured; timing pending †' if x.get('quality_status')=='measured_guarded_matched_filter' else 'Development, not accepted †' if x.get('quality_status')=='guarded_development_not_accepted' else x['status'].replace('_',' '))
-            md.append(f'| **{x["variant"]}** | {x["algorithm"]} | {fmt(x["gpu_busy_ms"],3)} | {fmt(x["ldr_flip"],6)} | {fmt(x["hdr_flip"],6)} | {image} | [{status}]({x["report"]}) |')
+            md.append(f'| **{x["variant"]}** | {x["algorithm"]} | {fmt(x["gpu_busy_ms"],3,x,"gpu_busy_ms")} | {fmt(x["ldr_flip"],6,x,"ldr_flip")} | {fmt(x["hdr_flip"],6,x,"hdr_flip")} | {image} | [{status}]({x["report"]}) |')
         md += ['', '<details><summary>Coverage and missing-data reasons</summary>','']
         for x in [r for r in rows if r['scene']==scene]:md += [f'- **{x["variant"]}:** {x["note"]}']
         md += ['','</details>','']

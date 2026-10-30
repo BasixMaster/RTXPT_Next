@@ -180,13 +180,26 @@ for row in overview['rows']:
     assert row['gpu_busy_ms'] is None or row['gpu_busy_ms']>0
     if row['image']:assert (D/row['image']).is_file()
     if row['variant'] in ['B8','B9','B10']:
-        assert row['gpu_busy_ms'] is None and row['hdr_flip'] is None and row['ldr_flip'] is None
-        assert row['report']==('B10_UNIFIED_LIGHTING.md' if row['variant']=='B10' else 'B9_RESULTS.md' if row['variant']=='B9' else 'B8_STAGED_IMPLEMENTATION.md')
+        if row['variant']=='B10':
+            assert row['gpu_busy_ms'] is None and row['hdr_flip'] is None and row['ldr_flip'] is None
+        else:
+            quality=json.loads((P/'Benchmarks/development/2026-10-30-b9-on-b8/quality-summary.json').read_text())
+            timing=json.loads((P/'Benchmarks/development/2026-10-30-b9-on-b8/timing-summary.json').read_text())
+            q=next(x for x in quality['rows'] if x['scene']==row['scene'] and x['variant']==row['variant'])
+            t=next(x for x in timing['rows'] if x['scene']==row['scene'])
+            assert row['gpu_busy_ms']==t[row['variant']+'_gpu_busy_ms']
+            assert row['ldr_flip']==q['ldr_flip'] and row['hdr_flip']==q['hdr_flip']
+            assert row['status']=='measured_scoped_development' and row['canonical_accepted'] is False
+        assert row['report']==('B10_UNIFIED_LIGHTING.md' if row['variant']=='B10' else 'B9_RESULTS.md')
         if row['variant']=='B10':assert row['image'] is None
         if row['image'] is not None:
             assert 'development' in row['status']
             expected_size=('640x360' if row['scene']=='opaque-room' else '1280x720') if row['variant'] in ['B8','B9','B10'] else '176x90'
             assert expected_size in row['note']
+for row in overview['rows']:
+    if row['variant']=='B0':assert all(row[k] is None and k in row['missing_metrics'] for k in ['gpu_busy_ms','ldr_flip','hdr_flip'])
+    if row['variant'] in ['B1','B2','B3','B4','B5']:assert row['hdr_flip'] is None and 'raw-HDR exporter' in row['missing_metrics']['hdr_flip']
+    if row['variant'] in ['B6','B7'] and row['scene']!='opaque-room':assert row['gpu_busy_ms'] is None and 'Timing pending' in row['missing_metrics']['gpu_busy_ms']
 for relative,digest in overview['source_hashes'].items():
     assert hashlib.sha256((P/relative).read_bytes()).hexdigest()==digest
 assert 'id="comparison-overview"' in page and 'comparison-overview.json' in page
