@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Basix Pathtracing · RTXPT Next</title><link rel="icon" href="assets/identity.svg?v=b28b9a033d"><link rel="stylesheet" href="assets/shell.css?v=a1788f2ec0e9"><link rel="stylesheet" href="assets/theme.css"><script src="assets/theme.js"></script><script defer src="assets/shell.js?v=a1788f2ec0e9"></script><style>.doc-main{min-width:0}.doc-panel p,.doc-panel li{overflow-wrap:anywhere}.doc-panel h2{scroll-margin-top:var(--doc-header-height,100px)}.doc-table table{min-width:680px}#b1-results .doc-table{margin:18px 0}#b1-results td:first-child,#b1-results th:first-child{white-space:nowrap}.doc-panel pre{overflow:auto}#comparison-overview .doc-table table{min-width:1050px}#comparison-overview .doc-table img{width:150px;max-width:150px;height:auto}#comparison-overview td:last-child{min-width:150px}.integration-map{width:100%;height:auto;background:#f3f6fa;border-radius:12px}.doc-sidebar nav a{line-height:1.4}.doc-panel details{padding:.6rem 0}@media print{section{content-visibility:visible}}</style><link rel="stylesheet" href="assets/visual-math.css"><style data-rtxpt-brand>.doc-overview.doc-banner{display:block;position:relative;background:linear-gradient(90deg,#0b2037f5 0%,#0b2037dd 42%,#0b203722 82%),url('assets/banner.svg') center/cover no-repeat;padding:38px 34px;min-height:250px}.doc-banner h1{font-size:clamp(36px,4.8vw,60px);letter-spacing:-.045em}.doc-banner>p{max-width:620px;font-size:17px}.doc-banner .doc-caption{font-size:12px;letter-spacing:.14em;text-transform:uppercase}.doc-brand img{border-radius:10px}.doc-main>figure{margin:24px 0;overflow-x:auto}.doc-main>figure .integration-map{min-width:720px}.doc-banner+figure figcaption{font-size:13px;color:var(--doc-muted)}@media(max-width:700px){.doc-overview.doc-banner{min-height:210px;padding:24px;background-position:60% center}.doc-banner>p{max-width:90%;font-size:15px}.doc-banner h1{font-size:38px}}</style></head><body><a class="doc-skip" href="#main">Skip to content</a><header class="doc-header"><a class="doc-brand" href="index.html"><img src="assets/identity.svg?v=b28b9a033d" alt=""><span><strong>Basix Pathtracing</strong><small>B0–B10 · Algorithms, evidence and roadmap</small></span></a><nav class="doc-actions" aria-label="Page actions"><a href="evidence/index.html">Evidence</a><button data-doc-back type="button">← Back</button><a href="#main">↑ Top</a></nav><label class="doc-search">Search all study docs<input data-doc-search type="search" placeholder="Papers, roadmap, audit, scene compatibility…"></label></header><div class="doc-layout"><aside class="doc-sidebar" aria-label="Study navigation"><h2 class="doc-nav-title">Research and implementation plan</h2><div class="doc-nav-scroll" tabindex="0"><nav aria-label="On this page"><a href="#readme">01 · Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap</a><a href="#comparison-overview">02 · B0–B10 comparison overview</a><a href="#native-matrix-results">03 · Native comparison completion: B2, B3 and B5</a><a href="#finite-shift-guard">04 · Finite rejected-shift targets: ReSTIR PT scene fix</a><a href="#gbuffer-precision">05 · GBuffer material precision: controlled DI brightness test</a><a href="#di-reuse-isolation">06 · DI reuse isolation: initial, temporal and spatial stages</a><a href="#prefix-throughput">07 · Prefix-throughput clamp: calibrated negative result</a><a href="#pt-extended-scenes">08 · ReSTIR PT on the original scenes: guarded development</a><a href="#algorithm-variants">09 · Algorithm overview: canonical B0–B10</a><a href="#version-mapping">10 · Canonical B0–B10 variants and legacy result mapping</a><a href="#canonical-native-di-results">11 · Canonical B1/B4: native PT with DI on</a><a href="#registered-room-results">12 · Registered-room comparison: B1, B4, B6 and B7</a><a href="#b8-partition-design">13 · B8: disjoint DI, GI and ReSTIR PT contribution ownership</a><a href="#b8-staged-implementation">14 · B8–B10 staged implementation: contribution split and PT++ gates</a><a href="#b9-results">15 · B9 based on B8: limited PT++ comparison</a><a href="#b10-paired-pilot">16 · B10 development: GPU reciprocal pairs and vector shading</a><a href="#b10-gaussian-pairing">17 · B10 development: Gaussian reciprocal pairing on the GPU</a><a href="#b1-results">18 · Legacy migration report · canonical B2/B5</a><a href="#b2-results">19 · Legacy PT checkpoint · canonical B7</a><a href="#b3-results">20 · Legacy PT++ pilot · B7 ablations</a><a href="#b3-implementation">21 · Legacy limited PT++ activation history</a><a href="#b4-implementation">22 · B10 remaining PT++ gates · legacy filename</a><a href="#nvidia-whitepapers">23 · NVIDIA engineering whitepapers: implications for RTXPT Next</a><a href="#b2-implementation">24 · Legacy PT foundation · B6/B7</a><a href="#roadmap">25 · Roadmap: canonical B0–B10</a><a href="#benchmark-versions">26 · Version comparison protocol for Basix Pathtracing / RTXPT_Next</a><a href="#quality-metrics">27 · Image quality and temporal stability measurement plan</a><a href="#ptpp-audit">28 · PT++ implementation audit of the RTXDI 3.1 reference</a><a href="#architecture">29 · Architecture and exact baseline pins</a><a href="#rtxdi-vs-rtxpt">30 · RTXDI versus RTXPT: dependency and renderer comparison</a><a href="#scene-compatibility">31 · Scene compatibility: RTXDI3.1 and RTXPT1.9</a><a href="#focused-a">32 · Focused paper notes: RTXPT 1.9 baseline and staged RTXDI 3.1 adoption</a><a href="#focused-b">33 · Geometry, disocclusion and bidirectional research notes</a><a href="#paper-catalog">34 · Recent20-paper catalog</a><a href="#breadth">35 · Wyman recent-paper breadth review</a><a href="#validation">36 · Validation and benchmark plan</a><a href="#sources-and-rights">37 · Source provenance and reuse terms</a><a href="#research-map">38 · Research map and scope</a><a href="#source-records">39 · Source records</a></nav></div></aside><main id="main" class="doc-main"><div class="doc-overview doc-banner"><p class="doc-caption">Canonical B0–B10 configurations · checked2026-10-29</p><h1>RTXPT Next</h1><p>B0 preserves RTXPT v1.9. B1–B5 compare native PT with DI/GI3.0 and3.1; B6–B8 add ReSTIR PT; B9–B10 target limited and full PT++. Implementation status and legacy result mappings are explicit.</p><figure tabindex="0" role="region" aria-label="Integration dependency map; scroll horizontally on narrow screens"><img class="integration-map" src="assets/integration-map.svg" alt="Canonical experiment groups B0 through B10; see the table for activation and validation status."><figcaption>Canonical groups: original reference; native PT with DI/GI; ReSTIR PT; then PT++. B8–B10 require validated PT/GI contribution sharing.</figcaption></figure></div><div class="doc-results" hidden role="status"></div><section class="doc-panel" id="readme"><h2 id="readme-heading-1">Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap</h2>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Basix Pathtracing · RTXPT Next</title><link rel="icon" href="assets/identity.svg?v=b28b9a033d"><link rel="stylesheet" href="assets/shell.css?v=a1788f2ec0e9"><link rel="stylesheet" href="assets/theme.css"><script src="assets/theme.js"></script><script defer src="assets/shell.js?v=a1788f2ec0e9"></script><style>.doc-main{min-width:0}.doc-panel p,.doc-panel li{overflow-wrap:anywhere}.doc-panel h2{scroll-margin-top:var(--doc-header-height,100px)}.doc-table table{min-width:680px}#b1-results .doc-table{margin:18px 0}#b1-results td:first-child,#b1-results th:first-child{white-space:nowrap}.doc-panel pre{overflow:auto}#comparison-overview .doc-table table{min-width:1050px}#comparison-overview .doc-table img{width:150px;max-width:150px;height:auto}#comparison-overview td:last-child{min-width:150px}.integration-map{width:100%;height:auto;background:#f3f6fa;border-radius:12px}.doc-sidebar nav a{line-height:1.4}.doc-panel details{padding:.6rem 0}@media print{section{content-visibility:visible}}</style><link rel="stylesheet" href="assets/visual-math.css"><style data-rtxpt-brand>.doc-overview.doc-banner{display:block;position:relative;background:linear-gradient(90deg,#0b2037f5 0%,#0b2037dd 42%,#0b203722 82%),url('assets/banner.svg') center/cover no-repeat;padding:38px 34px;min-height:250px}.doc-banner h1{font-size:clamp(36px,4.8vw,60px);letter-spacing:-.045em}.doc-banner>p{max-width:620px;font-size:17px}.doc-banner .doc-caption{font-size:12px;letter-spacing:.14em;text-transform:uppercase}.doc-brand img{border-radius:10px}.doc-main>figure{margin:24px 0;overflow-x:auto}.doc-main>figure .integration-map{min-width:720px}.doc-banner+figure figcaption{font-size:13px;color:var(--doc-muted)}@media(max-width:700px){.doc-overview.doc-banner{min-height:210px;padding:24px;background-position:60% center}.doc-banner>p{max-width:90%;font-size:15px}.doc-banner h1{font-size:38px}}</style></head><body><a class="doc-skip" href="#main">Skip to content</a><header class="doc-header"><a class="doc-brand" href="index.html"><img src="assets/identity.svg?v=b28b9a033d" alt=""><span><strong>Basix Pathtracing</strong><small>B0–B10 · Algorithms, evidence and roadmap</small></span></a><nav class="doc-actions" aria-label="Page actions"><a href="evidence/index.html">Evidence</a><button data-doc-back type="button">← Back</button><a href="#main">↑ Top</a></nav><label class="doc-search">Search all study docs<input data-doc-search type="search" placeholder="Papers, roadmap, audit, scene compatibility…"></label></header><div class="doc-layout"><aside class="doc-sidebar" aria-label="Study navigation"><h2 class="doc-nav-title">Research and implementation plan</h2><div class="doc-nav-scroll" tabindex="0"><nav aria-label="On this page"><a href="#readme">01 · Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap</a><a href="#comparison-overview">02 · B0–B16 and sampling-variant comparison overview</a><a href="#native-matrix-results">03 · Native comparison completion: B2, B3 and B5</a><a href="#finite-shift-guard">04 · Finite rejected-shift targets: ReSTIR PT scene fix</a><a href="#gbuffer-precision">05 · GBuffer material precision: controlled DI brightness test</a><a href="#di-reuse-isolation">06 · DI reuse isolation: initial, temporal and spatial stages</a><a href="#prefix-throughput">07 · Prefix-throughput clamp: calibrated negative result</a><a href="#pt-extended-scenes">08 · ReSTIR PT on the original scenes: guarded development</a><a href="#algorithm-variants">09 · Algorithm overview: canonical B0–B16 and sampling variants</a><a href="#version-mapping">10 · Canonical B0–B16 and sampling variants variants and legacy result mapping</a><a href="#canonical-native-di-results">11 · Canonical B1/B4: native PT with DI on</a><a href="#registered-room-results">12 · Registered-room comparison: B1, B4, B6 and B7</a><a href="#b8-partition-design">13 · B8: disjoint DI, GI and ReSTIR PT contribution ownership</a><a href="#b8-staged-implementation">14 · B8–B10 staged implementation: contribution split and PT++ gates</a><a href="#b9-results">15 · B9 based on B8: limited PT++ comparison</a><a href="#b10-paired-pilot">16 · B10 development: GPU reciprocal pairs and vector shading</a><a href="#b10-gaussian-pairing">17 · B10 development: Gaussian reciprocal pairing on the GPU</a><a href="#b10-queue-history">18 · B10 development: replay queue history validation</a><a href="#b11-integration">19 · B11 integration: compatibility-guided neighbor selection</a><a href="#b1-results">20 · Legacy migration report · canonical B2/B5</a><a href="#b2-results">21 · Legacy PT checkpoint · canonical B7</a><a href="#b3-results">22 · Legacy PT++ pilot · B7 ablations</a><a href="#b3-implementation">23 · Legacy limited PT++ activation history</a><a href="#b4-implementation">24 · B10 remaining PT++ gates · legacy filename</a><a href="#nvidia-whitepapers">25 · NVIDIA engineering whitepapers: implications for RTXPT Next</a><a href="#b2-implementation">26 · Legacy PT foundation · B6/B7</a><a href="#roadmap">27 · Roadmap: canonical B0–B16 and B10 sampling variants</a><a href="#benchmark-versions">28 · Version comparison protocol for Basix Pathtracing / RTXPT_Next</a><a href="#quality-metrics">29 · Image quality and temporal stability measurement plan</a><a href="#ptpp-audit">30 · PT++ implementation audit of the RTXDI 3.1 reference</a><a href="#architecture">31 · Architecture and exact baseline pins</a><a href="#rtxdi-vs-rtxpt">32 · RTXDI versus RTXPT: dependency and renderer comparison</a><a href="#scene-compatibility">33 · Scene compatibility: RTXDI3.1 and RTXPT1.9</a><a href="#focused-a">34 · Focused paper notes: RTXPT 1.9 baseline and staged RTXDI 3.1 adoption</a><a href="#focused-b">35 · Geometry, disocclusion and bidirectional research notes</a><a href="#paper-catalog">36 · Recent20-paper catalog</a><a href="#breadth">37 · Wyman recent-paper breadth review</a><a href="#validation">38 · Validation and benchmark plan</a><a href="#sources-and-rights">39 · Source provenance and reuse terms</a><a href="#research-map">40 · Research map and scope</a><a href="#source-records">41 · Source records</a></nav></div></aside><main id="main" class="doc-main"><div class="doc-overview doc-banner"><p class="doc-caption">Canonical B0–B10 configurations · checked2026-10-29</p><h1>RTXPT Next</h1><p>B0 preserves RTXPT v1.9. B1–B5 compare native PT with DI/GI3.0 and3.1; B6–B8 add ReSTIR PT; B9–B10 target limited and full PT++. Implementation status and legacy result mappings are explicit.</p><figure tabindex="0" role="region" aria-label="Integration dependency map; scroll horizontally on narrow screens"><img class="integration-map" src="assets/integration-map.svg" alt="Canonical experiment groups B0 through B10; see the table for activation and validation status."><figcaption>Canonical groups: original reference; native PT with DI/GI; ReSTIR PT; then PT++. B8–B10 require validated PT/GI contribution sharing.</figcaption></figure></div><div class="doc-results" hidden role="status"></div><section class="doc-panel" id="readme"><h2 id="readme-heading-1">Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap</h2>
 <p><strong>Current work:</strong> <a href="#b9-results">B9 based on B8</a> now has eight GPU diagnostic cases,18three-seed64-frame quality sequences and18uncapped timing runs. Room footprint+roulette is slower with higher measured error; original-scene roulette-only ablations reduce GPU busy with mixed quality. Original-scene footprint and brightness work remain pending.</p>
 <p><a href="#b10-gaussian-pairing">B10 Gaussian GPU pairing and extended scene checks</a>: full-resolution pictures, quality tradeoffs and18cap-verified adjacent/Gaussian timing runs; replay compaction remains next.</p>
 <p><a href="#b10-paired-pilot">B10 GPU paired/vector pilot</a>: reciprocal shared shifts, separate vector shading and three-scene development evidence. Full PT++ remains pending.</p>
@@ -106,14 +106,82 @@
 <p>Current scoped measurements: <a href="#registered-room-results">registered-room B1/B4/B6/B7 comparison</a> includes30quality captures,12timing processes and explicit history settling; <a href="#canonical-native-di-results">native original-scene report</a> now includes12accepted timing processes. B6/B7 original-scene support and B8–B10 remain pending.</p>
 <p>Current native coverage: <a href="#native-matrix-results">fresh B2/B3/B5 original-scene and room results</a> adds27quality captures and27cap-verified timing processes. <a href="#comparison-overview">The unified B0–B10 overview</a> includes all versions, current metrics and representative pictures; historical cohorts remain separate.</p>
 <p>Fresh requested control: <a href="#native-matrix-results">RTXPT1.9 PT-only override</a> now has9cap-verified timing processes and9PNG captures across Room and original Convergence/Kitchen. Native PT/NEE on, DI/GI off; original B0 defaults remain preserved. HDR export is unsupported in that unchanged binary.</p>
-</section><section class="doc-panel" id="comparison-overview"><h2 id="comparison-overview-heading-1">B0–B10 comparison overview</h2>
+<h3 id="readme-heading-5">Cumulative roadmap extension</h3>
+<p>| <strong>B10</strong> | Full PT++ | Complete the remaining paper mechanisms and validation; current pilots remain partial. |
+| <strong>B10.75</strong> | B10 at0.75average spp | RTXPT1.9 native sub-sampling mode1; ReSTIR integration pending. |
+| <strong>B10.50</strong> | B10 at0.5average spp | RTXPT1.9 native sub-sampling mode2; ReSTIR integration pending. |
+| <strong>B10.25</strong> | B10 at0.25average spp | RTXPT1.9 native sub-sampling mode3; ReSTIR integration pending. |
+| <strong>B11</strong> | B10 + Compatibility-Guided Neighbor Selection active | Explicit activation and validated neighbor selection required. |
+| <strong>B12</strong> | B11 + Stochastic Pairwise MIS | Validate combined selection probabilities, support and weights. |
+| <strong>B13</strong> | B12 + ReSTIR LoD | Geometry correspondence and forward/inverse Jacobians required. |
+| <strong>B14</strong> | B13 + ReSTIR BDPT with LW version | LW configuration scope and combined transport ownership to be specified. |
+| <strong>B15</strong> | B14 + ReSTIR PG | Guiding proposal, training cost and replay consistency required. |
+| <strong>B16</strong> | B15 + Multi-Layer Reservoir Splatting | Layer/visibility ownership and splat accumulation required. |</p>
+<p>RTXPT1.9 already supplies the sub-sampling mechanism. Sparse B10/ReSTIR integration and activation remain pending; B10 thenB11 are the current implementation priority.</p>
+<p><a href="#b10-queue-history">B10 queue-history checkpoint</a> · <a href="#b11-integration">B11 integration requirements</a> — partial development; no new speedup claim.</p>
+</section><section class="doc-panel" id="comparison-overview"><h2 id="comparison-overview-heading-1">B0–B16 and sampling-variant comparison overview</h2>
 <p><strong>Current implementation status:</strong> The opt-in one-neighbor spatial replay queue now passes11captured-frame GPU oracles, including Convergence244654replays and Kitchen41032replays. Every packed-history word and vector-radiance bit matches its same-frame direct control. Native and direct-pair queue-disabled regressions pass. Queue performance, queue-only temporal-history sequences and full B10 acceptance remain pending. <a href="#b10-gaussian-pairing">Detailed queue checkpoint</a>.</p>
-<p>All eleven canonical versions appear below for each required scene. <strong>The latest measured checkpoints now appear directly under B0 and B10 in these tables.</strong> B10 Gaussian timing, Gaussian quality and replay-queue validation have separate rows because they are different acquisitions. <strong>Not measured means unavailable, never zero.</strong> B0 remains the unchanged RTXPT1.9 reference; its PT-only control is explicitly labelled as an override.</p>
+<p>All 20 registered variants appear below for each required scene. <strong>The latest measured checkpoints now appear directly under B0 and B10 in these tables.</strong> B10 Gaussian timing, Gaussian quality and replay-queue validation have separate rows because they are different acquisitions. <strong>Not measured means unavailable, never zero.</strong> B0 remains the unchanged RTXPT1.9 reference; its PT-only control is explicitly labelled as an override.</p>
 <p>GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Rows from different cohorts are descriptive: settings and sampling policies must be checked before computing a relative gain. Known app/NVIDIA/RTSS cap boundaries were verified for accepted current timing cohorts; unknown external limiters and background load remain limitations.</p>
 <p><a href="comparison-overview.json">Machine-readable overview</a> · <a href="#version-mapping">Algorithm definitions and identities</a> · <a href="#benchmark-versions">Benchmark protocol</a></p>
-<h3 id="comparison-overview-heading-2">Controlled room — registered environment</h3>
+<h3 id="comparison-overview-heading-2">Latest B10 queue-history validation — partial development</h3>
+<p>Five static GPU cases compare272frames with actual queued output retained as history. Packed reservoir and RGB scheduling mismatches/overflow are zero; an injected early failure is rejected after a clean final frame. This is not full PT++, a quality improvement or a new timing result. B11 active CGNS remains pending. <a href="#b10-queue-history">Detailed evidence and remaining work</a> · <a href="#b11-integration">B11 integration requirements</a>.</p>
+<div class="doc-table" tabindex="0" role="region" aria-label="B0–B16 and sampling-variant comparison overview table"><table>
+<thead>
+<tr>
+<th>Case</th>
+<th align="right">Resolution</th>
+<th align="right">Compared frames</th>
+<th align="right">Reservoir / RGB mismatches</th>
+<th align="right">Overflow</th>
+<th>Diagnostic picture</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>room-adjacent64</td>
+<td align="right">177×91</td>
+<td align="right">64</td>
+<td align="right">0 / 0</td>
+<td align="right">0</td>
+<td><a href="assets/b10-history/room-adjacent64.png"><img src="assets/b10-history/room-adjacent64.png" width="140" alt="room-adjacent64 queue-history diagnostic, not full B10"></a></td>
+</tr>
+<tr>
+<td>room-gaussian64</td>
+<td align="right">177×91</td>
+<td align="right">64</td>
+<td align="right">0 / 0</td>
+<td align="right">0</td>
+<td><a href="assets/b10-history/room-gaussian64.png"><img src="assets/b10-history/room-gaussian64.png" width="140" alt="room-gaussian64 queue-history diagnostic, not full B10"></a></td>
+</tr>
+<tr>
+<td>room-thin16</td>
+<td align="right">176×1</td>
+<td align="right">16</td>
+<td align="right">0 / 0</td>
+<td align="right">0</td>
+<td><a href="assets/b10-history/room-thin16.png"><img src="assets/b10-history/room-thin16.png" width="140" alt="room-thin16 queue-history diagnostic, not full B10"></a></td>
+</tr>
+<tr>
+<td>convergence64</td>
+<td align="right">1280×720</td>
+<td align="right">64</td>
+<td align="right">0 / 0</td>
+<td align="right">0</td>
+<td><a href="assets/b10-history/convergence64.png"><img src="assets/b10-history/convergence64.png" width="140" alt="convergence64 queue-history diagnostic, not full B10"></a></td>
+</tr>
+<tr>
+<td>kitchen64</td>
+<td align="right">1280×720</td>
+<td align="right">64</td>
+<td align="right">0 / 0</td>
+<td align="right">0</td>
+<td><a href="assets/b10-history/kitchen64.png"><img src="assets/b10-history/kitchen64.png" width="140" alt="kitchen64 queue-history diagnostic, not full B10"></a></td>
+</tr>
+</tbody></table></div>
+<p>Pictures are final-frame scheduling diagnostics, not matched B10/B11 quality comparisons. Original-scene mid-path footprint and brightness investigation remain open. Driver-cap clearance is not asserted for these diagnostic captures.</p>
+<h3 id="comparison-overview-heading-3">Controlled room — registered environment</h3>
 <p>Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.scene.json. B8 development pictures and new checkpoint rows explicitly use4/4; the queue snapshot is176x90. This is a distinct fixture from the legacy no-environment room. Native controls retain their DI/MIS policies; B6/B7 use their documented PT/strict-DI policies.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B0–B10 comparison overview table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="B0–B16 and sampling-variant comparison overview table"><table>
 <thead>
 <tr>
 <th>Version</th>
@@ -296,6 +364,87 @@
 <td><a href="assets/b10-queue/opaque-room.png"><img src="assets/b10-queue/opaque-room.png" alt="B10 · Replay queue opaque-room"></a></td>
 <td><a href="#b10-gaussian-pairing">Exact snapshot: 176x90, cap4/4, 0 replays,0 mismatches. Timing/quality scores pending.</a></td>
 </tr>
+<tr>
+<td><strong>B10.75</strong></td>
+<td>B10 full PT++ at0.75average spp</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B10.50</strong></td>
+<td>B10 full PT++ at0.5average spp</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B10.25</strong></td>
+<td>B10 full PT++ at0.25average spp</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B11</strong></td>
+<td>B10 + Compatibility-Guided Neighbor Selection active</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B12</strong></td>
+<td>B11 + Stochastic Pairwise MIS</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B13</strong></td>
+<td>B12 + ReSTIR LoD</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B14</strong></td>
+<td>B13 + ReSTIR BDPT with LW version</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B15</strong></td>
+<td>B14 + ReSTIR PG</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B16</strong></td>
+<td>B15 + Multi-Layer Reservoir Splatting</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
 </tbody></table></div>
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -311,12 +460,21 @@
 <li><strong>B8:</strong> NVIDIA non-directional GI reuse: 640x360 cap4/4,64-frame static quality measured; mixed results. Scoped timing is shown separately when available; no canonical promotion.</li>
 <li><strong>B9:</strong> Eight GPU diagnostics passed; 640x360 cap4/4 snapshot shown. Three-seed64-frame quality and uncapped timing in progress. Original-scene footprint remains unsupported; no promotion.</li>
 <li><strong>B10:</strong> Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending. Image is 640x360 development coverage, not an accepted matched benchmark.</li>
+<li><strong>B10.75:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B10.50:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B10.25:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B11:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B12:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B13:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B14:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B15:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B16:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
 </ul>
 </details>
 
-<h3 id="comparison-overview-heading-3">Original Convergence</h3>
+<h3 id="comparison-overview-heading-4">Original Convergence</h3>
 <p>1280×720,1spp,14/2 bounce limits, exposure0. Original materials and camera preserved.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B0–B10 comparison overview table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="B0–B16 and sampling-variant comparison overview table"><table>
 <thead>
 <tr>
 <th>Version</th>
@@ -499,6 +657,87 @@
 <td><a href="assets/b10-queue/convergence.png"><img src="assets/b10-queue/convergence.png" alt="B10 · Replay queue convergence"></a></td>
 <td><a href="#b10-gaussian-pairing">Exact snapshot: 1280x720, cap14/2, 244654 replays,0 mismatches. Timing/quality scores pending.</a></td>
 </tr>
+<tr>
+<td><strong>B10.75</strong></td>
+<td>B10 full PT++ at0.75average spp</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B10.50</strong></td>
+<td>B10 full PT++ at0.5average spp</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B10.25</strong></td>
+<td>B10 full PT++ at0.25average spp</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B11</strong></td>
+<td>B10 + Compatibility-Guided Neighbor Selection active</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B12</strong></td>
+<td>B11 + Stochastic Pairwise MIS</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B13</strong></td>
+<td>B12 + ReSTIR LoD</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B14</strong></td>
+<td>B13 + ReSTIR BDPT with LW version</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B15</strong></td>
+<td>B14 + ReSTIR PG</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B16</strong></td>
+<td>B15 + Multi-Layer Reservoir Splatting</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
 </tbody></table></div>
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -514,12 +753,21 @@
 <li><strong>B8:</strong> NVIDIA non-directional GI reuse: 1280x720 cap14/2,64-frame static quality measured; mixed results. Scoped timing is shown separately when available; no canonical promotion.</li>
 <li><strong>B9:</strong> Eight GPU diagnostics passed; 1280x720 cap14/2 snapshot shown. Three-seed64-frame quality and uncapped timing in progress. Original-scene footprint remains unsupported; no promotion.</li>
 <li><strong>B10:</strong> Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending. Image is 1280x720 development coverage, not an accepted matched benchmark.</li>
+<li><strong>B10.75:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B10.50:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B10.25:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B11:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B12:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B13:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B14:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B15:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B16:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
 </ul>
 </details>
 
-<h3 id="comparison-overview-heading-4">Original Kitchen</h3>
+<h3 id="comparison-overview-heading-5">Original Kitchen</h3>
 <p>1280×720,1spp,14/2 bounce limits, exposure2. Original materials and camera preserved.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B0–B10 comparison overview table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="B0–B16 and sampling-variant comparison overview table"><table>
 <thead>
 <tr>
 <th>Version</th>
@@ -702,6 +950,87 @@
 <td><a href="assets/b10-queue/kitchen.png"><img src="assets/b10-queue/kitchen.png" alt="B10 · Replay queue kitchen"></a></td>
 <td><a href="#b10-gaussian-pairing">Exact snapshot: 1280x720, cap14/2, 41032 replays,0 mismatches. Timing/quality scores pending.</a></td>
 </tr>
+<tr>
+<td><strong>B10.75</strong></td>
+<td>B10 full PT++ at0.75average spp</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B10.50</strong></td>
+<td>B10 full PT++ at0.5average spp</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B10.25</strong></td>
+<td>B10 full PT++ at0.25average spp</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B11</strong></td>
+<td>B10 + Compatibility-Guided Neighbor Selection active</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B12</strong></td>
+<td>B11 + Stochastic Pairwise MIS</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B13</strong></td>
+<td>B12 + ReSTIR LoD</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B14</strong></td>
+<td>B13 + ReSTIR BDPT with LW version</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B15</strong></td>
+<td>B14 + ReSTIR PG</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
+<tr>
+<td><strong>B16</strong></td>
+<td>B15 + Multi-Layer Reservoir Splatting</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td align="right">Unavailable</td>
+<td>No eligible capture</td>
+<td><a href="#version-mapping">pending</a></td>
+</tr>
 </tbody></table></div>
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -717,13 +1046,22 @@
 <li><strong>B8:</strong> NVIDIA non-directional GI reuse: 1280x720 cap14/2,64-frame static quality measured; mixed results. Scoped timing is shown separately when available; no canonical promotion.</li>
 <li><strong>B9:</strong> Eight GPU diagnostics passed; 1280x720 cap14/2 snapshot shown. Three-seed64-frame quality and uncapped timing in progress. Original-scene footprint remains unsupported; no promotion.</li>
 <li><strong>B10:</strong> Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending. Image is 1280x720 development coverage, not an accepted matched benchmark.</li>
+<li><strong>B10.75:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B10.50:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B10.25:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B11:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B12:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B13:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B14:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B15:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
+<li><strong>B16:</strong> User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.</li>
 </ul>
 </details>
 
 <p>† Original-scene B6/B7 quality uses five explicit seeds and new matched MIP0 references after the finite-MIS-target fix. This differs from retained native timing/quality cohorts; it is not a new throughput result or unrestricted scene acceptance. Native startup intermittency and the smaller DI-enabled residual remain. See the <a href="#finite-shift-guard">scene-fix follow-up</a>.</p>
-<h3 id="comparison-overview-heading-5">Historical observations — different cohorts</h3>
+<h3 id="comparison-overview-heading-6">Historical observations — different cohorts</h3>
 <p>These retained measurements remain useful context, but are excluded from the current tables’ numeric columns. Their settings, scene identity or cap evidence differ. Historical images are available through the linked reports; they are not substitutes for missing current captures.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B0–B10 comparison overview table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="B0–B16 and sampling-variant comparison overview table"><table>
 <thead>
 <tr>
 <th>Canonical interpretation</th>
@@ -783,11 +1121,11 @@
 <td><a href="#b2-results">Earlier checkpoint</a></td>
 </tr>
 </tbody></table></div>
-<h3 id="comparison-overview-heading-6">Quality detail and convergence coverage</h3>
+<h3 id="comparison-overview-heading-7">Quality detail and convergence coverage</h3>
 <p>The JSON includes display MSE, available linear MSE and CPU cadence alongside each current result. <a href="#registered-room-results">Registered-room history curves and finite-reference checks</a> cover B6/B7 at1,8,32,64 warm-up frames and three explicit seeds. These are separate1spp history-settling snapshots, not accumulated-spp convergence or time-to-equal-quality. Native captures use three process restarts without verified independent seeds. Original-scene native quality uses finite4096spp references; the room uses a separate finite8192spp native reference with discrepancy checks. HDR-FLIP is unavailable for native original-shader controls.</p>
-<h3 id="comparison-overview-heading-7">B10 Gaussian development — separate quality cohorts</h3>
+<h3 id="comparison-overview-heading-8">B10 Gaussian development — separate quality cohorts</h3>
 <p>The room comparison uses one64-frame sequence per policy at640x360, cap4/4, one spatial neighbor and GI initial only. Original-scene rows are one1280x720 image each, original14/2 budgets, eight warm-up frames and spatial-only PT. These values do not replace or rank against the main accepted cohorts. <a href="#b10-gaussian-pairing">Full report and actual algorithm scope</a>.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B0–B10 comparison overview table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="B0–B16 and sampling-variant comparison overview table"><table>
 <thead>
 <tr>
 <th>Case</th>
@@ -827,15 +1165,15 @@
 </tr>
 </tbody></table></div>
 <p>Gaussian room MSE increases about4.7% while FLIP decreases slightly. This mixed result is not promoted. Pairing timings and spatial-queue snapshot checks are now shown in the scene tables above; full GI reuse, simultaneous multi-neighbor reuse, queue timing and full-history acceptance remain pending.</p>
-<h3 id="comparison-overview-heading-8">Summary and lessons learned</h3>
+<h3 id="comparison-overview-heading-9">Summary and lessons learned</h3>
 <p>The current registered-room comparison shows B7 costing19.4%more process GPU busy than B4 while lowering LDR-FLIP by45.1%. Original Convergence/Kitchen B1/B4 timing changes are below1%; they do not demonstrate a general speedup. B6/B7 now have corrected original-resolution five-seed quality evidence; native startup stability and new throughput remain pending. B8 now has NVIDIA GI temporal/spatial reuse with14scoped GPU checks; quality/timing are in progress. Earlier limited PT++ ablations retain their initial-only GI scope. Their176x90 illustrations are explicitly development-only; B10 now has Gaussian table GPU development with extended-resolution pictures; full GI reuse, remaining PT++ mechanisms and accepted extended measurements remain pending.</p>
-<h3 id="comparison-overview-heading-9">Changes</h3>
+<h3 id="comparison-overview-heading-10">Changes</h3>
 <ul>
 <li>2026-10-29: Added one generated overview with all33 version/scene rows, explicit missing coverage, representative images and retained historical cohort links.</li>
 </ul>
-<h3 id="comparison-overview-heading-10">Material precision ablation — defaults unchanged</h3>
+<h3 id="comparison-overview-heading-11">Material precision ablation — defaults unchanged</h3>
 <p>A separate matched five-seed experiment compares legacy material truncation with opt-in half-up rounding for B4/B7. These quality-only rows do not replace canonical results or supply throughput. Full settings, uncertainty and limitations: <a href="#gbuffer-precision">precision follow-up</a>.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B0–B10 comparison overview table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="B0–B16 and sampling-variant comparison overview table"><table>
 <thead>
 <tr>
 <th>Scene / variant</th>
@@ -875,9 +1213,9 @@
 </tr>
 </tbody></table></div>
 <p>Signed Y uses raw linear HDR against the same finite reference, without brightness normalization. The full report includes sample standard errors, LDR-FLIP and all per-seed data. No general energy-preservation or unbiasedness claim.</p>
-<h3 id="comparison-overview-heading-11">DI reuse isolation — renderer unchanged</h3>
+<h3 id="comparison-overview-heading-12">DI reuse isolation — renderer unchanged</h3>
 <p>A separate fixed-1spp five-seed study compares initial-only, temporal-only, spatial-only and combined DI within B4/B7. Material rounding remains off. These are quality-only ablations, not replacements for canonical timings. <a href="#di-reuse-isolation">Full settings, uncertainty, contrasts and pictures</a>.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B0–B10 comparison overview table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="B0–B16 and sampling-variant comparison overview table"><table>
 <thead>
 <tr>
 <th>Scene / variant</th>
@@ -922,9 +1260,9 @@
 </tr>
 </tbody></table></div>
 <p>All four modes keep DI active. Mode0 disables temporal/spatial reuse, not initial RIS or final DI shading. Signed Y uses the same raw-HDR finite references; it is not brightness-normalized. Full HDR/LDR-FLIP results and sample standard errors are in the linked report.</p>
-<h3 id="comparison-overview-heading-12">Prefix-throughput diagnostic — no quality gain claimed</h3>
+<h3 id="comparison-overview-heading-13">Prefix-throughput diagnostic — no quality gain claimed</h3>
 <p>A calibrated diagnostic found zero packed prefix pixels above one in eight physical snapshots. Omitted legacy default and preserve-above-one arrays were identical in the four observed pairs. This does not explain the sampled brightness discrepancy. The synthetic positive control is excluded from physical images and quality/performance claims. <a href="#prefix-throughput">Scope, calibration and pictures</a>.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B0–B10 comparison overview table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="B0–B16 and sampling-variant comparison overview table"><table>
 <thead>
 <tr>
 <th>Scene / variant</th>
@@ -959,9 +1297,9 @@
 </tr>
 </tbody></table></div>
 <p>One seed and final-frame packed weights only; not a raw-float range proof, unbiasedness result or throughput benchmark. The legacy clamp remains default.</p>
-<h3 id="comparison-overview-heading-13">Paired development timing — adjacent versus Gaussian</h3>
+<h3 id="comparison-overview-heading-14">Paired development timing — adjacent versus Gaussian</h3>
 <p>Three process repetitions per policy/scene,45s warmup plus30s capture, no image writes. Source/executable/682shader-cache identities stayed frozen; app/NVIDIA/RTSS cap checks and driver restoration passed. One spatial neighbor, DI initial and GI initial only; this is not full B10. GPU busy is process engine activity, not renderer FPS. Small differences remain exploratory. <a href="#b10-gaussian-pairing">Quality, images, uncertainty and full scope</a>.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B0–B10 comparison overview table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="B0–B16 and sampling-variant comparison overview table"><table>
 <thead>
 <tr>
 <th>Scene</th>
@@ -989,9 +1327,9 @@
 <td align="right">-2.14%</td>
 </tr>
 </tbody></table></div>
-<h3 id="comparison-overview-heading-14">Fresh B0 PT-only override — separate from original defaults</h3>
+<h3 id="comparison-overview-heading-15">Fresh B0 PT-only override — separate from original defaults</h3>
 <p>Preserved RTXPT1.9/runtime3.0 with native PT and NEE; ReSTIR DI/GI/PT off. Three quality process restarts and three cap-verified timing runs per scene. Original scenes1280x720,14/2; room640x360,4/4, distinct from the earlier3/3 native-room cohort. Native MIS/filter policies remain unchanged. HDR metrics are unavailable because this preserved binary has no raw-HDR exporter. <a href="#native-matrix-results">Report and evidence</a>.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="B0–B10 comparison overview table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="B0–B16 and sampling-variant comparison overview table"><table>
 <thead>
 <tr>
 <th>Scene</th>
@@ -2028,9 +2366,9 @@
 <ul>
 <li>2026-10-29: Added guarded original-scene transport fixes, path-local regression diagnostics, reduced-resolution quality cohorts and original-resolution development pictures.</li>
 </ul>
-</section><section class="doc-panel" id="algorithm-variants"><h2 id="algorithm-variants-heading-1">Algorithm overview: canonical B0–B10</h2>
+</section><section class="doc-panel" id="algorithm-variants"><h2 id="algorithm-variants-heading-1">Algorithm overview: canonical B0–B16 and sampling variants</h2>
 <p><strong>Current numbering:</strong> use <a href="#version-mapping">the canonical mapping and legacy crosswalk</a>. B0 retains unchanged RTXPT 1.9 defaults and pins; it is not defined by the raw native-only control.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="Algorithm overview: canonical B0–B10 table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Algorithm overview: canonical B0–B16 and sampling variants table"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2096,11 +2434,73 @@
 </tbody></table></div>
 <p>B1/B4 native-DI comparisons are measured on original scenes and the registered room; B6/B7 room timing and history sweeps are also measured. The 0.803 ms control is a B0 native-control raw preset, separate from original defaults; the 0.806 ms migrated native control is B3 with DI/GI off. The old-B2 checkpoint <code>de9fe651</code> maps to B7. The old-B3 pilot <code>a7428c8</code> maps to B7 plus limited ablations, <strong>not B9</strong>. Stored refs/data IDs and numbers are preserved.</p>
 <p>The original ReSTIR PT paper&#39;s §9.3 adjusted sample counts for approximately equal time; the current fixed-1spp room pilot is not that comparison. Keep equal-time/quality sweeps pending until measured. Existing runtime PT++ mechanisms are inherited, not newly counted as B9 gains.</p>
-<h3 id="algorithm-variants-heading-2">Legacy numbering appendix</h3>
+<h3 id="algorithm-variants-heading-2">Extended roadmap and sampling branches</h3>
+<p>Confirmed2026-10-30; B0–B9 and legacy evidence IDs remain unchanged. Future variants remain unmeasured until implemented and exercised.</p>
+<div class="doc-table" tabindex="0" role="region" aria-label="Algorithm overview: canonical B0–B16 and sampling variants table"><table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Configuration</th>
+<th>Current gate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>B10</strong></td>
+<td>Full PT++</td>
+<td>Complete the remaining paper mechanisms and validation; current pilots remain partial.</td>
+</tr>
+<tr>
+<td><strong>B10.75</strong></td>
+<td>B10 at0.75average spp</td>
+<td>RTXPT1.9 native sub-sampling mode1; ReSTIR integration pending.</td>
+</tr>
+<tr>
+<td><strong>B10.50</strong></td>
+<td>B10 at0.5average spp</td>
+<td>RTXPT1.9 native sub-sampling mode2; ReSTIR integration pending.</td>
+</tr>
+<tr>
+<td><strong>B10.25</strong></td>
+<td>B10 at0.25average spp</td>
+<td>RTXPT1.9 native sub-sampling mode3; ReSTIR integration pending.</td>
+</tr>
+<tr>
+<td><strong>B11</strong></td>
+<td>B10 + Compatibility-Guided Neighbor Selection active</td>
+<td>Explicit activation and validated neighbor selection required.</td>
+</tr>
+<tr>
+<td><strong>B12</strong></td>
+<td>B11 + Stochastic Pairwise MIS</td>
+<td>Validate combined selection probabilities, support and weights.</td>
+</tr>
+<tr>
+<td><strong>B13</strong></td>
+<td>B12 + ReSTIR LoD</td>
+<td>Geometry correspondence and forward/inverse Jacobians required.</td>
+</tr>
+<tr>
+<td><strong>B14</strong></td>
+<td>B13 + ReSTIR BDPT with LW version</td>
+<td>LW configuration scope and combined transport ownership to be specified.</td>
+</tr>
+<tr>
+<td><strong>B15</strong></td>
+<td>B14 + ReSTIR PG</td>
+<td>Guiding proposal, training cost and replay consistency required.</td>
+</tr>
+<tr>
+<td><strong>B16</strong></td>
+<td>B15 + Multi-Layer Reservoir Splatting</td>
+<td>Layer/visibility ownership and splat accumulation required.</td>
+</tr>
+</tbody></table></div>
+<p>Fractional rates reuse RTXPT1.9 sub-sampling. Its current ReSTIR guard remains in place until sparse-reservoir/history and weighting integration is validated. <a href="#roadmap">Execution roadmap</a>.</p>
+<h3 id="algorithm-variants-heading-3">Legacy numbering appendix</h3>
 <p>The following retained overview and scene requirements were written under the previous IDs. Interpret every B1–B4 occurrence in this appendix through <a href="#version-mapping">VERSION_MAPPING.md</a>; it is not a second current version definition. Required original-scene identities and missing-coverage statements remain applicable to their mapped algorithms.</p>
 <p>Version identifies the code; the algorithm label identifies the rendering configuration used in a particular result. Always show both. RTXPT supplies the renderer, materials and native path tracer; ReSTIR DI, GI and PT are selectable sampling paths within it.</p>
-<h3 id="algorithm-variants-heading-3">Short variant labels</h3>
-<div class="doc-table" tabindex="0" role="region" aria-label="Algorithm overview: canonical B0–B10 table"><table>
+<h3 id="algorithm-variants-heading-4">Short variant labels</h3>
+<div class="doc-table" tabindex="0" role="region" aria-label="Algorithm overview: canonical B0–B16 and sampling variants table"><table>
 <thead>
 <tr>
 <th>Variant</th>
@@ -2141,10 +2541,10 @@
 </tr>
 </tbody></table></div>
 <p>The short labels describe capabilities, not a promise that all named paths run in every capture. The command-line defaults request DI off and GI on; effective activation also depends on realtime/reconstruction settings. Benchmarks explicitly select and record their modes rather than relying on those defaults. An exact B0/B1 baseline remains distinct from its separately identified benchmark-control adapter.</p>
-<h3 id="algorithm-variants-heading-4">Labels required beside every result</h3>
+<h3 id="algorithm-variants-heading-5">Labels required beside every result</h3>
 <p>Use a compact form such as <strong>B1 · native PT · DI off / GI off</strong>, <strong>B1 · DI + GI</strong>, or <strong>B2 · DI + ReSTIR PT · GI off</strong>. Include reuse modes, bounce limits, resolution, reconstruction/cache state and source/executable identity in the supporting receipt. A single table must not turn an available feature into a claim that it was exercised.</p>
 <p>The current opaque-room table compares B0/B1 native PT against B2 DI + ReSTIR PT. It does not isolate only the runtime migration or compare the same indirect estimator across all versions. The earlier two-scene B0/B1 DI + GI experiment is a separate track, and its historical frame-cap coverage is unverified.</p>
-<h3 id="algorithm-variants-heading-5">Extended comparison coverage</h3>
+<h3 id="algorithm-variants-heading-6">Extended comparison coverage</h3>
 <p>Every new variant&#39;s comparison must include rows for <strong>original Convergence</strong>, <strong>original Kitchen</strong>, and the <strong>owned opaque room</strong>. Preserve pinned assets, original scene materials and camera identity. Run a capability preflight before expensive tests. An unsupported or missing case remains visible with its exact reason and next gate; do not silently substitute opaque materials, a different camera, or a different scene.</p>
 <p>The original B1 comparison identifies Convergence as <code>Assets/convergence-test.scene.json</code> (SHA256 <code>c3afaa933c5084ba04f8e5100b64bb8b488ab312f4042849705a15e5bf5af549</code>, exposure 0) and Kitchen as <code>Assets/kitchen-with-test-stuff.scene.json</code> (SHA256 <code>2af5735fb02fc01badd83671641d54b7f1c69859c8c9bcdf335ca95d9daae552</code>, exposure 2), at 1280×720 and total/diffuse bounce limits 14/2 under Balanced. At the current B2 checkpoint, both original presets are unsupported by its transmission/material gate and binding diffuse-cap restriction. This is a coverage gap, not a measured B2 performance result. A cap3/3 or opaque-only derivative would be a separately labelled diagnostic, not the original-scene comparison.</p>
 <p>For each scene/configuration, report timing, image quality and convergence as separate outcomes:</p>
@@ -2155,9 +2555,9 @@
 <li>Process GPU busy and CPU cadence with repeated runs and tails; renderer memory and temporal/reconstruction coverage when measured. A GPU-busy ratio is not a time-to-equal-quality speedup.</li>
 </ul>
 <p>Keep the old capped-or-unverified historical observations inspectable, but do not pool them with newly cap-verified throughput runs. One successful controlled scene does not satisfy this extended scene matrix.</p>
-<h3 id="algorithm-variants-heading-6">Summary and lessons learned</h3>
+<h3 id="algorithm-variants-heading-7">Summary and lessons learned</h3>
 <p>The version name alone did not explain which estimator ran. The algorithm label and scene-coverage matrix make the comparison assessable: B1 is the dependency migration, B2 adds path reuse, and B3 isolates PT++ changes. Report missing scenes and unmeasured convergence explicitly so a narrow checkpoint cannot be mistaken for general validation.</p>
-<h3 id="algorithm-variants-heading-7">Documentation changes</h3>
+<h3 id="algorithm-variants-heading-8">Documentation changes</h3>
 <ul>
 <li>2026-10-28: Added per-variant algorithm labels and mandatory Convergence/Kitchen/opaque-room coverage for new comparisons.</li>
 </ul>
@@ -2166,10 +2566,10 @@
 <p>Current native coverage: <a href="#native-matrix-results">fresh B2/B3/B5 original-scene and room results</a> adds27quality captures and27cap-verified timing processes. <a href="#comparison-overview">The unified B0–B10 overview</a> includes all versions, current metrics and representative pictures; historical cohorts remain separate.</p>
 <p>Fresh requested control: <a href="#native-matrix-results">RTXPT1.9 PT-only override</a> now has9cap-verified timing processes and9PNG captures across Room and original Convergence/Kitchen. Native PT/NEE on, DI/GI off; original B0 defaults remain preserved. HDR export is unsupported in that unchanged binary.</p>
 <p>Latest scoped checkpoint2026-10-29: <a href="#b10-gaussian-pairing">one-neighbor spatial replay queue</a> passes11captured-frame exact GPU oracles and2queue-disabled regressions. Queue timing, full multi-frame histories, temporal queues, simultaneous multi-neighbor reuse and remaining B10 mechanisms are pending. No full PT++ or speedup claim.</p>
-</section><section class="doc-panel" id="version-mapping"><h2 id="version-mapping-heading-1">Canonical B0–B10 variants and legacy result mapping</h2>
+</section><section class="doc-panel" id="version-mapping"><h2 id="version-mapping-heading-1">Canonical B0–B16 and sampling variants variants and legacy result mapping</h2>
 <p>User-confirmed numbering, 2026-10-29. <strong>B0 is the unchanged RTXPT 1.9 reference with its original defaults and dependency/scene pins.</strong> It is not redefined as a native-only raw preset. Every result shows a canonical variant, actual active modes and immutable source/settings identity.</p>
 <h3 id="version-mapping-heading-2">Canonical algorithm table</h3>
-<div class="doc-table" tabindex="0" role="region" aria-label="Canonical B0–B10 variants and legacy result mapping table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Canonical B0–B16 and sampling variants variants and legacy result mapping table"><table>
 <thead>
 <tr>
 <th>ID</th>
@@ -2225,7 +2625,7 @@
 <tr>
 <td><strong>B9</strong></td>
 <td><strong>B8 + limited PT++</strong></td>
-<td>B8 NVIDIA GI reuse retained: footprint/initial roulette in Room, full-prefix roulette-only original-scene ablations. Eight GPU checks pass; replicated replicated quality and uncapped timing measured; original-scene footprint unsupported. The historical GI-off pilot is not B9.</td>
+<td>B8 NVIDIA GI reuse retained: footprint/initial roulette in Room, full-prefix roulette-only original-scene ablations. Eight GPU checks pass; replicated quality and uncapped timing measured; original-scene footprint unsupported. The historical GI-off pilot is not B9.</td>
 </tr>
 <tr>
 <td><strong>B10</strong></td>
@@ -2233,9 +2633,71 @@
 <td>Gaussian reciprocal-pair/vector GPU development executes. Simultaneous multi-neighbor reuse, replay queues, remaining mechanisms and full validation remain pending. No complete-paper implementation claim.</td>
 </tr>
 </tbody></table></div>
-<h3 id="version-mapping-heading-3">Legacy crosswalk: preserve evidence identities</h3>
+<h3 id="version-mapping-heading-3">Extended roadmap and sampling branches</h3>
+<p>Confirmed2026-10-30; B0–B9 and legacy evidence IDs remain unchanged. Future variants remain unmeasured until implemented and exercised.</p>
+<div class="doc-table" tabindex="0" role="region" aria-label="Canonical B0–B16 and sampling variants variants and legacy result mapping table"><table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Configuration</th>
+<th>Current gate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>B10</strong></td>
+<td>Full PT++</td>
+<td>Complete the remaining paper mechanisms and validation; current pilots remain partial.</td>
+</tr>
+<tr>
+<td><strong>B10.75</strong></td>
+<td>B10 at0.75average spp</td>
+<td>RTXPT1.9 native sub-sampling mode1; ReSTIR integration pending.</td>
+</tr>
+<tr>
+<td><strong>B10.50</strong></td>
+<td>B10 at0.5average spp</td>
+<td>RTXPT1.9 native sub-sampling mode2; ReSTIR integration pending.</td>
+</tr>
+<tr>
+<td><strong>B10.25</strong></td>
+<td>B10 at0.25average spp</td>
+<td>RTXPT1.9 native sub-sampling mode3; ReSTIR integration pending.</td>
+</tr>
+<tr>
+<td><strong>B11</strong></td>
+<td>B10 + Compatibility-Guided Neighbor Selection active</td>
+<td>Explicit activation and validated neighbor selection required.</td>
+</tr>
+<tr>
+<td><strong>B12</strong></td>
+<td>B11 + Stochastic Pairwise MIS</td>
+<td>Validate combined selection probabilities, support and weights.</td>
+</tr>
+<tr>
+<td><strong>B13</strong></td>
+<td>B12 + ReSTIR LoD</td>
+<td>Geometry correspondence and forward/inverse Jacobians required.</td>
+</tr>
+<tr>
+<td><strong>B14</strong></td>
+<td>B13 + ReSTIR BDPT with LW version</td>
+<td>LW configuration scope and combined transport ownership to be specified.</td>
+</tr>
+<tr>
+<td><strong>B15</strong></td>
+<td>B14 + ReSTIR PG</td>
+<td>Guiding proposal, training cost and replay consistency required.</td>
+</tr>
+<tr>
+<td><strong>B16</strong></td>
+<td>B15 + Multi-Layer Reservoir Splatting</td>
+<td>Layer/visibility ownership and splat accumulation required.</td>
+</tr>
+</tbody></table></div>
+<p>Fractional rates reuse RTXPT1.9 sub-sampling. Its current ReSTIR guard remains in place until sparse-reservoir/history and weighting integration is validated. <a href="#roadmap">Execution roadmap</a>.</p>
+<h3 id="version-mapping-heading-4">Legacy crosswalk: preserve evidence identities</h3>
 <p>Old B1 meant a dependency migration, old B2 meant the PT bridge and old B3 meant two PT++ activations. Frozen filenames, tags, data IDs, branch names and figures keep those strings. <strong>They are legacy labels, not the canonical IDs above.</strong> No old numerical value or executable is renamed to imply a new measurement.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="Canonical B0–B10 variants and legacy result mapping table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Canonical B0–B16 and sampling variants variants and legacy result mapping table"><table>
 <thead>
 <tr>
 <th>Retained legacy identity</th>
@@ -2289,15 +2751,15 @@
 <td>Remaining work belongs to B10; retained filename preserves links.</td>
 </tr>
 </tbody></table></div>
-<h3 id="version-mapping-heading-4">Inherited PT++ is not a new B9 gain</h3>
+<h3 id="version-mapping-heading-5">Inherited PT++ is not a new B9 gain</h3>
 <p>Runtime 3.1 already supplies 64-byte PT reservoirs, forced terminal NEE reconnection and optional footprint/history/roulette machinery. Source presence is not execution. The historical GI-off pilot wired footprint and initial-only roulette and measured isolated effects; it did not implement reciprocal pairing, explicit replay compaction, unified primary direct/indirect reservoirs, all-candidate vector shading or dual-motion disocclusion recovery. Duplication reduction needs its actual producer/lifecycle and remains deliberately biased. Record inherited mechanisms rather than counting them again. CGNS is a separate paper and is not reciprocal pairing.</p>
-<h3 id="version-mapping-heading-5">Fair comparisons and paper context</h3>
+<h3 id="version-mapping-heading-6">Fair comparisons and paper context</h3>
 <p>Matched <strong>B1 versus B4</strong> native-PT-plus-DI captures and the registered-room B4/B7 comparison are now measured. The legacy 0.806 ms native control had DI off and cannot establish the native PT+DI3.1 baseline&#39;s cost or quality; use the new measured DI-on controls.</p>
 <p>The referenced original ReSTIR PT paper&#39;s §9.3 uses approximately equal-time comparisons with adjusted sample counts. Our fixed-1spp opaque-room pilot is a different experiment. Add measured sample/candidate sweeps and quality-versus-cost curves before comparable equal-time/equal-quality conclusions; do not transplant paper speedups.</p>
 <p>Every canonical variant retains visible original Convergence, original Kitchen and owned opaque-room rows. Preserve scene/material/camera identities and show missing, unsupported and historical-unverified-cap cases. The PT foundation&#39;s transmission/medium and original 14/2 binding diffuse-budget gates are not removed by renumbering or planned B8 sharing.</p>
-<h3 id="version-mapping-heading-6">Summary and lessons learned</h3>
+<h3 id="version-mapping-heading-7">Summary and lessons learned</h3>
 <p>Canonical IDs separate runtime, DI/GI/PT combination and PT++ scope. Legacy evidence stays intact under this crosswalk. Correct B8 sharing must precede B9/B10 claims, and missing native-DI baselines require measurements rather than inference from DI-off controls.</p>
-<h3 id="version-mapping-heading-7">Changes</h3>
+<h3 id="version-mapping-heading-8">Changes</h3>
 <ul>
 <li>2026-10-29: Applied user-confirmed B0–B10 numbering without changing historical references or numeric results.</li>
 </ul>
@@ -3374,6 +3836,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 </li>
 </ul>
 </section><section class="doc-panel" id="b10-paired-pilot"><h2 id="b10-paired-pilot-heading-1">B10 development: GPU reciprocal pairs and vector shading</h2>
+<p><strong>Newer checkpoint:</strong> <a href="#b10-queue-history">272-frame replay-queue history validation</a> preserves queued history and retains earlier failures. Full B10 remains partial; <a href="#b11-integration">B11 integration</a> is pending.</p>
 <p><strong>Retained adjacent-pair checkpoint.</strong> The subsequent <a href="#b10-gaussian-pairing">Gaussian GPU implementation</a> adds resident tables, frame transforms and larger-resolution diagnostics. The measurements and remaining-work list here describe this earlier checkpoint.</p>
 <p>The first B10 GPU pilot now executes <strong>pair-owned reciprocal spatial shifts and separate vector-weight shading</strong>. It builds on the disjoint initial-GI/PT-long foundation. It is a partial development implementation, not full PT++ or canonical B10 acceptance. Brightness work remains deferred.</p>
 <h3 id="b10-paired-pilot-heading-2">Implemented scope</h3>
@@ -3496,6 +3959,7 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p><a href="../../Benchmarks/development/2026-10-29-b10-paired-vector-pilot/README.md">Sanitized paired/vector evidence</a> includes raw component captures, packed reservoirs, GPU counters, two64-frame aggregates, official FLIP results and executable/source identities. Earlier executable phases retain their own hashes; the final snapshot is explicitly post-cohort. The final guard capture uses the final executable.</p>
 <p>The Release build and <strong>204 Python tests</strong> pass. GPU ownership/finite checks and reference comparisons are separate evidence from the CPU oracle tests. No submodule, original scene, baseline ref or historical numeric result changes.</p>
 </section><section class="doc-panel" id="b10-gaussian-pairing"><h2 id="b10-gaussian-pairing-heading-1">B10 development: Gaussian reciprocal pairing on the GPU</h2>
+<p><strong>Newer checkpoint:</strong> <a href="#b10-queue-history">272-frame replay-queue history validation</a> preserves queued history and retains earlier failures. Full B10 remains partial; <a href="#b11-integration">B11 integration</a> is pending.</p>
 <p>Three Gaussian-scale reciprocal tables now execute on the GPU, with frame-wide integer flips, rotations and offsets. The renderer selects <strong>one table per frame</strong> and retains the existing one-neighbor pair-MIS/vector estimator. This extends the <a href="#b10-paired-pilot">adjacent-pair pilot</a>; it does not implement simultaneous three-neighbor reuse or complete PT++. Brightness work remains deferred.</p>
 <h3 id="b10-gaussian-pairing-heading-2">Implementation and controls</h3>
 <p><code>--ptGaussianPairingValidation true</code> requires the explicit paired-spatial development path. The previous adjacent policy remains the default/control. Table-policy changes invalidate PT history and recreate the corresponding resources. Original scenes, materials, baseline refs and submodules are unchanged.</p>
@@ -3879,6 +4343,123 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p><a href="../../Benchmarks/development/2026-10-29-replay-queue/README.md">Sanitized evidence, rejected-attempt counters, complete source overlay and reproduction</a>. The portable11-case GPU runner ships in Benchmarks/tools/run_replay_queue_oracles.py. Post-cohort source/executable/cache identities are retained; this is not a pre-frozen timing experiment.</p>
 <h3 id="b10-gaussian-pairing-heading-10">Remaining B10 work after this checkpoint</h3>
 <p>Next: queue-only multi-frame/warmup error tracking, cap-verified queue/direct performance and memory, then multi-neighbor reuse and temporal scheduling. Full GI reuse, unified primary DI/indirect reservoirs, duplication-map production, dual-motion recovery and complete micro-optimization/equal-time/convergence validation remain pending. B8/B9/B10 remain unpromoted.</p>
+</section><section class="doc-panel" id="b10-queue-history"><h2 id="b10-queue-history-heading-1">B10 development: replay queue history validation</h2>
+<h3 id="b10-queue-history-heading-2">Summary and lessons learned</h3>
+<p>The spatial replay queue now preserves its actual output as the next frame&#39;s history while comparing every packed reservoir word and RGB shading bit against the direct scheduling control. Five static GPU cases cover <strong>272 compared frames</strong> with zero scheduling mismatches or overflow. A deliberately injected early mismatch remains detectable after later clean frames. This closes a diagnostic gap; <strong>full B10 and B11 are not complete</strong>. No new speedup or image-quality improvement is claimed.</p>
+<p>Previously the direct oracle overwrote the queued output and left its own state as history. Its frame-local counters also forgot failures before the captured frame. The comparison now restores the queue&#39;s exact saved output, accumulates sequence coverage and keeps sticky failure flags until a PT history reset. No tolerance, reservoir repacking or brightness correction is applied.</p>
+<h3 id="b10-queue-history-heading-3">GPU evidence</h3>
+<div class="doc-table" tabindex="0" role="region" aria-label="B10 development: replay queue history validation table"><table>
+<thead>
+<tr>
+<th>Case</th>
+<th align="right">Resolution</th>
+<th align="right">Compared frames</th>
+<th align="right">Queue state / RGB mismatches</th>
+<th align="right">Overflow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Room, adjacent reciprocal pairs</td>
+<td align="right">177×91</td>
+<td align="right">64</td>
+<td align="right">0 / 0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Room, Gaussian reciprocal pairs</td>
+<td align="right">177×91</td>
+<td align="right">64</td>
+<td align="right">0 / 0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Room, thin image and bounce cap1</td>
+<td align="right">176×1</td>
+<td align="right">16</td>
+<td align="right">0 / 0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Original Convergence, Gaussian pairs</td>
+<td align="right">1280×720</td>
+<td align="right">64</td>
+<td align="right">0 / 0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Original Kitchen, Gaussian pairs</td>
+<td align="right">1280×720</td>
+<td align="right">64</td>
+<td align="right">0 / 0</td>
+<td align="right">0</td>
+</tr>
+</tbody></table></div>
+<p>All cases use B8&#39;s NVIDIA non-directional GI approximation with reuse active and the limited initial-only roulette probability0.8. Room uses footprint reconnection; original scenes retain full-prefix replay because mid-path reconnection is still unsupported there. They use one spatial neighbor, DI/PT temporal+spatial reuse, static cameras and seed47. These are development combinations, not canonical full PT++ measurements. The five final-frame HDR stage payloads in each case are finite. Per-frame comparisons validate scheduling equivalence, not the underlying transport estimator&#39;s mean.</p>
+<p><a href="../../Benchmarks/development/2026-10-30-queue-history/summary.json">Portable summary and exact statistics</a> · <a href="../../Benchmarks/development/2026-10-30-queue-history/source-identity.json">Source and executable identities</a></p>
+<h3 id="b10-queue-history-heading-4">Failure and boundary checks</h3>
+<p>The successful negative fixture changes only the oracle&#39;s saved comparison value on its third compared frame. The actual queued estimator state remains untouched. At capture, frame-local mismatches are zero but the sticky reservoir-failure flag is1; the sequence contract rejects the run. The fixture restores and rebuilds the original shader in a finally block, and records its restored hash.</p>
+<p>Two earlier negative attempts are retained as excluded: a source edit did not reach the copied runtime shader, then a sampling-frame3 trigger failed to fire inside the compared chronology. Neither establishes failure detection. The third-comparison fixture does. A requested1×1 run rendered176×1 because of the window&#39;s minimum width; the requested-dimension gate rejected it. The176×1 follow-up is labelled with its actual dimensions. There is no claimed1×1 GPU result.</p>
+<p><a href="../../Benchmarks/development/2026-10-30-queue-history/fault-sequence-third/receipt.json">Negative fixture receipt</a> · <a href="../../Benchmarks/development/2026-10-30-queue-history/excluded-attempts.json">Excluded attempts</a></p>
+<p>The benchmark-tool suite passes <strong>234 tests</strong>, including missing sequence receipts, insufficient coverage and each sticky failure after a clean final frame. The portable runner is <code>Benchmarks/tools/run_queue_history_validation.py</code>; give it a new <code>--output</code> directory and optionally select a <code>--case</code>. It disables application caps for diagnostic captures. These captures do not establish driver-cap clearance or performance; timed tests still require the existing external-cap audit and complete pass costs.</p>
+<h3 id="b10-queue-history-heading-5">Remaining B10 gates</h3>
+<p>This is still a one-neighbor <strong>spatial</strong> queue. Temporal/multiple-neighbor scheduling, moving cameras/occluders, reset/resize stress and queue-only timing remain pending. Full PT++ also needs unified primary direct/indirect reservoir ownership, real duplication-map history reduction, paper-specific dual-motion recovery and the remaining scoped optimization audit. Inherited packing/forced NEE are not newly implemented gains. B10.75/.50/.25 retain the native RTXPT1.9 sampling definitions but sparse reservoir initialization/reconstruction is not activated.</p>
+<p>The next integration requirements are recorded in <a href="#b11-integration">B11 integration</a>. Brightness investigation remains deferred at the user&#39;s request.</p>
+<p>Changelog: 2026-10-30 — added preserved queue-history output, sequence counters, negative fixture and three-scene evidence.</p>
+</section><section class="doc-panel" id="b11-integration"><h2 id="b11-integration-heading-1">B11 integration: compatibility-guided neighbor selection</h2>
+<h3 id="b11-integration-heading-2">Summary and lessons learned</h3>
+<p><strong>B11 is B10 plus active Compatibility-Guided Neighbor Selection (CGNS). It remains pending, with B10 completion as a dependency.</strong> RTXDI3.1 supplies a real selector, but the current application neither dispatches it nor provides a compatible combined paired-reuse path. Turning on its flag would not implement B11 correctly.</p>
+<p>Source inspection used pinned runtime <code>f12037fa8e97ebc08e9e3edfd2de528ed1772a4b</code> and SDK reference <code>a6efab966b7c3b272da0461578eb56ac61c7cbff</code>. See the <a href="https://cwyman.org/papers/hpg26_compatibleNeighborSelection.pdf">CGNS paper</a> and the retained <a href="#ptpp-audit">PT++ audit</a> for the distinction between supplied code and application activation.</p>
+<h3 id="b11-integration-heading-3">Concrete integration requirements</h3>
+<div class="doc-table" tabindex="0" role="region" aria-label="B11 integration: compatibility-guided neighbor selection table"><table>
+<thead>
+<tr>
+<th>Boundary</th>
+<th>Current application</th>
+<th>Required implementation and acceptance evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Selector dispatch</td>
+<td>No CGNS producer; heuristic flag explicitly rejected</td>
+<td>Port the supplied geometry-only selector wrapper and surface callback; dispatch before consumption; prove actual dispatch and non-default selected coordinates</td>
+</tr>
+<tr>
+<td>Buffer ownership</td>
+<td>Bindingu18 is used by B10&#39;s RGB vector-shading output</td>
+<td>Allocate a distinct four-packed-coordinate-per-pixel CGNS buffer, keep RGB radiance separate, update every producer/consumer binding and barrier; verify odd extents and reset behavior</td>
+</tr>
+<tr>
+<td>Selection heuristic</td>
+<td>SDK scores normals and world positions, independent of radiance reservoirs</td>
+<td>Preserve geometry-only input, coordinate packing, invalid sentinel, candidate bounds and RNG stream; do not introduce sample luminance/confidence into its independence argument</td>
+</tr>
+<tr>
+<td>Reciprocal pairing</td>
+<td>B10 shares two directed shifts across an involutive pair</td>
+<td>Guided choices need not be reciprocal. Implement a derived reciprocal guided construction or a general directed-edge schedule with valid normalization; retain the unguided B10 control</td>
+</tr>
+<tr>
+<td>Replay scheduling</td>
+<td>Queue owns one source per pixel for a reciprocal pair</td>
+<td>Re-derive edge ownership/capacity/dependencies for the selected topology; exact queued-versus-direct output/history oracles must remain strict</td>
+</tr>
+<tr>
+<td>Evaluation</td>
+<td>No active B11 measurements</td>
+<td>Room, original Convergence and Kitchen; raw HDR/reference error, convergence and motion/disocclusion checks; repeated uncapped timings including selector, buffers, barriers and all reuse work</td>
+</tr>
+</tbody></table></div>
+<p>The supplied selector examines up to32 disk candidates within radius50, uses geometry compatibility weights and stores up to four independently selected coordinates. Its early-stop rule and invalid-neighbor handling are part of the pinned implementation. These directed picks cannot simply replace B10&#39;s reciprocal partner lookup: if pixelp choosesq, q need not choosep. The pair-owned inverse shift and normalization then lose the topology assumed by the current pilot.</p>
+<h3 id="b11-integration-heading-4">Execution order</h3>
+<ol>
+<li>Complete and freeze B10&#39;s remaining mechanisms and strict versus deliberately biased presets.</li>
+<li>Separate vector-radiance and neighbor-selection storage; validate the supplied selector independently as a diagnostic ablation, without calling it cumulative B11.</li>
+<li>Derive and test the combined guided topology, conditional normalization and queue schedule. Preserve own-sample support, rejected/empty candidates and boundary behavior.</li>
+<li>Validate GPU activation and full history, then run the extended matched B10/B11 comparison. Keep regressions and uncertainty visible; publish full B11 only after those gates.</li>
+</ol>
+<p>A mutual-pick filter or symmetric compatibility gate could produce a reciprocal research candidate, but it would differ from the paper&#39;s independent weighted selector. Such a candidate needs its own explicit label, derivation and measurements. It is not an already implemented B11 feature.</p>
+<p>The current queue-history checkpoint is reported in <a href="#b10-queue-history">B10 queue validation</a>. B12&#39;s stochastic pairwise MIS remains a later cumulative stage; it must not be silently substituted while labelling this implementation B11.</p>
+<p>Changelog: 2026-10-30 — documented the actual buffer collision, selector producer gap and reciprocal-topology acceptance requirements.</p>
 </section><section class="doc-panel" id="b1-results"><h2 id="b1-results-heading-1">Legacy B1 report: RTXPT1.9 and RTXDI3.1 migration</h2>
 <blockquote>
 <p><strong>LEGACY NUMBERING — preserved evidence.</strong> This report and its raw B0/B1 labels predate the user-confirmed <a href="#version-mapping">canonical B0–B10 mapping</a>. Its old-B0 native PT + DI/GI3.0 rows map to <strong>canonical B2</strong>; old-B1 native PT + DI/GI3.1 rows map to <strong>canonical B5</strong>. The retained tag/source <code>B1</code> / <code>7010bb4</code> is the migration identity, <strong>not canonical B1</strong>, whose runtime is3.0 and GI is off. All numeric results, refs and data IDs below are unchanged. These original-scene historical runs have <strong>unverified external-cap coverage</strong> and are not pooled with cap-verified throughput.</p>
@@ -4978,12 +5559,78 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <p>See <a href="#b2-results">B2 results</a> for the current comparison. Later GPU tests confirmed that generic allowed-lobe masks disabled opaque mid-path reconnection; the guard now tests actual BSDF lobes. Census proves active mid-path connections. The replay-only ablation therefore did not explain the earlier deficit; it exposed missing activation. Native primary direct NEE also needed MIS1 under the same PT owner predicate because native continuation, including the primary BSDF light-hit counterpart, had been removed. Unsupported/native-owned paths retain their original MIS.</p>
 <p>The current strict static DI preset additionally disables permutation sampling: under current-TLAS visibility approximation, evaluating a permuted neighbor&#39;s normalization from the current receiver produced a measurable static deficit. Fixed PT ordinary/boosted neighbor counts isolate the sample-dependent disocclusion boost. Age rejection remains an explicit independent ablation and had little effect in this seed0/11 test. The inactive raw PT neighbor-selection buffer remains allocated, but classic B2 does not define the macro enabling its loads; it is not an active CGNS prepass.</p>
 <p>The packed miss validity repair passed subsequent native/DI/PT captures. Seventy-six benchmark-tool tests pass. B2&#39;s current raw quality and matched timing use the settings and hashes in the current report; older intermediate tables are not final B2 claims.</p>
-</section><section class="doc-panel" id="roadmap"><h2 id="roadmap-heading-1">Roadmap: canonical B0–B10</h2>
+</section><section class="doc-panel" id="roadmap"><h2 id="roadmap-heading-1">Roadmap: canonical B0–B16 and B10 sampling variants</h2>
+<p><strong>B10 continuation, 2026-10-30:</strong> <a href="#b10-queue-history">five GPU queue-history cases /272frames</a> pass exact scheduling comparisons, including the original scenes; an early-fault negative control passes. This closes the captured-frame-only gap for the scoped spatial queue. Full PT++ is still partial. <a href="#b11-integration">B11</a> requires separate selector storage/producer and a derived combination with reciprocal pairing; its active configuration remains pending.</p>
 <p><strong>Live checkpoint:</strong> B9-on-B8 has completed its scoped comparison: eight GPU diagnostics,1152quality frames and18uncapped timing runs. Room footprint+roulette regresses in GPU busy and error; Convergence/Kitchen roulette-only ablations reduce GPU busy with quality tradeoffs. Keep B8 as the control and B9 experimental. Original-scene footprint, motion/equal-time validation and deferred brightness investigation remain open; B10&#39;s remaining mechanisms are separate work. <a href="#b9-results">B9 report</a>.</p>
 <p><strong>Current numbering, confirmed 2026-10-29:</strong> <a href="#version-mapping">VERSION_MAPPING.md</a> defines all canonical variants and the retained legacy crosswalk. B0 remains the unchanged RTXPT 1.9 original-defaults reference. Old files, branches, tags and data IDs are not renumbered in place.</p>
 <p>The user deferred brightness fixes and prioritized B8–B10. See <a href="#b8-staged-implementation">staged implementation</a> for the executed initial-GI contribution split, DI/PT reuse and limited PT++ ablation, with explicit remaining gates.</p>
 <p><a href="#b10-gaussian-pairing">Gaussian GPU pairing</a> now passes table-upload/transform and original-resolution diagnostic gates. Preserve the adjacent control and the measured MSE/FLIP tradeoff; explicit replay compaction is the next scheduling increment.</p>
-<h3 id="roadmap-heading-2">Current execution order and acceptance gates</h3>
+<h3 id="roadmap-heading-2">User-confirmed cumulative roadmap —2026-10-30</h3>
+<p>B0–B9 definitions and all historical measurements remain unchanged. B10 is full PT++; B11–B16 each inherit the preceding integer version. The three fractional B10 variants are sampling-budget branches of B10, not steps replacing B11–B16. Implementation proceeds B10, then B11; later integrations remain planned.</p>
+<div class="doc-table" tabindex="0" role="region" aria-label="Roadmap: canonical B0–B16 and B10 sampling variants table"><table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Cumulative configuration</th>
+<th>Activation/integration gate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>B10</strong></td>
+<td>Full PT++</td>
+<td>Complete the remaining paper mechanisms and validation; current pilots remain partial.</td>
+</tr>
+<tr>
+<td><strong>B10.75</strong></td>
+<td>B10 at0.75average spp</td>
+<td>RTXPT1.9 native sub-sampling mode1; ReSTIR integration pending.</td>
+</tr>
+<tr>
+<td><strong>B10.50</strong></td>
+<td>B10 at0.5average spp</td>
+<td>RTXPT1.9 native sub-sampling mode2; ReSTIR integration pending.</td>
+</tr>
+<tr>
+<td><strong>B10.25</strong></td>
+<td>B10 at0.25average spp</td>
+<td>RTXPT1.9 native sub-sampling mode3; ReSTIR integration pending.</td>
+</tr>
+<tr>
+<td><strong>B11</strong></td>
+<td>B10 + Compatibility-Guided Neighbor Selection active</td>
+<td>Explicit activation and validated neighbor selection required.</td>
+</tr>
+<tr>
+<td><strong>B12</strong></td>
+<td>B11 + Stochastic Pairwise MIS</td>
+<td>Validate combined selection probabilities, support and weights.</td>
+</tr>
+<tr>
+<td><strong>B13</strong></td>
+<td>B12 + ReSTIR LoD</td>
+<td>Geometry correspondence and forward/inverse Jacobians required.</td>
+</tr>
+<tr>
+<td><strong>B14</strong></td>
+<td>B13 + ReSTIR BDPT with LW version</td>
+<td>LW configuration scope and combined transport ownership to be specified.</td>
+</tr>
+<tr>
+<td><strong>B15</strong></td>
+<td>B14 + ReSTIR PG</td>
+<td>Guiding proposal, training cost and replay consistency required.</td>
+</tr>
+<tr>
+<td><strong>B16</strong></td>
+<td>B15 + Multi-Layer Reservoir Splatting</td>
+<td>Layer/visibility ownership and splat accumulation required.</td>
+</tr>
+</tbody></table></div>
+<h4 id="roadmap-heading-3">RTXPT1.9 sub-sampling is inherited</h4>
+<p>Pinned upstream303b408 already provides three-quarter, half and quarter sampling. <code>SampleUI.h</code> maps modes1/2/3 to0.75/0.5/0.25spp through scale/rate fields. <code>Shaders/Misc/SubSampling.h</code> includes block jitter, stochastic compaction, stratified blocks and Sobol patterns; selected native paths receive inverse-rate weighting. This is existing functionality, not a new B10 invention.</p>
+<p>Upstream disables sub-sampling with DI/GI; the current integration also disables it with ReSTIR PT (<code>ActualSubSamplingMode</code>). Therefore assigning a variant name or passing an override does not activate sparse B10. Integrate the inherited pixel-selection/dispatch mechanism with initial reservoirs, zero-sample pixels, history/reset, contribution weights and reconstruction; verify actual traced-pixel counts and total pipeline time. Native throughput compensation alone is not proof of the combined reservoir estimator. Preserve full-rate B10 as the control.</p>
+<p>B10 is still incomplete. Existing paired/vector/Gaussian and queue snapshots are scoped pilots. Close queue-history validation, unified direct/indirect sampling, duplication/history production, dual-motion handling and remaining paper gates before calling it full PT++. B11 must explicitly exercise CGNS on that accepted base; source availability is not activation evidence.</p>
+<h3 id="roadmap-heading-4">Current execution order and acceptance gates</h3>
 <ol>
 <li>Preserve B0 defaults/source/assets. Define B1 native PT + DI3.0 and B2 native PT + DI/GI3.0 as explicit configurations, distinct from the B0 native-only raw control.</li>
 <li>Define B3 native PT on runtime3.1, B4 native PT + DI3.1, and B5 native PT + DI/GI3.1. Fresh matched B1/B4 native-DI timing/quality is measured on original scenes and the registered room; the legacy 0.806 ms native-only control is B3, not B4.</li>
@@ -4994,13 +5641,13 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 </ol>
 <p>Each canonical variant keeps original Convergence, original Kitchen and the owned opaque room visible in the comparison matrix. Record unsupported/missing cases, raw/reconstructed quality, timing, memory and convergence. The original ReSTIR PT paper&#39;s §9.3 adjusts samples for approximately equal time; fixed-1spp room results are not equivalent. Equal-time/quality sweeps remain required before corresponding gains are claimed.</p>
 <p>Every promoted configuration needs an immutable source/settings/runtime/assets manifest, executable/shader identities and accepted scope. Runtime3.1 packing, forced NEE and optional supplied PT++ machinery are inherited, not newly counted B9/B10 achievements. Later guiding/splatting/LoD/BDPT research retains its technical gates below, but no canonical B1–B10 ID is reassigned to it.</p>
-<h3 id="roadmap-heading-3">Legacy roadmap appendix</h3>
+<h3 id="roadmap-heading-5">Legacy roadmap appendix</h3>
 <p><strong>The remainder is the retained planning history under the previous numbering.</strong> In this appendix, old B1 is the <code>7010bb4</code> migration, old B2 is the B6/B7 PT foundation, old B3 is the GI-off B7 limited pilot, and old B4 remaining work now belongs to B10. Its old section labels and estimates are archival, not competing definitions of the canonical IDs. Source refs, links and measurements are preserved.</p>
-<h3 id="roadmap-heading-4">Deliverable and version policy</h3>
+<h3 id="roadmap-heading-6">Deliverable and version policy</h3>
 <p>B0 is preserved as the unchanged source/scene baseline. B1 runtime/API migration is implemented and built; first comparisons are documented in <a href="#b1-results">B1 results</a>. B2 integration remains in progress and unpromoted. B3 PT++ development has started on <code>b3/ptpp-activation</code>; later research features remain planned. Every promoted B-version gets an immutable commit/tag, complete submodule manifest, executable/shader hashes, settings and result record. Keep RTXPT1.9 as a permanent comparator. Assign each later version only after its scoped feature and checks are complete; never relabel a changed build under an old result ID. The <a href="#algorithm-variants">variant overview</a> provides short algorithm labels and distinguishes capabilities from measured configurations.</p>
-<h3 id="roadmap-heading-5">Baseline milestone</h3>
+<h3 id="roadmap-heading-7">Baseline milestone</h3>
 <p>Use exact upstream RTXPT1.9 source303b408 and its pinned Assets a56be4e, runtimea14e079. Capture untouched upstream real-time defaults and a separate strict/reference transport preset. Preserve upstream scene materials, cameras and lights. Build requirements are upstream&#39;s CMake4.1+, supported Visual Studio/SDK and downloaded dependencies; merely checking out source is not a successful build. Benchmark assets by the same pin in all versions. Choose target hardware/resolution/VRAM budgets before claims.</p>
-<h3 id="roadmap-heading-6">B1: completed migration scope and later integration gates</h3>
+<h3 id="roadmap-heading-8">B1: completed migration scope and later integration gates</h3>
 <p>Completed scope: runtime <code>a14e079</code>→<code>f12037f</code>, four host/UI compatibility files, unchanged DI/GI estimator path. Release builds and initial GPU runs succeeded. ReSTIR PT, CGNS activation, new PT++ behavior and the capabilities below were not implemented in B1. The list retains the wider integration plan; items4–6 are future gates.</p>
 <ol>
 <li>Create a dedicated B1 development branch from the named RTXPT1.9 baseline with the research harness available.</li>
@@ -5011,18 +5658,18 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 <li>Benchmark existing3.1 footprint, history, roulette, CGNS and decorrelation choices independently. Some controls are present but off by default; history reduction is a biased heuristic.</li>
 </ol>
 <p>Acceptance for broader future integration: all chosen capabilities are compiled, exercised and recorded; no unsupported mode silently falls through; baseline regressions, raw/reference tests and performance/quality/VRAM comparisons pass. If only runtime/API migration is complete, label that limited scope explicitly rather than claiming full PT integration. Effort estimate: roughly2–4 engineer-weeks after baseline/toolchain availability, with integration complexity uncertain.</p>
-<h3 id="roadmap-heading-7">B2: ReSTIR PT integration</h3>
+<h3 id="roadmap-heading-9">B2: ReSTIR PT integration</h3>
 <p>B2 integrates the RTXDI3.1 ReSTIR PT application bridge, path generation/replay, host passes, resources, synchronization and final shading into RTXPT. Keep original DI+GI available; add a DI+PT configuration with PT owning indirect illumination. A configuration combining GI and PT must define disjoint contributions or valid MIS; do not add both indirect estimates. The UI and command line must report actual mode selection and reject unsupported combinations.</p>
 <p>The new pipeline reuses RTXPT&#39;s scene/material/light semantics and history/reset rules. Preserve B0 and B1. RTXDI3.1 already contains packed reservoirs, forced NEE reconnection and optional PT++ mechanisms; therefore B2 is an integrated3.1 reference path, not a recreation of the untouched2022 implementation. Record inherited mechanisms, chosen defaults and approximation controls in every manifest.</p>
 <p>Acceptance: real shaders compile; initial, temporal and spatial PT paths execute; camera cuts/resize/mode switches reset history; reference/finite-value checks pass; unsupported reconstruction/cache/material modes fail visibly or use a documented validated fallback. No source-presence or stub is a completed integration. Track current work in <a href="#b2-implementation">B2/B3 implementation status</a>. An initial build may take hours; complete integration and validation are a multi-day effort with material/replay complexity uncertain.</p>
-<h3 id="roadmap-heading-8">B3: footprint and initial-only roulette checkpoint</h3>
+<h3 id="roadmap-heading-10">B3: footprint and initial-only roulette checkpoint</h3>
 <p>B3 activates and independently measures the inherited footprint/inverse-footprint reconnection policy and initial-generation-only Russian roulette. Preserve B2&#39;s fixed-threshold/no-roulette policy as a same-executable control, while retaining the immutable B2 artifacts separately. Keep original-scene coverage gaps explicit. See <a href="#b3-implementation">B3 implementation</a>.</p>
-<h3 id="roadmap-heading-9">B4: remaining PT++ mechanisms</h3>
+<h3 id="roadmap-heading-11">B4: remaining PT++ mechanisms</h3>
 <p>After B3 is finished and preserved, continue with reciprocal paired reuse, explicit replay compaction, unified direct/indirect PT reservoirs, vector-weight shading, duplication-based confidence reduction and dual-motion disocclusion recovery. Audit remaining described micro-optimizations without counting inherited packing or forced NEE twice. Each mechanism needs an independent oracle and an isolated GPU ablation before a combined preset. See <a href="#b4-implementation">B4 implementation gates</a>.</p>
 <p>CGNS remains a separate paper and neighbor policy. Duplication reduction is deliberately biased and stays separate from strict reference settings. Preserve B0–B3 and all mandatory original-scene comparison rows; no paper speedup is assumed.</p>
-<h3 id="roadmap-heading-10">B5 and later: research-backed candidates</h3>
+<h3 id="roadmap-heading-12">B5 and later: research-backed candidates</h3>
 <p>The order below is proposed and may change after measured results. Each should be isolated before stacking; assign B3/B4/etc only when the actual scope is chosen.</p>
-<div class="doc-table" tabindex="0" role="region" aria-label="Roadmap: canonical B0–B10 table"><table>
+<div class="doc-table" tabindex="0" role="region" aria-label="Roadmap: canonical B0–B16 and B10 sampling variants table"><table>
 <thead>
 <tr>
 <th>Candidate</th>
@@ -5063,14 +5710,14 @@ G(a,x2) = abs(n_geom2 dot direction(x2→a)) / distance(a,x2)^2
 </tr>
 </tbody></table></div>
 <p>Estimates are engineering planning ranges for one experienced graphics engineer, not paper results or delivery promises. Dependencies, assets and hardware can dominate. The phases are not additive calendar commitments.</p>
-<h3 id="roadmap-heading-11">Compatibility policy</h3>
+<h3 id="roadmap-heading-13">Compatibility policy</h3>
 <p>Multi-layer paper excludes DOF/motion blur and off-screen history; leave these modes disabled for that technique until separately derived. Geometry-LoD paper assumes one per-object LoD per frame. CGNS&#39;s sample-independent geometric heuristic cannot acquire reservoir/luminance-dependent inputs while retaining its original proof. Stochastic MIS+CGNS needs explicit joint selection probabilities/support. PG&#39;s changing proposal models must not invalidate replay. Full BDPT and radiance cache termination need an explicit contribution partition. These are estimator gates, not cosmetic settings.</p>
-<h3 id="roadmap-heading-12">Comparison and promotion</h3>
+<h3 id="roadmap-heading-14">Comparison and promotion</h3>
 <p>Every new variant requires visible rows for original Convergence, original Kitchen and the owned opaque room. Keep original assets, cameras and materials; show unsupported/missing cases with reasons rather than omitting them or silently changing scene semantics. Include a short actual algorithm label beside each variant result: native PT, DI + GI, or DI + ReSTIR PT with GI off. Include quality-versus-frames/samples/time curves as well as warmed-up quality and timing; absent convergence measurements remain pending. The historical B1 two-scene results have unverified cap coverage and must remain separate from newly cap-verified runs. See the <a href="#algorithm-variants">extended comparison contract</a>.</p>
 <p>For RTXPT1.9/B1/B2+ report raw and reconstructed image-quality metrics, complete-frame GPU median/p95, VRAM, temporal behavior and reference error. Run equal-time and equal-quality sweeps; do not multiply paper speedups from unrelated hardware/baselines. Measure all added preprocessing, replay, fitting, barriers and reconstruction costs. B1 versus RTXPT1.9 establishes update cost/benefit; B2 versus B1 isolates optimization benefit; B2 versus original shows cumulative change. Keep unsuccessful/scene-specific variants and reasons inspectable.</p>
-<h3 id="roadmap-heading-13">Current B2 checkpoint</h3>
+<h3 id="roadmap-heading-15">Current B2 checkpoint</h3>
 <p><a href="#b2-results">Corrected static opaque B2 results</a> now include active reconnection census, matched HDR validation and fresh three-process native-control comparisons with cap receipts. B2 remains unpromoted; original material/medium coverage, binding diffuse limits, motion, temporal/reconstruction metrics and wider scene coverage remain acceptance gates. B3 is not activated by this checkpoint.</p>
-<h3 id="roadmap-heading-14">NVIDIA engineering guidance</h3>
+<h3 id="roadmap-heading-16">NVIDIA engineering guidance</h3>
 <p>The <a href="#nvidia-whitepapers">NVIDIA whitepaper review</a> adds immediate per-signal/pass profiling and later SER/OMM/tracing-model ablations. CLAS/PTLAS remains a separate geometry-scalability branch with explicit Agility SDK/HLSL/driver capability gates; it is not a substitute for ReSTIR-LoD&#39;s estimator/Jacobian work. Source-reported case-study gains are not RTXPT Next measurements.</p>
 <p>Current native coverage: <a href="#native-matrix-results">fresh B2/B3/B5 original-scene and room results</a> adds27quality captures and27cap-verified timing processes. <a href="#comparison-overview">The unified B0–B10 overview</a> includes all versions, current metrics and representative pictures; historical cohorts remain separate.</p>
 <p>Current timing checkpoint2026-10-29: <a href="#b10-gaussian-pairing">Gaussian versus adjacent pair/vector development</a> completes18cap-verified processes over all three scenes. Small descriptive timing differences and mixed quality do not promote full B10. Explicit replay compaction remains next; brightness fixes remain deferred.</p>

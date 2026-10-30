@@ -1,4 +1,4 @@
-# Algorithm overview: canonical B0–B10
+# Algorithm overview: canonical B0–B16 and sampling variants
 
 **Current numbering:** use [the canonical mapping and legacy crosswalk](VERSION_MAPPING.md). B0 retains unchanged RTXPT 1.9 defaults and pins; it is not defined by the raw native-only control.
 
@@ -19,6 +19,25 @@
 B1/B4 native-DI comparisons are measured on original scenes and the registered room; B6/B7 room timing and history sweeps are also measured. The 0.803 ms control is a B0 native-control raw preset, separate from original defaults; the 0.806 ms migrated native control is B3 with DI/GI off. The old-B2 checkpoint `de9fe651` maps to B7. The old-B3 pilot `a7428c8` maps to B7 plus limited ablations, **not B9**. Stored refs/data IDs and numbers are preserved.
 
 The original ReSTIR PT paper's §9.3 adjusted sample counts for approximately equal time; the current fixed-1spp room pilot is not that comparison. Keep equal-time/quality sweeps pending until measured. Existing runtime PT++ mechanisms are inherited, not newly counted as B9 gains.
+
+## Extended roadmap and sampling branches
+
+Confirmed2026-10-30; B0–B9 and legacy evidence IDs remain unchanged. Future variants remain unmeasured until implemented and exercised.
+
+| Version | Configuration | Current gate |
+|---|---|---|
+| **B10** | Full PT++ | Complete the remaining paper mechanisms and validation; current pilots remain partial. |
+| **B10.75** | B10 at0.75average spp | RTXPT1.9 native sub-sampling mode1; ReSTIR integration pending. |
+| **B10.50** | B10 at0.5average spp | RTXPT1.9 native sub-sampling mode2; ReSTIR integration pending. |
+| **B10.25** | B10 at0.25average spp | RTXPT1.9 native sub-sampling mode3; ReSTIR integration pending. |
+| **B11** | B10 + Compatibility-Guided Neighbor Selection active | Explicit activation and validated neighbor selection required. |
+| **B12** | B11 + Stochastic Pairwise MIS | Validate combined selection probabilities, support and weights. |
+| **B13** | B12 + ReSTIR LoD | Geometry correspondence and forward/inverse Jacobians required. |
+| **B14** | B13 + ReSTIR BDPT with LW version | LW configuration scope and combined transport ownership to be specified. |
+| **B15** | B14 + ReSTIR PG | Guiding proposal, training cost and replay consistency required. |
+| **B16** | B15 + Multi-Layer Reservoir Splatting | Layer/visibility ownership and splat accumulation required. |
+
+Fractional rates reuse RTXPT1.9 sub-sampling. Its current ReSTIR guard remains in place until sparse-reservoir/history and weighting integration is validated. [Execution roadmap](ROADMAP.md).
 
 ## Legacy numbering appendix
 

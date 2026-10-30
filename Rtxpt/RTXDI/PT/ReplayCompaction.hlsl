@@ -67,6 +67,7 @@ void main(uint2 pixel:SV_DispatchThreadID)
             // Capacity N follows from one request per source pixel. Preserve
             // the work even on an unexpected overflow, and fail diagnostics.
             InterlockedAdd(u_PTDiagnosticCounters[48],1);
+            InterlockedOr(u_PTDiagnosticCounters[95],1);
             u_PTShiftCache[index]=RTXPT_PairShiftTo(source,a,b,partner,QueueParams());
         }
     }
@@ -155,8 +156,27 @@ void main(uint2 pixel:SV_DispatchThreadID)
         }
     }
     InterlockedAdd(u_PTDiagnosticCounters[51],1);
-    if(different) InterlockedAdd(u_PTDiagnosticCounters[52],1);
-    if(any(u_PTSpatialNeighbors.Load3(index*16)!=u_PTReplayOracle.Load3(index*76+64))) InterlockedAdd(u_PTDiagnosticCounters[53],1);
+    if(index==0) InterlockedAdd(u_PTDiagnosticCounters[92],1);
+    if(different)
+    {
+        InterlockedAdd(u_PTDiagnosticCounters[52],1);
+        InterlockedOr(u_PTDiagnosticCounters[93],1);
+    }
+    if(any(u_PTSpatialNeighbors.Load3(index*16)!=u_PTReplayOracle.Load3(index*76+64)))
+    {
+        InterlockedAdd(u_PTDiagnosticCounters[53],1);
+        InterlockedOr(u_PTDiagnosticCounters[94],1);
+    }
+    // The direct control is diagnostic only. Restore the exact queued words
+    // and vector bits so the next frame follows the actual queue history.
+    RTXDI_PackedPTReservoir queued;
+    queued.Data0=u_PTReplayOracle.Load4(index*76);
+    queued.Data1=u_PTReplayOracle.Load4(index*76+16);
+    queued.Data2=u_PTReplayOracle.Load4(index*76+32);
+    queued.Data3=u_PTReplayOracle.Load4(index*76+48);
+    RTXDI_StorePackedPTReservoir(queued,g_RtxdiBridgeConst.restirPT.reservoirBuffer,pos,
+        g_RtxdiBridgeConst.restirPT.bufferIndices.spatialResamplingOutputBufferIndex);
+    u_PTSpatialNeighbors.Store3(index*16,u_PTReplayOracle.Load3(index*76+64));
 #endif
 #endif
 }

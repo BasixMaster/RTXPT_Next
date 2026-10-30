@@ -1,15 +1,17 @@
 {
   "schema_version": 1,
-  "title": "Basix Pathtracing · RTXPT1.9 and canonical B0–B10",
+  "title": "Basix Pathtracing · RTXPT1.9 and B0–B16 roadmap",
   "purpose": "Compare preserved B0 with explicitly configured native DI/GI, ReSTIR PT and planned PT++ variants; preserve legacy evidence identities.",
   "scope": "Versioned renderer configurations, primary-paper reviews, scoped native/opaque GPU evidence and explicit pending validation gates.",
-  "updated_on": "2026-10-29",
+  "updated_on": "2026-10-30",
   "summary": [
     "B0 preserves unchanged RTXPT1.9 defaults, original assets and runtime3.0. Canonical B1/B2 are native PT+DI/DI+GI3.0; B3/B4/B5 are native PT, +DI, +DI+GI on runtime3.1. VERSION_MAPPING.md preserves all legacy refs/data labels.",
     "B1–B5 native cohorts remain preserved. B6/B7 now have corrected original-resolution five-seed guarded quality evidence after finite rejected-shift targets prevented invalid MIS propagation; native startup stability and new throughput remain pending.",
     "B8 NVIDIA non-directional GI reuse now has14GPU snapshot/support gates, six64-frame static sequences and18uncapped timing processes across all required scenes. Quality is mixed, including a Kitchen linear-error regression; no canonical promotion. Earlier B9/B10 pilots retain their initial-GI scope; remaining PT++ mechanisms and broader validation are pending.",
     "Fresh RTXPT1.9 PT-only raw control now covers all three required scenes with nine timings and nine PNG quality captures; original B0 defaults remain unchanged and HDR export is unsupported in that preserved binary.",
-    "B9-on-B8 completed eight GPU diagnostic cases,1152quality frames across three seeds and18uncapped timings. Room footprint+roulette adds11.52%GPU busy and increases measured error; original-scene roulette-only ablations reduce GPU busy7.08%/8.12% with mixed quality. Original-scene footprint and cross-launch bitidentity remain unestablished; no promotion."
+    "B9-on-B8 completed eight GPU diagnostic cases,1152quality frames across three seeds and18uncapped timings. Room footprint+roulette adds11.52%GPU busy and increases measured error; original-scene roulette-only ablations reduce GPU busy7.08%/8.12% with mixed quality. Original-scene footprint and cross-launch bitidentity remain unestablished; no promotion.",
+    "User-confirmed B10fullPT++, B11CGNS active, B12Stochastic PairwiseMIS, B13ReSTIRLoD, B14ReSTIRBDPTwithLW, B15ReSTIRPG, B16Multi-Layer Reservoir Splatting. B10.75/.50/.25 use inherited RTXPT1.9 sampling rates; ReSTIR integration remains pending. Implement B10 thenB11; definitions are not activation.",
+    "B10 continuation: five static spatial queue cases compare272frames with queued output restored as history, zero packed/vector scheduling mismatches and a successful early-fault negative fixture. Full PT++ and active B11 CGNS remain pending; buffer ownership and guided reciprocal topology are explicit integration gates."
   ],
   "questions": [
     {

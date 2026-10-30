@@ -1,5 +1,7 @@
 # B10 development: Gaussian reciprocal pairing on the GPU
 
+**Newer checkpoint:** [272-frame replay-queue history validation](B10_QUEUE_HISTORY.md) preserves queued history and retains earlier failures. Full B10 remains partial; [B11 integration](B11_INTEGRATION.md) is pending.
+
 Three Gaussian-scale reciprocal tables now execute on the GPU, with frame-wide integer flips, rotations and offsets. The renderer selects **one table per frame** and retains the existing one-neighbor pair-MIS/vector estimator. This extends the [adjacent-pair pilot](B10_PAIRED_PILOT.md); it does not implement simultaneous three-neighbor reuse or complete PT++. Brightness work remains deferred.
 
 ## Implementation and controls

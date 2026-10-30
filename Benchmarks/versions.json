@@ -254,15 +254,193 @@
       "depends_on": [
         "B8"
       ],
-      "runtime_status": "Gaussian reciprocal pair/vector development and opt-in one-neighbor spatial replay queues execute.11captured-frame exact GPU oracles and2disabled regressions pass. GI initial only; queue-only histories/timing, temporal queues, simultaneous neighbors and full acceptance pending.",
+      "runtime_status": "One-neighbor spatial replay queue now retains actual queue history under B8 GI3. Five static GPU cases/272frames pass exact packed/vector scheduling oracles; earlier-fault negative fixture rejected. Full PT++, temporal/multi-neighbor queues, motion, total timing and canonical acceptance remain pending.",
       "ptpp_scope": "Full remaining PT++ including replaycompaction,pairedreuse,unifieddirect/indirectreservoirs,vectorweights,duplicationreduction,dualmotion and auditablemicrooptimizations",
-      "development_evidence": "Benchmarks/development/2026-10-29-gaussian-pairing",
-      "implementation_stage": "spatial_replay_queue_snapshot_oracles",
+      "development_evidence": "Benchmarks/development/2026-10-30-queue-history",
+      "implementation_stage": "spatial_replay_queue_history_oracles",
       "development_evidence_history": [
         "Benchmarks/development/2026-10-29-gaussian-pairing",
         "Benchmarks/development/2026-10-29-gaussian-timing",
-        "Benchmarks/development/2026-10-29-replay-queue"
+        "Benchmarks/development/2026-10-29-replay-queue",
+        "Benchmarks/development/2026-10-30-queue-history"
       ]
+    },
+    {
+      "id": "B10.75",
+      "status": "planned",
+      "ref": null,
+      "source_sha": null,
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "B10 full PT++ at0.75average spp",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "planned": true,
+        "inherits": "B10"
+      },
+      "depends_on": [
+        "B10"
+      ],
+      "runtime_status": "Planned; no activation/build/GPU evidence",
+      "average_spp": 0.75,
+      "native_subsampling_mode": 1,
+      "implementation_basis": "RTXPT1.9 inherited sub-sampling; integration with ReSTIR reuse remains pending"
+    },
+    {
+      "id": "B10.50",
+      "status": "planned",
+      "ref": null,
+      "source_sha": null,
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "B10 full PT++ at0.5average spp",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "planned": true,
+        "inherits": "B10"
+      },
+      "depends_on": [
+        "B10"
+      ],
+      "runtime_status": "Planned; no activation/build/GPU evidence",
+      "average_spp": 0.5,
+      "native_subsampling_mode": 2,
+      "implementation_basis": "RTXPT1.9 inherited sub-sampling; integration with ReSTIR reuse remains pending"
+    },
+    {
+      "id": "B10.25",
+      "status": "planned",
+      "ref": null,
+      "source_sha": null,
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "B10 full PT++ at0.25average spp",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "planned": true,
+        "inherits": "B10"
+      },
+      "depends_on": [
+        "B10"
+      ],
+      "runtime_status": "Planned; no activation/build/GPU evidence",
+      "average_spp": 0.25,
+      "native_subsampling_mode": 3,
+      "implementation_basis": "RTXPT1.9 inherited sub-sampling; integration with ReSTIR reuse remains pending"
+    },
+    {
+      "id": "B11",
+      "status": "planned",
+      "ref": null,
+      "source_sha": null,
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "B10 + Compatibility-Guided Neighbor Selection active",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "planned": true,
+        "inherits": "B10"
+      },
+      "depends_on": [
+        "B10"
+      ],
+      "runtime_status": "Planned; no activation/build/GPU evidence",
+      "added_technique": "Compatibility-Guided Neighbor Selection active"
+    },
+    {
+      "id": "B12",
+      "status": "planned",
+      "ref": null,
+      "source_sha": null,
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "B11 + Stochastic Pairwise MIS",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "planned": true,
+        "inherits": "B11"
+      },
+      "depends_on": [
+        "B11"
+      ],
+      "runtime_status": "Planned; no activation/build/GPU evidence",
+      "added_technique": "Stochastic Pairwise MIS"
+    },
+    {
+      "id": "B13",
+      "status": "planned",
+      "ref": null,
+      "source_sha": null,
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "B12 + ReSTIR LoD",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "planned": true,
+        "inherits": "B12"
+      },
+      "depends_on": [
+        "B12"
+      ],
+      "runtime_status": "Planned; no activation/build/GPU evidence",
+      "added_technique": "ReSTIR LoD"
+    },
+    {
+      "id": "B14",
+      "status": "planned",
+      "ref": null,
+      "source_sha": null,
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "B13 + ReSTIR BDPT with LW version",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "planned": true,
+        "inherits": "B13"
+      },
+      "depends_on": [
+        "B13"
+      ],
+      "runtime_status": "Planned; no activation/build/GPU evidence",
+      "added_technique": "ReSTIR BDPT with LW version"
+    },
+    {
+      "id": "B15",
+      "status": "planned",
+      "ref": null,
+      "source_sha": null,
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "B14 + ReSTIR PG",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "planned": true,
+        "inherits": "B14"
+      },
+      "depends_on": [
+        "B14"
+      ],
+      "runtime_status": "Planned; no activation/build/GPU evidence",
+      "added_technique": "ReSTIR PG"
+    },
+    {
+      "id": "B16",
+      "status": "planned",
+      "ref": null,
+      "source_sha": null,
+      "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+      "rtxdi_sha": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+      "algorithm_overview": "B15 + Multi-Layer Reservoir Splatting",
+      "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
+      "configuration": {
+        "planned": true,
+        "inherits": "B15"
+      },
+      "depends_on": [
+        "B15"
+      ],
+      "runtime_status": "Planned; no activation/build/GPU evidence",
+      "added_technique": "Multi-Layer Reservoir Splatting"
     }
   ],
   "legacy_registry": "Benchmarks/legacy/versions-before-2026-10-29.json",
@@ -497,5 +675,15 @@
     ],
     "raw_track": "Matched AA/cache/denoiser-off benchmark preset; never relabel B0 original defaults",
     "original_scenes": "OriginalConvergence/Kitchen at1280x720/exposure0/2/Balanced14/2; no material substitution"
+  },
+  "roadmap_extension": {
+    "confirmed_on": "2026-10-30",
+    "canonical_integer_range": "B0\u2013B16",
+    "sampling_variants": [
+      "B10.75",
+      "B10.50",
+      "B10.25"
+    ],
+    "legacy_numbering_scheme_preserved": true
   }
 }

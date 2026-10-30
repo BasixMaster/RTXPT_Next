@@ -5,7 +5,8 @@ import json
 import re
 
 REGISTRY=Path(__file__).resolve().parents[1]/'versions.json'
-SCHEME='2026-10-29-user-confirmed-B0-B10'
+SCHEME='2026-10-29-user-confirmed-B0-B10'  # Immutable legacy ID; roadmap_extension records later additions.
+VARIANT_IDS=tuple(v['id'] for v in json.loads(REGISTRY.read_text(encoding='utf-8'))['versions'])
 MODE_FLAGS={'default':(0,0,0),'di':(1,0,0),'digi':(1,1,0),'pt':(0,0,1),'dipt':(1,0,1),'reference':(0,0,0)}
 
 
@@ -15,8 +16,8 @@ def prepare(variant, mode, preset='matched-raw', reconnection=None, roulette=Non
     if registry['numbering_scheme']!=SCHEME:raise ValueError('Unrecognized experiment numbering scheme')
     record=next((v for v in registry['versions'] if v['id']==variant),None)
     if record is None:raise ValueError('Unknown canonical variant')
-    if variant in ['B8','B9','B10']:
-        raise ValueError('This combined PT/GI configuration is not implemented; no canonical result may be labelled as active')
+    if record['source_sha'] is None:
+        raise ValueError('This variant has no accepted canonical source; planned/development variants cannot be labelled as active')
     if mode=='reference':raise ValueError('Finite-reference truth captures are separate from the canonical realtime configuration')
     expected=(0,0,0) if variant=='B0' else tuple(record['configuration'][k] for k in ['restir_di','restir_gi','restir_pt'])
     if MODE_FLAGS[mode]!=expected:raise ValueError('Requested rendering mode does not match the canonical experiment')

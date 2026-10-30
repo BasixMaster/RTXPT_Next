@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "numbering_scheme": "2026-10-29-user-confirmed-B0-B10",
-  "updated_on": "2026-10-29",
+  "updated_on": "2026-10-30",
   "experiments": [
     {
       "id": "B0",
@@ -121,8 +121,80 @@
       "id": "B10",
       "status": "partial",
       "algorithm": "B8 + full PT++",
-      "scope": "One-neighbor spatial replay queue snapshot oracles; full PT++/GI reuse and queue timing/sequences pending.",
-      "evidence": "Benchmarks/development/2026-10-29-replay-queue"
+      "scope": "Five static spatial-queue history cases,272frames with exact packed/vector oracles and sticky early-failure rejection. Full PT++ mechanisms, temporal/multi-neighbor queues, motion and timing pending.",
+      "evidence": "Benchmarks/development/2026-10-30-queue-history"
+    },
+    {
+      "id": "B10.75",
+      "status": "pending",
+      "algorithm": "B10 full PT++ at0.75average spp",
+      "depends_on": [
+        "B10"
+      ]
+    },
+    {
+      "id": "B10.50",
+      "status": "pending",
+      "algorithm": "B10 full PT++ at0.5average spp",
+      "depends_on": [
+        "B10"
+      ]
+    },
+    {
+      "id": "B10.25",
+      "status": "pending",
+      "algorithm": "B10 full PT++ at0.25average spp",
+      "depends_on": [
+        "B10"
+      ]
+    },
+    {
+      "id": "B11",
+      "status": "pending",
+      "algorithm": "B10 + Compatibility-Guided Neighbor Selection active",
+      "depends_on": [
+        "B10"
+      ]
+    },
+    {
+      "id": "B12",
+      "status": "pending",
+      "algorithm": "B11 + Stochastic Pairwise MIS",
+      "depends_on": [
+        "B11"
+      ]
+    },
+    {
+      "id": "B13",
+      "status": "pending",
+      "algorithm": "B12 + ReSTIR LoD",
+      "depends_on": [
+        "B12"
+      ]
+    },
+    {
+      "id": "B14",
+      "status": "pending",
+      "algorithm": "B13 + ReSTIR BDPT with LW version",
+      "depends_on": [
+        "B13"
+      ]
+    },
+    {
+      "id": "B15",
+      "status": "pending",
+      "algorithm": "B14 + ReSTIR PG",
+      "depends_on": [
+        "B14"
+      ]
+    },
+    {
+      "id": "B16",
+      "status": "pending",
+      "algorithm": "B15 + Multi-Layer Reservoir Splatting",
+      "depends_on": [
+        "B15"
+      ]
     }
   ],
   "transitions": [
@@ -353,6 +425,32 @@
       ],
       "reason": "Completed eight GPU gates,1152quality frames and18uncapped timings with matched B8. Room footprint/roulette; original full-prefix roulette-only scope. Quality tradeoffs, failed independent-launch bitidentity and remaining footprint gate retained; no promotion.",
       "evidence": "Benchmarks/development/2026-10-30-b9-on-b8/summary.json"
+    },
+    {
+      "id": "roadmap-b10-b16-and-fractional-sampling",
+      "date": "2026-10-30",
+      "variants": [
+        "B10",
+        "B10.75",
+        "B10.50",
+        "B10.25",
+        "B11",
+        "B12",
+        "B13",
+        "B14",
+        "B15",
+        "B16"
+      ],
+      "reason": "User defined cumulative B10fullPT++, B11CGNS, B12stochastic pairwiseMIS, B13LoD, B14BDPTwithLW, B15PG, B16multi-layer splatting plus inherited RTXPT1.9 sampling-budget variants. Implementation requested for B10 thenB11. No activation inferred."
+    }
+  ],
+  "history": [
+    {
+      "date": "2026-10-30",
+      "variant": "B10",
+      "status": "partial",
+      "evidence": "Benchmarks/development/2026-10-30-queue-history",
+      "scope": "Five static spatial-queue history cases,272frames with exact packed/vector oracles and sticky early-failure rejection. Full PT++ mechanisms, temporal/multi-neighbor queues, motion and timing pending."
     }
   ]
 }

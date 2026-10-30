@@ -95,7 +95,7 @@ def build(repo):
             row=next(x for x in rows if x['variant']==item['variant'] and x['scene']==item['scene'])
             row.update(item)
 
-    assert len(rows)==33 and len({(x['variant'],x['scene']) for x in rows})==33
+    assert len(rows)==len(registry['versions'])*3 and len({(x['variant'],x['scene']) for x in rows})==len(registry['versions'])*3
     for x in rows:
         if x['image'] and not (doc/x['image']).is_file():raise ValueError('Missing overview image: '+x['image'])
         if x['gpu_busy_ms'] is not None and x['gpu_busy_ms']<=0:raise ValueError('Unavailable timings cannot be zero')
@@ -207,14 +207,28 @@ def build(repo):
                 label='B8 · matched B9 control' if version=='B8' else 'B9 · '+('footprint + roulette' if scene=='opaque-room' else 'roulette only'),
                 gpu_busy_ms=t['B8_gpu_busy_ms' if version=='B8' else 'B9_gpu_busy_ms'] if t else None,
                 report='B9_RESULTS.md',evidence='Three seeds ×64static frames; frame64 FLIP. '+('Three uncapped timings. ' if t else 'Timing pending. ')+('Room cap4/4. ' if scene=='opaque-room' else 'Original cap14/2; footprint unsupported. ')+'Development, no promotion.'))
+    history_path=repo/'Benchmarks/development/2026-10-30-queue-history/summary.json'
+    history=load(history_path) if history_path.exists() else None
+    if history:
+        data['queue_history_validation']=history
+        data['source_hashes'][history_path.relative_to(repo).as_posix()]=hashlib.sha256(history_path.read_bytes()).hexdigest()
     data['checkpoint_rows']=checkpoints
     for item in checkpoints:
         if item.get('image') and not (doc/item['image']).is_file():raise ValueError('Missing checkpoint picture')
     (doc/'comparison-overview.json').write_text(json.dumps(data,indent=2,allow_nan=False)+'\n',encoding='utf-8')
-    md=['# B0–B10 comparison overview','',
-        'All eleven canonical versions appear below for each required scene. **The latest measured checkpoints now appear directly under B0 and B10 in these tables.** B10 Gaussian timing, Gaussian quality and replay-queue validation have separate rows because they are different acquisitions. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; its PT-only control is explicitly labelled as an override.','',
+    md=['# B0–B16 and sampling-variant comparison overview','',
+        'All 20 registered variants appear below for each required scene. **The latest measured checkpoints now appear directly under B0 and B10 in these tables.** B10 Gaussian timing, Gaussian quality and replay-queue validation have separate rows because they are different acquisitions. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; its PT-only control is explicitly labelled as an override.','',
         'GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Rows from different cohorts are descriptive: settings and sampling policies must be checked before computing a relative gain. Known app/NVIDIA/RTSS cap boundaries were verified for accepted current timing cohorts; unknown external limiters and background load remain limitations.','',
         '[Machine-readable overview](comparison-overview.json) · [Algorithm definitions and identities](VERSION_MAPPING.md) · [Benchmark protocol](BENCHMARK_VERSIONS.md)','']
+    if history:
+        md += ['## Latest B10 queue-history validation — partial development', '',
+               'Five static GPU cases compare272frames with actual queued output retained as history. Packed reservoir and RGB scheduling mismatches/overflow are zero; an injected early failure is rejected after a clean final frame. This is not full PT++, a quality improvement or a new timing result. B11 active CGNS remains pending. [Detailed evidence and remaining work](B10_QUEUE_HISTORY.md) · [B11 integration requirements](B11_INTEGRATION.md).', '',
+               '|Case|Resolution|Compared frames|Reservoir / RGB mismatches|Overflow|Diagnostic picture|', '|---|---:|---:|---:|---:|---|']
+        for row in history['rows']:
+            image='assets/b10-history/'+row['case']+'.png'
+            if not (doc/image).is_file():raise ValueError('Missing queue history diagnostic image')
+            md.append(f"|{row['case']}|{row['width']}×{row['height']}|{row['frames']}|0 / 0|0|<a href=\"{image}\"><img src=\"{image}\" width=\"140\" alt=\"{row['case']} queue-history diagnostic, not full B10\"></a>|")
+        md += ['', 'Pictures are final-frame scheduling diagnostics, not matched B10/B11 quality comparisons. Original-scene mid-path footprint and brightness investigation remain open. Driver-cap clearance is not asserted for these diagnostic captures.', '']
     captions={'opaque-room':('Controlled room — registered environment','Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.scene.json. B8 development pictures and new checkpoint rows explicitly use4/4; the queue snapshot is176x90. This is a distinct fixture from the legacy no-environment room. Native controls retain their DI/MIS policies; B6/B7 use their documented PT/strict-DI policies.'),
               'convergence':('Original Convergence','1280×720,1spp,14/2 bounce limits, exposure0. Original materials and camera preserved.'),
               'kitchen':('Original Kitchen','1280×720,1spp,14/2 bounce limits, exposure2. Original materials and camera preserved.')}

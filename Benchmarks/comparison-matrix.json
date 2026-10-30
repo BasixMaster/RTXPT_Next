@@ -17,7 +17,16 @@
     "B7",
     "B8",
     "B9",
-    "B10"
+    "B10",
+    "B10.75",
+    "B10.50",
+    "B10.25",
+    "B11",
+    "B12",
+    "B13",
+    "B14",
+    "B15",
+    "B16"
   ],
   "rows": [
     {
@@ -341,6 +350,195 @@
       "status": "development_not_accepted",
       "reason": "Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending.",
       "development_evidence": "Benchmarks/development/2026-10-29-gaussian-pairing/summary.json"
+    },
+    {
+      "variant": "B10.75",
+      "scene": "convergence",
+      "algorithm": "B10 full PT++ at0.75average spp",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B10.75",
+      "scene": "kitchen",
+      "algorithm": "B10 full PT++ at0.75average spp",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B10.75",
+      "scene": "opaque-room",
+      "algorithm": "B10 full PT++ at0.75average spp",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B10.50",
+      "scene": "convergence",
+      "algorithm": "B10 full PT++ at0.5average spp",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B10.50",
+      "scene": "kitchen",
+      "algorithm": "B10 full PT++ at0.5average spp",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B10.50",
+      "scene": "opaque-room",
+      "algorithm": "B10 full PT++ at0.5average spp",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B10.25",
+      "scene": "convergence",
+      "algorithm": "B10 full PT++ at0.25average spp",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B10.25",
+      "scene": "kitchen",
+      "algorithm": "B10 full PT++ at0.25average spp",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B10.25",
+      "scene": "opaque-room",
+      "algorithm": "B10 full PT++ at0.25average spp",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B11",
+      "scene": "convergence",
+      "algorithm": "B10 + Compatibility-Guided Neighbor Selection active",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B11",
+      "scene": "kitchen",
+      "algorithm": "B10 + Compatibility-Guided Neighbor Selection active",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B11",
+      "scene": "opaque-room",
+      "algorithm": "B10 + Compatibility-Guided Neighbor Selection active",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B12",
+      "scene": "convergence",
+      "algorithm": "B11 + Stochastic Pairwise MIS",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B12",
+      "scene": "kitchen",
+      "algorithm": "B11 + Stochastic Pairwise MIS",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B12",
+      "scene": "opaque-room",
+      "algorithm": "B11 + Stochastic Pairwise MIS",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B13",
+      "scene": "convergence",
+      "algorithm": "B12 + ReSTIR LoD",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B13",
+      "scene": "kitchen",
+      "algorithm": "B12 + ReSTIR LoD",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B13",
+      "scene": "opaque-room",
+      "algorithm": "B12 + ReSTIR LoD",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B14",
+      "scene": "convergence",
+      "algorithm": "B13 + ReSTIR BDPT with LW version",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B14",
+      "scene": "kitchen",
+      "algorithm": "B13 + ReSTIR BDPT with LW version",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B14",
+      "scene": "opaque-room",
+      "algorithm": "B13 + ReSTIR BDPT with LW version",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B15",
+      "scene": "convergence",
+      "algorithm": "B14 + ReSTIR PG",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B15",
+      "scene": "kitchen",
+      "algorithm": "B14 + ReSTIR PG",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B15",
+      "scene": "opaque-room",
+      "algorithm": "B14 + ReSTIR PG",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B16",
+      "scene": "convergence",
+      "algorithm": "B15 + Multi-Layer Reservoir Splatting",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B16",
+      "scene": "kitchen",
+      "algorithm": "B15 + Multi-Layer Reservoir Splatting",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
+    },
+    {
+      "variant": "B16",
+      "scene": "opaque-room",
+      "algorithm": "B15 + Multi-Layer Reservoir Splatting",
+      "status": "pending",
+      "reason": "User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred."
     }
   ]
 }

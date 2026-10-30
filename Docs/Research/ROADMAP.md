@@ -1,4 +1,6 @@
-# Roadmap: canonical B0–B10
+# Roadmap: canonical B0–B16 and B10 sampling variants
+
+**B10 continuation, 2026-10-30:** [five GPU queue-history cases /272frames](B10_QUEUE_HISTORY.md) pass exact scheduling comparisons, including the original scenes; an early-fault negative control passes. This closes the captured-frame-only gap for the scoped spatial queue. Full PT++ is still partial. [B11](B11_INTEGRATION.md) requires separate selector storage/producer and a derived combination with reciprocal pairing; its active configuration remains pending.
 
 **Live checkpoint:** B9-on-B8 has completed its scoped comparison: eight GPU diagnostics,1152quality frames and18uncapped timing runs. Room footprint+roulette regresses in GPU busy and error; Convergence/Kitchen roulette-only ablations reduce GPU busy with quality tradeoffs. Keep B8 as the control and B9 experimental. Original-scene footprint, motion/equal-time validation and deferred brightness investigation remain open; B10's remaining mechanisms are separate work. [B9 report](B9_RESULTS.md).
 
@@ -7,6 +9,31 @@
 The user deferred brightness fixes and prioritized B8–B10. See [staged implementation](B8_STAGED_IMPLEMENTATION.md) for the executed initial-GI contribution split, DI/PT reuse and limited PT++ ablation, with explicit remaining gates.
 
 [Gaussian GPU pairing](B10_GAUSSIAN_PAIRING.md) now passes table-upload/transform and original-resolution diagnostic gates. Preserve the adjacent control and the measured MSE/FLIP tradeoff; explicit replay compaction is the next scheduling increment.
+
+## User-confirmed cumulative roadmap —2026-10-30
+
+B0–B9 definitions and all historical measurements remain unchanged. B10 is full PT++; B11–B16 each inherit the preceding integer version. The three fractional B10 variants are sampling-budget branches of B10, not steps replacing B11–B16. Implementation proceeds B10, then B11; later integrations remain planned.
+
+| Version | Cumulative configuration | Activation/integration gate |
+|---|---|---|
+| **B10** | Full PT++ | Complete the remaining paper mechanisms and validation; current pilots remain partial. |
+| **B10.75** | B10 at0.75average spp | RTXPT1.9 native sub-sampling mode1; ReSTIR integration pending. |
+| **B10.50** | B10 at0.5average spp | RTXPT1.9 native sub-sampling mode2; ReSTIR integration pending. |
+| **B10.25** | B10 at0.25average spp | RTXPT1.9 native sub-sampling mode3; ReSTIR integration pending. |
+| **B11** | B10 + Compatibility-Guided Neighbor Selection active | Explicit activation and validated neighbor selection required. |
+| **B12** | B11 + Stochastic Pairwise MIS | Validate combined selection probabilities, support and weights. |
+| **B13** | B12 + ReSTIR LoD | Geometry correspondence and forward/inverse Jacobians required. |
+| **B14** | B13 + ReSTIR BDPT with LW version | LW configuration scope and combined transport ownership to be specified. |
+| **B15** | B14 + ReSTIR PG | Guiding proposal, training cost and replay consistency required. |
+| **B16** | B15 + Multi-Layer Reservoir Splatting | Layer/visibility ownership and splat accumulation required. |
+
+### RTXPT1.9 sub-sampling is inherited
+
+Pinned upstream303b408 already provides three-quarter, half and quarter sampling. `SampleUI.h` maps modes1/2/3 to0.75/0.5/0.25spp through scale/rate fields. `Shaders/Misc/SubSampling.h` includes block jitter, stochastic compaction, stratified blocks and Sobol patterns; selected native paths receive inverse-rate weighting. This is existing functionality, not a new B10 invention.
+
+Upstream disables sub-sampling with DI/GI; the current integration also disables it with ReSTIR PT (`ActualSubSamplingMode`). Therefore assigning a variant name or passing an override does not activate sparse B10. Integrate the inherited pixel-selection/dispatch mechanism with initial reservoirs, zero-sample pixels, history/reset, contribution weights and reconstruction; verify actual traced-pixel counts and total pipeline time. Native throughput compensation alone is not proof of the combined reservoir estimator. Preserve full-rate B10 as the control.
+
+B10 is still incomplete. Existing paired/vector/Gaussian and queue snapshots are scoped pilots. Close queue-history validation, unified direct/indirect sampling, duplication/history production, dual-motion handling and remaining paper gates before calling it full PT++. B11 must explicitly exercise CGNS on that accepted base; source availability is not activation evidence.
 
 ## Current execution order and acceptance gates
 

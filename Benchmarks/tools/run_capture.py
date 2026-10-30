@@ -1,6 +1,6 @@
 """Run one bounded, manifest-backed RTXPT capture, optionally with process-filtered PresentMon."""
 from pathlib import Path
-from experiment_contract import prepare as prepare_experiment, verify as verify_experiment, verify_snapshot
+from experiment_contract import VARIANT_IDS, prepare as prepare_experiment, verify as verify_experiment, verify_snapshot
 import argparse,subprocess,time,json,hashlib,os,datetime,csv
 from capture_identity import transport_settings
 from sampling_contract import roulette_value, seed_value, verify as verify_sampling, verify_di, verify_pt_replay, verify_pt_history, verify_pt_spatial, verify_ptpp, verify_capture_history
@@ -27,7 +27,7 @@ def scene_argument(value, assets_dir=None):
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--exe',type=Path,required=True);ap.add_argument('--output',type=Path,required=True)
-    ap.add_argument('--variant',choices=['B'+str(i) for i in range(11)])
+    ap.add_argument('--variant',choices=VARIANT_IDS)
     ap.add_argument('--b8-initial-gi-validation',action='store_true',help='Development only: initial DI/GI-short/PT-long partition; not a canonical B8 result')
     ap.add_argument('--b8-component',type=int,choices=range(5),default=0,help='Development output:0sum,1native,2DI,3GI-short,4PT-long')
     ap.add_argument('--b8-gi-reuse-mode',type=int,choices=range(4),help='Opt into NVIDIA GI approximation:0 initial,1 temporal,2 spatial,3 both; omission preserves legacy initial-only control')

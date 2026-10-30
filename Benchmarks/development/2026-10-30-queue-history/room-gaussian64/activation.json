@@ -1,0 +1,82 @@
+{
+  "effective_b8_partition": {
+    "development": true,
+    "contract_version": 1,
+    "gi_reuse": true,
+    "gi_approximation_mode": 3,
+    "component": 0,
+    "stage": 2,
+    "pt_min_light_inclusive_length": 4,
+    "canonical_accepted": false
+  },
+  "effective_paired_spatial_pilot": {
+    "enabled": true,
+    "policy": "Gaussian reciprocal tables; one per frame",
+    "pair_owned_shifts": true,
+    "vector_shading": true,
+    "canonical_accepted": false
+  },
+  "effective_replay_queue": {
+    "enabled": true,
+    "oracle": true,
+    "shift_stride_bytes": 104,
+    "indirect_dispatch": true,
+    "canonical_accepted": false
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 64,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "queue_same_frame_oracles": [
+    {
+      "compared_pixels": 16107,
+      "reservoir_mismatches": 0,
+      "vector_mismatches": 0,
+      "overflow": 0,
+      "replay_requests": 163,
+      "cheap_shifts": 2094,
+      "scope": "Exact packed output/vector comparison under identical frame/input/RNG; not a transport correctness or performance claim"
+    }
+  ],
+  "b8_same_frame_checks": [
+    {
+      "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+      "max_bounces": 4,
+      "components": {
+        "native": {
+          "mean_rgb": [
+            0.2159387222946545,
+            0.2159387222946545,
+            0.2159387222946545
+          ],
+          "nonzero_pixels": 175
+        },
+        "di": {
+          "mean_rgb": [
+            0.09137822722873556,
+            0.09075714422499379,
+            0.07226269864766612
+          ],
+          "nonzero_pixels": 7319
+        },
+        "gi_short": {
+          "mean_rgb": [
+            0.03844860023113205,
+            0.03403712971632194,
+            0.023597888102217333
+          ],
+          "nonzero_pixels": 8208
+        },
+        "pt_long": {
+          "mean_rgb": [
+            0.017612265468850113,
+            0.01793086069170646,
+            0.008305511143336773
+          ],
+          "nonzero_pixels": 8582
+        }
+      }
+    }
+  ]
+}

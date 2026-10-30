@@ -1,4 +1,4 @@
-# Canonical B0–B10 variants and legacy result mapping
+# Canonical B0–B16 and sampling variants variants and legacy result mapping
 
 User-confirmed numbering, 2026-10-29. **B0 is the unchanged RTXPT 1.9 reference with its original defaults and dependency/scene pins.** It is not redefined as a native-only raw preset. Every result shows a canonical variant, actual active modes and immutable source/settings identity.
 
@@ -15,8 +15,27 @@ User-confirmed numbering, 2026-10-29. **B0 is the unchanged RTXPT 1.9 reference 
 | **B6** | **ReSTIR PT / DI and GI off** | Separate DI/GI estimators off; existing native direct/fallback terms remain until explicitly replaced by a unified-lighting partition. No complete extended-scene benchmark is claimed. |
 | **B7** | **ReSTIR PT + DI 3.1** | DI direct plus PT indirect; GI off. Corrected static opaque checkpoint `de9fe651`; original-scene gates remain unresolved. |
 | **B8** | **ReSTIR PT + DI 3.1 + GI 3.1** | NVIDIA non-directional GI temporal/spatial reuse executes on disjoint GI-short/PT-long domains. Full-resolution static quality is measured with mixed results; uncapped timing measured; canonical validation remains pending. |
-| **B9** | **B8 + limited PT++** | B8 NVIDIA GI reuse retained: footprint/initial roulette in Room, full-prefix roulette-only original-scene ablations. Eight GPU checks pass; replicated replicated quality and uncapped timing measured; original-scene footprint unsupported. The historical GI-off pilot is not B9. |
+| **B9** | **B8 + limited PT++** | B8 NVIDIA GI reuse retained: footprint/initial roulette in Room, full-prefix roulette-only original-scene ablations. Eight GPU checks pass; replicated quality and uncapped timing measured; original-scene footprint unsupported. The historical GI-off pilot is not B9. |
 | **B10** | **B8 + full remaining PT++** | Gaussian reciprocal-pair/vector GPU development executes. Simultaneous multi-neighbor reuse, replay queues, remaining mechanisms and full validation remain pending. No complete-paper implementation claim. |
+
+## Extended roadmap and sampling branches
+
+Confirmed2026-10-30; B0–B9 and legacy evidence IDs remain unchanged. Future variants remain unmeasured until implemented and exercised.
+
+| Version | Configuration | Current gate |
+|---|---|---|
+| **B10** | Full PT++ | Complete the remaining paper mechanisms and validation; current pilots remain partial. |
+| **B10.75** | B10 at0.75average spp | RTXPT1.9 native sub-sampling mode1; ReSTIR integration pending. |
+| **B10.50** | B10 at0.5average spp | RTXPT1.9 native sub-sampling mode2; ReSTIR integration pending. |
+| **B10.25** | B10 at0.25average spp | RTXPT1.9 native sub-sampling mode3; ReSTIR integration pending. |
+| **B11** | B10 + Compatibility-Guided Neighbor Selection active | Explicit activation and validated neighbor selection required. |
+| **B12** | B11 + Stochastic Pairwise MIS | Validate combined selection probabilities, support and weights. |
+| **B13** | B12 + ReSTIR LoD | Geometry correspondence and forward/inverse Jacobians required. |
+| **B14** | B13 + ReSTIR BDPT with LW version | LW configuration scope and combined transport ownership to be specified. |
+| **B15** | B14 + ReSTIR PG | Guiding proposal, training cost and replay consistency required. |
+| **B16** | B15 + Multi-Layer Reservoir Splatting | Layer/visibility ownership and splat accumulation required. |
+
+Fractional rates reuse RTXPT1.9 sub-sampling. Its current ReSTIR guard remains in place until sparse-reservoir/history and weighting integration is validated. [Execution roadmap](ROADMAP.md).
 
 ## Legacy crosswalk: preserve evidence identities
 

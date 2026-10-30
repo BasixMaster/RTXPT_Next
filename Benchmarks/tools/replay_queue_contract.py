@@ -16,3 +16,12 @@ def check_counters(stats,width,height):
     if stats['queue_shift_stride_bytes']!=104 or stats['queue_cache_elements']!=pixels:raise ValueError('Queue GPU cache layout/capacity mismatch')
     if stats['queue_replay_requests']<0 or stats['queue_cheap_shifts']<0 or stats['queue_replay_requests']+stats['queue_cheap_shifts']>pixels:raise ValueError('Queue request ownership exceeds one source per pixel')
     return dict(compared_pixels=pixels,reservoir_mismatches=0,vector_mismatches=0,overflow=0,replay_requests=stats['queue_replay_requests'],cheap_shifts=stats['queue_cheap_shifts'],scope='Exact packed output/vector comparison under identical frame/input/RNG; not a transport correctness or performance claim')
+
+
+def check_sequence(stats,minimum_frames=1):
+    if stats.get('queue_sequence_frames',0)<minimum_frames:
+        raise ValueError('Queue sequence did not cover the requested history')
+    fields=('queue_sequence_reservoir_failure','queue_sequence_vector_failure','queue_sequence_overflow_failure')
+    if any(stats.get(field,1)!=0 for field in fields):
+        raise ValueError('Queue sequence contains an earlier packed/vector mismatch or overflow')
+    return dict(frames_compared=stats['queue_sequence_frames'],sticky_reservoir_failure=0,sticky_vector_failure=0,sticky_overflow_failure=0,history='Actual queued packed/vector outputs restored after each direct oracle; source/reset chronology scoped')

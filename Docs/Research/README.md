@@ -74,3 +74,20 @@ Current scoped measurements: [registered-room B1/B4/B6/B7 comparison](REGISTERED
 Current native coverage: [fresh B2/B3/B5 original-scene and room results](NATIVE_MATRIX_RESULTS.md) adds27quality captures and27cap-verified timing processes. [The unified B0–B10 overview](COMPARISON_OVERVIEW.md) includes all versions, current metrics and representative pictures; historical cohorts remain separate.
 
 Fresh requested control: [RTXPT1.9 PT-only override](NATIVE_MATRIX_RESULTS.md#fresh-rtxpt19-pt-only-override) now has9cap-verified timing processes and9PNG captures across Room and original Convergence/Kitchen. Native PT/NEE on, DI/GI off; original B0 defaults remain preserved. HDR export is unsupported in that unchanged binary.
+
+## Cumulative roadmap extension
+
+| **B10** | Full PT++ | Complete the remaining paper mechanisms and validation; current pilots remain partial. |
+| **B10.75** | B10 at0.75average spp | RTXPT1.9 native sub-sampling mode1; ReSTIR integration pending. |
+| **B10.50** | B10 at0.5average spp | RTXPT1.9 native sub-sampling mode2; ReSTIR integration pending. |
+| **B10.25** | B10 at0.25average spp | RTXPT1.9 native sub-sampling mode3; ReSTIR integration pending. |
+| **B11** | B10 + Compatibility-Guided Neighbor Selection active | Explicit activation and validated neighbor selection required. |
+| **B12** | B11 + Stochastic Pairwise MIS | Validate combined selection probabilities, support and weights. |
+| **B13** | B12 + ReSTIR LoD | Geometry correspondence and forward/inverse Jacobians required. |
+| **B14** | B13 + ReSTIR BDPT with LW version | LW configuration scope and combined transport ownership to be specified. |
+| **B15** | B14 + ReSTIR PG | Guiding proposal, training cost and replay consistency required. |
+| **B16** | B15 + Multi-Layer Reservoir Splatting | Layer/visibility ownership and splat accumulation required. |
+
+RTXPT1.9 already supplies the sub-sampling mechanism. Sparse B10/ReSTIR integration and activation remain pending; B10 thenB11 are the current implementation priority.
+
+[B10 queue-history checkpoint](B10_QUEUE_HISTORY.md) · [B11 integration requirements](B11_INTEGRATION.md) — partial development; no new speedup claim.

@@ -53,7 +53,10 @@ scenes=sorted(p.name for p in (P/'Assets').glob('*.scene.json'));assert len(scen
 checks.append(dict(name='Pinned original scene files present',status='passed',scenes=scenes))
 versions=json.loads((P/'Benchmarks/versions.json').read_text(encoding='utf-8'))
 by_id={x['id']:x for x in versions['versions']}
-assert list(by_id)==['B'+str(i) for i in range(11)]
+expected_ids=['B'+str(i) for i in range(11)]+['B10.75','B10.50','B10.25']+['B'+str(i) for i in range(11,17)]
+assert list(by_id)==expected_ids
+for key,rate,mode in [('B10.75',.75,1),('B10.50',.5,2),('B10.25',.25,3)]:
+    assert by_id[key]['average_spp']==rate and by_id[key]['native_subsampling_mode']==mode and by_id[key]['status']=='planned'
 assert versions['numbering_scheme']=='2026-10-29-user-confirmed-B0-B10'
 for name in ['B0','B1','B2']:assert by_id[name]['source_sha']==baseline and by_id[name]['rtxdi_sha']=='a14e079c727ed8c4fd3173bd2aea8244c9d9f6d6'
 for name in ['B3','B4','B5']:assert by_id[name]['source_sha']==b1 and by_id[name]['rtxdi_sha']=='f12037fa8e97ebc08e9e3edfd2de528ed1772a4b'
@@ -170,8 +173,8 @@ for folder in (native_completion/'timing').iterdir():
     assert result['image_write_count']==0 and not result['reported_trace_loss']
 checks.append(dict(name='Native B2/B3/B5 completion:27Q/27T frozen identities and restoration',status='passed'))
 overview=json.loads((D/'comparison-overview.json').read_text(encoding='utf-8'))
-assert len(overview['rows'])==33 and len({(x['variant'],x['scene']) for x in overview['rows']})==33
-assert {x['variant'] for x in overview['rows']}=={'B'+str(i) for i in range(11)}
+assert len(overview['rows'])==60 and len({(x['variant'],x['scene']) for x in overview['rows']})==60
+assert {x['variant'] for x in overview['rows']}==set(expected_ids)
 assert {x['scene'] for x in overview['rows']}=={'convergence','kitchen','opaque-room'}
 for row in overview['rows']:
     assert row['gpu_busy_ms'] is None or row['gpu_busy_ms']>0
@@ -186,7 +189,7 @@ for row in overview['rows']:
 for relative,digest in overview['source_hashes'].items():
     assert hashlib.sha256((P/relative).read_bytes()).hexdigest()==digest
 assert 'id="comparison-overview"' in page and 'comparison-overview.json' in page
-checks.append(dict(name='Unified canonical overview: all33 scene/variant rows, exact evidence hashes and explicit missing values',status='passed'))
+checks.append(dict(name='Unified canonical overview: all60 scene/variant rows, exact evidence hashes and explicit missing values',status='passed'))
 extended=P/'Benchmarks/development/2026-10-29-original-scene-pt-development'
 ext_index=json.loads((extended/'index.json').read_text())
 assert ext_index['status']=='development_not_accepted' and ext_index['counts']['original_resolution_captures']==4
@@ -246,7 +249,7 @@ if precision.exists():
         post=json.loads((precision/('post-cli-'+variant+'.json')).read_text());assert post['measurement_status']=='captured' and post['effective_gbuffer_precision']['rounded_materials']==mode and post['artifact_identity_after_capture']['validated']
     assert len(list(precision.rglob('*.pfm')))==2
     assert (D/'GBUFFER_PRECISION.md').exists() and '[RESULT_INTERPRETATION]' not in (D/'GBUFFER_PRECISION.md').read_text()
-    assert 'material_precision_ablation' in overview and len(overview['rows'])==33
+    assert 'material_precision_ablation' in overview and len(overview['rows'])==60
     checks.append(dict(name='Material precision:40matched captures,8groups,2rawPFMs,exact artifacts,explicit0/1 plus implicit legacy default and separate overview ablation',status='passed'))
 
 di_reuse=P/'Benchmarks/development/2026-10-29-di-reuse-isolation'
@@ -270,7 +273,7 @@ if di_reuse.exists():
         assert statistics.median(x['hdr_flip']['mean'] for x in sample)==group['median_hdr_flip']
     exclusion=json.loads((di_reuse/'excluded-timing/outcome.json').read_text());assert exclusion['accepted_timing_samples']==0 and exclusion['driver_restoration_verified']
     audit=json.loads((di_reuse/'retained-trace-log-audit.json').read_text());assert audit['checked']==72 and audit['reported_loss_count']==0
-    assert len(list(di_reuse.rglob('*.pfm')))==2 and len(overview['rows'])==33 and 'di_reuse_ablation' in overview
+    assert len(list(di_reuse.rglob('*.pfm')))==2 and len(overview['rows'])==60 and 'di_reuse_ablation' in overview
     assert '[RESULT_INTERPRETATION]' not in (D/'DI_REUSE_ISOLATION.md').read_text()
     checks.append(dict(name='DI reuse isolation:80original-scene captures,16groups,12contrasts,actual activation/flags,exact artifacts,reference agreement and independent aggregate checks',status='passed'))
 
@@ -300,7 +303,7 @@ if prefix.exists():
     assert len(list(prefix.rglob('*.pfm')))==2 and len(json.loads((prefix/'radiance-finite-checks.json').read_text()))==8
     for row in json.loads((prefix/'radiance-finite-checks.json').read_text()):assert row['nonfinite_components']==0
     for row in json.loads((prefix/'native-cli-validation.json').read_text()):assert row['exit_code']!=0 and row['expected_diagnostic_present']
-    assert 'prefix_throughput_diagnostic' in overview and len(overview['rows'])==33
+    assert 'prefix_throughput_diagnostic' in overview and len(overview['rows'])==60
     checks.append(dict(name='Calibrated prefix:8frozen physical snapshots,exact default/preserve buffers,known synthetic packed words,restoration,finite radiance and CLI rejection',status='passed'))
 
 staged=P/'Benchmarks/development/2026-10-29-b8-staged-partition'
@@ -519,7 +522,31 @@ assert len(json.loads((queue/'queue-disabled-regressions.json').read_text()))==2
 assert overview['replay_compaction_status']['state']=='partial_gpu_snapshot_oracles_passed'
 checks.append(dict(name='11exact GPU queue snapshots, real original-scene replay, disabled regressions and source/evidence hashes',status='passed',limits='Captured-frame checks only; queue-only histories, timing, full GI reuse and complete PT++ remain pending.'))
 
-receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; general directional GI, queue-only histories/timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending.'])
+history_root=P/'Benchmarks/development/2026-10-30-queue-history'
+history=json.loads((history_root/'summary.json').read_text())
+assert history['status']=='partial_gpu_queue_history_oracles_passed' and not history['canonical_accepted']
+assert len(history['rows'])==5 and history['frames_compared']==272
+identity=json.loads((history_root/'source-identity.json').read_text())
+assert hashlib.sha256((history_root/'renderer-source.patch').read_bytes()).hexdigest()==identity['renderer_patch_sha256']
+for row in history['rows']:
+    folder=history_root/row['case'];stats=json.loads((folder/'stats.json').read_text())
+    assert hashlib.sha256((folder/'stats.json').read_bytes()).hexdigest()==row['stats_sha256']
+    assert stats['queue_sequence_frames']==row['frames'] and stats['queue_oracle_pixels']==row['width']*row['height']
+    assert all(stats[k]==0 for k in ['queue_sequence_reservoir_failure','queue_sequence_vector_failure','queue_sequence_overflow_failure','queue_reservoir_mismatches','queue_vector_mismatches','queue_overflow'])
+    assert hashlib.sha256((folder/'image.png').read_bytes()).hexdigest()==row['image_sha256']
+    assert hashlib.sha256((D/'assets/b10-history'/(row['case']+'.png')).read_bytes()).hexdigest()==row['image_sha256']
+    assert all(x['finite'] and (x['width'],x['height'])==(row['width'],row['height']) for x in json.loads((folder/'hdr-payloads.json').read_text()))
+fault=json.loads((history_root/'fault-sequence-third/stats.json').read_text())
+assert fault['queue_reservoir_mismatches']==0 and fault['queue_sequence_reservoir_failure']==1 and fault['queue_sequence_frames']==16
+negative=json.loads((history_root/'fault-sequence-third/receipt.json').read_text())
+assert negative['expected_rejection'] and negative['last_frame_clean'] and negative['earlier_failure_sticky']
+assert negative['restored_shader_sha256']==identity['renderer_source_files']['Rtxpt/RTXDI/PT/ReplayCompaction.hlsl']
+assert len(json.loads((history_root/'excluded-attempts.json').read_text()))==3
+assert overview['queue_history_validation']==history
+assert 'id=\"b10-queue-history\"' in page and 'id=\"b11-integration\"' in page
+checks.append(dict(name='B10 static queue history:5GPU cases/272frames, exact state/vector comparisons, earlier-fault rejection, retained excluded attempts and export hashes',status='passed',limits='One spatial neighbor; static chronology; no full PT++, new performance/quality gain or B11 activation.'))
+
+receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; general directional GI, broader moving/reset queue histories and timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))
 print(json.dumps(dict(passed=True,checks=len(checks),scenes=len(scenes),math_expressions=page.count('<math '))))

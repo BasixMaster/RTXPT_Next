@@ -1,7 +1,7 @@
 <!-- basix-research:start -->
 # Basix Pathtracing · RTXPT Next
 
-**Canonical B0–B10 numbering:** B0 is unchanged RTXPT 1.9 with original defaults and pins. Explicit DI/GI/PT configurations and PT++ stages are defined in the [version mapping and legacy crosswalk](Docs/Research/VERSION_MAPPING.md). Existing tags, data IDs and numeric results retain their original identities. [Research and roadmap](Docs/Research/README.md) · [Offline study](Docs/Research/index.html) · [Version comparisons](Benchmarks/README.md) · [Image quality metrics](Docs/Research/QUALITY_METRICS.md).
+**Canonical B0–B16 and B10 fractional-sampling variants:** B0 is unchanged RTXPT 1.9 with original defaults and pins. Explicit DI/GI/PT configurations and PT++ stages are defined in the [version mapping and legacy crosswalk](Docs/Research/VERSION_MAPPING.md). Existing tags, data IDs and numeric results retain their original identities. [Research and roadmap](Docs/Research/README.md) · [Offline study](Docs/Research/index.html) · [Version comparisons](Benchmarks/README.md) · [Image quality metrics](Docs/Research/QUALITY_METRICS.md).
 
 | Variant | Short algorithm overview |
 |---|---|
@@ -244,3 +244,18 @@ Historical checkpoint: [legacy B2 static opaque results](Docs/Research/B2_RESULT
 Measured updates: [B1/B4 original-scene DI controls](Docs/Research/CANONICAL_NATIVE_DI_RESULTS.md) and [B1/B4/B6/B7 registered-room comparison](Docs/Research/REGISTERED_ROOM_RESULTS.md). The latter measures a19.41%GPU-busy increase and45.09%lower LDR-FLIP for configured B7 versus B4; no equal-quality speedup is claimed. B8 GPU integration remains pending after17exact CPU prerequisite tests.
 
 [**Unified B0–B10 comparison: performance, quality and pictures**](Docs/Research/COMPARISON_OVERVIEW.md) shows every required scene/variant row. [Fresh B2/B3/B5 native results](Docs/Research/NATIVE_MATRIX_RESULTS.md) complete the native scene matrix; original-scene ReSTIR PT compatibility is being validated separately.
+
+## Cumulative roadmap extension
+
+| **B10** | Full PT++ | Complete the remaining paper mechanisms and validation; current pilots remain partial. |
+| **B10.75** | B10 at0.75average spp | RTXPT1.9 native sub-sampling mode1; ReSTIR integration pending. |
+| **B10.50** | B10 at0.5average spp | RTXPT1.9 native sub-sampling mode2; ReSTIR integration pending. |
+| **B10.25** | B10 at0.25average spp | RTXPT1.9 native sub-sampling mode3; ReSTIR integration pending. |
+| **B11** | B10 + Compatibility-Guided Neighbor Selection active | Explicit activation and validated neighbor selection required. |
+| **B12** | B11 + Stochastic Pairwise MIS | Validate combined selection probabilities, support and weights. |
+| **B13** | B12 + ReSTIR LoD | Geometry correspondence and forward/inverse Jacobians required. |
+| **B14** | B13 + ReSTIR BDPT with LW version | LW configuration scope and combined transport ownership to be specified. |
+| **B15** | B14 + ReSTIR PG | Guiding proposal, training cost and replay consistency required. |
+| **B16** | B15 + Multi-Layer Reservoir Splatting | Layer/visibility ownership and splat accumulation required. |
+
+RTXPT1.9 already supplies the sub-sampling mechanism. Sparse B10/ReSTIR integration and activation remain pending; B10 thenB11 are the current implementation priority.

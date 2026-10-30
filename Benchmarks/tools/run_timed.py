@@ -1,7 +1,7 @@
 """Capture no-image-write, process-filtered PresentMon timing of an owned renderer."""
 from pathlib import Path
 from presentmon_log import reported_loss
-from experiment_contract import prepare as prepare_experiment, verify as verify_experiment, verify_snapshot
+from experiment_contract import VARIANT_IDS, prepare as prepare_experiment, verify as verify_experiment, verify_snapshot
 import argparse,subprocess,time,json,datetime,hashlib,csv
 from cap_preflight import validate_audit,validate_runtime
 from capture_identity import transport_settings
@@ -20,7 +20,7 @@ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--exe',type=Path,required=True);ap.add_argument('--presentmon',type=Path,required=True);ap.add_argument('--output',type=Path,required=True)
-    ap.add_argument('--variant',choices=['B'+str(i) for i in range(11)])
+    ap.add_argument('--variant',choices=VARIANT_IDS)
     ap.add_argument('--variant-preset',choices=['matched-raw','raw-native-control','limited-ptpp-ablation'],default='matched-raw')
     ap.add_argument('--label',required=True);ap.add_argument('--scene',required=True);ap.add_argument('--exposure',type=float,required=True)
     ap.add_argument('--width',type=int,default=1280);ap.add_argument('--height',type=int,default=720)

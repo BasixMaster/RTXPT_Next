@@ -1,0 +1,81 @@
+{
+  "status": "partial_gpu_queue_history_oracles_passed",
+  "canonical_accepted": false,
+  "rows": [
+    {
+      "case": "room-adjacent64",
+      "width": 177,
+      "height": 91,
+      "frames": 64,
+      "reservoir_mismatches": 0,
+      "vector_mismatches": 0,
+      "overflow": 0,
+      "replay_requests": 794,
+      "stats_sha256": "5fb54e18154fc03c949143fb20f7702b141cdced5e1854a61c55d39c305bb3b6",
+      "image_sha256": "dd353337fe6291b72345d29ad880bd2692b22d394d11853d3dddb289206036ef",
+      "scope": "Exact per-frame scheduling oracle with restored actual queue history; final-frame HDR finite checks. Not full PT++ or a transport-mean/quality/performance claim."
+    },
+    {
+      "case": "room-gaussian64",
+      "width": 177,
+      "height": 91,
+      "frames": 64,
+      "reservoir_mismatches": 0,
+      "vector_mismatches": 0,
+      "overflow": 0,
+      "replay_requests": 163,
+      "stats_sha256": "fc81381a14d59f7290606e65583e6b1a3dbdc7b44589c70f13496c8ed18c2a93",
+      "image_sha256": "c30d3a1bb3a28a04b5f594e8fd4122734af14a4f689e6d868d70fcf722aed6a3",
+      "scope": "Exact per-frame scheduling oracle with restored actual queue history; final-frame HDR finite checks. Not full PT++ or a transport-mean/quality/performance claim."
+    },
+    {
+      "case": "room-thin16",
+      "width": 176,
+      "height": 1,
+      "frames": 16,
+      "reservoir_mismatches": 0,
+      "vector_mismatches": 0,
+      "overflow": 0,
+      "replay_requests": 0,
+      "stats_sha256": "a7836a80e10b4526d747a8d63b55c6662c3e8759cab5abd7876baf62f94ccb8c",
+      "image_sha256": "2bbc134950671d4e8d44f587823e5a3374e577ed8addb32c48f8255ca90846e5",
+      "scope": "Exact per-frame scheduling oracle with restored actual queue history; final-frame HDR finite checks. Not full PT++ or a transport-mean/quality/performance claim."
+    },
+    {
+      "case": "convergence64",
+      "width": 1280,
+      "height": 720,
+      "frames": 64,
+      "reservoir_mismatches": 0,
+      "vector_mismatches": 0,
+      "overflow": 0,
+      "replay_requests": 617162,
+      "stats_sha256": "5bd7c828090531ef31206fd7dd58435093ccb2f8ee34f6069461a3ab41ef1e68",
+      "image_sha256": "8009e48b17962d69add664f90cc72d6d7198cee30bb6cc1385c3a5bf2e7becc3",
+      "scope": "Exact per-frame scheduling oracle with restored actual queue history; final-frame HDR finite checks. Not full PT++ or a transport-mean/quality/performance claim."
+    },
+    {
+      "case": "kitchen64",
+      "width": 1280,
+      "height": 720,
+      "frames": 64,
+      "reservoir_mismatches": 0,
+      "vector_mismatches": 0,
+      "overflow": 0,
+      "replay_requests": 543491,
+      "stats_sha256": "ccfe2f455cc041bcf210d7c60f41d921dfddd80055decb60b9bcf5348489d377",
+      "image_sha256": "55dc1e2da58c7295b69cfa2f038f9ddde6311bcafa93663b97ae640c63efd158",
+      "scope": "Exact per-frame scheduling oracle with restored actual queue history; final-frame HDR finite checks. Not full PT++ or a transport-mean/quality/performance claim."
+    }
+  ],
+  "frames_compared": 272,
+  "negative_control": "fault-sequence-third/receipt.json",
+  "excluded_attempts": "excluded-attempts.json",
+  "limitations": [
+    "Static cameras only; one GPU.",
+    "One-neighbor spatial replay queue only, not temporal/multi-neighbor queues.",
+    "Diagnostic direct control adds cost; no timing or speedup claim.",
+    "Full PT++ mechanisms and B11 active CGNS are pending.",
+    "Brightness investigation remains deferred by user."
+  ]
+}

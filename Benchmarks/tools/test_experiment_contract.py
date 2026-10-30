@@ -15,6 +15,11 @@ def owned_scratch():
 
 
 class CanonicalExperimentTests(unittest.TestCase):
+    def test_roadmap_and_sampling_ids_cannot_be_recorded_as_active(self):
+        from experiment_contract import VARIANT_IDS
+        for version in ['B10.75','B10.50','B10.25']+['B'+str(i) for i in range(11,17)]:
+            self.assertIn(version,VARIANT_IDS)
+            with self.assertRaises(ValueError):prepare(version,'dipt')
     def test_all_supported_mode_assignments(self):
         for v,mode in [('B1','di'),('B2','digi'),('B3','default'),('B4','di'),('B5','digi'),('B6','pt'),('B7','dipt')]:
             self.assertEqual(prepare(v,mode)['variant'],v)

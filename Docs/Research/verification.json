@@ -138,9 +138,9 @@
       "name": "Mandatory version/algorithm labels and original-scene coverage rows",
       "status": "passed",
       "coverage": {
-        "variants": 11,
+        "variants": 20,
         "scenes": 3,
-        "rows": 33,
+        "rows": 60,
         "status": "coverage labels verified; not validation of renderer results"
       }
     },
@@ -206,7 +206,7 @@
       "status": "passed"
     },
     {
-      "name": "Unified canonical overview: all33 scene/variant rows, exact evidence hashes and explicit missing values",
+      "name": "Unified canonical overview: all60 scene/variant rows, exact evidence hashes and explicit missing values",
       "status": "passed"
     },
     {
@@ -287,6 +287,11 @@
       "name": "11exact GPU queue snapshots, real original-scene replay, disabled regressions and source/evidence hashes",
       "status": "passed",
       "limits": "Captured-frame checks only; queue-only histories, timing, full GI reuse and complete PT++ remain pending."
+    },
+    {
+      "name": "B10 static queue history:5GPU cases/272frames, exact state/vector comparisons, earlier-fault rejection, retained excluded attempts and export hashes",
+      "status": "passed",
+      "limits": "One spatial neighbor; static chronology; no full PT++, new performance/quality gain or B11 activation."
     }
   ],
   "passed": true,
@@ -295,6 +300,6 @@
     "One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.",
     "PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.",
     "Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.",
-    "Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; general directional GI, queue-only histories/timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending."
+    "Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; general directional GI, broader moving/reset queue histories and timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending."
   ]
 }

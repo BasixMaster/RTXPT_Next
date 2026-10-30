@@ -1,0 +1,7 @@
+{
+  "expected_rejection": true,
+  "reason": "Queue sequence contains an earlier packed/vector mismatch or overflow",
+  "last_frame_clean": true,
+  "earlier_failure_sticky": true,
+  "restored_shader_sha256": "9f76adb7e6c1781b7f5ed235154b501dc338baf7d1f029cf4ef521221fe50cf9"
+}

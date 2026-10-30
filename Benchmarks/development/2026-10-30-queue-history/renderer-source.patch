@@ -1,0 +1,89 @@
+diff --git a/Rtxpt/RTXDI/PT/ReplayCompaction.hlsl b/Rtxpt/RTXDI/PT/ReplayCompaction.hlsl
+index 27546ab..79a2c01 100644
+--- a/Rtxpt/RTXDI/PT/ReplayCompaction.hlsl
++++ b/Rtxpt/RTXDI/PT/ReplayCompaction.hlsl
+@@ -67,6 +67,7 @@ void main(uint2 pixel:SV_DispatchThreadID)
+             // Capacity N follows from one request per source pixel. Preserve
+             // the work even on an unexpected overflow, and fail diagnostics.
+             InterlockedAdd(u_PTDiagnosticCounters[48],1);
++            InterlockedOr(u_PTDiagnosticCounters[95],1);
+             u_PTShiftCache[index]=RTXPT_PairShiftTo(source,a,b,partner,QueueParams());
+         }
+     }
+@@ -155,8 +156,27 @@ void main(uint2 pixel:SV_DispatchThreadID)
+         }
+     }
+     InterlockedAdd(u_PTDiagnosticCounters[51],1);
+-    if(different) InterlockedAdd(u_PTDiagnosticCounters[52],1);
+-    if(any(u_PTSpatialNeighbors.Load3(index*16)!=u_PTReplayOracle.Load3(index*76+64))) InterlockedAdd(u_PTDiagnosticCounters[53],1);
++    if(index==0) InterlockedAdd(u_PTDiagnosticCounters[92],1);
++    if(different)
++    {
++        InterlockedAdd(u_PTDiagnosticCounters[52],1);
++        InterlockedOr(u_PTDiagnosticCounters[93],1);
++    }
++    if(any(u_PTSpatialNeighbors.Load3(index*16)!=u_PTReplayOracle.Load3(index*76+64)))
++    {
++        InterlockedAdd(u_PTDiagnosticCounters[53],1);
++        InterlockedOr(u_PTDiagnosticCounters[94],1);
++    }
++    // The direct control is diagnostic only. Restore the exact queued words
++    // and vector bits so the next frame follows the actual queue history.
++    RTXDI_PackedPTReservoir queued;
++    queued.Data0=u_PTReplayOracle.Load4(index*76);
++    queued.Data1=u_PTReplayOracle.Load4(index*76+16);
++    queued.Data2=u_PTReplayOracle.Load4(index*76+32);
++    queued.Data3=u_PTReplayOracle.Load4(index*76+48);
++    RTXDI_StorePackedPTReservoir(queued,g_RtxdiBridgeConst.restirPT.reservoirBuffer,pos,
++        g_RtxdiBridgeConst.restirPT.bufferIndices.spatialResamplingOutputBufferIndex);
++    u_PTSpatialNeighbors.Store3(index*16,u_PTReplayOracle.Load3(index*76+64));
+ #endif
+ #endif
+ }
+diff --git a/Rtxpt/RTXDI/RtxdiPass.cpp b/Rtxpt/RTXDI/RtxdiPass.cpp
+index f81e890..ef1f5d0 100644
+--- a/Rtxpt/RTXDI/RtxdiPass.cpp
++++ b/Rtxpt/RTXDI/RtxdiPass.cpp
+@@ -430,6 +430,7 @@ void RtxdiPass::BeginFrame(
+     {
+         commandList->clearBufferUInt(m_rtxdiResources->PTReservoirBuffer, 0);
+         commandList->clearBufferUInt(m_rtxdiResources->PTSpatialNeighborSelectionBuffer, 0xffffffffu);
++        commandList->clearBufferUInt(m_rtxdiResources->PTDiagnosticCounters, 0);
+         nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
+         nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTSpatialNeighborSelectionBuffer);
+         commandList->commitBarriers();
+@@ -438,7 +439,10 @@ void RtxdiPass::BeginFrame(
+ 
+     if (m_BridgeParameters.usingReSTIRPT && m_BridgeParameters.capturePTDiagnostics)
+     {
+-        commandList->clearBufferUInt(m_rtxdiResources->PTDiagnosticCounters, 0);
++        // Slots92..95 retain sequence-oracle coverage/failures until history
++        // resets. Clear only frame-local counters after the initial full clear.
++        const uint32_t frameCounters[92] = {};
++        commandList->writeBuffer(m_rtxdiResources->PTDiagnosticCounters, frameCounters, sizeof(frameCounters));
+         nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTDiagnosticCounters);
+     }
+     // Light preparation is needed for DI/ReGIR and PT next-event estimation.
+@@ -990,7 +994,7 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
+     float selfShiftMaxError = 0;
+     std::memcpy(&selfShiftMaxError,counters+9,sizeof(float));
+     std::ofstream statFile(path + ".stats.json");
+-    statFile << "{\n  \"scope\": \"last captured frame, diagnostics only\",\n  \"roulette_tests\": " << counters[0]
++    statFile << "{\n  \"scope\": \"Frame-local counters plus queue sequence flags since last history reset\",\n  \"roulette_tests\": " << counters[0]
+         << ",\n  \"roulette_terminated\": " << counters[1] << ",\n  \"roulette_survived\": " << counters[2]
+         << ",\n  \"replay_roulette_tests\": " << counters[3]
+         << ",\n  \"transmission_scatter_events\": " << counters[4]
+@@ -1034,7 +1038,12 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
+     for(int i=56;i<72;++i) { if(i>56) statFile << ","; statFile << counters[i]; }
+     statFile << "],\n  \"queue_first_difference\": [";
+     for(int i=72;i<92;++i) { if(i>72) statFile << ","; statFile << counters[i]; }
+-    statFile << "]\n}\n";
++    statFile << "]"
++        << ",\n  \"queue_sequence_frames\": " << counters[92]
++        << ",\n  \"queue_sequence_reservoir_failure\": " << counters[93]
++        << ",\n  \"queue_sequence_vector_failure\": " << counters[94]
++        << ",\n  \"queue_sequence_overflow_failure\": " << counters[95]
++        << "\n}\n";
+     m_device->unmapBuffer(stats);
+     if (!statFile) throw std::runtime_error("PT counter metadata write failed");
+     if ((m_BridgeParameters.giPTPartition & 4u) != 0)

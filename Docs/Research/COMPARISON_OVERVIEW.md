@@ -1,12 +1,26 @@
-# B0–B10 comparison overview
+# B0–B16 and sampling-variant comparison overview
 
 **Current implementation status:** The opt-in one-neighbor spatial replay queue now passes11captured-frame GPU oracles, including Convergence244654replays and Kitchen41032replays. Every packed-history word and vector-radiance bit matches its same-frame direct control. Native and direct-pair queue-disabled regressions pass. Queue performance, queue-only temporal-history sequences and full B10 acceptance remain pending. [Detailed queue checkpoint](B10_GAUSSIAN_PAIRING.md#replay-compaction--active-implementation-checkpoint).
 
-All eleven canonical versions appear below for each required scene. **The latest measured checkpoints now appear directly under B0 and B10 in these tables.** B10 Gaussian timing, Gaussian quality and replay-queue validation have separate rows because they are different acquisitions. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; its PT-only control is explicitly labelled as an override.
+All 20 registered variants appear below for each required scene. **The latest measured checkpoints now appear directly under B0 and B10 in these tables.** B10 Gaussian timing, Gaussian quality and replay-queue validation have separate rows because they are different acquisitions. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; its PT-only control is explicitly labelled as an override.
 
 GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Rows from different cohorts are descriptive: settings and sampling policies must be checked before computing a relative gain. Known app/NVIDIA/RTSS cap boundaries were verified for accepted current timing cohorts; unknown external limiters and background load remain limitations.
 
 [Machine-readable overview](comparison-overview.json) · [Algorithm definitions and identities](VERSION_MAPPING.md) · [Benchmark protocol](BENCHMARK_VERSIONS.md)
+
+## Latest B10 queue-history validation — partial development
+
+Five static GPU cases compare272frames with actual queued output retained as history. Packed reservoir and RGB scheduling mismatches/overflow are zero; an injected early failure is rejected after a clean final frame. This is not full PT++, a quality improvement or a new timing result. B11 active CGNS remains pending. [Detailed evidence and remaining work](B10_QUEUE_HISTORY.md) · [B11 integration requirements](B11_INTEGRATION.md).
+
+|Case|Resolution|Compared frames|Reservoir / RGB mismatches|Overflow|Diagnostic picture|
+|---|---:|---:|---:|---:|---|
+|room-adjacent64|177×91|64|0 / 0|0|<a href="assets/b10-history/room-adjacent64.png"><img src="assets/b10-history/room-adjacent64.png" width="140" alt="room-adjacent64 queue-history diagnostic, not full B10"></a>|
+|room-gaussian64|177×91|64|0 / 0|0|<a href="assets/b10-history/room-gaussian64.png"><img src="assets/b10-history/room-gaussian64.png" width="140" alt="room-gaussian64 queue-history diagnostic, not full B10"></a>|
+|room-thin16|176×1|16|0 / 0|0|<a href="assets/b10-history/room-thin16.png"><img src="assets/b10-history/room-thin16.png" width="140" alt="room-thin16 queue-history diagnostic, not full B10"></a>|
+|convergence64|1280×720|64|0 / 0|0|<a href="assets/b10-history/convergence64.png"><img src="assets/b10-history/convergence64.png" width="140" alt="convergence64 queue-history diagnostic, not full B10"></a>|
+|kitchen64|1280×720|64|0 / 0|0|<a href="assets/b10-history/kitchen64.png"><img src="assets/b10-history/kitchen64.png" width="140" alt="kitchen64 queue-history diagnostic, not full B10"></a>|
+
+Pictures are final-frame scheduling diagnostics, not matched B10/B11 quality comparisons. Original-scene mid-path footprint and brightness investigation remain open. Driver-cap clearance is not asserted for these diagnostic captures.
 
 ## Controlled room — registered environment
 
@@ -33,6 +47,15 @@ Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.
 | **↳ B10 · Gaussian timing** | DI initial + GI initial + paired/vector PT; one Gaussian neighbor | 1.591 | Unavailable | Unavailable | No images during timing | [3 timed processes; quality is a separate row. Room4/4; originals14/2.](B10_GAUSSIAN_PAIRING.md) |
 | **↳ B10 · Gaussian quality** | One-neighbor paired/vector PT; GI initial only | Unavailable | 0.096257 | 0.159373 | [![B10 · Gaussian quality opaque-room](assets/b10-gaussian/room.png)](assets/b10-gaussian/room.png) | [Quality-only cohort: 64-frame sequence, cap4/4.](B10_GAUSSIAN_PAIRING.md) |
 | **↳ B10 · Replay queue** | One-neighbor spatial replay queue; DI/GI initial | Unavailable | Unavailable | Unavailable | [![B10 · Replay queue opaque-room](assets/b10-queue/opaque-room.png)](assets/b10-queue/opaque-room.png) | [Exact snapshot: 176x90, cap4/4, 0 replays,0 mismatches. Timing/quality scores pending.](B10_GAUSSIAN_PAIRING.md) |
+| **B10.75** | B10 full PT++ at0.75average spp | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B10.50** | B10 full PT++ at0.5average spp | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B10.25** | B10 full PT++ at0.25average spp | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B11** | B10 + Compatibility-Guided Neighbor Selection active | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B12** | B11 + Stochastic Pairwise MIS | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B13** | B12 + ReSTIR LoD | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B14** | B13 + ReSTIR BDPT with LW version | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B15** | B14 + ReSTIR PG | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B16** | B15 + Multi-Layer Reservoir Splatting | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
 
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -47,6 +70,15 @@ Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.
 - **B8:** NVIDIA non-directional GI reuse: 640x360 cap4/4,64-frame static quality measured; mixed results. Scoped timing is shown separately when available; no canonical promotion.
 - **B9:** Eight GPU diagnostics passed; 640x360 cap4/4 snapshot shown. Three-seed64-frame quality and uncapped timing in progress. Original-scene footprint remains unsupported; no promotion.
 - **B10:** Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending. Image is 640x360 development coverage, not an accepted matched benchmark.
+- **B10.75:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B10.50:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B10.25:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B11:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B12:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B13:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B14:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B15:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B16:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
 
 </details>
 
@@ -75,6 +107,15 @@ Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.
 | **↳ B10 · Gaussian timing** | DI initial + GI initial + paired/vector PT; one Gaussian neighbor | 7.184 | Unavailable | Unavailable | No images during timing | [3 timed processes; quality is a separate row. Room4/4; originals14/2.](B10_GAUSSIAN_PAIRING.md) |
 | **↳ B10 · Gaussian quality** | One-neighbor paired/vector PT; GI initial only | Unavailable | 0.351035 | 0.536508 | [![B10 · Gaussian quality convergence](assets/b10-gaussian/convergence.png)](assets/b10-gaussian/convergence.png) | [Quality-only cohort: 1 image,8 warmup frames, cap14/2.](B10_GAUSSIAN_PAIRING.md) |
 | **↳ B10 · Replay queue** | One-neighbor spatial replay queue; DI/GI initial | Unavailable | Unavailable | Unavailable | [![B10 · Replay queue convergence](assets/b10-queue/convergence.png)](assets/b10-queue/convergence.png) | [Exact snapshot: 1280x720, cap14/2, 244654 replays,0 mismatches. Timing/quality scores pending.](B10_GAUSSIAN_PAIRING.md) |
+| **B10.75** | B10 full PT++ at0.75average spp | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B10.50** | B10 full PT++ at0.5average spp | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B10.25** | B10 full PT++ at0.25average spp | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B11** | B10 + Compatibility-Guided Neighbor Selection active | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B12** | B11 + Stochastic Pairwise MIS | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B13** | B12 + ReSTIR LoD | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B14** | B13 + ReSTIR BDPT with LW version | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B15** | B14 + ReSTIR PG | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B16** | B15 + Multi-Layer Reservoir Splatting | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
 
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -89,6 +130,15 @@ Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.
 - **B8:** NVIDIA non-directional GI reuse: 1280x720 cap14/2,64-frame static quality measured; mixed results. Scoped timing is shown separately when available; no canonical promotion.
 - **B9:** Eight GPU diagnostics passed; 1280x720 cap14/2 snapshot shown. Three-seed64-frame quality and uncapped timing in progress. Original-scene footprint remains unsupported; no promotion.
 - **B10:** Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending. Image is 1280x720 development coverage, not an accepted matched benchmark.
+- **B10.75:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B10.50:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B10.25:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B11:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B12:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B13:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B14:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B15:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B16:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
 
 </details>
 
@@ -117,6 +167,15 @@ Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.
 | **↳ B10 · Gaussian timing** | DI initial + GI initial + paired/vector PT; one Gaussian neighbor | 8.262 | Unavailable | Unavailable | No images during timing | [3 timed processes; quality is a separate row. Room4/4; originals14/2.](B10_GAUSSIAN_PAIRING.md) |
 | **↳ B10 · Gaussian quality** | One-neighbor paired/vector PT; GI initial only | Unavailable | 0.406308 | 0.752397 | [![B10 · Gaussian quality kitchen](assets/b10-gaussian/kitchen.png)](assets/b10-gaussian/kitchen.png) | [Quality-only cohort: 1 image,8 warmup frames, cap14/2.](B10_GAUSSIAN_PAIRING.md) |
 | **↳ B10 · Replay queue** | One-neighbor spatial replay queue; DI/GI initial | Unavailable | Unavailable | Unavailable | [![B10 · Replay queue kitchen](assets/b10-queue/kitchen.png)](assets/b10-queue/kitchen.png) | [Exact snapshot: 1280x720, cap14/2, 41032 replays,0 mismatches. Timing/quality scores pending.](B10_GAUSSIAN_PAIRING.md) |
+| **B10.75** | B10 full PT++ at0.75average spp | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B10.50** | B10 full PT++ at0.5average spp | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B10.25** | B10 full PT++ at0.25average spp | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B11** | B10 + Compatibility-Guided Neighbor Selection active | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B12** | B11 + Stochastic Pairwise MIS | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B13** | B12 + ReSTIR LoD | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B14** | B13 + ReSTIR BDPT with LW version | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B15** | B14 + ReSTIR PG | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
+| **B16** | B15 + Multi-Layer Reservoir Splatting | Unavailable | Unavailable | Unavailable | No eligible capture | [pending](VERSION_MAPPING.md) |
 
 <details><summary>Coverage and missing-data reasons</summary>
 
@@ -131,6 +190,15 @@ Main canonical rows:640×360,1spp,3/3 bounce limits; opaque-room-registered-env.
 - **B8:** NVIDIA non-directional GI reuse: 1280x720 cap14/2,64-frame static quality measured; mixed results. Scoped timing is shown separately when available; no canonical promotion.
 - **B9:** Eight GPU diagnostics passed; 1280x720 cap14/2 snapshot shown. Three-seed64-frame quality and uncapped timing in progress. Original-scene footprint remains unsupported; no promotion.
 - **B10:** Gaussian single-neighbor pair/vector development executes at original1280x720 and room640x360. GI initial only; original-scene quality is one capture, room one64-frame sequence. Remaining mechanisms and accepted total timing pending. Image is 1280x720 development coverage, not an accepted matched benchmark.
+- **B10.75:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B10.50:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B10.25:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B11:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B12:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B13:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B14:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B15:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
+- **B16:** User-confirmed roadmap; activation/integration and matched quality/performance evidence pending. No measurements inferred.
 
 </details>
 

@@ -430,6 +430,7 @@ void RtxdiPass::BeginFrame(
     {
         commandList->clearBufferUInt(m_rtxdiResources->PTReservoirBuffer, 0);
         commandList->clearBufferUInt(m_rtxdiResources->PTSpatialNeighborSelectionBuffer, 0xffffffffu);
+        commandList->clearBufferUInt(m_rtxdiResources->PTDiagnosticCounters, 0);
         nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTReservoirBuffer);
         nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTSpatialNeighborSelectionBuffer);
         commandList->commitBarriers();
@@ -438,7 +439,10 @@ void RtxdiPass::BeginFrame(
 
     if (m_BridgeParameters.usingReSTIRPT && m_BridgeParameters.capturePTDiagnostics)
     {
-        commandList->clearBufferUInt(m_rtxdiResources->PTDiagnosticCounters, 0);
+        // Slots92..95 retain sequence-oracle coverage/failures until history
+        // resets. Clear only frame-local counters after the initial full clear.
+        const uint32_t frameCounters[92] = {};
+        commandList->writeBuffer(m_rtxdiResources->PTDiagnosticCounters, frameCounters, sizeof(frameCounters));
         nvrhi::utils::BufferUavBarrier(commandList, m_rtxdiResources->PTDiagnosticCounters);
     }
     // Light preparation is needed for DI/ReGIR and PT next-event estimation.
@@ -990,7 +994,7 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
     float selfShiftMaxError = 0;
     std::memcpy(&selfShiftMaxError,counters+9,sizeof(float));
     std::ofstream statFile(path + ".stats.json");
-    statFile << "{\n  \"scope\": \"last captured frame, diagnostics only\",\n  \"roulette_tests\": " << counters[0]
+    statFile << "{\n  \"scope\": \"Frame-local counters plus queue sequence flags since last history reset\",\n  \"roulette_tests\": " << counters[0]
         << ",\n  \"roulette_terminated\": " << counters[1] << ",\n  \"roulette_survived\": " << counters[2]
         << ",\n  \"replay_roulette_tests\": " << counters[3]
         << ",\n  \"transmission_scatter_events\": " << counters[4]
@@ -1034,7 +1038,12 @@ void RtxdiPass::CapturePTReservoirs(const std::string& path)
     for(int i=56;i<72;++i) { if(i>56) statFile << ","; statFile << counters[i]; }
     statFile << "],\n  \"queue_first_difference\": [";
     for(int i=72;i<92;++i) { if(i>72) statFile << ","; statFile << counters[i]; }
-    statFile << "]\n}\n";
+    statFile << "]"
+        << ",\n  \"queue_sequence_frames\": " << counters[92]
+        << ",\n  \"queue_sequence_reservoir_failure\": " << counters[93]
+        << ",\n  \"queue_sequence_vector_failure\": " << counters[94]
+        << ",\n  \"queue_sequence_overflow_failure\": " << counters[95]
+        << "\n}\n";
     m_device->unmapBuffer(stats);
     if (!statFile) throw std::runtime_error("PT counter metadata write failed");
     if ((m_BridgeParameters.giPTPartition & 4u) != 0)

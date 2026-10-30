@@ -1,0 +1,2 @@
+uint saved=u_PTReplayOracle.Load(index*76+i*4);
+        if(index==0 && i==15 && u_PTDiagnosticCounters[92]==2) saved ^= 1; // Synthetic oracle-only fault on third compared frame; queued state remains unchanged.
