@@ -29,6 +29,16 @@ void RTXPT_ComputeHybridShift(inout RAB_Surface surfaceForResampling,
                 surfaceForResampling, RTXDI_SampledLightData_GetUVDataFloat2(data));
             float scatterPdf = surfaceForResampling.EvalPdf(normalize(light.position - surfaceForResampling.GetPosW()), true);
             targetFunction *= RTXPT_PTFiniteNEEWeight(light, scatterPdf);
+            if (g_RtxdiBridgeConst.ptUnifiedRISCandidates > 0)
+            {
+                // Explicit supplemental PSS mode: prefix RNG and terminal light
+                // UV are preserved, so the shift Jacobian in that space is one.
+                // SDK already reconstructed f/q_conditional; divide by p1 to
+                // recover the hypothetical single-sample PSS target. Its legacy
+                // solid-angle Jacobian remains untouched in the M1 control.
+                targetFunction *= float(g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion.numLights);
+                jacobian = 1.f;
+            }
         }
     }
     const bool diagnostics = g_RtxdiBridgeConst.ptDiagnostics != 0;

@@ -1,0 +1,17 @@
+{
+  "m1-mixed-control": {
+    "captured": true,
+    "pss_ris_inactive": true,
+    "prior_hdr_bit_equal": true
+  },
+  "default-off": {
+    "captured": true,
+    "pss_ris_inactive": true
+  },
+  "native_missing_replay": {
+    "rejected": true,
+    "exit_code": 3221226505,
+    "images": 0,
+    "explicit_receipt": true
+  }
+}

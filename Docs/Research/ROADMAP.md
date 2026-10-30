@@ -1,6 +1,6 @@
 # Roadmap: B0–B16 and B10 sampling branches
 
-**Latest B10 integration:** [finite M1 BSDF/NEE MIS](B10_UNIFIED_LIGHTING.md) now runs in the unified PT reservoir; four scoped GPU modes pass31,492identity checks. Full PT++ remains partial; M>1 RIS/PSS, environment and broader reuse integration are next.
+**Latest B10 integration:** [finite multi-candidate RIS/PSS MIS](B10_UNIFIED_LIGHTING.md) now runs in the unified PT reservoir. Six scoped GPU snapshots pass48,130identity checks and read back the actual PSS weights. Full PT++ remains partial; environment and broader composition are next.
 
 ## Current status — 2026-10-30
 
@@ -14,7 +14,7 @@ The integer sequence is cumulative: each version B11–B16 adds its named techni
 
 | Version | Your cumulative definition | Current status / implementation gate |
 |---|---|---|
-| **B10** | **Full PT++** | Partial. Duplication comparison complete; finite M1 unified MIS active; M>1/environment integration, dual motion and broader validation pending. |
+| **B10** | **Full PT++** | Partial. Duplication comparison complete; finite RIS/PSS MIS active; environment/composition, dual motion and broader validation pending. |
 | **B10.75** | B10 with **0.75 spp** | Planned sampling branch; reuse RTXPT 1.9 native sub-sampling mode 1. |
 | **B10.50** | B10 with **0.50 spp** | Planned sampling branch; reuse RTXPT 1.9 native sub-sampling mode 2. |
 | **B10.25** | B10 with **0.25 spp** | Planned sampling branch; reuse RTXPT 1.9 native sub-sampling mode 3. |

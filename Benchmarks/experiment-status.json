@@ -143,6 +143,19 @@
         "identity_failures": 0,
         "initial_selected_bsdf_hits_per_case": 125,
         "initial_selected_nee_per_case": 7748
+      },
+      "finite_ris_pss_integration": {
+        "status": "scoped_gpu_prerequisite_passed",
+        "evidence": "Benchmarks/development/2026-10-30-unified-pss-ris",
+        "canonical_accepted": false,
+        "full_ptpp": false,
+        "scope": "Finite uniform M1/M4 RIS with supplemental PSS UCW and companion MIS; full-prefix static opaque Room only",
+        "gpu_cases": 6,
+        "identity_tests": 48130,
+        "identity_failures": 0,
+        "pss_ucw_readback": true,
+        "environment": false,
+        "general_composition": false
       }
     },
     {
@@ -470,6 +483,13 @@
       "status": "partial",
       "evidence": "Benchmarks/development/2026-10-30-unified-finite-mis",
       "scope": "Finite M1 complementary BSDF/NEE MIS integrated;4Room snapshots/31492identity checks,0failures. Both branches selected; controls preserved. Full PT++ pending."
+    },
+    {
+      "date": "2026-10-30",
+      "variant": "B10",
+      "status": "partial",
+      "evidence": "Benchmarks/development/2026-10-30-unified-pss-ris",
+      "scope": "Finite multi-candidate RIS/PSS MIS integrated;M1/M4,6Room snapshots/48130identity checks,0failures; actualPSSweights readback; fullPT++/environment/generalcomposition pending."
     }
   ],
   "history": [

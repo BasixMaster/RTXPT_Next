@@ -1,6 +1,6 @@
 # Basix Pathtracing · RTXPT1.9 baseline and B0–B16 roadmap
 
-**Latest B10 integration:** [finite M1 BSDF/NEE MIS](B10_UNIFIED_LIGHTING.md) now runs in the unified PT reservoir; four scoped GPU modes pass31,492identity checks. Full PT++ remains partial; M>1 RIS/PSS, environment and broader reuse integration are next.
+**Latest B10 integration:** [finite multi-candidate RIS/PSS MIS](B10_UNIFIED_LIGHTING.md) now runs in the unified PT reservoir. Six scoped GPU snapshots pass48,130identity checks and read back the actual PSS weights. Full PT++ remains partial; environment and broader composition are next.
 
 [**Compact research summary: findings, measured tradeoffs and next steps**](RESEARCH_SUMMARY.md).
 

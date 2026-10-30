@@ -190,7 +190,7 @@
       "name": "Structured evidence schema separately validated; SQLite metric search",
       "status": "passed",
       "smape_matches": 2,
-      "sources": 41,
+      "sources": 42,
       "findings": 45
     },
     {
@@ -323,6 +323,10 @@
     },
     {
       "name": "Finite M1 BSDF/NEE MIS: four scoped GPU snapshots,31492unchanged identity checks, both selected branches, decoded states/HDR hashes and preserved controls; full B10 pending",
+      "status": "passed"
+    },
+    {
+      "name": "Finite RIS/PSS integration: six M1/M4GPU snapshots,48130unchanged identity checks,decoded PSSweights/packedstates/HDRhashes and controls;full B10 pending",
       "status": "passed"
     }
   ],

@@ -2474,8 +2474,11 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
     bridgeParameters.usingReSTIRPT = m_ui.ActualUseReSTIRPT();
     bridgeParameters.unifiedFiniteNEEPilot = m_cmdLine.PTUnifiedFiniteNEEValidation;
     bridgeParameters.unifiedMIS = m_cmdLine.PTUnifiedMISValidation;
+    bridgeParameters.unifiedRISCandidates = uint32_t(m_cmdLine.PTUnifiedRISCandidates);
+    if (m_cmdLine.PTUnifiedRISCandidates > 0 && m_frameIndex == 0)
+        std::printf("PT_UNIFIED_RIS enabled=1 candidates=%d source=uniform-local target=single-sample-PSS ucw=RIS-times-source terminalNEEJacobian=1 fullPTPP=0\n", m_cmdLine.PTUnifiedRISCandidates);
     if (m_cmdLine.PTUnifiedMISValidation && m_frameIndex == 0)
-        std::printf("PT_UNIFIED_MIS enabled=1 primaryOwner=PT indirectOwner=PT standaloneDI=0 standaloneGI=0 localProposals=1 transport=finite-BSDF-NEE-MIS fullPrefix=1 fullPTPP=0\n");
+        std::printf("PT_UNIFIED_MIS enabled=1 primaryOwner=PT indirectOwner=PT standaloneDI=0 standaloneGI=0 localProposals=%d transport=finite-BSDF-NEE-MIS fullPrefix=1 fullPTPP=0\n", std::max(1, m_cmdLine.PTUnifiedRISCandidates));
     if (m_cmdLine.PTUnifiedFiniteNEEValidation && m_frameIndex == 0)
         std::printf("PT_UNIFIED_FINITE_NEE enabled=1 primaryOwner=PT indirectOwner=PT standaloneDI=0 standaloneGI=0 localProposals=1 transport=NEE-only fullPaperMIS=0\n");
     if (m_cmdLine.PTDuplicationHistoryValidation)

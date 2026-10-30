@@ -187,6 +187,9 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     m_ui.UseReSTIRPT                = cmdLine.UseReSTIRPT != 0;
     m_ui.B8InitialGIValidation = cmdLine.B8InitialGIValidation;
     m_ui.B8ValidationStage = cmdLine.B8ValidationStage;
+    if (cmdLine.PTUnifiedRISCandidates < 0 || cmdLine.PTUnifiedRISCandidates > 32 ||
+        (cmdLine.PTUnifiedRISCandidates > 0 && !cmdLine.PTUnifiedMISValidation))
+        throw std::runtime_error("Unified PSS RIS requires unified MIS and candidates1..32;0 preserves control");
     if (cmdLine.PTUnifiedFiniteNEEValidation && cmdLine.PTUnifiedMISValidation)
         throw std::runtime_error("Select either the NEE-only control or unified MIS, not both");
     if ((cmdLine.PTUnifiedFiniteNEEValidation || cmdLine.PTUnifiedMISValidation) && !cmdLine.nonInteractive)

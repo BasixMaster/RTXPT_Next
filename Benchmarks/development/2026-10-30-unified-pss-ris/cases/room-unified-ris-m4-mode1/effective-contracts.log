@@ -1,0 +1,16 @@
+BENCHMARK_UNCAPPED vsync=0 fpsLimiter=0 reflexCap=0 reflexMode=0 frameGeneration=0 renderUnfocused=1
+PT_UNIFIED_RIS enabled=1 candidates=4 source=uniform-local target=single-sample-PSS ucw=RIS-times-source terminalNEEJacobian=1 fullPTPP=0
+PT_UNIFIED_MIS enabled=1 primaryOwner=PT indirectOwner=PT standaloneDI=0 standaloneGI=0 localProposals=4 transport=finite-BSDF-NEE-MIS fullPrefix=1 fullPTPP=0
+PT_HISTORY frame=0 previous=0 requestedReset=1 contractChanged=0 priorHistory=0
+PT_REPLAY_CONTRACT replayOnly=1 roughnessThreshold=1
+PT_HISTORY_CONTRACT ageRejection=1 maxAge=30 maxHistory=8
+PT_SPATIAL_CONTRACT samples=1 boost=1
+PT_HISTORY frame=1 previous=0 requestedReset=0 contractChanged=0 priorHistory=1
+PT_HISTORY frame=2 previous=1 requestedReset=1 contractChanged=0 priorHistory=0
+PT_HISTORY frame=3 previous=2 requestedReset=0 contractChanged=0 priorHistory=1
+PT_HISTORY frame=4 previous=3 requestedReset=0 contractChanged=0 priorHistory=1
+PT_HISTORY frame=5 previous=4 requestedReset=0 contractChanged=0 priorHistory=1
+PT_HISTORY frame=6 previous=5 requestedReset=0 contractChanged=0 priorHistory=1
+PT_HISTORY frame=7 previous=6 requestedReset=0 contractChanged=0 priorHistory=1
+PT_HISTORY frame=8 previous=7 requestedReset=0 contractChanged=0 priorHistory=1
+PT_HISTORY frame=9 previous=8 requestedReset=0 contractChanged=0 priorHistory=1

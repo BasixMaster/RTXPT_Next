@@ -318,7 +318,7 @@ RTXDI_BrdfRaySample RTXPT_PTSampleBsdf(RAB_Surface s, inout RTXDI_RandomSamplerS
 float RTXPT_PTFiniteNEEWeight(RAB_LightSample light, float scatterPdf)
 {
     if (RAB_IsAnalyticLightSample(light)) return 1.f;
-    float pNee = light.solidAnglePdf / float(g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion.numLights);
+    float pNee = float(max(1u, g_RtxdiBridgeConst.ptUnifiedRISCandidates)) * light.solidAnglePdf / float(g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion.numLights);
     return pNee > 0.f ? pNee / (pNee + scatterPdf) : 0.f;
 }
 float RTXPT_PTFiniteEmitterWeight(RAB_RayPayload hit, RAB_Surface previousSurface, RTXDI_BrdfRaySample brs)
@@ -329,8 +329,64 @@ float RTXPT_PTFiniteEmitterWeight(RAB_RayPayload hit, RAB_Surface previousSurfac
     // Light sampling takes a square UV, not raw triangle hit barycentrics.
     float2 uv = randomFromBarycentric(hitUVToBarycentric(hit.barycentrics));
     RAB_LightSample light = RAB_SamplePolymorphicLight(RAB_LoadLightInfo(lightIndex, false), previousSurface, uv);
-    float pNee = light.solidAnglePdf / float(g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion.numLights);
+    float pNee = float(max(1u, g_RtxdiBridgeConst.ptUnifiedRISCandidates)) * light.solidAnglePdf / float(g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion.numLights);
     return brs.outPdf > 0.f ? brs.outPdf / (brs.outPdf + pNee) : 0.f;
+}
+
+// PT++ supplemental section5: the RIS proposal is a black box. The
+// target uses the hypothetical SINGLE-sample PSS parameterization; RIS only
+// changes UCW. Uniform light-index mass p1=1/N in (index, square-UV) measure.
+// The conditional solid-angle density converts radiance to square-UV measure.
+// Host restricts this to finite local lights and full-prefix replay.
+template<typename PTContextType>
+void RTXPT_PTRecordFiniteRIS(inout RTXDI_PathTracerContext<PTContextType> ctx,
+    inout RTXDI_PathTracerRandomContext randomContext)
+{
+    const RTXDI_LightBufferRegion region = g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion;
+    if (region.numLights == 0) return;
+    const uint candidateCount = g_RtxdiBridgeConst.ptUnifiedRISCandidates;
+    const float sourceMass = 1.f / float(region.numLights);
+    RAB_Surface surface = ctx.GetIntersectionSurface();
+    RTXDI_SampledLightData selected = RTXDI_SampledLightData_CreateInvalidData();
+    RAB_LightSample selectedLight = RAB_EmptyLightSample();
+    float selectedTarget = 0.f;
+    float weightSum = 0.f;
+    for (uint i = 0; i < candidateCount; ++i)
+    {
+        uint offset = min(uint(RTXDI_GetNextRandom(randomContext.initialRandomSamplerState) * region.numLights), region.numLights - 1);
+        uint index = region.firstLightIndex + offset;
+        float2 uv = float2(RTXDI_GetNextRandom(randomContext.initialRandomSamplerState), RTXDI_GetNextRandom(randomContext.initialRandomSamplerState));
+        RAB_LightSample light = RAB_SamplePolymorphicLight(RAB_LoadLightInfo(index, false), surface, uv);
+        // Unshadowed RIS target; trace visibility only for the selected sample.
+        float target = light.solidAnglePdf > 0.f ? RTXDI_Luminance(surface.Eval(normalize(light.position - surface.GetPosW())).rgb * light.radiance) / light.solidAnglePdf : 0.f;
+        float weight = target / sourceMass;
+        weightSum += weight;
+        float random = RTXDI_GetNextRandom(randomContext.initialRandomSamplerState);
+        if (weight > 0.f && random * weightSum < weight)
+        {
+            selectedTarget = target;
+            selectedLight = light;
+            RTXDI_SampledLightData_SetLightData(selected, index);
+            RTXDI_SampledLightData_SetUVData(selected, uv);
+        }
+    }
+    if (selectedTarget <= 0.f) return;
+    float risUCW = weightSum / (float(candidateCount) * selectedTarget);
+    float pssUCW = risUCW * sourceMass; // W_U = W_RIS,path * p1.
+    float scatterPdf = surface.EvalPdf(normalize(selectedLight.position - surface.GetPosW()), true);
+    float3 singleSamplePSS = RAB_GetReflectedBsdfRadianceForSurface(selectedLight.position, selectedLight.radiance, surface) /
+        (selectedLight.solidAnglePdf * sourceMass);
+    singleSamplePSS *= RTXPT_PTFiniteNEEWeight(selectedLight, scatterPdf);
+    // SDK's neePdf parameter removes sampling weight from the target. Supply
+    // reciprocal PSS UCW, NOT the unknown RIS-selected sampling density.
+    bool selectedPath = ctx.RecordNeeLightSample(selected, singleSamplePSS * pssUCW, 1.f / pssUCW,
+        scatterPdf, selectedLight, randomContext.initialRandomSamplerState);
+#if defined(RTXDI_RESTIR_PT_INITIAL_SAMPLING)
+    // For terminal-NEE paths rcWiPdf is unused by the pinned SDK (it is read
+    // only for mid-path footprint inversion). In this host-restricted full-
+    // prefix mode retain the actual selected PSS UCW for diagnostic readback.
+    if (selectedPath) ctx.ctx.selectedRcWiPdf = pssUCW;
+#endif
 }
 
 // PT++ main section6.1 initial-tree ownership prerequisite. This pilot retains
@@ -341,6 +397,11 @@ template<typename PTContextType>
 void RTXPT_PTRecordUniformFiniteNEE(inout RTXDI_PathTracerContext<PTContextType> ctx,
     inout RTXDI_PathTracerRandomContext randomContext)
 {
+    if (g_RtxdiBridgeConst.ptUnifiedRISCandidates > 0)
+    {
+        RTXPT_PTRecordFiniteRIS(ctx, randomContext);
+        return;
+    }
     const RTXDI_LightBufferRegion region = g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion;
     if (region.numLights == 0) return;
     uint offset = min(uint(RTXDI_GetNextRandom(randomContext.initialRandomSamplerState) * region.numLights), region.numLights - 1);

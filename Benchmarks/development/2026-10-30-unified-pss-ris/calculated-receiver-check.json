@@ -1,0 +1,16 @@
+{
+  "kind": "exact rational finite-domain calculation; not GPU output",
+  "source": "Benchmarks/tools/test_unified_ris_pss.py",
+  "source_sha256": "5ca394f0b955662ce2d10c5cefe2a8d438254b35dfe556d0ee139cbe3d5f923b",
+  "candidate_counts": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "expected_integral": 21,
+  "correct_pss_estimate": 21,
+  "missing_conversion_estimate": 63,
+  "extra_solid_angle_jacobian_estimate": 47.5,
+  "scope": "Fixed hypothetical light-index/UV domain under receiver changes; no visibility/media/motion/GPU correctness claim."
+}

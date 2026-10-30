@@ -258,7 +258,8 @@ struct RtxdiBridgeConstants
     float3 ptPreviousPreviousCameraPosition;
     uint ptDiagnostics;
     uint ptUnifiedFiniteNEE; // 0 legacy, 1 finite NEE-only control, 2 finite M1 BSDF/NEE MIS.
-    uint3 ptUnifiedPadding;
+    uint ptUnifiedRISCandidates;
+    uint2 ptUnifiedPadding;
 };
 
 struct SecondarySurface
