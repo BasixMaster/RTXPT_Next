@@ -1,0 +1,46 @@
+{
+  "status": "scoped_gpu_prerequisite_passed",
+  "canonical_accepted": false,
+  "full_ptpp": false,
+  "full_paper_mis": false,
+  "modes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "scene": "owned opaque Room;177x91;4/4;seed47;8warmupframes",
+  "scope": "Finite local lights; one uniform NEE proposal with complementary BSDF hits, full-prefix replay, stopped scene; no environment/infinite lights/transmission/binding diffuse cap",
+  "cases": 4,
+  "source_files": 326,
+  "exe_sha256": "4437547da551b7c81c592ee066c964cf5436e9443f1b368053f756b8e1a6ae7d",
+  "identity_tests": 31492,
+  "identity_failures": 0,
+  "performance": "not measured; diagnostic captures include readbacks",
+  "limits": [
+    "M1 finite BSDF/NEE MIS only; no multi-candidate RIS/PSS integration.",
+    "No original-scene, motion/reset/resize, equal-time, bias or performance acceptance.",
+    "Mid-path mode remains excluded; earlier NEE-only exploratory failures retained separately."
+  ],
+  "controls": {
+    "nee-control": {
+      "captured": true,
+      "mis_inactive": true,
+      "prior_hdr_bit_equal": true
+    },
+    "default-off": {
+      "captured": true,
+      "mis_inactive": true
+    },
+    "native_missing_replay": {
+      "rejected": true,
+      "exit_code": 3221226505,
+      "images": 0,
+      "explicit_receipt": true
+    }
+  },
+  "base_source": "600d67acc89c93d2bfed68cd6441acb63e281711",
+  "continuous_finite_m1_mis": true,
+  "diagnostic_threshold": "relative >1% AND absolute >1e-4 fails; nonfinite fails; unchanged",
+  "snapshot_scope": "Four final-frame readbacks with the same seed after8warmupframes; not a quality cohort or per-frame sequence oracle."
+}

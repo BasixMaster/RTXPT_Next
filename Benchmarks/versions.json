@@ -282,6 +282,17 @@
         "identity_tests": 31472,
         "identity_failures": 0,
         "midpath_gate": "rejected; eight failures retained"
+      },
+      "finite_m1_mis_integration": {
+        "status": "scoped_gpu_prerequisite_passed",
+        "evidence": "Benchmarks/development/2026-10-30-unified-finite-mis",
+        "canonical_accepted": false,
+        "full_ptpp": false,
+        "scope": "Finite uniform M1 BSDF/NEE MIS, full-prefix replay, four static opaque Room snapshots; no M>1 RIS/PSS, environment or broader scene acceptance",
+        "identity_tests": 31492,
+        "identity_failures": 0,
+        "initial_selected_bsdf_hits_per_case": 125,
+        "initial_selected_nee_per_case": 7748
       }
     },
     {

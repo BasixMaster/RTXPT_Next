@@ -187,7 +187,9 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     m_ui.UseReSTIRPT                = cmdLine.UseReSTIRPT != 0;
     m_ui.B8InitialGIValidation = cmdLine.B8InitialGIValidation;
     m_ui.B8ValidationStage = cmdLine.B8ValidationStage;
-    if (cmdLine.PTUnifiedFiniteNEEValidation && !cmdLine.nonInteractive)
+    if (cmdLine.PTUnifiedFiniteNEEValidation && cmdLine.PTUnifiedMISValidation)
+        throw std::runtime_error("Select either the NEE-only control or unified MIS, not both");
+    if ((cmdLine.PTUnifiedFiniteNEEValidation || cmdLine.PTUnifiedMISValidation) && !cmdLine.nonInteractive)
         throw std::runtime_error("Unified finite-NEE pilot is a noninteractive validation preset, not an interactive renderer mode");
     if (cmdLine.B8GIReuseMode < -1 || cmdLine.B8GIReuseMode > 3 ||
         (cmdLine.B8GIReuseMode >= 0 && !cmdLine.B8InitialGIValidation))
@@ -261,6 +263,10 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
         m_ui.RTXDI.restirPT.temporalResamplingParams.enableAgeBasedRejection = 0;
     if (cmdLine.PTReplayOnlyValidation)
         m_ui.RTXDI.restirPT.reconnectionParams.roughnessThreshold = 1.0f;
+    // MIS emitter hits use pure PSS replay, not terminal BSDF reconnection.
+    // NEE endpoints remain forced reconnectible by the SDK. Static finite scope.
+    if (cmdLine.PTUnifiedMISValidation)
+        m_ui.RTXDI.restirPT.reconnectionParams.distanceThreshold = 1.0e20f;
     if (cmdLine.StrictDIValidation)
     {
         // The static validation track avoids evaluating a permuted neighbor's

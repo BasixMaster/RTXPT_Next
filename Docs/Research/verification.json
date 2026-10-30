@@ -190,7 +190,7 @@
       "name": "Structured evidence schema separately validated; SQLite metric search",
       "status": "passed",
       "smape_matches": 2,
-      "sources": 40,
+      "sources": 41,
       "findings": 45
     },
     {
@@ -319,6 +319,10 @@
     },
     {
       "name": "Finite-NEE unified initial-tree prerequisite: four GPU snapshots/31472identity checks, decoded states/raw hashes, native rejection and rejected mid-path trials retained; full PT++ remains pending",
+      "status": "passed"
+    },
+    {
+      "name": "Finite M1 BSDF/NEE MIS: four scoped GPU snapshots,31492unchanged identity checks, both selected branches, decoded states/HDR hashes and preserved controls; full B10 pending",
       "status": "passed"
     }
   ],

@@ -669,6 +669,29 @@ assert all(r['counters']['identity_shift_failures']==8 and r['counters']['identi
 assert 'finite_nee_initial_tree_pilot' in by_id['B10'] and not by_id['B10']['finite_nee_initial_tree_pilot']['full_paper_mis']
 checks.append(dict(name='Finite-NEE unified initial-tree prerequisite: four GPU snapshots/31472identity checks, decoded states/raw hashes, native rejection and rejected mid-path trials retained; full PT++ remains pending',status='passed'))
 
+mis=P/'Benchmarks/development/2026-10-30-unified-finite-mis'
+mis_summary=json.loads((mis/'summary.json').read_text());mis_results=json.loads((mis/'results.json').read_text())
+assert len(mis_results)==4 and {r['mode'] for r in mis_results}=={0,1,2,3}
+assert mis_summary['identity_tests']==sum(r['counters']['identity_shift_tests'] for r in mis_results)==31492
+assert mis_summary['identity_failures']==0 and not mis_summary['full_ptpp'] and not mis_summary['canonical_accepted']
+assert mis_summary['controls']['nee-control']['prior_hdr_bit_equal'] and mis_summary['controls']['native_missing_replay']['images']==0
+for row in mis_results:
+    case=mis/'cases'/row['label'];capture=json.loads((case/'capture.json').read_text())
+    assert capture['effective_unified_mis']['active'] and not capture['effective_unified_finite_nee']['active']
+    assert capture['settings']['restir_di']==capture['settings']['restir_gi']==0 and capture['settings']['restir_pt']==1
+    assert row['exe_sha256']==mis_summary['exe_sha256'] and row['counters']['identity_shift_failures']==0
+    assert hashlib.sha256(gzip.decompress((case/'raw-hdr.pfm.gz').read_bytes())).hexdigest()==row['raw_hdr_sha256']
+    words=np.load(case/'packed-state.npz')['words'];meta=json.loads((case/'packed-metadata.json').read_text())
+    assert inspect_unified(words,meta)==row['statistics']
+    y,x=np.indices((meta['height'],meta['width']),dtype=np.int64)
+    address=(y//16)*meta['block_row_pitch']+(x//16)*256+(y%16)*16+x%16+meta['initial_preserved_index']*meta['array_pitch']
+    selected=words[address];weight=selected[...,3].copy().view('<f4');rc=(selected[...,11]>>8)&255;length=(selected[...,11]>>16)&255
+    assert int(((weight>0)&(rc>length)).sum())==row['bsdf_pure_replay_selected']==125
+    assert int(((weight>0)&(rc==length)).sum())==row['nee_terminal_selected']==7748
+    assert (D/f"assets/b10-unified-finite-mis/mode{row['mode']}.png").is_file()
+assert by_id['B10']['finite_m1_mis_integration']['identity_tests']==31492
+checks.append(dict(name='Finite M1 BSDF/NEE MIS: four scoped GPU snapshots,31492unchanged identity checks, both selected branches, decoded states/HDR hashes and preserved controls; full B10 pending',status='passed'))
+
 receipt=dict(updated_on='2026-10-30',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; general directional GI, broader moving/reset queue histories and timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))

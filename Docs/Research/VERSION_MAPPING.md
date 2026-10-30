@@ -24,7 +24,7 @@ Confirmed2026-10-30; B0–B9 and legacy evidence IDs remain unchanged. Future va
 
 | Version | Your cumulative definition | Current status / implementation gate |
 |---|---|---|
-| **B10** | **Full PT++** | Partial. Duplication comparison complete; unified-lighting renderer, dual motion and broader validation pending. |
+| **B10** | **Full PT++** | Partial. Duplication comparison complete; finite M1 unified MIS active; M>1/environment integration, dual motion and broader validation pending. |
 | **B10.75** | B10 with **0.75 spp** | Planned sampling branch; reuse RTXPT 1.9 native sub-sampling mode 1. |
 | **B10.50** | B10 with **0.50 spp** | Planned sampling branch; reuse RTXPT 1.9 native sub-sampling mode 2. |
 | **B10.25** | B10 with **0.25 spp** | Planned sampling branch; reuse RTXPT 1.9 native sub-sampling mode 3. |

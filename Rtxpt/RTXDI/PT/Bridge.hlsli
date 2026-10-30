@@ -22,6 +22,7 @@
 struct RAB_RayPayload
 {
     uint instanceIndex;
+    uint geometryInstanceBase; // TLAS InstanceID, distinct from native instance array index.
     uint geometryIndex;
     uint primitiveIndex;
     float2 barycentrics;
@@ -118,6 +119,7 @@ RAB_RayPayload RTXPT_PTTrace(RayDesc ray, bool visibilityRay = false)
     if (q.CommittedStatus() == COMMITTED_TRIANGLE_HIT)
     {
         p.instanceIndex = q.CommittedInstanceIndex();
+        p.geometryInstanceBase = q.CommittedInstanceID();
         p.geometryIndex = q.CommittedGeometryIndex();
         p.primitiveIndex = q.CommittedPrimitiveIndex();
         p.barycentrics = q.CommittedTriangleBarycentrics();
@@ -310,6 +312,27 @@ RTXDI_BrdfRaySample RTXPT_PTSampleBsdf(RAB_Surface s, inout RTXDI_RandomSamplerS
     return RTXPT_PTSampleBsdf(s, rng, ignoredNativeLobe);
 }
 
+// NVIDIA reference RAB_MISCallbacks.hlsli balance heuristic, finite M=1.
+// Uniform discrete light mass times conditional solid-angle density. Analytic
+// point lights have no continuous BSDF companion. Environment is host-rejected.
+float RTXPT_PTFiniteNEEWeight(RAB_LightSample light, float scatterPdf)
+{
+    if (RAB_IsAnalyticLightSample(light)) return 1.f;
+    float pNee = light.solidAnglePdf / float(g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion.numLights);
+    return pNee > 0.f ? pNee / (pNee + scatterPdf) : 0.f;
+}
+float RTXPT_PTFiniteEmitterWeight(RAB_RayPayload hit, RAB_Surface previousSurface, RTXDI_BrdfRaySample brs)
+{
+    if (brs.properties.IsDelta()) return 1.f;
+    uint lightIndex = getLightIndex(hit.geometryInstanceBase, hit.geometryIndex, hit.primitiveIndex);
+    if (lightIndex == RTXDI_InvalidLightIndex) return 1.f;
+    // Light sampling takes a square UV, not raw triangle hit barycentrics.
+    float2 uv = randomFromBarycentric(hitUVToBarycentric(hit.barycentrics));
+    RAB_LightSample light = RAB_SamplePolymorphicLight(RAB_LoadLightInfo(lightIndex, false), previousSurface, uv);
+    float pNee = light.solidAnglePdf / float(g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion.numLights);
+    return brs.outPdf > 0.f ? brs.outPdf / (brs.outPdf + pNee) : 0.f;
+}
+
 // PT++ main section6.1 initial-tree ownership prerequisite. This pilot retains
 // the existing NEE-only continuous transport partition, not supplemental MIS.
 // Exactly one uniformly selected local light gives a known source probability;
@@ -328,6 +351,9 @@ void RTXPT_PTRecordUniformFiniteNEE(inout RTXDI_PathTracerContext<PTContextType>
     if (!(light.solidAnglePdf > 0.f)) return;
     float3 reflected = RAB_GetReflectedBsdfRadianceForSurface(light.position, light.radiance, surface);
     reflected *= float(region.numLights) / light.solidAnglePdf;
+    float scatterPdf = surface.EvalPdf(normalize(light.position - surface.GetPosW()), true);
+    if (g_RtxdiBridgeConst.ptUnifiedFiniteNEE == 2)
+        reflected *= RTXPT_PTFiniteNEEWeight(light, scatterPdf);
     RTXDI_SampledLightData data = RTXDI_SampledLightData_CreateInvalidData();
     RTXDI_SampledLightData_SetLightData(data, lightIndex);
     RTXDI_SampledLightData_SetUVData(data, uv);
@@ -490,8 +516,13 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
 #endif
         ctx.RecordPathIntersection(surface);
         if (ctx.IsPathTerminated()) { user.replayDebugFlags |= 8; break; }
-        if ((g_RtxdiBridgeConst.giPTPartition == 0 || ctx.GetBounceDepth() >= 4) && brs.properties.IsDelta() && ctx.ShouldSampleEmissiveSurfaces())
+        if ((g_RtxdiBridgeConst.giPTPartition == 0 || ctx.GetBounceDepth() >= 4) &&
+            (brs.properties.IsDelta() || g_RtxdiBridgeConst.ptUnifiedFiniteNEE == 2) && ctx.ShouldSampleEmissiveSurfaces())
+        {
+            if (g_RtxdiBridgeConst.ptUnifiedFiniteNEE == 2)
+                emission *= RTXPT_PTFiniteEmitterWeight(hit, previousSurface, brs);
             ctx.RecordEmissiveLightSample(emission, previousSurface, randomContext.initialRandomSamplerState);
+        }
         // Native truncation keeps terminal emission from this trace, but no
         // NEE or further scatter at its endpoint. Replay reconstructs all counters;
         // no unstored suffix diffuse budget is guessed at a mid-path connection.

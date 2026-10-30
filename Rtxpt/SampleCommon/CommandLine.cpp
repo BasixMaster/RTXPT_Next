@@ -64,6 +64,7 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
             ("ptRouletteProbability", "Initial-only PT roulette survival probability: 0 off, [0.1,1] on; replay never roulettes", value(PTRouletteProbability))
             ("ptFixedSpatialSamples", "Diagnostic: fixed PT ordinary/boosted neighbor count (1..32)", value(PTFixedSpatialSamples))
             ("ptDisableAgeRejectionValidation", "Diagnostic: disable PT age-based history rejection, retaining history mass cap", value(PTDisableAgeRejectionValidation))
+            ("ptUnifiedMISValidation", "Development: finite M1 unified BSDF/NEE MIS, full-prefix replay only", value(PTUnifiedMISValidation))
             ("ptUnifiedFiniteNEEValidation", "Development: one PT reservoir for primary+indirect finite-light NEE; no standalone DI/GI, not full PT++ MIS", value(PTUnifiedFiniteNEEValidation))
             ("ptReplayOnlyValidation", "Diagnostic: suppress mid-path PT reconnection; preserve terminal-light reconnection", value(PTReplayOnlyValidation))
             ("ptExtendedSceneValidation", "Development: allow original-scene transport with full-prefix replay and native diffuse accounting", value(PTExtendedSceneValidation))

@@ -13,7 +13,8 @@
     "User-confirmed B10fullPT++, B11CGNS active, B12Stochastic PairwiseMIS, B13ReSTIRLoD, B14ReSTIRBDPTwithLW, B15ReSTIRPG, B16Multi-Layer Reservoir Splatting. B10.75/.50/.25 use inherited RTXPT1.9 sampling rates; ReSTIR integration remains pending. Implement B10 thenB11; definitions are not activation.",
     "B10 continuation: five static spatial queue cases compare272frames with queued output restored as history, zero packed/vector scheduling mismatches and a successful early-fault negative fixture. Full PT++ and active B11 CGNS remain pending; buffer ownership and guided reciprocal topology are explicit integration gates.",
     "B10 duplication comparison completed6GPU gates,18quality sequences/1152frames and18uncapped timings. Averaged-image MSE improves in original scenes with per-frame/perceptual tradeoffs; Room/Convergence timing differences small, Kitchen cost+1.67%. Full B10 and B11 pending; source-aligned unified-lighting prerequisite has8exact tests, no renderer activation.",
-    "2026-10-30: finite-light NEE-only unified initial tree passes four GPU snapshot modes/31,472identity checks with full-prefix replay. Mid-path trial rejected; full PT++ MIS, motion and performance remain pending."
+    "2026-10-30: finite-light NEE-only unified initial tree passes four GPU snapshot modes/31,472identity checks with full-prefix replay. Mid-path trial rejected; full PT++ MIS, motion and performance remain pending.",
+    "2026-10-30: finite M1 complementary BSDF/NEE MIS now runs in one PT reservoir;4Room snapshots/31,492identity checks pass. Full-prefix replay only; full PT++ and comparable quality/performance remain pending."
   ],
   "questions": [
     {
@@ -696,6 +697,19 @@
       "limitations": "NEE-only finite local lights, full-prefix replay, same seed; no full MIS, original scenes, motion, quality/bias/timing acceptance. Eight earlier mid-path failures retained.",
       "notes": "Primary direct and indirect paths now compete in one reservoir. Standalone DI/GI off; default behavior preserved. Source presence/activation/validation/full-paper acceptance remain distinct.",
       "rights": "Application integration and owned Room evidence; NVIDIA notices and component licenses retained."
+    },
+    {
+      "id": "LOCAL-B10-UNIFIED-FINITE-MIS",
+      "title": "B10 finite M1 BSDF/NEE MIS integration",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/B10_UNIFIED_LIGHTING.md",
+      "kind": "experiment",
+      "published_on": "2026-10-30",
+      "checked_on": "2026-10-30",
+      "access": "full",
+      "quality": "Four source/executable-checked Room snapshots, both selected path types,31,492identity checks, raw HDR and packed state.",
+      "limitations": "M1 finite lights/full-prefix only; no unbiased-mean/quality/speedup claim, no full PT++ acceptance.",
+      "notes": "NVIDIA balance MIS, reverse light-index/UV mapping and adapter-side fixed-threshold NEE weight; NEE-only control retained.",
+      "rights": "Application integration and owned Room evidence; retained NVIDIA licenses."
     }
   ],
   "findings": [

@@ -107,6 +107,7 @@ struct RtxdiBridgeParameters
     bool usingLightSampling;
     bool usingReGIR;
     bool unifiedFiniteNEEPilot = false;
+    bool unifiedMIS = false;
     bool usingReSTIRPT = false;
     uint32_t giPTPartition = 0; // Initial-only disjoint development contract.
     bool extendedSceneValidation = false;

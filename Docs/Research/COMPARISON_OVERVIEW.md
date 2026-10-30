@@ -8,6 +8,10 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 
 [Compact research summary](RESEARCH_SUMMARY.md) · [Machine-readable overview](comparison-overview.json) · [Algorithm definitions and identities](VERSION_MAPPING.md) · [Benchmark protocol](BENCHMARK_VERSIONS.md)
 
+## Latest B10 finite BSDF/NEE MIS integration
+
+The new default-off finite M1 unified MIS mode selects both BSDF-hit and NEE paths in one PT reservoir. Four Room modes pass31,492identity checks with full-prefix replay. The earlier NEE-only control is preserved. Diagnostic snapshots are not a comparable performance/quality cohort; M>1 RIS/PSS, environment, broader reuse and full B10 remain pending. [Implementation, pictures, limits and evidence](B10_UNIFIED_LIGHTING.md).
+
 ## Latest B10 unified initial-tree prerequisite
 
 The finite-local-light, NEE-only pilot now selects direct and indirect paths in one PT reservoir. Four Room modes pass31,472same-pixel checks with explicit full-prefix replay; the mid-path trial remains rejected. Original Convergence/Kitchen, comparable quality, timing and full PT++ MIS are unavailable for this pilot. [Scope, pictures, failed gate and source evidence](B10_UNIFIED_LIGHTING.md).

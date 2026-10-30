@@ -1,0 +1,274 @@
+{
+  "label": "room-unified-mis-mode2",
+  "scene": "WORKSPACE\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+  "mode": "pt",
+  "output_track": "unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata",
+  "exe_sha256": "4437547da551b7c81c592ee066c964cf5436e9443f1b368053f756b8e1a6ae7d",
+  "started_utc": "2026-10-30T11:52:36.552343+00:00",
+  "command": [
+    "WORKSPACE\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+    "--scene",
+    "WORKSPACE\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+    "--width",
+    "177",
+    "--height",
+    "91",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "0",
+    "--useReSTIRGI",
+    "0",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "WORKSPACE\\work\\2026-10-30-unified-finite-mis\\matrix\\room-unified-mis-mode2\\frame.png",
+    "--captureSuffix",
+    "room-unified-mis-mode2",
+    "--perfLog",
+    "WORKSPACE\\work\\2026-10-30-unified-finite-mis\\matrix\\room-unified-mis-mode2\\partial-perf.csv",
+    "--ptUnifiedMISValidation",
+    "true",
+    "--captureNativeRadiance",
+    "true",
+    "--ptReconnectionMode",
+    "0",
+    "--captureWarmupFrames",
+    "8",
+    "--ptFixedSpatialSamples",
+    "1",
+    "--capturePTReservoirs",
+    "true",
+    "--ptReplayOnlyValidation",
+    "true",
+    "--environmentDiffuseMip",
+    "0",
+    "--benchmarkUncapped",
+    "true",
+    "--samplingSeed",
+    "47",
+    "--captureLinearHDR",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--useReSTIRPT",
+    "1",
+    "--restirPTMode",
+    "2",
+    "--maxBounces",
+    "4",
+    "--maxDiffuseBounces",
+    "4",
+    "--stopAnimations",
+    "--captureSimple"
+  ],
+  "cwd": "WORKSPACE\\outputs\\RTXDI_Next\\bin",
+  "settings": {
+    "width": 177,
+    "height": 91,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 0,
+    "restir_gi": 0,
+    "simple": true,
+    "record_start": null,
+    "frames": 1,
+    "reference_spp": null,
+    "linear_hdr_requested": true,
+    "sampling_seed_requested": 47,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": null,
+    "nee_mis_requested": null,
+    "nee_type": 2,
+    "restir_pt": 1,
+    "max_bounces_override": 4,
+    "max_diffuse_bounces_override": 4,
+    "pt_mode": 2
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+  "canonical_experiment": null,
+  "paired_spatial_pilot_requested": false,
+  "gaussian_pairing_requested": false,
+  "unified_mis_requested": true,
+  "unified_finite_nee_requested": false,
+  "process_id": 56548,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 21.67200000002049,
+  "images": [
+    {
+      "name": "frame_room-unified-mis-mode2.png",
+      "sha256": "e505f652c9350cbb589c66c77243e0200c652f8f5eefb9afbdcaf0369b1a2b44",
+      "bytes": 30552
+    }
+  ],
+  "linear_hdr_files": [
+    {
+      "name": "frame_room-unified-mis-mode2.pfm",
+      "sha256": "a96a03dc841bb79c99b82c481dc0fdd739839bbc493de392d3bac833ef9c6d4c",
+      "bytes": 193299
+    },
+    {
+      "name": "frame_room-unified-mis-mode2.pfm.json",
+      "sha256": "7c060ebdd86c720010497ea9dfe582bce19183e70c3b88a97dadcfc337c48a4d",
+      "bytes": 596
+    },
+    {
+      "name": "frame_room-unified-mis-mode2.pfm.native.pfm",
+      "sha256": "81037c31e4afd08607997588a2d1cc8e106eb166f2ad165055a5a0d4788bf73f",
+      "bytes": 193299
+    },
+    {
+      "name": "frame_room-unified-mis-mode2.pfm.native.pfm.json",
+      "sha256": "7c060ebdd86c720010497ea9dfe582bce19183e70c3b88a97dadcfc337c48a4d",
+      "bytes": 596
+    },
+    {
+      "name": "frame_room-unified-mis-mode2.pfm.pt.bin",
+      "sha256": "78a6894feb65554c4ce4f19324cee1b2c2b114c01ea96447ef0c36d95d123e88",
+      "bytes": 3538944
+    },
+    {
+      "name": "frame_room-unified-mis-mode2.pfm.pt.bin.json",
+      "sha256": "02226a66ac3981e1212713c4027efa3cbc0def1d058abf4f36b50707a9b0fc9f",
+      "bytes": 329
+    },
+    {
+      "name": "frame_room-unified-mis-mode2.pfm.pt.bin.stats.json",
+      "sha256": "a35b89e60b3d42f88dcc35cce9795751a6ea1496d10c4a17cc66dd825fd9dfd0",
+      "bytes": 2029
+    }
+  ],
+  "effective_b8_partition": {
+    "development": false,
+    "contract_version": 1,
+    "gi_reuse": false,
+    "gi_approximation_mode": null,
+    "component": 0,
+    "stage": 0,
+    "pt_min_light_inclusive_length": 4,
+    "canonical_accepted": false
+  },
+  "effective_paired_spatial_pilot": {
+    "enabled": false,
+    "policy": "adjacent reciprocal pairs",
+    "pair_owned_shifts": false,
+    "vector_shading": false,
+    "canonical_accepted": false
+  },
+  "effective_replay_queue": {
+    "enabled": false,
+    "oracle": false,
+    "shift_stride_bytes": 104,
+    "indirect_dispatch": false,
+    "canonical_accepted": false
+  },
+  "effective_environment_filter": {
+    "diffuse_mip": 0.0,
+    "explicit_override": true,
+    "scope": "Filtering identity only; no renderer correctness or acceptance claim"
+  },
+  "effective_sampling": {
+    "coverage": "verified first-frame effective receipt",
+    "seed": 47,
+    "realtime": true,
+    "reference_pixel_center": false,
+    "pixel_jitter_scale": 0.0
+  },
+  "effective_di_validation": {
+    "coverage": "verified first-frame effective receipt",
+    "strict": false,
+    "boiling": true,
+    "discount_naive": false,
+    "temporal_permutation": true
+  },
+  "effective_extended_scene_contract": null,
+  "effective_unified_mis": {
+    "requested": true,
+    "active": true,
+    "canonical_accepted": false,
+    "full_ptpp": false,
+    "receipt": {
+      "enabled": "1",
+      "primaryOwner": "PT",
+      "indirectOwner": "PT",
+      "standaloneDI": "0",
+      "standaloneGI": "0",
+      "localProposals": "1",
+      "transport": "finite-BSDF-NEE-MIS",
+      "fullPrefix": "1",
+      "fullPTPP": "0"
+    }
+  },
+  "effective_unified_finite_nee": {
+    "requested": false,
+    "active": false
+  },
+  "effective_pt_replay": {
+    "coverage": "verified first-frame effective receipt",
+    "replay_only": true,
+    "roughness_threshold": 1.0
+  },
+  "effective_pt_history": {
+    "coverage": "verified first-frame effective receipt",
+    "age_rejection": true,
+    "max_age": 30,
+    "max_history": 8
+  },
+  "effective_pt_spatial": {
+    "coverage": "verified first-frame effective receipt",
+    "samples": 1,
+    "boost": 1
+  },
+  "effective_ptpp": {
+    "coverage": "verified first-frame effective receipt",
+    "reconnection_mode": 0,
+    "roulette_probability": 0.0,
+    "diagnostics": true
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 8,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "not requested; legacy labels retain their original numbering"
+  },
+  "effective_gbuffer_precision": {
+    "rounded_materials": 0,
+    "explicit_override": false,
+    "scope": "Half-up after fp16 conversion; not exact/unbiased BSDF reconstruction"
+  },
+  "effective_di_reuse": {
+    "active": false,
+    "mode": 3,
+    "temporal": false,
+    "spatial": false,
+    "gi": false,
+    "pt": true,
+    "scope": "Effective first-frame settings; not estimator correctness or timing proof"
+  },
+  "effective_prefix_throughput": {
+    "preserve_above_one": false,
+    "capture_packed": false,
+    "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+  }
+}

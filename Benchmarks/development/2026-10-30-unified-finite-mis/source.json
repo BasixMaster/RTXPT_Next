@@ -1,0 +1,18 @@
+{
+  "base_source": "600d67acc89c93d2bfed68cd6441acb63e281711",
+  "overlay_files": {
+    "Rtxpt/RTXDI/PT/Bridge.hlsli": "d095c44a7e8e6937906d5e1c00afc080d57772f79468fe446d52298ecc5eb267",
+    "Rtxpt/RTXDI/PT/Runtime/HybridShiftGuard.hlsli": "d16be5a8fc345b16fd7963e15acc595117af7346640a200be8141068aa37cfb0",
+    "Rtxpt/RTXDI/RtxdiPass.cpp": "7ed2501ebd482ade2db95492dc61ec256f58e6860448299fd1acdd7476db4fac",
+    "Rtxpt/RTXDI/RtxdiPass.h": "10495f1de0c9c063ef256d776814238532ed86d190e042f3aa6e3b851aea6aeb",
+    "Rtxpt/RTXDI/ShaderParameters.h": "5960d78299635be8fc78f3794bc46140214fe8bc530613b51bed55effc030086",
+    "Rtxpt/Sample.cpp": "562e404fd9d4ce8b8f24130df524463babd47a98e2885f8046633b276b3c2395",
+    "Rtxpt/SampleCommon/CommandLine.cpp": "b89daf753b56209d7e4f701fedf2e692b536dea2ded127368450ae487d131e98",
+    "Rtxpt/SampleCommon/CommandLine.h": "e968d3d8833f4ca015c32d6486f8e0a14500d0691ffc087e77a5f30bcb525205",
+    "Rtxpt/SampleUI.cpp": "21726488c279c1f185d14f605866534056a828f099581e423c4339445825ef51"
+  },
+  "rtxdi": "f12037fa8e97ebc08e9e3edfd2de528ed1772a4b",
+  "sdk_reference": "a6efab966b7c3b272da0461578eb56ac61c7cbff",
+  "assets": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
+  "exe_sha256": "4437547da551b7c81c592ee066c964cf5436e9443f1b368053f756b8e1a6ae7d"
+}

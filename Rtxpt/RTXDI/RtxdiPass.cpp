@@ -315,6 +315,7 @@ void RtxdiPass::PrepareResources(
          bridgeParams.samplingSeed != m_BridgeParameters.samplingSeed ||
          bridgeParams.giPTPartition != m_BridgeParameters.giPTPartition ||
          bridgeParams.unifiedFiniteNEEPilot != m_BridgeParameters.unifiedFiniteNEEPilot ||
+         bridgeParams.unifiedMIS != m_BridgeParameters.unifiedMIS ||
          bridgeParams.userSettings.restirGI.resamplingMode != m_BridgeParameters.userSettings.restirGI.resamplingMode ||
          bridgeParams.extendedSceneValidation != m_BridgeParameters.extendedSceneValidation ||
          bridgeParams.maxDiffuseBounces != m_BridgeParameters.maxDiffuseBounces ||
@@ -625,8 +626,8 @@ void RtxdiPass::FillSharedConstants(struct RtxdiBridgeConstants& bridgeConstants
     bridgeConstants.ptHistoryValid = m_PTCameraHistoryValid ? 1 : 0;
     bridgeConstants.ptRouletteProbability = m_BridgeParameters.userSettings.restirPT.russianRouletteProbability;
     bridgeConstants.ptDiagnostics = m_BridgeParameters.capturePTDiagnostics ? 1u : 0u;
-    bridgeConstants.ptUnifiedFiniteNEE = m_BridgeParameters.unifiedFiniteNEEPilot ? 1u : 0u;
-    if (m_BridgeParameters.unifiedFiniteNEEPilot && bridgeConstants.lightBufferParams.infiniteLightBufferRegion.numLights != 0)
+    bridgeConstants.ptUnifiedFiniteNEE = m_BridgeParameters.unifiedMIS ? 2u : (m_BridgeParameters.unifiedFiniteNEEPilot ? 1u : 0u);
+    if ((m_BridgeParameters.unifiedFiniteNEEPilot || m_BridgeParameters.unifiedMIS) && bridgeConstants.lightBufferParams.infiniteLightBufferRegion.numLights != 0)
         throw std::runtime_error("Unified finite-NEE pilot does not cover infinite analytic lights");
     bridgeConstants.giPTPartition = m_BridgeParameters.giPTPartition;
     bridgeConstants.ptExtendedSceneValidation = m_BridgeParameters.extendedSceneValidation ? 1u : 0u;

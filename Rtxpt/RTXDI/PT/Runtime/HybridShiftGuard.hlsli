@@ -16,6 +16,21 @@ void RTXPT_ComputeHybridShift(inout RAB_Surface surfaceForResampling,
 {
     RTXDI_ComputeHybridShift(surfaceForResampling,neighborSample,hspfParams,
         hsrParams,rcParams,targetFunction,jacobian,ptud);
+    // Fixed-threshold SDK reconnection supplies scatterPdf=0 to its MIS
+    // callback. Keep that legacy callback at one and apply the actual marginal
+    // BSDF density here once, after light-ID remapping. No second shadow trace.
+    if (g_RtxdiBridgeConst.ptUnifiedFiniteNEE == 2 && jacobian != 0.f && ConnectsToNEELight(neighborSample))
+    {
+        RTXDI_SampledLightData data = RTXDI_GetSampledLightData(neighborSample);
+        if (RTXDI_SampledLightData_IsValidLightData(data))
+        {
+            RAB_LightSample light = RAB_SamplePolymorphicLight(
+                RAB_LoadLightInfo(RTXDI_SampledLightData_GetLightIndex(data), hsrParams.isPrevFrame),
+                surfaceForResampling, RTXDI_SampledLightData_GetUVDataFloat2(data));
+            float scatterPdf = surfaceForResampling.EvalPdf(normalize(light.position - surfaceForResampling.GetPosW()), true);
+            targetFunction *= RTXPT_PTFiniteNEEWeight(light, scatterPdf);
+        }
+    }
     const bool diagnostics = g_RtxdiBridgeConst.ptDiagnostics != 0;
     if (diagnostics)
     {

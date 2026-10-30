@@ -80,6 +80,7 @@ struct CommandLineOptions
     float PTRouletteProbability = 0.0f;
     int PTFixedSpatialSamples      = -1;
     bool PTDisableAgeRejectionValidation = false;
+    bool PTUnifiedMISValidation = false; // Finite M1 complementary BSDF/NEE MIS, full-prefix replay.
     bool PTUnifiedFiniteNEEValidation = false; // Opt-in finite-light NEE-only unified tree; not full paper MIS.
     bool PTReplayOnlyValidation    = false;
     bool B8InitialGIValidation = false;

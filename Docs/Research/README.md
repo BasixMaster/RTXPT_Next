@@ -1,6 +1,6 @@
 # Basix Pathtracing · RTXPT1.9 baseline and B0–B16 roadmap
 
-**New B10 prerequisite:** [finite-light unified initial-tree pilot](B10_UNIFIED_LIGHTING.md) passes four scoped GPU modes and31,472identity checks; full paper MIS and mid-path robustness remain pending.
+**Latest B10 integration:** [finite M1 BSDF/NEE MIS](B10_UNIFIED_LIGHTING.md) now runs in the unified PT reservoir; four scoped GPU modes pass31,492identity checks. Full PT++ remains partial; M>1 RIS/PSS, environment and broader reuse integration are next.
 
 [**Compact research summary: findings, measured tradeoffs and next steps**](RESEARCH_SUMMARY.md).
 
