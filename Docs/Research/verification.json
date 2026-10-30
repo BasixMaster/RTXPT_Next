@@ -190,7 +190,7 @@
       "name": "Structured evidence schema separately validated; SQLite metric search",
       "status": "passed",
       "smape_matches": 2,
-      "sources": 42,
+      "sources": 43,
       "findings": 45
     },
     {
@@ -327,6 +327,10 @@
     },
     {
       "name": "Finite RIS/PSS integration: six M1/M4GPU snapshots,48130unchanged identity checks,decoded PSSweights/packedstates/HDRhashes and controls;full B10 pending",
+      "status": "passed"
+    },
+    {
+      "name": "Environment RIS/MIS extension: six M1/M4positive-environment snapshots,51694identity checks,decoded environmentNEE/BSDFmisses,rawHDR/source hashes and preserved controls;no fullB10quality/timing claim",
       "status": "passed"
     }
   ],

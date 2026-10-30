@@ -306,6 +306,19 @@
         "pss_ucw_readback": true,
         "environment": false,
         "general_composition": false
+      },
+      "environment_mis_integration": {
+        "status": "scoped_gpu_prerequisite_passed",
+        "evidence": "Benchmarks/development/2026-10-30-unified-environment",
+        "canonical_accepted": false,
+        "full_ptpp": false,
+        "scope": "Static opaque Room,positive MIP environment,finite uniform RIS,full-prefix;M1/M4",
+        "gpu_cases": 6,
+        "identity_tests": 51694,
+        "identity_failures": 0,
+        "environment_nee_and_bsdf_miss_readback": true,
+        "general_composition": false,
+        "performance_quality": "not measured for this integration"
       }
     },
     {

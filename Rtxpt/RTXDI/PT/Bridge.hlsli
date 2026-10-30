@@ -318,6 +318,11 @@ RTXDI_BrdfRaySample RTXPT_PTSampleBsdf(RAB_Surface s, inout RTXDI_RandomSamplerS
 float RTXPT_PTFiniteNEEWeight(RAB_LightSample light, float scatterPdf)
 {
     if (RAB_IsAnalyticLightSample(light)) return 1.f;
+    if (light.lightType == PolymorphicLightType::kEnvironment)
+    {
+        float pNee = float(g_RtxdiBridgeConst.ptUnifiedRISCandidates) * light.solidAnglePdf;
+        return pNee > 0.f ? pNee / (pNee + scatterPdf) : 0.f;
+    }
     float pNee = float(max(1u, g_RtxdiBridgeConst.ptUnifiedRISCandidates)) * light.solidAnglePdf / float(g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion.numLights);
     return pNee > 0.f ? pNee / (pNee + scatterPdf) : 0.f;
 }
@@ -389,6 +394,65 @@ void RTXPT_PTRecordFiniteRIS(inout RTXDI_PathTracerContext<PTContextType> ctx,
 #endif
 }
 
+// NVIDIA EnvMapSampler MIP descent and PT++ supplement5: this source is
+// sampled directly with known solid-angle PDF. The environment and finite
+// emitters have disjoint terminal domains, each with M NEE candidates.
+EnvMapSampler RTXPT_PTEnvironmentSampler()
+{
+    return EnvMapSampler::make(s_EnvironmentMapImportanceSampler, t_EnvironmentMapImportanceMap,
+        g_Const.envMapImportanceSamplingParams, t_EnvironmentMap, s_EnvironmentMapSampler, g_Const.envMapSceneParams);
+}
+float RTXPT_PTEnvironmentMissWeight(float3 direction, RTXDI_BrdfRaySample brs)
+{
+    if (brs.properties.IsDelta()) return 1.f;
+    EnvMapSampler sampler = RTXPT_PTEnvironmentSampler();
+    float pNee = float(g_RtxdiBridgeConst.ptUnifiedRISCandidates) * sampler.MIPDescentEvalPdf(direction);
+    return brs.outPdf > 0.f ? brs.outPdf / (brs.outPdf + pNee) : 0.f;
+}
+template<typename PTContextType>
+void RTXPT_PTRecordEnvironmentRIS(inout RTXDI_PathTracerContext<PTContextType> ctx,
+    inout RTXDI_PathTracerRandomContext randomContext)
+{
+    const uint count = g_RtxdiBridgeConst.ptUnifiedRISCandidates;
+    const RTXDI_EnvironmentLightBufferParameters params = g_RtxdiBridgeConst.lightBufferParams.environmentLightParams;
+    if (params.lightPresent == 0) return;
+    RAB_Surface surface = ctx.GetIntersectionSurface();
+    EnvMapSampler sampler = RTXPT_PTEnvironmentSampler();
+    RAB_LightSample chosen = RAB_EmptyLightSample();
+    RTXDI_SampledLightData data = RTXDI_SampledLightData_CreateInvalidData();
+    float sum = 0.f, chosenTarget = 0.f;
+    for (uint i=0; i<count; ++i)
+    {
+        float2 randoms = float2(RTXDI_GetNextRandom(randomContext.initialRandomSamplerState), RTXDI_GetNextRandom(randomContext.initialRandomSamplerState));
+        DistantLightSample candidate = sampler.MIPDescentSample(randoms);
+        // Store direction in the polymorphic environment sampler's oct UV.
+        RTXDI_SampledLightData candidateData = RTXDI_SampledLightData_CreateInvalidData();
+        RTXDI_SampledLightData_SetLightData(candidateData, params.lightIndex);
+        RTXDI_SampledLightData_SetUVData(candidateData, Encode_Oct(candidate.Dir));
+        // Evaluate the stored UV, as in the SDK presampled environment path,
+        // so a packed texel-border rounding cannot change the reused target.
+        float2 uv = RTXDI_SampledLightData_GetUVDataFloat2(candidateData);
+        RAB_LightSample light = RAB_SamplePolymorphicLight(RAB_LoadLightInfo(params.lightIndex, false), surface, uv);
+        float target = light.solidAnglePdf > 0.f ? RTXDI_Luminance(surface.Eval(-light.normal).rgb * light.radiance) / light.solidAnglePdf : 0.f;
+        sum += target;
+        if (RTXDI_GetNextRandom(randomContext.initialRandomSamplerState) * sum < target)
+        {
+            chosenTarget = target; chosen = light;
+            data = candidateData;
+        }
+    }
+    if (!(chosenTarget > 0.f)) return;
+    float pssUCW = sum / (float(count) * chosenTarget);
+    float scatterPdf = surface.EvalPdf(-chosen.normal, true);
+    float3 singleSamplePSS = RAB_GetReflectedBsdfRadianceForSurface(chosen.position, chosen.radiance, surface) / chosen.solidAnglePdf;
+    singleSamplePSS *= RTXPT_PTFiniteNEEWeight(chosen, scatterPdf);
+    bool selectedPath = ctx.RecordNeeLightSample(data, singleSamplePSS * pssUCW, 1.f / pssUCW,
+        scatterPdf, chosen, randomContext.initialRandomSamplerState);
+#if defined(RTXDI_RESTIR_PT_INITIAL_SAMPLING)
+    if (selectedPath) ctx.ctx.selectedRcWiPdf = pssUCW;
+#endif
+}
+
 // PT++ main section6.1 initial-tree ownership prerequisite. This pilot retains
 // the existing NEE-only continuous transport partition, not supplemental MIS.
 // Exactly one uniformly selected local light gives a known source probability;
@@ -423,6 +487,15 @@ void RTXPT_PTRecordUniformFiniteNEE(inout RTXDI_PathTracerContext<PTContextType>
 }
 
 template<typename PTContextType>
+void RTXPT_PTRecordUnifiedNEE(inout RTXDI_PathTracerContext<PTContextType> ctx,
+    inout RTXDI_PathTracerRandomContext randomContext)
+{
+    RTXPT_PTRecordUniformFiniteNEE(ctx, randomContext);
+    if (g_RtxdiBridgeConst.ptUnifiedEnvironment != 0)
+        RTXPT_PTRecordEnvironmentRIS(ctx, randomContext);
+}
+
+template<typename PTContextType>
 void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
     inout RTXDI_PathTracerRandomContext randomContext, inout RAB_PathTracerUserData user)
 {
@@ -437,7 +510,7 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
         // The SDK starts continuation tracing at depth2. At the primary hit,
         // NEE has light-inclusive length2. Restore depth before BSDF tracing.
         ctx.ctx.ptState.bounceDepth = 1;
-        RTXPT_PTRecordUniformFiniteNEE(ctx, randomContext);
+        RTXPT_PTRecordUnifiedNEE(ctx, randomContext);
         ctx.ctx.ptState.bounceDepth = 2;
     }
 #endif
@@ -542,7 +615,26 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
             ctx.RecordPathRadianceMiss(randomContext.initialRandomSamplerState);
             // Continuous misses are covered by NEE. A delta connection cannot
             // be sampled by NEE and therefore retains explicit emitted light.
-            if ((g_RtxdiBridgeConst.giPTPartition == 0 || ctx.GetBounceDepth() >= 4) && brs.properties.IsDelta() && ctx.ShouldSampleEmissiveSurfaces() && Bridge::HasEnvMap())
+            if (g_RtxdiBridgeConst.ptUnifiedEnvironment != 0 && ctx.ShouldSampleEmissiveSurfaces() && Bridge::HasEnvMap())
+            {
+                EnvMap env = Bridge::CreateEnvMap();
+                float3 emitted = env.Eval(ray.Direction) * RTXPT_PTEnvironmentMissWeight(ray.Direction, brs);
+#if defined(RTXDI_RESTIR_PT_HYBRID_SHIFT)
+                // Full PSS paths retain primary and secondary misses alike.
+                // The SDK default omits secondary misses for its split owner.
+                if (ctx.ctx.selectedPathLength == ctx.GetBounceDepth() && ctx.ctx.replayRcVertexLength > ctx.GetBounceDepth())
+                    ctx.ctx.radiance += emitted * ctx.GetPathThroughput();
+#else
+                bool selectedMiss = ctx.RecordEnvironmentMapLightSample(emitted, previousSurface, randomContext.initialRandomSamplerState);
+#if defined(RTXDI_RESTIR_PT_INITIAL_SAMPLING)
+                // Pure-PSS paths never read rcWiPdf for footprint inversion.
+                // A negative marker distinguishes actual selected environment
+                // misses from emitter hits in diagnostic packed readback.
+                if (selectedMiss) ctx.ctx.selectedRcWiPdf = -1.f;
+#endif
+#endif
+            }
+            else if ((g_RtxdiBridgeConst.giPTPartition == 0 || ctx.GetBounceDepth() >= 4) && brs.properties.IsDelta() && ctx.ShouldSampleEmissiveSurfaces() && Bridge::HasEnvMap())
             {
                 EnvMap env = Bridge::CreateEnvMap();
 #if defined(RTXDI_RESTIR_PT_HYBRID_SHIFT)
@@ -589,7 +681,7 @@ void RAB_PathTrace(inout RTXDI_PathTracerContext<PTContextType> ctx,
         // no unstored suffix diffuse budget is guessed at a mid-path connection.
         if (diffuseBudgetExceeded) { ctx.SetPathTermination(true); break; }
         if (ctx.ShouldSampleNee() && g_RtxdiBridgeConst.ptUnifiedFiniteNEE != 0)
-            RTXPT_PTRecordUniformFiniteNEE(ctx, randomContext);
+            RTXPT_PTRecordUnifiedNEE(ctx, randomContext);
         else if (ctx.ShouldSampleNee())
         {
             RAB_LightSample light = RAB_EmptyLightSample();

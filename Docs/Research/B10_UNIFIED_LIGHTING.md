@@ -12,6 +12,53 @@ The paper's full target uses one PT reservoir over direct and indirect path leng
 - [Authors' supplementary document](https://research.nvidia.com/labs/rtr/publication/lin2026restirptenhanced/lin2026restirptenhanced_supplemental.pdf), §§1 and5: lobe-indexed PSS, multi-candidate NEE MIS and UCW conversion. The privately cached supplement has13pages and SHA256 `6c43cf0d8cc01d0352a85800c00477ad3179fa9d5ab78dc217dfb23408e650b5`.
 - Pinned NVIDIA runtime `PT/InitialSamplingPathTracerContext.hlsli`, `PT/InitialSampling.hlsli`, `PT/HybridShift.hlsli` and the SDK shader/application bridge documentation define the integration interfaces. Presence of those interfaces does not establish application-side unification.
 
+## Environment RIS/MIS extension — 2026-10-30
+
+The new default-off environment extension adds **MIP-importance-sampled environment NEE and complementary BSDF environment misses** to the unified reservoir, alongside finite-light RIS. It follows PT++ §6.1/supplement §5 and NVIDIA's native `EnvMapSampler::MIPDescentSample`/`MIPDescentEvalPdf` plus the SDK MIS/replay reference. The finite-only mode remains a preserved control. Standalone DI/GI shading stays off.
+
+The native sampler already returns a full solid-angle PDF; the new MIS uses that density once. Each light domain has M NEE candidates per path vertex, with RIS UCW carried into the hypothetical single-sample PSS target. Finite emitters and environment misses have disjoint terminal domains. The environment's direction is stored in octahedral UV; initial evaluation uses the packed UV so reused targets see the same texel. Existing16-bit UV precision is retained, without an exact unbiasedness claim. Static environment sampling keeps the PSS terminal Jacobian at one.
+
+The SDK's default replay callback omits secondary environment misses under its split-lighting ownership. The explicit unified mode restores selected pure-PSS misses at all supported depths with their BSDF MIS weight. This adapter is confined to full-prefix replay. It does not change the legacy control, fix earlier mid-path failures or apply brightness fitting.
+
+### GPU activation and replay checks
+
+The owned Room variation uses the same geometry/camera with HDR environment intensity1. Earlier finite-only captures used intensity0; **those are different lighting conditions, not a matched quality comparison**. Six snapshots use177×91,4/4bounces,seed47 and8warmupframes. Per-frame light-ID receipts identify selected environment NEE paths; a diagnostic marker distinguishes actual BSDF environment misses.
+
+|Candidates per light domain|Reuse|Initial finite NEE|Initial environment NEE|Initial BSDF environment misses|Identity checks / failures|
+|---:|---|---:|---:|---:|---:|
+|1|None|6,390|806|1,289|8,607 / 0|
+|1|Temporal + spatial|6,390|806|1,289|8,607 / 0|
+|4|None|6,423|1,158|980|8,620 / 0|
+|4|Temporal|6,423|1,158|980|8,620 / 0|
+|4|Spatial|6,423|1,158|980|8,620 / 0|
+|4|Temporal + spatial|6,423|1,158|980|8,620 / 0|
+
+All51,694same-pixel target×Jacobian checks pass at unchanged thresholds; packed state, selected UCWs and raw HDR are finite. M=1 selected NEE UCWs remain within floating-point tolerance of one. The finite-only M4 mode0 raw HDR is bit-identical to its earlier retained capture in one matched case; default-off capture passes. Native execution with the new flag but a zero-intensity environment rejects with an explicit receipt and zero images.268tooltests pass. These shared-seed final snapshots are not independent quality trials or a per-frame history oracle.
+
+|M=1 environment extension: combined reuse|M=4 environment extension: combined reuse|
+|---|---|
+|![Unified environment M1 diagnostic snapshot](assets/b10-unified-environment/m1-mode3.png)|![Unified environment M4 diagnostic snapshot](assets/b10-unified-environment/m4-mode3.png)|
+
+The64-byte reservoir ABI is unchanged. In this restricted mode, terminal-NEE `rcWiPdf` retains PSS UCW for readback; pure-PSS environment misses use marker−1. The pinned SDK reads that field only for mid-path footprint inversion, which is excluded here. The marker is not a negative sample weight.
+
+### Performance and quality status
+
+**Full B10 still has no accepted performance/quality comparison.** The new finite/environment integration has diagnostic evidence only: no speedup, quality improvement, unbiased-mean result or memory saving is claimed. Its readback-heavy captures are excluded from performance timing. Original Convergence/Kitchen, multiple seeds, equal-time/error convergence, uncapped timing and motion/reset/resize remain pending for this unified mode.
+
+The completed [duplication-history component study](B10_DUPLICATION_HISTORY.md) remains the available B10 component comparison:
+
+|Scene|GPU busy change, duplication on/off|Averaged-image MSE change|
+|---|---:|---:|
+|Room|+0.25%|+3.05%|
+|Convergence|−0.91%|−24.47%|
+|Kitchen|+1.67%|−26.79%|
+
+Lower is better. Individual-frame error is mixed and HDR-FLIP is slightly worse on all three scenes; this deliberately biased component does not establish a full-PT++ gain.
+
+Run `Benchmarks/tools/run_unified_environment_validation.py --exe bin/Rtxpt.exe --output <new-directory> --candidates 4`. It supplies `--pt-unified-environment-validation` (native `--ptUnifiedEnvironmentValidation true`) with explicit PSS MIS, full-prefix replay and stopped animations. The extension requires a prepared positive environment and rejects infinite analytic lights, transmission/binding budgets and the unvalidated B8/pair/queue/duplication/roulette combinations. **Next: compose the remaining PT++ mechanisms, dual motion and broader queue/scene support. B10 remains partial; B11 remains inactive.**
+
+[GPU results, source overlay, owned scene and controls](../../Benchmarks/development/2026-10-30-unified-environment/summary.json) · [Portable runner](../../Benchmarks/tools/run_unified_environment_validation.py).
+
 ## Finite multi-candidate RIS/PSS integration — 2026-10-30
 
 A new opt-in mode now implements PT++ supplement §5 for **uniform finite-light RIS**: multiple NEE candidates, the complementary M-sample BSDF/NEE MIS weights, and explicit RIS-to-PSS UCW conversion. It keeps the hypothetical single-sample PSS target separate from the unknown RIS-selected distribution. Direct and indirect paths still compete in one PT reservoir; standalone DI/GI shading remains off. This is a restricted B10 integration, not full PT++ acceptance.
@@ -47,7 +94,7 @@ These tiny diagnostic snapshots include readback overhead and share a seed. They
 
 Run `Benchmarks/tools/run_unified_ris_validation.py --exe bin/Rtxpt.exe --output <new-directory> --candidates 4`. Native flags are `--ptUnifiedMISValidation true --ptUnifiedRISCandidates 4`, with explicit full-prefix replay and fixed-threshold mode. The wrapper flag is `--pt-unified-ris-candidates 4`;1–32is supported, while0preserves the earlier M1 control. The runner freezes animations. Candidate count and parameterization changes reset history. Shared constant-buffer size and reservoir ABI remain unchanged.
 
-The current preset excludes environment/infinite-light transport, transmission/binding diffuse budgets and composition with B8/pair/queue/duplication/roulette adaptations. **Next integration priorities are environment MIS and composition with the remaining PT++ mechanisms**, followed by dual motion and broader queue/scene support. Full B10 stays partial; B11 stays inactive. The earlier M1 and NEE-only evidence below remains preserved with its original identities.
+The current preset excludes environment/infinite-light transport, transmission/binding diffuse budgets and composition with B8/pair/queue/duplication/roulette adaptations. At this earlier finite-only checkpoint, environment MIS and composition were pending; the environment extension above now implements the scoped environment path. Composition, dual motion and broader queue/scene support remain pending. Full B10 stays partial; B11 stays inactive. The earlier M1 and NEE-only evidence below remains preserved with its original identities.
 
 [GPU results, source overlay and controls](../../Benchmarks/development/2026-10-30-unified-pss-ris/summary.json) · [Exact receiver-change calculation](../../Benchmarks/development/2026-10-30-unified-pss-ris/calculated-receiver-check.json) · [Portable runner](../../Benchmarks/tools/run_unified_ris_validation.py).
 

@@ -8,9 +8,13 @@ GPU busy is process GPU activity in milliseconds, not complete frame latency or 
 
 [Compact research summary](RESEARCH_SUMMARY.md) · [Machine-readable overview](comparison-overview.json) · [Algorithm definitions and identities](VERSION_MAPPING.md) · [Benchmark protocol](BENCHMARK_VERSIONS.md)
 
-## Latest B10 multi-candidate RIS/PSS integration
+## Latest B10 environment RIS/MIS integration
 
-Finite-light M1/M4 RIS/PSS MIS now runs in the unified reservoir. Six Room snapshots pass48,130identity checks; actual PSS weights are read back and the earlier M1 control is preserved. These diagnostic pictures are not a new comparable performance/quality cohort. Environment, broader composition, original-scene convergence/timing and full B10 remain pending. [Implementation, pictures and source evidence](B10_UNIFIED_LIGHTING.md).
+Finite and environment RIS/PSS MIS now share the unified reservoir. Six positive-environment Room snapshots pass51,694identity checks, with selected environment NEE and BSDF misses read back. The finite-only control is preserved. Full B10 performance/quality comparisons are still pending; these readback-heavy diagnostics are not a speed or quality result. The completed duplication component comparison remains separate. [Implementation, pictures, current performance/quality status and evidence](B10_UNIFIED_LIGHTING.md).
+
+## Earlier B10 finite multi-candidate RIS/PSS checkpoint
+
+Finite-light M1/M4 RIS/PSS MIS now runs in the unified reservoir. Six Room snapshots pass48,130identity checks; actual PSS weights are read back and the earlier M1 control is preserved. These diagnostic pictures are not a new comparable performance/quality cohort. The newer environment extension above adds scoped static environment MIS; broader composition, original-scene convergence/timing and full B10 remain pending. [Implementation, pictures and source evidence](B10_UNIFIED_LIGHTING.md).
 
 ## Earlier B10 finite M1 BSDF/NEE MIS checkpoint
 

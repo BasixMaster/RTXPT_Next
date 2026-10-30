@@ -3,6 +3,7 @@ from pathlib import Path
 from experiment_contract import VARIANT_IDS, prepare as prepare_experiment, verify as verify_experiment, verify_snapshot
 import argparse,subprocess,time,json,hashlib,os,datetime,csv
 from capture_identity import transport_settings
+from unified_environment_contract import validate_request as validate_unified_environment, verify as verify_unified_environment
 from unified_ris_contract import validate_request as validate_unified_ris, verify as verify_unified_ris
 from unified_mis_contract import validate_request as validate_unified_mis, verify as verify_unified_mis
 from unified_finite_nee_contract import validate_request as validate_unified, verify as verify_unified
@@ -61,6 +62,7 @@ def main():
     ap.add_argument('--capture-pt-reservoirs',action='store_true')
     ap.add_argument('--pt-disable-age-rejection-validation',action='store_true')
     ap.add_argument('--pt-replay-only-validation',action='store_true')
+    ap.add_argument('--pt-unified-environment-validation',action='store_true',help='Static environment RIS/MIS extension; requires explicit PSS mode')
     ap.add_argument('--pt-unified-ris-candidates',type=int,choices=range(33),default=0,help='Explicit PSS RIS candidates1..32;0 preserves M1 mixed-measure control')
     ap.add_argument('--pt-unified-mis-validation',action='store_true',help='Finite M1 complementary BSDF/NEE MIS; explicit full-prefix replay')
     ap.add_argument('--pt-unified-finite-nee-validation',action='store_true',help='Finite-local-light unified NEE-only initial tree; not full PT++ MIS')
@@ -95,6 +97,8 @@ def main():
         if a.b8_validation_stage==2 and (a.pt_reconnection_mode!=1 or not 0<(a.pt_roulette_probability or 0)<1):raise SystemExit('Limited PT++ ablation requires explicit footprint and roulette in(0,1)')
         args[args.index('--useReSTIRGI')+1]='1'
         args+=['--b8InitialGIValidation','true','--b8Component',str(a.b8_component),'--b8ValidationStage',str(a.b8_validation_stage)]
+    validate_unified_environment(a.pt_unified_environment_validation,a.pt_unified_mis_validation,a.pt_unified_ris_candidates,a.simple or a.stop_animations)
+    if a.pt_unified_environment_validation:args += ['--ptUnifiedEnvironmentValidation','true']
     validate_unified_ris(a.pt_unified_ris_candidates,a.pt_unified_mis_validation)
     if a.pt_unified_ris_candidates:args += ['--ptUnifiedRISCandidates',str(a.pt_unified_ris_candidates)]
     validate_unified_mis(a.pt_unified_mis_validation,a.pt_unified_finite_nee_validation,a.mode,a.variant,a.b8_initial_gi_validation,a.pt_extended_scene_validation,a.pt_paired_spatial_validation,a.pt_roulette_probability,a.pt_replay_only_validation,a.pt_reconnection_mode,a.pt_replay_compaction_validation,a.pt_duplication_history_validation)
@@ -163,6 +167,7 @@ def main():
     if a.pt_extended_scene_validation:manifest['development_extended_scene_transport']=dict(full_prefix_replay=True,canonical_accepted=False,diffuse_budget='Native sampled-lobe accounting with terminal-emission truncation')
     if a.linear_hdr:manifest['output_track']='unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata'
     manifest['settings']['linear_hdr_requested']=a.linear_hdr
+    manifest['unified_environment_requested']=a.pt_unified_environment_validation
     manifest['unified_ris_candidates']=a.pt_unified_ris_candidates
     manifest['unified_mis_requested']=a.pt_unified_mis_validation
     manifest['unified_finite_nee_requested']=a.pt_unified_finite_nee_validation
@@ -245,6 +250,8 @@ def main():
             except ValueError as exc:manifest['measurement_status']='failed_di_validation_contract';manifest['di_validation_failure']=str(exc)
             try:manifest['effective_extended_scene_contract']=verify_extended((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_extended_scene_validation,a.max_diffuse_bounces,a.mode,a.b8_initial_gi_validation,a.b8_validation_stage,a.b8_gi_reuse_mode)
             except ValueError as exc:manifest['measurement_status']='failed_extended_scene_contract';manifest['extended_scene_failure']=str(exc)
+            try:manifest['effective_unified_environment']=verify_unified_environment((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_unified_environment_validation)
+            except ValueError as exc:manifest['measurement_status']='failed_unified_environment_contract';manifest['unified_environment_failure']=str(exc)
             try:manifest['effective_unified_ris']=verify_unified_ris((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_unified_ris_candidates)
             except ValueError as exc:manifest['measurement_status']='failed_unified_ris_contract';manifest['unified_ris_failure']=str(exc)
             try:manifest['effective_unified_mis']=verify_unified_mis((out/'renderer.log').read_text(encoding='utf-8',errors='replace'),a.pt_unified_mis_validation,a.pt_unified_ris_candidates)

@@ -80,6 +80,7 @@ struct CommandLineOptions
     float PTRouletteProbability = 0.0f;
     int PTFixedSpatialSamples      = -1;
     bool PTDisableAgeRejectionValidation = false;
+    bool PTUnifiedEnvironmentValidation = false; // Static full-prefix environment RIS/MIS extension.
     int PTUnifiedRISCandidates = 0; // 0 preserves verified M1 mixed-measure control; 1..32 explicit PSS RIS.
     bool PTUnifiedMISValidation = false; // Finite M1 complementary BSDF/NEE MIS, full-prefix replay.
     bool PTUnifiedFiniteNEEValidation = false; // Opt-in finite-light NEE-only unified tree; not full paper MIS.

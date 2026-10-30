@@ -317,6 +317,7 @@ void RtxdiPass::PrepareResources(
          bridgeParams.unifiedFiniteNEEPilot != m_BridgeParameters.unifiedFiniteNEEPilot ||
          bridgeParams.unifiedMIS != m_BridgeParameters.unifiedMIS ||
          bridgeParams.unifiedRISCandidates != m_BridgeParameters.unifiedRISCandidates ||
+         bridgeParams.unifiedEnvironment != m_BridgeParameters.unifiedEnvironment ||
          bridgeParams.userSettings.restirGI.resamplingMode != m_BridgeParameters.userSettings.restirGI.resamplingMode ||
          bridgeParams.extendedSceneValidation != m_BridgeParameters.extendedSceneValidation ||
          bridgeParams.maxDiffuseBounces != m_BridgeParameters.maxDiffuseBounces ||
@@ -627,7 +628,14 @@ void RtxdiPass::FillSharedConstants(struct RtxdiBridgeConstants& bridgeConstants
     bridgeConstants.ptHistoryValid = m_PTCameraHistoryValid ? 1 : 0;
     bridgeConstants.ptRouletteProbability = m_BridgeParameters.userSettings.restirPT.russianRouletteProbability;
     bridgeConstants.ptDiagnostics = m_BridgeParameters.capturePTDiagnostics ? 1u : 0u;
+    bridgeConstants.ptUnifiedEnvironment = uint32_t(m_BridgeParameters.unifiedEnvironment);
     bridgeConstants.ptUnifiedRISCandidates = m_BridgeParameters.unifiedRISCandidates;
+    if (m_BridgeParameters.unifiedEnvironment)
+    {
+        if (!bridgeConstants.lightBufferParams.environmentLightParams.lightPresent)
+            throw std::runtime_error("Unified environment validation requires a prepared environment light");
+        std::printf("PT_UNIFIED_ENV_LIGHT frame=%u lightIndex=%u localLights=%u\n", m_BridgeParameters.frameIndex, bridgeConstants.lightBufferParams.environmentLightParams.lightIndex, bridgeConstants.lightBufferParams.localLightBufferRegion.numLights);
+    }
     bridgeConstants.ptUnifiedFiniteNEE = m_BridgeParameters.unifiedMIS ? 2u : (m_BridgeParameters.unifiedFiniteNEEPilot ? 1u : 0u);
     if ((m_BridgeParameters.unifiedFiniteNEEPilot || m_BridgeParameters.unifiedMIS) && bridgeConstants.lightBufferParams.infiniteLightBufferRegion.numLights != 0)
         throw std::runtime_error("Unified finite-NEE pilot does not cover infinite analytic lights");

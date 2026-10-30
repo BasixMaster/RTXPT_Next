@@ -10,7 +10,7 @@ RTXPT supplies the renderer, scenes and native path tracer; RTXDI supplies reusa
 
 ![Conceptual ownership: current B8 split versus full B10 target](assets/research-summary/lighting-ownership.svg)
 
-Our B8 control partitions short-GI and long-PT contributions. Full PT++ §6.1 instead uses one PT reservoir over direct and all indirect paths, replacing standalone DI/GI shading in that preset. A restricted finite-light RIS/PSS mode now implements that ownership; environment and composition with the other mechanisms remain unfinished. [Derivation and implementation gates](B10_UNIFIED_LIGHTING.md).
+Our B8 control partitions short-GI and long-PT contributions. Full PT++ §6.1 instead uses one PT reservoir over direct and all indirect paths, replacing standalone DI/GI shading in that preset. A restricted finite-light RIS/PSS mode now implements that ownership; a scoped static environment extension also runs, while composition with the other mechanisms remains unfinished. [Derivation and implementation gates](B10_UNIFIED_LIGHTING.md).
 
 ## What our experiments show
 
@@ -20,7 +20,7 @@ Each row compares against its own study's control. Quality uses three seeds and 
 
 - **B9 versus B8:** GPU busy falls about 7–8% in original Convergence/Kitchen, but increases 11.5% in Room. Convergence's averaged-image MSE worsens about 21%; Kitchen's improves about 21%, with large uncertainty. Original scenes test roulette only; Room also tests footprint reconnection. [Full results](B9_RESULTS.md).
 - **B10 duplication on versus off:** averaged-image MSE improves about 24–27% in the original scenes, while Room worsens 3%. Frame-64 HDR-FLIP is slightly worse in every scene. GPU cost is nearly unchanged in Room/Convergence and rises about 1.7% in Kitchen; no general speedup is established. This sample-dependent history reduction is deliberately biased. [Full results and uncertainty](B10_DUPLICATION_HISTORY.md).
-- **Latest unified-lighting integration:** finite M=1/4 RIS/PSS MIS passes six Room snapshots and48,130identity checks, with actual PSS weights read back. The earlier M1 control is preserved. This is a correctness/activation checkpoint, without a quality or performance improvement claim. [Scope and evidence](B10_UNIFIED_LIGHTING.md).
+- **Latest unified-lighting integration:** finite + environment M=1/4 RIS/PSS MIS passes six positive-environment Room snapshots and51,694identity checks. Finite-only controls are preserved. This is a correctness/activation checkpoint, without a quality or performance improvement claim. [Scope and evidence](B10_UNIFIED_LIGHTING.md).
 - **Correctness mattered before optimization:** canonicalizing rejected zero-Jacobian shifts to a finite zero target stopped observed NaN propagation. Brightness residuals remain; exposure fitting would hide rather than explain them. [Finite-shift investigation](FINITE_SHIFT_GUARD.md).
 
 <details><summary>Convergence evidence: the running mean across 64 frames</summary>

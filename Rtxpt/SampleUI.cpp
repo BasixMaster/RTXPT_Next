@@ -187,6 +187,8 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     m_ui.UseReSTIRPT                = cmdLine.UseReSTIRPT != 0;
     m_ui.B8InitialGIValidation = cmdLine.B8InitialGIValidation;
     m_ui.B8ValidationStage = cmdLine.B8ValidationStage;
+    if (cmdLine.PTUnifiedEnvironmentValidation && (!cmdLine.PTUnifiedMISValidation || cmdLine.PTUnifiedRISCandidates < 1 || !cmdLine.stopAnimations))
+        throw std::runtime_error("Unified environment requires explicit PSS MIS and stopped animations");
     if (cmdLine.PTUnifiedRISCandidates < 0 || cmdLine.PTUnifiedRISCandidates > 32 ||
         (cmdLine.PTUnifiedRISCandidates > 0 && !cmdLine.PTUnifiedMISValidation))
         throw std::runtime_error("Unified PSS RIS requires unified MIS and candidates1..32;0 preserves control");

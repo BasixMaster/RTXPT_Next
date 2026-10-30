@@ -1,0 +1,57 @@
+{
+  "status": "scoped_gpu_prerequisite_passed",
+  "canonical_accepted": false,
+  "full_ptpp": false,
+  "full_paper_mis": false,
+  "finite_ris_pss": true,
+  "environment_mis": true,
+  "cases": 6,
+  "candidate_counts": [
+    1,
+    4
+  ],
+  "modes_by_count": {
+    "1": [
+      0,
+      3
+    ],
+    "4": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "identity_tests": 51694,
+  "identity_failures": 0,
+  "source_files": 327,
+  "exe_sha256": "0638743e55761480359208aa760820a6d5a1ab6c6e49c60a8fe092979ef7cef6",
+  "base_source": "d7dcbceb5759cbda5a1524300c50b5f7930070e4",
+  "controls": {
+    "finite-ris-control": {
+      "captured": true,
+      "environment_inactive": true,
+      "prior_hdr_bit_equal": true
+    },
+    "default-off": {
+      "captured": true,
+      "environment_inactive": true
+    },
+    "native_zero_environment": {
+      "rejected": true,
+      "exit_code": 3221226505,
+      "images": 0,
+      "explicit_receipt": true
+    }
+  },
+  "scope": "Static opaque Room177x91,4/4bounces,seed47,8warmupframes,finite uniform local lights plus positive MIP-sampled environment,full-prefix replay.",
+  "diagnostic_threshold": "relative >1% AND absolute >1e-4 fails; nonfinite fails; unchanged",
+  "snapshot_scope": "Six final-frame snapshots with shared seed; not independent quality trials or per-frame sequence oracle.",
+  "packed_field_semantics": "Terminal-NEE rcWiPdf stores selected PSS UCW; pure-PSS environment misses use rcWiPdf=-1 marker. SDK reads this field only for excluded mid-path footprint inversion.64byte ABI unchanged.",
+  "limits": [
+    "Static environment enabled; infinite analytic lights, transmission and binding diffuse budgets excluded.",
+    "No general mid-path or combined pair/queue/duplication/roulette integration.",
+    "No original-scene, motion/reset/resize, quality/convergence, unbiased-mean, performance or memory acceptance.",
+    "Brightness fitting not used; earlier failures remain preserved."
+  ]
+}

@@ -109,6 +109,7 @@ struct RtxdiBridgeParameters
     bool unifiedFiniteNEEPilot = false;
     bool unifiedMIS = false;
     uint32_t unifiedRISCandidates = 0;
+    bool unifiedEnvironment = false;
     bool usingReSTIRPT = false;
     uint32_t giPTPartition = 0; // Initial-only disjoint development contract.
     bool extendedSceneValidation = false;

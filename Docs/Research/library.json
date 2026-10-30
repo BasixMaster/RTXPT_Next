@@ -15,7 +15,8 @@
     "B10 duplication comparison completed6GPU gates,18quality sequences/1152frames and18uncapped timings. Averaged-image MSE improves in original scenes with per-frame/perceptual tradeoffs; Room/Convergence timing differences small, Kitchen cost+1.67%. Full B10 and B11 pending; source-aligned unified-lighting prerequisite has8exact tests, no renderer activation.",
     "2026-10-30: finite-light NEE-only unified initial tree passes four GPU snapshot modes/31,472identity checks with full-prefix replay. Mid-path trial rejected; full PT++ MIS, motion and performance remain pending.",
     "2026-10-30: finite M1 complementary BSDF/NEE MIS now runs in one PT reservoir;4Room snapshots/31,492identity checks pass. Full-prefix replay only; full PT++ and comparable quality/performance remain pending.",
-    "2026-10-30: finite multi-candidate RIS/PSS MIS integrated;6M1/M4Room snapshots/48,130identity checks pass. Actual PSS weights verified, old M1 control preserved; environment/general composition and full B10 pending."
+    "2026-10-30: finite multi-candidate RIS/PSS MIS integrated;6M1/M4Room snapshots/48,130identity checks pass. Actual PSS weights verified, old M1 control preserved; environment/general composition and full B10 pending.",
+    "2026-10-30: environment RIS/MIS and complementary BSDF misses added to unified PT;6M1/M4positive-environmentRoom snapshots/51694identity checks pass. Finite control preserved; fullB10performance/quality and composition pending."
   ],
   "questions": [
     {
@@ -724,6 +725,19 @@
       "limitations": "Finite uniform/full-prefix/static only; no environment/general composition, quality/unbiasedmean/speedup or fullPT++ acceptance.",
       "notes": "PT++ supplement5: hypothetical single-sample target, RIS UCW conversion, complementary M-sample MIS and unit terminal UV-space Jacobian. Legacy M1 control preserved.",
       "rights": "Application integration and owned Room evidence; retained NVIDIA licenses."
+    },
+    {
+      "id": "LOCAL-B10-UNIFIED-ENVIRONMENT",
+      "title": "B10 unified environment RIS/MIS extension",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/B10_UNIFIED_LIGHTING.md",
+      "kind": "experiment",
+      "published_on": "2026-10-30",
+      "checked_on": "2026-10-30",
+      "access": "full",
+      "quality": "Six source/executable-checked positive-environment Room snapshots,M1/M4,51694identity checks,actualenvironmentNEE/BSDFmiss readback,rawHDR/packedstate.",
+      "limitations": "Static opaque/full-prefix only; no general composition, original-scene quality/convergence, unbiasedmean, speedup or fullPT++ acceptance.",
+      "notes": "Native MIP solid-angle PDF,complementary MIS and explicit unified secondary environment misses; finite-only control preserved.",
+      "rights": "Application integration/owned scene variation; HDR asset pin and NVIDIA licenses retained."
     }
   ],
   "findings": [

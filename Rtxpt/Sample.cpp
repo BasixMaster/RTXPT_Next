@@ -2390,13 +2390,20 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
 void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraData cameraData, uint2 renderDims)
 {
     const bool envMapPresent = m_ui.EnvironmentMapParams.Enabled;
+    if (m_cmdLine.PTUnifiedEnvironmentValidation &&
+        (!envMapPresent || m_ui.EnvironmentMapParams.Intensity <= 0.f || m_ui.EnableAnimations))
+    {
+        std::printf("PT_UNIFIED_ENV_REJECT reason=requires-positive-static-environment\n");
+        std::fflush(stdout);
+        throw std::runtime_error("Unified environment requires positive environment intensity and stopped animations");
+    }
     if ((m_cmdLine.PTUnifiedFiniteNEEValidation || m_cmdLine.PTUnifiedMISValidation) &&
         (!m_ui.ActualUseReSTIRPT() || m_ui.ActualUseReSTIRDI() || m_ui.ActualUseReSTIRGI() ||
          m_ui.B8InitialGIValidation || m_cmdLine.PTExtendedSceneValidation ||
          !m_cmdLine.PTReplayOnlyValidation || m_cmdLine.PTPairedSpatialValidation ||
          m_cmdLine.PTDuplicationHistoryValidation || m_cmdLine.PTReplayCompactionValidation ||
          m_ui.RTXDI.restirPT.russianRouletteProbability != 0.f ||
-         (envMapPresent && m_ui.EnvironmentMapParams.Intensity != 0.f)))
+         (!m_cmdLine.PTUnifiedEnvironmentValidation && envMapPresent && m_ui.EnvironmentMapParams.Intensity != 0.f)))
     {
         std::printf("PT_UNIFIED_FINITE_NEE_REJECT reason=unsupported-contract requires=full-prefix-PT-only-zero-environment-no-adaptations\n");
         std::fflush(stdout);
@@ -2475,6 +2482,9 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
     bridgeParameters.unifiedFiniteNEEPilot = m_cmdLine.PTUnifiedFiniteNEEValidation;
     bridgeParameters.unifiedMIS = m_cmdLine.PTUnifiedMISValidation;
     bridgeParameters.unifiedRISCandidates = uint32_t(m_cmdLine.PTUnifiedRISCandidates);
+    bridgeParameters.unifiedEnvironment = m_cmdLine.PTUnifiedEnvironmentValidation;
+    if (m_cmdLine.PTUnifiedEnvironmentValidation && m_frameIndex == 0)
+        std::printf("PT_UNIFIED_ENV enabled=1 proposal=MIP-descent companion=BSDF-miss target=single-sample-PSS standaloneDI=0 standaloneGI=0 fullPTPP=0\n");
     if (m_cmdLine.PTUnifiedRISCandidates > 0 && m_frameIndex == 0)
         std::printf("PT_UNIFIED_RIS enabled=1 candidates=%d source=uniform-local target=single-sample-PSS ucw=RIS-times-source terminalNEEJacobian=1 fullPTPP=0\n", m_cmdLine.PTUnifiedRISCandidates);
     if (m_cmdLine.PTUnifiedMISValidation && m_frameIndex == 0)

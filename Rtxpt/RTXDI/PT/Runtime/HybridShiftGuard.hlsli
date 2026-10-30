@@ -36,7 +36,8 @@ void RTXPT_ComputeHybridShift(inout RAB_Surface surfaceForResampling,
                 // SDK already reconstructed f/q_conditional; divide by p1 to
                 // recover the hypothetical single-sample PSS target. Its legacy
                 // solid-angle Jacobian remains untouched in the M1 control.
-                targetFunction *= float(g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion.numLights);
+                if (light.lightType != PolymorphicLightType::kEnvironment)
+                    targetFunction *= float(g_RtxdiBridgeConst.lightBufferParams.localLightBufferRegion.numLights);
                 jacobian = 1.f;
             }
         }
