@@ -1,6 +1,6 @@
 # B10 development: replay queue history validation
 
-**Latest B10 checkpoint:** [duplication temporal history](B10_DUPLICATION_HISTORY.md) now has6GPU on/off gates/384frames, exact map counts and active nonzero prior-map reads. Quality14of18sequences; startup reliability prevents timing. Full B10/B11 remain incomplete.
+**Latest B10 checkpoint:** [duplication temporal history](B10_DUPLICATION_HISTORY.md) has6GPU activation/count gates,18three-seed64-frame quality sequences and18uncapped timing processes. Original-scene averaged MSE improves with individual-frame/perceptual tradeoffs. Full B10 is partial; [unified-lighting mathematical prerequisites](B10_UNIFIED_LIGHTING.md) pass but renderer unification and dual motion remain pending.
 
 ## Summary and lessons learned
 

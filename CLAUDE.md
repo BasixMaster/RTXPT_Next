@@ -1,5 +1,7 @@
 # Project instructions
 
+Apply the paper/NVIDIA implementation guidance in AGENTS.md: closely follow the Wyman papers, supplements/author code and NVIDIA docs/reference code; trace changes to source locations and explicitly justify deviations. Never label an approximation or partial reproduction as the full published algorithm.
+
 Follow AGENTS.md and Docs/Research/VERSION_MAPPING.md for user-confirmed canonical B0–B10. B0 preserves unchanged RTXPT1.9 original defaults/pins. B1=native PT+DI3.0; B2=native PT+DI/GI3.0; B3=native PT/runtime3.1, DI/GI off; B4=native PT+DI3.1; B5=native PT+DI/GI3.1; B6=ReSTIR PT, DI/GI off; B7=ReSTIR PT+DI3.1, GI off; B8 adds valid GI3.1 sharing; B9=B8+limited PT++; B10=B8+full remaining PT++. GI is off for B1/B4. No overlapping GI/PT estimates without partition/MIS.
 
 Preserve legacy refs/tags/data IDs and numerical results. Legacy B1/tag7010bb4 is migration source, NOT canonical B1; old B2/de9fe651 maps to B7; old B3/a7428c8 pilot was GI off, a B7 limited ablation, NOT B9. Historical old-B0/old-B1 DI+GI rows map to B2/B5 with cap coverage unverified. Current full remaining PT++ work is B10, dependent on B8 sharing; B4_IMPLEMENTATION.md is a retained legacy plan path. Runtime3.1 inherited PT++ is not a new B9 gain. Preserve licenses, source pins and private-data exclusions.

@@ -1,17 +1,14 @@
 {
-  "status": "development_duplication_temporal_history",
+  "status": "evaluated_development_duplication_temporal_history",
   "canonical_accepted": false,
   "diagnostics": "diagnostics.json",
-  "quality": "incomplete14of18sequences",
-  "timing": "not_started_due_to_quality_startup_gate",
-  "scope": "Real duplication count producer/previous-frame temporal consumer; deliberately biased opt-in. Full B10 and active B11 remain incomplete.",
-  "eligible_quality_sequences": 14,
+  "quality": "complete18sequences_three_seeds_64frames",
+  "timing": "complete18_uncapped_processes",
+  "scope": "Complete scoped duplication on/off ablation on B8 sharing with paired Gaussian/vector/spatial queue development; full PT++ and B11 remain pending. Startup reliability unresolved; diagnostic runs excluded.",
+  "eligible_quality_sequences": 18,
   "quality_frames_per_sequence": 64,
-  "missing_quality_cases": [
-    "convergence-off-s4093",
-    "convergence-on-s4093",
-    "kitchen-off-s4093",
-    "kitchen-on-s4093"
-  ],
-  "diagnostic_frames": 384
+  "missing_quality_cases": [],
+  "diagnostic_frames": 384,
+  "quality_frames": 1152,
+  "timing_processes": 18
 }

@@ -65,6 +65,7 @@
         "Rtxpt/Lighting/LightsBaker.cpp",
         "Rtxpt/RTXDI/GIFinalShading.hlsl",
         "Rtxpt/RTXDI/PT/Bridge.hlsli",
+        "Rtxpt/RTXDI/PT/ComputeDuplicationMap.hlsl",
         "Rtxpt/RTXDI/PT/FinalShading.hlsl",
         "Rtxpt/RTXDI/PT/GenerateInitialSamples.hlsl",
         "Rtxpt/RTXDI/PT/IdentityShiftDiagnostics.hlsl",
@@ -130,8 +131,7 @@
         "Testing/B2/test_diffuse_budget.py",
         "Testing/native-controls-v2/README.md",
         "Testing/native-controls-v2/manifest.json",
-        "Testing/native-controls-v2/rtxpt19-host-controls.patch",
-        "Rtxpt/RTXDI/PT/ComputeDuplicationMap.hlsl"
+        "Testing/native-controls-v2/rtxpt19-host-controls.patch"
       ],
       "reason": "Registry validation does not prove runtime activation or estimator correctness."
     },
@@ -184,7 +184,7 @@
     {
       "name": "Brand assets valid SVG, final titles and native MathML",
       "status": "passed",
-      "math_expressions": 47
+      "math_expressions": 49
     },
     {
       "name": "Structured evidence schema separately validated; SQLite metric search",
@@ -256,7 +256,7 @@
       "timed_processes": 9
     },
     {
-      "name": "24scoped checkpoints inline beside B0/B8/B9/B10 across all three scene tables; timing/quality/oracle scopes separated",
+      "name": "30scoped checkpoints inline beside B0/B8/B9/B10 across all three scene tables; timing/quality/oracle scopes separated",
       "status": "passed"
     },
     {
@@ -295,9 +295,23 @@
       "limits": "One spatial neighbor; static chronology; no full PT++, new performance/quality gain or B11 activation."
     },
     {
-      "name": "B10 duplication:6GPU cases/384frames, exact exported17x17 counts, negative oracle and active/disabled map reads; incomplete quality and no timing correctly labelled",
+      "name": "B10 duplication:6GPU cases/384frames, exact exported17x17 counts, negative oracle and active/disabled map reads; completed scoped quality/timing separately verified",
       "status": "passed",
       "limits": "Deliberately biased temporal cap; static gates only; no complete PT++ or B11 activation."
+    },
+    {
+      "name": "B10 duplication complete18quality sequences/1152frames and18uncapped processes: exact exported images/raw hashes, identity, no capture writes/loss, cap and runtime restoration",
+      "status": "passed",
+      "limits": "Three static seeds/repeats; full PT++ and startup reliability remain pending; no universal gain."
+    },
+    {
+      "name": "Paper supplement RIS/MIS/PSS exact finite-domain prerequisite and source hash; unification renderer remains unimplemented",
+      "status": "passed",
+      "limits": "No continuous-measure, shift, delta, medium or GPU proof."
+    },
+    {
+      "name": "User B10\u2013B16 cumulative roadmap and native B10 sampling branches consistent across registry and three owning docs; definitions separate from activation",
+      "status": "passed"
     }
   ],
   "passed": true,

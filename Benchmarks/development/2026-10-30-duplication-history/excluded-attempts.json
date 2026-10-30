@@ -28,5 +28,45 @@
     "case": "continuation-wrapper-import",
     "status": "postprocessing_failure_recovered",
     "scope": "Renderer exited0 and produced64images; preserved wrapper ModuleNotFoundError, then independently verified manifest, image count and effective contract. No renderer retry for this wrapper failure."
+  },
+  {
+    "case": "live-symbol-debugger",
+    "attempts": 2,
+    "status": "diagnostic_timeout",
+    "bounds_seconds": [
+      120,
+      300
+    ],
+    "benchmark_eligible": false
+  },
+  {
+    "case": "new_host_console_diagnostics",
+    "runs": 4,
+    "frames": 256,
+    "status": "completed_diagnostic_only",
+    "benchmark_eligible": false,
+    "root_cause_established": false
+  },
+  {
+    "case": "lightweight_debugger",
+    "status": "bounded_at120seconds",
+    "frames": 58,
+    "benchmark_eligible": false,
+    "root_cause_established": false
+  },
+  {
+    "case": "detached_console_flag",
+    "frames": 64,
+    "status": "completed_diagnostic_only",
+    "benchmark_eligible": false,
+    "root_cause_established": false
+  },
+  {
+    "case": "original-frozen-D-continuation",
+    "scope": "Convergence off/on succeeded and are eligible; Kitchen-off startup failed before frames; preserved separately."
+  },
+  {
+    "case": "kitchen-C-continuation",
+    "scope": "Two eligible original-binary quality sequences acquired on C with space preflight, losslessly archived to D with exact hashes; no timing mixed with image-writing captures."
   }
 ]

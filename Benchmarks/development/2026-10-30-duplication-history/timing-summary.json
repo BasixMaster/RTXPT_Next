@@ -1,0 +1,78 @@
+{
+  "status": "measured_development_partial",
+  "scope": "18rotated processes,3per policy/scene;30swarmup15srecord; last600Original/NotSet frames, final16dropped. Process GPUBusy is not total critical-path frame latency, FPS or equal-quality speedup.",
+  "rows": [
+    {
+      "scene": "opaque-room",
+      "off_gpu_busy_ms": 2.2482499999999996,
+      "on_gpu_busy_ms": 2.2539499999999997,
+      "gpu_busy_change_percent": 0.25353052374068596,
+      "off_cpu_cadence_ms": 2.18485,
+      "on_cpu_cadence_ms": 2.2062,
+      "off_gpu_run_ci95": {
+        "low_ms": 2.2167,
+        "high_ms": 2.3985000000000003,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      },
+      "on_gpu_run_ci95": {
+        "low_ms": 2.2491,
+        "high_ms": 2.29605,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      }
+    },
+    {
+      "scene": "convergence",
+      "off_gpu_busy_ms": 10.178799999999999,
+      "on_gpu_busy_ms": 10.0866,
+      "gpu_busy_change_percent": -0.9058042205367878,
+      "off_cpu_cadence_ms": 10.1314,
+      "on_cpu_cadence_ms": 10.07475,
+      "off_gpu_run_ci95": {
+        "low_ms": 9.98495,
+        "high_ms": 10.7107,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      },
+      "on_gpu_run_ci95": {
+        "low_ms": 10.0426,
+        "high_ms": 10.8658,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      }
+    },
+    {
+      "scene": "kitchen",
+      "off_gpu_busy_ms": 11.7713,
+      "on_gpu_busy_ms": 11.9683,
+      "gpu_busy_change_percent": 1.6735619685166458,
+      "off_cpu_cadence_ms": 11.7579,
+      "on_cpu_cadence_ms": 11.97995,
+      "off_gpu_run_ci95": {
+        "low_ms": 11.6988,
+        "high_ms": 11.87555,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      },
+      "on_gpu_run_ci95": {
+        "low_ms": 11.96545,
+        "high_ms": 12.26015,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,1216 @@
+{
+  "label": "convergence-off-s4093",
+  "scene": "convergence-test.scene.json",
+  "mode": "dipt",
+  "output_track": "unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata",
+  "exe_sha256": "a3f44cb37000e2f23d39259d2b8c21d211bafa9b6e172a753fbe585493f4ca89",
+  "started_utc": "2026-10-30T08:48:03.533468+00:00",
+  "command": [
+    "WORKSPACE\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+    "--scene",
+    "convergence-test.scene.json",
+    "--width",
+    "1280",
+    "--height",
+    "720",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "1",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "BENCHMARK_VOLUME\\2026-10-30-duplication-quality-frozen-continuation\\convergence-off-s4093\\frame.png",
+    "--captureSuffix",
+    "convergence-off-s4093",
+    "--perfLog",
+    "BENCHMARK_VOLUME\\2026-10-30-duplication-quality-frozen-continuation\\convergence-off-s4093\\partial-perf.csv",
+    "--b8InitialGIValidation",
+    "true",
+    "--b8Component",
+    "0",
+    "--b8ValidationStage",
+    "3",
+    "--b8GIReuseMode",
+    "3",
+    "--ptPairedSpatialValidation",
+    "true",
+    "--ptGaussianPairingValidation",
+    "true",
+    "--ptReplayCompactionValidation",
+    "true",
+    "--ptReconnectionMode",
+    "0",
+    "--ptRouletteProbability",
+    "0.8",
+    "--ptFixedSpatialSamples",
+    "1",
+    "--ptReplayOnlyValidation",
+    "true",
+    "--ptExtendedSceneValidation",
+    "true",
+    "--strictDIValidation",
+    "true",
+    "--restirDIMode",
+    "3",
+    "--neeMIS",
+    "0",
+    "--environmentDiffuseMip",
+    "0",
+    "--benchmarkUncapped",
+    "true",
+    "--samplingSeed",
+    "4093",
+    "--captureLinearHDR",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--useReSTIRPT",
+    "1",
+    "--restirPTMode",
+    "3",
+    "--maxBounces",
+    "14",
+    "--maxDiffuseBounces",
+    "2",
+    "--stopAnimations",
+    "--captureSequence",
+    "--sequenceFPS",
+    "60",
+    "--sequenceWarmupStart",
+    "0",
+    "--sequenceRecordStart",
+    "0.1",
+    "--sequenceFrameCount",
+    "64"
+  ],
+  "cwd": "WORKSPACE\\outputs\\RTXDI_Next\\bin",
+  "settings": {
+    "width": 1280,
+    "height": 720,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 1,
+    "restir_gi": 1,
+    "simple": false,
+    "record_start": 0.1,
+    "frames": 64,
+    "reference_spp": null,
+    "linear_hdr_requested": true,
+    "sampling_seed_requested": 4093,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": 3,
+    "nee_mis_requested": 0,
+    "nee_type": 2,
+    "restir_pt": 1,
+    "max_bounces_override": 14,
+    "max_diffuse_bounces_override": 2,
+    "pt_mode": 3
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "scene_sha256": "c3afaa933c5084ba04f8e5100b64bb8b488ab312f4042849705a15e5bf5af549",
+  "canonical_experiment": null,
+  "paired_spatial_pilot_requested": true,
+  "gaussian_pairing_requested": true,
+  "development_partition": {
+    "contract_version": 1,
+    "canonical_accepted": false,
+    "gi_reuse": true,
+    "gi_approximation_mode": 3,
+    "component": 0,
+    "stage": 3,
+    "pt_min_light_inclusive_length": 4
+  },
+  "development_extended_scene_transport": {
+    "full_prefix_replay": true,
+    "canonical_accepted": false,
+    "diffuse_budget": "Native sampled-lobe accounting with terminal-emission truncation"
+  },
+  "process_id": 31008,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 40.030999999988126,
+  "images": [
+    {
+      "name": "frame_000_convergence-off-s4093.png",
+      "sha256": "4d11480b30e9961e335cf55c5e44820d9f61c21d8bb5453d278e47ce15ad38fc",
+      "bytes": 3553782
+    },
+    {
+      "name": "frame_001_convergence-off-s4093.png",
+      "sha256": "3929cfb7e15adf53833ca8e4f34cdfb55ae105c3d21be06a5a12b251cee606d5",
+      "bytes": 3553540
+    },
+    {
+      "name": "frame_002_convergence-off-s4093.png",
+      "sha256": "37bb3452db3bca81de52dc7d21db789a6eaa294c16e7fa0be7dd072e7aceda1c",
+      "bytes": 3552974
+    },
+    {
+      "name": "frame_003_convergence-off-s4093.png",
+      "sha256": "468472ce2cb5431ec72acca611df612d7ee629680fd15abea39c5492ab2427ce",
+      "bytes": 3552967
+    },
+    {
+      "name": "frame_004_convergence-off-s4093.png",
+      "sha256": "70852ec482827709e859449d4900b6b03dc50e2b5b692376f2ace0c368802185",
+      "bytes": 3552841
+    },
+    {
+      "name": "frame_005_convergence-off-s4093.png",
+      "sha256": "623bfcf578e42538246999b83d6d9985eeec047e2428ee3053e69639614a41ff",
+      "bytes": 3552502
+    },
+    {
+      "name": "frame_006_convergence-off-s4093.png",
+      "sha256": "ce6e0d17855685273230d26d26c72aa51e3df1a6463eb66a103349d4cbb11663",
+      "bytes": 3551965
+    },
+    {
+      "name": "frame_007_convergence-off-s4093.png",
+      "sha256": "8a1ea6fab43c7c8ae78dbf575bc2fd295a343829c1bad4c2962a91d6ac477f18",
+      "bytes": 3552259
+    },
+    {
+      "name": "frame_008_convergence-off-s4093.png",
+      "sha256": "6945883c313bea51954d8891f25510dce86a22ec7394713620e066b0ef899383",
+      "bytes": 3552030
+    },
+    {
+      "name": "frame_009_convergence-off-s4093.png",
+      "sha256": "8ca60a42a1951008e4dcad79b58e57542b6a97a69e1e699f956144fe715c41a2",
+      "bytes": 3552060
+    },
+    {
+      "name": "frame_010_convergence-off-s4093.png",
+      "sha256": "4457b5b105109a42c27f393520bbd59ee9f4f1f538f725be1225d1a8814d5593",
+      "bytes": 3552220
+    },
+    {
+      "name": "frame_011_convergence-off-s4093.png",
+      "sha256": "edc777c7e9144225b24e9dd8f82f491f896d6f36bd231c2497a1f986a3864a59",
+      "bytes": 3551440
+    },
+    {
+      "name": "frame_012_convergence-off-s4093.png",
+      "sha256": "3c08d8ff24f1ec4fd2890994ee206aa22704f031001b469b3a914d332bf3f646",
+      "bytes": 3551654
+    },
+    {
+      "name": "frame_013_convergence-off-s4093.png",
+      "sha256": "aaf168ce63a9fb26bfdf606dc9e893e581c1143765b047610a47fe4aaf497418",
+      "bytes": 3551839
+    },
+    {
+      "name": "frame_014_convergence-off-s4093.png",
+      "sha256": "75dc418036253ab8b22c6d0b91bae4f4713e9005fb169726fae586ae8d31cd02",
+      "bytes": 3551710
+    },
+    {
+      "name": "frame_015_convergence-off-s4093.png",
+      "sha256": "4809a92f09af3be799afea6f03d1e7bfd4d977551394f9c2d37cccbb12d54ba8",
+      "bytes": 3551563
+    },
+    {
+      "name": "frame_016_convergence-off-s4093.png",
+      "sha256": "5fc9a799ea20aca95966ad04fd2da32e5595d98501601bacdfdcf8ea217f5ff9",
+      "bytes": 3551410
+    },
+    {
+      "name": "frame_017_convergence-off-s4093.png",
+      "sha256": "244ba567cb9d6a86548ef75d74da52d4eea1e7c4564eb75be2d5b6f675980764",
+      "bytes": 3551827
+    },
+    {
+      "name": "frame_018_convergence-off-s4093.png",
+      "sha256": "760b552a6fed3ce5fefa14bd146a410b3d783403aa1445ebc8a3a6d74dd42707",
+      "bytes": 3551341
+    },
+    {
+      "name": "frame_019_convergence-off-s4093.png",
+      "sha256": "4a930de6f41597c1a685230d1704ff56c446703589ca5c3f33a72be7402127c3",
+      "bytes": 3551291
+    },
+    {
+      "name": "frame_020_convergence-off-s4093.png",
+      "sha256": "6c91d38a56115d6fb1cb30381b20d5ecb03c250de49f5d8aaa657dcd711aae3b",
+      "bytes": 3551154
+    },
+    {
+      "name": "frame_021_convergence-off-s4093.png",
+      "sha256": "476fe1616c1af9dca9579fb7a00b5345766d43279ca7d713e7d216bdd55f02a1",
+      "bytes": 3551260
+    },
+    {
+      "name": "frame_022_convergence-off-s4093.png",
+      "sha256": "abe45091d53fe520f05ceae92d6bd727af6cf7b8ecde26a2844c03fceb3e0cec",
+      "bytes": 3551513
+    },
+    {
+      "name": "frame_023_convergence-off-s4093.png",
+      "sha256": "b82381ff9a5d51f264558575bc203af0da40ad5d33794fd9db81009449656a5e",
+      "bytes": 3551503
+    },
+    {
+      "name": "frame_024_convergence-off-s4093.png",
+      "sha256": "947954476fbd4bc2e3191b574d49591812a869cc51316df28153410aad1fec5a",
+      "bytes": 3552197
+    },
+    {
+      "name": "frame_025_convergence-off-s4093.png",
+      "sha256": "bff72f5d97e9407c4ee4f4a9c5e7bf5b716eeb5bc9bca1ca7f7ebb1f8f8e267e",
+      "bytes": 3552111
+    },
+    {
+      "name": "frame_026_convergence-off-s4093.png",
+      "sha256": "edd860531a173a0d116132367d1c32cc231880ff1688e6eaf2984b851a6ba1d7",
+      "bytes": 3552300
+    },
+    {
+      "name": "frame_027_convergence-off-s4093.png",
+      "sha256": "e8cc3a272a03bb66e463193b8b65a38f30a2895e99ce178a5f86a6dbc2eee4db",
+      "bytes": 3552286
+    },
+    {
+      "name": "frame_028_convergence-off-s4093.png",
+      "sha256": "111312f36d80fe11027b99cf6ac279525a881cd3bff7d96e61b5932bb37238e8",
+      "bytes": 3552347
+    },
+    {
+      "name": "frame_029_convergence-off-s4093.png",
+      "sha256": "8b0889ace510555fbb7511559f71b3b67ce75fcd075a14b05cace429e7163199",
+      "bytes": 3551858
+    },
+    {
+      "name": "frame_030_convergence-off-s4093.png",
+      "sha256": "e8c0c258ddcc9f519258b36ad2a4b4785a88a5d6c941954f227fb36482849a37",
+      "bytes": 3552296
+    },
+    {
+      "name": "frame_031_convergence-off-s4093.png",
+      "sha256": "5f9710d78f3158c92a77ef26028fe4b89fed41c7a4e7606424eb0a113447b680",
+      "bytes": 3551061
+    },
+    {
+      "name": "frame_032_convergence-off-s4093.png",
+      "sha256": "7961c84973ffb68c8d9ad24c147481598b54edf5b8b96ccd888e02f9662fa4d5",
+      "bytes": 3551757
+    },
+    {
+      "name": "frame_033_convergence-off-s4093.png",
+      "sha256": "edd524ebcee47ab88ca6b944e599eab6d0abaf83544e1c0011ce60240373e0ac",
+      "bytes": 3551036
+    },
+    {
+      "name": "frame_034_convergence-off-s4093.png",
+      "sha256": "9c963c3685113d9ac14bd68f495204048f8c729676e6e891ac16f58932f18aea",
+      "bytes": 3551137
+    },
+    {
+      "name": "frame_035_convergence-off-s4093.png",
+      "sha256": "74356a2be9b51b08c7d645e9217ad58a11f840016a0583cfa2223c037f10234b",
+      "bytes": 3550673
+    },
+    {
+      "name": "frame_036_convergence-off-s4093.png",
+      "sha256": "da5bf9dc96f5c6b12b55d88595e9bf66b67b7ffebbb9e0da8377c44af9cacd82",
+      "bytes": 3550935
+    },
+    {
+      "name": "frame_037_convergence-off-s4093.png",
+      "sha256": "2635f32d05dae8c78c64e5a454056aaea845d9320d8b71b1bd42a1dcf569666b",
+      "bytes": 3551445
+    },
+    {
+      "name": "frame_038_convergence-off-s4093.png",
+      "sha256": "541ec808f26e261e764a440118213dc7ca7e216ccbdbe0fc5c3c34eada675985",
+      "bytes": 3551406
+    },
+    {
+      "name": "frame_039_convergence-off-s4093.png",
+      "sha256": "89b18d5d195298ff62b20802a8c7d33f6499e2fcf79340c3a9f605ba019e72aa",
+      "bytes": 3551259
+    },
+    {
+      "name": "frame_040_convergence-off-s4093.png",
+      "sha256": "04f8be298462912e9ed9fb4c71ee99fa6b00679f069b873dd71db0649d91059e",
+      "bytes": 3551106
+    },
+    {
+      "name": "frame_041_convergence-off-s4093.png",
+      "sha256": "4efbf6e18df5b7467d0f80521597e2b77210b9b66f0f81bc940e9c1265b36e2c",
+      "bytes": 3551117
+    },
+    {
+      "name": "frame_042_convergence-off-s4093.png",
+      "sha256": "861fe8b2d1a11300baaecb808e715c92827a1c4dc303f19b569e1191fc242059",
+      "bytes": 3551497
+    },
+    {
+      "name": "frame_043_convergence-off-s4093.png",
+      "sha256": "994b9772e44f0c46bc5eaeb7d303133a113c266000c52f03de2f67d81c31ee4d",
+      "bytes": 3551355
+    },
+    {
+      "name": "frame_044_convergence-off-s4093.png",
+      "sha256": "2d5c6e3430bad6236489e1f5af7b91d9c9141746b3e5bd3cdf7f21786f02d79f",
+      "bytes": 3551110
+    },
+    {
+      "name": "frame_045_convergence-off-s4093.png",
+      "sha256": "7c8c29c45367ef4f1989aabeb906aa0a80f5723428d3a924b5eee480785faf2b",
+      "bytes": 3551776
+    },
+    {
+      "name": "frame_046_convergence-off-s4093.png",
+      "sha256": "551ce836fd3efc664474b482aaaf9017bda2a4b2bd43a5c4f08607c0ff70fc14",
+      "bytes": 3551317
+    },
+    {
+      "name": "frame_047_convergence-off-s4093.png",
+      "sha256": "afc1bdfc9e97b0f5f19828d0f88b19f1ed500463dc6349b52707fedbcd0b6c06",
+      "bytes": 3551147
+    },
+    {
+      "name": "frame_048_convergence-off-s4093.png",
+      "sha256": "217d02457efe3760438fc24ed7232d4968684960977e39235b547977f37f78e4",
+      "bytes": 3551792
+    },
+    {
+      "name": "frame_049_convergence-off-s4093.png",
+      "sha256": "2188f15989f12592708291f04ad964f368a98bd5b24c56937a009b930eda4d3f",
+      "bytes": 3551189
+    },
+    {
+      "name": "frame_050_convergence-off-s4093.png",
+      "sha256": "d74e82266d77bd90fd0c6e10c2e31d602ef91a0a9fd02dfd089cf48a1c232cff",
+      "bytes": 3551670
+    },
+    {
+      "name": "frame_051_convergence-off-s4093.png",
+      "sha256": "5e8a8fb73ea135fb95c7b7e035fed6a992417e9ac05bab41d3d46282251e0417",
+      "bytes": 3551194
+    },
+    {
+      "name": "frame_052_convergence-off-s4093.png",
+      "sha256": "f57a006214a45e218b5ac39ad1fe182ebf61d5e1602247ad5a3f69a6a7991682",
+      "bytes": 3552105
+    },
+    {
+      "name": "frame_053_convergence-off-s4093.png",
+      "sha256": "2d7bfa733fb3e69e67dfaf8057b6ab167392d4c536d1bfff358350dfc1e84f7f",
+      "bytes": 3551630
+    },
+    {
+      "name": "frame_054_convergence-off-s4093.png",
+      "sha256": "9c3391d9a14a68fe4a47e5bf20c8b7068de8539026662b98b4411d8e39271b82",
+      "bytes": 3551813
+    },
+    {
+      "name": "frame_055_convergence-off-s4093.png",
+      "sha256": "969c2129e9e5c7c584b904c8f6ea104f35510e840233e475260051d08e808398",
+      "bytes": 3551882
+    },
+    {
+      "name": "frame_056_convergence-off-s4093.png",
+      "sha256": "fe1eac3fb0333f1e67b8a57741ef040af72cd2b712343e911a3fd091e8ee0c7b",
+      "bytes": 3551863
+    },
+    {
+      "name": "frame_057_convergence-off-s4093.png",
+      "sha256": "82c75d0990c04e15a4e771dfa3a58e45fb9bbee215e6792445e4b5cf0b62ae9a",
+      "bytes": 3552062
+    },
+    {
+      "name": "frame_058_convergence-off-s4093.png",
+      "sha256": "25f9fd64d2c08f341a210f86604305b1d511076c6a24adb1643aee207042f0fa",
+      "bytes": 3552277
+    },
+    {
+      "name": "frame_059_convergence-off-s4093.png",
+      "sha256": "67382e5f14968bb229fb599794b52faa9ae202217a4f655d4d5b049b3fee14a7",
+      "bytes": 3552099
+    },
+    {
+      "name": "frame_060_convergence-off-s4093.png",
+      "sha256": "cd54ae1230bfd57076a969bdb07c6339d35dc9934c753dd63c8338987514091a",
+      "bytes": 3552218
+    },
+    {
+      "name": "frame_061_convergence-off-s4093.png",
+      "sha256": "06ecbd2e975ada84fde93b8a6f0d8458fe7aaf8262c0a91e0a11492cc4dd064d",
+      "bytes": 3552704
+    },
+    {
+      "name": "frame_062_convergence-off-s4093.png",
+      "sha256": "6aee315865df8bfa4d76d83c850de8888311371a1f5003ba4acd30fac4717022",
+      "bytes": 3551796
+    },
+    {
+      "name": "frame_063_convergence-off-s4093.png",
+      "sha256": "53683363ed8fe2427b9f4c6344bcc7c8eb56720ae0ae022623c6fb3ab07b5c6b",
+      "bytes": 3551919
+    }
+  ],
+  "linear_hdr_files": [
+    {
+      "name": "frame_000_convergence-off-s4093.pfm",
+      "sha256": "603fbcbc3e949ebc0b77d39c83df10b6259c38e2a56eaeacb7af5067c40e796e",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_000_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_001_convergence-off-s4093.pfm",
+      "sha256": "d85237f366f7aac6e57828683809c9969ba2602a06b1a7f712a0dfe334846d34",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_001_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_002_convergence-off-s4093.pfm",
+      "sha256": "b9656181dfada9c0c1cbe515e81eb02d7d69bfb43506db4efd8ee93a54e9d16d",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_002_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_003_convergence-off-s4093.pfm",
+      "sha256": "762e83ff8bfd9d15d4cc8d437f1702a5b9691d960c2c29b36ad628b480b4d5be",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_003_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_004_convergence-off-s4093.pfm",
+      "sha256": "815e448667344fbf403e0462f449d459f94634493fffa1f6b64616eede532cf9",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_004_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_005_convergence-off-s4093.pfm",
+      "sha256": "770f0d1ac81045810758c7819d9f23ae150d8c654d2af6c1a83813c4c8d6fa8f",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_005_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_006_convergence-off-s4093.pfm",
+      "sha256": "fda7225766c901b827a6579b5778017b5cfbd8a4ffd6912268cea610e983c85e",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_006_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_007_convergence-off-s4093.pfm",
+      "sha256": "97ec4ceb192476635cbddd979a141e7d2862bb1ae15324661840fc67516387b3",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_007_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_008_convergence-off-s4093.pfm",
+      "sha256": "ebbce5983601347a1820f4cd4445ef62d89657e7bbe612c602cd8c158a85636a",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_008_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_009_convergence-off-s4093.pfm",
+      "sha256": "db3699db3919ec3158e212e924f624b41699120f0ffa295740fc1932907191ec",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_009_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_010_convergence-off-s4093.pfm",
+      "sha256": "7c0e9d442051948d721efb1b28941d45cb1f23eb53a685cefb605a4f6035746c",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_010_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_011_convergence-off-s4093.pfm",
+      "sha256": "97f669ca9cb0dd8f80a61af3f414b127efcccea2f72c6be690288fa17c3ee627",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_011_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_012_convergence-off-s4093.pfm",
+      "sha256": "4fff738f437924a6e5df76dbdbdd294cde7c74a98f5227689ae9ce77d8e3b24a",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_012_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_013_convergence-off-s4093.pfm",
+      "sha256": "9a069b106ba79dac6c69361babb6330195297d8c787716e5bbcb4232ccdc4b9c",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_013_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_014_convergence-off-s4093.pfm",
+      "sha256": "6843ba87517b89811aeec380da63130703bb16c2a22b28255842b66e4777aff5",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_014_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_015_convergence-off-s4093.pfm",
+      "sha256": "32697589fa0a1db129a2e08fbd183bc7b60297d973069c9935d98569abad3cb3",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_015_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_016_convergence-off-s4093.pfm",
+      "sha256": "e71aadef62bf905562f1a06ea758827036c9c8440dccb832292caf4d63a96f8c",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_016_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_017_convergence-off-s4093.pfm",
+      "sha256": "fe5795a85c7ee1260866852e4e096d30ad61df3663779642161f0d3ef34195e5",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_017_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_018_convergence-off-s4093.pfm",
+      "sha256": "9ebffadd139418cdc5d451ced16ac627c2b7ea583799ed9eefa97cddf6663a37",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_018_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_019_convergence-off-s4093.pfm",
+      "sha256": "9aa61c4a6fcbbfe1b55be6c351a0abc58c722427f71dec150959a8636b87052d",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_019_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_020_convergence-off-s4093.pfm",
+      "sha256": "d4f4a499cd30fb8459e589e3fbfcc9a9981bc5cb27c08fc8d98f468ca4249f86",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_020_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_021_convergence-off-s4093.pfm",
+      "sha256": "7b5984e583ef614646234d181255573999e11ee05e77e400439b0834c9eaf570",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_021_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_022_convergence-off-s4093.pfm",
+      "sha256": "d161a570790f31331f128b2d79e3b9368108493e1beeb90173a04604fc94dec4",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_022_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_023_convergence-off-s4093.pfm",
+      "sha256": "a5e1cd5aa8ed7750588da4b9fbe2f9c82e293c89baff7d58b182aa4862f8ab73",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_023_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_024_convergence-off-s4093.pfm",
+      "sha256": "7e28b237169ab645cee70614cdbe4224dcb520f1e49693cca45a844653eeef6f",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_024_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_025_convergence-off-s4093.pfm",
+      "sha256": "97665be947141c42ea94c00b1cdc4cafee8b58a9ea5003823932750873f33294",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_025_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_026_convergence-off-s4093.pfm",
+      "sha256": "c03db9aea7a684d4b74e2143ae4ca128f710e8521e775ccf971a6c2e3b1792b1",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_026_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_027_convergence-off-s4093.pfm",
+      "sha256": "ffebe6afcac3bff6f13bc8112c4f550c2b83d693b2b81e615805848866a864df",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_027_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_028_convergence-off-s4093.pfm",
+      "sha256": "39c21025750163ad3343eef4b33bffad9fe9b4d66acbf0f08147d3311257a096",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_028_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_029_convergence-off-s4093.pfm",
+      "sha256": "59f4ffe1b6159e9546f3b27087142d76a469e6e3588c6e963c7cceeee5e4bb62",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_029_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_030_convergence-off-s4093.pfm",
+      "sha256": "ff46873f8e187dc86447f5afb3c0bb83a8029740fb364c1f9de11f77c610ee73",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_030_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_031_convergence-off-s4093.pfm",
+      "sha256": "f57e48f2d4e6bce3c5c1cdaf168f2e22e067b6dc1a71acc19e0095aa5b5cd066",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_031_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_032_convergence-off-s4093.pfm",
+      "sha256": "2dc1767e1f6c7ddfbb4e62282587e616ac4051d15a56402a9234bfa4c6fe692a",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_032_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_033_convergence-off-s4093.pfm",
+      "sha256": "c09cbb23f6a7d9fbe7983ff888f1a4f19342a17f16f2c0a28f9662f7c9669884",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_033_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_034_convergence-off-s4093.pfm",
+      "sha256": "aaa56918233382fd4f352bd80adf97266afe753b4eebbfbfd15d9b658508db77",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_034_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_035_convergence-off-s4093.pfm",
+      "sha256": "decd0787bb7ea199fef644d8ed1706660c37dad4a8a46a8ae633d41a2f063cd2",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_035_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_036_convergence-off-s4093.pfm",
+      "sha256": "34f83d865b7a835a6bd7e6cdf4e8688bbcf3add5db5844dccc768ebb5653f05a",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_036_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_037_convergence-off-s4093.pfm",
+      "sha256": "69e7d51bb21b12dad367582f90c66aee0f258f1d6da877f97b831a0bf7f7e312",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_037_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_038_convergence-off-s4093.pfm",
+      "sha256": "204906367ef38bc916131f27739dd8775d55dc135773747a3cf6d8b39b32ddf6",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_038_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_039_convergence-off-s4093.pfm",
+      "sha256": "0248d30aa3e18e403fd43c1ac58f057f3f55bbd254e7b19c2166d4371d68df1f",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_039_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_040_convergence-off-s4093.pfm",
+      "sha256": "c844f83a79c255d3929edd3dbbc4cfae78481e0b71835732d299ebf182d92f67",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_040_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_041_convergence-off-s4093.pfm",
+      "sha256": "b6998e0854adf5b8c9069fd4d490e47ba48bb8d43c2dc6d81f445ee168635672",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_041_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_042_convergence-off-s4093.pfm",
+      "sha256": "24451ca90180adebf0e4b713530ec8902a3b05df54fca7db76780e812da13292",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_042_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_043_convergence-off-s4093.pfm",
+      "sha256": "dbfffc0e93974f2a030631a79838792fd024f97cc3974a6b12f967949162e5d1",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_043_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_044_convergence-off-s4093.pfm",
+      "sha256": "3601c40183674556357ca6126925f1045602321de717a5afc48187301c6aa95e",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_044_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_045_convergence-off-s4093.pfm",
+      "sha256": "722b76e070735c721a6aa8bbf928b26f5cf8099dffae192986919fc6df3c62bf",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_045_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_046_convergence-off-s4093.pfm",
+      "sha256": "f87db8c7a3e3e803d928efdb92bc814364c4920898239ca6ac625a88109ec7b0",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_046_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_047_convergence-off-s4093.pfm",
+      "sha256": "190411613dc19067bf26a3a9d691d4375f5cd191a0c706e13e87977587eb1002",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_047_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_048_convergence-off-s4093.pfm",
+      "sha256": "571296fd2a906df795cbfdfef7cc9cc41980fd61bfe5749d2661798b938f9e30",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_048_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_049_convergence-off-s4093.pfm",
+      "sha256": "015c920cd6d2331ba218f263e3476a8ce8c5be62d6efc338716b6353add6cbfc",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_049_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_050_convergence-off-s4093.pfm",
+      "sha256": "8efd072141214e8156825ba405644e813e79706d1983dec42a3aaf37cb475d85",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_050_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_051_convergence-off-s4093.pfm",
+      "sha256": "051c668f0053752233a4ed38d82f6e9275d19247d4cc741095c61a756c969842",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_051_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_052_convergence-off-s4093.pfm",
+      "sha256": "79c615fb31bfb245b8e6f1268026b31f2d7157bcbc4e565d747cc0e27ef0885d",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_052_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_053_convergence-off-s4093.pfm",
+      "sha256": "75f94acd548d7d972716e9357d99b4ff780efdf557281943ddddce2f836c26b6",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_053_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_054_convergence-off-s4093.pfm",
+      "sha256": "e94b52bafa8ad2cd4250fbe0e370e7b2b77877d94a3d5f72669a2f66043fe08e",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_054_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_055_convergence-off-s4093.pfm",
+      "sha256": "cf393ce33a6a6453fb35b42fc448bb596b22c4d5f977a886b0c934ce73ead60d",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_055_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_056_convergence-off-s4093.pfm",
+      "sha256": "3ffd5870022274ff7f1756bcd977cbec9f4e94d10b5601acf01cfb11d5c494d4",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_056_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_057_convergence-off-s4093.pfm",
+      "sha256": "b499c52edc372bd34ea7f16b4a46d0885a633ac8bb254355e28a304eb2111a93",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_057_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_058_convergence-off-s4093.pfm",
+      "sha256": "a265300247f7be6164b450455608e43a0bf8309e4159ad0e78e6aed3e4935974",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_058_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_059_convergence-off-s4093.pfm",
+      "sha256": "a897fef713f8fc6d98adf3c3f9c3d5cf8e9e435022f35956db23cf7f63ac602d",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_059_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_060_convergence-off-s4093.pfm",
+      "sha256": "dda4e37508b074c44b2c62029b0ba382bb41607d06ca0442bcf83d4ccff30d67",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_060_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_061_convergence-off-s4093.pfm",
+      "sha256": "ebd66a9e421d626abe01e7bb43a03a4092477f32fb28a1ad610dc67a68b38b35",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_061_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_062_convergence-off-s4093.pfm",
+      "sha256": "135eb39929a9a187df6eccff81f3977bb79a3b0876f3ac4444962c134dc6b7a9",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_062_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_063_convergence-off-s4093.pfm",
+      "sha256": "59f4c9bcbc251d67aadda89f3b705a60c5fd3bdad24802015d7849d46a24ce78",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_063_convergence-off-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    }
+  ],
+  "effective_b8_partition": {
+    "development": true,
+    "contract_version": 1,
+    "gi_reuse": true,
+    "gi_approximation_mode": 3,
+    "component": 0,
+    "stage": 3,
+    "pt_min_light_inclusive_length": 4,
+    "canonical_accepted": false
+  },
+  "effective_paired_spatial_pilot": {
+    "enabled": true,
+    "policy": "Gaussian reciprocal tables; one per frame",
+    "pair_owned_shifts": true,
+    "vector_shading": true,
+    "canonical_accepted": false
+  },
+  "effective_replay_queue": {
+    "enabled": true,
+    "oracle": false,
+    "shift_stride_bytes": 104,
+    "indirect_dispatch": true,
+    "canonical_accepted": false
+  },
+  "effective_environment_filter": {
+    "diffuse_mip": 0.0,
+    "explicit_override": true,
+    "scope": "Filtering identity only; no renderer correctness or acceptance claim"
+  },
+  "effective_sampling": {
+    "coverage": "verified first-frame effective receipt",
+    "seed": 4093,
+    "realtime": true,
+    "reference_pixel_center": false,
+    "pixel_jitter_scale": 0.0
+  },
+  "effective_di_validation": {
+    "coverage": "verified first-frame effective receipt",
+    "strict": true,
+    "boiling": false,
+    "discount_naive": false,
+    "temporal_permutation": false
+  },
+  "effective_extended_scene_contract": {
+    "scope": "Verified effective development settings; not scene correctness or canonical acceptance",
+    "full_prefix_replay": true,
+    "diffuse_budget": 2,
+    "max_bounces": 14,
+    "combined_partition": true,
+    "canonical_accepted": false
+  },
+  "effective_pt_replay": {
+    "coverage": "verified first-frame effective receipt",
+    "replay_only": true,
+    "roughness_threshold": 1.0
+  },
+  "effective_pt_history": {
+    "coverage": "verified first-frame effective receipt",
+    "age_rejection": true,
+    "max_age": 30,
+    "max_history": 8
+  },
+  "effective_pt_spatial": {
+    "coverage": "verified first-frame effective receipt",
+    "samples": 1,
+    "boost": 1
+  },
+  "effective_ptpp": {
+    "coverage": "verified first-frame effective receipt",
+    "reconnection_mode": 0,
+    "roulette_probability": 0.800000012,
+    "diagnostics": false
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 6,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "not requested; legacy labels retain their original numbering"
+  },
+  "effective_gbuffer_precision": {
+    "rounded_materials": 0,
+    "explicit_override": false,
+    "scope": "Half-up after fp16 conversion; not exact/unbiased BSDF reconstruction"
+  },
+  "effective_di_reuse": {
+    "active": true,
+    "mode": 3,
+    "temporal": true,
+    "spatial": true,
+    "gi": true,
+    "pt": true,
+    "scope": "Effective first-frame settings; not estimator correctness or timing proof"
+  },
+  "effective_prefix_throughput": {
+    "preserve_above_one": false,
+    "capture_packed": false,
+    "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+  }
+}

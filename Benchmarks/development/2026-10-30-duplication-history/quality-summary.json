@@ -1,0 +1,138 @@
+{
+  "status": "measured_development_partial",
+  "scope": "Three seeds47/1019/4093, one64-frame static sequence per version/scene/seed; distinct no-image-write timing cohort; no brightness fitting. Both policies: paired Gaussian spatial queue, initial roulette0.8 and B8 GI3; Room footprint, originals full-prefix replay. Only duplication temporal history reduction changes.",
+  "rows": [
+    {
+      "scene": "opaque-room",
+      "variant": "B10",
+      "policy": "off",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; footprint; duplication off",
+      "image": "assets/b10-duplication/room-off.png",
+      "gpu_busy_ms": null,
+      "hdr_flip": 0.10985805094242096,
+      "ldr_flip": 0.07630834728479385,
+      "linear_mse": 0.006165399960828455,
+      "linear_mse_se": 0.0008796115770213053,
+      "mean_image_mse": 0.0004350186800229898,
+      "mean_image_mse_se": 1.759187853625073e-05,
+      "mean_y_difference_percent": 0.06166134551473072
+    },
+    {
+      "scene": "opaque-room",
+      "variant": "B10",
+      "policy": "on",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; footprint; duplication on",
+      "image": "assets/b10-duplication/room-on.png",
+      "gpu_busy_ms": null,
+      "hdr_flip": 0.11040861159563065,
+      "ldr_flip": 0.07641935348510742,
+      "linear_mse": 0.006277101322638426,
+      "linear_mse_se": 0.0008587838244184528,
+      "mean_image_mse": 0.0004483005043789112,
+      "mean_image_mse_se": 1.7535451787694214e-05,
+      "mean_y_difference_percent": 0.045022852962335484
+    },
+    {
+      "scene": "convergence",
+      "variant": "B10",
+      "policy": "off",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; full-prefix replay; duplication off",
+      "image": "assets/b10-duplication/convergence-off.png",
+      "gpu_busy_ms": null,
+      "hdr_flip": 0.31426045298576355,
+      "ldr_flip": 0.21155333518981934,
+      "linear_mse": 1.3514042910058992,
+      "linear_mse_se": 0.10555056166651125,
+      "mean_image_mse": 0.17084267293207808,
+      "mean_image_mse_se": 0.04195363093143832,
+      "mean_y_difference_percent": -1.3667458325737414
+    },
+    {
+      "scene": "convergence",
+      "variant": "B10",
+      "policy": "on",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; full-prefix replay; duplication on",
+      "image": "assets/b10-duplication/convergence-on.png",
+      "gpu_busy_ms": null,
+      "hdr_flip": 0.3164099454879761,
+      "ldr_flip": 0.2126655876636505,
+      "linear_mse": 1.2648706192410513,
+      "linear_mse_se": 0.08828263893362029,
+      "mean_image_mse": 0.12903475778611123,
+      "mean_image_mse_se": 0.020193333189847094,
+      "mean_y_difference_percent": -1.35698872920873
+    },
+    {
+      "scene": "kitchen",
+      "variant": "B10",
+      "policy": "off",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; full-prefix replay; duplication off",
+      "image": "assets/b10-duplication/kitchen-off.png",
+      "gpu_busy_ms": null,
+      "hdr_flip": 0.46161311864852905,
+      "ldr_flip": 0.2741090953350067,
+      "linear_mse": 0.7313940540766914,
+      "linear_mse_se": 0.2542122472019709,
+      "mean_image_mse": 0.09401510000268713,
+      "mean_image_mse_se": 0.028022710640910404,
+      "mean_y_difference_percent": -5.055828875715922
+    },
+    {
+      "scene": "kitchen",
+      "variant": "B10",
+      "policy": "on",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; full-prefix replay; duplication on",
+      "image": "assets/b10-duplication/kitchen-on.png",
+      "gpu_busy_ms": null,
+      "hdr_flip": 0.46450504660606384,
+      "ldr_flip": 0.2754421830177307,
+      "linear_mse": 0.7477348578189619,
+      "linear_mse_se": 0.2989078303019383,
+      "mean_image_mse": 0.06882834004567746,
+      "mean_image_mse_se": 0.021551829645327966,
+      "mean_y_difference_percent": -4.569712376980233
+    }
+  ]
+}

@@ -423,15 +423,15 @@ for cohort,expected_count in [('2026-10-29-gaussian-timing',18),('2026-10-29-fre
     checks.append(dict(name=cohort+' exact evidence hashes and accepted cap/freeze/restoration receipts',status='passed',timed_processes=expected_count))
 assert len(overview['b0_pt_only_override']['rows'])==3 and len(overview['gaussian_pairing_timing']['rows'])==3
 checkpoint_rows=overview['checkpoint_rows']
-assert len(checkpoint_rows)==24
+assert len(checkpoint_rows)==30
 for scene in ['opaque-room','convergence','kitchen']:
     scoped=[x for x in checkpoint_rows if x['scene']==scene]
-    assert {x['kind'] for x in scoped}=={'native_pt_only','gaussian_timing','gaussian_quality','spatial_queue_oracle','b8_gi_initial','b8_gi_reuse','b9_matched_B8','b9_limited'}
+    assert {x['kind'] for x in scoped}=={'native_pt_only','gaussian_timing','gaussian_quality','spatial_queue_oracle','b8_gi_initial','b8_gi_reuse','b9_matched_B8','b9_limited','duplication_off','duplication_on'}
     assert all(x.get('gpu_busy_ms') is None for x in scoped if x['kind'] in ['gaussian_quality','spatial_queue_oracle'])
     assert all(x.get('ldr_flip') is None and x.get('hdr_flip') is None for x in scoped if x['kind'] in ['gaussian_timing','spatial_queue_oracle'])
     for x in scoped:
         if x.get('image'):assert (D/x['image']).is_file()
-checks.append(dict(name='24scoped checkpoints inline beside B0/B8/B9/B10 across all three scene tables; timing/quality/oracle scopes separated',status='passed'))
+checks.append(dict(name='30scoped checkpoints inline beside B0/B8/B9/B10 across all three scene tables; timing/quality/oracle scopes separated',status='passed'))
 b8=P/'Benchmarks/development/2026-10-29-b8-nvidia-gi'
 for name,expected_sha in json.loads((b8/'files.json').read_text()).items():
     assert hashlib.sha256((b8/name).read_bytes()).hexdigest()==expected_sha,name
@@ -567,8 +567,8 @@ for row in dup['cases']:
         assert stats['duplication_produced_pixels']==row['width']*row['height'] and stats['duplication_nonzero_reads']>0 and check['negative']['expected_rejection']
     else:assert stats['duplication_map_reads']==stats['duplication_produced_pixels']==0
 summary=json.loads((dup_root/'summary.json').read_text())
-assert overview['duplication_temporal_history']==summary and summary['eligible_quality_sequences']==14 and not summary['canonical_accepted']
-assert summary['timing']=='not_started_due_to_quality_startup_gate' and len(summary['missing_quality_cases'])==4
+assert overview['duplication_temporal_history']==summary and summary['eligible_quality_sequences']==18 and not summary['canonical_accepted']
+assert summary['timing']=='complete18_uncapped_processes' and len(summary['missing_quality_cases'])==0
 eligibility=json.loads((dup_root/'quality-eligibility.json').read_text())
 assert len(eligibility['eligible_sequences'])==14 and eligibility['eligible_frames']==896
 assert len({x['case'] for x in eligibility['eligible_sequences']})==14
@@ -577,7 +577,61 @@ for capture in eligibility['eligible_sequences']:
     assert capture['executable_sha256']==json.loads((dup_root/'source.json').read_text())['executable_sha256']
     assert all(len(x['pfm_sha256'])==len(x['png_sha256'])==64 for x in capture['captures'])
 assert 'id="b10-duplication-history"' in page
-checks.append(dict(name='B10 duplication:6GPU cases/384frames, exact exported17x17 counts, negative oracle and active/disabled map reads; incomplete quality and no timing correctly labelled',status='passed',limits='Deliberately biased temporal cap; static gates only; no complete PT++ or B11 activation.'))
+checks.append(dict(name='B10 duplication:6GPU cases/384frames, exact exported17x17 counts, negative oracle and active/disabled map reads; completed scoped quality/timing separately verified',status='passed',limits='Deliberately biased temporal cap; static gates only; no complete PT++ or B11 activation.'))
+
+completed=json.loads((dup_root/'quality-completed-eligibility.json').read_text())
+quality=json.loads((dup_root/'quality.json').read_text())
+assert len(completed['eligible_sequences'])==18 and completed['frames']==1152
+assert completed['quality_sha256']==hashlib.sha256((dup_root/'quality.json').read_bytes()).hexdigest()
+assert len(quality['scenes'])==3 and sum(len(x['groups']) for x in quality['scenes'].values())==18
+for scene,item in quality['scenes'].items():
+    for label,group in item['groups'].items():
+        assert group['frames']==64 and len(group['curve'])==64 and len(group['selected_frame_flip'])==4
+        active=json.loads((dup_root/'quality-runs'/label/'duplication-effective.json').read_text())
+        assert active['enabled']==('-on-' in label)
+    for policy in ('off','on'):
+        group=item['groups'][f'{scene}-{policy}-s47'];image=D/f'assets/b10-duplication/{scene}-{policy}.png'
+        assert hashlib.sha256(image.read_bytes()).hexdigest()==group['selected_frame_flip'][-1]['png_sha256']
+        raw=next((dup_root/'selected-raw'/f'{scene}-{policy}-s47').glob('*.gz'))
+        assert hashlib.sha256(gzip.decompress(raw.read_bytes())).hexdigest()==group['curve'][-1]['pfm_sha256']
+frozen=json.loads((dup_root/'frozen-artifacts.json').read_text())
+assert frozen['root_source_sha']=='0bd96933236d753a932cb3046e4899a18056f176'
+assert all(g['source_exe_sha256']==frozen['executable_sha256'] for x in quality['scenes'].values() for g in x['groups'].values())
+runs=list((dup_root/'timing-evidence').glob('*/run.json'));assert len(runs)==18
+for path in runs:
+    run=json.loads(path.read_text());restore=json.loads((path.parent/'restoration-receipt.json').read_text())
+    assert run['status']=='timed_completed' and run['image_write_count']==0 and not run['reported_trace_loss']
+    assert run['artifact_identity']['validated'] and run['artifact_identity_after_capture']['validated']
+    assert run['cap_control']['observed_sync_interval']==0 and restore['restoration_verified']
+    assert run['exe_sha256']==frozen['executable_sha256']
+assert json.loads((dup_root/'runtime-restoration.json').read_text())['exact_restoration']
+assert json.loads((dup_root/'archive-verification.json').read_text())['all_hashes_match']
+assert len(overview['duplication_quality']['rows'])==6 and len(overview['duplication_timing']['rows'])==3
+assert (D/'assets/b10-duplication/convergence.svg').is_file()
+checks.append(dict(name='B10 duplication complete18quality sequences/1152frames and18uncapped processes: exact exported images/raw hashes, identity, no capture writes/loss, cap and runtime restoration',status='passed',limits='Three static seeds/repeats; full PT++ and startup reliability remain pending; no universal gain.'))
+from unified_lighting_oracle import enumerate_ris_mis
+from fractions import Fraction as Fraction
+oracle=P/'Benchmarks/development/2026-10-30-unified-ris-oracle/results.json';model=json.loads(oracle.read_text())
+assert not model['renderer_implemented'] and not model['canonical_accepted']
+assert hashlib.sha256((P/'Benchmarks/tools/unified_lighting_oracle.py').read_bytes()).hexdigest()==model['oracle_sha256']
+for row in model['rows']:
+    m=row['candidates'];value=enumerate_ris_mis([7,2,11],[Fraction(1,2),Fraction(1,3),Fraction(1,6)],[Fraction(1,5),Fraction(3,10),Fraction(1,2)],[1,9,2],m)
+    assert value['combined']==20 and row['combined']==dict(numerator=20,denominator=1)
+    assert value['missing_pss_conversion']!=20
+    if m>1:assert value['stale_single_sample_bsdf_mis']!=20
+assert 'id="b10-unified-lighting"' in page
+checks.append(dict(name='Paper supplement RIS/MIS/PSS exact finite-domain prerequisite and source hash; unification renderer remains unimplemented',status='passed',limits='No continuous-measure, shift, delta, medium or GPU proof.'))
+
+roadmap_names=['ROADMAP.md','VERSION_MAPPING.md','ALGORITHM_VARIANTS.md']
+for name in roadmap_names:
+    text=(D/name).read_text(encoding='utf-8')
+    for version in ['B10','B10.75','B10.50','B10.25','B11','B12','B13','B14','B15','B16']:assert '**'+version+'**' in text
+    for phrase in ['Compatibility-Guided Neighbor Selection active','Stochastic Pairwise MIS','ReSTIR LoD','ReSTIR BDPT with LW version','ReSTIR PG','Multi-Layer Reservoir Splatting']:assert phrase in text
+    assert '0.75 spp' in text and '0.50 spp' in text and '0.25 spp' in text
+assert by_id['B11']['depends_on']==['B10'] and by_id['B16']['depends_on']==['B15']
+assert by_id['B10']['planned_full_unification']['planned']
+assert 'one PT reservoir' in (D/'B10_UNIFIED_LIGHTING.md').read_text() and 'all indirect' in (D/'ROADMAP.md').read_text()
+checks.append(dict(name='User B10–B16 cumulative roadmap and native B10 sampling branches consistent across registry and three owning docs; definitions separate from activation',status='passed'))
 
 receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; general directional GI, broader moving/reset queue histories and timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')

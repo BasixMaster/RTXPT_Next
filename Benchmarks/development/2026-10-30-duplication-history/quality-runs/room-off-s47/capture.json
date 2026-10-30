@@ -1,0 +1,1200 @@
+{
+  "label": "room-off-s47",
+  "scene": "WORKSPACE\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+  "mode": "dipt",
+  "output_track": "unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata",
+  "exe_sha256": "a3f44cb37000e2f23d39259d2b8c21d211bafa9b6e172a753fbe585493f4ca89",
+  "started_utc": "2026-10-30T07:25:39.843553+00:00",
+  "command": [
+    "WORKSPACE\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+    "--scene",
+    "WORKSPACE\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+    "--width",
+    "640",
+    "--height",
+    "360",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "1",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "0.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "BENCHMARK_VOLUME\\2026-10-30-duplication-quality\\room-off-s47\\frame.png",
+    "--captureSuffix",
+    "room-off-s47",
+    "--perfLog",
+    "BENCHMARK_VOLUME\\2026-10-30-duplication-quality\\room-off-s47\\partial-perf.csv",
+    "--b8InitialGIValidation",
+    "true",
+    "--b8Component",
+    "0",
+    "--b8ValidationStage",
+    "2",
+    "--b8GIReuseMode",
+    "3",
+    "--ptPairedSpatialValidation",
+    "true",
+    "--ptGaussianPairingValidation",
+    "true",
+    "--ptReplayCompactionValidation",
+    "true",
+    "--ptReconnectionMode",
+    "1",
+    "--ptRouletteProbability",
+    "0.8",
+    "--ptFixedSpatialSamples",
+    "1",
+    "--strictDIValidation",
+    "true",
+    "--restirDIMode",
+    "3",
+    "--neeMIS",
+    "0",
+    "--environmentDiffuseMip",
+    "0",
+    "--benchmarkUncapped",
+    "true",
+    "--samplingSeed",
+    "47",
+    "--captureLinearHDR",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--useReSTIRPT",
+    "1",
+    "--restirPTMode",
+    "3",
+    "--maxBounces",
+    "4",
+    "--maxDiffuseBounces",
+    "4",
+    "--stopAnimations",
+    "--captureSequence",
+    "--sequenceFPS",
+    "60",
+    "--sequenceWarmupStart",
+    "0",
+    "--sequenceRecordStart",
+    "0.1",
+    "--sequenceFrameCount",
+    "64"
+  ],
+  "cwd": "WORKSPACE\\outputs\\RTXDI_Next\\bin",
+  "settings": {
+    "width": 640,
+    "height": 360,
+    "exposure": 0.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 1,
+    "restir_gi": 1,
+    "simple": false,
+    "record_start": 0.1,
+    "frames": 64,
+    "reference_spp": null,
+    "linear_hdr_requested": true,
+    "sampling_seed_requested": 47,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": 3,
+    "nee_mis_requested": 0,
+    "nee_type": 2,
+    "restir_pt": 1,
+    "max_bounces_override": 4,
+    "max_diffuse_bounces_override": 4,
+    "pt_mode": 3
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "scene_sha256": "339a8338de31c2e124554b44497678dd40c8505b30c45c59413bd968497f47d5",
+  "canonical_experiment": null,
+  "paired_spatial_pilot_requested": true,
+  "gaussian_pairing_requested": true,
+  "development_partition": {
+    "contract_version": 1,
+    "canonical_accepted": false,
+    "gi_reuse": true,
+    "gi_approximation_mode": 3,
+    "component": 0,
+    "stage": 2,
+    "pt_min_light_inclusive_length": 4
+  },
+  "process_id": 4076,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 30.687000000005355,
+  "images": [
+    {
+      "name": "frame_000_room-off-s47.png",
+      "sha256": "71471d430878cbd7541042b31818df5477daa5900b4a4d38f894d54de7dd5881",
+      "bytes": 501877
+    },
+    {
+      "name": "frame_001_room-off-s47.png",
+      "sha256": "c43335e7ec2f56d55cca4bae5c548f26c4e58310c8c7a7b772ace222b79b2eed",
+      "bytes": 500903
+    },
+    {
+      "name": "frame_002_room-off-s47.png",
+      "sha256": "192b6063837288420a4876127a9e623906390d7d29b7408ade9881eee49e50b1",
+      "bytes": 500724
+    },
+    {
+      "name": "frame_003_room-off-s47.png",
+      "sha256": "51db2d587f4d17ce7990627a29e98bc8e7c07155f5f3e4eb70f8ed1adacf88f7",
+      "bytes": 500189
+    },
+    {
+      "name": "frame_004_room-off-s47.png",
+      "sha256": "009296542075d6c608c0c1b78d810c1b946754ca56cd42e75349c39a3d6ff6ce",
+      "bytes": 500308
+    },
+    {
+      "name": "frame_005_room-off-s47.png",
+      "sha256": "3afdf8587599681715c5d5e9ed32ff639bb85bde5542b0fb26790757026b3861",
+      "bytes": 499826
+    },
+    {
+      "name": "frame_006_room-off-s47.png",
+      "sha256": "abc4ab3acfe8f0b8d63d9abf232b53239ba3038cfa5d9d8b065683057081630e",
+      "bytes": 499797
+    },
+    {
+      "name": "frame_007_room-off-s47.png",
+      "sha256": "314d2dca6714fcd0a1fb49e04a5699d384df835c55ec756dcacc8f9041ae946f",
+      "bytes": 499986
+    },
+    {
+      "name": "frame_008_room-off-s47.png",
+      "sha256": "06158ae12782a0c8a85ce8a3bfb04a9f4141af0bb296ee6b3e7edf6fc4de3dcc",
+      "bytes": 499686
+    },
+    {
+      "name": "frame_009_room-off-s47.png",
+      "sha256": "62eea5082b00cc1346ab3568859def108f443e340977c3d7d16206d178b9ddab",
+      "bytes": 499664
+    },
+    {
+      "name": "frame_010_room-off-s47.png",
+      "sha256": "0264efaabfbf301081b7ddf9855adccd2371637459b307ecacd6f699b7ee4a51",
+      "bytes": 499444
+    },
+    {
+      "name": "frame_011_room-off-s47.png",
+      "sha256": "52b2998a74d6a59146e7a1f86d2cd7ae95ea19d844fe203f5c7363791a9f1204",
+      "bytes": 499240
+    },
+    {
+      "name": "frame_012_room-off-s47.png",
+      "sha256": "f81520872e63aabe5cc3916f26b9b06681c336d1b70c8d227ddb74cd51af4785",
+      "bytes": 499240
+    },
+    {
+      "name": "frame_013_room-off-s47.png",
+      "sha256": "47a8d18e6928f5de60231dc1cce16ff32ae0e8e5d805630a350e403dc43e9d57",
+      "bytes": 499067
+    },
+    {
+      "name": "frame_014_room-off-s47.png",
+      "sha256": "fcae18b6cbba7ae0621643dfa665292c4223d96d2ff71d4a95509e8ea0b9b7bf",
+      "bytes": 498715
+    },
+    {
+      "name": "frame_015_room-off-s47.png",
+      "sha256": "ab27fc2ee06057adb5b34f64b9897c8c913a6fe881f8d1834d7ec50f599f2c82",
+      "bytes": 499014
+    },
+    {
+      "name": "frame_016_room-off-s47.png",
+      "sha256": "6e264478b00e1a8967218e03260d9dde79b8ff3825b4b4b6fc339b6c9213bd61",
+      "bytes": 499116
+    },
+    {
+      "name": "frame_017_room-off-s47.png",
+      "sha256": "ce0260cefd41f68b77e97af47db9ec0a6883ba8d67db6fa869df3f8aca307766",
+      "bytes": 499027
+    },
+    {
+      "name": "frame_018_room-off-s47.png",
+      "sha256": "cae24dcd778fcb989f69962db67fc7ad62407a39703cb31e61e89778b28d59e4",
+      "bytes": 499448
+    },
+    {
+      "name": "frame_019_room-off-s47.png",
+      "sha256": "1073e98226d964a7cbb0e1acd4bebe719448d97dc4a09bfac90e362d8119dd04",
+      "bytes": 499896
+    },
+    {
+      "name": "frame_020_room-off-s47.png",
+      "sha256": "1589ba9e3f1448cd13a1578412faae956e963ff56bb7fe3e0354f0196a20a715",
+      "bytes": 499567
+    },
+    {
+      "name": "frame_021_room-off-s47.png",
+      "sha256": "2322a9d57390140e842bc026ae6f1eb38ea517a9ce135fbbe695c180867f8d89",
+      "bytes": 499879
+    },
+    {
+      "name": "frame_022_room-off-s47.png",
+      "sha256": "5590aacc7ea18103083ea2514d0a307e575d343be6b75945597df2d7114a7ce3",
+      "bytes": 499883
+    },
+    {
+      "name": "frame_023_room-off-s47.png",
+      "sha256": "b856cad4165347e4be82c8cae9c8b98a29ca7165fdfc3c17461c0283f70a75f0",
+      "bytes": 499947
+    },
+    {
+      "name": "frame_024_room-off-s47.png",
+      "sha256": "ecbb60162e99cff9fbd9e45fb57c9e0bec2b82a0ac31b2cc526525e2d69124ba",
+      "bytes": 500209
+    },
+    {
+      "name": "frame_025_room-off-s47.png",
+      "sha256": "92111ad7d45df55438ee8162c570f8a5b7878c849d17e5106acf369e93c751c5",
+      "bytes": 500439
+    },
+    {
+      "name": "frame_026_room-off-s47.png",
+      "sha256": "9ff8d3302ebc98ec89b2e7b1d3f386340bb2cbf5974bfa53071a2f120b0aee9e",
+      "bytes": 500389
+    },
+    {
+      "name": "frame_027_room-off-s47.png",
+      "sha256": "dc3fca44ae0a183ae50b38b6cb7809f6eb54e9068eede509a4fc7a4ba01fdaf8",
+      "bytes": 500332
+    },
+    {
+      "name": "frame_028_room-off-s47.png",
+      "sha256": "af169e3bce5ce1cc6df6de46169d79ef4a13faf8eac4ed09c077129576c254ca",
+      "bytes": 500426
+    },
+    {
+      "name": "frame_029_room-off-s47.png",
+      "sha256": "632c93651e4eabbe0edd415f490711d2692f6798a92466fae1fa847be45d5a86",
+      "bytes": 500210
+    },
+    {
+      "name": "frame_030_room-off-s47.png",
+      "sha256": "52a1842c0033f2500cf47eb7c993fffc14cec56715e5ea7bbc271c189b1c9721",
+      "bytes": 500479
+    },
+    {
+      "name": "frame_031_room-off-s47.png",
+      "sha256": "2bfb2533bae2619c3561f4cc0ea783b4a43d56498825eadfebbb53ee03f90807",
+      "bytes": 500245
+    },
+    {
+      "name": "frame_032_room-off-s47.png",
+      "sha256": "32ab8a85240599c42f34a82ae6e440f4744490275a1971282a48bc4da68bfd94",
+      "bytes": 499929
+    },
+    {
+      "name": "frame_033_room-off-s47.png",
+      "sha256": "3da801fee6b2d7d0701f013db16703078abba5e2485469cbddba2154a50c2ac1",
+      "bytes": 500491
+    },
+    {
+      "name": "frame_034_room-off-s47.png",
+      "sha256": "ca72212641cbb487986497d832599e7a5a7e60b88af21036ae3ae6c8e7e7def3",
+      "bytes": 500525
+    },
+    {
+      "name": "frame_035_room-off-s47.png",
+      "sha256": "f8bccb80fd0c723e7645e0a79e37dba11ac6b964c3096206485fcfb535ac5170",
+      "bytes": 499958
+    },
+    {
+      "name": "frame_036_room-off-s47.png",
+      "sha256": "d4c4fec3fb0b2e07c21c138233df594b39d26b30d1f6de6659ac38c50f1d3773",
+      "bytes": 499921
+    },
+    {
+      "name": "frame_037_room-off-s47.png",
+      "sha256": "1695cd6e363c2f739844bb318d1e889405fa365d6ab67fedf76549efb97fdd00",
+      "bytes": 500233
+    },
+    {
+      "name": "frame_038_room-off-s47.png",
+      "sha256": "7201871e942111d612222f99006793449063cb69657f33b5f337bf6a6ffbe20a",
+      "bytes": 499994
+    },
+    {
+      "name": "frame_039_room-off-s47.png",
+      "sha256": "df5f0820057c24cec48c514cd36c255837659325cf49dabf0e7be58d344b8971",
+      "bytes": 499748
+    },
+    {
+      "name": "frame_040_room-off-s47.png",
+      "sha256": "04e998db4b99314da75995cb80b098ff6f9824c0ef47961616b861b800cc492f",
+      "bytes": 500116
+    },
+    {
+      "name": "frame_041_room-off-s47.png",
+      "sha256": "75c7c760eb31197976b9a54bb9006f0b49e428808567b4e5403d8a6188a55b65",
+      "bytes": 499933
+    },
+    {
+      "name": "frame_042_room-off-s47.png",
+      "sha256": "31c1bbdc5d757b92518c814eef6e324e7a8ee279d88fa62459a9498938e6ec18",
+      "bytes": 500073
+    },
+    {
+      "name": "frame_043_room-off-s47.png",
+      "sha256": "d2d3527e97d4126a15b75629fbab7fe97492a5e8717b90d9d8ba737caa77f6c5",
+      "bytes": 500124
+    },
+    {
+      "name": "frame_044_room-off-s47.png",
+      "sha256": "5268eb205f3d22f4fc9caf8eec94f86ddbe23497c7809e6d294d6ff6f142b9b4",
+      "bytes": 500025
+    },
+    {
+      "name": "frame_045_room-off-s47.png",
+      "sha256": "aa28a2cfe79e528a7ddad2b622470f39506e576bbb19471beed9740f84033c69",
+      "bytes": 499863
+    },
+    {
+      "name": "frame_046_room-off-s47.png",
+      "sha256": "dfe5f2de061966a0bac2cc93e0fed00de4eb991ee83f11c32678772ce34fa161",
+      "bytes": 499864
+    },
+    {
+      "name": "frame_047_room-off-s47.png",
+      "sha256": "450e181fa6859fb8259cdeddfbd96ddb5dbbb89781c36580c3a4be12c60136b5",
+      "bytes": 500177
+    },
+    {
+      "name": "frame_048_room-off-s47.png",
+      "sha256": "97815e98538fa6cd2b9dfd2e9a7f0976eaa1c8bb18ca7265ec07c5df164a8045",
+      "bytes": 500036
+    },
+    {
+      "name": "frame_049_room-off-s47.png",
+      "sha256": "b678ad4fb368aa3e5cb225c48cdf0b391cc3403050cf49f39123b5fb76f1be8d",
+      "bytes": 500022
+    },
+    {
+      "name": "frame_050_room-off-s47.png",
+      "sha256": "def0c28ed34061932dab9102f0434d95d380bb68f0fbfd00014ffe0401be34a6",
+      "bytes": 499533
+    },
+    {
+      "name": "frame_051_room-off-s47.png",
+      "sha256": "fc175c8d82f84991b8d35aeebf3961d03bab3a713c6778cff2f8f802fa015e6f",
+      "bytes": 499745
+    },
+    {
+      "name": "frame_052_room-off-s47.png",
+      "sha256": "bb874b0c475868f7df50a895867cdc236c37254b5c3f1967a261136386782ee9",
+      "bytes": 499505
+    },
+    {
+      "name": "frame_053_room-off-s47.png",
+      "sha256": "48e23d78dafdb289ec00a5f41579fc12a4c858093c0eb43e4f306c5453e0381a",
+      "bytes": 499968
+    },
+    {
+      "name": "frame_054_room-off-s47.png",
+      "sha256": "25973e973494c0e6dedc9a93f30f0e364a5267d72bf3d7f737a151e2b0f1be77",
+      "bytes": 499582
+    },
+    {
+      "name": "frame_055_room-off-s47.png",
+      "sha256": "dfdc34ea9351f20e16994f332c1e31eeff7934b6beb093771eed15e08993a113",
+      "bytes": 499828
+    },
+    {
+      "name": "frame_056_room-off-s47.png",
+      "sha256": "af25adb2dd65f9dd1776f2c1f07f08f336bc618c96245adae6ea9a5ba98a2f0b",
+      "bytes": 499489
+    },
+    {
+      "name": "frame_057_room-off-s47.png",
+      "sha256": "944297cac09042edd818d80dea81e4a763b8a4178957183efd0281a1da2e849a",
+      "bytes": 499542
+    },
+    {
+      "name": "frame_058_room-off-s47.png",
+      "sha256": "e48148cbf4ab24b053628b52e8e6224291e418a773ec54e096276d492e70ae34",
+      "bytes": 499508
+    },
+    {
+      "name": "frame_059_room-off-s47.png",
+      "sha256": "028174d6d2c73ac9b42b5c8ab012cad4050011b1b50e39252da76312beed6559",
+      "bytes": 499639
+    },
+    {
+      "name": "frame_060_room-off-s47.png",
+      "sha256": "311f405e4a892f4d429718ee5deccacca64558fcfa76aa28cfdbb94162364767",
+      "bytes": 499880
+    },
+    {
+      "name": "frame_061_room-off-s47.png",
+      "sha256": "5de05258a2a1ee40a0ce81f33f2af11e8746fc33fb45aed2ff9b097551d4970b",
+      "bytes": 499841
+    },
+    {
+      "name": "frame_062_room-off-s47.png",
+      "sha256": "6ec262f8537b804d48bf18dcd466581fb56e344631a89424ecfe9d113d27536e",
+      "bytes": 499549
+    },
+    {
+      "name": "frame_063_room-off-s47.png",
+      "sha256": "942730fa14a2e52cdb81b1f8672380206ba364d2db4a60717c0a5bc26d12a1b2",
+      "bytes": 499597
+    }
+  ],
+  "linear_hdr_files": [
+    {
+      "name": "frame_000_room-off-s47.pfm",
+      "sha256": "3d50602f37aae1282a7a88886de4157f8d09fc1ecbd9e25c5969e62484b57ebc",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_000_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_001_room-off-s47.pfm",
+      "sha256": "65acb197ba58d256c39ac6b2480eab90bb3778185f7c5cff5d6009a2d3efae31",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_001_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_002_room-off-s47.pfm",
+      "sha256": "0a2839c4d8fdfddb15a29108bf4c09028bd1bd07c550345e83c6179a327b4461",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_002_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_003_room-off-s47.pfm",
+      "sha256": "669f61c19d88df3b1392b2a3bb9b1092fa099ac1832a5a694d329f7fdf1f7807",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_003_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_004_room-off-s47.pfm",
+      "sha256": "59a66a165d63046de99e98a5b91fae28ec9a0a0d8a239f73d57ac7df39e9fb6c",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_004_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_005_room-off-s47.pfm",
+      "sha256": "82ff16fc8c9c4b49a8df9249caf17f06cc99ec8cb53136fdb9bd932538634cd3",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_005_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_006_room-off-s47.pfm",
+      "sha256": "95beb7f3df6b0c21b7be96367cbe7e82e6d677cd86c67437fea90cf5ebf77a1a",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_006_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_007_room-off-s47.pfm",
+      "sha256": "7997996ff56561fa3665b77d9be5cbce89bd9881f6431806be677e2de74c42a8",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_007_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_008_room-off-s47.pfm",
+      "sha256": "57b6432b68e10dbdb4c3694dfc31d6d1db1f647bf0ed6821fae5ea8af23a51ba",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_008_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_009_room-off-s47.pfm",
+      "sha256": "ac106eb8389110ad1e0e502aba745fc8214297860c08c674b35c1236a10c78df",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_009_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_010_room-off-s47.pfm",
+      "sha256": "53e4168128f5053c20bea0b360d0070d9b435ea5c3dfda6d488f36f8084a9696",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_010_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_011_room-off-s47.pfm",
+      "sha256": "3296b82b7d6100ac8b24c02d468a276518d10ecc0435a91688b0a8adade5a036",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_011_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_012_room-off-s47.pfm",
+      "sha256": "cbb82e1a8b5a82f358f592f879afca1c157a6ecf6e3534cf49d9ed3c99056811",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_012_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_013_room-off-s47.pfm",
+      "sha256": "994a885afc5ac0f390c4dd24279373fc8b6c534b20a696d71648c522282e269f",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_013_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_014_room-off-s47.pfm",
+      "sha256": "bbe4a3642554fc8201c2d22421db887cb870c802386f322ec8baa8652df32f6e",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_014_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_015_room-off-s47.pfm",
+      "sha256": "e8ef20e513bdc3f0b8b5b83b96e64c5574abbc68d4ee26597cd389b9450026fb",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_015_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_016_room-off-s47.pfm",
+      "sha256": "42b08c5ed1badf72b6045e3a4d2003aaefe451d94e6ac2a8f4d2a275a3c5ec99",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_016_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_017_room-off-s47.pfm",
+      "sha256": "0787396a5d6ea241017184ae0dd4577f35e9b0f3a081217ec9006c41ac5ebc41",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_017_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_018_room-off-s47.pfm",
+      "sha256": "f9243f36f5f8bfb5e0b2f9c97b7bfe17c22561edaaca89c1852936a84e67c753",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_018_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_019_room-off-s47.pfm",
+      "sha256": "e4b88ea1ada647a2092ec2944e88712f0bbf159e3f0371907ae946657531ce2b",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_019_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_020_room-off-s47.pfm",
+      "sha256": "1376716d3ed77cc5f633e0167564ea04254f64816cee240043e5a1e196bd5936",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_020_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_021_room-off-s47.pfm",
+      "sha256": "96b53d17f01bb01ee5f6f5700dce5dbf74a1ea93bc5e2e30d32c4b54f3407d9d",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_021_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_022_room-off-s47.pfm",
+      "sha256": "fb667c07642e228e952fa55f00241ff806daa91082b79ffa9df8607305ca3205",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_022_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_023_room-off-s47.pfm",
+      "sha256": "bd9cef26f08ca1e7be5b7891b89e297ae8a16fbdde53de7e1c485fca14f22024",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_023_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_024_room-off-s47.pfm",
+      "sha256": "95abbf7e5aab0fa6da8444975bde2a7542ebff04746d0e04e20d7459033f8e80",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_024_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_025_room-off-s47.pfm",
+      "sha256": "0502b05999ea5a2eb37d0f40c2027e9126ee1f7066d9ab2d04fe36de835ff233",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_025_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_026_room-off-s47.pfm",
+      "sha256": "73ca2748911c410990b0dcf3272c245ec6326b7947ce96757ce5619f7886588e",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_026_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_027_room-off-s47.pfm",
+      "sha256": "a81ea6e79f9e681eb34ee4cbf1311fb5dde8477f42dac8a084e829c17ff5bc90",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_027_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_028_room-off-s47.pfm",
+      "sha256": "48fe50ca6316031acc225634b11b8617ec72055063d7f1c077c7b11e85bed119",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_028_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_029_room-off-s47.pfm",
+      "sha256": "478bc9c4137ca0342791bd407efec1ad7fcefdd7fb39c19b6b183b99c0e60a22",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_029_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_030_room-off-s47.pfm",
+      "sha256": "d2a6edd245766c9659a07100977c0ed07e5ea9644660cf4726d357109c13e178",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_030_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_031_room-off-s47.pfm",
+      "sha256": "f4fd39b5e5896fcbb92fb74723e842d4fae16d3e0d2e04efc8a8459132b45288",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_031_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_032_room-off-s47.pfm",
+      "sha256": "81e49856e6aad7d1a564d1cf2cc8816792225268cf477348026247257532beb1",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_032_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_033_room-off-s47.pfm",
+      "sha256": "0de75c577c8e33f94bc6b89885effa16eb1b504978f875b0c26aba914a5171fc",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_033_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_034_room-off-s47.pfm",
+      "sha256": "7d9501ce351559fbfe0580230f6da99115358c4cbaa98d61312ebefaf21f88c2",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_034_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_035_room-off-s47.pfm",
+      "sha256": "b23b3d8a32a2e165a4550818d67be9cc1b2987da8ffd1426c20e4e2db82b004d",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_035_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_036_room-off-s47.pfm",
+      "sha256": "77361a770c35fdecaf6758710cbe444d97c198784cf2143404be8eb6e8bc76c0",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_036_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_037_room-off-s47.pfm",
+      "sha256": "42291854faac80f45209c5fa8b668127498e671d83d24e55e300832e61345dfc",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_037_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_038_room-off-s47.pfm",
+      "sha256": "9eb97d646c5843598f40735d8b512263986982089f9a59458d3739a1f66c0aa5",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_038_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_039_room-off-s47.pfm",
+      "sha256": "d42ee3dfc33dd029812aff8239f91d4e858e3e068416a824c5596818e03b2bea",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_039_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_040_room-off-s47.pfm",
+      "sha256": "650279f50395b379947843b18027ef0ac6df534151042d2a394e556d0427296a",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_040_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_041_room-off-s47.pfm",
+      "sha256": "2fc028a1de1a9f040ada009cc474c10aa712540389376ecd3764d52ad64a03ce",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_041_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_042_room-off-s47.pfm",
+      "sha256": "ce56b2828720fe88a0eee785002dbea7425bd7087c407bcdf87dda2b156d4ed0",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_042_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_043_room-off-s47.pfm",
+      "sha256": "4d260ee50b6c7946b2995568e91f56c0c807a7ecc20ab0cf65d5ddf1ebc5e085",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_043_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_044_room-off-s47.pfm",
+      "sha256": "00aed649d62e8fb82dd51fe5701fc8a28b75532848df9516d58600c4da7ca159",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_044_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_045_room-off-s47.pfm",
+      "sha256": "66a31c7e7376072e86551720d9cb50f8cca7543e65013949279a1b8508001381",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_045_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_046_room-off-s47.pfm",
+      "sha256": "1fbbbfd0f5483efce003ce984476556f76245e60247cdf17b620585c10a80f67",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_046_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_047_room-off-s47.pfm",
+      "sha256": "9b583e09d87c4a2814558fa198ce19f23f37e17520cec3e9d60c6da9c75a8062",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_047_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_048_room-off-s47.pfm",
+      "sha256": "8e2b1a91f2e59881c2dbdabced9d2edd67d0d3ea05733a6399043bb3904dfb5e",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_048_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_049_room-off-s47.pfm",
+      "sha256": "d549227d5e13699ea01e70e65fbbbb18cb7cd093aa765786f22c461595666ff2",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_049_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_050_room-off-s47.pfm",
+      "sha256": "09a77ebbb4700a468d768db1cb84aea7b90497595c60ee4199a5852a64b0b162",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_050_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_051_room-off-s47.pfm",
+      "sha256": "317296e2df6ca860c184c12b7e208931bdc620d616287df9f0bac92d7aaaa62f",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_051_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_052_room-off-s47.pfm",
+      "sha256": "a09d58d65c0160eb272f28d6bf18cf21550c23e86794dc8270efc0b634f70f4f",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_052_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_053_room-off-s47.pfm",
+      "sha256": "c1f3bf8a59abc94710681e418e3ac1bc9cfe860774bd2e5146ddd84d80af3149",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_053_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_054_room-off-s47.pfm",
+      "sha256": "f84bf1ecadbec373924af6be0e0166916a54764be5e1a643548108a32c43afa3",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_054_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_055_room-off-s47.pfm",
+      "sha256": "51ec8c43168c5cc0b128f98b97686471aff1410b4bc14829c67fe0c9ac18ebf6",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_055_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_056_room-off-s47.pfm",
+      "sha256": "68d5aa509de73dde7ef9015ea93ef96291e5deaedfaaf5f7a838e686247a68fe",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_056_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_057_room-off-s47.pfm",
+      "sha256": "5054d982f9f66d508c591f84f9725239aa64b5a5998d60d237ea09b837334de2",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_057_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_058_room-off-s47.pfm",
+      "sha256": "dc7883aa817ee245aa432579ed8bfc0c1deb244e02bcdbd90478c0364a4c135c",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_058_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_059_room-off-s47.pfm",
+      "sha256": "e94e74dd559680a23f9a3c217a48b001420d81df32e943e220b83ce132743dc6",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_059_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_060_room-off-s47.pfm",
+      "sha256": "28f50c197ae1c6b0ae1899ce04a4a34e987ba380de37008523babb572db81d9f",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_060_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_061_room-off-s47.pfm",
+      "sha256": "8eec3003c09bed7bb400981c5ed41d97f669da1dbfc35f3439de37166090afa3",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_061_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_062_room-off-s47.pfm",
+      "sha256": "c2feb1be8238ef07cdb42cf4176c9f74535a82257343d8b6ddfeb5f3531c3b09",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_062_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    },
+    {
+      "name": "frame_063_room-off-s47.pfm",
+      "sha256": "d56fc5d15ea2194d17920384d3fa6da4257e262821f9a5f317da3edcc8bd5655",
+      "bytes": 2764816
+    },
+    {
+      "name": "frame_063_room-off-s47.pfm.json",
+      "sha256": "f58bd12e7a94dc809d3eab5cda03e33a8b0dc37f35198a9bf17c292cd579a0d0",
+      "bytes": 600
+    }
+  ],
+  "effective_b8_partition": {
+    "development": true,
+    "contract_version": 1,
+    "gi_reuse": true,
+    "gi_approximation_mode": 3,
+    "component": 0,
+    "stage": 2,
+    "pt_min_light_inclusive_length": 4,
+    "canonical_accepted": false
+  },
+  "effective_paired_spatial_pilot": {
+    "enabled": true,
+    "policy": "Gaussian reciprocal tables; one per frame",
+    "pair_owned_shifts": true,
+    "vector_shading": true,
+    "canonical_accepted": false
+  },
+  "effective_replay_queue": {
+    "enabled": true,
+    "oracle": false,
+    "shift_stride_bytes": 104,
+    "indirect_dispatch": true,
+    "canonical_accepted": false
+  },
+  "effective_environment_filter": {
+    "diffuse_mip": 0.0,
+    "explicit_override": true,
+    "scope": "Filtering identity only; no renderer correctness or acceptance claim"
+  },
+  "effective_sampling": {
+    "coverage": "verified first-frame effective receipt",
+    "seed": 47,
+    "realtime": true,
+    "reference_pixel_center": false,
+    "pixel_jitter_scale": 0.0
+  },
+  "effective_di_validation": {
+    "coverage": "verified first-frame effective receipt",
+    "strict": true,
+    "boiling": false,
+    "discount_naive": false,
+    "temporal_permutation": false
+  },
+  "effective_extended_scene_contract": null,
+  "effective_pt_replay": {
+    "coverage": "verified first-frame effective receipt",
+    "replay_only": false,
+    "roughness_threshold": 0.100000001
+  },
+  "effective_pt_history": {
+    "coverage": "verified first-frame effective receipt",
+    "age_rejection": true,
+    "max_age": 30,
+    "max_history": 8
+  },
+  "effective_pt_spatial": {
+    "coverage": "verified first-frame effective receipt",
+    "samples": 1,
+    "boost": 1
+  },
+  "effective_ptpp": {
+    "coverage": "verified first-frame effective receipt",
+    "reconnection_mode": 1,
+    "roulette_probability": 0.800000012,
+    "diagnostics": false
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 6,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "not requested; legacy labels retain their original numbering"
+  },
+  "effective_gbuffer_precision": {
+    "rounded_materials": 0,
+    "explicit_override": false,
+    "scope": "Half-up after fp16 conversion; not exact/unbiased BSDF reconstruction"
+  },
+  "effective_di_reuse": {
+    "active": true,
+    "mode": 3,
+    "temporal": true,
+    "spatial": true,
+    "gi": true,
+    "pt": true,
+    "scope": "Effective first-frame settings; not estimator correctness or timing proof"
+  },
+  "effective_prefix_throughput": {
+    "preserve_above_one": false,
+    "capture_packed": false,
+    "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+  }
+}

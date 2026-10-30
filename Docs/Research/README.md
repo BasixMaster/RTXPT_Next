@@ -1,6 +1,10 @@
 # Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap
 
-**Current work:** [B9 based on B8](B9_RESULTS.md) now has eight GPU diagnostic cases,18three-seed64-frame quality sequences and18uncapped timing runs. Room footprint+roulette is slower with higher measured error; original-scene roulette-only ablations reduce GPU busy with mixed quality. Original-scene footprint and brightness work remain pending.
+## Implementation guidance
+
+Follow the Wyman papers, their supplementary material and author implementations, together with NVIDIA documentation and pinned reference code, closely when implementing algorithms. Trace each change to its relevant section/equation or API/source location; preserve the stated estimator assumptions and weighting. Document paper-versus-SDK differences and clearly justify any necessary approximation or integration adaptation. Source presence, activation, partial reproduction and validated full implementation are distinct claims. This user-confirmed guidance applies to existing B10 work and all later variants; [AGENTS.md](../../AGENTS.md) is the maintained project instruction.
+
+**Current work:** B10 remains partial. The [duplication comparison](B10_DUPLICATION_HISTORY.md) now completes 18 quality sequences and 18 uncapped timing processes; full unification and dual motion remain pending. Your [B10–B16 roadmap and B10 sampling branches](ROADMAP.md) are the maintained execution sequence.
 
 [B10 Gaussian GPU pairing and extended scene checks](B10_GAUSSIAN_PAIRING.md): full-resolution pictures, quality tradeoffs and18cap-verified adjacent/Gaussian timing runs; replay compaction remains next.
 
@@ -92,4 +96,6 @@ RTXPT1.9 already supplies the sub-sampling mechanism. Sparse B10/ReSTIR integrat
 
 [B10 queue-history checkpoint](B10_QUEUE_HISTORY.md) · [B11 integration requirements](B11_INTEGRATION.md) — partial development; no new speedup claim.
 
-[B10 duplication temporal history](B10_DUPLICATION_HISTORY.md): actual producer/consumer GPU validation; incomplete extended quality and no new timing result.
+[B10 duplication temporal history](B10_DUPLICATION_HISTORY.md): completed three-scene quality/convergence/timing ablation; full B10 remains partial.
+
+[Paper-native unified lighting and exact supplemental oracle](B10_UNIFIED_LIGHTING.md) — planned renderer integration, mathematical prerequisites only.

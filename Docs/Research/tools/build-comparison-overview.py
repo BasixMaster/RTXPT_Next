@@ -214,6 +214,14 @@ def build(repo):
         data['source_hashes'][history_path.relative_to(repo).as_posix()]=hashlib.sha256(history_path.read_bytes()).hexdigest()
     duplication=load(repo/'Benchmarks/development/2026-10-30-duplication-history/summary.json')
     data['duplication_temporal_history']=duplication
+    dup_root=repo/'Benchmarks/development/2026-10-30-duplication-history'
+    dq=load(dup_root/'quality-summary.json');dt=load(dup_root/'timing-summary.json')
+    data['duplication_quality']=dq;data['duplication_timing']=dt
+    for source in ['summary.json','quality-summary.json','timing-summary.json','quality.json','paired-quality.json']:
+        path=dup_root/source;data['source_hashes'][path.relative_to(repo).as_posix()]=hashlib.sha256(path.read_bytes()).hexdigest()
+    for row in dq['rows']:
+        t=next(v for v in dt['rows'] if v['scene']==row['scene'])
+        checkpoints.append(dict(row,kind='duplication_'+row['policy'],label='B10 dev · duplication '+row['policy'],gpu_busy_ms=t[row['policy']+'_gpu_busy_ms'],report='B10_DUPLICATION_HISTORY.md',evidence='Three seeds ×64frames; frame64 FLIP; three separate uncapped timings. Static development ablation, not full B10.'))
     data['checkpoint_rows']=checkpoints
     for item in checkpoints:
         if item.get('image') and not (doc/item['image']).is_file():raise ValueError('Missing checkpoint picture')
@@ -222,7 +230,7 @@ def build(repo):
         'All 20 registered variants appear below for each required scene. **The latest measured checkpoints now appear directly under B0 and B10 in these tables.** B10 Gaussian timing, Gaussian quality and replay-queue validation have separate rows because they are different acquisitions. **Not measured means unavailable, never zero.** B0 remains the unchanged RTXPT1.9 reference; its PT-only control is explicitly labelled as an override.','',
         'GPU busy is process GPU activity in milliseconds, not complete frame latency or an FPS estimate. Lower FLIP/MSE is better. Rows from different cohorts are descriptive: settings and sampling policies must be checked before computing a relative gain. Known app/NVIDIA/RTSS cap boundaries were verified for accepted current timing cohorts; unknown external limiters and background load remain limitations.','',
         '[Machine-readable overview](comparison-overview.json) · [Algorithm definitions and identities](VERSION_MAPPING.md) · [Benchmark protocol](BENCHMARK_VERSIONS.md)','']
-    md += ['## Latest B10 duplication-history checkpoint', '', 'Real map producer and previous-frame temporal consumer pass6GPU on/off gates across all three scenes (384frames). Deliberately biased opt-in. Extended quality is14of18sequences; startup failures occurred on/off, so timing has not started. Full B10 and B11 remain incomplete. [Implementation, exact count evidence and remaining gates](B10_DUPLICATION_HISTORY.md).', '']
+    md += ['## Latest B10 duplication-history checkpoint', '', 'Real map producer and previous-frame temporal consumer pass6GPU on/off gates across all three scenes (384frames). Deliberately biased opt-in. 18three-seed64-frame quality sequences and18uncapped timings are complete. Averaged-image error improves in original scenes with per-frame/perceptual tradeoffs; startup reliability remains unresolved. Full B10 and B11 remain incomplete. [Implementation, exact count evidence and remaining gates](B10_DUPLICATION_HISTORY.md).', '']
     if history:
         md += ['## Latest B10 queue-history validation — partial development', '',
                'Five static GPU cases compare272frames with actual queued output retained as history. Packed reservoir and RGB scheduling mismatches/overflow are zero; an injected early failure is rejected after a clean final frame. This is not full PT++, a quality improvement or a new timing result. B11 active CGNS remains pending. [Detailed evidence and remaining work](B10_QUEUE_HISTORY.md) · [B11 integration requirements](B11_INTEGRATION.md).', '',

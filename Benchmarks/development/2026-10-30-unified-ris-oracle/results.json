@@ -1,0 +1,123 @@
+{
+  "status": "calculated_exact_finite_domain_prerequisite",
+  "renderer_implemented": false,
+  "canonical_accepted": false,
+  "source": "PT++ supplement sections1and5; main paper section6.1",
+  "supplement_sha256": "6c43cf0d8cc01d0352a85800c00477ad3179fa9d5ab78dc217dfb23408e650b5",
+  "oracle_sha256": "f5044ebd0448949526e5f034220a079e4f2b65433e603ab1bf4576c2a6c9e2d6",
+  "rows": [
+    {
+      "candidates": 1,
+      "enumerated_streams": 3,
+      "reference": {
+        "numerator": 20,
+        "denominator": 1
+      },
+      "combined": {
+        "numerator": 20,
+        "denominator": 1
+      },
+      "nee": {
+        "numerator": 669,
+        "denominator": 76
+      },
+      "bsdf": {
+        "numerator": 851,
+        "denominator": 76
+      },
+      "missing_conversion": {
+        "numerator": 3105,
+        "denominator": 76
+      },
+      "stale_bsdf_mis": {
+        "numerator": 20,
+        "denominator": 1
+      }
+    },
+    {
+      "candidates": 2,
+      "enumerated_streams": 9,
+      "reference": {
+        "numerator": 20,
+        "denominator": 1
+      },
+      "combined": {
+        "numerator": 20,
+        "denominator": 1
+      },
+      "nee": {
+        "numerator": 10103,
+        "denominator": 870
+      },
+      "bsdf": {
+        "numerator": 7297,
+        "denominator": 870
+      },
+      "missing_conversion": {
+        "numerator": 8803,
+        "denominator": 174
+      },
+      "stale_bsdf_mis": {
+        "numerator": 754099,
+        "denominator": 33060
+      }
+    },
+    {
+      "candidates": 3,
+      "enumerated_streams": 27,
+      "reference": {
+        "numerator": 20,
+        "denominator": 1
+      },
+      "combined": {
+        "numerator": 20,
+        "denominator": 1
+      },
+      "nee": {
+        "numerator": 5841,
+        "denominator": 442
+      },
+      "bsdf": {
+        "numerator": 2999,
+        "denominator": 442
+      },
+      "missing_conversion": {
+        "numerator": 25085,
+        "denominator": 442
+      },
+      "stale_bsdf_mis": {
+        "numerator": 410029,
+        "denominator": 16796
+      }
+    },
+    {
+      "candidates": 4,
+      "enumerated_streams": 81,
+      "reference": {
+        "numerator": 20,
+        "denominator": 1
+      },
+      "combined": {
+        "numerator": 20,
+        "denominator": 1
+      },
+      "nee": {
+        "numerator": 7698,
+        "denominator": 539
+      },
+      "bsdf": {
+        "numerator": 3082,
+        "denominator": 539
+      },
+      "missing_conversion": {
+        "numerator": 32910,
+        "denominator": 539
+      },
+      "stale_bsdf_mis": {
+        "numerator": 1043737,
+        "denominator": 40964
+      }
+    }
+  ],
+  "limits": "Discrete common-measure RIS/PSS/MIS only; no GPU, shift, transport-mean or performance result"
+}

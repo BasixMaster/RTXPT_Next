@@ -17,6 +17,7 @@ struct CommandLineOptions
 {
 	std::string scene;
 	bool nonInteractive = false;
+    bool DiagnosticStartupLog = false; // Opt-in host diagnostics; exclude from benchmark cohorts.
 	bool noWindow = false;
 	bool debug = false;
 	bool gpuValidation = false;

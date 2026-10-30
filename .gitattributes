@@ -1,4 +1,8 @@
 # Frozen benchmark evidence is byte-addressed by SHA-256.
+# The supplemental finite-domain oracle is also referenced by exact source hash.
+Benchmarks/tools/unified_lighting_oracle.py -text
+Benchmarks/versions.json -text whitespace=cr-at-eol
+Benchmarks/comparison-matrix.json -text whitespace=cr-at-eol
 # Preserve exact profiler CSV and manifest bytes across platforms.
 Benchmarks/results/** -text whitespace=cr-at-eol
 # The offline documentation content manifest also hashes exact source bytes.

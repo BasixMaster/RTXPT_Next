@@ -22,6 +22,8 @@ for p in list(D.glob('*.md'))+[P/'README.md',P/'Benchmarks/README.md']:
     t=p.read_text(encoding='utf-8').replace('https://github.com/BasixMaster/RTXDI_Next','https://github.com/BasixMaster/RTXPT_Next')
     t=t.replace('The repository remains named RTXDI_Next.','The repository is named RTXPT_Next.').replace('# Basix Pathtracing · RTXDI Next','# Basix Pathtracing · RTXPT Next').replace('Basix_Pathtracing / RTXDI_Next','Basix Pathtracing / RTXPT_Next')
     p.write_text(t,encoding='utf-8')
-v=P/'Benchmarks/versions.json';data=json.loads(v.read_text(encoding='utf-8'));data['repository']='BasixMaster/RTXPT_Next';v.write_text(json.dumps(data,indent=2)+'\n',encoding='utf-8')
+v=P/'Benchmarks/versions.json';data=json.loads(v.read_text(encoding='utf-8'))
+if data.get('repository')!='BasixMaster/RTXPT_Next':
+    data['repository']='BasixMaster/RTXPT_Next';v.write_text(json.dumps(data,indent=2)+'\n',encoding='utf-8')
 (D/'branding.json').write_text(json.dumps(dict(project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',banner='assets/banner.svg',icon='assets/identity.svg',rights='Original editable SVG artwork for this project; no third-party image assets.'),indent=2)+'\n',encoding='utf-8')
 print(json.dumps(dict(project='Basix Pathtracing',title='RTXPT Next',repository='BasixMaster/RTXPT_Next')))

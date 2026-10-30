@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "title": "Basix Pathtracing · RTXPT1.9 and B0–B16 roadmap",
+  "title": "Basix Pathtracing \u00b7 RTXPT1.9 and B0\u2013B16 roadmap",
   "purpose": "Compare preserved B0 with explicitly configured native DI/GI, ReSTIR PT and planned PT++ variants; preserve legacy evidence identities.",
   "scope": "Versioned renderer configurations, primary-paper reviews, scoped native/opaque GPU evidence and explicit pending validation gates.",
   "updated_on": "2026-10-30",
   "summary": [
     "B0 preserves unchanged RTXPT1.9 defaults, original assets and runtime3.0. Canonical B1/B2 are native PT+DI/DI+GI3.0; B3/B4/B5 are native PT, +DI, +DI+GI on runtime3.1. VERSION_MAPPING.md preserves all legacy refs/data labels.",
-    "B1–B5 native cohorts remain preserved. B6/B7 now have corrected original-resolution five-seed guarded quality evidence after finite rejected-shift targets prevented invalid MIS propagation; native startup stability and new throughput remain pending.",
+    "B1\u2013B5 native cohorts remain preserved. B6/B7 now have corrected original-resolution five-seed guarded quality evidence after finite rejected-shift targets prevented invalid MIS propagation; native startup stability and new throughput remain pending.",
     "B8 NVIDIA non-directional GI reuse now has14GPU snapshot/support gates, six64-frame static sequences and18uncapped timing processes across all required scenes. Quality is mixed, including a Kitchen linear-error regression; no canonical promotion. Earlier B9/B10 pilots retain their initial-GI scope; remaining PT++ mechanisms and broader validation are pending.",
     "Fresh RTXPT1.9 PT-only raw control now covers all three required scenes with nine timings and nine PNG quality captures; original B0 defaults remain unchanged and HDR export is unsupported in that preserved binary.",
     "B9-on-B8 completed eight GPU diagnostic cases,1152quality frames across three seeds and18uncapped timings. Room footprint+roulette adds11.52%GPU busy and increases measured error; original-scene roulette-only ablations reduce GPU busy7.08%/8.12% with mixed quality. Original-scene footprint and cross-launch bitidentity remain unestablished; no promotion.",
     "User-confirmed B10fullPT++, B11CGNS active, B12Stochastic PairwiseMIS, B13ReSTIRLoD, B14ReSTIRBDPTwithLW, B15ReSTIRPG, B16Multi-Layer Reservoir Splatting. B10.75/.50/.25 use inherited RTXPT1.9 sampling rates; ReSTIR integration remains pending. Implement B10 thenB11; definitions are not activation.",
     "B10 continuation: five static spatial queue cases compare272frames with queued output restored as history, zero packed/vector scheduling mismatches and a successful early-fault negative fixture. Full PT++ and active B11 CGNS remain pending; buffer ownership and guided reciprocal topology are explicit integration gates.",
-    "B10 duplication temporal history producer/consumer active experimentally:6GPU on/off cases/384frames pass exact counts and queue-history oracles. Deliberately biased opt-in; quality14of18sequences, startup failures on/off unresolved; timing not started. Full PT++ and B11 remain pending."
+    "B10 duplication comparison completed6GPU gates,18quality sequences/1152frames and18uncapped timings. Averaged-image MSE improves in original scenes with per-frame/perceptual tradeoffs; Room/Convergence timing differences small, Kitchen cost+1.67%. Full B10 and B11 pending; source-aligned unified-lighting prerequisite has8exact tests, no renderer activation."
   ],
   "questions": [
     {
@@ -38,7 +38,7 @@
     },
     {
       "id": "Q2",
-      "title": "RTXPT1.9 baseline and canonical B0–B10 policy",
+      "title": "RTXPT1.9 baseline and canonical B0\u2013B10 policy",
       "topic": "Architecture",
       "priority": "high",
       "status": "complete",
@@ -228,8 +228,8 @@
       "checked_on": "2026-10-28",
       "access": "full",
       "quality": "Primary author source; method evidence, not independent reproduction.",
-      "limitations": "Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1–B5, scoped PT configurations B6/B7, and combined/PT++ work B8–B10. These source notes are not local paper reproduction evidence.",
-      "notes": "See papers_b.md B1; §§4–6 pp4–6; Fig1,5,6 Original analysis is in FOCUSED_A.md / FOCUSED_B.md.",
+      "limitations": "Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1\u2013B5, scoped PT configurations B6/B7, and combined/PT++ work B8\u2013B10. These source notes are not local paper reproduction evidence.",
+      "notes": "See papers_b.md B1; \u00a7\u00a74\u20136 pp4\u20136; Fig1,5,6 Original analysis is in FOCUSED_A.md / FOCUSED_B.md.",
       "rights": "Paper CC-BY-4.0; reference code separately assessed.",
       "pdf_sha256": "228e5724402032c1c4ca1685e12b94dc09f9f7d7e2845261b2242cc3ecf7192a"
     },
@@ -242,8 +242,8 @@
       "checked_on": "2026-10-28",
       "access": "full",
       "quality": "Primary author source; method evidence, not independent reproduction.",
-      "limitations": "Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1–B5, scoped PT configurations B6/B7, and combined/PT++ work B8–B10. These source notes are not local paper reproduction evidence.",
-      "notes": "See papers_b.md B2; §§4–7 pp3–7 Original analysis is in FOCUSED_A.md / FOCUSED_B.md.",
+      "limitations": "Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1\u2013B5, scoped PT configurations B6/B7, and combined/PT++ work B8\u2013B10. These source notes are not local paper reproduction evidence.",
+      "notes": "See papers_b.md B2; \u00a7\u00a74\u20137 pp3\u20137 Original analysis is in FOCUSED_A.md / FOCUSED_B.md.",
       "rights": "Paper CC-BY-4.0; no official reusable code license verified.",
       "pdf_sha256": "2a915867d44687113baef1fb9891d0915d3febad57adfab7a33214af119dd8d3"
     },
@@ -256,8 +256,8 @@
       "checked_on": "2026-10-28",
       "access": "full",
       "quality": "Primary author source; method evidence, not independent reproduction.",
-      "limitations": "Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1–B5, scoped PT configurations B6/B7, and combined/PT++ work B8–B10. These source notes are not local paper reproduction evidence.",
-      "notes": "See papers_b.md B3; §§4–9 pp5–12 Original analysis is in FOCUSED_A.md / FOCUSED_B.md.",
+      "limitations": "Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1\u2013B5, scoped PT configurations B6/B7, and combined/PT++ work B8\u2013B10. These source notes are not local paper reproduction evidence.",
+      "notes": "See papers_b.md B3; \u00a7\u00a74\u20139 pp5\u201312 Original analysis is in FOCUSED_A.md / FOCUSED_B.md.",
       "rights": "Author PDF carries ACM personal/classroom/abstracting permissions; do not redistribute full PDF. Placeholder DOI in inspected version.",
       "pdf_sha256": "eff6f643e5f6cdc02e2ca9ece1a60df65b81cd74884b8cd2156e342af9fc4d90"
     },
@@ -270,7 +270,7 @@
       "checked_on": "2026-10-28",
       "access": "full",
       "quality": "Primary author source; method evidence, not independent reproduction.",
-      "limitations": "Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1–B5, scoped PT configurations B6/B7, and combined/PT++ work B8–B10. These source notes are not local paper reproduction evidence.",
+      "limitations": "Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1\u2013B5, scoped PT configurations B6/B7, and combined/PT++ work B8\u2013B10. These source notes are not local paper reproduction evidence.",
       "notes": "See papers_b.md B1 reference code Original analysis is in FOCUSED_A.md / FOCUSED_B.md.",
       "rights": "BSD-3-Clause-style LICENSE.md verified2026-10-28, revision37d13d9b1f3e76be88aa79109d24b0fe6e4ef6a9. Retain copyright/conditions/disclaimer; nonendorsement. DLSS/RTXGI/RTXDI/NRD linked terms and assets separate."
     },
@@ -283,7 +283,7 @@
       "checked_on": "2026-10-28",
       "access": "full",
       "quality": "Primary author source; method evidence, not independent reproduction.",
-      "limitations": "Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1–B5, scoped PT configurations B6/B7, and combined/PT++ work B8–B10. These source notes are not local paper reproduction evidence.",
+      "limitations": "Paper-specific transfer/gains are unmeasured. Canonical B0 preserves RTXPT1.9; native configurations are B1\u2013B5, scoped PT configurations B6/B7, and combined/PT++ work B8\u2013B10. These source notes are not local paper reproduction evidence.",
       "notes": "See papers_b.md B3 reference code; README Rough glass bug Original analysis is in FOCUSED_A.md / FOCUSED_B.md.",
       "rights": "BSD-3-Clause-style LICENSE.md verified2026-10-28, revisionb4fc2c7f16a6af6791e1139b930adce5e19117c9. Retain copyright/conditions/disclaimer; nonendorsement. Linked SDKs/assets separate."
     },
@@ -296,8 +296,8 @@
       "checked_on": "2026-10-28",
       "access": "full",
       "quality": "Primary author/publisher source; reading extent explicit.",
-      "limitations": "Assumes affine object transforms. High-frequency temporal turbulence remains without temporal gradients; reconstruction is an additional cost. Neural reconstruction efficiency is prospective, not demonstrated as a DLSS integration. Publisher full-text HTML: Sections 4–6; direct PDF exceeded web size limit.",
-      "notes": "Resample paired-pixel paths directly in gradient space, with adaptive edge-aligned spatial reuse and positive/negative reservoirs to reduce sign noise; reconstruct using a separate primal Area ReSTIR image. Locator: Sections 4.1–4.4, 5 Results, 6 Discussion and Conclusion; Figures 9–12 Falcor, RTX 5090, Ryzen 5900X, 1920×1080 moving camera. L2 Poisson reconstruction costs 11 ms; L1 costs 300 ms. L2 cost is included in equal-time comparisons.",
+      "limitations": "Assumes affine object transforms. High-frequency temporal turbulence remains without temporal gradients; reconstruction is an additional cost. Neural reconstruction efficiency is prospective, not demonstrated as a DLSS integration. Publisher full-text HTML: Sections 4\u20136; direct PDF exceeded web size limit.",
+      "notes": "Resample paired-pixel paths directly in gradient space, with adaptive edge-aligned spatial reuse and positive/negative reservoirs to reduce sign noise; reconstruct using a separate primal Area ReSTIR image. Locator: Sections 4.1\u20134.4, 5 Results, 6 Discussion and Conclusion; Figures 9\u201312 Falcor, RTX 5090, Ryzen 5900X, 1920\u00d71080 moving camera. L2 Poisson reconstruction costs 11 ms; L1 costs 300 ms. L2 cost is included in equal-time comparisons.",
       "rights": "Paper/code rights separate; do not infer permission from availability."
     },
     {
@@ -309,8 +309,8 @@
       "checked_on": "2026-10-28",
       "access": "abstract",
       "quality": "Primary author/publisher source; reading extent explicit.",
-      "limitations": "Forward scatter requires deterministic handling of collisions and uncovered pixels; multi-splat partitions raise storage. Repository describes a Falcor 8 prototype, not an RTXDI API port. Author abstract, official repository README and indexed supplemental Section 1–3 excerpt; large main PDF could not be opened.",
-      "notes": "Forward-project exact prior-frame primary hits rather than only backprojecting current pixels. Combine splats and backup gather samples using MIS. Multiple time splats extend reuse to motion blur; depth of field is also supported. Locator: Abstract; supplemental Sections 1–3; repository Temporal Resampling Options Author abstract reports better resampling quality than Area ReSTIR at up to 10% lower cost; this is not a measured RTXDI_Next result.",
+      "limitations": "Forward scatter requires deterministic handling of collisions and uncovered pixels; multi-splat partitions raise storage. Repository describes a Falcor 8 prototype, not an RTXDI API port. Author abstract, official repository README and indexed supplemental Section 1\u20133 excerpt; large main PDF could not be opened.",
+      "notes": "Forward-project exact prior-frame primary hits rather than only backprojecting current pixels. Combine splats and backup gather samples using MIS. Multiple time splats extend reuse to motion blur; depth of field is also supported. Locator: Abstract; supplemental Sections 1\u20133; repository Temporal Resampling Options Author abstract reports better resampling quality than Area ReSTIR at up to 10% lower cost; this is not a measured RTXDI_Next result.",
       "rights": "Paper/code rights separate; do not infer permission from availability."
     },
     {
@@ -348,7 +348,7 @@
       "checked_on": "2026-10-28",
       "access": "abstract",
       "quality": "Primary author/publisher source; reading extent explicit.",
-      "limitations": "Aperture support and shift Jacobians matter; primary-hit reconnection can leave the aperture. General filters alter overlap/MIS weights. The author repository publishes only the DI implementation, modifies scene-history storage outside its module, and warns module-only copying produces bias/errors; noisy camera-domain G-buffers challenge denoisers. Author project abstract and indexed paper Sections 4.1–4.6 excerpts; complete large PDF unavailable in web extraction.",
+      "limitations": "Aperture support and shift Jacobians matter; primary-hit reconnection can leave the aperture. General filters alter overlap/MIS weights. The author repository publishes only the DI implementation, modifies scene-history storage outside its module, and warns module-only copying produces bias/errors; noisy camera-domain G-buffers challenge denoisers. Author project abstract and indexed paper Sections 4.1\u20134.6 excerpts; complete large PDF unavailable in web extraction.",
       "notes": "Include film and lens coordinates in the reservoir domain. Fractional-pixel temporal tracking and camera-aware shifts improve reuse of subpixel detail and defocus. The robust option can borrow shifted samples from four overlapping prior reservoirs. Locator: Sections 4.1 Area Reservoirs, 4.3 Temporal Reuse, 4.4 General Pixel Filters, 4.6 Depth of Field Supports antialiasing and depth of field; basis for later splatting and gradient-domain work.",
       "rights": "Paper/code rights separate; do not infer permission from availability."
     },
@@ -362,7 +362,7 @@
       "access": "full",
       "quality": "Primary author/publisher source; reading extent explicit.",
       "limitations": "Non-negligible runtime; can improve perceptual correlation without lowering MSE. It is not a discovery mechanism for missing important transport, and even unlimited mutations need not remove all correlations. Publisher full-text method Section 3 and limitations Section 7; indexed paper excerpts.",
-      "notes": "Mutate selected reservoir samples using Metropolis–Hastings, usually after temporal reuse; update the contribution weight by the old/new target-function ratio before further resampling. Locator: Section 3 Method, Equation 16, Algorithm 3, Section 7 Limitations; Figures 12–13 Demonstrated in DI and PT; mutations address correlation and duplicate-sample impoverishment.",
+      "notes": "Mutate selected reservoir samples using Metropolis\u2013Hastings, usually after temporal reuse; update the contribution weight by the old/new target-function ratio before further resampling. Locator: Section 3 Method, Equation 16, Algorithm 3, Section 7 Limitations; Figures 12\u201313 Demonstrated in DI and PT; mutations address correlation and duplicate-sample impoverishment.",
       "rights": "Paper/code rights separate; do not infer permission from availability."
     },
     {
@@ -388,7 +388,7 @@
       "access": "abstract",
       "quality": "Primary author/publisher source; reading extent explicit.",
       "limitations": "A practical geometry-optimization variant checks visibility only in current geometry and introduces bias; learning rate limits its effect. Author project results and indexed paper multi-view Algorithm 8/computational-overhead excerpt.",
-      "notes": "Reuse sampling work across inverse-rendering optimization iterations/views, including gradient estimates and preserved occluded reservoirs. Locator: Project results; paper multi-view estimator and Computational overhead discussion Project reports up to 100× lower gradient relative error and up to 20× lower reconstruction error in its inverse-rendering comparisons, not forward rendering FPS.",
+      "notes": "Reuse sampling work across inverse-rendering optimization iterations/views, including gradient estimates and preserved occluded reservoirs. Locator: Project results; paper multi-view estimator and Computational overhead discussion Project reports up to 100\u00d7 lower gradient relative error and up to 20\u00d7 lower reconstruction error in its inverse-rendering comparisons, not forward rendering FPS.",
       "rights": "Paper/code rights separate; do not infer permission from availability."
     },
     {
@@ -400,8 +400,8 @@
       "checked_on": "2026-10-28",
       "access": "abstract",
       "quality": "Primary author/publisher source; reading extent explicit.",
-      "limitations": "Correlation alone does not grant convergence. Correct support, resampling MIS partition and mapping weights are obligations; an arbitrary heuristic can converge to a wrong answer. Indexed primary PDF abstract/introduction and Sections 3.2, 4.1–4.2; supplement contents, not complete proof review.",
-      "notes": "Formalize resampling of correlated samples with tractable unbiased contribution weights and domain-changing shift maps/Jacobians; under conditions derive convergence and variance guarantees. Locator: Sections 3.2 and 4, Equation 4 partition of unity and Equation 8 unbiased contribution weights; supplement S.1–S.5 Establishes the ReSTIR PT framework and its distinction from classical independent-sample RIS.",
+      "limitations": "Correlation alone does not grant convergence. Correct support, resampling MIS partition and mapping weights are obligations; an arbitrary heuristic can converge to a wrong answer. Indexed primary PDF abstract/introduction and Sections 3.2, 4.1\u20134.2; supplement contents, not complete proof review.",
+      "notes": "Formalize resampling of correlated samples with tractable unbiased contribution weights and domain-changing shift maps/Jacobians; under conditions derive convergence and variance guarantees. Locator: Sections 3.2 and 4, Equation 4 partition of unity and Equation 8 unbiased contribution weights; supplement S.1\u2013S.5 Establishes the ReSTIR PT framework and its distinction from classical independent-sample RIS.",
       "rights": "Paper/code rights separate; do not infer permission from availability."
     },
     {
@@ -426,8 +426,8 @@
       "checked_on": "2026-10-28",
       "access": "abstract",
       "quality": "Primary author/publisher source; reading extent explicit.",
-      "limitations": "These are historical changes underlying productization, not fresh gains to add on top of current RTXDI. GPU timing must include all new passes and synchronization. Publisher abstract and indexed primary paper Figure 2 / Sections 5–7 overview.",
-      "notes": "Rework candidate presampling and memory coherence, ray budgets, synchronization, spatial-neighbor choices and separation of shading from reuse for production. Locator: Abstract; Figure 2; Sections 5, 6.1–6.3 and 7 Author abstract reports up to 7× lower lighting cost over the earlier research implementation.",
+      "limitations": "These are historical changes underlying productization, not fresh gains to add on top of current RTXDI. GPU timing must include all new passes and synchronization. Publisher abstract and indexed primary paper Figure 2 / Sections 5\u20137 overview.",
+      "notes": "Rework candidate presampling and memory coherence, ray budgets, synchronization, spatial-neighbor choices and separation of shading from reuse for production. Locator: Abstract; Figure 2; Sections 5, 6.1\u20136.3 and 7 Author abstract reports up to 7\u00d7 lower lighting cost over the earlier research implementation.",
       "rights": "Paper/code rights separate; do not infer permission from availability."
     },
     {
@@ -452,8 +452,8 @@
       "checked_on": "2026-10-28",
       "access": "abstract",
       "quality": "Primary author/publisher source; reading extent explicit.",
-      "limitations": "Energy loss in the biased form and temporal sample dominance are explicit tradeoffs. Old speedup ratios are not expected incremental gains over RTXDI 3.1. Author abstract and indexed primary paper Sections 5–6 evaluation/temporal weighting excerpt.",
-      "notes": "Select weighted reservoir light samples and reuse across pixels/frames to spend visibility/shading on high-contribution candidates. Locator: Abstract; Sections 5–6 reservoir storage, temporal weighting and results The paper distinguishes unbiased and lower-noise biased versions; original results used RTX 2080 Ti/Titan RTX and omit shared G-buffer rasterization costs.",
+      "limitations": "Energy loss in the biased form and temporal sample dominance are explicit tradeoffs. Old speedup ratios are not expected incremental gains over RTXDI 3.1. Author abstract and indexed primary paper Sections 5\u20136 evaluation/temporal weighting excerpt.",
+      "notes": "Select weighted reservoir light samples and reuse across pixels/frames to spend visibility/shading on high-contribution candidates. Locator: Abstract; Sections 5\u20136 reservoir storage, temporal weighting and results The paper distinguishes unbiased and lower-noise biased versions; original results used RTX 2080 Ti/Titan RTX and omit shared G-buffer rasterization costs.",
       "rights": "Paper/code rights separate; do not infer permission from availability."
     },
     {
@@ -707,7 +707,7 @@
       "evidence": [
         {
           "source_id": "PTPP",
-          "locator": "§5 pp8–10; Fig5; §7.4 p14",
+          "locator": "\u00a75 pp8\u201310; Fig5; \u00a77.4 p14",
           "relation": "supports",
           "note": "Direct primary-source support; implementation suggestion is separate analysis."
         }
@@ -726,7 +726,7 @@
       "context": "Primary PDF inspected. Final baseline B0 is untouched RTXPT1.9 with scenes. RTXDI3.1 shader facts refer to a separate SDK reference only, not B0. Future B1 adopts runtime3.1; B2+ optimization; no renderer implementation in current scope.",
       "strengths": "Methods and limits stated in primary source.",
       "limitations": "Not a local benchmark or validation of combined techniques.",
-      "implications": "Do not apply 2–3x claim to RTXPT1.9. Audit existing optimizations and measure marginal gains.",
+      "implications": "Do not apply 2\u20133x claim to RTXPT1.9. Audit existing optimizations and measure marginal gains.",
       "tags": [
         "ReSTIR",
         "RTXPT",
@@ -735,7 +735,7 @@
       "evidence": [
         {
           "source_id": "PTPP",
-          "locator": "§7 pp11–12, Table1",
+          "locator": "\u00a77 pp11\u201312, Table1",
           "relation": "supports",
           "note": "Direct primary-source support; implementation suggestion is separate analysis."
         }
@@ -748,7 +748,7 @@
         "Q3"
       ],
       "topic": "PTPP",
-      "claim": "Reciprocal neighbor texture pairing reuses the two shifts for A←B and B←A, with extra staging overhead.",
+      "claim": "Reciprocal neighbor texture pairing reuses the two shifts for A\u2190B and B\u2190A, with extra staging overhead.",
       "evidence_type": "reported",
       "confidence": "high",
       "context": "Primary PDF inspected. Final baseline B0 is untouched RTXPT1.9 with scenes. RTXDI3.1 shader facts refer to a separate SDK reference only, not B0. Future B1 adopts runtime3.1; B2+ optimization; no renderer implementation in current scope.",
@@ -763,7 +763,7 @@
       "evidence": [
         {
           "source_id": "PTPP",
-          "locator": "§3 pp4–6; §7.2 p13",
+          "locator": "\u00a73 pp4\u20136; \u00a77.2 p13",
           "relation": "supports",
           "note": "Direct primary-source support; implementation suggestion is separate analysis."
         }
@@ -791,7 +791,7 @@
       "evidence": [
         {
           "source_id": "CGNS",
-          "locator": "§4.3 p7; §5 p8",
+          "locator": "\u00a74.3 p7; \u00a75 p8",
           "relation": "supports",
           "note": "Direct primary-source support; implementation suggestion is separate analysis."
         }
@@ -804,7 +804,7 @@
         "Q3"
       ],
       "topic": "CGNS",
-      "claim": "Fixed-radius guided selection can increase spatial covariance; varying radius moves the error/correlation operating point. Fast mode 1.3–4.4% frame overhead in tested configuration.",
+      "claim": "Fixed-radius guided selection can increase spatial covariance; varying radius moves the error/correlation operating point. Fast mode 1.3\u20134.4% frame overhead in tested configuration.",
       "evidence_type": "reported",
       "confidence": "high",
       "context": "Primary PDF inspected. Final baseline B0 is untouched RTXPT1.9 with scenes. RTXDI3.1 shader facts refer to a separate SDK reference only, not B0. Future B1 adopts runtime3.1; B2+ optimization; no renderer implementation in current scope.",
@@ -819,7 +819,7 @@
       "evidence": [
         {
           "source_id": "CGNS",
-          "locator": "§6 p8; §7 pp9–13; Tables1–2",
+          "locator": "\u00a76 p8; \u00a77 pp9\u201313; Tables1\u20132",
           "relation": "supports",
           "note": "Direct primary-source support; implementation suggestion is separate analysis."
         }
@@ -847,7 +847,7 @@
       "evidence": [
         {
           "source_id": "CGNS",
-          "locator": "§8 p14",
+          "locator": "\u00a78 p14",
           "relation": "supports",
           "note": "Direct primary-source support; implementation suggestion is separate analysis."
         }
@@ -875,7 +875,7 @@
       "evidence": [
         {
           "source_id": "SPMIS",
-          "locator": "§§3–4 pp4–5, Eqs15–19; §5 pp6–7",
+          "locator": "\u00a7\u00a73\u20134 pp4\u20135, Eqs15\u201319; \u00a75 pp6\u20137",
           "relation": "supports",
           "note": "Direct primary-source support; implementation suggestion is separate analysis."
         }
@@ -903,7 +903,7 @@
       "evidence": [
         {
           "source_id": "SPMIS",
-          "locator": "§4.3 pp5–6, Fig2",
+          "locator": "\u00a74.3 pp5\u20136, Fig2",
           "relation": "supports",
           "note": "Direct primary-source support; implementation suggestion is separate analysis."
         }
@@ -916,7 +916,7 @@
         "Q3"
       ],
       "topic": "SPMIS",
-      "claim": "Prototype uses 8×8 cells, up to 64 candidates, three evaluated neighbors and one canonical evaluation; RTX4090/1080p; source importance is imperfect and boiling can persist.",
+      "claim": "Prototype uses 8\u00d78 cells, up to 64 candidates, three evaluated neighbors and one canonical evaluation; RTX4090/1080p; source importance is imperfect and boiling can persist.",
       "evidence_type": "reported",
       "confidence": "high",
       "context": "Primary PDF inspected. Final baseline B0 is untouched RTXPT1.9 with scenes. RTXDI3.1 shader facts refer to a separate SDK reference only, not B0. Future B1 adopts runtime3.1; B2+ optimization; no renderer implementation in current scope.",
@@ -931,7 +931,7 @@
       "evidence": [
         {
           "source_id": "SPMIS",
-          "locator": "§5 pp6–7; §6 pp7–9, Table2; §7 p10",
+          "locator": "\u00a75 pp6\u20137; \u00a76 pp7\u20139, Table2; \u00a77 p10",
           "relation": "supports",
           "note": "Direct primary-source support; implementation suggestion is separate analysis."
         }
@@ -959,7 +959,7 @@
       "evidence": [
         {
           "source_id": "PG",
-          "locator": "§4 pp6–8, Fig3",
+          "locator": "\u00a74 pp6\u20138, Fig3",
           "relation": "supports",
           "note": "Direct primary-source support; implementation suggestion is separate analysis."
         }
@@ -972,7 +972,7 @@
         "Q3"
       ],
       "topic": "PG",
-      "claim": "Reported path records require approximately 102.8MB per bounce at 1080p; each valid guiding cell costs 152 bytes, totalling 5–76MB in two examples.",
+      "claim": "Reported path records require approximately 102.8MB per bounce at 1080p; each valid guiding cell costs 152 bytes, totalling 5\u201376MB in two examples.",
       "evidence_type": "reported",
       "confidence": "high",
       "context": "Primary PDF inspected. Final baseline B0 is untouched RTXPT1.9 with scenes. RTXDI3.1 shader facts refer to a separate SDK reference only, not B0. Future B1 adopts runtime3.1; B2+ optimization; no renderer implementation in current scope.",
@@ -987,7 +987,7 @@
       "evidence": [
         {
           "source_id": "PG",
-          "locator": "§5 p8",
+          "locator": "\u00a75 p8",
           "relation": "supports",
           "note": "Direct primary-source support; implementation suggestion is separate analysis."
         }
@@ -1015,7 +1015,7 @@
       "evidence": [
         {
           "source_id": "PG",
-          "locator": "§4.2 pp6–7; §5 p8; §6 p8",
+          "locator": "\u00a74.2 pp6\u20137; \u00a75 p8; \u00a76 p8",
           "relation": "supports",
           "note": "Direct primary-source support; implementation suggestion is separate analysis."
         }
@@ -1042,7 +1042,7 @@
       "evidence": [
         {
           "source_id": "B1",
-          "locator": "§§4.4,6 pp5–6",
+          "locator": "\u00a7\u00a74.4,6 pp5\u20136",
           "relation": "context",
           "note": "Basis for integration proposal, not evidence of implemented behavior."
         }
@@ -1069,7 +1069,7 @@
       "evidence": [
         {
           "source_id": "B2",
-          "locator": "§§4–7 pp3–7",
+          "locator": "\u00a7\u00a74\u20137 pp3\u20137",
           "relation": "context",
           "note": "Basis for integration proposal, not evidence of implemented behavior."
         }
@@ -1096,7 +1096,7 @@
       "evidence": [
         {
           "source_id": "B3",
-          "locator": "§§7–9 pp10–12",
+          "locator": "\u00a7\u00a77\u20139 pp10\u201312",
           "relation": "context",
           "note": "Basis for integration proposal, not evidence of implemented behavior."
         }
@@ -1112,7 +1112,7 @@
       "claim": "Resample paired-pixel paths directly in gradient space, with adaptive edge-aligned spatial reuse and positive/negative reservoirs to reduce sign noise; reconstruct using a separate primal Area ReSTIR image.",
       "evidence_type": "reported",
       "confidence": "high",
-      "context": "Publisher full-text HTML: Sections 4–6; direct PDF exceeded web size limit. Falcor, RTX 5090, Ryzen 5900X, 1920×1080 moving camera. L2 Poisson reconstruction costs 11 ms; L1 costs 300 ms. L2 cost is included in equal-time comparisons.",
+      "context": "Publisher full-text HTML: Sections 4\u20136; direct PDF exceeded web size limit. Falcor, RTX 5090, Ryzen 5900X, 1920\u00d71080 moving camera. L2 Poisson reconstruction costs 11 ms; L1 costs 300 ms. L2 cost is included in equal-time comparisons.",
       "strengths": "Primary-source mechanism evidence with explicit scope.",
       "limitations": "Assumes affine object transforms. High-frequency temporal turbulence remains without temporal gradients; reconstruction is an additional cost. Neural reconstruction efficiency is prospective, not demonstrated as a DLSS integration.",
       "implications": "RTXPT research branch: separate gradient reservoirs, primal pass and reconstruction interface. RTXDI core can supply path shifts but cannot obtain this by merely changing a spatial-neighbor picker. Decision: Promising detail preservation, but a separate estimator/reconstruction architecture follows the seven requested sampling priorities.",
@@ -1123,7 +1123,7 @@
       "evidence": [
         {
           "source_id": "P06",
-          "locator": "Sections 4.1–4.4, 5 Results, 6 Discussion and Conclusion; Figures 9–12",
+          "locator": "Sections 4.1\u20134.4, 5 Results, 6 Discussion and Conclusion; Figures 9\u201312",
           "relation": "supports",
           "note": "Reading extent and performance context are source-specific."
         }
@@ -1139,7 +1139,7 @@
       "claim": "Forward-project exact prior-frame primary hits rather than only backprojecting current pixels. Combine splats and backup gather samples using MIS. Multiple time splats extend reuse to motion blur; depth of field is also supported.",
       "evidence_type": "reported",
       "confidence": "medium",
-      "context": "Author abstract, official repository README and indexed supplemental Section 1–3 excerpt; large main PDF could not be opened. Author abstract reports better resampling quality than Area ReSTIR at up to 10% lower cost; this is not a measured RTXDI_Next result.",
+      "context": "Author abstract, official repository README and indexed supplemental Section 1\u20133 excerpt; large main PDF could not be opened. Author abstract reports better resampling quality than Area ReSTIR at up to 10% lower cost; this is not a measured RTXDI_Next result.",
       "strengths": "Primary-source mechanism evidence with explicit scope.",
       "limitations": "Forward scatter requires deterministic handling of collisions and uncovered pixels; multi-splat partitions raise storage. Repository describes a Falcor 8 prototype, not an RTXDI API port.",
       "implications": "RTXPT temporal candidate-production pass plus RTXDI PT-compatible sample/weight import. Foundational dependency for the 2026 multi-layer splatting branch. Decision: Establish a single-layer splat plus backup baseline before adding hidden-surface layers.",
@@ -1150,7 +1150,7 @@
       "evidence": [
         {
           "source_id": "P08",
-          "locator": "Abstract; supplemental Sections 1–3; repository Temporal Resampling Options",
+          "locator": "Abstract; supplemental Sections 1\u20133; repository Temporal Resampling Options",
           "relation": "supports",
           "note": "Reading extent and performance context are source-specific."
         }
@@ -1220,7 +1220,7 @@
       "claim": "Include film and lens coordinates in the reservoir domain. Fractional-pixel temporal tracking and camera-aware shifts improve reuse of subpixel detail and defocus. The robust option can borrow shifted samples from four overlapping prior reservoirs.",
       "evidence_type": "reported",
       "confidence": "medium",
-      "context": "Author project abstract and indexed paper Sections 4.1–4.6 excerpts; complete large PDF unavailable in web extraction. Supports antialiasing and depth of field; basis for later splatting and gradient-domain work.",
+      "context": "Author project abstract and indexed paper Sections 4.1\u20134.6 excerpts; complete large PDF unavailable in web extraction. Supports antialiasing and depth of field; basis for later splatting and gradient-domain work.",
       "strengths": "Primary-source mechanism evidence with explicit scope.",
       "limitations": "Aperture support and shift Jacobians matter; primary-hit reconnection can leave the aperture. General filters alter overlap/MIS weights. The author repository publishes only the DI implementation, modifies scene-history storage outside its module, and warns module-only copying produces bias/errors; noisy camera-domain G-buffers challenge denoisers.",
       "implications": "Extend RTXPT camera/sample domain and RTXDI PT history metadata before camera effects or splatting. Audit what current RTXDI already implements first. Decision: Use as domain-correctness reference and comparison baseline for the requested 2026 temporal techniques.",
@@ -1244,7 +1244,7 @@
         "Q4"
       ],
       "topic": "Supporting papers",
-      "claim": "Mutate selected reservoir samples using Metropolis–Hastings, usually after temporal reuse; update the contribution weight by the old/new target-function ratio before further resampling.",
+      "claim": "Mutate selected reservoir samples using Metropolis\u2013Hastings, usually after temporal reuse; update the contribution weight by the old/new target-function ratio before further resampling.",
       "evidence_type": "reported",
       "confidence": "high",
       "context": "Publisher full-text method Section 3 and limitations Section 7; indexed paper excerpts. Demonstrated in DI and PT; mutations address correlation and duplicate-sample impoverishment.",
@@ -1258,7 +1258,7 @@
       "evidence": [
         {
           "source_id": "P13",
-          "locator": "Section 3 Method, Equation 16, Algorithm 3, Section 7 Limitations; Figures 12–13",
+          "locator": "Section 3 Method, Equation 16, Algorithm 3, Section 7 Limitations; Figures 12\u201313",
           "relation": "supports",
           "note": "Reading extent and performance context are source-specific."
         }
@@ -1301,7 +1301,7 @@
       "claim": "Reuse sampling work across inverse-rendering optimization iterations/views, including gradient estimates and preserved occluded reservoirs.",
       "evidence_type": "reported",
       "confidence": "medium",
-      "context": "Author project results and indexed paper multi-view Algorithm 8/computational-overhead excerpt. Project reports up to 100× lower gradient relative error and up to 20× lower reconstruction error in its inverse-rendering comparisons, not forward rendering FPS.",
+      "context": "Author project results and indexed paper multi-view Algorithm 8/computational-overhead excerpt. Project reports up to 100\u00d7 lower gradient relative error and up to 20\u00d7 lower reconstruction error in its inverse-rendering comparisons, not forward rendering FPS.",
       "strengths": "Primary-source mechanism evidence with explicit scope.",
       "limitations": "A practical geometry-optimization variant checks visibility only in current geometry and introduces bias; learning rate limits its effect.",
       "implications": "Future material/shape fitting tool around RTXPT, not the forward-rendering fork core. Decision: Different workload and validation objective.",
@@ -1328,7 +1328,7 @@
       "claim": "Formalize resampling of correlated samples with tractable unbiased contribution weights and domain-changing shift maps/Jacobians; under conditions derive convergence and variance guarantees.",
       "evidence_type": "reported",
       "confidence": "medium",
-      "context": "Indexed primary PDF abstract/introduction and Sections 3.2, 4.1–4.2; supplement contents, not complete proof review. Establishes the ReSTIR PT framework and its distinction from classical independent-sample RIS.",
+      "context": "Indexed primary PDF abstract/introduction and Sections 3.2, 4.1\u20134.2; supplement contents, not complete proof review. Establishes the ReSTIR PT framework and its distinction from classical independent-sample RIS.",
       "strengths": "Primary-source mechanism evidence with explicit scope.",
       "limitations": "Correlation alone does not grant convergence. Correct support, resampling MIS partition and mapping weights are obligations; an arbitrary heuristic can converge to a wrong answer.",
       "implications": "Mandatory estimator contract for every RTXDI PT extension and shared reservoir schema. Decision: Correctness prerequisite to combining neighbor selection, stochastic MIS, LoD and PG.",
@@ -1339,7 +1339,7 @@
       "evidence": [
         {
           "source_id": "P16",
-          "locator": "Sections 3.2 and 4, Equation 4 partition of unity and Equation 8 unbiased contribution weights; supplement S.1–S.5",
+          "locator": "Sections 3.2 and 4, Equation 4 partition of unity and Equation 8 unbiased contribution weights; supplement S.1\u2013S.5",
           "relation": "supports",
           "note": "Reading extent and performance context are source-specific."
         }
@@ -1382,7 +1382,7 @@
       "claim": "Rework candidate presampling and memory coherence, ray budgets, synchronization, spatial-neighbor choices and separation of shading from reuse for production.",
       "evidence_type": "reported",
       "confidence": "medium",
-      "context": "Publisher abstract and indexed primary paper Figure 2 / Sections 5–7 overview. Author abstract reports up to 7× lower lighting cost over the earlier research implementation.",
+      "context": "Publisher abstract and indexed primary paper Figure 2 / Sections 5\u20137 overview. Author abstract reports up to 7\u00d7 lower lighting cost over the earlier research implementation.",
       "strengths": "Primary-source mechanism evidence with explicit scope.",
       "limitations": "These are historical changes underlying productization, not fresh gains to add on top of current RTXDI. GPU timing must include all new passes and synchronization.",
       "implications": "Mandatory design/performance reference for the fork and integration with RTXPT dispatch scheduling. Decision: Audit already-shipped work before porting research pseudocode or increasing reservoir traffic.",
@@ -1393,7 +1393,7 @@
       "evidence": [
         {
           "source_id": "P18",
-          "locator": "Abstract; Figure 2; Sections 5, 6.1–6.3 and 7",
+          "locator": "Abstract; Figure 2; Sections 5, 6.1\u20136.3 and 7",
           "relation": "supports",
           "note": "Reading extent and performance context are source-specific."
         }
@@ -1436,7 +1436,7 @@
       "claim": "Select weighted reservoir light samples and reuse across pixels/frames to spend visibility/shading on high-contribution candidates.",
       "evidence_type": "reported",
       "confidence": "medium",
-      "context": "Author abstract and indexed primary paper Sections 5–6 evaluation/temporal weighting excerpt. The paper distinguishes unbiased and lower-noise biased versions; original results used RTX 2080 Ti/Titan RTX and omit shared G-buffer rasterization costs.",
+      "context": "Author abstract and indexed primary paper Sections 5\u20136 evaluation/temporal weighting excerpt. The paper distinguishes unbiased and lower-noise biased versions; original results used RTX 2080 Ti/Titan RTX and omit shared G-buffer rasterization costs.",
       "strengths": "Primary-source mechanism evidence with explicit scope.",
       "limitations": "Energy loss in the biased form and temporal sample dominance are explicit tradeoffs. Old speedup ratios are not expected incremental gains over RTXDI 3.1.",
       "implications": "Foundational DI correctness and baseline reference; RTXDI already supplies its production lineage. Decision: Keep DI as a separately measurable baseline while modifying PT.",
@@ -1447,7 +1447,7 @@
       "evidence": [
         {
           "source_id": "P20",
-          "locator": "Abstract; Sections 5–6 reservoir storage, temporal weighting and results",
+          "locator": "Abstract; Sections 5\u20136 reservoir storage, temporal weighting and results",
           "relation": "supports",
           "note": "Reading extent and performance context are source-specific."
         }
@@ -1508,13 +1508,13 @@
       "evidence": [
         {
           "source_id": "CGNS",
-          "locator": "footnote3p8; AppendixAp16; §7p9",
+          "locator": "footnote3p8; AppendixAp16; \u00a77p9",
           "relation": "supports",
           "note": "SMAPE/covariance equations and protocol."
         },
         {
           "source_id": "PTPP",
-          "locator": "§7pp11–12; §7.4pp14–16; Fig15p17",
+          "locator": "\u00a77pp11\u201312; \u00a77.4pp14\u201316; Fig15p17",
           "relation": "supports",
           "note": "HDR-FLIP, MSE and independent-rerun evaluation."
         },
@@ -1549,7 +1549,7 @@
       "evidence": [
         {
           "source_id": "NV-PT-PERF",
-          "locator": "§1 Required performance data and Starting ray-budget model; §§11–13",
+          "locator": "\u00a71 Required performance data and Starting ray-budget model; \u00a7\u00a711\u201313",
           "relation": "supports",
           "note": "Directly inspected Markdown sections; project action is separate inference."
         }
@@ -1677,7 +1677,7 @@
         "Q3"
       ],
       "topic": "Implementation correctness",
-      "claim": "Kitchen already differs from the native reference in initial-only DI: B4 −1.159% ±0.120% sample SE and B7 −1.004% ±0.316%. Temporal/spatial reuse is not the sole explanation. Reuse lowers perceptual error, while preferred mode depends on scene and HDR/LDR metric.",
+      "claim": "Kitchen already differs from the native reference in initial-only DI: B4 \u22121.159% \u00b10.120% sample SE and B7 \u22121.004% \u00b10.316%. Temporal/spatial reuse is not the sole explanation. Reuse lowers perceptual error, while preferred mode depends on scene and HDR/LDR metric.",
       "evidence_type": "measured",
       "confidence": "medium",
       "context": "B4 native PT+DI3.1 and guarded B7 ReSTIR PT+DI3.1, original720p scenes,14/2 bounce limits,MIP0,strictDI,five seeds. PT reuse fixed within B7.",
@@ -1943,7 +1943,7 @@
         "Q3"
       ],
       "topic": "GI/PT integration",
-      "claim": "Measured GPU busy changes versus fresh matched B8 are+11.52%Room footprint/roulette,−7.08%Convergence roulette-only and−8.12%Kitchen roulette-only. Mean frame MSE point estimates rise;64-frame-average error is higher in Room/Convergence and lower in Kitchen with large uncertainty.",
+      "claim": "Measured GPU busy changes versus fresh matched B8 are+11.52%Room footprint/roulette,\u22127.08%Convergence roulette-only and\u22128.12%Kitchen roulette-only. Mean frame MSE point estimates rise;64-frame-average error is higher in Room/Convergence and lower in Kitchen with large uncertainty.",
       "evidence_type": "measured",
       "confidence": "high",
       "context": "B8 NVIDIA GI reuse active in both; original materials/cameras and scene-specific full-prefix replay guard;1152quality frames and separate18timings.",
@@ -2048,8 +2048,8 @@
   "scope_changes": [
     "Final user-selected scope: RTXPT1.9 renderer+scenes baseline; future B1=RTXDI3.1 adoption; B2+=optimizations. User requested baseline/roadmap first and image-quality metrics.",
     "Added two NVIDIA engineering guides outside the20-paper Wyman ranking; no new renderer feature activation or source-reported speedup treated as a local result.",
-    "2026-10-29 canonical update supersedes earlier project numbering: B0unchanged reference; B1–B5native configurations; B6/B7PT; B8combined sharing pending; B9/B10PT++ planned. Source-record IDs B1/B2/B3 refer to paper entries and are preserved, not renamed as project versions.",
-    "2026-10-29: Added unified33row B0–B10 performance/quality/image overview and fresh27quality/27timing nativeB2/B3/B5 cohort. Original-scene PT implementation remains an explicitly guarded development path, separate from accepted native measurements.",
+    "2026-10-29 canonical update supersedes earlier project numbering: B0unchanged reference; B1\u2013B5native configurations; B6/B7PT; B8combined sharing pending; B9/B10PT++ planned. Source-record IDs B1/B2/B3 refer to paper entries and are preserved, not renamed as project versions.",
+    "2026-10-29: Added unified33row B0\u2013B10 performance/quality/image overview and fresh27quality/27timing nativeB2/B3/B5 cohort. Original-scene PT implementation remains an explicitly guarded development path, separate from accepted native measurements.",
     "2026-10-29: Original-scene guarded rendering and path-local fixes verified; quality discrepancy retained, exact-primary experiment rejected.",
     "2026-10-29: Finite rejected-shift targets verified with original-resolution5seed quality, matched environment filtering and native-DI controls; startup failures and remaining limits retained.",
     "2026-10-29: Added a separate40capture material-packing precision ablation; legacy defaults, canonical cohorts and timing values remain preserved.",

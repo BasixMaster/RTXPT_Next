@@ -1,0 +1,17 @@
+{
+  "status": "development_duplication_temporal_history",
+  "canonical_accepted": false,
+  "diagnostics": "diagnostics.json",
+  "quality": "incomplete14of18sequences",
+  "timing": "not_started_due_to_quality_startup_gate",
+  "scope": "Real duplication count producer/previous-frame temporal consumer; deliberately biased opt-in. Full B10 and active B11 remain incomplete.",
+  "eligible_quality_sequences": 14,
+  "quality_frames_per_sequence": 64,
+  "missing_quality_cases": [
+    "convergence-off-s4093",
+    "convergence-on-s4093",
+    "kitchen-off-s4093",
+    "kitchen-on-s4093"
+  ],
+  "diagnostic_frames": 384
+}

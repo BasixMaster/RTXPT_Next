@@ -121,7 +121,7 @@
       "id": "B10",
       "status": "partial",
       "algorithm": "B8 + full PT++",
-      "scope": "Real deliberately biased duplication temporal history:6GPU cases/384frames pass; quality14of18sequences, startup failure gate prevents timing. Full PT++ incomplete.",
+      "scope": "Duplication comparison complete:6GPU cases/384diagnostic frames,18quality sequences/1152frames and18uncapped timings. Tradeoffs, no promotion. Full PT++ remains partial.",
       "evidence": "Benchmarks/development/2026-10-30-duplication-history"
     },
     {
@@ -458,6 +458,13 @@
       "status": "partial",
       "evidence": "Benchmarks/development/2026-10-30-duplication-history",
       "scope": "Real deliberately biased duplication temporal history:6GPU cases/384frames pass; quality14of18sequences, startup failure gate prevents timing. Full PT++ incomplete."
+    },
+    {
+      "date": "2026-10-30",
+      "variant": "B10",
+      "status": "partial",
+      "scope": "Duplication comparison complete:6GPU cases/384diagnostic frames,18quality sequences/1152frames and18uncapped timings. Tradeoffs, no promotion. Full PT++ remains partial.",
+      "evidence": "Benchmarks/development/2026-10-30-duplication-history"
     }
   ]
 }

@@ -1,0 +1,402 @@
+{
+  "quality_sha256": "38baf86c8628b9fd65726f846aebf4f31a9c208f5b141caf58cfc8a2976092e8",
+  "scope": "Three seed-paired separate-process summaries; not identical paths; small-sample exploratory SE.",
+  "scenes": {
+    "room": {
+      "mean_frame_linear_mse": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          0.004659181841925794,
+          0.0061313433369533845,
+          0.007705674703606186
+        ],
+        "candidate_values": [
+          0.004789183998738391,
+          0.006278021964580738,
+          0.007764098004596149
+        ],
+        "differences": [
+          0.00013000215681259735,
+          0.00014667862762735365,
+          5.8423300989962276e-05
+        ],
+        "mean_difference": 0.0001117013618099711,
+        "sample_se": 2.707052513506325e-05,
+        "change_percent_of_means": 1.8117455886018652,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty"
+      },
+      "mean_image_linear_mse": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          0.00040125596514324624,
+          0.00044332787995938236,
+          0.0004604721949663408
+        ],
+        "candidate_values": [
+          0.0004133751894921082,
+          0.0004629985654252075,
+          0.0004685277582194179
+        ],
+        "differences": [
+          1.2119224348861968e-05,
+          1.9670685465825166e-05,
+          8.05556325307713e-06
+        ],
+        "mean_difference": 1.3281824355921421e-05,
+        "sample_se": 3.403013129888432e-06,
+        "change_percent_of_means": 3.0531618447326103,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty"
+      },
+      "mean_y_difference_percent": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          0.11783334944486037,
+          -0.025007460553038742,
+          0.09215814765237054
+        ],
+        "candidate_values": [
+          0.08697274659208963,
+          0.022338320339502712,
+          0.025757491955414116
+        ],
+        "differences": [
+          -0.030860602852770744,
+          0.047345780892541454,
+          -0.06640065569695643
+        ],
+        "mean_difference": -0.01663849255239524,
+        "sample_se": 0.03359694567094456,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty",
+        "unit": "percentage points"
+      },
+      "frame64_hdr_flip": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          0.10985805094242096,
+          0.1106543019413948,
+          0.10951024293899536
+        ],
+        "candidate_values": [
+          0.11029013246297836,
+          0.11052018404006958,
+          0.11040861159563065
+        ],
+        "differences": [
+          0.00043208152055740356,
+          -0.00013411790132522583,
+          0.0008983686566352844
+        ],
+        "mean_difference": 0.00039877742528915405,
+        "sample_se": 0.0002985180034568061,
+        "change_percent_of_means": 0.3625001109044623,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty"
+      },
+      "frame64_ldr_flip": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          0.07630834728479385,
+          0.07671646028757095,
+          0.07589141279459
+        ],
+        "candidate_values": [
+          0.07641935348510742,
+          0.07693277299404144,
+          0.07639456540346146
+        ],
+        "differences": [
+          0.00011100620031356812,
+          0.0002163127064704895,
+          0.00050315260887146
+        ],
+        "mean_difference": 0.0002768238385518392,
+        "sample_se": 0.00011717636175944102,
+        "change_percent_of_means": 0.3627840413948258,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty"
+      }
+    },
+    "convergence": {
+      "mean_frame_linear_mse": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          1.55959920206513,
+          1.27753798598577,
+          1.2170756849667974
+        ],
+        "candidate_values": [
+          1.392363612029746,
+          1.0953383695356447,
+          1.306909876157763
+        ],
+        "differences": [
+          -0.1672355900353839,
+          -0.1821996164501254,
+          0.0898341911909657
+        ],
+        "mean_difference": -0.08653367176484787,
+        "sample_se": 0.08828967065732313,
+        "change_percent_of_means": -6.403240861432947,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty"
+      },
+      "mean_image_linear_mse": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          0.25307119219761004,
+          0.1441912764163627,
+          0.11526555018226148
+        ],
+        "candidate_values": [
+          0.1468390824109318,
+          0.08873885988140408,
+          0.15152633106599778
+        ],
+        "differences": [
+          -0.10623210978667824,
+          -0.05545241653495862,
+          0.0362607808837363
+        ],
+        "mean_difference": -0.04180791514596686,
+        "sample_se": 0.04169606410889133,
+        "change_percent_of_means": -24.471588057269756,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty"
+      },
+      "mean_y_difference_percent": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          -1.2584696429211588,
+          -1.294142518791106,
+          -1.5476253360089594
+        ],
+        "candidate_values": [
+          -1.218206835186862,
+          -1.4101140183743384,
+          -1.4426453340649896
+        ],
+        "differences": [
+          0.0402628077342968,
+          -0.11597149958323238,
+          0.10498000194396973
+        ],
+        "mean_difference": 0.00975710336501138,
+        "sample_se": 0.06558160312689573,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty",
+        "unit": "percentage points"
+      },
+      "frame64_hdr_flip": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          0.31426045298576355,
+          0.31374436616897583,
+          0.31429460644721985
+        ],
+        "candidate_values": [
+          0.31543970108032227,
+          0.3169943690299988,
+          0.3164099454879761
+        ],
+        "differences": [
+          0.0011792480945587158,
+          0.0032500028610229492,
+          0.0021153390407562256
+        ],
+        "mean_difference": 0.002181529998779297,
+        "sample_se": 0.0005986908656676372,
+        "change_percent_of_means": 0.694534011007919,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty"
+      },
+      "frame64_ldr_flip": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          0.2113654613494873,
+          0.21155333518981934,
+          0.21202096343040466
+        ],
+        "candidate_values": [
+          0.2119991034269333,
+          0.21306779980659485,
+          0.2126655876636505
+        ],
+        "differences": [
+          0.0006336420774459839,
+          0.0015144646167755127,
+          0.0006446242332458496
+        ],
+        "mean_difference": 0.0009309103091557821,
+        "sample_se": 0.0002917943764552135,
+        "change_percent_of_means": 0.4398418721802244,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty"
+      }
+    },
+    "kitchen": {
+      "mean_frame_linear_mse": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          0.5787422913382995,
+          1.227713601329165,
+          0.38772626956260997
+        ],
+        "candidate_values": [
+          0.5696358250297369,
+          1.330999129089523,
+          0.342569619337626
+        ],
+        "differences": [
+          -0.0091064663085626,
+          0.10328552776035793,
+          -0.045156650224983996
+        ],
+        "mean_difference": 0.016340803742270444,
+        "sample_se": 0.044700643977605814,
+        "change_percent_of_means": 2.2341996973025635,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty"
+      },
+      "mean_image_linear_mse": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          0.041156061242165656,
+          0.10431209165237056,
+          0.13657714711352517
+        ],
+        "candidate_values": [
+          0.11188479034189867,
+          0.045553504150867355,
+          0.04904672564426635
+        ],
+        "differences": [
+          0.07072872909973302,
+          -0.0587585875015032,
+          -0.08753042146925882
+        ],
+        "mean_difference": -0.02518675995700967,
+        "sample_se": 0.048671656324848926,
+        "change_percent_of_means": -26.790121965822276,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty"
+      },
+      "mean_y_difference_percent": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          -5.0843081843497835,
+          -4.947134920891096,
+          -5.1360435219068865
+        ],
+        "candidate_values": [
+          -4.705835489702424,
+          -4.357377667994788,
+          -4.645923973243487
+        ],
+        "differences": [
+          0.37847269464735955,
+          0.589757252896308,
+          0.49011954866339913
+        ],
+        "mean_difference": 0.4861164987356889,
+        "sample_se": 0.061025430341664744,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty",
+        "unit": "percentage points"
+      },
+      "frame64_hdr_flip": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          0.46161311864852905,
+          0.4618321359157562,
+          0.46047499775886536
+        ],
+        "candidate_values": [
+          0.46394938230514526,
+          0.46674853563308716,
+          0.46450504660606384
+        ],
+        "differences": [
+          0.002336263656616211,
+          0.004916399717330933,
+          0.004030048847198486
+        ],
+        "mean_difference": 0.00376090407371521,
+        "sample_se": 0.0007568805948915465,
+        "change_percent_of_means": 0.8152718483746213,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty"
+      },
+      "frame64_ldr_flip": {
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "baseline_values": [
+          0.2744448184967041,
+          0.2741090953350067,
+          0.2740006446838379
+        ],
+        "candidate_values": [
+          0.274524062871933,
+          0.2762995958328247,
+          0.2754421830177307
+        ],
+        "differences": [
+          7.924437522888184e-05,
+          0.002190500497817993,
+          0.0014415383338928223
+        ],
+        "mean_difference": 0.0012370944023132324,
+        "sample_se": 0.0006179802032056508,
+        "change_percent_of_means": 0.45118991421522203,
+        "scope": "Seed-paired separate process captures, not identical sampled paths; small-sample exploratory uncertainty"
+      }
+    }
+  }
+}

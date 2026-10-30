@@ -8,7 +8,7 @@
     "hdr_flip": "Official HDR-FLIP1.7; scene-reference-only exposure parameters"
   },
   "source_hashes": {
-    "Benchmarks/versions.json": "0dbed50f02bd68211466ef13369efbf80fe64789fdf497deb073fb94e90bb40e",
+    "Benchmarks/versions.json": "87aaebcd3c50f6e06c68e26263bd01212c608f20143443b4ebf730485ce2209b",
     "Benchmarks/comparison-matrix.json": "136674228fe93a73d168a3802515ef017b327a93fe397ed6d14666571b3ea10e",
     "Benchmarks/development/2026-10-29-canonical-native-di/display-quality-summary.json": "b45c3ff27c71d0669a3df7b02e2392473c5405826962650f992e93072affdb2c",
     "Benchmarks/development/2026-10-29-canonical-native-di-timing/comparison.json": "2b2171e2abafb5c2e1aa7398da1880a475db858831a7549ab79b310fd0090dc1",
@@ -31,6 +31,11 @@
     "Benchmarks/development/2026-10-30-b9-on-b8/quality-summary.json": "9b91734cd47aa7d921053c9e989df2ef1404b26e63ee02f24da563292a4e45c0",
     "Benchmarks/development/2026-10-30-b9-on-b8/timing-summary.json": "eeb95b791026775348322b2b710aeb616761ba7d75925a921377fc2aef1b3a4a",
     "Benchmarks/development/2026-10-30-queue-history/summary.json": "5fdb4466c1b603ccc6c7a382490268a18d9089ef225caeb185b06bd65299fad7",
+    "Benchmarks/development/2026-10-30-duplication-history/summary.json": "68aea16a5d174f2165a0f2da78803b58f5cdee4f51177f6ac6a93b12352b5290",
+    "Benchmarks/development/2026-10-30-duplication-history/quality-summary.json": "76c5306eb883c1b76a326ef1513cf338f72346a2263b47d142bece38d1d4ee8a",
+    "Benchmarks/development/2026-10-30-duplication-history/timing-summary.json": "ff1cc3425df4aa0d6f9bf74f4a2e72b7b1d39bf95c139f0ecbaa76e15d4734f6",
+    "Benchmarks/development/2026-10-30-duplication-history/quality.json": "38baf86c8628b9fd65726f846aebf4f31a9c208f5b141caf58cfc8a2976092e8",
+    "Benchmarks/development/2026-10-30-duplication-history/paired-quality.json": "5d71b1391b8bd9f6260f57d5db10b4ec655d94b65115a34f878f6b1c5f395d74",
     "Docs/Research/replay-compaction-status.json": "a6fa6da6d1e657ba8772bc36aba6e2c4aeb0231608f9afefda558ee58d654c71"
   },
   "rows": [
@@ -11329,21 +11334,234 @@
     ]
   },
   "duplication_temporal_history": {
-    "status": "development_duplication_temporal_history",
+    "status": "evaluated_development_duplication_temporal_history",
     "canonical_accepted": false,
     "diagnostics": "diagnostics.json",
-    "quality": "incomplete14of18sequences",
-    "timing": "not_started_due_to_quality_startup_gate",
-    "scope": "Real duplication count producer/previous-frame temporal consumer; deliberately biased opt-in. Full B10 and active B11 remain incomplete.",
-    "eligible_quality_sequences": 14,
+    "quality": "complete18sequences_three_seeds_64frames",
+    "timing": "complete18_uncapped_processes",
+    "scope": "Complete scoped duplication on/off ablation on B8 sharing with paired Gaussian/vector/spatial queue development; full PT++ and B11 remain pending. Startup reliability unresolved; diagnostic runs excluded.",
+    "eligible_quality_sequences": 18,
     "quality_frames_per_sequence": 64,
-    "missing_quality_cases": [
-      "convergence-off-s4093",
-      "convergence-on-s4093",
-      "kitchen-off-s4093",
-      "kitchen-on-s4093"
-    ],
-    "diagnostic_frames": 384
+    "missing_quality_cases": [],
+    "diagnostic_frames": 384,
+    "quality_frames": 1152,
+    "timing_processes": 18
+  },
+  "duplication_quality": {
+    "status": "measured_development_partial",
+    "scope": "Three seeds47/1019/4093, one64-frame static sequence per version/scene/seed; distinct no-image-write timing cohort; no brightness fitting. Both policies: paired Gaussian spatial queue, initial roulette0.8 and B8 GI3; Room footprint, originals full-prefix replay. Only duplication temporal history reduction changes.",
+    "rows": [
+      {
+        "scene": "opaque-room",
+        "variant": "B10",
+        "policy": "off",
+        "runs": 3,
+        "frames_per_run": 64,
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; footprint; duplication off",
+        "image": "assets/b10-duplication/room-off.png",
+        "gpu_busy_ms": null,
+        "hdr_flip": 0.10985805094242096,
+        "ldr_flip": 0.07630834728479385,
+        "linear_mse": 0.006165399960828455,
+        "linear_mse_se": 0.0008796115770213053,
+        "mean_image_mse": 0.0004350186800229898,
+        "mean_image_mse_se": 1.759187853625073e-05,
+        "mean_y_difference_percent": 0.06166134551473072
+      },
+      {
+        "scene": "opaque-room",
+        "variant": "B10",
+        "policy": "on",
+        "runs": 3,
+        "frames_per_run": 64,
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; footprint; duplication on",
+        "image": "assets/b10-duplication/room-on.png",
+        "gpu_busy_ms": null,
+        "hdr_flip": 0.11040861159563065,
+        "ldr_flip": 0.07641935348510742,
+        "linear_mse": 0.006277101322638426,
+        "linear_mse_se": 0.0008587838244184528,
+        "mean_image_mse": 0.0004483005043789112,
+        "mean_image_mse_se": 1.7535451787694214e-05,
+        "mean_y_difference_percent": 0.045022852962335484
+      },
+      {
+        "scene": "convergence",
+        "variant": "B10",
+        "policy": "off",
+        "runs": 3,
+        "frames_per_run": 64,
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; full-prefix replay; duplication off",
+        "image": "assets/b10-duplication/convergence-off.png",
+        "gpu_busy_ms": null,
+        "hdr_flip": 0.31426045298576355,
+        "ldr_flip": 0.21155333518981934,
+        "linear_mse": 1.3514042910058992,
+        "linear_mse_se": 0.10555056166651125,
+        "mean_image_mse": 0.17084267293207808,
+        "mean_image_mse_se": 0.04195363093143832,
+        "mean_y_difference_percent": -1.3667458325737414
+      },
+      {
+        "scene": "convergence",
+        "variant": "B10",
+        "policy": "on",
+        "runs": 3,
+        "frames_per_run": 64,
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; full-prefix replay; duplication on",
+        "image": "assets/b10-duplication/convergence-on.png",
+        "gpu_busy_ms": null,
+        "hdr_flip": 0.3164099454879761,
+        "ldr_flip": 0.2126655876636505,
+        "linear_mse": 1.2648706192410513,
+        "linear_mse_se": 0.08828263893362029,
+        "mean_image_mse": 0.12903475778611123,
+        "mean_image_mse_se": 0.020193333189847094,
+        "mean_y_difference_percent": -1.35698872920873
+      },
+      {
+        "scene": "kitchen",
+        "variant": "B10",
+        "policy": "off",
+        "runs": 3,
+        "frames_per_run": 64,
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; full-prefix replay; duplication off",
+        "image": "assets/b10-duplication/kitchen-off.png",
+        "gpu_busy_ms": null,
+        "hdr_flip": 0.46161311864852905,
+        "ldr_flip": 0.2741090953350067,
+        "linear_mse": 0.7313940540766914,
+        "linear_mse_se": 0.2542122472019709,
+        "mean_image_mse": 0.09401510000268713,
+        "mean_image_mse_se": 0.028022710640910404,
+        "mean_y_difference_percent": -5.055828875715922
+      },
+      {
+        "scene": "kitchen",
+        "variant": "B10",
+        "policy": "on",
+        "runs": 3,
+        "frames_per_run": 64,
+        "seeds": [
+          47,
+          1019,
+          4093
+        ],
+        "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; full-prefix replay; duplication on",
+        "image": "assets/b10-duplication/kitchen-on.png",
+        "gpu_busy_ms": null,
+        "hdr_flip": 0.46450504660606384,
+        "ldr_flip": 0.2754421830177307,
+        "linear_mse": 0.7477348578189619,
+        "linear_mse_se": 0.2989078303019383,
+        "mean_image_mse": 0.06882834004567746,
+        "mean_image_mse_se": 0.021551829645327966,
+        "mean_y_difference_percent": -4.569712376980233
+      }
+    ]
+  },
+  "duplication_timing": {
+    "status": "measured_development_partial",
+    "scope": "18rotated processes,3per policy/scene;30swarmup15srecord; last600Original/NotSet frames, final16dropped. Process GPUBusy is not total critical-path frame latency, FPS or equal-quality speedup.",
+    "rows": [
+      {
+        "scene": "opaque-room",
+        "off_gpu_busy_ms": 2.2482499999999996,
+        "on_gpu_busy_ms": 2.2539499999999997,
+        "gpu_busy_change_percent": 0.25353052374068596,
+        "off_cpu_cadence_ms": 2.18485,
+        "on_cpu_cadence_ms": 2.2062,
+        "off_gpu_run_ci95": {
+          "low_ms": 2.2167,
+          "high_ms": 2.3985000000000003,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        },
+        "on_gpu_run_ci95": {
+          "low_ms": 2.2491,
+          "high_ms": 2.29605,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      {
+        "scene": "convergence",
+        "off_gpu_busy_ms": 10.178799999999999,
+        "on_gpu_busy_ms": 10.0866,
+        "gpu_busy_change_percent": -0.9058042205367878,
+        "off_cpu_cadence_ms": 10.1314,
+        "on_cpu_cadence_ms": 10.07475,
+        "off_gpu_run_ci95": {
+          "low_ms": 9.98495,
+          "high_ms": 10.7107,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        },
+        "on_gpu_run_ci95": {
+          "low_ms": 10.0426,
+          "high_ms": 10.8658,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      },
+      {
+        "scene": "kitchen",
+        "off_gpu_busy_ms": 11.7713,
+        "on_gpu_busy_ms": 11.9683,
+        "gpu_busy_change_percent": 1.6735619685166458,
+        "off_cpu_cadence_ms": 11.7579,
+        "on_cpu_cadence_ms": 11.97995,
+        "off_gpu_run_ci95": {
+          "low_ms": 11.6988,
+          "high_ms": 11.87555,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        },
+        "on_gpu_run_ci95": {
+          "low_ms": 11.96545,
+          "high_ms": 12.26015,
+          "confidence": 0.95,
+          "method": "percentile bootstrap over process-run medians",
+          "bootstrap_samples": 4000,
+          "bootstrap_seed": 0
+        }
+      }
+    ]
   },
   "checkpoint_rows": [
     {
@@ -11795,6 +12013,162 @@
       "label": "B9 \u00b7 roulette only",
       "report": "B9_RESULTS.md",
       "evidence": "Three seeds \u00d764static frames; frame64 FLIP. Three uncapped timings. Original cap14/2; footprint unsupported. Development, no promotion."
+    },
+    {
+      "scene": "opaque-room",
+      "variant": "B10",
+      "policy": "off",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; footprint; duplication off",
+      "image": "assets/b10-duplication/room-off.png",
+      "gpu_busy_ms": 2.2482499999999996,
+      "hdr_flip": 0.10985805094242096,
+      "ldr_flip": 0.07630834728479385,
+      "linear_mse": 0.006165399960828455,
+      "linear_mse_se": 0.0008796115770213053,
+      "mean_image_mse": 0.0004350186800229898,
+      "mean_image_mse_se": 1.759187853625073e-05,
+      "mean_y_difference_percent": 0.06166134551473072,
+      "kind": "duplication_off",
+      "label": "B10 dev \u00b7 duplication off",
+      "report": "B10_DUPLICATION_HISTORY.md",
+      "evidence": "Three seeds \u00d764frames; frame64 FLIP; three separate uncapped timings. Static development ablation, not full B10."
+    },
+    {
+      "scene": "opaque-room",
+      "variant": "B10",
+      "policy": "on",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; footprint; duplication on",
+      "image": "assets/b10-duplication/room-on.png",
+      "gpu_busy_ms": 2.2539499999999997,
+      "hdr_flip": 0.11040861159563065,
+      "ldr_flip": 0.07641935348510742,
+      "linear_mse": 0.006277101322638426,
+      "linear_mse_se": 0.0008587838244184528,
+      "mean_image_mse": 0.0004483005043789112,
+      "mean_image_mse_se": 1.7535451787694214e-05,
+      "mean_y_difference_percent": 0.045022852962335484,
+      "kind": "duplication_on",
+      "label": "B10 dev \u00b7 duplication on",
+      "report": "B10_DUPLICATION_HISTORY.md",
+      "evidence": "Three seeds \u00d764frames; frame64 FLIP; three separate uncapped timings. Static development ablation, not full B10."
+    },
+    {
+      "scene": "convergence",
+      "variant": "B10",
+      "policy": "off",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; full-prefix replay; duplication off",
+      "image": "assets/b10-duplication/convergence-off.png",
+      "gpu_busy_ms": 10.178799999999999,
+      "hdr_flip": 0.31426045298576355,
+      "ldr_flip": 0.21155333518981934,
+      "linear_mse": 1.3514042910058992,
+      "linear_mse_se": 0.10555056166651125,
+      "mean_image_mse": 0.17084267293207808,
+      "mean_image_mse_se": 0.04195363093143832,
+      "mean_y_difference_percent": -1.3667458325737414,
+      "kind": "duplication_off",
+      "label": "B10 dev \u00b7 duplication off",
+      "report": "B10_DUPLICATION_HISTORY.md",
+      "evidence": "Three seeds \u00d764frames; frame64 FLIP; three separate uncapped timings. Static development ablation, not full B10."
+    },
+    {
+      "scene": "convergence",
+      "variant": "B10",
+      "policy": "on",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; full-prefix replay; duplication on",
+      "image": "assets/b10-duplication/convergence-on.png",
+      "gpu_busy_ms": 10.0866,
+      "hdr_flip": 0.3164099454879761,
+      "ldr_flip": 0.2126655876636505,
+      "linear_mse": 1.2648706192410513,
+      "linear_mse_se": 0.08828263893362029,
+      "mean_image_mse": 0.12903475778611123,
+      "mean_image_mse_se": 0.020193333189847094,
+      "mean_y_difference_percent": -1.35698872920873,
+      "kind": "duplication_on",
+      "label": "B10 dev \u00b7 duplication on",
+      "report": "B10_DUPLICATION_HISTORY.md",
+      "evidence": "Three seeds \u00d764frames; frame64 FLIP; three separate uncapped timings. Static development ablation, not full B10."
+    },
+    {
+      "scene": "kitchen",
+      "variant": "B10",
+      "policy": "off",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; full-prefix replay; duplication off",
+      "image": "assets/b10-duplication/kitchen-off.png",
+      "gpu_busy_ms": 11.7713,
+      "hdr_flip": 0.46161311864852905,
+      "ldr_flip": 0.2741090953350067,
+      "linear_mse": 0.7313940540766914,
+      "linear_mse_se": 0.2542122472019709,
+      "mean_image_mse": 0.09401510000268713,
+      "mean_image_mse_se": 0.028022710640910404,
+      "mean_y_difference_percent": -5.055828875715922,
+      "kind": "duplication_off",
+      "label": "B10 dev \u00b7 duplication off",
+      "report": "B10_DUPLICATION_HISTORY.md",
+      "evidence": "Three seeds \u00d764frames; frame64 FLIP; three separate uncapped timings. Static development ablation, not full B10."
+    },
+    {
+      "scene": "kitchen",
+      "variant": "B10",
+      "policy": "on",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "B8 DI/GI3 + paired Gaussian PT/vector shading + spatial replay queue + RR0.8; full-prefix replay; duplication on",
+      "image": "assets/b10-duplication/kitchen-on.png",
+      "gpu_busy_ms": 11.9683,
+      "hdr_flip": 0.46450504660606384,
+      "ldr_flip": 0.2754421830177307,
+      "linear_mse": 0.7477348578189619,
+      "linear_mse_se": 0.2989078303019383,
+      "mean_image_mse": 0.06882834004567746,
+      "mean_image_mse_se": 0.021551829645327966,
+      "mean_y_difference_percent": -4.569712376980233,
+      "kind": "duplication_on",
+      "label": "B10 dev \u00b7 duplication on",
+      "report": "B10_DUPLICATION_HISTORY.md",
+      "evidence": "Three seeds \u00d764frames; frame64 FLIP; three separate uncapped timings. Static development ablation, not full B10."
     }
   ],
   "replay_compaction_status": {

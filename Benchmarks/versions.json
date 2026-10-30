@@ -254,17 +254,25 @@
       "depends_on": [
         "B8"
       ],
-      "runtime_status": "Duplication-map producer and prior-frame temporal consumer execute behind explicit deliberately biased opt-in. Six64-frame on/off GPU cases pass; enabled maps exactly match CPU counts with real nonzero reads. Extended quality14of18cases; startup failures on/off unresolved, timing not started. Full PT++ and B11 pending.",
+      "runtime_status": "Duplication on/off:6GPU activation/count cases,18three-seed64-frame quality sequences and18uncapped timing processes complete. Convergence/quality tradeoff; startup reliability unresolved. Unified-lighting discrete oracle passes; renderer unification, dual motion and full PT++ acceptance pending.",
       "ptpp_scope": "Full remaining PT++ including replaycompaction,pairedreuse,unifieddirect/indirectreservoirs,vectorweights,duplicationreduction,dualmotion and auditablemicrooptimizations",
       "development_evidence": "Benchmarks/development/2026-10-30-duplication-history",
-      "implementation_stage": "duplication_temporal_history_gpu_oracles",
+      "implementation_stage": "duplication_temporal_history_evaluated",
       "development_evidence_history": [
         "Benchmarks/development/2026-10-29-gaussian-pairing",
         "Benchmarks/development/2026-10-29-gaussian-timing",
         "Benchmarks/development/2026-10-29-replay-queue",
         "Benchmarks/development/2026-10-30-queue-history",
         "Benchmarks/development/2026-10-30-duplication-history"
-      ]
+      ],
+      "configuration_scope": "Existing split-path development preset; final unified preset is a separate planned ownership contract.",
+      "planned_full_unification": {
+        "planned": true,
+        "source": "PT++ section6.1 and supplement sections1/5",
+        "path_space": "primary direct and all indirect paths",
+        "standalone_di_gi_shading": "replaced by unified PT in paper-native preset",
+        "B8_split": "preserved control; hybrid adaptation remains separately labelled"
+      }
     },
     {
       "id": "B10.75",

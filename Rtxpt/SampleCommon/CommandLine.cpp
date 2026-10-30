@@ -12,6 +12,7 @@
 #include <cxxopts.hpp>
 #include <donut/core/log.h>
 #include <filesystem>
+#include <cstdio>
 
 bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv)
 {
@@ -27,6 +28,7 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
 		options.add_options()
 			("s,scene", "Preferred scene to load (.scene.json)", value(scene))
 			("nonInteractive", "Indicates that RTXPT will start in non-interactive mode, disabling popups and windows that require input", value(nonInteractive))
+            ("diagnosticStartupLog", "Diagnostic only: send host startup/error messages to stdout/stderr; not a benchmark mode", value(DiagnosticStartupLog))
             ("noWindow", "Not supported: rejected at startup, as there is no headless rendering path", value(noWindow))
 			("d,debug", "Enables the D3D12/VK debug layer and NVRHI validation layer", value(debug))
 			("gpuValidation", "Enables D3D12 GPU-based validation and debug layers (slow)", value(gpuValidation))
@@ -113,6 +115,13 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
 		int argc = _argc;
 		char const* const* argv = _argv;
 		options.parse(argc, argv);
+        if (DiagnosticStartupLog)
+        {
+            donut::log::EnableOutputToConsole(true);
+            if (nonInteractive) donut::log::EnableOutputToMessageBox(false);
+            std::fprintf(stderr, "STARTUP_DIAGNOSTICS enabled=1 benchmarkEligible=0\n");
+            std::fflush(stderr);
+        }
         if (PreserveGBufferThroughput < 0 || PreserveGBufferThroughput > 1 ||
             (CaptureGBufferThroughput && !CaptureLinearHDR))
         {

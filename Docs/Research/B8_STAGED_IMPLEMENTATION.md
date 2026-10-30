@@ -1,5 +1,7 @@
 # B8–B10 staged implementation: contribution split and PT++ gates
 
+**Current B10+ status:** your [B10–B16 roadmap and B10 sampling branches](ROADMAP.md) are maintained separately. The [latest B10 duplication comparison](B10_DUPLICATION_HISTORY.md) completes 18 quality sequences and 18 uncapped timings; full unification and dual motion remain pending. This chapter retains the B8 foundation and its staged history.
+
 The user deferred the brightness investigation and requested B8 through B10 next. No brightness correction, normalization, material change or reference adjustment is included here.
 
 ## NVIDIA GI approximation: current implementation
