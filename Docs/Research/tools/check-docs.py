@@ -633,7 +633,18 @@ assert by_id['B10']['planned_full_unification']['planned']
 assert 'one PT reservoir' in (D/'B10_UNIFIED_LIGHTING.md').read_text() and 'all indirect' in (D/'ROADMAP.md').read_text()
 checks.append(dict(name='User B10–B16 cumulative roadmap and native B10 sampling branches consistent across registry and three owning docs; definitions separate from activation',status='passed'))
 
-receipt=dict(updated_on='2026-10-29',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; general directional GI, broader moving/reset queue histories and timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending.'])
+summary_assets=D/'assets/research-summary'
+figures=json.loads((summary_assets/'figure-data.json').read_text())
+assert len(figures['measured_rows'])==6 and figures['oracle']['reference']==20
+assert figures['oracle']['values']['combined']==20 and figures['oracle']['values']['missing_conversion']>20
+for name,digest in figures['outputs'].items():
+    assert hashlib.sha256((summary_assets/name).read_bytes()).hexdigest()==digest
+for name,digest in figures['inputs'].items():
+    assert hashlib.sha256((P/'Benchmarks/development'/name).read_bytes()).hexdigest()==digest
+assert 'id="research-summary"' in page and 'RESEARCH_SUMMARY' in json.loads((D/'content-manifest.json').read_text())['chapters']
+checks.append(dict(name='Compact research synthesis: three figures match preserved evidence and exact oracle; measured versus calculated scope and searchable chapter retained',status='passed'))
+
+receipt=dict(updated_on='2026-10-30',project='Basix Pathtracing',product='RTXPT Next',repository='BasixMaster/RTXPT_Next',checks=checks,passed=not errors,limits=['Source audit is not algorithm correctness proof.','One GPU. Legacy migration:two original scenes/five process pairs. New native DI:two original scenes/three processes per configuration; registered room:four configurations/three timing processes.','PresentMon GPU active duration is not exclusive DI/GI or complete critical-path latency.','Native controls have display metrics; modern room captures include raw HDR/HDR-FLIP and explicit seeds. Motion, reconstruction and equal-time/error convergence remain pending.','Canonical B1/B4 native controls and B6/B7 registered-room measurements are scoped evidence. Original Convergence/Kitchen PT gates remain. Legacy limited PT++ maps to B7 ablations. B8 initial-GI development, limited PT++ and B10 Gaussian pair/vector development execute; one-neighbor spatial replay queues have scoped snapshot oracles; general directional GI, broader moving/reset queue histories and timing, temporal/multi-neighbor queues, remaining mechanisms and canonical acceptance remain pending.'])
 (D/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 if errors:raise SystemExit(json.dumps(errors))
 print(json.dumps(dict(passed=True,checks=len(checks),scenes=len(scenes),math_expressions=page.count('<math '))))

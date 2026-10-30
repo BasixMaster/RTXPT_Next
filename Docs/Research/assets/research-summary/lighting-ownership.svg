@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 365" role="img" aria-labelledby="t d">
+<title id="t">Current split ownership and full PT++ target</title><desc id="d">B8 assigns direct lighting to DI, short indirect paths to GI and long indirect paths to ReSTIR PT. Full B10 targets one PT reservoir over all these paths. The B10 target remains unimplemented.</desc>
+<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7" fill="#526a7c"/></marker></defs>
+<rect width="1000" height="365" rx="14" fill="#f7fafc"/>
+<g font-family="system-ui,sans-serif" fill="#20354b"><text x="30" y="34" font-size="22" font-weight="650">Lighting ownership: reuse must count each path once</text>
+<rect x="25" y="55" width="460" height="265" rx="12" fill="#e7f1f3" stroke="#a3bdc4"/><rect x="515" y="55" width="460" height="265" rx="12" fill="#fff0dc" stroke="#c7ac87"/>
+<text x="45" y="86" font-size="19" font-weight="650">B8 control · scoped GPU implementation</text><text x="535" y="86" font-size="19" font-weight="650">Full B10 target · not yet implemented</text>
+<g fill="white" stroke="#91a9b4"><rect x="45" y="110" width="270" height="44" rx="7"/><rect x="45" y="173" width="270" height="44" rx="7"/><rect x="45" y="236" width="270" height="44" rx="7"/><rect x="365" y="173" width="95" height="44" rx="7"/>
+<rect x="535" y="112" width="420" height="44" rx="7"/><rect x="535" y="181" width="420" height="44" rx="7"/><rect x="535" y="250" width="420" height="44" rx="7"/></g>
+<g font-size="17" text-anchor="middle"><text x="180" y="138">DI → direct lighting</text><text x="180" y="201">GI → short indirect paths</text><text x="180" y="264">ReSTIR PT → long indirect paths</text><text x="412" y="201">Pixel sum</text>
+<text x="745" y="140">NEE + BSDF proposals · all path lengths</text><text x="745" y="209">One PT reservoir · temporal + spatial reuse</text><text x="745" y="278">Unified shading · standalone DI/GI replaced</text></g>
+<g stroke="#526a7c" fill="none" stroke-width="2" marker-end="url(#arrow)"><path d="M315 132 H340 V185 H364"/><path d="M315 195 H364"/><path d="M315 258 H340 V207 H364"/><path d="M745 157 V179"/><path d="M745 226 V248"/></g>
+<text x="30" y="345" font-size="16">Conceptual diagram • split support / MIS on the left; paper §6.1 and supplement §§1/5 on the right.</text></g></svg>

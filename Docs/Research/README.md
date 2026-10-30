@@ -1,5 +1,7 @@
 # Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap
 
+[**Compact research summary: findings, measured tradeoffs and next steps**](RESEARCH_SUMMARY.md).
+
 ## Implementation guidance
 
 [Local data history and reproduction guide](LOCAL_DATA_HISTORY.md) records the 2026-10-30 cleanup, retained main data, older experiment lessons and how to reacquire pruned frame sequences.
