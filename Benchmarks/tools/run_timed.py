@@ -12,7 +12,7 @@ from extended_scene_contract import validate_request as validate_extended_reques
 from environment_filter_contract import verify as verify_environment_filter
 from rtss_caps import RTSSBackend
 from rtss_readonly import collect as collect_rtss,validate as validate_rtss
-from b8_partition_contract import verify as verify_b8
+from b8_partition_contract import validate_replay_roulette, verify as verify_b8
 from paired_pilot_contract import verify as verify_paired
 from di_reuse_contract import verify as verify_di_reuse
 
@@ -33,7 +33,7 @@ def main():
     ap.add_argument('--di-mode',type=int,choices=[0,1,2,3])
     ap.add_argument('--b8-initial-gi-validation',action='store_true')
     ap.add_argument('--b8-gi-reuse-mode',type=int,choices=range(4),help='Opt into NVIDIA GI approximation:0 initial,1 temporal,2 spatial,3 both; omission preserves legacy initial-only control')
-    ap.add_argument('--b8-validation-stage',type=int,choices=range(3),default=0)
+    ap.add_argument('--b8-validation-stage',type=int,choices=range(4),default=0)
     ap.add_argument('--pt-paired-spatial-validation',action='store_true')
     ap.add_argument('--pt-gaussian-pairing-validation',action='store_true')
     ap.add_argument('--pt-replay-only-validation',action='store_true')
@@ -54,6 +54,7 @@ def main():
     if any(out.iterdir()):raise SystemExit('Run directory must be new/empty.')
     if a.b8_gi_reuse_mode is not None and not a.b8_initial_gi_validation:
         raise SystemExit('GI approximation requires explicit B8 development partition')
+    validate_replay_roulette(a.b8_validation_stage,a.b8_initial_gi_validation,a.pt_extended_scene_validation,a.pt_replay_only_validation,a.b8_gi_reuse_mode,a.pt_reconnection_mode,a.pt_roulette_probability)
     if a.b8_initial_gi_validation:
         if a.variant is not None or a.mode!='dipt' or a.di_mode is None or a.nee_mis!=0 or not a.strict_di_validation or not a.benchmark_uncapped:
             raise SystemExit('Partition timing requires uncapped development DI/PT, explicit DI mode, exact MIS and strict DI; no canonical label')

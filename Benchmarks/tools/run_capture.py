@@ -9,7 +9,7 @@ from extended_scene_contract import validate_request as validate_extended_reques
 from environment_filter_contract import verify as verify_environment_filter
 from di_reuse_contract import verify as verify_di_reuse
 from throughput_contract import verify as verify_throughput, validate_request as validate_throughput
-from b8_partition_contract import verify as verify_b8, check_stages as check_b8_stages
+from b8_partition_contract import validate_replay_roulette, verify as verify_b8, check_stages as check_b8_stages
 from paired_pilot_contract import verify as verify_paired
 from replay_queue_contract import verify as verify_queue, check_counters as check_queue_counters
 from gbuffer_precision_contract import verify as verify_gbuffer_precision, validate_request as validate_gbuffer_request
@@ -31,7 +31,7 @@ def main():
     ap.add_argument('--b8-initial-gi-validation',action='store_true',help='Development only: initial DI/GI-short/PT-long partition; not a canonical B8 result')
     ap.add_argument('--b8-component',type=int,choices=range(5),default=0,help='Development output:0sum,1native,2DI,3GI-short,4PT-long')
     ap.add_argument('--b8-gi-reuse-mode',type=int,choices=range(4),help='Opt into NVIDIA GI approximation:0 initial,1 temporal,2 spatial,3 both; omission preserves legacy initial-only control')
-    ap.add_argument('--b8-validation-stage',type=int,choices=range(3),default=0,help='GI-short development:0 initial,1 DI/PT reuse,2 limited PT++ ablation; not canonical B9')
+    ap.add_argument('--b8-validation-stage',type=int,choices=range(4),default=0,help='GI-short development:0 initial,1 DI/PT reuse,2 limited PT++ ablation; not canonical B9')
     ap.add_argument('--pt-paired-spatial-validation',action='store_true',help='Development only: adjacent reciprocal-pair shifts and vector shading; not full B10')
     ap.add_argument('--pt-replay-compaction-validation',action='store_true',help='Opt-in replay queue; reservoir capture enables the same-frame exact direct oracle')
     ap.add_argument('--pt-gaussian-pairing-validation',action='store_true',help='Paired development: three resident Gaussian tables, one transformed table per frame')
@@ -79,6 +79,7 @@ def main():
         raise SystemExit('B8 component selection requires the explicit development partition')
     if a.b8_gi_reuse_mode is not None and not a.b8_initial_gi_validation:
         raise SystemExit('GI approximation requires explicit B8 development partition')
+    validate_replay_roulette(a.b8_validation_stage,a.b8_initial_gi_validation,a.pt_extended_scene_validation,a.pt_replay_only_validation,a.b8_gi_reuse_mode,a.pt_reconnection_mode,a.pt_roulette_probability)
     if a.b8_initial_gi_validation:
         if a.variant is not None or a.mode!='dipt' or a.di_mode is None or a.nee_mis!=0 or not a.strict_di_validation:
             raise SystemExit('B8 development requires no canonical label, mode dipt, explicit DI mode, exact NEE MIS and strict DI')

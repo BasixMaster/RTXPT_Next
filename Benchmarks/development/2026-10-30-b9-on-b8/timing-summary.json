@@ -1,0 +1,78 @@
+{
+  "status": "measured_development_partial",
+  "scope": "B9-on-B8, GI3 active in both. Room footprint/roulette; originals full-prefix roulette-only. Three process repeats,30s warmup15s capture, no images. Per-process GPU busy is not complete frame latency/FPS or equal-quality speedup.",
+  "rows": [
+    {
+      "scene": "opaque-room",
+      "B8_gpu_busy_ms": 1.9979,
+      "B9_gpu_busy_ms": 2.22805,
+      "gpu_busy_change_percent": 11.519595575354135,
+      "B8_cpu_cadence_ms": 1.95665,
+      "B9_cpu_cadence_ms": 2.1827,
+      "B8_gpu_run_ci95": {
+        "low_ms": 1.85345,
+        "high_ms": 2.0006500000000003,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      },
+      "B9_gpu_run_ci95": {
+        "low_ms": 2.1902,
+        "high_ms": 2.285,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      }
+    },
+    {
+      "scene": "convergence",
+      "B8_gpu_busy_ms": 10.91055,
+      "B9_gpu_busy_ms": 10.13785,
+      "gpu_busy_change_percent": -7.082136097630276,
+      "B8_cpu_cadence_ms": 10.9208,
+      "B9_cpu_cadence_ms": 10.138449999999999,
+      "B8_gpu_run_ci95": {
+        "low_ms": 10.65795,
+        "high_ms": 11.0121,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      },
+      "B9_gpu_run_ci95": {
+        "low_ms": 10.1035,
+        "high_ms": 10.145900000000001,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      }
+    },
+    {
+      "scene": "kitchen",
+      "B8_gpu_busy_ms": 13.279250000000001,
+      "B9_gpu_busy_ms": 12.20075,
+      "gpu_busy_change_percent": -8.121693619745107,
+      "B8_cpu_cadence_ms": 13.272,
+      "B9_cpu_cadence_ms": 12.198799999999999,
+      "B8_gpu_run_ci95": {
+        "low_ms": 13.241900000000001,
+        "high_ms": 13.9743,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      },
+      "B9_gpu_run_ci95": {
+        "low_ms": 12.14895,
+        "high_ms": 12.2765,
+        "confidence": 0.95,
+        "method": "percentile bootstrap over process-run medians",
+        "bootstrap_samples": 4000,
+        "bootstrap_seed": 0
+      }
+    }
+  ]
+}

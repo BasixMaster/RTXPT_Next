@@ -15,7 +15,7 @@ User-confirmed numbering, 2026-10-29. **B0 is the unchanged RTXPT 1.9 reference 
 | **B6** | **ReSTIR PT / DI and GI off** | Separate DI/GI estimators off; existing native direct/fallback terms remain until explicitly replaced by a unified-lighting partition. No complete extended-scene benchmark is claimed. |
 | **B7** | **ReSTIR PT + DI 3.1** | DI direct plus PT indirect; GI off. Corrected static opaque checkpoint `de9fe651`; original-scene gates remain unresolved. |
 | **B8** | **ReSTIR PT + DI 3.1 + GI 3.1** | NVIDIA non-directional GI temporal/spatial reuse executes on disjoint GI-short/PT-long domains. Full-resolution static quality is measured with mixed results; uncapped timing measured; canonical validation remains pending. |
-| **B9** | **B8 + limited PT++** | A GI-initial-only footprint/initial-roulette development ablation executes; complete B8/B9 validation remains pending. The historical GI-off pilot is not B9. |
+| **B9** | **B8 + limited PT++** | B8 NVIDIA GI reuse retained: footprint/initial roulette in Room, full-prefix roulette-only original-scene ablations. Eight GPU checks pass; replicated replicated quality and uncapped timing measured; original-scene footprint unsupported. The historical GI-off pilot is not B9. |
 | **B10** | **B8 + full remaining PT++** | Gaussian reciprocal-pair/vector GPU development executes. Simultaneous multi-neighbor reuse, replay queues, remaining mechanisms and full validation remain pending. No complete-paper implementation claim. |
 
 ## Legacy crosswalk: preserve evidence identities

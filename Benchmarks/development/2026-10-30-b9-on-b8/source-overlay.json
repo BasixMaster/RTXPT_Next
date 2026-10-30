@@ -1,0 +1,6 @@
+{
+  "base_commit": "9c91ca422b6eaf4d6b04ce5ac35f2cdd6c5de5a7",
+  "patch_sha256": "de15d620c6f223f2c24a915aab0eea26dbf13278dd069b3b669844eea7a05d00",
+  "scope": "Root application host guards/CLI/receipts activate inherited runtime mechanisms; no SDK submodule change",
+  "post_cohort_note": "The current tree additionally clarifies the CommandLine.h stage comment: GI mode is separate and stage3 requiresGI3. No numerical/control-flow code changed after the cohort. The archived patch retains the exact measured source."
+}

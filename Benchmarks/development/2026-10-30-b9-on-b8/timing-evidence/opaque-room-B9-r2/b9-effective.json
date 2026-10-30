@@ -1,0 +1,9 @@
+{
+  "stage": 2,
+  "gi_reuse": true,
+  "footprint": true,
+  "replay_safe_ablation": false,
+  "full_prefix_replay": false,
+  "initial_only_roulette_probability": 0.800000012,
+  "scope": "Limited PT++ footprint/roulette development; no canonical promotion"
+}

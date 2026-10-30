@@ -1,0 +1,150 @@
+{
+  "status": "measured_development_partial",
+  "scope": "Three seeds47/1019/4093, one64-frame static sequence per version/scene/seed; distinct no-image-write timing cohort; no brightness fitting. Room footprint+roulette, original scenes full-prefix roulette only.",
+  "rows": [
+    {
+      "scene": "opaque-room",
+      "variant": "B8",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "GI3 + PT-long fixed, roulette off",
+      "footprint": false,
+      "roulette": 0,
+      "gpu_busy_ms": null,
+      "hdr_flip": 0.11051645129919052,
+      "ldr_flip": 0.07698338478803635,
+      "linear_mse": 0.00622541105761454,
+      "linear_mse_se": 0.0009024908026163966,
+      "mean_image_mse": 0.0004359022473447559,
+      "mean_image_mse_se": 2.101151021302148e-05,
+      "mean_y_difference_percent": 0.05529780182824273,
+      "mean_y_difference_se": 0.0283147561709685,
+      "image": "assets/b9-on-b8/room-B8.png"
+    },
+    {
+      "scene": "opaque-room",
+      "variant": "B9",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "GI3 + PT-long footprint/roulette",
+      "footprint": true,
+      "roulette": 0.8,
+      "gpu_busy_ms": null,
+      "hdr_flip": 0.1115688756108284,
+      "ldr_flip": 0.07747611403465271,
+      "linear_mse": 0.006343499465399337,
+      "linear_mse_se": 0.000900181046500563,
+      "mean_image_mse": 0.0004539943247394537,
+      "mean_image_mse_se": 1.770060514429355e-05,
+      "mean_y_difference_percent": 0.04125363415592888,
+      "mean_y_difference_se": 0.03524258056210385,
+      "image": "assets/b9-on-b8/room-B9.png"
+    },
+    {
+      "scene": "convergence",
+      "variant": "B8",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "GI3 + PT-long fixed, roulette off",
+      "footprint": false,
+      "roulette": 0,
+      "gpu_busy_ms": null,
+      "hdr_flip": 0.31577441096305847,
+      "ldr_flip": 0.21189633011817932,
+      "linear_mse": 1.2699155234405317,
+      "linear_mse_se": 0.14955055513137483,
+      "mean_image_mse": 0.14458739013373517,
+      "mean_image_mse_se": 0.0485360421498287,
+      "mean_y_difference_percent": -1.5453547801883136,
+      "mean_y_difference_se": 0.05591748611878681,
+      "image": "assets/b9-on-b8/convergence-B8.png"
+    },
+    {
+      "scene": "convergence",
+      "variant": "B9",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "GI3 + PT-long full-prefix roulette-only",
+      "footprint": false,
+      "roulette": 0.8,
+      "gpu_busy_ms": null,
+      "hdr_flip": 0.31971096992492676,
+      "ldr_flip": 0.2152688056230545,
+      "linear_mse": 1.4401342737248208,
+      "linear_mse_se": 0.20335615870778545,
+      "mean_image_mse": 0.1752923197133503,
+      "mean_image_mse_se": 0.05049258319254503,
+      "mean_y_difference_percent": -1.4383022695019945,
+      "mean_y_difference_se": 0.08098153197517254,
+      "image": "assets/b9-on-b8/convergence-B9.png"
+    },
+    {
+      "scene": "kitchen",
+      "variant": "B8",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "GI3 + PT-long fixed, roulette off",
+      "footprint": false,
+      "roulette": 0,
+      "gpu_busy_ms": null,
+      "hdr_flip": 0.45948007702827454,
+      "ldr_flip": 0.2726425230503082,
+      "linear_mse": 0.7454397997043021,
+      "linear_mse_se": 0.23799044779229545,
+      "mean_image_mse": 0.10651297681218565,
+      "mean_image_mse_se": 0.008284252863571798,
+      "mean_y_difference_percent": -4.9170499154692475,
+      "mean_y_difference_se": 0.1341086856873937,
+      "image": "assets/b9-on-b8/kitchen-B8.png"
+    },
+    {
+      "scene": "kitchen",
+      "variant": "B9",
+      "runs": 3,
+      "frames_per_run": 64,
+      "seeds": [
+        47,
+        1019,
+        4093
+      ],
+      "algorithm": "GI3 + PT-long full-prefix roulette-only",
+      "footprint": false,
+      "roulette": 0.8,
+      "gpu_busy_ms": null,
+      "hdr_flip": 0.4645557999610901,
+      "ldr_flip": 0.27536216378211975,
+      "linear_mse": 0.7977681007998515,
+      "linear_mse_se": 0.24702529055019434,
+      "mean_image_mse": 0.0838416419917661,
+      "mean_image_mse_se": 0.03900091423217915,
+      "mean_y_difference_percent": -4.808166475168238,
+      "mean_y_difference_se": 0.07482757556980532,
+      "image": "assets/b9-on-b8/kitchen-B9.png"
+    }
+  ]
+}

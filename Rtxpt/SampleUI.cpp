@@ -197,9 +197,13 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
     if (cmdLine.PTPairedSpatialValidation && (!cmdLine.B8InitialGIValidation || cmdLine.B8ValidationStage == 0 ||
         (cmdLine.ReSTIRPTMode != 2 && cmdLine.ReSTIRPTMode != 3) || cmdLine.PTFixedSpatialSamples != 1))
         throw std::runtime_error("Paired spatial pilot requires B8 development stage1/2, PT spatial reuse and exactly one neighbor");
-    if (cmdLine.B8ValidationStage < 0 || cmdLine.B8ValidationStage > 2 ||
+    if (cmdLine.B8ValidationStage < 0 || cmdLine.B8ValidationStage > 3 ||
         (cmdLine.B8ValidationStage != 0 && !cmdLine.B8InitialGIValidation))
-        throw std::runtime_error("B8 validation stage requires the development partition and stage0..2");
+        throw std::runtime_error("B8 validation stage requires the development partition and stage0..3");
+    if (cmdLine.B8ValidationStage == 3 &&
+        (!cmdLine.PTExtendedSceneValidation || !cmdLine.PTReplayOnlyValidation || cmdLine.B8GIReuseMode != 3 ||
+         cmdLine.PTReconnectionMode != 0 || !(cmdLine.PTRouletteProbability > 0.0f && cmdLine.PTRouletteProbability < 1.0f)))
+        throw std::runtime_error("B9 replay-safe ablation requires extended full-prefix replay, fixed reconnection, B8 GI mode3 and explicit roulette in(0,1)");
     m_ui.B8Component = cmdLine.B8Component;
     if (cmdLine.B8Component < 0 || cmdLine.B8Component > 4 ||
         (cmdLine.B8Component != 0 && !cmdLine.B8InitialGIValidation))
@@ -240,8 +244,8 @@ SampleUI::SampleUI(DeviceManager* deviceManager, SampleBaseApp & baseApp, Sample
             RTXDI_PTReconnectionMode::FixedThreshold : RTXDI_PTReconnectionMode::Footprint;
     m_ui.RTXDI.restirPT.russianRouletteProbability = cmdLine.PTRouletteProbability;
     if (cmdLine.PTExtendedSceneValidation &&
-        (!cmdLine.PTReplayOnlyValidation || !m_ui.UseReSTIRPT || cmdLine.PTRouletteProbability != 0.0f))
-        throw std::runtime_error("Extended-scene PT validation requires ReSTIR PT, full-prefix replay and roulette off");
+        (!cmdLine.PTReplayOnlyValidation || !m_ui.UseReSTIRPT || (cmdLine.PTRouletteProbability != 0.0f && cmdLine.B8ValidationStage != 3)))
+        throw std::runtime_error("Extended-scene PT validation requires ReSTIR PT, full-prefix replay; roulette requires explicit B9 stage3");
     if (cmdLine.PTReplayOnlyValidation && cmdLine.PTReconnectionMode == 1)
         throw std::runtime_error("Replay-only diagnostic requires fixed-threshold reconnection");
     if (cmdLine.PTFixedSpatialSamples < -1 || cmdLine.PTFixedSpatialSamples == 0 || cmdLine.PTFixedSpatialSamples > 32)

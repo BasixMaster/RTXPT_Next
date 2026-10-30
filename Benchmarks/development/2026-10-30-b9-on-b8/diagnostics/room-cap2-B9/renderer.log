@@ -1,0 +1,89 @@
+File 'WORKSPACE\outputs\RTXDI_Next\bin\sl.interposer.dll' is signed by NVIDIA and the signature was verified.
+BENCHMARK_UNCAPPED vsync=0 fpsLimiter=0 reflexCap=0 reflexMode=0 frameGeneration=0 renderUnfocused=1
+PT_HISTORY frame=0 previous=0 requestedReset=1 contractChanged=0 priorHistory=0
+SAMPLING_CONTRACT seed=47 realtime=1 referencePixelCenter=0 pixelJitterScale=0
+TRANSPORT_CONTRACT di=1 gi=1 pt=1 diMode=3 neeMIS=0 maxBounces=2 maxDiffuseBounces=2
+DI_VALIDATION_CONTRACT strict=1 boiling=0 discountNaive=0
+PT_EXTENDED_SCENE_CONTRACT development=0 diffuseBudget=2 fullPrefixReplay=0
+B8_PARTITION_CONTRACT development=1 version=1 giReuse=1 component=0 minPTLength=4 stage=2
+B8_GI_APPROX_CONTRACT enabled=1 mode=3 directional=0 jacobianClamp=1 finalBlend=1
+B9_LIMITED_CONTRACT enabled=1 footprint=1 replaySafe=0 giReuse=1 roulette=0.800000012
+PT_PAIRED_CONTRACT enabled=0 adjacentReciprocal=0 pairOwnedShifts=0 vectorShading=0
+PT_PAIR_POLICY gaussian=0 residentTables=0 activeTablesPerFrame=0 sigma=16 frameTransforms=0
+PT_QUEUE_CONTRACT enabled=0 shiftStride=104 requestCapacityPerPixel=1 oracle=0 indirect=1
+PT_REPLAY_CONTRACT replayOnly=0 roughnessThreshold=0.100000001
+PT_HISTORY_CONTRACT ageRejection=1 maxAge=30 maxHistory=8
+PTPP_CONTRACT reconnection=1 rouletteProbability=0.800000012 diagnostics=1
+PT_SPATIAL_CONTRACT samples=1 boost=1
+DI_TEMPORAL_CONTRACT permutation=0 maxHistory=20
+ENVIRONMENT_FILTER_CONTRACT diffuseMip=0
+GBUFFER_PRECISION_CONTRACT roundedMaterials=0
+PREFIX_THROUGHPUT_CONTRACT preserveAboveOne=0 capturePacked=0
+B8_GI_DISPATCH frame=0 mode=3 temporal=0 spatial=1 history=0
+PT_HISTORY frame=1 previous=0 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=1 mode=3 temporal=1 spatial=1 history=1
+CAPTURE_HISTORY warmupFrames=32
+PT_HISTORY frame=2 previous=1 requestedReset=1 contractChanged=0 priorHistory=0
+B8_GI_DISPATCH frame=2 mode=3 temporal=0 spatial=1 history=0
+PT_HISTORY frame=3 previous=2 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=3 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=4 previous=3 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=4 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=5 previous=4 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=5 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=6 previous=5 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=6 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=7 previous=6 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=7 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=8 previous=7 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=8 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=9 previous=8 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=9 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=10 previous=9 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=10 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=11 previous=10 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=11 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=12 previous=11 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=12 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=13 previous=12 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=13 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=14 previous=13 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=14 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=15 previous=14 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=15 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=16 previous=15 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=16 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=17 previous=16 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=17 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=18 previous=17 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=18 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=19 previous=18 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=19 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=20 previous=19 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=20 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=21 previous=20 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=21 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=22 previous=21 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=22 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=23 previous=22 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=23 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=24 previous=23 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=24 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=25 previous=24 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=25 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=26 previous=25 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=26 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=27 previous=26 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=27 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=28 previous=27 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=28 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=29 previous=28 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=29 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=30 previous=29 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=30 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=31 previous=30 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=31 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=32 previous=31 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=32 mode=3 temporal=1 spatial=1 history=1
+PT_HISTORY frame=33 previous=32 requestedReset=0 contractChanged=0 priorHistory=1
+B8_GI_DISPATCH frame=33 mode=3 temporal=1 spatial=1 history=1

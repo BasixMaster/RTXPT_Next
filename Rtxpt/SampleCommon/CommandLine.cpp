@@ -67,7 +67,7 @@ bool CommandLineOptions::InitFromCommandLine(int _argc, char const* const* _argv
             ("b8InitialGIValidation", "Development disjoint DI/GI-short/PT-long partition", value(B8InitialGIValidation))
             ("b8GIReuseMode", "B8 NVIDIA non-directional GI: -1 legacy control,0 initial,1 temporal,2 spatial,3 both", value(B8GIReuseMode))
             ("b8Component", "Development component:0 sum,1 native,2 DI,3 GI-short,4 PT-long", value(B8Component))
-            ("b8ValidationStage", "GI-short development:0 initial,1 DI/PT reuse,2 limited PT++ ablation", value(B8ValidationStage))
+            ("b8ValidationStage", "GI-short development:0 initial,1 DI/PT reuse,2 footprint/roulette,3 extended replay/roulette", value(B8ValidationStage))
             ("ptPairedSpatialValidation", "Development: pair-owned adjacent reciprocal shifts and vector shading", value(PTPairedSpatialValidation))
             ("ptGaussianPairingValidation", "Development: resident Gaussian reciprocal tables and frame transforms", value(PTGaussianPairingValidation))
             ("ptReplayCompactionValidation", "Development: compact paired spatial replay queue; diagnostics compare same-frame direct control", value(PTReplayCompactionValidation))

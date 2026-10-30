@@ -1,0 +1,2031 @@
+[
+  {
+    "case": "room-B8",
+    "stage": 1,
+    "contract": {
+      "stage": 1,
+      "gi_reuse": true,
+      "footprint": false,
+      "replay_safe_ablation": false,
+      "full_prefix_replay": false,
+      "initial_only_roulette_probability": 0.0,
+      "scope": "B8 matched control with GI reuse; roulette off"
+    },
+    "roulette": {
+      "tests": 0,
+      "survivals": 0,
+      "terminations": 0,
+      "replay_tests": 0
+    },
+    "gi": {
+      "pixels": 230400,
+      "valid": 134614,
+      "positive_weight": 133633,
+      "m_greater_than_one": 132785,
+      "positive_age_valid": 122268,
+      "max_age_valid": 31,
+      "mean_m_valid": 23.544876461586462
+    },
+    "pt": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 74370,
+        "terminal_reconnection_valid": 60270,
+        "age_histogram_valid": {
+          "0": 134640
+        },
+        "rc_length_histogram_valid": {
+          "0": 60270,
+          "2": 74370
+        },
+        "path_length_histogram_valid": {
+          "0": 60270,
+          "4": 48651,
+          "5": 25719
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 74370,
+        "positive_weight_path_length_histogram": {
+          "4": 48651,
+          "5": 25719
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 131803,
+        "positive_age_valid": 119560,
+        "midpath_reconnection_valid": 133239,
+        "terminal_reconnection_valid": 1401,
+        "age_histogram_valid": {
+          "0": 15080,
+          "1": 11674,
+          "2": 10568,
+          "3": 10268,
+          "4": 9118,
+          "5": 8473,
+          "6": 7594,
+          "7": 6865,
+          "8": 5941,
+          "9": 5748,
+          "10": 4916,
+          "11": 4460,
+          "12": 4019,
+          "13": 3527,
+          "14": 3013,
+          "15": 2851,
+          "16": 2471,
+          "17": 2267,
+          "18": 1970,
+          "19": 1691,
+          "20": 1442,
+          "21": 1528,
+          "22": 1296,
+          "23": 1238,
+          "24": 1001,
+          "25": 890,
+          "26": 823,
+          "27": 824,
+          "28": 680,
+          "29": 851,
+          "30": 1553
+        },
+        "rc_length_histogram_valid": {
+          "0": 1401,
+          "2": 133239
+        },
+        "path_length_histogram_valid": {
+          "0": 1401,
+          "4": 95455,
+          "5": 37784
+        },
+        "max_age_valid": 30,
+        "mean_m_valid": 8.831431966726084,
+        "valid_with_positive_weight": 133239,
+        "positive_weight_path_length_histogram": {
+          "4": 95455,
+          "5": 37784
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 133716,
+        "positive_age_valid": 120596,
+        "midpath_reconnection_valid": 134164,
+        "terminal_reconnection_valid": 476,
+        "age_histogram_valid": {
+          "0": 14044,
+          "1": 12091,
+          "2": 10880,
+          "3": 10549,
+          "4": 9301,
+          "5": 8497,
+          "6": 7672,
+          "7": 6801,
+          "8": 5987,
+          "9": 5775,
+          "10": 4913,
+          "11": 4433,
+          "12": 4085,
+          "13": 3465,
+          "14": 3020,
+          "15": 2855,
+          "16": 2444,
+          "17": 2248,
+          "18": 1934,
+          "19": 1636,
+          "20": 1383,
+          "21": 1513,
+          "22": 1269,
+          "23": 1229,
+          "24": 1019,
+          "25": 899,
+          "26": 823,
+          "27": 807,
+          "28": 703,
+          "29": 815,
+          "30": 1550
+        },
+        "rc_length_histogram_valid": {
+          "0": 476,
+          "2": 134164
+        },
+        "path_length_histogram_valid": {
+          "0": 476,
+          "4": 96350,
+          "5": 37814
+        },
+        "max_age_valid": 30,
+        "mean_m_valid": 14.69484551396316,
+        "valid_with_positive_weight": 134164,
+        "positive_weight_path_length_histogram": {
+          "4": 96350,
+          "5": 37814
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "exact_previous_b8": null,
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 4,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.20194173177083333,
+              0.20194173177083333,
+              0.20194173177083333
+            ],
+            "nonzero_pixels": 2341
+          },
+          "di": {
+            "mean_rgb": [
+              0.1002915514475252,
+              0.09972705882016776,
+              0.07912589268784763
+            ],
+            "nonzero_pixels": 113308
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.040774276413333914,
+              0.034740093141638985,
+              0.024291142669454632
+            ],
+            "nonzero_pixels": 133312
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.01902192472325017,
+              0.019592501748249763,
+              0.009201538360988101
+            ],
+            "nonzero_pixels": 134140
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "room-B9",
+    "stage": 2,
+    "contract": {
+      "stage": 2,
+      "gi_reuse": true,
+      "footprint": true,
+      "replay_safe_ablation": false,
+      "full_prefix_replay": false,
+      "initial_only_roulette_probability": 0.800000012,
+      "scope": "Limited PT++ footprint/roulette development; no canonical promotion"
+    },
+    "roulette": {
+      "tests": 210338,
+      "survivals": 168151,
+      "terminations": 42187,
+      "replay_tests": 0
+    },
+    "gi": {
+      "pixels": 230400,
+      "valid": 134615,
+      "positive_weight": 133648,
+      "m_greater_than_one": 132785,
+      "positive_age_valid": 122228,
+      "max_age_valid": 31,
+      "mean_m_valid": 23.535816959477028
+    },
+    "pt": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 54332,
+        "terminal_reconnection_valid": 80308,
+        "age_histogram_valid": {
+          "0": 134640
+        },
+        "rc_length_histogram_valid": {
+          "0": 77455,
+          "2": 49693,
+          "3": 3818,
+          "4": 3250,
+          "5": 424
+        },
+        "path_length_histogram_valid": {
+          "0": 77455,
+          "4": 39810,
+          "5": 17375
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 57185,
+        "positive_weight_path_length_histogram": {
+          "4": 39810,
+          "5": 17375
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 131692,
+        "positive_age_valid": 120150,
+        "midpath_reconnection_valid": 128451,
+        "terminal_reconnection_valid": 6189,
+        "age_histogram_valid": {
+          "0": 14490,
+          "1": 11288,
+          "2": 10228,
+          "3": 9849,
+          "4": 9222,
+          "5": 8557,
+          "6": 7902,
+          "7": 6809,
+          "8": 6342,
+          "9": 5445,
+          "10": 5332,
+          "11": 4428,
+          "12": 3894,
+          "13": 3616,
+          "14": 3237,
+          "15": 2839,
+          "16": 2692,
+          "17": 2385,
+          "18": 2061,
+          "19": 1696,
+          "20": 1497,
+          "21": 1454,
+          "22": 1477,
+          "23": 1102,
+          "24": 939,
+          "25": 954,
+          "26": 930,
+          "27": 793,
+          "28": 653,
+          "29": 999,
+          "30": 1530
+        },
+        "rc_length_histogram_valid": {
+          "0": 1778,
+          "2": 121096,
+          "3": 5776,
+          "4": 5430,
+          "5": 560
+        },
+        "path_length_histogram_valid": {
+          "0": 1778,
+          "4": 95249,
+          "5": 37613
+        },
+        "max_age_valid": 30,
+        "mean_m_valid": 8.82483660130719,
+        "valid_with_positive_weight": 132862,
+        "positive_weight_path_length_histogram": {
+          "4": 95249,
+          "5": 37613
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 230400,
+        "valid": 134640,
+        "m_greater_than_one": 133715,
+        "positive_age_valid": 121196,
+        "midpath_reconnection_valid": 129854,
+        "terminal_reconnection_valid": 4786,
+        "age_histogram_valid": {
+          "0": 13444,
+          "1": 11710,
+          "2": 10531,
+          "3": 10186,
+          "4": 9512,
+          "5": 8645,
+          "6": 8013,
+          "7": 6829,
+          "8": 6273,
+          "9": 5472,
+          "10": 5339,
+          "11": 4297,
+          "12": 3871,
+          "13": 3577,
+          "14": 3218,
+          "15": 2857,
+          "16": 2656,
+          "17": 2368,
+          "18": 2003,
+          "19": 1660,
+          "20": 1522,
+          "21": 1365,
+          "22": 1467,
+          "23": 1092,
+          "24": 934,
+          "25": 970,
+          "26": 862,
+          "27": 797,
+          "28": 645,
+          "29": 982,
+          "30": 1543
+        },
+        "rc_length_histogram_valid": {
+          "0": 641,
+          "2": 122825,
+          "3": 5494,
+          "4": 5170,
+          "5": 510
+        },
+        "path_length_histogram_valid": {
+          "0": 641,
+          "4": 96178,
+          "5": 37821
+        },
+        "max_age_valid": 30,
+        "mean_m_valid": 14.686051693404634,
+        "valid_with_positive_weight": 133998,
+        "positive_weight_path_length_histogram": {
+          "4": 96177,
+          "5": 37821
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "exact_previous_b8": null,
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 4,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.20194173177083333,
+              0.20194173177083333,
+              0.20194173177083333
+            ],
+            "nonzero_pixels": 2341
+          },
+          "di": {
+            "mean_rgb": [
+              0.10028035066116395,
+              0.09961805433241858,
+              0.07909445191060917
+            ],
+            "nonzero_pixels": 113301
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.04079603017281948,
+              0.03477250386753844,
+              0.024289795187457153
+            ],
+            "nonzero_pixels": 133328
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.019151155441326815,
+              0.019596132084779026,
+              0.009161365824078935
+            ],
+            "nonzero_pixels": 133975
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "convergence-B8",
+    "stage": 1,
+    "contract": {
+      "stage": 1,
+      "gi_reuse": true,
+      "footprint": false,
+      "replay_safe_ablation": false,
+      "full_prefix_replay": true,
+      "initial_only_roulette_probability": 0.0,
+      "scope": "B8 matched control with GI reuse; roulette off"
+    },
+    "roulette": {
+      "tests": 0,
+      "survivals": 0,
+      "terminations": 0,
+      "replay_tests": 0
+    },
+    "gi": {
+      "pixels": 921600,
+      "valid": 752043,
+      "positive_weight": 747917,
+      "m_greater_than_one": 748534,
+      "positive_age_valid": 691041,
+      "max_age_valid": 31,
+      "mean_m_valid": 27.398681990258535
+    },
+    "pt": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 921600,
+        "valid": 752110,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 742115,
+        "age_histogram_valid": {
+          "0": 752110
+        },
+        "rc_length_histogram_valid": {
+          "0": 455836,
+          "4": 228224,
+          "5": 41824,
+          "6": 11190,
+          "7": 3008,
+          "8": 883,
+          "9": 625,
+          "10": 191,
+          "11": 96,
+          "12": 62,
+          "13": 63,
+          "14": 59,
+          "15": 54,
+          "16": 9995
+        },
+        "path_length_histogram_valid": {
+          "0": 455836,
+          "4": 234736,
+          "5": 44576,
+          "6": 11693,
+          "7": 3169,
+          "8": 916,
+          "9": 640,
+          "10": 197,
+          "11": 98,
+          "12": 63,
+          "13": 67,
+          "14": 63,
+          "15": 56
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 296274,
+        "positive_weight_path_length_histogram": {
+          "4": 234736,
+          "5": 44576,
+          "6": 11693,
+          "7": 3169,
+          "8": 916,
+          "9": 640,
+          "10": 197,
+          "11": 98,
+          "12": 63,
+          "13": 67,
+          "14": 63,
+          "15": 56
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 921600,
+        "valid": 752110,
+        "m_greater_than_one": 735141,
+        "positive_age_valid": 672667,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 694656,
+        "age_histogram_valid": {
+          "0": 79443,
+          "1": 60552,
+          "2": 57636,
+          "3": 54161,
+          "4": 49657,
+          "5": 46402,
+          "6": 42630,
+          "7": 38657,
+          "8": 34855,
+          "9": 31904,
+          "10": 28593,
+          "11": 25646,
+          "12": 22774,
+          "13": 22007,
+          "14": 18554,
+          "15": 16333,
+          "16": 14877,
+          "17": 13713,
+          "18": 12474,
+          "19": 10459,
+          "20": 9510,
+          "21": 8162,
+          "22": 7482,
+          "23": 6835,
+          "24": 6021,
+          "25": 5390,
+          "26": 5404,
+          "27": 4402,
+          "28": 4174,
+          "29": 4837,
+          "30": 8566
+        },
+        "rc_length_histogram_valid": {
+          "0": 10635,
+          "4": 558642,
+          "5": 94565,
+          "6": 21263,
+          "7": 5486,
+          "8": 1831,
+          "9": 1495,
+          "10": 299,
+          "11": 169,
+          "12": 77,
+          "13": 86,
+          "14": 46,
+          "15": 62,
+          "16": 57454
+        },
+        "path_length_histogram_valid": {
+          "0": 10635,
+          "4": 597306,
+          "5": 109791,
+          "6": 23876,
+          "7": 6120,
+          "8": 1999,
+          "9": 1577,
+          "10": 322,
+          "11": 176,
+          "12": 86,
+          "13": 96,
+          "14": 58,
+          "15": 68
+        },
+        "max_age_valid": 30,
+        "mean_m_valid": 8.819505125580035,
+        "valid_with_positive_weight": 741475,
+        "positive_weight_path_length_histogram": {
+          "4": 597306,
+          "5": 109791,
+          "6": 23876,
+          "7": 6120,
+          "8": 1999,
+          "9": 1577,
+          "10": 322,
+          "11": 176,
+          "12": 86,
+          "13": 96,
+          "14": 58,
+          "15": 68
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 921600,
+        "valid": 752110,
+        "m_greater_than_one": 749464,
+        "positive_age_valid": 677405,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 695103,
+        "age_histogram_valid": {
+          "0": 74705,
+          "1": 62589,
+          "2": 59568,
+          "3": 55431,
+          "4": 50605,
+          "5": 46870,
+          "6": 43122,
+          "7": 38754,
+          "8": 34766,
+          "9": 31845,
+          "10": 28471,
+          "11": 25545,
+          "12": 22601,
+          "13": 21850,
+          "14": 18366,
+          "15": 16244,
+          "16": 14630,
+          "17": 13432,
+          "18": 12329,
+          "19": 10293,
+          "20": 9377,
+          "21": 8037,
+          "22": 7464,
+          "23": 6873,
+          "24": 5989,
+          "25": 5301,
+          "26": 5313,
+          "27": 4335,
+          "28": 4144,
+          "29": 4730,
+          "30": 8531
+        },
+        "rc_length_histogram_valid": {
+          "0": 5202,
+          "4": 568299,
+          "5": 92287,
+          "6": 20351,
+          "7": 5122,
+          "8": 1742,
+          "9": 1428,
+          "10": 272,
+          "11": 154,
+          "12": 68,
+          "13": 79,
+          "14": 41,
+          "15": 58,
+          "16": 57007
+        },
+        "path_length_histogram_valid": {
+          "0": 5202,
+          "4": 606718,
+          "5": 107478,
+          "6": 22863,
+          "7": 5707,
+          "8": 1902,
+          "9": 1511,
+          "10": 292,
+          "11": 160,
+          "12": 75,
+          "13": 89,
+          "14": 51,
+          "15": 62
+        },
+        "max_age_valid": 30,
+        "mean_m_valid": 16.246162130539417,
+        "valid_with_positive_weight": 746908,
+        "positive_weight_path_length_histogram": {
+          "4": 606718,
+          "5": 107478,
+          "6": 22863,
+          "7": 5707,
+          "8": 1902,
+          "9": 1511,
+          "10": 292,
+          "11": 160,
+          "12": 75,
+          "13": 89,
+          "14": 51,
+          "15": 62
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "exact_previous_b8": null,
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 14,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.2278631783171376,
+              0.20797018408891746,
+              0.1856324051280454
+            ],
+            "nonzero_pixels": 163749
+          },
+          "di": {
+            "mean_rgb": [
+              0.148883311358772,
+              0.10785381096958493,
+              0.07758575272552358
+            ],
+            "nonzero_pixels": 729752
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.0532714217145177,
+              0.03439033270917005,
+              0.01874457224440347
+            ],
+            "nonzero_pixels": 739120
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.04754080606411056,
+              0.03171103028392988,
+              0.01568341118509933
+            ],
+            "nonzero_pixels": 743491
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "convergence-B9",
+    "stage": 3,
+    "contract": {
+      "stage": 3,
+      "gi_reuse": true,
+      "footprint": false,
+      "replay_safe_ablation": true,
+      "full_prefix_replay": true,
+      "initial_only_roulette_probability": 0.800000012,
+      "scope": "Limited PT++; original-scene footprint remains unsupported"
+    },
+    "roulette": {
+      "tests": 1075029,
+      "survivals": 860133,
+      "terminations": 214896,
+      "replay_tests": 0
+    },
+    "gi": {
+      "pixels": 921600,
+      "valid": 752047,
+      "positive_weight": 747875,
+      "m_greater_than_one": 748480,
+      "positive_age_valid": 690979,
+      "max_age_valid": 31,
+      "mean_m_valid": 27.396390119234567
+    },
+    "pt": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 921600,
+        "valid": 752110,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 746282,
+        "age_histogram_valid": {
+          "0": 752110
+        },
+        "rc_length_histogram_valid": {
+          "0": 525890,
+          "4": 184696,
+          "5": 27772,
+          "6": 6033,
+          "7": 1303,
+          "8": 308,
+          "9": 176,
+          "10": 49,
+          "11": 20,
+          "12": 12,
+          "13": 10,
+          "14": 6,
+          "15": 7,
+          "16": 5828
+        },
+        "path_length_histogram_valid": {
+          "0": 525890,
+          "4": 188770,
+          "5": 29233,
+          "6": 6264,
+          "7": 1352,
+          "8": 318,
+          "9": 177,
+          "10": 50,
+          "11": 20,
+          "12": 12,
+          "13": 10,
+          "14": 7,
+          "15": 7
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 226220,
+        "positive_weight_path_length_histogram": {
+          "4": 188770,
+          "5": 29233,
+          "6": 6264,
+          "7": 1352,
+          "8": 318,
+          "9": 177,
+          "10": 50,
+          "11": 20,
+          "12": 12,
+          "13": 10,
+          "14": 7,
+          "15": 7
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 921600,
+        "valid": 752110,
+        "m_greater_than_one": 734099,
+        "positive_age_valid": 678885,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 702413,
+        "age_histogram_valid": {
+          "0": 73225,
+          "1": 55748,
+          "2": 53523,
+          "3": 51900,
+          "4": 49552,
+          "5": 46134,
+          "6": 42844,
+          "7": 39991,
+          "8": 36391,
+          "9": 32491,
+          "10": 30130,
+          "11": 26969,
+          "12": 24073,
+          "13": 22798,
+          "14": 19114,
+          "15": 17639,
+          "16": 16306,
+          "17": 14066,
+          "18": 12938,
+          "19": 11054,
+          "20": 9781,
+          "21": 9117,
+          "22": 7596,
+          "23": 7274,
+          "24": 6672,
+          "25": 5424,
+          "26": 5265,
+          "27": 4842,
+          "28": 4537,
+          "29": 5025,
+          "30": 9691
+        },
+        "rc_length_histogram_valid": {
+          "0": 13089,
+          "4": 572545,
+          "5": 90426,
+          "6": 18848,
+          "7": 4547,
+          "8": 1562,
+          "9": 960,
+          "10": 206,
+          "11": 91,
+          "12": 48,
+          "13": 35,
+          "14": 35,
+          "15": 21,
+          "16": 49697
+        },
+        "path_length_histogram_valid": {
+          "0": 13089,
+          "4": 606878,
+          "5": 103465,
+          "6": 20642,
+          "7": 4931,
+          "8": 1645,
+          "9": 1002,
+          "10": 221,
+          "11": 94,
+          "12": 49,
+          "13": 37,
+          "14": 36,
+          "15": 21
+        },
+        "max_age_valid": 30,
+        "mean_m_valid": 8.80842164045153,
+        "valid_with_positive_weight": 739021,
+        "positive_weight_path_length_histogram": {
+          "4": 606878,
+          "5": 103465,
+          "6": 20642,
+          "7": 4931,
+          "8": 1645,
+          "9": 1002,
+          "10": 221,
+          "11": 94,
+          "12": 49,
+          "13": 37,
+          "14": 36,
+          "15": 21
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 921600,
+        "valid": 752110,
+        "m_greater_than_one": 749349,
+        "positive_age_valid": 683493,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 702313,
+        "age_histogram_valid": {
+          "0": 68617,
+          "1": 58812,
+          "2": 56117,
+          "3": 53609,
+          "4": 50749,
+          "5": 46701,
+          "6": 43046,
+          "7": 40143,
+          "8": 36148,
+          "9": 32314,
+          "10": 29849,
+          "11": 26656,
+          "12": 23900,
+          "13": 22541,
+          "14": 18688,
+          "15": 17377,
+          "16": 16097,
+          "17": 13894,
+          "18": 12658,
+          "19": 10806,
+          "20": 9513,
+          "21": 8955,
+          "22": 7475,
+          "23": 7089,
+          "24": 6474,
+          "25": 5330,
+          "26": 5212,
+          "27": 4736,
+          "28": 4458,
+          "29": 4833,
+          "30": 9313
+        },
+        "rc_length_histogram_valid": {
+          "0": 6247,
+          "4": 581616,
+          "5": 88919,
+          "6": 18259,
+          "7": 4357,
+          "8": 1521,
+          "9": 972,
+          "10": 198,
+          "11": 87,
+          "12": 45,
+          "13": 33,
+          "14": 37,
+          "15": 22,
+          "16": 49797
+        },
+        "path_length_histogram_valid": {
+          "0": 6247,
+          "4": 616031,
+          "5": 102011,
+          "6": 20044,
+          "7": 4718,
+          "8": 1603,
+          "9": 1012,
+          "10": 213,
+          "11": 90,
+          "12": 46,
+          "13": 35,
+          "14": 38,
+          "15": 22
+        },
+        "max_age_valid": 30,
+        "mean_m_valid": 16.22445254018694,
+        "valid_with_positive_weight": 745863,
+        "positive_weight_path_length_histogram": {
+          "4": 616031,
+          "5": 102011,
+          "6": 20044,
+          "7": 4718,
+          "8": 1603,
+          "9": 1012,
+          "10": 213,
+          "11": 90,
+          "12": 46,
+          "13": 35,
+          "14": 38,
+          "15": 22
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "exact_previous_b8": null,
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 14,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.22800063069153112,
+              0.20800890385011572,
+              0.18568419512865755
+            ],
+            "nonzero_pixels": 163710
+          },
+          "di": {
+            "mean_rgb": [
+              0.14748308859985426,
+              0.1071648613015552,
+              0.07728187375533808
+            ],
+            "nonzero_pixels": 729682
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.05350657970586326,
+              0.034589736832422203,
+              0.01890508382050838
+            ],
+            "nonzero_pixels": 739241
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.047835674676074025,
+              0.03202340119705897,
+              0.016082995232039442
+            ],
+            "nonzero_pixels": 742212
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "kitchen-B8",
+    "stage": 1,
+    "contract": {
+      "stage": 1,
+      "gi_reuse": true,
+      "footprint": false,
+      "replay_safe_ablation": false,
+      "full_prefix_replay": true,
+      "initial_only_roulette_probability": 0.0,
+      "scope": "B8 matched control with GI reuse; roulette off"
+    },
+    "roulette": {
+      "tests": 0,
+      "survivals": 0,
+      "terminations": 0,
+      "replay_tests": 0
+    },
+    "gi": {
+      "pixels": 921600,
+      "valid": 807620,
+      "positive_weight": 772579,
+      "m_greater_than_one": 790376,
+      "positive_age_valid": 727850,
+      "max_age_valid": 31,
+      "mean_m_valid": 24.89516604343627
+    },
+    "pt": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 921600,
+        "valid": 808152,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 807192,
+        "age_histogram_valid": {
+          "0": 808152
+        },
+        "rc_length_histogram_valid": {
+          "0": 746788,
+          "4": 46827,
+          "5": 8868,
+          "6": 2394,
+          "7": 894,
+          "8": 503,
+          "9": 268,
+          "10": 181,
+          "11": 147,
+          "12": 89,
+          "13": 100,
+          "14": 69,
+          "15": 64,
+          "16": 960
+        },
+        "path_length_histogram_valid": {
+          "0": 746788,
+          "4": 47195,
+          "5": 9051,
+          "6": 2593,
+          "7": 960,
+          "8": 542,
+          "9": 302,
+          "10": 203,
+          "11": 168,
+          "12": 99,
+          "13": 108,
+          "14": 74,
+          "15": 69
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 61364,
+        "positive_weight_path_length_histogram": {
+          "4": 47195,
+          "5": 9051,
+          "6": 2593,
+          "7": 960,
+          "8": 542,
+          "9": 302,
+          "10": 203,
+          "11": 168,
+          "12": 99,
+          "13": 108,
+          "14": 74,
+          "15": 69
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 921600,
+        "valid": 808152,
+        "m_greater_than_one": 780819,
+        "positive_age_valid": 749053,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 789254,
+        "age_histogram_valid": {
+          "0": 59099,
+          "1": 30611,
+          "2": 33575,
+          "3": 36295,
+          "4": 38509,
+          "5": 39721,
+          "6": 39858,
+          "7": 39370,
+          "8": 37387,
+          "9": 37749,
+          "10": 35942,
+          "11": 33353,
+          "12": 31290,
+          "13": 29033,
+          "14": 27705,
+          "15": 26601,
+          "16": 23648,
+          "17": 22266,
+          "18": 20657,
+          "19": 18836,
+          "20": 17313,
+          "21": 17118,
+          "22": 14951,
+          "23": 12936,
+          "24": 12062,
+          "25": 11864,
+          "26": 10873,
+          "27": 9990,
+          "28": 9741,
+          "29": 12642,
+          "30": 17157
+        },
+        "rc_length_histogram_valid": {
+          "0": 30602,
+          "4": 686802,
+          "5": 53963,
+          "6": 9606,
+          "7": 3541,
+          "8": 1819,
+          "9": 1021,
+          "10": 591,
+          "11": 441,
+          "12": 291,
+          "13": 278,
+          "14": 166,
+          "15": 133,
+          "16": 18898
+        },
+        "path_length_histogram_valid": {
+          "0": 30602,
+          "4": 699717,
+          "5": 56653,
+          "6": 11032,
+          "7": 4183,
+          "8": 2199,
+          "9": 1261,
+          "10": 757,
+          "11": 567,
+          "12": 382,
+          "13": 362,
+          "14": 236,
+          "15": 201
+        },
+        "max_age_valid": 30,
+        "mean_m_valid": 8.72942713746919,
+        "valid_with_positive_weight": 777549,
+        "positive_weight_path_length_histogram": {
+          "4": 699716,
+          "5": 56653,
+          "6": 11032,
+          "7": 4183,
+          "8": 2199,
+          "9": 1261,
+          "10": 757,
+          "11": 567,
+          "12": 382,
+          "13": 362,
+          "14": 236,
+          "15": 201
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 921600,
+        "valid": 808152,
+        "m_greater_than_one": 800436,
+        "positive_age_valid": 756340,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 788922,
+        "age_histogram_valid": {
+          "0": 51812,
+          "1": 34715,
+          "2": 37582,
+          "3": 39744,
+          "4": 41429,
+          "5": 41673,
+          "6": 41330,
+          "7": 40487,
+          "8": 37610,
+          "9": 37647,
+          "10": 35868,
+          "11": 33022,
+          "12": 30695,
+          "13": 28440,
+          "14": 27069,
+          "15": 25693,
+          "16": 22883,
+          "17": 21575,
+          "18": 19996,
+          "19": 18180,
+          "20": 16656,
+          "21": 16646,
+          "22": 14345,
+          "23": 12299,
+          "24": 11576,
+          "25": 11429,
+          "26": 10507,
+          "27": 9602,
+          "28": 9253,
+          "29": 12024,
+          "30": 16365
+        },
+        "rc_length_histogram_valid": {
+          "0": 19707,
+          "4": 698509,
+          "5": 53328,
+          "6": 9330,
+          "7": 3438,
+          "8": 1758,
+          "9": 1015,
+          "10": 571,
+          "11": 423,
+          "12": 278,
+          "13": 273,
+          "14": 164,
+          "15": 128,
+          "16": 19230
+        },
+        "path_length_histogram_valid": {
+          "0": 19707,
+          "4": 711859,
+          "5": 55980,
+          "6": 10728,
+          "7": 4065,
+          "8": 2131,
+          "9": 1252,
+          "10": 733,
+          "11": 546,
+          "12": 369,
+          "13": 354,
+          "14": 232,
+          "15": 196
+        },
+        "max_age_valid": 30,
+        "mean_m_valid": 14.951583365505499,
+        "valid_with_positive_weight": 788445,
+        "positive_weight_path_length_histogram": {
+          "4": 711859,
+          "5": 55980,
+          "6": 10728,
+          "7": 4065,
+          "8": 2131,
+          "9": 1252,
+          "10": 733,
+          "11": 546,
+          "12": 369,
+          "13": 354,
+          "14": 232,
+          "15": 196
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "exact_previous_b8": null,
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 14,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.08154472090297431,
+              0.07572820759850503,
+              0.06778793549488506
+            ],
+            "nonzero_pixels": 92428
+          },
+          "di": {
+            "mean_rgb": [
+              0.0212015821424494,
+              0.017163497053035017,
+              0.014050783503011593
+            ],
+            "nonzero_pixels": 677103
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.005903743467190199,
+              0.004389531953105082,
+              0.0031609111442230642
+            ],
+            "nonzero_pixels": 747090
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.008316241508453257,
+              0.0054660976610224074,
+              0.004062512088825719
+            ],
+            "nonzero_pixels": 774882
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "kitchen-B9",
+    "stage": 3,
+    "contract": {
+      "stage": 3,
+      "gi_reuse": true,
+      "footprint": false,
+      "replay_safe_ablation": true,
+      "full_prefix_replay": true,
+      "initial_only_roulette_probability": 0.800000012,
+      "scope": "Limited PT++; original-scene footprint remains unsupported"
+    },
+    "roulette": {
+      "tests": 1581740,
+      "survivals": 1265842,
+      "terminations": 315898,
+      "replay_tests": 0
+    },
+    "gi": {
+      "pixels": 921600,
+      "valid": 807620,
+      "positive_weight": 772579,
+      "m_greater_than_one": 790376,
+      "positive_age_valid": 727850,
+      "max_age_valid": 31,
+      "mean_m_valid": 24.89516604343627
+    },
+    "pt": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 921600,
+        "valid": 808152,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 807683,
+        "age_histogram_valid": {
+          "0": 808152
+        },
+        "rc_length_histogram_valid": {
+          "0": 762224,
+          "4": 37820,
+          "5": 5715,
+          "6": 1215,
+          "7": 380,
+          "8": 159,
+          "9": 83,
+          "10": 28,
+          "11": 22,
+          "12": 19,
+          "13": 9,
+          "14": 4,
+          "15": 5,
+          "16": 469
+        },
+        "path_length_histogram_valid": {
+          "0": 762224,
+          "4": 38057,
+          "5": 5811,
+          "6": 1306,
+          "7": 400,
+          "8": 167,
+          "9": 91,
+          "10": 32,
+          "11": 23,
+          "12": 23,
+          "13": 9,
+          "14": 4,
+          "15": 5
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 45928,
+        "positive_weight_path_length_histogram": {
+          "4": 38057,
+          "5": 5811,
+          "6": 1306,
+          "7": 400,
+          "8": 167,
+          "9": 91,
+          "10": 32,
+          "11": 23,
+          "12": 23,
+          "13": 9,
+          "14": 4,
+          "15": 5
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 921600,
+        "valid": 808152,
+        "m_greater_than_one": 777547,
+        "positive_age_valid": 747153,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 794213,
+        "age_histogram_valid": {
+          "0": 60999,
+          "1": 26203,
+          "2": 29784,
+          "3": 32525,
+          "4": 35273,
+          "5": 37146,
+          "6": 37954,
+          "7": 38754,
+          "8": 37254,
+          "9": 37365,
+          "10": 36048,
+          "11": 35184,
+          "12": 31138,
+          "13": 30632,
+          "14": 29106,
+          "15": 27531,
+          "16": 26167,
+          "17": 22499,
+          "18": 21561,
+          "19": 19449,
+          "20": 17844,
+          "21": 16154,
+          "22": 15893,
+          "23": 14229,
+          "24": 13348,
+          "25": 12095,
+          "26": 11991,
+          "27": 10918,
+          "28": 10596,
+          "29": 13750,
+          "30": 18762
+        },
+        "rc_length_histogram_valid": {
+          "0": 37156,
+          "4": 693340,
+          "5": 50602,
+          "6": 8154,
+          "7": 2505,
+          "8": 1180,
+          "9": 571,
+          "10": 280,
+          "11": 198,
+          "12": 102,
+          "13": 59,
+          "14": 38,
+          "15": 28,
+          "16": 13939
+        },
+        "path_length_histogram_valid": {
+          "0": 37156,
+          "4": 703868,
+          "5": 52375,
+          "6": 9060,
+          "7": 2863,
+          "8": 1342,
+          "9": 658,
+          "10": 323,
+          "11": 219,
+          "12": 126,
+          "13": 77,
+          "14": 46,
+          "15": 39
+        },
+        "max_age_valid": 30,
+        "mean_m_valid": 8.69703719102347,
+        "valid_with_positive_weight": 770995,
+        "positive_weight_path_length_histogram": {
+          "4": 703867,
+          "5": 52375,
+          "6": 9060,
+          "7": 2863,
+          "8": 1342,
+          "9": 658,
+          "10": 323,
+          "11": 219,
+          "12": 126,
+          "13": 77,
+          "14": 46,
+          "15": 39
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 921600,
+        "valid": 808152,
+        "m_greater_than_one": 799077,
+        "positive_age_valid": 755956,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 793966,
+        "age_histogram_valid": {
+          "0": 52196,
+          "1": 30430,
+          "2": 34093,
+          "3": 36249,
+          "4": 38526,
+          "5": 39884,
+          "6": 39661,
+          "7": 39846,
+          "8": 37562,
+          "9": 37460,
+          "10": 35907,
+          "11": 34823,
+          "12": 30636,
+          "13": 29857,
+          "14": 28344,
+          "15": 26743,
+          "16": 25462,
+          "17": 21659,
+          "18": 20895,
+          "19": 18656,
+          "20": 17190,
+          "21": 15504,
+          "22": 15251,
+          "23": 13552,
+          "24": 12813,
+          "25": 11563,
+          "26": 11493,
+          "27": 10542,
+          "28": 10177,
+          "29": 13316,
+          "30": 17862
+        },
+        "rc_length_histogram_valid": {
+          "0": 24797,
+          "4": 706095,
+          "5": 50257,
+          "6": 7933,
+          "7": 2447,
+          "8": 1179,
+          "9": 564,
+          "10": 280,
+          "11": 192,
+          "12": 101,
+          "13": 57,
+          "14": 36,
+          "15": 28,
+          "16": 14186
+        },
+        "path_length_histogram_valid": {
+          "0": 24797,
+          "4": 716895,
+          "5": 52021,
+          "6": 8829,
+          "7": 2797,
+          "8": 1343,
+          "9": 652,
+          "10": 321,
+          "11": 214,
+          "12": 125,
+          "13": 75,
+          "14": 44,
+          "15": 39
+        },
+        "max_age_valid": 30,
+        "mean_m_valid": 14.900385076074798,
+        "valid_with_positive_weight": 783355,
+        "positive_weight_path_length_histogram": {
+          "4": 716895,
+          "5": 52021,
+          "6": 8829,
+          "7": 2797,
+          "8": 1343,
+          "9": 652,
+          "10": 321,
+          "11": 214,
+          "12": 125,
+          "13": 75,
+          "14": 44,
+          "15": 39
+        },
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "exact_previous_b8": null,
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 14,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.08154472090297431,
+              0.07572820759850503,
+              0.06778793549488506
+            ],
+            "nonzero_pixels": 92428
+          },
+          "di": {
+            "mean_rgb": [
+              0.020906293042224005,
+              0.016468854934921385,
+              0.013800209807426049
+            ],
+            "nonzero_pixels": 677321
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.005903758762869984,
+              0.004389577818801627,
+              0.003160946587385196
+            ],
+            "nonzero_pixels": 747134
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.00859195906688304,
+              0.005708323679799732,
+              0.004229589162277989
+            ],
+            "nonzero_pixels": 767055
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "room-cap1-B9",
+    "stage": 2,
+    "contract": {
+      "stage": 2,
+      "gi_reuse": true,
+      "footprint": true,
+      "replay_safe_ablation": false,
+      "full_prefix_replay": false,
+      "initial_only_roulette_probability": 0.800000012,
+      "scope": "Limited PT++ footprint/roulette development; no canonical promotion"
+    },
+    "roulette": {
+      "tests": 0,
+      "survivals": 0,
+      "terminations": 0,
+      "replay_tests": 0
+    },
+    "gi": {
+      "pixels": 16107,
+      "valid": 8642,
+      "positive_weight": 0,
+      "m_greater_than_one": 7787,
+      "positive_age_valid": 7404,
+      "max_age_valid": 31,
+      "mean_m_valid": 13.312659106688267
+    },
+    "pt": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 16107,
+        "valid": 8645,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 8645,
+        "age_histogram_valid": {
+          "0": 8645
+        },
+        "rc_length_histogram_valid": {
+          "0": 8645
+        },
+        "path_length_histogram_valid": {
+          "0": 8645
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 0,
+        "positive_weight_path_length_histogram": {},
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 16107,
+        "valid": 8645,
+        "m_greater_than_one": 8645,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 8645,
+        "age_histogram_valid": {
+          "0": 8645
+        },
+        "rc_length_histogram_valid": {
+          "0": 8645
+        },
+        "path_length_histogram_valid": {
+          "0": 8645
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 9.0,
+        "valid_with_positive_weight": 0,
+        "positive_weight_path_length_histogram": {},
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 16107,
+        "valid": 8645,
+        "m_greater_than_one": 8645,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 8645,
+        "age_histogram_valid": {
+          "0": 8645
+        },
+        "rc_length_histogram_valid": {
+          "0": 8645
+        },
+        "path_length_histogram_valid": {
+          "0": 8645
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 11.752573742047426,
+        "valid_with_positive_weight": 0,
+        "positive_weight_path_length_histogram": {},
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "exact_previous_b8": null,
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 1,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.2159387222946545,
+              0.2159387222946545,
+              0.2159387222946545
+            ],
+            "nonzero_pixels": 175
+          },
+          "di": {
+            "mean_rgb": [
+              0.09318682874626397,
+              0.0930693992106262,
+              0.07428027752458682
+            ],
+            "nonzero_pixels": 7323
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "nonzero_pixels": 0
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "nonzero_pixels": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "case": "room-cap2-B9",
+    "stage": 2,
+    "contract": {
+      "stage": 2,
+      "gi_reuse": true,
+      "footprint": true,
+      "replay_safe_ablation": false,
+      "full_prefix_replay": false,
+      "initial_only_roulette_probability": 0.800000012,
+      "scope": "Limited PT++ footprint/roulette development; no canonical promotion"
+    },
+    "roulette": {
+      "tests": 6467,
+      "survivals": 5201,
+      "terminations": 1266,
+      "replay_tests": 0
+    },
+    "gi": {
+      "pixels": 16107,
+      "valid": 8640,
+      "positive_weight": 8205,
+      "m_greater_than_one": 8008,
+      "positive_age_valid": 7119,
+      "max_age_valid": 31,
+      "mean_m_valid": 14.907754629629629
+    },
+    "pt": {
+      "initial_preserved_index": {
+        "slot": 2,
+        "pixels": 16107,
+        "valid": 8645,
+        "m_greater_than_one": 0,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 8645,
+        "age_histogram_valid": {
+          "0": 8645
+        },
+        "rc_length_histogram_valid": {
+          "0": 8645
+        },
+        "path_length_histogram_valid": {
+          "0": 8645
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 1.0,
+        "valid_with_positive_weight": 0,
+        "positive_weight_path_length_histogram": {},
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "temporal_output_index": {
+        "slot": 0,
+        "pixels": 16107,
+        "valid": 8645,
+        "m_greater_than_one": 8645,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 8645,
+        "age_histogram_valid": {
+          "0": 8645
+        },
+        "rc_length_histogram_valid": {
+          "0": 8645
+        },
+        "path_length_histogram_valid": {
+          "0": 8645
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 9.0,
+        "valid_with_positive_weight": 0,
+        "positive_weight_path_length_histogram": {},
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      },
+      "final_index": {
+        "slot": 1,
+        "pixels": 16107,
+        "valid": 8645,
+        "m_greater_than_one": 8645,
+        "positive_age_valid": 0,
+        "midpath_reconnection_valid": 0,
+        "terminal_reconnection_valid": 8645,
+        "age_histogram_valid": {
+          "0": 8645
+        },
+        "rc_length_histogram_valid": {
+          "0": 8645
+        },
+        "path_length_histogram_valid": {
+          "0": 8645
+        },
+        "max_age_valid": 0,
+        "mean_m_valid": 11.752573742047426,
+        "valid_with_positive_weight": 0,
+        "positive_weight_path_length_histogram": {},
+        "nonfinite_m": 0,
+        "nonfinite_weight_valid": 0,
+        "nonfinite_target_valid": 0
+      }
+    },
+    "exact_previous_b8": null,
+    "same_frame": [
+      {
+        "scope": "Same-frame support/finite smoke checks only; not a transport-mean oracle",
+        "max_bounces": 2,
+        "components": {
+          "native": {
+            "mean_rgb": [
+              0.2159387222946545,
+              0.2159387222946545,
+              0.2159387222946545
+            ],
+            "nonzero_pixels": 175
+          },
+          "di": {
+            "mean_rgb": [
+              0.09177718208719397,
+              0.09165618015103864,
+              0.07290157668156991
+            ],
+            "nonzero_pixels": 7319
+          },
+          "gi_short": {
+            "mean_rgb": [
+              0.03926302903471338,
+              0.03279630889689492,
+              0.023002434470337212
+            ],
+            "nonzero_pixels": 8192
+          },
+          "pt_long": {
+            "mean_rgb": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "nonzero_pixels": 0
+          }
+        }
+      }
+    ]
+  }
+]

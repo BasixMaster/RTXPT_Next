@@ -82,7 +82,7 @@ struct CommandLineOptions
     bool PTReplayOnlyValidation    = false;
     bool B8InitialGIValidation = false;
     int B8GIReuseMode = -1; // -1 preserves initial-only control; 0..3 opts into NVIDIA GI approximation.
-    int B8ValidationStage = 0; // 0 initial-only, 1 DI/PT reuse, 2 limited PT++ ablation; GI reuse remains off.
+    int B8ValidationStage = 0; // 0 initial-only, 1 DI/PT reuse, 2 footprint/roulette,3 extended replay/roulette; GI mode is selected separately (stage3 requiresGI3).
     bool PTPairedSpatialValidation = false; // Adjacent reciprocal-pair/vector pilot, not full B10.
     bool PTGaussianPairingValidation = false; // Three resident tables, one per frame; not simultaneous three-neighbor reuse.
     bool PTReplayCompactionValidation = false; // Opt-in queue schedule; same-frame direct oracle when reservoir diagnostics are captured.

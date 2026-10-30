@@ -214,7 +214,7 @@
     },
     {
       "id": "B9",
-      "status": "development_limited_ptpp_gi_initial_only",
+      "status": "development_limited_ptpp_on_b8",
       "ref": null,
       "source_sha": null,
       "assets_sha": "a56be4ed65029d2733fd02f00f4027ffd541eda8",
@@ -229,9 +229,13 @@
       "depends_on": [
         "B8"
       ],
-      "runtime_status": "GI-initial-only staged ablation executes with footprint and initial-only roulette; not complete canonical B9",
-      "ptpp_scope": "Footprint/inverse-footprint and initial-only roulette; legacy GI-off limited pilot is not this configuration",
-      "development_evidence": "Benchmarks/development/2026-10-29-b8-staged-partition"
+      "runtime_status": "Measured B9 on B8 GI reuse: Room footprint/initial roulette; original-scene full-prefix roulette-only ablations. Eight diagnostics,18quality sequences and18uncapped timings complete; no canonical promotion.",
+      "ptpp_scope": "Room: footprint/inverse-footprint plus initial-only roulette survival0.8. Original scenes: full-prefix roulette-only ablations; mid-path footprint unsupported. Legacy GI-off pilot is not this configuration.",
+      "development_evidence": "Benchmarks/development/2026-10-30-b9-on-b8",
+      "development_evidence_history": [
+        "Benchmarks/development/2026-10-29-b8-staged-partition",
+        "Benchmarks/development/2026-10-30-b9-on-b8"
+      ]
     },
     {
       "id": "B10",

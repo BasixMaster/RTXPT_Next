@@ -13,11 +13,13 @@
 | B5 | Native PT + DI 3.1 + GI 3.1 |
 | B6 | ReSTIR PT; DI/GI off |
 | B7 | ReSTIR PT + DI 3.1; GI off |
-| B8 | ReSTIR PT + DI 3.1 + GI 3.1; planned valid sharing/MIS |
-| B9 | B8 + limited PT++; planned after B8 sharing |
+| B8 | ReSTIR PT + DI 3.1 + approximate GI3.1 reuse; measured disjoint short/long path split |
+| B9 | B8 + limited PT++; measured Room footprint/roulette and original-scene roulette-only ablations |
 | B10 | B8 + full remaining PT++; authorized future work |
 
-Every result states its actual active modes. [The overview and mandatory scene matrix](Docs/Research/ALGORITHM_VARIANTS.md) distinguish native controls from DI/GI/PT captures. Original Convergence and Kitchen remain unsupported by the ReSTIR PT foundation's transmission and binding 14/2 diffuse-budget gates. No opaque substitute counts as an original-scene result. Prioritize new matched B1/B4 native-DI comparisons; the historical migrated native-only 0.806 ms control maps to B3, not B4.
+[B9-on-B8 measured report](Docs/Research/B9_RESULTS.md): eight GPU diagnostic cases,1152quality frames and18uncapped timings. Room footprint/roulette regresses in time and error; original-scene roulette-only ablations reduce GPU busy with mixed quality. B9 remains experimental.
+
+Every result states its actual active modes. [The overview and mandatory scene matrix](Docs/Research/ALGORITHM_VARIANTS.md) distinguish native controls from DI/GI/PT captures. Original Convergence and Kitchen have guarded full-prefix replay development coverage at their unchanged14/2 budgets; general mid-path reconnection with their medium/diffuse state remains unsupported. No opaque substitute counts as an original-scene result. Matched B1/B4 native-DI comparisons are recorded separately; the historical migrated native-only 0.806 ms control maps to B3, not B4.
 
 Baseline ref: `rtxpt-1.9-baseline` (`303b408`). Legacy tag `B1` (`7010bb4`) records the runtime3.1 migration; it is not canonical B1. Old-B2 checkpoint `de9fe651` maps to B7; old-B3 limited pilot `a7428c8` is a GI-off B7 ablation, not B9. `External/RTXDI-SDK` remains a separate source reference. Original upstream documentation follows unchanged.
 <!-- basix-research:end -->

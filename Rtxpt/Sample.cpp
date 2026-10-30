@@ -2294,6 +2294,10 @@ void Sample::UpdatePathTracerConstants( PathTracerConstants & constants, const P
             int(m_ui.B8InitialGIValidation), int(m_cmdLine.B8GIReuseMode > 0), m_ui.B8Component, m_ui.B8ValidationStage);
         std::printf("B8_GI_APPROX_CONTRACT enabled=%d mode=%d directional=0 jacobianClamp=1 finalBlend=1\n",
             int(m_cmdLine.B8GIReuseMode >= 0), m_cmdLine.B8GIReuseMode);
+        std::printf("B9_LIMITED_CONTRACT enabled=%d footprint=%d replaySafe=%d giReuse=%d roulette=%.9g\n",
+            int(m_ui.B8InitialGIValidation && m_cmdLine.B8GIReuseMode == 3 && m_ui.B8ValidationStage >= 2),
+            int(m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode == RTXDI_PTReconnectionMode::Footprint), int(m_ui.B8ValidationStage == 3), int(m_cmdLine.B8GIReuseMode > 0),
+            m_ui.RTXDI.restirPT.russianRouletteProbability);
         std::printf("PT_PAIRED_CONTRACT enabled=%d adjacentReciprocal=%d pairOwnedShifts=%d vectorShading=%d\n",
             int(m_cmdLine.PTPairedSpatialValidation), int(m_cmdLine.PTPairedSpatialValidation && !m_cmdLine.PTGaussianPairingValidation),
             int(m_cmdLine.PTPairedSpatialValidation), int(m_cmdLine.PTPairedSpatialValidation));
@@ -2393,12 +2397,19 @@ void Sample::RtxdiSetupFrame(nvrhi::IFramebuffer* framebuffer, PathTracerCameraD
           !(m_ui.RTXDI.restirPT.russianRouletteProbability > 0.0f && m_ui.RTXDI.restirPT.russianRouletteProbability < 1.0f)))))
         throw std::runtime_error("B8 staged partition settings changed or are incompatible");
 
+    if (m_ui.B8ValidationStage == 3 &&
+        (!m_ui.B8InitialGIValidation || !m_cmdLine.PTExtendedSceneValidation || !m_cmdLine.PTReplayOnlyValidation ||
+         m_cmdLine.B8GIReuseMode != 3 || uint32_t(m_ui.RTXDI.restirGI.resamplingMode) != 3 ||
+         m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode != RTXDI_PTReconnectionMode::FixedThreshold ||
+         !(m_ui.RTXDI.restirPT.russianRouletteProbability > 0.0f && m_ui.RTXDI.restirPT.russianRouletteProbability < 1.0f)))
+        throw std::runtime_error("B9 replay-safe ablation contract changed");
+
     if (m_cmdLine.PTExtendedSceneValidation &&
         (!m_cmdLine.PTReplayOnlyValidation || !m_ui.ActualUseReSTIRPT() ||
          m_ui.RTXDI.restirPT.reconnectionParams.roughnessThreshold != 1.0f ||
          m_ui.RTXDI.restirPT.reconnectionParams.reconnectionMode != RTXDI_PTReconnectionMode::FixedThreshold ||
-         m_ui.RTXDI.restirPT.russianRouletteProbability != 0.0f))
-        throw std::runtime_error("Extended-scene development requires full-prefix replay; mid-path suffix budget and roulette are not validated");
+         (m_ui.RTXDI.restirPT.russianRouletteProbability != 0.0f && m_ui.B8ValidationStage != 3)))
+        throw std::runtime_error("Extended-scene development requires full-prefix replay; mid-path suffix budget is not validated; roulette requires B9 stage3");
     if (m_ui.ActualUseReSTIRPT())
     {
         // Until replay carries medium state and suffix diffuse counts, refuse

@@ -6,6 +6,14 @@ import re
 import numpy as np
 
 
+def validate_replay_roulette(stage, partition, extended, replay_only, gi_mode, rc_mode, roulette):
+    if stage != 3:
+        return
+    if not (partition and extended and replay_only and gi_mode == 3 and rc_mode == 0
+            and roulette is not None and np.isfinite(roulette) and 0 < roulette < 1):
+        raise ValueError('B9 stage3 requires B8 GI3, extended full-prefix replay, fixed reconnection and roulette in(0,1)')
+
+
 def verify(log, enabled=False, component=0, stage=0, gi_mode=None):
     rows = re.findall(r'^B8_PARTITION_CONTRACT development=(\d+) version=(\d+) giReuse=(\d+) component=(\d+) minPTLength=(\d+)(?: stage=(\d+))?\s*$', log, re.MULTILINE)
     rows = [row[:5] + (row[5] or '0',) for row in rows]

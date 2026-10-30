@@ -13,7 +13,7 @@
 | B6 | ReSTIR PT | DI/GI off; native direct/fallback ownership remains explicit. |
 | B7 | ReSTIR PT + DI 3.1 | GI off; measured static opaque checkpoint. |
 | B8 | ReSTIR PT + DI 3.1 + GI 3.1 | NVIDIA non-directional GI reuse executes on the disjoint short-GI/long-PT split; original-resolution static quality measured, mixed results; uncapped timing measured; general acceptance pending. |
-| B9 | B8 + limited PT++ | GI-initial-only footprint/roulette ablation executes; complete B8/B9 pending. |
+| B9 | B8 + limited PT++ | B8 GI reuse retained; Room footprint/roulette and original-scene replay/roulette ablations execute; replicated quality and uncapped timing measured; original-scene footprint unsupported. |
 | B10 | B8 + full remaining PT++ | Gaussian reciprocal-pair/vector GPU development executes; full PT++ and acceptance pending. |
 
 B1/B4 native-DI comparisons are measured on original scenes and the registered room; B6/B7 room timing and history sweeps are also measured. The 0.803 ms control is a B0 native-control raw preset, separate from original defaults; the 0.806 ms migrated native control is B3 with DI/GI off. The old-B2 checkpoint `de9fe651` maps to B7. The old-B3 pilot `a7428c8` maps to B7 plus limited ablations, **not B9**. Stored refs/data IDs and numbers are preserved.

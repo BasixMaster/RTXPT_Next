@@ -1,0 +1,51 @@
+{
+  "scope": "B9-on-B8 with NVIDIA GI reuse in both: Room footprint/roulette; original scenes safeguarded full-prefix roulette-only; no canonical promotion",
+  "warmup_seconds": 30,
+  "measurement_seconds": 15,
+  "repeats": 3,
+  "orders": [
+    [
+      "B8",
+      "B9"
+    ],
+    [
+      "B9",
+      "B8"
+    ],
+    [
+      "B8",
+      "B9"
+    ]
+  ],
+  "scenes": {
+    "opaque-room": [
+      "WORKSPACE\\outputs\\RTXDI_Next\\Testing\\B2\\Scenes\\opaque-room-registered-env.scene.json",
+      0,
+      640,
+      360,
+      4,
+      4
+    ],
+    "convergence": [
+      "convergence-test.scene.json",
+      0,
+      1280,
+      720,
+      14,
+      2
+    ],
+    "kitchen": [
+      "kitchen-with-test-stuff.scene.json",
+      2,
+      1280,
+      720,
+      14,
+      2
+    ]
+  },
+  "selection": "Last600 Original/NotSet process/swapchain rows, drop final16",
+  "caps": "App uncapped; transactional exact-executable NVIDIA profile; read-only RTSS checks; restore every process",
+  "quality": "Separate three-seed64-frame static sequences; not equal-time quality",
+  "desktop": "User confirmed active and display connected",
+  "timing_scope": "PresentMon per-process GPU engine busy and CPU cadence, not complete critical-path frame latency/FPS"
+}

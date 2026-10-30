@@ -298,23 +298,25 @@
       "variant": "B9",
       "scene": "convergence",
       "algorithm": "B8 + limited PT++",
-      "status": "pending",
-      "reason": "Limited footprint/initial-only-roulette ablation executes in room with GI initial only; complete B8/B9 and extended comparisons pending."
+      "status": "development_not_accepted",
+      "reason": "B9 on B8 GI3: eight GPU diagnostics, three-seed64-frame quality and18uncapped timings measured. Room footprint/roulette; original scenes roulette only with full-prefix replay. Mixed quality; no canonical promotion.",
+      "development_evidence": "Benchmarks/development/2026-10-30-b9-on-b8/summary.json"
     },
     {
       "variant": "B9",
       "scene": "kitchen",
       "algorithm": "B8 + limited PT++",
-      "status": "pending",
-      "reason": "Limited footprint/initial-only-roulette ablation executes in room with GI initial only; complete B8/B9 and extended comparisons pending."
+      "status": "development_not_accepted",
+      "reason": "B9 on B8 GI3: eight GPU diagnostics, three-seed64-frame quality and18uncapped timings measured. Room footprint/roulette; original scenes roulette only with full-prefix replay. Mixed quality; no canonical promotion.",
+      "development_evidence": "Benchmarks/development/2026-10-30-b9-on-b8/summary.json"
     },
     {
       "variant": "B9",
       "scene": "opaque-room",
       "algorithm": "B8 + limited PT++",
       "status": "development_not_accepted",
-      "reason": "Limited footprint/initial-only-roulette ablation executes in room with GI initial only; complete B8/B9 and extended comparisons pending.",
-      "development_evidence": "Benchmarks/development/2026-10-29-b8-staged-partition/summary.json"
+      "reason": "B9 on B8 GI3: eight GPU diagnostics, three-seed64-frame quality and18uncapped timings measured. Room footprint/roulette; original scenes roulette only with full-prefix replay. Mixed quality; no canonical promotion.",
+      "development_evidence": "Benchmarks/development/2026-10-30-b9-on-b8/summary.json"
     },
     {
       "variant": "B10",

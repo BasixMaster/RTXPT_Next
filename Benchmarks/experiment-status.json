@@ -112,8 +112,10 @@
     },
     {
       "id": "B9",
-      "status": "planned",
-      "algorithm": "B8 + limited PT++"
+      "status": "partial",
+      "algorithm": "B8 + limited PT++",
+      "runtime_status": "B9 on B8 GI3: eight GPU diagnostics,18three-seed64-frame quality sequences,18uncapped timings complete. Original-scene footprint unsupported; no promotion.",
+      "evidence": "Benchmarks/development/2026-10-30-b9-on-b8"
     },
     {
       "id": "B10",
@@ -333,6 +335,24 @@
       ],
       "reason": "18uncapped no-image-write timing processes passed frozen identity/loss/cap/restoration checks. Complete experimental checkpoint; mixed quality remains explicit. No brightness correction or canonical promotion.",
       "evidence": "Benchmarks/development/2026-10-29-b8-nvidia-gi/timing-evidence/summary.json"
+    },
+    {
+      "id": "b9-on-b8-started",
+      "date": "2026-10-30",
+      "variants": [
+        "B9"
+      ],
+      "reason": "User requested B9 on measured B8. NVIDIA GI mode3 retained; Room footprint/roulette and safeguarded original-scene roulette-only ablations implemented. Build/225tool tests passed; no promotion.",
+      "evidence": "Benchmarks/development/2026-10-30-b9-on-b8/summary.json"
+    },
+    {
+      "id": "b9-on-b8-comparison-complete",
+      "date": "2026-10-30",
+      "variants": [
+        "B9"
+      ],
+      "reason": "Completed eight GPU gates,1152quality frames and18uncapped timings with matched B8. Room footprint/roulette; original full-prefix roulette-only scope. Quality tradeoffs, failed independent-launch bitidentity and remaining footprint gate retained; no promotion.",
+      "evidence": "Benchmarks/development/2026-10-30-b9-on-b8/summary.json"
     }
   ]
 }

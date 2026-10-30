@@ -8,7 +8,8 @@
     "B0 preserves unchanged RTXPT1.9 defaults, original assets and runtime3.0. Canonical B1/B2 are native PT+DI/DI+GI3.0; B3/B4/B5 are native PT, +DI, +DI+GI on runtime3.1. VERSION_MAPPING.md preserves all legacy refs/data labels.",
     "B1–B5 native cohorts remain preserved. B6/B7 now have corrected original-resolution five-seed guarded quality evidence after finite rejected-shift targets prevented invalid MIS propagation; native startup stability and new throughput remain pending.",
     "B8 NVIDIA non-directional GI reuse now has14GPU snapshot/support gates, six64-frame static sequences and18uncapped timing processes across all required scenes. Quality is mixed, including a Kitchen linear-error regression; no canonical promotion. Earlier B9/B10 pilots retain their initial-GI scope; remaining PT++ mechanisms and broader validation are pending.",
-    "Fresh RTXPT1.9 PT-only raw control now covers all three required scenes with nine timings and nine PNG quality captures; original B0 defaults remain unchanged and HDR export is unsupported in that preserved binary."
+    "Fresh RTXPT1.9 PT-only raw control now covers all three required scenes with nine timings and nine PNG quality captures; original B0 defaults remain unchanged and HDR export is unsupported in that preserved binary.",
+    "B9-on-B8 completed eight GPU diagnostic cases,1152quality frames across three seeds and18uncapped timings. Room footprint+roulette adds11.52%GPU busy and increases measured error; original-scene roulette-only ablations reduce GPU busy7.08%/8.12% with mixed quality. Original-scene footprint and cross-launch bitidentity remain unestablished; no promotion."
   ],
   "questions": [
     {
@@ -664,6 +665,19 @@
       "quality": "14GPU snapshot/support gates, six64-frame static quality sequences and18uncapped timing processes; exact source/cache/executable and cap/restoration receipts.",
       "limitations": "GI secondary radiance is non-directional; quality is mixed, including Kitchen linear-error and empirical-luminance regression. No independent seed/motion/equal-time or canonical acceptance.",
       "notes": "Initial-only control remains available. No material replacement, exposure fitting or brightness multiplier. Earlier B9/B10 pilots retain initial-GI scope.",
+      "rights": "Application-owned prototype and measured evidence; pinned NVIDIA component/source licenses preserved."
+    },
+    {
+      "id": "LOCAL-B9-ON-B8",
+      "title": "B9 on B8: scene-scoped limited PT++ comparison",
+      "url": "https://github.com/BasixMaster/RTXPT_Next/blob/b3/ptpp-activation/Docs/Research/B9_RESULTS.md",
+      "kind": "experiment",
+      "published_on": "2026-10-30",
+      "checked_on": "2026-10-30",
+      "access": "full",
+      "quality": "Eight GPU diagnostics,18three-seed64-frame sequences,18cap-verified no-image-write timings and exact source/executable/cache receipts.",
+      "limitations": "Original-scene footprint unsupported; three-seed/process exploratory uncertainty, failed cross-launch bitidentity, GI approximation; no motion/equal-time or canonical acceptance.",
+      "notes": "Fresh matched B8 controls; original scenes roulette-only, Room footprint+roulette. Room regression retained; no brightness fit.",
       "rights": "Application-owned prototype and measured evidence; pinned NVIDIA component/source licenses preserved."
     }
   ],
@@ -1916,6 +1930,36 @@
           "locator": "B8_STAGED_IMPLEMENTATION.md; Benchmarks/development/2026-10-29-b8-nvidia-gi",
           "relation": "supports",
           "note": "Implementation, GPU participation and scoped measured comparison; not universal correctness or performance."
+        }
+      ]
+    },
+    {
+      "id": "B9-ON-B8-LIMITED-PTPP",
+      "title": "Limited PT++ has scene-specific cost and quality tradeoffs",
+      "question_ids": [
+        "Q3"
+      ],
+      "topic": "GI/PT integration",
+      "claim": "Measured GPU busy changes versus fresh matched B8 are+11.52%Room footprint/roulette,−7.08%Convergence roulette-only and−8.12%Kitchen roulette-only. Mean frame MSE point estimates rise;64-frame-average error is higher in Room/Convergence and lower in Kitchen with large uncertainty.",
+      "evidence_type": "measured",
+      "confidence": "high",
+      "context": "B8 NVIDIA GI reuse active in both; original materials/cameras and scene-specific full-prefix replay guard;1152quality frames and separate18timings.",
+      "strengths": "Three seeds, explicit runtime receipts/roulette counters, full-resolution original scenes, raw HDR/official FLIP, source/cache identity and verified cap restoration.",
+      "limitations": "No full original-scene footprint, complete-paper claim, full-image launch equivalence, motion/equal-time or universal quality/performance benefit.",
+      "implications": "Retain B8 as control and B9 experimental; separate Room footprint investigation from original-scene roulette tradeoffs and deferred brightness work.",
+      "tags": [
+        "B9",
+        "PT++",
+        "roulette",
+        "footprint",
+        "benchmark"
+      ],
+      "evidence": [
+        {
+          "source_id": "LOCAL-B9-ON-B8",
+          "locator": "B9_RESULTS.md; Benchmarks/development/2026-10-30-b9-on-b8",
+          "relation": "supports",
+          "note": "Scope and regressions retained; no canonical promotion."
         }
       ]
     }

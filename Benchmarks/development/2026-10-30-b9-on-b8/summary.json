@@ -1,0 +1,22 @@
+{
+  "status": "measured_development_partial",
+  "scope": "B9 development on measured B8 with NVIDIA GI reuse; full footprint/roulette in Room, replay-safe roulette-only original-scene ablations",
+  "gates": {
+    "build": "passed",
+    "tool_tests": 229,
+    "gpu": "eight_diagnostic_cases_passed",
+    "quality": "18_three_seed_64_frame_sequences_measured",
+    "timing": "18_uncapped_processes_passed"
+  },
+  "canonical_accepted": false,
+  "gpu_cases": 8,
+  "snapshot_scope": "Last captured frame counters/support only; full-image cross-launch equivalence gate failed and remains unestablished",
+  "quality_sequences": 18,
+  "quality_frames": 1152,
+  "timing_processes": 18,
+  "remaining": [
+    "Original-scene mid-path footprint support",
+    "Cross-process full-image bitidentity",
+    "Motion/reset stress and equal-time/error comparisons"
+  ]
+}

@@ -189,8 +189,8 @@
       "name": "Structured evidence schema separately validated; SQLite metric search",
       "status": "passed",
       "smape_matches": 2,
-      "sources": 38,
-      "findings": 44
+      "sources": 39,
+      "findings": 45
     },
     {
       "name": "No full-paper PDFs exported",
@@ -255,7 +255,7 @@
       "timed_processes": 9
     },
     {
-      "name": "18scoped checkpoints inline beside B0/B8/B10 across all three scene tables; timing/quality/oracle scopes separated",
+      "name": "24scoped checkpoints inline beside B0/B8/B9/B10 across all three scene tables; timing/quality/oracle scopes separated",
       "status": "passed"
     },
     {
@@ -272,6 +272,16 @@
       "name": "B8 all18uncapped timing receipts: frozen identities, no image writes/loss and verified restoration",
       "status": "passed",
       "limits": "Per-process GPU busy/cadence, not complete frame latency or equal-quality speedup."
+    },
+    {
+      "name": "B9 on B8:8GPU activation/support cases,18three-seed64-frame quality sequences, scene-specific footprint/replay scope and exact exported hashes",
+      "status": "passed",
+      "limits": "Original-scene footprint unsupported; cross-process full-image identity unestablished; no canonical promotion."
+    },
+    {
+      "name": "B9/B8 all18uncapped timing receipts: source/exe/cache identity, activation, no image writes/loss and verified cap restoration",
+      "status": "passed",
+      "limits": "Per-process GPU busy/cadence; three repeats, not complete frame latency or equal-quality speedup."
     },
     {
       "name": "11exact GPU queue snapshots, real original-scene replay, disabled regressions and source/evidence hashes",

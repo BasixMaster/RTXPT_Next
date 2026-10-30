@@ -1,0 +1,26 @@
+{
+  "native.pfm": {
+    "old_repeat_mismatched_components": 0,
+    "old_repeat_mse": 0.0,
+    "new_repeat_mismatched_components": 0,
+    "new_repeat_mse": 0.0
+  },
+  "native-di.pfm": {
+    "old_repeat_mismatched_components": 338220,
+    "old_repeat_mse": 0.0006215056711590071,
+    "new_repeat_mismatched_components": 338290,
+    "new_repeat_mse": 0.0006191050754918565
+  },
+  "native-di-gi.pfm": {
+    "old_repeat_mismatched_components": 386763,
+    "old_repeat_mse": 0.0009833497004049217,
+    "new_repeat_mismatched_components": 371058,
+    "new_repeat_mse": 0.0006391421193982493
+  },
+  "native-di-gi-pt.pfm": {
+    "old_repeat_mismatched_components": 383873,
+    "old_repeat_mse": 0.0009827791999884952,
+    "new_repeat_mismatched_components": 366826,
+    "new_repeat_mse": 0.0006387218968074408
+  }
+}

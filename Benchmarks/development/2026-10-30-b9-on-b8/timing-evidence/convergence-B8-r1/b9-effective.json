@@ -1,0 +1,9 @@
+{
+  "stage": 1,
+  "gi_reuse": true,
+  "footprint": false,
+  "replay_safe_ablation": false,
+  "full_prefix_replay": true,
+  "initial_only_roulette_probability": 0.0,
+  "scope": "B8 matched control with GI reuse; roulette off"
+}

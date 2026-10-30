@@ -1,0 +1,12 @@
+{
+  "base_commit": "9c91ca422b6eaf4d6b04ce5ac35f2cdd6c5de5a7",
+  "patch_sha256": "de15d620c6f223f2c24a915aab0eea26dbf13278dd069b3b669844eea7a05d00",
+  "matches_frozen_renderer_diff": true,
+  "files": [
+    "Rtxpt/Sample.cpp",
+    "Rtxpt/SampleCommon/CommandLine.cpp",
+    "Rtxpt/SampleCommon/CommandLine.h",
+    "Rtxpt/SampleUI.cpp"
+  ],
+  "current_tree_matches_except_documented_comment": true
+}

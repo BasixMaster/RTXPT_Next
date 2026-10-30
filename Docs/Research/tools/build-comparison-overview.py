@@ -45,6 +45,11 @@ def build(repo):
                 elif v=='B9' and scene=='opaque-room':
                     row['image']='assets/b8-staged/limited-ptpp.png'
                     row['note']+=' Image is a176x90 development illustration, not a matched comparison.'
+            if v=='B9':
+                row['report']='B9_RESULTS.md'
+                row['image']='assets/b9-on-b8/'+('room' if scene=='opaque-room' else scene)+'-B9.png'
+                row['algorithm']='B9 on B8: GI reuse + '+('footprint/roulette' if scene=='opaque-room' else 'full-prefix roulette-only ablation')
+                row['note']='Eight GPU diagnostics passed; '+('640x360 cap4/4' if scene=='opaque-room' else '1280x720 cap14/2')+' snapshot shown. Three-seed64-frame quality and uncapped timing in progress. Original-scene footprint remains unsupported; no promotion.'
             if scene!='opaque-room' and v in ['B1','B4']:
                 q=nq[scene]['groups'][v];t=nt[scene]['groups'][v]['summary']
                 row.update(gpu_busy_ms=t['GPUBusy']['median_of_run_medians_ms'],cpu_cadence_ms=t['CPUFrameTime']['median_of_run_medians_ms'],
@@ -188,6 +193,20 @@ def build(repo):
                     mean_frame_linear_mse=g['mean_frame_linear_mse'] if g else None,mean_image_linear_mse=g['mean_image_metrics']['linear_rgb_mse'] if g else None,
                     mean_y_difference_percent=g['mean_y_difference_percent'] if g else None,image=f'assets/b8-nvidia-gi/{name}-gi{mode}.png',
                     report='B8_STAGED_IMPLEMENTATION.md',evidence=('64-frame static sequence, frame64 FLIP; ' if g else 'Finite full-resolution snapshot; quality pending; ')+('3 uncapped timing processes. ' if t else 'timing pending. ')+('Initial-only GI control. ' if mode<0 else 'Nondirectional GI approximation. ')+('Cap4/4. ' if scene=='opaque-room' else 'Cap14/2. ')+'Mixed quality; not canonical acceptance.'))
+    b9_path=dev/'2026-10-30-b9-on-b8/quality-summary.json'
+    if b9_path.exists():
+        b9=load(b9_path);data['b9_on_b8_quality']=b9
+        data['source_hashes'][b9_path.relative_to(repo).as_posix()]=hashlib.sha256(b9_path.read_bytes()).hexdigest()
+        b9_timing_path=b9_path.parent/'timing-summary.json'
+        b9_timing=load(b9_timing_path) if b9_timing_path.exists() else None
+        if b9_timing:
+            data['b9_on_b8_timing']=b9_timing;data['source_hashes'][b9_timing_path.relative_to(repo).as_posix()]=hashlib.sha256(b9_timing_path.read_bytes()).hexdigest()
+        for item in b9['rows']:
+            scene=item['scene'];version=item['variant'];t=next((x for x in b9_timing['rows'] if x['scene']==scene),None) if b9_timing else None
+            checkpoints.append(dict(item,kind='b9_matched_B8' if version=='B8' else 'b9_limited',
+                label='B8 · matched B9 control' if version=='B8' else 'B9 · '+('footprint + roulette' if scene=='opaque-room' else 'roulette only'),
+                gpu_busy_ms=t['B8_gpu_busy_ms' if version=='B8' else 'B9_gpu_busy_ms'] if t else None,
+                report='B9_RESULTS.md',evidence='Three seeds ×64static frames; frame64 FLIP. '+('Three uncapped timings. ' if t else 'Timing pending. ')+('Room cap4/4. ' if scene=='opaque-room' else 'Original cap14/2; footprint unsupported. ')+'Development, no promotion.'))
     data['checkpoint_rows']=checkpoints
     for item in checkpoints:
         if item.get('image') and not (doc/item['image']).is_file():raise ValueError('Missing checkpoint picture')

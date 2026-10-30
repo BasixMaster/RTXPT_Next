@@ -1,6 +1,6 @@
 # Roadmap: canonical B0–B10
 
-**Live checkpoint:** B8 now has opt-in NVIDIA non-directional GI temporal/spatial reuse on the existing disjoint GI-short/PT-long split. Eight room gates and six full-resolution control/reuse snapshots pass, including original Convergence/Kitchen. Six64-frame static quality sequences and18uncapped timing processes are complete; quality is mixed and the approximation is not promoted. Finish this B8 evaluation before advancing B9, then B10; exact glossy GI reevaluation is a separate future enhancement. Brightness correction remains deferred. [B8 details](B8_STAGED_IMPLEMENTATION.md).
+**Live checkpoint:** B9-on-B8 has completed its scoped comparison: eight GPU diagnostics,1152quality frames and18uncapped timing runs. Room footprint+roulette regresses in GPU busy and error; Convergence/Kitchen roulette-only ablations reduce GPU busy with quality tradeoffs. Keep B8 as the control and B9 experimental. Original-scene footprint, motion/equal-time validation and deferred brightness investigation remain open; B10's remaining mechanisms are separate work. [B9 report](B9_RESULTS.md).
 
 **Current numbering, confirmed 2026-10-29:** [VERSION_MAPPING.md](VERSION_MAPPING.md) defines all canonical variants and the retained legacy crosswalk. B0 remains the unchanged RTXPT 1.9 original-defaults reference. Old files, branches, tags and data IDs are not renumbered in place.
 

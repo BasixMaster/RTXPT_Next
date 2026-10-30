@@ -1,0 +1,5 @@
+{
+  "reason": "Report actual full-prefix replay separately from B9 stage3 ablation flag; B8 original-scene controls also have full-prefix replay. Existing raw logs revalidated; no rendering, numerical, acceptance-gate or shader change.",
+  "previous_checks_sha256": "5567065b19fa25c0d20114fe0d5dd5334b1be41c7e539d734f2ba7d804674b5c",
+  "cases": 8
+}

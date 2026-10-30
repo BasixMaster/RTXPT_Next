@@ -1,0 +1,1210 @@
+{
+  "label": "kitchen-B9-s4093",
+  "scene": "kitchen-with-test-stuff.scene.json",
+  "mode": "dipt",
+  "output_track": "unreconstructed tonemapped sRGB PNG plus stored linear RGB PFM and source-format metadata",
+  "exe_sha256": "964a3c677d397655ea48c3764afda9af97ebb83dd778596855e9f7c8ed9d9b2c",
+  "started_utc": "2026-10-29T23:33:13.584206+00:00",
+  "command": [
+    "WORKSPACE\\outputs\\RTXDI_Next\\bin\\Rtxpt.exe",
+    "--scene",
+    "kitchen-with-test-stuff.scene.json",
+    "--width",
+    "1280",
+    "--height",
+    "720",
+    "--overrideRadianceCacheMode",
+    "0",
+    "--useNEE",
+    "1",
+    "--NEEType",
+    "2",
+    "--useReSTIRDI",
+    "1",
+    "--useReSTIRGI",
+    "1",
+    "--standaloneDenoiser",
+    "0",
+    "--overrideAutoexposureOff",
+    "--overrideExposureOffset",
+    "2.0",
+    "--disablePostProcessFilters",
+    "--realtimeAA",
+    "0",
+    "--disableFireflyFilters",
+    "--overrideSubSamplingMode",
+    "0",
+    "--nonInteractive",
+    "--capturePath",
+    "WORKSPACE\\work\\2026-10-30-b9\\quality\\kitchen-B9-s4093\\frame.png",
+    "--captureSuffix",
+    "kitchen-B9-s4093",
+    "--perfLog",
+    "WORKSPACE\\work\\2026-10-30-b9\\quality\\kitchen-B9-s4093\\partial-perf.csv",
+    "--b8InitialGIValidation",
+    "true",
+    "--b8Component",
+    "0",
+    "--b8ValidationStage",
+    "3",
+    "--b8GIReuseMode",
+    "3",
+    "--ptReconnectionMode",
+    "0",
+    "--ptRouletteProbability",
+    "0.8",
+    "--ptFixedSpatialSamples",
+    "1",
+    "--ptReplayOnlyValidation",
+    "true",
+    "--ptExtendedSceneValidation",
+    "true",
+    "--strictDIValidation",
+    "true",
+    "--restirDIMode",
+    "3",
+    "--neeMIS",
+    "0",
+    "--environmentDiffuseMip",
+    "0",
+    "--benchmarkUncapped",
+    "true",
+    "--samplingSeed",
+    "4093",
+    "--captureLinearHDR",
+    "true",
+    "--overrideToRealtimeMode",
+    "--realtimeSamplesPerPixel",
+    "1",
+    "--useReSTIRPT",
+    "1",
+    "--restirPTMode",
+    "3",
+    "--maxBounces",
+    "14",
+    "--maxDiffuseBounces",
+    "2",
+    "--stopAnimations",
+    "--captureSequence",
+    "--sequenceFPS",
+    "60",
+    "--sequenceWarmupStart",
+    "0",
+    "--sequenceRecordStart",
+    "0.1",
+    "--sequenceFrameCount",
+    "64"
+  ],
+  "cwd": "WORKSPACE\\outputs\\RTXDI_Next\\bin",
+  "settings": {
+    "width": 1280,
+    "height": 720,
+    "exposure": 2.0,
+    "aa": 0,
+    "denoiser": 0,
+    "radiance_cache": 0,
+    "restir_di": 1,
+    "restir_gi": 1,
+    "simple": false,
+    "record_start": 0.1,
+    "frames": 64,
+    "reference_spp": null,
+    "linear_hdr_requested": true,
+    "sampling_seed_requested": 4093,
+    "reference_pixel_center_requested": false,
+    "di_mode_requested": 3,
+    "nee_mis_requested": 0,
+    "nee_type": 2,
+    "restir_pt": 1,
+    "max_bounces_override": 14,
+    "max_diffuse_bounces_override": 2,
+    "pt_mode": 3
+  },
+  "timing_scope": "External PresentMon plus separate internal partial PT stage attribution. PNG write is outside selected pre-capture window.",
+  "measurement_status": "captured",
+  "scene_sha256": "2af5735fb02fc01badd83671641d54b7f1c69859c8c9bcdf335ca95d9daae552",
+  "canonical_experiment": null,
+  "paired_spatial_pilot_requested": false,
+  "gaussian_pairing_requested": false,
+  "development_partition": {
+    "contract_version": 1,
+    "canonical_accepted": false,
+    "gi_reuse": true,
+    "gi_approximation_mode": 3,
+    "component": 0,
+    "stage": 3,
+    "pt_min_light_inclusive_length": 4
+  },
+  "development_extended_scene_transport": {
+    "full_prefix_replay": true,
+    "canonical_accepted": false,
+    "diffuse_budget": "Native sampled-lobe accounting with terminal-emission truncation"
+  },
+  "process_id": 77144,
+  "renderer_exit_code": 0,
+  "elapsed_wall_s": 45.375,
+  "images": [
+    {
+      "name": "frame_000_kitchen-B9-s4093.png",
+      "sha256": "e72c08b5be300d14ebbff8a1bd8f61f4f3344d0756177da9618bfcff6f5a3fc8",
+      "bytes": 3185579
+    },
+    {
+      "name": "frame_001_kitchen-B9-s4093.png",
+      "sha256": "9f15ab8cc3861398d6ae73edaeca647f9329eac4dfe463adecfef8992f7072e5",
+      "bytes": 3184984
+    },
+    {
+      "name": "frame_002_kitchen-B9-s4093.png",
+      "sha256": "8ec8defefe591af7d91cea72c103a695a9230ff4941722619afafd3a290c5e1e",
+      "bytes": 3182741
+    },
+    {
+      "name": "frame_003_kitchen-B9-s4093.png",
+      "sha256": "9c97e1b99b4e66da39cf420328f0ede56104cc681a82c92cb04dde075b32cf90",
+      "bytes": 3182729
+    },
+    {
+      "name": "frame_004_kitchen-B9-s4093.png",
+      "sha256": "b7642e8d3f77660a8c70770a70e9aea7ead1ba92a321a762f1040caa85f2eccd",
+      "bytes": 3182170
+    },
+    {
+      "name": "frame_005_kitchen-B9-s4093.png",
+      "sha256": "bc6af0ed41f68ad1be33d1053aee62792161e71d1f3ba16e93447425aa5f813b",
+      "bytes": 3182085
+    },
+    {
+      "name": "frame_006_kitchen-B9-s4093.png",
+      "sha256": "a685bcd0577aa73ed3a14d5a1036a958432987b5eafa051c4b62f8be920505e2",
+      "bytes": 3183326
+    },
+    {
+      "name": "frame_007_kitchen-B9-s4093.png",
+      "sha256": "79c147d1e75d10c7f48a571b77522719a678ba26489eec09c06e4678ce46fe5b",
+      "bytes": 3185196
+    },
+    {
+      "name": "frame_008_kitchen-B9-s4093.png",
+      "sha256": "8dedc0552c7641db1fb6da8dcbd5df71386d1c8969e079cc5486244b613b50c9",
+      "bytes": 3182239
+    },
+    {
+      "name": "frame_009_kitchen-B9-s4093.png",
+      "sha256": "b9dee24921563e1e1ed27afaafb9846601b3dac3d872ed27f9490a992f8229e4",
+      "bytes": 3182425
+    },
+    {
+      "name": "frame_010_kitchen-B9-s4093.png",
+      "sha256": "2ae7d2467edb9cc54a6f3bcd06597eab5575071ee7712e50709aa762b64a4410",
+      "bytes": 3183408
+    },
+    {
+      "name": "frame_011_kitchen-B9-s4093.png",
+      "sha256": "a68c66273825f27949adb5dd8cfc17ec78c2caf7cb08fc55ce046b137466ce87",
+      "bytes": 3183509
+    },
+    {
+      "name": "frame_012_kitchen-B9-s4093.png",
+      "sha256": "165a4a68d6c58eaa5304653b418fecd4adb8ca995c26fad116bbda344148afb4",
+      "bytes": 3183735
+    },
+    {
+      "name": "frame_013_kitchen-B9-s4093.png",
+      "sha256": "8ae62ce10763d85dc80a8ad466a20eaa442c3353a02dced9eafe9f2ce049ce93",
+      "bytes": 3185684
+    },
+    {
+      "name": "frame_014_kitchen-B9-s4093.png",
+      "sha256": "ddb8d183259d10794a37e516a11b61fb04c8c7b8195baa4bace8be43b12f72b7",
+      "bytes": 3182873
+    },
+    {
+      "name": "frame_015_kitchen-B9-s4093.png",
+      "sha256": "3c36e716e180efaccff0911e86b3df14f99dea1cc83fe5801390e3363770b12e",
+      "bytes": 3184333
+    },
+    {
+      "name": "frame_016_kitchen-B9-s4093.png",
+      "sha256": "937e90132a36f96fdd953c5b6d076b02409a04b74a4e4e8fff5d9253652044e1",
+      "bytes": 3183051
+    },
+    {
+      "name": "frame_017_kitchen-B9-s4093.png",
+      "sha256": "269a3d3831f12b4d492c9c0e2af36116221c28ba173cfcf1f5a0d64a6e5c8366",
+      "bytes": 3183080
+    },
+    {
+      "name": "frame_018_kitchen-B9-s4093.png",
+      "sha256": "0c28f6ce4b001aecd86877430f28c6d5dfc20d24f41596e320e8a77eedf575e0",
+      "bytes": 3183297
+    },
+    {
+      "name": "frame_019_kitchen-B9-s4093.png",
+      "sha256": "be2e7ddc6e686c800b0f4f84931b21462fe026716e2a14ea939c4c2c4d8665f2",
+      "bytes": 3183566
+    },
+    {
+      "name": "frame_020_kitchen-B9-s4093.png",
+      "sha256": "ba28bfe202a24c207e163b5cf7a2f5685c9123a551d1ed87578221ac920c133d",
+      "bytes": 3184440
+    },
+    {
+      "name": "frame_021_kitchen-B9-s4093.png",
+      "sha256": "3a81855a96677d655283ba388ebd9d283c8ad648b77e11bcacfefd8005665b78",
+      "bytes": 3184302
+    },
+    {
+      "name": "frame_022_kitchen-B9-s4093.png",
+      "sha256": "0b711b95d33ef8046b1b317e099ddec09dde8c719c0acb731c25a34c5dec4f56",
+      "bytes": 3184167
+    },
+    {
+      "name": "frame_023_kitchen-B9-s4093.png",
+      "sha256": "d8e2d05f3c690ab0600529f4d44b36c9d5e2600a6bb05123636235ebbaf1f8c7",
+      "bytes": 3183685
+    },
+    {
+      "name": "frame_024_kitchen-B9-s4093.png",
+      "sha256": "b5eceb335384cf19f9c412f3351ca2c413233ab932cab13793c9e4aca9f4cfe8",
+      "bytes": 3182698
+    },
+    {
+      "name": "frame_025_kitchen-B9-s4093.png",
+      "sha256": "9294a59ce6ca8ae7d4e2ba3432bd74af474cf6addec9067a834c803ea34fe83a",
+      "bytes": 3183733
+    },
+    {
+      "name": "frame_026_kitchen-B9-s4093.png",
+      "sha256": "da4ee1d965e1d0a2ad52663fd224113d9b6bd4e84fe217e0a3a59e0e7e092776",
+      "bytes": 3180795
+    },
+    {
+      "name": "frame_027_kitchen-B9-s4093.png",
+      "sha256": "8e35e74ea1740d455a6b12cfe1045c57fb6c6627849cedb866b4c5460a64da24",
+      "bytes": 3181254
+    },
+    {
+      "name": "frame_028_kitchen-B9-s4093.png",
+      "sha256": "b47761551f85233d4477e77869b9d9984b81547ad4d0cd7497f3a33b82638bf9",
+      "bytes": 3180848
+    },
+    {
+      "name": "frame_029_kitchen-B9-s4093.png",
+      "sha256": "d9b13af590713f4ebb7071b6b153d0dc29b87038687665b7e64d0bcc42aa74e9",
+      "bytes": 3181429
+    },
+    {
+      "name": "frame_030_kitchen-B9-s4093.png",
+      "sha256": "890e67d33ad742c28164589f9d8a3a00a30ccbfc49c6b763c10d883547bf4944",
+      "bytes": 3181046
+    },
+    {
+      "name": "frame_031_kitchen-B9-s4093.png",
+      "sha256": "ff1d38c67855faef5489685460517f9c8b475c5cb7bd361403e3833f88a559bc",
+      "bytes": 3179913
+    },
+    {
+      "name": "frame_032_kitchen-B9-s4093.png",
+      "sha256": "72a8da1757bb3870bb7032522ef005389eadee25dd2f5bd354638db3dd4d600c",
+      "bytes": 3180204
+    },
+    {
+      "name": "frame_033_kitchen-B9-s4093.png",
+      "sha256": "bcd8442b56767ed91a1c6e75da7b5f5c618ab9b6d1e651d103e34eb6331725fa",
+      "bytes": 3181227
+    },
+    {
+      "name": "frame_034_kitchen-B9-s4093.png",
+      "sha256": "ae16a9a5a4a059aa313e06e199ddf5bbdc188e7e00ce8be5530a0ff41c49cdad",
+      "bytes": 3180268
+    },
+    {
+      "name": "frame_035_kitchen-B9-s4093.png",
+      "sha256": "775dc72add85a314475ae571281a86fe5f7f9ebceff652cfbf1731646c712c0a",
+      "bytes": 3179035
+    },
+    {
+      "name": "frame_036_kitchen-B9-s4093.png",
+      "sha256": "b080f634ce2c476a3fe660848eb989b2ff1170536c5cb3fb10183b7e696468bd",
+      "bytes": 3179500
+    },
+    {
+      "name": "frame_037_kitchen-B9-s4093.png",
+      "sha256": "720909be8335e444af56ac79f1bc5050484fb4931e443a92570f3f837e335778",
+      "bytes": 3180175
+    },
+    {
+      "name": "frame_038_kitchen-B9-s4093.png",
+      "sha256": "e52b1f520010b51ade47296518f3afa2204a7866d36848f598e8ec1385ffd070",
+      "bytes": 3179481
+    },
+    {
+      "name": "frame_039_kitchen-B9-s4093.png",
+      "sha256": "a114e903ec73b6a8b34158128aaa0a118e2a188f4f859c012d7a4d952aab6418",
+      "bytes": 3179801
+    },
+    {
+      "name": "frame_040_kitchen-B9-s4093.png",
+      "sha256": "e843dbc276ae5a6698ed83c8eed9cad727b4665d6840339bb6b6cd6b17b3206c",
+      "bytes": 3179711
+    },
+    {
+      "name": "frame_041_kitchen-B9-s4093.png",
+      "sha256": "6975720cc648078f2b4632dc8d36ac91f49f3fc67aa7f0aee9e8574e1caf6488",
+      "bytes": 3180060
+    },
+    {
+      "name": "frame_042_kitchen-B9-s4093.png",
+      "sha256": "48a1e2ed69a518f251ef9505b058e165db97db3777e22836cd30624bf565b706",
+      "bytes": 3179063
+    },
+    {
+      "name": "frame_043_kitchen-B9-s4093.png",
+      "sha256": "7850912e9406279b98abb19f4343e6555726f753fdcc50bdb10c43628e356d5a",
+      "bytes": 3181584
+    },
+    {
+      "name": "frame_044_kitchen-B9-s4093.png",
+      "sha256": "8cd6d2a91e719221ee11421d7e89bcea3c14c53450468357b0ee620c415ef1f1",
+      "bytes": 3179430
+    },
+    {
+      "name": "frame_045_kitchen-B9-s4093.png",
+      "sha256": "f34eed98025095a5176fcb29aed023104a8ea7656faed8548d9b84888cff306a",
+      "bytes": 3180706
+    },
+    {
+      "name": "frame_046_kitchen-B9-s4093.png",
+      "sha256": "7feeb95cf3c0f42abfa7cc08be923d6cd1603480e7447c69cf72145dcf74020b",
+      "bytes": 3180257
+    },
+    {
+      "name": "frame_047_kitchen-B9-s4093.png",
+      "sha256": "8ed78eab81d76c9c179c914bcb0a255efc804ff33ca165b7d540a02b248399b9",
+      "bytes": 3180968
+    },
+    {
+      "name": "frame_048_kitchen-B9-s4093.png",
+      "sha256": "b70020ed7d8ee9548a35acaa28cffc8d3b20615fd59673bfa84e149004437608",
+      "bytes": 3180979
+    },
+    {
+      "name": "frame_049_kitchen-B9-s4093.png",
+      "sha256": "2e8b700fcd207f5a449b780828f1a4edd8f21b5f4cf0e926530f573867ee25c6",
+      "bytes": 3181764
+    },
+    {
+      "name": "frame_050_kitchen-B9-s4093.png",
+      "sha256": "60e98d650bedea7b01bbdb6865aa7d527d76ae36478396acaa3659097abd502d",
+      "bytes": 3183018
+    },
+    {
+      "name": "frame_051_kitchen-B9-s4093.png",
+      "sha256": "3d240910e3c531944f194b40964118e07c4fdd7eeb72e91f1977d1360e9f3219",
+      "bytes": 3182233
+    },
+    {
+      "name": "frame_052_kitchen-B9-s4093.png",
+      "sha256": "f7593c5f6a8a6095332e8fc5e8a29cf1734c9d64c83601ebb3b79f41f524803c",
+      "bytes": 3182332
+    },
+    {
+      "name": "frame_053_kitchen-B9-s4093.png",
+      "sha256": "eca260ae4dc5d83f7bc110220cb8f6378c27b9131eb12ff21dc73e0a1d298534",
+      "bytes": 3182840
+    },
+    {
+      "name": "frame_054_kitchen-B9-s4093.png",
+      "sha256": "a1e320ba2f1dafdda39a70e2ed231a69b9c474140e0b8c393aad36579683b6bc",
+      "bytes": 3183958
+    },
+    {
+      "name": "frame_055_kitchen-B9-s4093.png",
+      "sha256": "ec001a7db5a89d72249af302421d6a814f4c5fd8faa148836a6deba36bc901de",
+      "bytes": 3183258
+    },
+    {
+      "name": "frame_056_kitchen-B9-s4093.png",
+      "sha256": "297d7eeed67443625947539fc87d3a7657c9a3a4503bcb6d94a960d1369204a1",
+      "bytes": 3183751
+    },
+    {
+      "name": "frame_057_kitchen-B9-s4093.png",
+      "sha256": "f686fdacb99ae734a22d45385da375c744f7967457c89f9f48e54e385eb90210",
+      "bytes": 3182526
+    },
+    {
+      "name": "frame_058_kitchen-B9-s4093.png",
+      "sha256": "c5ddd08a472f6190d4b2c329a8f493c6ac32105a01a8f05a42193a8bbdb16519",
+      "bytes": 3184069
+    },
+    {
+      "name": "frame_059_kitchen-B9-s4093.png",
+      "sha256": "81a4217648361b45d68e863f1aaecda0c83d6a54f71a6dc1ea4ee8586d7dff96",
+      "bytes": 3182750
+    },
+    {
+      "name": "frame_060_kitchen-B9-s4093.png",
+      "sha256": "000a31311234036a1b2fc16e8f5bd1b5a8b38085838fa5329e67f0202e46464e",
+      "bytes": 3183257
+    },
+    {
+      "name": "frame_061_kitchen-B9-s4093.png",
+      "sha256": "9619416cf0ae70dd552a95d569e61b773521403e13ade7aa47ceb93e4a591ae3",
+      "bytes": 3185038
+    },
+    {
+      "name": "frame_062_kitchen-B9-s4093.png",
+      "sha256": "b51883e1281a533e28c6ce9a1f4802c4d8bb42a15c401a95043d9dc88bf87cb3",
+      "bytes": 3184705
+    },
+    {
+      "name": "frame_063_kitchen-B9-s4093.png",
+      "sha256": "58fb72e7f48852d49a24ea959ba1038a5c9dac397488cbab67338c79f5222f33",
+      "bytes": 3184568
+    }
+  ],
+  "linear_hdr_files": [
+    {
+      "name": "frame_000_kitchen-B9-s4093.pfm",
+      "sha256": "e2a4076c854d6f94fd0c68f4d449fc09e501721fca63046ca065e213355bcabb",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_000_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_001_kitchen-B9-s4093.pfm",
+      "sha256": "cd067069783953b43444e7f7d03cc09db914ce49d209c8601dd36266d5243ada",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_001_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_002_kitchen-B9-s4093.pfm",
+      "sha256": "15feaec16fbdddaf44dfb84637e9c78ed7d2f8f3b997534c0f25b552dac5710e",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_002_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_003_kitchen-B9-s4093.pfm",
+      "sha256": "8edc158c3f8c684c2ab2eb33f69359621d0c4bf755fff2d4c855d354d73c3468",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_003_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_004_kitchen-B9-s4093.pfm",
+      "sha256": "74ddacb82c8ff8f5d15af6d640ff9e75898ec5b19f46a0fb519c710fd6568e36",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_004_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_005_kitchen-B9-s4093.pfm",
+      "sha256": "4214ddb103a98fb425d92f360e0cf0eec880882ed610800bd5f73d7cced7d9c8",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_005_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_006_kitchen-B9-s4093.pfm",
+      "sha256": "32e341f321fcca5a9b81fcf7cf0e53b8b08de8d64c8df7924631d37c8368bd92",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_006_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_007_kitchen-B9-s4093.pfm",
+      "sha256": "a4419b3bbc431128633f43936ab368c9a870426ab0932bf0d3f5b45a44ef9bc0",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_007_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_008_kitchen-B9-s4093.pfm",
+      "sha256": "ab46d51e4e6fe045087c2a70218726c851390197498e4bacd8fd412adb5d52aa",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_008_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_009_kitchen-B9-s4093.pfm",
+      "sha256": "eabdf9ae54b4ebc0c61b364b7d5ccde65bb447825a71b0171a2a83a11c8685cc",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_009_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_010_kitchen-B9-s4093.pfm",
+      "sha256": "06edc98c2c0ceca7a2e76892cf34ac28e5091fc55584808458bbd32810334001",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_010_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_011_kitchen-B9-s4093.pfm",
+      "sha256": "935a524375e0ed729552152f20ddf83ddea5cbea21af5f19525fc2d99c2d4a65",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_011_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_012_kitchen-B9-s4093.pfm",
+      "sha256": "a0396287e1e6c292bc47da0d9cff171b33da906f3193a327cd741e7643c783aa",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_012_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_013_kitchen-B9-s4093.pfm",
+      "sha256": "bca507e6065b4bbdcfb4f9c4785fe0e5485cf1e6eab11f88343912254aa1fb44",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_013_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_014_kitchen-B9-s4093.pfm",
+      "sha256": "80dd32c2839a5da8529584c0017c37dcc46675f674fca6a390b28d9e29835a40",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_014_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_015_kitchen-B9-s4093.pfm",
+      "sha256": "3385c71954ac2890e49513c607df50931f822a65d5ec767c46acba583413a658",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_015_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_016_kitchen-B9-s4093.pfm",
+      "sha256": "403c304c95833cba4f66bf3274219b1fc4f46aaf3a5146a9cc6f6d77b05e9b43",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_016_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_017_kitchen-B9-s4093.pfm",
+      "sha256": "b920438d19261c93e90b1198269c008b5edce41d7dda0ca5a7ea605896b6f976",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_017_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_018_kitchen-B9-s4093.pfm",
+      "sha256": "a2da87a52c165e9b45ad8d1542314351bfacd5e766fcc8b6301b513c652e225e",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_018_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_019_kitchen-B9-s4093.pfm",
+      "sha256": "c27d3b7e9e38cdbbc86c9c39f476691f430a9f9619acf2af9babb3baf69c4fd0",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_019_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_020_kitchen-B9-s4093.pfm",
+      "sha256": "6c4e6b089a4529b90aa090497485867a165d44296993953ff87f0ab3c55e4fb2",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_020_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_021_kitchen-B9-s4093.pfm",
+      "sha256": "4c51b17ca655f9b0d4ea78f6ea613c73facfd806fff6d1002f7cc39d237dba10",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_021_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_022_kitchen-B9-s4093.pfm",
+      "sha256": "f22ee58b7e9aff8c2bad852c9d407a1132edab36e6e20e46b86c1d8dbc29621d",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_022_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_023_kitchen-B9-s4093.pfm",
+      "sha256": "12396ad1720cbb5456cddc8990654c06700454586102bc4eebc2fa01a01ca9d4",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_023_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_024_kitchen-B9-s4093.pfm",
+      "sha256": "bef784cf6c0e5e8028ec670af902cdccd1cd235f3759d826157252db38feef30",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_024_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_025_kitchen-B9-s4093.pfm",
+      "sha256": "f5b0abbd8052f61f4a3c3fc83ea4d8c6ca061f0fae52e200955f0947ab54f0d5",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_025_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_026_kitchen-B9-s4093.pfm",
+      "sha256": "3518fdbc3ad6de2d94b74f5622b81eb6ca0343098391030ef3d37ffa26a75e25",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_026_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_027_kitchen-B9-s4093.pfm",
+      "sha256": "ddf9fb2d9c3181d22be919622b65f9832b5c9677551d4e51a15c8d72732df5ff",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_027_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_028_kitchen-B9-s4093.pfm",
+      "sha256": "62fbacbebeade173cb5f44cf3305b60cf6d90ec0c53b980ff077f0f4c005117f",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_028_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_029_kitchen-B9-s4093.pfm",
+      "sha256": "c3ea84acc6ed1da9cdb552ca0f0ee60545b56ec154e71ab0fa93cae033972cb3",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_029_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_030_kitchen-B9-s4093.pfm",
+      "sha256": "ad1313ec148221731aef86721741e9fd5be173c74a7b6eb9b72bb373818359d8",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_030_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_031_kitchen-B9-s4093.pfm",
+      "sha256": "14b23a524c143f1d5e75a34022ec5da0d86c3688ba6e425b6779ddaf3289210f",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_031_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_032_kitchen-B9-s4093.pfm",
+      "sha256": "bf386c900d4f6daa7aeb2939f5bda0c86b56d938de0bc2a4d8af9fee8c9fc9a5",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_032_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_033_kitchen-B9-s4093.pfm",
+      "sha256": "cd299eed8b1f04351a9d07e2de7f1ef763588f06d16c1e6dfd4f677006f15fda",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_033_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_034_kitchen-B9-s4093.pfm",
+      "sha256": "c5b3f9d10440fafc39b354bd2335bbf93c71ae32ff8201fa309e1d512b4f074b",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_034_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_035_kitchen-B9-s4093.pfm",
+      "sha256": "78f168b9575213a8300ffff9d7a25fa0fb0fa9856f1ad2fa292eb7803c1ed64f",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_035_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_036_kitchen-B9-s4093.pfm",
+      "sha256": "9903de362bc089f1be4f0cb4b09566864087b4dbd70087d01b001794f42c61e6",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_036_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_037_kitchen-B9-s4093.pfm",
+      "sha256": "5289c389410b9eb3ae35693072983edd123448ffc898bd0927487471c121dfe6",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_037_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_038_kitchen-B9-s4093.pfm",
+      "sha256": "9495817921b5ab99c55a65b625a8f0bea480e9406fc1b9e60714c0a1678a4fc3",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_038_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_039_kitchen-B9-s4093.pfm",
+      "sha256": "3c1cfaf4e79eae5f8e8c04f8717be95b33f59a5ced3d215d2520b9dc96baf235",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_039_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_040_kitchen-B9-s4093.pfm",
+      "sha256": "fa1e0698fe62716a454d7f458e8647293ddd2046b26d7c3714d9de14368e56e7",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_040_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_041_kitchen-B9-s4093.pfm",
+      "sha256": "90c802302fc0265398f3d8a3396e18eabac667a1691ef84014831e193919edcf",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_041_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_042_kitchen-B9-s4093.pfm",
+      "sha256": "a40dee4250de9ae7757d923becccbce25c4842fb2a8a01152929989b2b939c69",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_042_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_043_kitchen-B9-s4093.pfm",
+      "sha256": "5ff5105bb622093fd99c017fb0435819e0c58de8d6fb82c853f3c7b5a97e046b",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_043_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_044_kitchen-B9-s4093.pfm",
+      "sha256": "8d5bea61f79feeaed98fcd7a98f12d463c1630f00ff16ac33ecd131648516475",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_044_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_045_kitchen-B9-s4093.pfm",
+      "sha256": "2c17452c4de8d20fa52984eb539d0028a901c25399e41725486457311d9151c9",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_045_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_046_kitchen-B9-s4093.pfm",
+      "sha256": "747ff6da1c2725688ce2f232e3fa32aaaa96e084049bd4b078152ffff8ce3024",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_046_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_047_kitchen-B9-s4093.pfm",
+      "sha256": "fe5b15e594e47fce05d58fda8fe78f1d958508f03394507adb19dcdd04bfaf48",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_047_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_048_kitchen-B9-s4093.pfm",
+      "sha256": "99bb3f17f4f2872629b6cb00f3dc46530cfd3cbb55df107cf0332092a33ab4be",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_048_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_049_kitchen-B9-s4093.pfm",
+      "sha256": "82118a86723ab3f8fb22315a342aa19ca4c91b3e08099c21fe99a7f677827189",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_049_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_050_kitchen-B9-s4093.pfm",
+      "sha256": "b15df4cae077e098e8ea9a62920d3318929c66688f92f61f833b86d975d2421e",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_050_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_051_kitchen-B9-s4093.pfm",
+      "sha256": "db1838f0ab2a25f0140e5cad2cd4c3b6e772ae98ff86350007aa95e75f7e8f5c",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_051_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_052_kitchen-B9-s4093.pfm",
+      "sha256": "f4ee2c22404ebab4d5521ea11b411811e401e9262829d4777c47cab117ad165b",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_052_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_053_kitchen-B9-s4093.pfm",
+      "sha256": "6f423ac97f94bc56f4b9730c069552cfeabe2ee59bd0ce82f8d486cc5a0de394",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_053_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_054_kitchen-B9-s4093.pfm",
+      "sha256": "07dc567ddc14af21769c7225fb7b796bc477c2adda6e08d2279a64baea49af55",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_054_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_055_kitchen-B9-s4093.pfm",
+      "sha256": "504309956e4f35077fe2e3024c511e79c330aec52cc10f75435f2a126d0523d6",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_055_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_056_kitchen-B9-s4093.pfm",
+      "sha256": "601442849401546d2c722346816ee2fd805f117aa25543172c75e2c14cfbccdf",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_056_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_057_kitchen-B9-s4093.pfm",
+      "sha256": "fa65f81e957f9fab9f92451670f4072241589f62e57b5c7d51c2fd275b7041c4",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_057_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_058_kitchen-B9-s4093.pfm",
+      "sha256": "111e91d8693edf8a0b5f24e5c138ceb6d957213582bd8deb933c8fa3740f82ca",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_058_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_059_kitchen-B9-s4093.pfm",
+      "sha256": "dda6792e82f33a5db1de0ced856c34ceb1a52c6ce0d0a5d68d286442171774da",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_059_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_060_kitchen-B9-s4093.pfm",
+      "sha256": "c62916a3078bb1f73f5044efde4829ec7c5cbfbc8a127ad530f9e36dda37bfd2",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_060_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_061_kitchen-B9-s4093.pfm",
+      "sha256": "4aa9f30cdf61a1dcf6c7a4066df72bfbed5b67ac94ae3a17b1a0274ff669ce07",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_061_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_062_kitchen-B9-s4093.pfm",
+      "sha256": "ed63b793170a3ac88cfd4f005698a8e71913ba2cb163d433790cafe932108dbd",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_062_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    },
+    {
+      "name": "frame_063_kitchen-B9-s4093.pfm",
+      "sha256": "8b6e50c89b23cb45aa781a1498ac5a466aa36d24ea7a5e5d15b8235161d3b64b",
+      "bytes": 11059217
+    },
+    {
+      "name": "frame_063_kitchen-B9-s4093.pfm.json",
+      "sha256": "ef715532dfb63d357cd4f7571c497306c8e3223ddeb86393cf533b8f0b09b1ba",
+      "bytes": 602
+    }
+  ],
+  "effective_b8_partition": {
+    "development": true,
+    "contract_version": 1,
+    "gi_reuse": true,
+    "gi_approximation_mode": 3,
+    "component": 0,
+    "stage": 3,
+    "pt_min_light_inclusive_length": 4,
+    "canonical_accepted": false
+  },
+  "effective_paired_spatial_pilot": {
+    "enabled": false,
+    "policy": "adjacent reciprocal pairs",
+    "pair_owned_shifts": false,
+    "vector_shading": false,
+    "canonical_accepted": false
+  },
+  "effective_replay_queue": {
+    "enabled": false,
+    "oracle": false,
+    "shift_stride_bytes": 104,
+    "indirect_dispatch": false,
+    "canonical_accepted": false
+  },
+  "effective_environment_filter": {
+    "diffuse_mip": 0.0,
+    "explicit_override": true,
+    "scope": "Filtering identity only; no renderer correctness or acceptance claim"
+  },
+  "effective_sampling": {
+    "coverage": "verified first-frame effective receipt",
+    "seed": 4093,
+    "realtime": true,
+    "reference_pixel_center": false,
+    "pixel_jitter_scale": 0.0
+  },
+  "effective_di_validation": {
+    "coverage": "verified first-frame effective receipt",
+    "strict": true,
+    "boiling": false,
+    "discount_naive": false,
+    "temporal_permutation": false
+  },
+  "effective_extended_scene_contract": {
+    "scope": "Verified effective development settings; not scene correctness or canonical acceptance",
+    "full_prefix_replay": true,
+    "diffuse_budget": 2,
+    "max_bounces": 14,
+    "combined_partition": true,
+    "canonical_accepted": false
+  },
+  "effective_pt_replay": {
+    "coverage": "verified first-frame effective receipt",
+    "replay_only": true,
+    "roughness_threshold": 1.0
+  },
+  "effective_pt_history": {
+    "coverage": "verified first-frame effective receipt",
+    "age_rejection": true,
+    "max_age": 30,
+    "max_history": 8
+  },
+  "effective_pt_spatial": {
+    "coverage": "verified first-frame effective receipt",
+    "samples": 1,
+    "boost": 1
+  },
+  "effective_ptpp": {
+    "coverage": "verified first-frame effective receipt",
+    "reconnection_mode": 0,
+    "roulette_probability": 0.800000012,
+    "diagnostics": false
+  },
+  "effective_capture_history": {
+    "coverage": "verified actual capture warmup",
+    "warmup_frames": 6,
+    "scope": "history warmup; not accumulated spp"
+  },
+  "effective_canonical_experiment": {
+    "coverage": "not requested; legacy labels retain their original numbering"
+  },
+  "effective_gbuffer_precision": {
+    "rounded_materials": 0,
+    "explicit_override": false,
+    "scope": "Half-up after fp16 conversion; not exact/unbiased BSDF reconstruction"
+  },
+  "effective_di_reuse": {
+    "active": true,
+    "mode": 3,
+    "temporal": true,
+    "spatial": true,
+    "gi": true,
+    "pt": true,
+    "scope": "Effective first-frame settings; not estimator correctness or timing proof"
+  },
+  "effective_prefix_throughput": {
+    "preserve_above_one": false,
+    "capture_packed": false,
+    "scope": "Upper clamp identity; R11G11B10 quantization/finite upper clamp remain"
+  }
+}

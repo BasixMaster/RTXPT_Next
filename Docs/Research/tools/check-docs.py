@@ -60,7 +60,7 @@ for name in ['B3','B4','B5']:assert by_id[name]['source_sha']==b1 and by_id[name
 for name in ['B6','B7']:assert by_id[name]['source_sha']=='de9fe651903f203327830e7361ac4237e00d508c'
 for name in ['B8','B9','B10']:
     assert by_id[name]['source_sha'] is None and by_id[name]['ref'] is None
-    assert by_id[name]['status'] in ['development_partition_gi_initial_only','development_limited_ptpp_gi_initial_only','development_gaussian_pairing_pilot','development_nvidia_gi_approximation']
+    assert by_id[name]['status'] in ['development_partition_gi_initial_only','development_limited_ptpp_gi_initial_only','development_gaussian_pairing_pilot','development_nvidia_gi_approximation','development_limited_ptpp_on_b8']
     assert (P/by_id[name]['development_evidence']/'summary.json').is_file()
 flags={'B1':(1,0,0),'B2':(1,1,0),'B3':(0,0,0),'B4':(1,0,0),'B5':(1,1,0),'B6':(0,0,1),'B7':(1,0,1),'B8':(1,1,1),'B9':(1,1,1),'B10':(1,1,1)}
 for name,expected_flags in flags.items():assert tuple(by_id[name]['configuration'][k] for k in ['restir_di','restir_gi','restir_pt'])==expected_flags
@@ -178,10 +178,10 @@ for row in overview['rows']:
     if row['image']:assert (D/row['image']).is_file()
     if row['variant'] in ['B8','B9','B10']:
         assert row['gpu_busy_ms'] is None and row['hdr_flip'] is None and row['ldr_flip'] is None
-        assert row['report']==('B10_GAUSSIAN_PAIRING.md' if row['variant']=='B10' else 'B8_STAGED_IMPLEMENTATION.md')
+        assert row['report']==('B10_GAUSSIAN_PAIRING.md' if row['variant']=='B10' else 'B9_RESULTS.md' if row['variant']=='B9' else 'B8_STAGED_IMPLEMENTATION.md')
         if row['image'] is not None:
             assert 'development' in row['status']
-            expected_size=('640x360' if row['scene']=='opaque-room' else '1280x720') if row['variant'] in ['B8','B10'] else '176x90'
+            expected_size=('640x360' if row['scene']=='opaque-room' else '1280x720') if row['variant'] in ['B8','B9','B10'] else '176x90'
             assert expected_size in row['note']
 for relative,digest in overview['source_hashes'].items():
     assert hashlib.sha256((P/relative).read_bytes()).hexdigest()==digest
@@ -420,15 +420,15 @@ for cohort,expected_count in [('2026-10-29-gaussian-timing',18),('2026-10-29-fre
     checks.append(dict(name=cohort+' exact evidence hashes and accepted cap/freeze/restoration receipts',status='passed',timed_processes=expected_count))
 assert len(overview['b0_pt_only_override']['rows'])==3 and len(overview['gaussian_pairing_timing']['rows'])==3
 checkpoint_rows=overview['checkpoint_rows']
-assert len(checkpoint_rows)==18
+assert len(checkpoint_rows)==24
 for scene in ['opaque-room','convergence','kitchen']:
     scoped=[x for x in checkpoint_rows if x['scene']==scene]
-    assert {x['kind'] for x in scoped}=={'native_pt_only','gaussian_timing','gaussian_quality','spatial_queue_oracle','b8_gi_initial','b8_gi_reuse'}
+    assert {x['kind'] for x in scoped}=={'native_pt_only','gaussian_timing','gaussian_quality','spatial_queue_oracle','b8_gi_initial','b8_gi_reuse','b9_matched_B8','b9_limited'}
     assert all(x.get('gpu_busy_ms') is None for x in scoped if x['kind'] in ['gaussian_quality','spatial_queue_oracle'])
     assert all(x.get('ldr_flip') is None and x.get('hdr_flip') is None for x in scoped if x['kind'] in ['gaussian_timing','spatial_queue_oracle'])
     for x in scoped:
         if x.get('image'):assert (D/x['image']).is_file()
-checks.append(dict(name='18scoped checkpoints inline beside B0/B8/B10 across all three scene tables; timing/quality/oracle scopes separated',status='passed'))
+checks.append(dict(name='24scoped checkpoints inline beside B0/B8/B9/B10 across all three scene tables; timing/quality/oracle scopes separated',status='passed'))
 b8=P/'Benchmarks/development/2026-10-29-b8-nvidia-gi'
 for name,expected_sha in json.loads((b8/'files.json').read_text()).items():
     assert hashlib.sha256((b8/name).read_bytes()).hexdigest()==expected_sha,name
@@ -461,6 +461,50 @@ for file in (b8t/'timing').glob('*/run.json'):
 assert len(overview['b8_gi_timing']['rows'])==3 and len(overview['b8_gi_quality']['groups'])==3
 checks.append(dict(name='B8 all18uncapped timing receipts: frozen identities, no image writes/loss and verified restoration',status='passed',limits='Per-process GPU busy/cadence, not complete frame latency or equal-quality speedup.'))
 
+b9=P/'Benchmarks/development/2026-10-30-b9-on-b8'
+for name,expected_sha in json.loads((b9/'files.json').read_text()).items():
+    assert hashlib.sha256((b9/name).read_bytes()).hexdigest()==expected_sha,name
+b9g=json.loads((b9/'gpu-checks.json').read_text());assert len(b9g)==8
+for row in b9g:
+    assert row['roulette']['replay_tests']==0
+    assert row['roulette']['tests']==row['roulette']['survivals']+row['roulette']['terminations']
+    if row['case'] in ['convergence-B9','kitchen-B9']:
+        assert row['contract']['full_prefix_replay'] and not row['contract']['footprint']
+        assert row['pt']['final_index']['midpath_reconnection_valid']==0
+    if row['case']=='room-B9':assert row['contract']['footprint'] and row['pt']['final_index']['midpath_reconnection_valid']>0
+b9q=json.loads((b9/'quality.json').read_text());assert set(b9q['scenes'])=={'room','convergence','kitchen'}
+b9f=json.loads((b9/'timing-evidence/frozen-artifacts.json').read_text());qexes=set()
+for scene,item in b9q['scenes'].items():
+    assert len(item['groups'])==6
+    for version in ['B8','B9']:
+        assert item['summary'][version]['runs']==3 and item['summary'][version]['seeds']==[47,1019,4093]
+    for value in item['groups'].values():
+        assert len(value['curve'])==value['frames']==64
+        assert value['actual_resolution']==([640,360] if scene=='room' else [1280,720])
+        assert [f['frame'] for f in value['selected_frame_flip']]==[1,8,32,64]
+        qexes.add(value['source_exe_sha256'])
+        if scene!='room':assert value['contract']['full_prefix_replay'] and not value['contract']['footprint']
+assert qexes=={b9f['executable_sha256']}
+import gzip
+for scene,item in b9q['scenes'].items():
+    for version in ['B8','B9']:
+        label=f'{scene}-{version}-s47';g=item['groups'][label]
+        assert hashlib.sha256((D/'assets/b9-on-b8'/f'{scene}-{version}.png').read_bytes()).hexdigest()==g['selected_frame_flip'][-1]['png_sha256']
+        raw=next((b9/'selected-raw'/label).glob('*.gz'))
+        assert hashlib.sha256(gzip.decompress(raw.read_bytes())).hexdigest()==g['curve'][-1]['pfm_sha256']
+assert json.loads((b9/'paired-quality.json').read_text())['quality_sha256']==hashlib.sha256((b9/'quality.json').read_bytes()).hexdigest()
+assert json.loads((b9/'overlay-verification.json').read_text())['matches_frozen_renderer_diff']
+
+assert len(overview['b9_on_b8_quality']['rows'])==6 and len(overview['b9_on_b8_timing']['rows'])==3
+assert not json.loads((b9/'summary.json').read_text())['canonical_accepted']
+checks.append(dict(name='B9 on B8:8GPU activation/support cases,18three-seed64-frame quality sequences, scene-specific footprint/replay scope and exact exported hashes',status='passed',limits='Original-scene footprint unsupported; cross-process full-image identity unestablished; no canonical promotion.'))
+b9runs=list((b9/'timing-evidence').glob('*/run.json'));assert len(b9runs)==18
+for file in b9runs:
+    run=json.loads(file.read_text());restore=json.loads((file.parent/'restoration-receipt.json').read_text());active=json.loads((file.parent/'b9-effective.json').read_text())
+    assert run['status']=='timed_completed' and run['image_write_count']==0 and not run['reported_trace_loss']
+    assert run['artifact_identity']['validated'] and run['artifact_identity_after_capture']['validated'] and restore['restoration_verified']
+    assert run['cap_control']['observed_sync_interval']==0 and active['gi_reuse']
+checks.append(dict(name='B9/B8 all18uncapped timing receipts: source/exe/cache identity, activation, no image writes/loss and verified cap restoration',status='passed',limits='Per-process GPU busy/cadence; three repeats, not complete frame latency or equal-quality speedup.'))
 queue=P/'Benchmarks/development/2026-10-29-replay-queue'
 index=json.loads((queue/'files.json').read_text())
 for name,expected_sha in index.items():assert hashlib.sha256((queue/name).read_bytes()).hexdigest()==expected_sha,name

@@ -1,0 +1,15 @@
+[
+  {
+    "case": "diagnostics/room-B8",
+    "reason": "Failed proposed cross-process bitidentity check; native exact, reused lighting varied. Not called a passed-equivalence gate."
+  },
+  {
+    "case": "frozen-B8-repeat",
+    "exit_code": "0xC0000409",
+    "reason": "Relocated executable preflight failed before logging; original-location repeat succeeded; no cause asserted."
+  },
+  {
+    "case": "frozen-B8-repeat-original-location",
+    "reason": "Historical frozen B8 repeated at original executable location; cross-launch full-image identity not established; new B9 executable restored in finally."
+  }
+]

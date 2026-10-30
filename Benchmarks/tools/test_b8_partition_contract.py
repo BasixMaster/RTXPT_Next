@@ -1,9 +1,16 @@
 import unittest
 import numpy as np
-from b8_partition_contract import verify, check_stages
+from b8_partition_contract import verify, check_stages, validate_replay_roulette
 
 
 class PartitionCaptureTests(unittest.TestCase):
+    def test_replay_roulette_preserves_original_scene_safeguards(self):
+        valid=(3,True,True,True,3,0,0.8)
+        validate_replay_roulette(*valid)
+        for index,value in [(1,False),(2,False),(3,False),(4,None),(4,0),(5,1),(6,0),(6,1),(6,float('nan'))]:
+            invalid=list(valid);invalid[index]=value
+            with self.assertRaises(ValueError):validate_replay_roulette(*invalid)
+        validate_replay_roulette(1,True,True,True,3,0,0)
     def test_approximation_requires_matching_effective_receipt(self):
         base = 'B8_PARTITION_CONTRACT development=1 version=1 giReuse=1 component=0 minPTLength=4 stage=1\n'
         approx = 'B8_GI_APPROX_CONTRACT enabled=1 mode=3 directional=0 jacobianClamp=1 finalBlend=1\n'

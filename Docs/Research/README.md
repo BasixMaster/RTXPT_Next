@@ -1,6 +1,6 @@
 # Basix Pathtracing · RTXPT1.9 baseline and B-series roadmap
 
-**Current work:** completed pairing and fresh native PT-only results are in the [comparison overview](COMPARISON_OVERVIEW.md). [Replay compaction](B10_GAUSSIAN_PAIRING.md#replay-compaction--active-implementation-checkpoint) passes11captured-frame exact GPU oracles; queue timing/sequences and full B10 remain pending.
+**Current work:** [B9 based on B8](B9_RESULTS.md) now has eight GPU diagnostic cases,18three-seed64-frame quality sequences and18uncapped timing runs. Room footprint+roulette is slower with higher measured error; original-scene roulette-only ablations reduce GPU busy with mixed quality. Original-scene footprint and brightness work remain pending.
 
 [B10 Gaussian GPU pairing and extended scene checks](B10_GAUSSIAN_PAIRING.md): full-resolution pictures, quality tradeoffs and18cap-verified adjacent/Gaussian timing runs; replay compaction remains next.
 
@@ -31,7 +31,7 @@ User-confirmed numbering, 2026-10-29: **B0 is unchanged RTXPT 1.9 with its origi
 | B6 | ReSTIR PT; DI/GI off | Registered-room quality/timing/history measured; original scenes have guarded development images; quality acceptance pending |
 | B7 | ReSTIR PT + DI 3.1; GI off | Scoped opaque checkpoint `de9fe651`; wider material/scene validation pending |
 | B8 | ReSTIR PT + DI 3.1 + GI 3.1 | NVIDIA approximate GI reuse executes; full-resolution64-frame quality measured, mixed results; uncapped timing measured; general acceptance pending |
-| B9 | B8 + limited PT++ | GI-initial-only footprint/roulette development ablation executes; full B8/B9 pending |
+| B9 | B8 + limited PT++ | B8 GI reuse retained; Room footprint/roulette, original-scene roulette-only ablations; replicated quality and uncapped timing measured; original-scene footprint unsupported |
 | B10 | B8 + full remaining PT++ | Gaussian reciprocal-pair/vector GPU development executes; full PT++ pending |
 
 Every result states its actual algorithm, settings and source identity. Historical old-B0/old-B1 Convergence/Kitchen DI+GI rows map to B2/B5. The old opaque-room comparison maps to a separately labelled B0 native-control raw preset, B3 native control and B7 DI+PT. Its DI-off0.806ms row is not a B4 native-DI comparator. New B1/B4 and room B4/B7 measurements now supply DI-on controls; equal-time sample sweeps remain pending. The branch `baseline/rtxpt-1.9` and tag `rtxpt-1.9-baseline` retain exact upstream source; a moving main branch is not an unnamed baseline.
